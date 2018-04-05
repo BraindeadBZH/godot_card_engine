@@ -4,7 +4,7 @@
 [ext_resource path="res://addons/card_engine/demo/screens/new_game/background.png" type="Texture" id=2]
 [ext_resource path="res://addons/card_engine/demo/widgets/menu_button/widget_menu_button.tscn" type="PackedScene" id=3]
 
-[node name="root" type="Node" index="0"]
+[node name="root" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -62,6 +62,10 @@ margin_right = 528.0
 margin_bottom = 188.0
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Textures" ]
 button_text = "BACK"
+
+[connection signal="pressed" from="btn_fighter" to="." method="_on_btn_fighter_pressed"]
+
+[connection signal="pressed" from="btn_mage" to="." method="_on_btn_mage_pressed"]
 
 [connection signal="pressed" from="btn_back" to="." method="_on_btn_back_pressed"]
 

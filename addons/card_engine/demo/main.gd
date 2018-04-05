@@ -4,7 +4,8 @@ extends Node
 var _screens = {
 		"menu": preload("res://addons/card_engine/demo/screens/menu/screen_menu.tscn"),
 		"library": preload("res://addons/card_engine/demo/screens/library/screen_library.tscn"),
-		"new_game": preload("res://addons/card_engine/demo/screens/new_game/screen_new_game.tscn")
+		"new_game": preload("res://addons/card_engine/demo/screens/new_game/screen_new_game.tscn"),
+		"game": preload("res://addons/card_engine/demo/screens/game/screen_game.tscn")
 	}
 
 func _ready():

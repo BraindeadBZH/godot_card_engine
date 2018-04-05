@@ -22,6 +22,18 @@
      id="defs2">
     <linearGradient
        inkscape:collect="always"
+       id="linearGradient1089">
+      <stop
+         style="stop-color:#e3dbdb;stop-opacity:1"
+         offset="0"
+         id="stop1085" />
+      <stop
+         style="stop-color:#ac9393;stop-opacity:1"
+         offset="1"
+         id="stop1087" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
        id="linearGradient1145">
       <stop
          style="stop-color:#000000;stop-opacity:0.47777778"
@@ -434,6 +446,66 @@
        y2="212.33331"
        spreadMethod="pad"
        gradientTransform="translate(0.13226466,0.13229658)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1089"
+       id="linearGradient1091"
+       x1="662.51672"
+       y1="321.34164"
+       x2="674.15839"
+       y2="331.92499"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1089"
+       id="radialGradient1097"
+       cx="670.21368"
+       cy="327.98029"
+       fx="670.21368"
+       fy="327.98029"
+       r="7.4083467"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.5714276,0,0,1.5714295,-382.20889,-186.64793)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1089"
+       id="linearGradient1221"
+       gradientUnits="userSpaceOnUse"
+       x1="662.51672"
+       y1="321.34164"
+       x2="674.15839"
+       y2="331.92499" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1089"
+       id="radialGradient1223"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.5714276,0,0,1.5714295,-382.20889,-186.64793)"
+       cx="670.21368"
+       cy="327.98029"
+       fx="670.21368"
+       fy="327.98029"
+       r="7.4083467" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1089"
+       id="linearGradient1231"
+       gradientUnits="userSpaceOnUse"
+       x1="662.51672"
+       y1="321.34164"
+       x2="674.15839"
+       y2="331.92499" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1089"
+       id="radialGradient1233"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.5714276,0,0,1.5714295,-1719.9423,-839.91459)"
+       cx="670.21368"
+       cy="327.98029"
+       fx="670.21368"
+       fy="327.98029"
+       r="7.4083467" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -442,12 +514,12 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="1926.0001"
-     inkscape:cy="360"
+     inkscape:zoom="4"
+     inkscape:cx="2523.4099"
+     inkscape:cy="-138.56109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="false"
+     showgrid="true"
      units="px"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
@@ -1023,5 +1095,96 @@
          rx="2.1166668"
          ry="2.1166668" />
     </g>
+    <rect
+       ry="0.26458335"
+       rx="0.26458335"
+       y="309.69998"
+       x="338.66669"
+       height="198.96669"
+       width="347.13336"
+       id="rect973"
+       style="opacity:1;fill:#000000;fill-opacity:0.99444442;stroke:none;stroke-width:7.9375;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <g
+       id="g1081"
+       inkscape:export-filename="C:\Users\Braindead\Dev\ClassicNightmares\CardEngine\addons\card_engine\demo\screens\game\background.png"
+       inkscape:export-xdpi="143.99998"
+       inkscape:export-ydpi="143.99998">
+      <rect
+         y="313.93332"
+         x="342.90005"
+         height="190.50002"
+         width="338.66669"
+         id="rect975"
+         style="opacity:1;fill:#6c5353;fill-opacity:0.99444442;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         y="411.29999"
+         x="342.89999"
+         height="93.133347"
+         width="338.66669"
+         id="rect983"
+         style="opacity:1;fill:#e3dbdb;fill-opacity:0.99444442;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       id="g1205">
+      <circle
+         r="8.4666672"
+         cy="326.63333"
+         cx="668.8667"
+         id="path1083"
+         style="opacity:1;fill:url(#linearGradient1091);fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         style="opacity:1;fill:url(#radialGradient1097);fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle1093"
+         cx="668.8667"
+         cy="326.63333"
+         r="7.4083467" />
+    </g>
+    <g
+       id="g1219"
+       transform="translate(2.1999967e-6,21.166676)"
+       inkscape:export-filename="C:\Users\Braindead\Dev\ClassicNightmares\CardEngine\addons\card_engine\demo\widgets\icon_button\button_normal.png"
+       inkscape:export-xdpi="95.999634"
+       inkscape:export-ydpi="95.999634">
+      <circle
+         style="opacity:1;fill:url(#linearGradient1221);fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle1211"
+         cx="668.8667"
+         cy="326.63333"
+         r="8.4666672" />
+      <circle
+         r="7.4083467"
+         cy="326.63333"
+         cx="668.8667"
+         id="circle1213"
+         style="opacity:1;fill:url(#radialGradient1223);fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <g
+       inkscape:export-ydpi="95.999634"
+       inkscape:export-xdpi="95.999634"
+       inkscape:export-filename="C:\Users\Braindead\Dev\ClassicNightmares\CardEngine\addons\card_engine\demo\widgets\icon_button\button_hovered.png"
+       transform="translate(9.5565317e-6,42.333323)"
+       id="g1229">
+      <circle
+         r="8.4666672"
+         cy="326.63333"
+         cx="668.8667"
+         id="circle1225"
+         style="opacity:1;fill:url(#linearGradient1231);fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <circle
+         style="opacity:1;fill:url(#radialGradient1233);fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle1227"
+         cx="-668.8667"
+         cy="-326.63333"
+         r="7.4083467"
+         transform="scale(-1)" />
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       d="m 670.78068,324.07569 1.91682,2.55766 -1.91682,2.55763 m -3.83362,-2.55763 h 5.75044 m -7.66726,-3.83647 h 3.83362 v 7.67291 h -3.83362 z"
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.79375005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1116"
+       inkscape:export-filename="C:\Users\Braindead\Dev\ClassicNightmares\CardEngine\addons\card_engine\demo\screens\game\exit-icon.png"
+       inkscape:export-xdpi="95.999634"
+       inkscape:export-ydpi="95.999634" />
   </g>
 </svg>

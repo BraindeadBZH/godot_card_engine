@@ -17,7 +17,7 @@ use_filter = true
 font_data = ExtResource( 8 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="root" type="TextureButton" index="0"]
+[node name="root" type="TextureButton"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -72,6 +72,6 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Mouse", "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
 
