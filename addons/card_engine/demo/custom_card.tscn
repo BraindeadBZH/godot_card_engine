@@ -1,0 +1,235 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://addons/card_engine/widgets/widget_card.gd" type="Script" id=1]
+[ext_resource path="res://addons/card_engine/icons/card-node.png" type="Texture" id=2]
+[ext_resource path="res://addons/card_engine/demo/cards/images/card-background-fighter.png" type="Texture" id=3]
+[ext_resource path="res://addons/card_engine/demo/cards/images/card-picture-placeholder.png" type="Texture" id=4]
+[ext_resource path="res://addons/card_engine/demo/cards/images/card-cost-default.png" type="Texture" id=5]
+[ext_resource path="res://addons/card_engine/demo/Rajdhani-Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://addons/card_engine/demo/cards/images/card-name-default.png" type="Texture" id=7]
+[ext_resource path="res://addons/card_engine/demo/cards/images/card-type-default.png" type="Texture" id=8]
+[ext_resource path="res://addons/card_engine/demo/Rajdhani-SemiBold.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://addons/card_engine/demo/cards/images/card-desc-default.png" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 64
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 6 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 32
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 6 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 20
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 9 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 28
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 6 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 28
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 9 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="custom_card" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Focus", "Mouse", "Rect", "Size Flags", "Transform" ]
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+default_size = Vector2( 400, 576 )
+card_size = Vector2( 400, 576 )
+animation_speed = 0.25
+
+[node name="img_background" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Offset" ]
+
+[node name="img_picture" type="Sprite" parent="." index="1"]
+
+position = Vector2( 0, -140 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Margin", "Offset", "Transform" ]
+
+[node name="img_cost" type="Sprite" parent="." index="2"]
+
+position = Vector2( -200, -288 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Margin", "Transform" ]
+
+[node name="lbl_cost" type="Label" parent="img_cost" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -13.0
+margin_top = -20.0
+margin_right = 8.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "1"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="img_name" type="Sprite" parent="." index="3"]
+
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="lbl_name" type="Label" parent="img_name" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -141.0
+margin_top = -23.0
+margin_right = 141.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "Name placeholder"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="img_type" type="Sprite" parent="." index="4"]
+
+position = Vector2( 0, -240 )
+texture = ExtResource( 8 )
+_sections_unfolded = [ "Margin", "Transform" ]
+
+[node name="lbl_type" type="Label" parent="img_type" index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.0
+margin_top = -44.0
+margin_right = -33.0
+margin_bottom = -24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Attack"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="img_desc" type="Sprite" parent="." index="5"]
+
+position = Vector2( 0, 144 )
+texture = ExtResource( 10 )
+_sections_unfolded = [ "Margin", "Transform" ]
+
+[node name="lbl_desc" type="RichTextLabel" parent="img_desc" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -130.0
+margin_top = -84.0
+margin_right = 130.0
+margin_bottom = 84.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/bold_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 5 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Placeholder text
+[b]Placeholder text[/b][/center]
+"
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Placeholder text
+Placeholder text
+"
+scroll_active = false
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "Anchor", "BBCode", "Margin", "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="mouse_area" type="Control" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -200.0
+margin_top = -288.0
+margin_right = 200.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+

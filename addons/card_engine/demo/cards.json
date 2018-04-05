@@ -1,0 +1,171 @@
+{
+  "cards": {
+    "sword": {
+      "category": "fighter",
+      "type": "attack",
+      "tags": [],
+      "images": {
+        "background": "fighter",
+        "picture": "sword"
+      },
+      "values": {
+        "cost": 1,
+        "attack": 7
+      },
+      "texts": {
+        "name": "Sword",
+        "type": "Attack",
+        "desc": "[center]Deal [color=#a02c2c]$attack[/color] damage\nto one enemy[/center]"
+      }
+    },
+    "two_hands": {
+      "category": "fighter",
+      "type": "attack",
+      "tags": [],
+      "images": {
+        "background": "fighter",
+        "picture": "sword"
+      },
+      "values": {
+        "cost": 2,
+        "attack": 13,
+        "vulnerable": 1
+      },
+      "texts": {
+        "name": "Two Hands Wack",
+        "type": "Attack",
+        "desc": "[center]Deal [color=#a02c2c]$attack[/color] damage\nto one enemy\nApply [color=#a02c2c]$vulnerable[/color] vulnerable[/center]"
+      }
+    },
+    "shield": {
+      "category": "fighter",
+      "type": "defense",
+      "tags": [],
+      "images": {
+        "background": "fighter",
+        "picture": "shield"
+      },
+      "values": {
+        "cost": 1,
+        "defense": 5
+      },
+      "texts": {
+        "name": "Shield",
+        "type": "Defense",
+        "desc": "[center]Block [color=#0044aa]$defense[/color] damage[/center]"
+      }
+    },
+    "parry": {
+      "category": "fighter",
+      "type": "defense",
+      "tags": [],
+      "images": {
+        "background": "fighter",
+        "picture": "shield"
+      },
+      "values": {
+        "cost": 0,
+        "defense": 3
+      },
+      "texts": {
+        "name": "Parry",
+        "type": "Defense",
+        "desc": "[center]Block [color=#0044aa]$defense[/color] damage[/center]"
+      }
+    },
+
+    "fireball": {
+      "category": "mage",
+      "type": "attack",
+      "tags": [],
+      "images": {
+        "background": "mage",
+        "picture": "fireball"
+      },
+      "values": {
+        "cost": 1,
+        "attack": 5
+      },
+      "texts": {
+        "name": "Fireball",
+        "type": "Attack",
+        "desc": "[center]Deal [color=#a02c2c]$attack[/color] damage\nto one enemy[/center]"
+      }
+    },
+    "mental_shock": {
+      "category": "mage",
+      "type": "attack",
+      "tags": [],
+      "images": {
+        "background": "mage",
+        "picture": "fireball"
+      },
+      "values": {
+        "cost": 1,
+        "attack": 3,
+        "weak": 2
+      },
+      "texts": {
+        "name": "Mental Shock",
+        "type": "Attack",
+        "desc": "[center]Deal [color=#a02c2c]$attack[/color] damage\nto one enemy\nApply [color=#a02c2c]$weak[/color] weak[/center]"
+      }
+    },
+    "protection": {
+      "category": "mage",
+      "type": "defense",
+      "tags": [],
+      "images": {
+        "background": "mage",
+        "picture": "protection"
+      },
+      "values": {
+        "cost": 1,
+        "defense": 7
+      },
+      "texts": {
+        "name": "Protection",
+        "type": "Defense",
+        "desc": "[center]Block [color=#0044aa]$defense[/color] damage[/center]"
+      }
+    },
+    "invisibility": {
+      "category": "mage",
+      "type": "defense",
+      "tags": [],
+      "images": {
+        "background": "mage",
+        "picture": "protection"
+      },
+      "values": {
+        "cost": 2,
+        "defense": 13
+      },
+      "texts": {
+        "name": "Invisibility",
+        "type": "Defense",
+        "desc": "[center]Block [color=#0044aa]$defense[/color] damage[/center]"
+      }
+    }
+  },
+
+  "decks": {
+    "fighter_starter": {
+      "sword": {
+        "quantity": 5
+      },
+      "shield": {
+        "quantity": 5
+      }
+    },
+
+    "mage_starter": {
+      "fireball": {
+        "quantity": 5
+      },
+      "protection": {
+        "quantity": 5
+      }
+    }
+  }
+}
