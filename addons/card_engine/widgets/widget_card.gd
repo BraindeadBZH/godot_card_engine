@@ -68,12 +68,12 @@ func set_initial_position(pos):
 # Moves the card by the given amount
 func move(amount):
 	_animation.interpolate_property(
-		self, "position", position, position + amount, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "position", _initial_pos, _initial_pos + amount, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
 # Moves the card to the given value
 func move_to(value):
 	_animation.interpolate_property(
-		self, "position", position, value, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "position", _initial_pos, value, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
 # Moves the card back to its intial position
 func reset_position():
@@ -87,12 +87,12 @@ func set_initial_rotation(rot):
 # Rotates the card by the given amount
 func rotate(amount):
 	_animation.interpolate_property(
-		self, "rotation_degrees", rotation_degrees, rotation_degrees + amount, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "rotation_degrees", _initial_rot, _initial_rot + amount, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
 # Rotates the card to the given value
 func rotate_to(value):
 	_animation.interpolate_property(
-		self, "rotation_degrees", rotation_degrees, value, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "rotation_degrees", _initial_rot, value, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
 # Rotates the card back to its initial rotation
 func reset_rotation():
@@ -105,12 +105,12 @@ func set_initial_scale():
 
 # Scales the card by the given ratio
 func scale_relative(ratio):
-	_animation.interpolate_property(self, "scale", scale, scale*ratio, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	_animation.interpolate_property(self, "scale", _initial_scale, _initial_scale*ratio, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
 # Scales the card to the given value
 func scale_to(value):
 	_animation.interpolate_property(
-		self, "scale", scale, Vector2(value, value), animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "scale", _initial_scale, Vector2(value, value), animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
 # Scales the card to its initial scale
 func reset_scale():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/card_engine/demo/screens/game/screen_game.gd" type="Script" id=1]
 [ext_resource path="res://addons/card_engine/demo/screens/game/background.png" type="Texture" id=2]
@@ -6,8 +6,20 @@
 [ext_resource path="res://addons/card_engine/icons/hand-node.png" type="Texture" id=4]
 [ext_resource path="res://addons/card_engine/demo/widgets/icon_button/widget_icon_button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/card_engine/demo/screens/game/exit-icon.png" type="Texture" id=6]
+[ext_resource path="res://addons/card_engine/demo/screens/game/draw-pile-icon.png" type="Texture" id=7]
+[ext_resource path="res://addons/card_engine/demo/Rajdhani-Bold.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://addons/card_engine/demo/screens/game/discard-pile-icon.png" type="Texture" id=9]
+[ext_resource path="res://addons/card_engine/demo/screens/game/next-turn-icon.png" type="Texture" id=10]
 
-[node name="root" type="Node"]
+[sub_resource type="DynamicFont" id=1]
+
+size = 30
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+
+[node name="root" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -51,19 +63,132 @@ __meta__ = {
 card_overlap = 30
 vertical_offset = 20
 card_angle = 3
-mouse_hover_offset = Vector2( 0, -150 )
+mouse_hover_offset = Vector2( 0, -130 )
 
 [node name="btn_exit" parent="." index="2" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -84.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = 84.0
-_sections_unfolded = [ "Anchor", "Margin", "Rect", "Textures" ]
+margin_left = -74.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = 74.0
+hint_tooltip = "Exit to menu"
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Rect", "Textures" ]
 button_icon = ExtResource( 6 )
+
+[node name="icon" parent="btn_exit" index="0"]
+
+margin_left = -12.0
+margin_right = 20.0
+texture = ExtResource( 6 )
+
+[node name="btn_draw_pile" parent="." index="3" instance=ExtResource( 5 )]
+
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -74.0
+margin_right = 74.0
+margin_bottom = -10.0
+hint_tooltip = "Draw pile"
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Rect", "Textures" ]
+button_icon = ExtResource( 7 )
+
+[node name="lbl_draw_pile_count" type="Label" parent="btn_draw_pile" index="1"]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -25.0
+margin_right = 24.0
+margin_bottom = 6.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.445049, 0.84375, 0.197754, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_as_outline = 1
+text = "0"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="btn_discard_pile2" parent="." index="4" instance=ExtResource( 5 )]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -74.0
+margin_top = -74.0
+margin_right = -10.0
+margin_bottom = -10.0
+hint_tooltip = "Discard pile"
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Rect", "Textures" ]
+button_icon = ExtResource( 9 )
+
+[node name="lbl_draw_pile_count2" type="Label" parent="btn_discard_pile2" index="1"]
+
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+margin_left = -25.0
+margin_top = -25.0
+margin_right = 19.0
+margin_bottom = 6.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.800781, 0.215836, 0.215836, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_as_outline = 1
+text = "0"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="btn_end_turn" parent="." index="5" instance=ExtResource( 5 )]
+
+editor/display_folded = true
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -74.0
+margin_top = -220.0
+margin_right = -10.0
+margin_bottom = -156.0
+hint_tooltip = "Next turn"
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Rect", "Textures" ]
+button_icon = ExtResource( 10 )
+
+[node name="icon" parent="btn_end_turn" index="0"]
+
+margin_left = -12.0
+margin_right = 20.0
+texture = ExtResource( 10 )
 
 [connection signal="pressed" from="btn_exit" to="." method="_on_btn_exit_pressed"]
 
 
+[editable path="btn_exit"]
+[editable path="btn_end_turn"]

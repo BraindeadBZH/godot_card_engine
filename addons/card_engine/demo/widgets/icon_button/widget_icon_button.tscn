@@ -5,7 +5,7 @@
 [ext_resource path="res://addons/card_engine/demo/widgets/icon_button/button_mask.png" type="BitMap" id=3]
 [ext_resource path="res://addons/card_engine/demo/widgets/icon_button/widget_icon_button.gd" type="Script" id=4]
 
-[node name="root" type="TextureButton" index="0"]
+[node name="root" type="TextureButton"]
 
 anchor_left = 0.0
 anchor_top = 0.0
