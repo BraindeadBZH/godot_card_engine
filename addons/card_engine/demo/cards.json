@@ -156,6 +156,12 @@
       },
       "shield": {
         "quantity": 5
+      },
+      "two_hands": {
+        "quantity": 1
+      },
+      "parry": {
+        "quantity": 2
       }
     },
 
@@ -165,6 +171,12 @@
       },
       "protection": {
         "quantity": 5
+      },
+      "mental_shock": {
+        "quantity": 2
+      },
+      "invisibility": {
+        "quantity": 1
       }
     }
   }

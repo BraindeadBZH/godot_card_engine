@@ -1,11 +1,11 @@
 extends "../abstract_screen.gd"
 
 func _on_btn_fighter_pressed():
-	# TODO: prepare for fighter
+	CardEngine.start_game({"deck": "fighter_starter"})
 	emit_signal("next_screen", "game")
 
 func _on_btn_mage_pressed():
-	# TODO: prepare for mage
+	CardEngine.start_game({"deck": "mage_starter"})
 	emit_signal("next_screen", "game")
 
 func _on_btn_back_pressed():

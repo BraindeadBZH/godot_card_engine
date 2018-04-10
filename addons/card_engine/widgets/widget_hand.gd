@@ -19,6 +19,7 @@ func _ready():
 func set_container(container):
 	_container = container
 	_update_hand()
+	_container.connect("size_changed", self, "_on_container_size_changed")
 
 func set_focused_card(card):
 	if _focused_card != null: return
@@ -83,6 +84,9 @@ func _on_resized():
 		card_widget.set_initial_rotation(rot)
 		
 		card_index += 1
+
+func _on_container_size_changed():
+	_update_hand()
 
 func _on_card_mouse_entered(card):
 	set_focused_card(card)
