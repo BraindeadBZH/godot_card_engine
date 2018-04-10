@@ -658,6 +658,17 @@
        y2="352.03333"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.90624028,0,0,0.90530426,58.747568,32.935169)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1495"
+       id="radialGradient1497-1"
+       cx="45.508335"
+       cy="222.91666"
+       fx="45.508335"
+       fy="222.91666"
+       r="6.3500004"
+       gradientTransform="translate(0,-1.5797241e-4)"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -667,8 +678,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4"
-     inkscape:cx="2380.1249"
-     inkscape:cy="-138.56109"
+     inkscape:cx="2317.4739"
+     inkscape:cy="-208.25463"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -1551,6 +1562,48 @@
        style="fill:none;fill-rule:evenodd;stroke:url(#linearGradient1080);stroke-width:0.79374999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 622.70092,343.96753 7.67284,7.66491 -3.83641,-3.83245 3.83641,-3.83246 -7.67284,7.66491"
        id="path1072"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Braindead\Dev\ClassicNightmares\CardEngine\addons\card_engine\demo\screens\game\close-icon.png"
+       inkscape:export-xdpi="95.999634"
+       inkscape:export-ydpi="95.999634" />
+    <g
+       id="g1515-7"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       transform="matrix(1.3333333,0,0,1.3333323,544.68892,50.57801)"
+       style="stroke-width:0.75000036"
+       inkscape:export-filename="C:\Users\Braindead\Dev\ClassicNightmares\CardEngine\addons\card_engine\demo\screens\game\energy_bg.png">
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path1478-4"
+         d="m 49.74167,229.26665 h -8.466667 l -2.116667,-8.46667 6.35,-4.23334 6.350001,4.23334 z"
+         style="opacity:1;fill:url(#radialGradient1497-1);fill-opacity:1;stroke:none;stroke-width:0.39687523;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1481-0"
+         d="m 45.508337,216.56665 v 7.40833 l 6.35,-3.175 z"
+         style="opacity:1;fill:#fefcff;fill-opacity:0.56111109;fill-rule:evenodd;stroke:none;stroke-width:0.19843762px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1483-4"
+         d="m 39.158337,220.79998 6.35,-4.23333 v 7.40833 z"
+         style="fill:#ffffff;fill-opacity:0.76666667;fill-rule:evenodd;stroke:none;stroke-width:0.19843762px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1485-0"
+         d="m 41.275004,229.26665 4.233333,-5.29167 -6.35,-3.175 z"
+         style="fill:#ffffff;fill-opacity:0.32156863;fill-rule:evenodd;stroke:none;stroke-width:0.19843762px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1487-6"
+         d="m 51.858337,220.79998 -2.116666,8.46667 -4.233334,-5.29167 z"
+         style="fill:#ffffff;fill-opacity:0.32222224;fill-rule:evenodd;stroke:none;stroke-width:0.19843762px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path1489-0"
+         d="m 41.275004,229.26665 h 8.466667 l -4.233334,-5.29167 z"
+         style="fill:#ffffff;fill-opacity:0.15;fill-rule:evenodd;stroke:none;stroke-width:0.19843762px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
   </g>
 </svg>

@@ -7,8 +7,14 @@ var CardPile = preload("card_pile.gd")
 var CardHand = preload("card_hand.gd")
 var CardData = preload("card_data.gd")
 
+signal energy_changed()
+
 # Indentifies the player
 var id = ""
+
+# The maximum and current energy the player has
+var max_energy     = 3
+var current_energy = 3
 
 # The decks used for the game
 var _decks = {}
