@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/card_engine/demo/screens/game/screen_game.gd" type="Script" id=1]
 [ext_resource path="res://addons/card_engine/demo/screens/game/background.png" type="Texture" id=2]
@@ -14,6 +14,14 @@
 [ext_resource path="res://addons/card_engine/demo/screens/game/energy_bg.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
+
+size = 30
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=2]
 
 size = 44
 use_mipmaps = false
@@ -266,7 +274,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
