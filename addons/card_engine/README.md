@@ -1,6 +1,6 @@
 # CardEngine
 
-To test the plugin preview:
+To use the plugin demo:
 1. Download it as a zip and unzip it inside a newly created Godot project
 2. Add "res://addons/card_engine/demo/interface.gd" in the AutoLoad project settings as a singleton named CEInterface
 3. Add "res://addons/card_engine/card_engine.gd" in the AutoLoad project settings as a singleton named CardEngine
