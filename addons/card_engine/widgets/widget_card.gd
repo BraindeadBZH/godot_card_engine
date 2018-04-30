@@ -48,6 +48,7 @@ func _exit_tree():
 func set_card_data(card_data):
 	_card_data = card_data
 	_update_card()
+	_card_data.connect("changed", self, "_update_card")
 
 # Makes the card appear in front of others Node2D
 func bring_front():

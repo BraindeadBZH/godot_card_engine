@@ -1,6 +1,8 @@
 # CardData class - Holds the data for a card
 extends Reference
 
+signal changed()
+
 # Base data
 var id       = "" # Identifies the card, unique in the library
 var category = "" # Specifies the card's category
@@ -32,3 +34,7 @@ func duplicate():
 	copy.origin   = origin
 	
 	return copy
+
+# Marks the data as changed for widgets to update their content
+func mark_changed():
+	emit_signal("changed")

@@ -174,7 +174,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="btn_discard_pile2" parent="." index="5" instance=ExtResource( 5 )]
+[node name="btn_discard_pile" parent="." index="5" instance=ExtResource( 5 )]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -188,7 +188,7 @@ hint_tooltip = "Discard pile"
 _sections_unfolded = [ "Anchor", "Hint", "Margin", "Rect", "Textures" ]
 button_icon = ExtResource( 10 )
 
-[node name="lbl_discard_pile_count" type="Label" parent="btn_discard_pile2" index="1"]
+[node name="lbl_discard_pile_count" type="Label" parent="btn_discard_pile" index="1"]
 
 anchor_left = 0.0
 anchor_top = 1.0
@@ -275,7 +275,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "0/0"

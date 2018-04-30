@@ -1,21 +1,31 @@
 extends "../abstract_screen.gd"
 
 func _ready():
-	$hand.set_container(CardEngine.player(CEInterface.PLAYER_PLAYER).hand())
+	$hand.set_container(DemoGame.player_hand)
 	
-	$btn_deck/lbl_deck_count.text = "%d" % CardEngine.player(CEInterface.PLAYER_PLAYER).deck(CEInterface.DECK_PLAYER).size()
-	$btn_draw_pile/lbl_draw_pile_count.text = "%d" % CardEngine.player(CEInterface.PLAYER_PLAYER).pile(CEInterface.PILE_DRAW).size()
-	CardEngine.player(CEInterface.PLAYER_PLAYER).pile(CEInterface.PILE_DRAW).connect("size_changed", self, "_on_draw_pile_size_changed")
+	DemoGame.player_deck.connect("size_changed", self, "_update_deck")
+	_update_deck(DemoGame.player_deck.size())
 	
-	CardEngine.player(CEInterface.PLAYER_PLAYER).connect("energy_changed", self, "_on_player_energy_changed")
-	_on_player_energy_changed()
+	DemoGame.player_draw.connect("size_changed", self, "_update_draw_pile")
+	_update_draw_pile(DemoGame.player_draw.size())
+	
+	DemoGame.player_discard.connect("size_changed", self, "_update_discard_pile")
+	_update_discard_pile(DemoGame.player_discard.size())
+	
+	DemoGame.connect("player_energy_changed", self, "_update_player_energy")
+	_update_player_energy()
+
+func _update_deck(new_size):
+	$btn_deck/lbl_deck_count.text = "%d" % DemoGame.player_deck.size()
+
+func _update_draw_pile(new_size):
+	$btn_draw_pile/lbl_draw_pile_count.text = "%d" % new_size
+
+func _update_discard_pile(new_size):
+	$btn_discard_pile/lbl_discard_pile_count.text = "%d" % new_size
+
+func _update_player_energy():
+	$img_energy/lbl_energy.text = "%d/%d" % [DemoGame.player_energy, DemoGame.player_max_energy]
 
 func _on_btn_exit_pressed():
 	emit_signal("next_screen", "menu")
-
-func _on_draw_pile_size_changed(new_size):
-	$btn_draw_pile/lbl_draw_pile_count.text = "%d" % new_size
-
-func _on_player_energy_changed():
-	var player = CardEngine.player(CEInterface.PLAYER_PLAYER)
-	$img_energy/lbl_energy.text = "%d/%d" % [player.current_energy, player.max_energy]

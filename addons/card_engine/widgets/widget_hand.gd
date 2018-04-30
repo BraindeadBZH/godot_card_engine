@@ -47,7 +47,8 @@ func _update_hand():
 		card_widget.connect("mouse_entered", self, "_on_card_mouse_entered", [card_widget])
 		card_widget.connect("mouse_exited", self, "_on_card_mouse_exited", [card_widget])
 	
-	_on_resized()
+	# If the Hand is displayed we call resize to update widgets position and size
+	if is_inside_tree(): _on_resized()
 
 func _on_resized():
 	yield(get_tree(), "idle_frame")
@@ -85,7 +86,7 @@ func _on_resized():
 		
 		card_index += 1
 
-func _on_container_size_changed():
+func _on_container_size_changed(new_size):
 	_update_hand()
 
 func _on_card_mouse_entered(card):

@@ -1,6 +1,7 @@
 # CardLibrary class - Holds all the card loaded from the database
 extends Reference
 
+# Imports
 var CardData = preload("card_data.gd")
 var CardDeck = preload("card_deck.gd")
 

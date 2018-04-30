@@ -51,7 +51,7 @@ use_filter = true
 font_data = ExtResource( 9 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="custom_card" type="Node2D"]
+[node name="custom_card" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Focus", "Mouse", "Rect", "Size Flags", "Transform" ]

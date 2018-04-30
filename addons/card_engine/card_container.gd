@@ -1,9 +1,10 @@
 # CardContainer class - Base class for all classes storing cards
 extends Reference
 
-signal size_changed(new_size)
-
+# Imports
 var CardData = preload("card_data.gd")
+
+signal size_changed(new_size)
 
 var _cards = []
 
