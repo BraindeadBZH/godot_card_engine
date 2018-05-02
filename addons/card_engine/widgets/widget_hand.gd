@@ -20,7 +20,7 @@ func _ready():
 
 func set_container(container):
 	_container = container
-	_update_hand()
+	_reset_hand()
 	_container.connect("size_changed", self, "_on_container_size_changed")
 
 func set_focused_card(card):
@@ -32,22 +32,21 @@ func set_focused_card(card):
 
 func unset_focused_card(card):
 	if _focused_card != card: return
+	_focused_card.reset_animation_state()
 	_focused_card.reset_z_index()
-	_focused_card.reset_position()
-	_focused_card.reset_rotation()
 	_focused_card = null
 
 func set_selected_card(card):
 	if _focused_card != card: return
+	_focused_card.push_animation_state()
 	_focused_card.move_to(Vector2(rect_size.x/2, selected_vertical_offset))
 	_focused_card.scale_relative(1.5)
 
 func unset_selected_card(card):
 	if _focused_card != card: return
-	_focused_card.reset_position()
-	_focused_card.reset_scale()
+	_focused_card.pop_animation_state()
 
-func _update_hand():
+func _reset_hand():
 	for child in get_children():
 		remove_child(child)
 	
@@ -93,16 +92,14 @@ func _on_resized():
 		var rot = card_angle*dist
 		
 		card_widget.set_card_size(size)
-		card_widget.set_initial_scale()
 		card_widget.position = pos
 		card_widget.rotation_degrees = rot
-		card_widget.set_initial_position(pos)
-		card_widget.set_initial_rotation(rot)
+		card_widget.push_animation_state()
 		
 		card_index += 1
 
 func _on_container_size_changed(new_size):
-	_update_hand()
+	_reset_hand()
 
 func _on_card_mouse_entered(card):
 	set_focused_card(card)
