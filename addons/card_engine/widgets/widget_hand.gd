@@ -3,12 +3,14 @@ extends Control
 
 # Amount the card overlaps horizontally to reduce hand's width
 export(int) var card_overlap = 30
-# Amount the card is offset vertically, at 0 only the top-half of the card is withing the hand's height
+# Amount the card is offset vertically, at 0 only the top-half of the card is within the hand's height
 export(int) var vertical_offset = 20
 # Cumulative angle between cards in degree
 export(float) var card_angle = 3
 # Amount the card is moved when the mouse hover it
 export(Vector2) var mouse_hover_offset = Vector2(0, -100)
+# Amount the card is moved vertically when selected
+export(int) var selected_vertical_offset = -100
 
 var _container = null
 var _focused_card = null
@@ -35,6 +37,16 @@ func unset_focused_card(card):
 	_focused_card.reset_rotation()
 	_focused_card = null
 
+func set_selected_card(card):
+	if _focused_card != card: return
+	_focused_card.move_to(Vector2(rect_size.x/2, selected_vertical_offset))
+	_focused_card.scale_relative(1.5)
+
+func unset_selected_card(card):
+	if _focused_card != card: return
+	_focused_card.reset_position()
+	_focused_card.reset_scale()
+
 func _update_hand():
 	for child in get_children():
 		remove_child(child)
@@ -46,6 +58,8 @@ func _update_hand():
 		
 		card_widget.connect("mouse_entered", self, "_on_card_mouse_entered", [card_widget])
 		card_widget.connect("mouse_exited", self, "_on_card_mouse_exited", [card_widget])
+		card_widget.connect("mouse_pressed", self, "_on_card_mouse_pressed", [card_widget])
+		card_widget.connect("mouse_released", self, "_on_card_mouse_released", [card_widget])
 	
 	# If the Hand is displayed we call resize to update widgets position and size
 	if is_inside_tree(): _on_resized()
@@ -79,6 +93,7 @@ func _on_resized():
 		var rot = card_angle*dist
 		
 		card_widget.set_card_size(size)
+		card_widget.set_initial_scale()
 		card_widget.position = pos
 		card_widget.rotation_degrees = rot
 		card_widget.set_initial_position(pos)
@@ -94,3 +109,11 @@ func _on_card_mouse_entered(card):
 
 func _on_card_mouse_exited(card):
 	unset_focused_card(card)
+
+func _on_card_mouse_pressed(button, card):
+	if button == BUTTON_LEFT:
+		set_selected_card(card)
+
+func _on_card_mouse_released(button, card):
+	if button == BUTTON_LEFT:
+		unset_selected_card(card)

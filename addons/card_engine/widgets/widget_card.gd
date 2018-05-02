@@ -14,6 +14,8 @@ export(float) var animation_speed = 1
 signal mouse_entered()
 signal mouse_exited()
 signal mouse_motion(relative)
+signal mouse_pressed(button)
+signal mouse_released(button)
 
 var _card_data = null
 var _is_ready = false
@@ -160,6 +162,11 @@ func _on_mouse_area_exited():
 func _on_mouse_area_event(event):
 	if event is InputEventMouseMotion:
 		emit_signal("mouse_motion", event.relative)
+	elif event is InputEventMouseButton:
+		if event.pressed:
+			emit_signal("mouse_pressed", event.button_index)
+		else:
+			emit_signal("mouse_released", event.button_index)
 
 func _on_animation_completed(object, key):
 	_animation.remove(object, key)
