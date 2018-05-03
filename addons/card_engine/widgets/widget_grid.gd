@@ -53,8 +53,7 @@ func _on_resized():
 		
 		card_widget.set_card_size(size)
 		card_widget.position = pos
-		card_widget.set_initial_position(pos)
-		card_widget.set_initial_scale()
+		card_widget.push_animation_state_from_current()
 		
 		card_index += 1
 	
@@ -63,8 +62,8 @@ func _on_resized():
 
 func _on_card_mouse_entered(card):
 	card.bring_front()
-	card.scale_relative(1.25)
+	card.push_animation_state(Vector2(0, 0), 0, Vector2(1.25, 1.25), true, true, true)
 
 func _on_card_mouse_exited(card):
+	card.pop_animation_state()
 	card.reset_z_index()
-	card.reset_scale()

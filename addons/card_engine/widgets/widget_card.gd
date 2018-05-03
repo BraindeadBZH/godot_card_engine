@@ -70,76 +70,50 @@ func send_back():
 func reset_z_index():
 	z_index = 0
 
-# Adds an animation state as a reference point
-func push_animation_state():
+# Adds an animation state from the current values
+func push_animation_state_from_current():
 	var state = AnimationState.new()
 	state.pos = position
 	state.rot = rotation_degrees
 	state.scale = scale
 	_animation_stack.push_back(state)
 
-# Removes the last animation state and put the card in this state
+# Adds an animation state from the given values and animate the card to the state
+func push_animation_state(pos, rot, scale_ratio, is_pos_relative=false, is_rot_relative=false, is_scale_relative=false):
+	var previous_state = null
+	if !_animation_stack.empty():
+		previous_state = _animation_stack.back()
+	else:
+		previous_state = AnimationState.new()
+		previous_state.pos = position
+		previous_state.rot = rotation_degrees
+		previous_state.scale = scale
+		
+	var state = AnimationState.new()
+	state.pos = pos if !is_pos_relative else previous_state.pos + pos
+	state.rot = rot if !is_rot_relative else previous_state.rot + rot
+	state.scale = scale_ratio if !is_scale_relative else previous_state.scale*scale_ratio
+	_animation_stack.push_back(state)
+	_animate(previous_state, state)
+
+# Removes the last animation state and animate the card to the previous state
 func pop_animation_state():
 	if _animation_stack.empty(): return
 	var state = _animation_stack.pop_back()
-	_internal_reset(state)
+	if !_animation_stack.empty():
+		var previous_sate = _animation_stack.back()
+		_animate(state, previous_sate)
 
-# Takes the last animation state and put the card in this state
-func reset_animation_state():
-	if _animation_stack.empty(): return
-	var state = _animation_stack.back()
-	_internal_reset(state)
+# Internal animation from one state to another
+func _animate(from_state, to_state):
+	_animation.interpolate_property(
+		self, "position", from_state.pos, to_state.pos, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
-# For internal use only
-func _internal_reset(state):
 	_animation.interpolate_property(
-		self, "position", position, state.pos, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	_animation.interpolate_property(
-		self, "rotation_degrees", rotation_degrees, state.rot, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	_animation.interpolate_property(
-		self, "scale", scale, state.scale, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "rotation_degrees", from_state.rot, to_state.rot, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
-# Moves the card by the given amount
-func move(amount):
-	if _animation_stack.empty(): return
-	var state = _animation_stack.back()
 	_animation.interpolate_property(
-		self, "position", state.pos, state.pos + amount, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-
-# Moves the card to the given value
-func move_to(value):
-	if _animation_stack.empty(): return
-	var state = _animation_stack.back()
-	_animation.interpolate_property(
-		self, "position", state.pos, value, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-
-# Rotates the card by the given amount
-func rotate(amount):
-	if _animation_stack.empty(): return
-	var state = _animation_stack.back()
-	_animation.interpolate_property(
-		self, "rotation_degrees", state.rot, state.rot + amount, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-
-# Rotates the card to the given value
-func rotate_to(value):
-	if _animation_stack.empty(): return
-	var state = _animation_stack.back()
-	_animation.interpolate_property(
-		self, "rotation_degrees", state.rot, value, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-
-# Scales the card by the given ratio
-func scale_relative(ratio):
-	if _animation_stack.empty(): return
-	var state = _animation_stack.back()
-	_animation.interpolate_property(
-		self, "scale", state.scale, state.scale*ratio, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-
-# Scales the card to the given value
-func scale_to(value):
-	if _animation_stack.empty(): return
-	var state = _animation_stack.back()
-	_animation.interpolate_property(
-		self, "scale", state.scale, value, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "scale", from_state.scale, to_state.scale, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
 func _update_card():
 	if _card_data == null || !_is_ready: return

@@ -27,20 +27,17 @@ func set_focused_card(card):
 	if _focused_card != null: return
 	_focused_card = card
 	_focused_card.bring_front()
-	_focused_card.move(mouse_hover_offset)
-	_focused_card.rotate_to(0)
+	_focused_card.push_animation_state(mouse_hover_offset, 0, Vector2(1,1), true, false, true)
 
 func unset_focused_card(card):
 	if _focused_card != card: return
-	_focused_card.reset_animation_state()
+	_focused_card.pop_animation_state()
 	_focused_card.reset_z_index()
 	_focused_card = null
 
 func set_selected_card(card):
 	if _focused_card != card: return
-	_focused_card.push_animation_state()
-	_focused_card.move_to(Vector2(rect_size.x/2, selected_vertical_offset))
-	_focused_card.scale_relative(1.5)
+	_focused_card.push_animation_state(Vector2(rect_size.x/2, selected_vertical_offset), 0, Vector2(1.5,1.5), false, true, true)
 
 func unset_selected_card(card):
 	if _focused_card != card: return
@@ -94,7 +91,7 @@ func _on_resized():
 		card_widget.set_card_size(size)
 		card_widget.position = pos
 		card_widget.rotation_degrees = rot
-		card_widget.push_animation_state()
+		card_widget.push_animation_state_from_current()
 		
 		card_index += 1
 
