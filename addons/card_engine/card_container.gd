@@ -5,14 +5,25 @@ extends Reference
 var CardData = preload("card_data.gd")
 
 signal size_changed(new_size)
+signal card_added(card)
+signal multiple_card_added(cards)
+signal card_removed(card)
 
 var _cards = []
 
 # Adds a card to the container
 func append(card_data):
-	# Skip append if the parameter is not of the CardData type
 	if card_data == null || !card_data is CardData: return
 	_cards.append(card_data)
+	emit_signal("card_added", card_data)
+	emit_signal("size_changed", size())
+
+# Adds the cards from the given array to the container
+func append_multiple(card_data_array):
+	for card_data in card_data_array:
+		if card_data != null && card_data is CardData:
+			_cards.append(card_data)
+	emit_signal("multiple_card_added", card_data_array)
 	emit_signal("size_changed", size())
 
 # Returns all the card as an array
@@ -69,15 +80,21 @@ func clear():
 	
 # Removes the card at the given index from the container
 func remove(index):
+	if index < 0 || index >= _cards.size():
+		return
+	var card = _cards[index]
 	_cards.remove(index)
 	emit_signal("size_changed", size())
+	emit_signal("card_removed", card)
 
 # Removes the first card from the container
 func remove_first():
-	_cards.pop_front()
+	var card = _cards.pop_front()
 	emit_signal("size_changed", size())
+	emit_signal("card_removed", card)
 
 # Removes the lase card from the container
 func remove_last():
-	_cards.pop_back()
+	var card = _cards.pop_back()
 	emit_signal("size_changed", size())
+	emit_signal("card_removed", card)

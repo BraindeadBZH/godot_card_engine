@@ -66,7 +66,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 3 )
-_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Visibility" ]
 __meta__ = {
 "_editor_icon": ExtResource( 4 )
 }
@@ -75,6 +75,8 @@ vertical_offset = 20
 card_angle = 3
 mouse_hover_offset = Vector2( 0, -130 )
 selected_vertical_offset = -100
+draw_point = NodePath("../btn_draw_pile/draw_point")
+discard_point = NodePath("../btn_discard_pile/discard_point")
 
 [node name="btn_exit" parent="." index="2" instance=ExtResource( 5 )]
 
@@ -175,6 +177,10 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
 
+[node name="draw_point" type="Position2D" parent="btn_draw_pile" index="2"]
+
+position = Vector2( 32.5076, 33.171 )
+
 [node name="btn_discard_pile" parent="." index="5" instance=ExtResource( 5 )]
 
 anchor_left = 1.0
@@ -216,6 +222,8 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="discard_point" type="Position2D" parent="btn_discard_pile" index="2"]
 
 [node name="btn_end_turn" parent="." index="6" instance=ExtResource( 5 )]
 
@@ -288,6 +296,8 @@ max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Hint", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
 
 [connection signal="pressed" from="btn_exit" to="." method="_on_btn_exit_pressed"]
+
+[connection signal="pressed" from="btn_draw_pile" to="." method="_on_btn_draw_pile_pressed"]
 
 
 [editable path="btn_exit"]

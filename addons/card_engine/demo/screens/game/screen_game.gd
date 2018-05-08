@@ -29,3 +29,6 @@ func _update_player_energy():
 
 func _on_btn_exit_pressed():
 	emit_signal("next_screen", "menu")
+
+func _on_btn_draw_pile_pressed():
+	DemoGame.draw_one_card()

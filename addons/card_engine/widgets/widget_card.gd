@@ -6,8 +6,6 @@ const FORMAT_IMAGE = "img_%s"
 
 # The size the card should be if no specific size apply
 export(Vector2) var default_size = Vector2(100, 200)
-# The actual size of the card
-export(Vector2) var card_size = Vector2(100, 200) setget set_card_size
 # Animation speed in second
 export(float) var animation_speed = 1
 
@@ -24,18 +22,21 @@ class AnimationState extends Reference:
 
 var _card_data = null
 var _is_ready = false
-var _initial_pos = Vector2(0, 0)
-var _initial_rot = 0
-var _initial_scale = scale
 var _animation = Tween.new()
 var _animation_stack = []
 
 func _init():
 	add_child(_animation)
 
-func set_card_size(new_size):
-	card_size = new_size
-	_on_resized()
+# Returns the ideal scale given the card's default size and the given size
+func calculate_scale(size):
+	var ratio = size / default_size
+	var result = Vector2(1, 1)
+	if ratio.x > ratio.y:
+		result = Vector2(ratio.y, ratio.y)
+	else:
+		result = Vector2(ratio.x, ratio.x)
+	return result
 
 func _ready():
 	_is_ready = true
@@ -57,6 +58,10 @@ func set_card_data(card_data):
 	_card_data = card_data
 	_update_card()
 	_card_data.connect("changed", self, "_update_card")
+
+# Returns the date used by this widget
+func get_card_data():
+	return _card_data
 
 # Makes the card appear in front of others Node2D
 func bring_front():
@@ -107,13 +112,13 @@ func pop_animation_state():
 # Internal animation from one state to another
 func _animate(from_state, to_state):
 	_animation.interpolate_property(
-		self, "position", from_state.pos, to_state.pos, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "position", from_state.pos, to_state.pos, animation_speed, Tween.TRANS_BACK, Tween.EASE_OUT)
 
 	_animation.interpolate_property(
-		self, "rotation_degrees", from_state.rot, to_state.rot, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "rotation_degrees", from_state.rot, to_state.rot, animation_speed, Tween.TRANS_BACK, Tween.EASE_OUT)
 
 	_animation.interpolate_property(
-		self, "scale", from_state.scale, to_state.scale, animation_speed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		self, "scale", from_state.scale, to_state.scale, animation_speed, Tween.TRANS_BACK, Tween.EASE_OUT)
 
 func _update_card():
 	if _card_data == null || !_is_ready: return
@@ -140,13 +145,6 @@ func _update_card():
 				node.bbcode_text = CardEngine.final_text(_card_data, text)
 			else:
 				node.text = CardEngine.final_text(_card_data, text)
-
-func _on_resized():
-	var ratio = card_size / default_size
-	if ratio.x > ratio.y:
-		scale = Vector2(ratio.y, ratio.y)
-	else:
-		scale = Vector2(ratio.x, ratio.x)
 
 func _on_mouse_area_entered():
 	emit_signal("mouse_entered")

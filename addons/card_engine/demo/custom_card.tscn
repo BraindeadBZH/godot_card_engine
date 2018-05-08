@@ -51,7 +51,7 @@ use_filter = true
 font_data = ExtResource( 9 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="custom_card" type="Node2D" index="0"]
+[node name="custom_card" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Focus", "Mouse", "Rect", "Size Flags", "Transform" ]
@@ -59,7 +59,6 @@ __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
 default_size = Vector2( 400, 576 )
-card_size = Vector2( 400, 576 )
 animation_speed = 0.25
 
 [node name="img_background" type="Sprite" parent="." index="0"]

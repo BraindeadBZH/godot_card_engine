@@ -26,3 +26,12 @@ func draw():
 	emit_signal("card_drawn")
 	return card
 
+# Draw the given amount of cards from the top of the pile
+func draw_multiple(amount):
+	var cards = []
+	for i in range(amount):
+		if !_cards.empty():
+			cards.append(_cards.pop_back())
+			emit_signal("card_drawn")
+	emit_signal("size_changed", size())
+	return cards

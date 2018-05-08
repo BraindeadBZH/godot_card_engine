@@ -3,25 +3,36 @@ extends Control
 
 # Amount the card overlaps horizontally to reduce hand's width
 export(int) var card_overlap = 30
+
 # Amount the card is offset vertically, at 0 only the top-half of the card is within the hand's height
 export(int) var vertical_offset = 20
+
 # Cumulative angle between cards in degree
 export(float) var card_angle = 3
+
 # Amount the card is moved when the mouse hover it
 export(Vector2) var mouse_hover_offset = Vector2(0, -100)
+
 # Amount the card is moved vertically when selected
 export(int) var selected_vertical_offset = -100
+
+# Position from where cards are drawn
+export(NodePath) var draw_point
+
+# Position to where cards are discarded
+export(NodePath) var discard_point
 
 var _container = null
 var _focused_card = null
 
 func _ready():
-	connect("resized", self, "_on_resized")
+	connect("resized", self, "_apply_hand_transform")
 
 func set_container(container):
 	_container = container
-	_reset_hand()
-	_container.connect("size_changed", self, "_on_container_size_changed")
+	_container.connect("card_added", self, "_on_container_card_added")
+	_container.connect("multiple_card_added", self, "_on_container_multiple_card_added")
+	_container.connect("card_removed", self, "_on_container_card_removed")
 
 func set_focused_card(card):
 	if _focused_card != null: return
@@ -43,24 +54,24 @@ func unset_selected_card(card):
 	if _focused_card != card: return
 	_focused_card.pop_animation_state()
 
-func _reset_hand():
-	for child in get_children():
-		remove_child(child)
+func _add_card_widget(card):
+	var card_widget = CEInterface.card_instance()
+	card_widget.set_card_data(card)
+	add_child(card_widget)
 	
-	for card in _container.cards():
-		var card_widget = CEInterface.card_instance()
-		card_widget.set_card_data(card)
-		add_child(card_widget)
-		
-		card_widget.connect("mouse_entered", self, "_on_card_mouse_entered", [card_widget])
-		card_widget.connect("mouse_exited", self, "_on_card_mouse_exited", [card_widget])
-		card_widget.connect("mouse_pressed", self, "_on_card_mouse_pressed", [card_widget])
-		card_widget.connect("mouse_released", self, "_on_card_mouse_released", [card_widget])
+	card_widget.connect("mouse_entered", self, "_on_card_mouse_entered", [card_widget])
+	card_widget.connect("mouse_exited", self, "_on_card_mouse_exited", [card_widget])
+	card_widget.connect("mouse_pressed", self, "_on_card_mouse_pressed", [card_widget])
+	card_widget.connect("mouse_released", self, "_on_card_mouse_released", [card_widget])
 	
-	# If the Hand is displayed we call resize to update widgets position and size
-	if is_inside_tree(): _on_resized()
+	return card_widget
 
-func _on_resized():
+func _remove_card_widget(card):
+	for card_widget in get_children():
+		if card_widget.get_card_data() == card:
+			remove_child(card_widget)
+
+func _apply_hand_transform():
 	yield(get_tree(), "idle_frame")
 	var card_index = 0
 	var total_card = _container.size()
@@ -88,15 +99,30 @@ func _on_resized():
 		# Rotation calculations
 		var rot = card_angle*dist
 		
-		card_widget.set_card_size(size)
-		card_widget.position = pos
-		card_widget.rotation_degrees = rot
-		card_widget.push_animation_state_from_current()
+		card_widget.push_animation_state(pos, rot, card_widget.calculate_scale(size), false, false, false)
 		
 		card_index += 1
 
-func _on_container_size_changed(new_size):
-	_reset_hand()
+func _apply_draw_transform(widget):
+	if draw_point != null:
+		widget.global_position = get_node(draw_point).global_position
+		widget.rotation_degrees = 90
+		widget.scale = Vector2(0, 0)
+
+func _on_container_card_added(card):
+	var widget = _add_card_widget(card)
+	_apply_draw_transform(widget)
+	_apply_hand_transform()
+
+func _on_container_multiple_card_added(cards):
+	for card in cards:
+		var widget = _add_card_widget(card)
+		_apply_draw_transform(widget)
+	_apply_hand_transform()
+	
+func _on_container_card_removed(card):
+	_remove_card_widget(card)
+	_apply_hand_transform()
 
 func _on_card_mouse_entered(card):
 	set_focused_card(card)

@@ -16,6 +16,7 @@ func change_screen(screen_name):
 	
 	for child in $screen_layer.get_children():
 		$screen_layer.remove_child(child)
+		child.queue_free()
 	
 	var screen = _screens[screen_name].instance()
 	screen.connect("next_screen", self, "change_screen")
