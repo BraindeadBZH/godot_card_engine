@@ -51,9 +51,7 @@ func _on_resized():
 		if row > final_row:
 			final_row = row
 		
-		card_widget.set_card_size(size)
-		card_widget.position = pos
-		card_widget.push_animation_state_from_current()
+		card_widget.push_animation_state(pos, 0, card_widget.calculate_scale(size), false, false, false)
 		
 		card_index += 1
 	
