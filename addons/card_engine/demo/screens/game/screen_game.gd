@@ -1,5 +1,13 @@
 extends "../abstract_screen.gd"
 
+const TEXT_ANIM_SPEED = 1.0
+
+var _animation = Tween.new()
+
+func _init():
+	add_child(_animation)
+	_animation.connect("tween_completed", self, "_on_animation_completed")
+
 func _ready():
 	$hand.set_container(DemoGame.player_hand)
 	
@@ -14,6 +22,24 @@ func _ready():
 	
 	DemoGame.connect("player_energy_changed", self, "_update_player_energy")
 	_update_player_energy()
+	
+	DemoGame.connect("turn_started", self, "_on_turn_started")
+	
+	_change_step_text("Get ready!")
+
+func _enter_tree():
+	_animation.start()
+
+func _exit_tree():
+	_animation.stop_all()
+
+func _change_step_text(text):
+	$lbl_step.text = text
+	_animation.interpolate_property(
+		$lbl_step, "modulate", $lbl_step.modulate,  Color(1.0, 1.0, 1.0, 1.0), TEXT_ANIM_SPEED, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	yield(get_tree().create_timer(TEXT_ANIM_SPEED), "timeout")
+	_animation.interpolate_property(
+		$lbl_step, "modulate", $lbl_step.modulate,  Color(1.0, 1.0, 1.0, 0.0), TEXT_ANIM_SPEED, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 
 func _update_deck(new_size):
 	$btn_deck/lbl_deck_count.text = "%d" % DemoGame.player_deck.size()
@@ -35,3 +61,9 @@ func _on_btn_draw_pile_pressed():
 
 func _on_btn_discard_pile_pressed():
 	DemoGame.discard_random_card()
+
+func _on_turn_started():
+	_change_step_text("Your turn")
+
+func _on_animation_completed(object, key):
+	_animation.remove(object, key)
