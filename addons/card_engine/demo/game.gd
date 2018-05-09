@@ -4,6 +4,7 @@ extends Node
 # Imports
 var CardHand = preload("../card_hand.gd")
 var CardPile = preload("../card_pile.gd")
+var CardRng  = preload("../card_rng.gd")
 
 # Time to wait between step to account for animations
 const STEP_WAIT_TIME = 2.0
@@ -25,12 +26,15 @@ var player_max_energy = 3
 var _stepper = Timer.new()
 var _steps = ["start_turn"]
 var _current_step = 0
+var _discard_rng = CardRng.new()
 
 func _init():
 	_stepper.one_shot = true
 	_stepper.wait_time = STEP_WAIT_TIME
 	add_child(_stepper)
 	_stepper.connect("timeout", self, "_on_stepper_timeout")
+	
+	_discard_rng.set_seed(CardEngine.master_rng().randomi())
 
 # Creates a new game with the given deck
 func create_game(deck_id):
@@ -54,6 +58,10 @@ func draw_one_card():
 
 func draw_cards(amount):
 	player_hand.append_multiple(player_draw.draw_multiple(amount))
+
+func discard_random_card():
+	var card = player_hand.discard(floor(_discard_rng.randomf()*player_hand.size()))
+	player_discard.append(card)
 
 func _step_start_turn():
 	draw_cards(HAND_SIZE)

@@ -48,6 +48,8 @@ func _ready():
 	_animation.connect("tween_completed", self, "_on_animation_completed")
 	
 	_update_card()
+
+func _enter_tree():
 	_animation.start()
 
 func _exit_tree():

@@ -32,3 +32,6 @@ func _on_btn_exit_pressed():
 
 func _on_btn_draw_pile_pressed():
 	DemoGame.draw_one_card()
+
+func _on_btn_discard_pile_pressed():
+	DemoGame.discard_random_card()

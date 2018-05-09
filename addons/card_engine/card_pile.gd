@@ -18,7 +18,7 @@ func shuffle():
 		shuffled.insert(_rng.randomf()*shuffled.size(), card)
 	_cards = shuffled
 
-# Draw the top card of the pile
+# Draws the top card of the pile
 func draw():
 	if _cards.empty(): return null
 	var card = _cards.pop_back()
@@ -26,7 +26,7 @@ func draw():
 	emit_signal("card_drawn")
 	return card
 
-# Draw the given amount of cards from the top of the pile
+# Draws the given amount of cards from the top of the pile
 func draw_multiple(amount):
 	var cards = []
 	for i in range(amount):

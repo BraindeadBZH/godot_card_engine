@@ -24,8 +24,12 @@ export(NodePath) var discard_point
 
 var _container = null
 var _focused_card = null
+var _active_cards = Node2D.new()
+var _discarded_cards = Node2D.new()
 
 func _ready():
+	add_child(_active_cards)
+	add_child(_discarded_cards)
 	connect("resized", self, "_apply_hand_transform")
 
 func set_container(container):
@@ -57,7 +61,7 @@ func unset_selected_card(card):
 func _add_card_widget(card):
 	var card_widget = CEInterface.card_instance()
 	card_widget.set_card_data(card)
-	add_child(card_widget)
+	_active_cards.add_child(card_widget)
 	
 	card_widget.connect("mouse_entered", self, "_on_card_mouse_entered", [card_widget])
 	card_widget.connect("mouse_exited", self, "_on_card_mouse_exited", [card_widget])
@@ -67,9 +71,15 @@ func _add_card_widget(card):
 	return card_widget
 
 func _remove_card_widget(card):
-	for card_widget in get_children():
+	for card_widget in _active_cards.get_children():
 		if card_widget.get_card_data() == card:
-			remove_child(card_widget)
+			_active_cards.remove_child(card_widget)
+			_discarded_cards.add_child(card_widget)
+			_apply_discard_transform(card_widget)
+			# We wait a second for the animation to finish
+			yield(get_tree().create_timer(1.0), "timeout")
+			_discarded_cards.remove_child(card_widget)
+			card_widget.queue_free()
 
 func _apply_hand_transform():
 	yield(get_tree(), "idle_frame")
@@ -90,7 +100,7 @@ func _apply_hand_transform():
 		# If the hand is larger than the widget, we recalculate an overlap which make all the cards visible
 		final_overlap = ceil((size.x*total_card-rect_size.x)/(total_card-1))
 	
-	for card_widget in get_children():
+	for card_widget in _active_cards.get_children():
 		# Position calculations
 		var middle = rect_size.x/2 
 		var dist = float(card_index) - half_total + 0.5 # We add 0.5 so the distance is from the middle of the card
@@ -108,6 +118,15 @@ func _apply_draw_transform(widget):
 		widget.global_position = get_node(draw_point).global_position
 		widget.rotation_degrees = 90
 		widget.scale = Vector2(0, 0)
+
+func _apply_discard_transform(widget):
+	if discard_point != null:
+		widget.push_animation_state(
+			_to_local(get_node(discard_point).global_position), 90, Vector2(0,0), false, false, false)
+
+# Implementation of Node2D to_local function as it is not present in Control
+func _to_local(point):
+	return get_global_transform().affine_inverse().xform(point)
 
 func _on_container_card_added(card):
 	var widget = _add_card_widget(card)
