@@ -59,7 +59,7 @@ __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
 default_size = Vector2( 400, 576 )
-animation_speed = 0.25
+animation_speed = 0.6
 
 [node name="img_background" type="Sprite" parent="." index="0"]
 
