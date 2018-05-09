@@ -4,11 +4,6 @@ extends Node2D
 const FORMAT_LABEL = "lbl_%s"
 const FORMAT_IMAGE = "img_%s"
 
-# The size the card should be if no specific size apply
-export(Vector2) var default_size = Vector2(100, 200)
-# Animation speed in second
-export(float) var animation_speed = 1
-
 signal mouse_entered()
 signal mouse_exited()
 signal mouse_motion(relative)
@@ -19,6 +14,13 @@ class AnimationState extends Reference:
 	var pos = Vector2(0, 0)
 	var rot = 0
 	var scale = Vector2(1, 1)
+
+# The size the card should be if no specific size apply
+export(Vector2) var default_size = Vector2(100, 200)
+# Animation speed in second
+export(float) var animation_speed = 1
+
+var default_z = 0 setget set_default_z
 
 var _card_data = null
 var _is_ready = false
@@ -75,7 +77,12 @@ func send_back():
 
 # Makes the card returns to its normal z position
 func reset_z_index():
-	z_index = 0
+	z_index = default_z
+
+# Allows to define a z index for the cards so if they overlap you can order them
+func set_default_z(new_value):
+	default_z = new_value
+	z_index = new_value
 
 # Adds an animation state from the current values
 func push_animation_state_from_current():

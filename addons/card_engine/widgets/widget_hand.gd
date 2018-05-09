@@ -109,6 +109,7 @@ func _apply_hand_transform():
 		# Rotation calculations
 		var rot = card_angle*dist
 		
+		card_widget.default_z = card_index
 		card_widget.push_animation_state(pos, rot, card_widget.calculate_scale(size), false, false, false)
 		
 		card_index += 1
