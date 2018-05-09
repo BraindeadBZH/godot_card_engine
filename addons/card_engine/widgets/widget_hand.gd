@@ -75,9 +75,9 @@ func _remove_card_widget(card):
 		if card_widget.get_card_data() == card:
 			_active_cards.remove_child(card_widget)
 			_discarded_cards.add_child(card_widget)
-			_apply_discard_transform(card_widget)
-			# We wait a second for the animation to finish
-			yield(get_tree().create_timer(1.0), "timeout")
+			if _apply_discard_transform(card_widget):
+				# If a transform has been applied we wait a second for the animation to finish
+				yield(get_tree().create_timer(1.0), "timeout")
 			_discarded_cards.remove_child(card_widget)
 			card_widget.queue_free()
 
@@ -114,15 +114,19 @@ func _apply_hand_transform():
 		card_index += 1
 
 func _apply_draw_transform(widget):
-	if draw_point != null:
+	if !draw_point.is_empty():
 		widget.global_position = get_node(draw_point).global_position
 		widget.rotation_degrees = 90
 		widget.scale = Vector2(0, 0)
+		return true
+	return false
 
 func _apply_discard_transform(widget):
-	if discard_point != null:
+	if !discard_point.is_empty():
 		widget.push_animation_state(
 			_to_local(get_node(discard_point).global_position), 90, Vector2(0,0), false, false, false)
+		return true
+	return false
 
 # Implementation of Node2D to_local function as it is not present in Control
 func _to_local(point):
