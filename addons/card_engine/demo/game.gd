@@ -15,6 +15,8 @@ signal turn_started()
 # Constant values
 const HAND_SIZE = 4
 
+var character = ""
+
 var player_deck    = null
 var player_hand    = CardHand.new()
 var player_draw    = CardPile.new()
@@ -37,7 +39,8 @@ func _init():
 	_discard_rng.set_seed(CardEngine.master_rng().randomi())
 
 # Creates a new game with the given deck
-func create_game(deck_id):
+func create_game(deck_id, character_name):
+	character = character_name
 	player_deck = CardEngine.library().deck(deck_id)
 	if player_deck == null:
 		printerr("Invalid deck ID while creating a game")

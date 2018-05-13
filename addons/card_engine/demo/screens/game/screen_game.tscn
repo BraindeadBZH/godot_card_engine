@@ -49,7 +49,43 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 7
 
-[node name="hand" type="Control" parent="." index="1"]
+[node name="player_position" type="Control" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+margin_left = 300.0
+margin_top = -20.0
+margin_right = 340.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="enemy_position" type="Control" parent="." index="2"]
+
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -340.0
+margin_top = -20.0
+margin_right = -300.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin", "Rect" ]
+
+[node name="hand" type="Control" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 1.0
@@ -78,7 +114,7 @@ selected_vertical_offset = -100
 draw_point = NodePath("../btn_draw_pile/draw_point")
 discard_point = NodePath("../btn_discard_pile/discard_point")
 
-[node name="btn_exit" parent="." index="2" instance=ExtResource( 5 )]
+[node name="btn_exit" parent="." index="4" instance=ExtResource( 5 )]
 
 editor/display_folded = true
 anchor_left = 1.0
@@ -97,8 +133,9 @@ margin_left = -12.0
 margin_right = 20.0
 texture = ExtResource( 6 )
 
-[node name="btn_deck" parent="." index="3" instance=ExtResource( 5 )]
+[node name="btn_deck" parent="." index="5" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -148.0
@@ -137,8 +174,9 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="btn_draw_pile" parent="." index="4" instance=ExtResource( 5 )]
+[node name="btn_draw_pile" parent="." index="6" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -181,8 +219,9 @@ _sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", 
 
 position = Vector2( 32.5076, 33.171 )
 
-[node name="btn_discard_pile" parent="." index="5" instance=ExtResource( 5 )]
+[node name="btn_discard_pile" parent="." index="7" instance=ExtResource( 5 )]
 
+editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -227,7 +266,7 @@ _sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", 
 
 position = Vector2( 33.171, 32.5076 )
 
-[node name="btn_end_turn" parent="." index="6" instance=ExtResource( 5 )]
+[node name="btn_end_turn" parent="." index="8" instance=ExtResource( 5 )]
 
 editor/display_folded = true
 anchor_left = 1.0
@@ -248,8 +287,9 @@ margin_left = -12.0
 margin_right = 20.0
 texture = ExtResource( 11 )
 
-[node name="img_energy" type="TextureRect" parent="." index="7"]
+[node name="img_energy" type="TextureRect" parent="." index="9"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 0.0
@@ -297,8 +337,9 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Hint", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="lbl_step" type="Label" parent="." index="8"]
+[node name="lbl_step" type="Label" parent="." index="10"]
 
+editor/display_folded = true
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.0
 anchor_top = 0.0

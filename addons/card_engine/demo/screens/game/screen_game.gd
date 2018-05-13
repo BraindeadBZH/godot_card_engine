@@ -3,6 +3,13 @@ extends "../abstract_screen.gd"
 const TEXT_ANIM_SPEED = 1.0
 
 var _animation = Tween.new()
+var _player_characters = {
+		"fighter": preload("res://addons/card_engine/demo/character/player/fighter/fighter.tscn"),
+		"mage": preload("res://addons/card_engine/demo/character/player/mage/mage.tscn")
+	}
+var _enemy_characters = {
+		"enemy_1": preload("res://addons/card_engine/demo/character/enemy/enemy.tscn")
+	}
 
 func _init():
 	add_child(_animation)
@@ -26,6 +33,9 @@ func _ready():
 	DemoGame.connect("turn_started", self, "_on_turn_started")
 	
 	_change_step_text("Get ready!")
+	
+	$player_position.add_child(_player_characters[DemoGame.character].instance())
+	$enemy_position.add_child(_enemy_characters["enemy_1"].instance())
 
 func _enter_tree():
 	_animation.start()
