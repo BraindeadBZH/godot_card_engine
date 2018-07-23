@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/card_engine/demo/main.gd" type="Script" id=1]
 
-[node name="root" type="Node"]
+[node name="root" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

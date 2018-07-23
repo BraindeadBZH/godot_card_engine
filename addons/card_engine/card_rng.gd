@@ -1,4 +1,4 @@
-# CardRng class - Implement the Mersenne Twister algorithm (adapted from Python)
+# CardRng class - Implements the Mersenne Twister algorithm (adapted from Python)
 # It allows to have multiple self-contained generator running at the same time independently
 extends Reference
 
