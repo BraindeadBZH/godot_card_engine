@@ -5,7 +5,7 @@
       "type": "<some type>",
       "tags": [],
       "images": {
-        "<picture type>": "<picture id>"
+        "<image type>": "<image id>"
       },
       "values": {
         "<value id>": <value>
