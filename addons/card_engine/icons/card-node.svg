@@ -9,16 +9,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="32"
-   height="32"
-   viewBox="0 0 8.4666665 8.4666669"
+   width="16.000002"
+   height="16.000002"
+   viewBox="0 0 4.2333338 4.2333339"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="card-node.svg"
-   inkscape:export-filename="C:\Users\Braindead\Dev\ClassicNightmares\CardEngine\addons\card_engine\icon.png"
-   inkscape:export-xdpi="192"
-   inkscape:export-ydpi="192">
+   inkscape:export-filename="C:\Users\edogg\Documents\Godot Projects\Card Game\addons\card_engine\icons\card-node.png"
+   inkscape:export-xdpi="153.59998"
+   inkscape:export-ydpi="153.59998">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -29,20 +29,26 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="26.5625"
-     inkscape:cx="16"
-     inkscape:cy="16"
+     inkscape:cx="2.0915041"
+     inkscape:cy="7.4964711"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      units="px"
      inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="1912"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1">
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     fit-margin-top="1"
+     fit-margin-bottom="1"
+     fit-margin-left="3"
+     fit-margin-right="3">
     <inkscape:grid
        type="xygrid"
-       id="grid815" />
+       id="grid815"
+       originx="-2.1166661"
+       originy="-2.1166535" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -52,7 +58,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -60,36 +66,36 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-288.53332)">
+     transform="translate(-2.1166661,-290.65)">
     <rect
-       style="opacity:1;fill:#ffd42a;fill-opacity:1;stroke:none;stroke-width:0.79374999;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ffd42a;fill-opacity:1;stroke:none;stroke-width:0.39687508;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect1420"
-       width="5.2916665"
-       height="7.4083333"
-       x="1.5875"
-       y="289.0625"
-       rx="0.5291667"
-       ry="0.5291667" />
+       width="2.6458337"
+       height="3.7041674"
+       x="2.9104161"
+       y="290.91458"
+       rx="0.26458341"
+       ry="0.26458341" />
     <rect
-       style="opacity:1;fill:#aa8800;fill-opacity:1;stroke:none;stroke-width:0.79374999;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#aa8800;fill-opacity:1;stroke:none;stroke-width:0.39687508;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect1422"
-       width="4.2333336"
-       height="2.1166744"
-       x="2.1166666"
-       y="289.59164" />
+       width="2.1166673"
+       height="1.0583375"
+       x="3.1749997"
+       y="291.17914" />
     <rect
-       style="opacity:1;fill:#aa8800;fill-opacity:1;stroke:none;stroke-width:0.79374999;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#aa8800;fill-opacity:1;stroke:none;stroke-width:0.39687508;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect1422-7"
-       width="4.2333336"
-       height="0.79373926"
-       x="2.1166668"
-       y="291.9729" />
+       width="2.1166673"
+       height="0.39686972"
+       x="3.1749997"
+       y="292.36978" />
     <rect
-       style="opacity:1;fill:#aa8800;fill-opacity:1;stroke:none;stroke-width:0.79374999;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#aa8800;fill-opacity:1;stroke:none;stroke-width:0.39687508;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect1422-2"
-       width="4.2333336"
-       height="2.9104254"
-       x="2.1166668"
-       y="293.03125" />
+       width="2.1166673"
+       height="1.4552131"
+       x="3.1749997"
+       y="292.89896" />
   </g>
 </svg>
