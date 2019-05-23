@@ -1,6 +1,2 @@
 .import/**
 *.import
-/default_env.tres
-/icon.png
-/project.godot
-/main.tscn
