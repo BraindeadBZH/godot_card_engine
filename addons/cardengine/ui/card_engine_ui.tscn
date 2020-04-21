@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/cardengine/ui/card_engine_ui.gd" type="Script" id=1]
+[ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" type="PackedScene" id=2]
+
+[node name="CardEngineUI" type="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 200 )
+tab_align = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Databases" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="DatabaseLayout" type="VBoxContainer" parent="Databases"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Toolbar" type="HBoxContainer" parent="Databases/DatabaseLayout"]
+margin_right = 1272.0
+margin_bottom = 20.0
+
+[node name="CreateBtn" type="Button" parent="Databases/DatabaseLayout/Toolbar"]
+margin_right = 144.0
+margin_bottom = 20.0
+text = "Create new database"
+
+[node name="DatabaseList" type="ItemList" parent="Databases/DatabaseLayout"]
+margin_top = 24.0
+margin_right = 1272.0
+margin_bottom = 684.0
+size_flags_vertical = 3
+
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="NewDatabaseDialog" parent="Dialogs" instance=ExtResource( 2 )]
+[connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="." method="_on_CreateBtn_pressed"]
+[connection signal="creation_confirmed" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_creation_confirmed"]

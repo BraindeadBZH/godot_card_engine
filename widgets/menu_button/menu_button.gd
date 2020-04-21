@@ -1,4 +1,4 @@
-tool
+tool # required to allow text update in the editor
 extends TextureButton
 
 export(String) var button_text = "BUTTON" setget set_button_text

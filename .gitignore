@@ -1,2 +1,4 @@
 .import/**
 *.import
+_private/**
+addons/godot-plugin-refresher/**

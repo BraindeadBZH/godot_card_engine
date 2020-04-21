@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/cardengine/ui/dialogs/abstract_form_dialog/abstract_form_dialog.gd" type="Script" id=1]
+
+[node name="AbstractFormDialog" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -858.0
+margin_bottom = -514.0
+popup_exclusive = true
+window_title = "Form"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorText" type="Label" parent="MainLayout"]
+visible = false
+margin_right = 402.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.917647, 0.27451, 0.27451, 1 )
+
+[node name="Form" type="GridContainer" parent="MainLayout"]
+margin_right = 402.0
+margin_bottom = 152.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
+margin_top = 156.0
+margin_right = 402.0
+margin_bottom = 186.0
+alignment = 1
+
+[node name="SubmitButton" type="Button" parent="MainLayout/ButtonLayout"]
+margin_left = 99.0
+margin_right = 199.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+text = "Confirm"
+
+[node name="CancelButton" type="Button" parent="MainLayout/ButtonLayout"]
+margin_left = 203.0
+margin_right = 303.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+text = "Cancel"
+[connection signal="about_to_show" from="." to="." method="_on_AbstractFormDialog_about_to_show"]
+[connection signal="pressed" from="MainLayout/ButtonLayout/SubmitButton" to="." method="_on_SubmitButton_pressed"]
+[connection signal="pressed" from="MainLayout/ButtonLayout/CancelButton" to="." method="_on_CancelButton_pressed"]
