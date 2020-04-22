@@ -16,6 +16,7 @@ __meta__ = {
 }
 
 [node name="Databases" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -51,7 +52,55 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "test - Test Database", null, false ]
+items = [ "main - Main Database", null, false, "test - Test Database", null, false ]
+
+[node name="Card" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="CardLayout" type="VBoxContainer" parent="Card"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolLayout" type="HBoxContainer" parent="Card/CardLayout"]
+margin_right = 1272.0
+margin_bottom = 30.0
+
+[node name="CardIdLbl" type="Label" parent="Card/CardLayout/ToolLayout"]
+margin_top = 8.0
+margin_right = 47.0
+margin_bottom = 22.0
+text = "Card ID"
+
+[node name="CardId" type="LineEdit" parent="Card/CardLayout/ToolLayout"]
+margin_left = 51.0
+margin_right = 251.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="SaveBtn" type="Button" parent="Card/CardLayout/ToolLayout"]
+margin_left = 255.0
+margin_right = 355.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+disabled = true
+text = "Save to"
+
+[node name="DatabaseSelect" type="OptionButton" parent="Card/CardLayout/ToolLayout"]
+margin_left = 359.0
+margin_right = 559.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 0 )
+text = "main - Main Database"
+items = [ "main - Main Database", null, false, 0, "main", "test - Test Database", null, false, 1, "test" ]
+selected = 0
 
 [node name="Dialogs" type="Node" parent="."]
 
@@ -61,10 +110,11 @@ items = [ "test - Test Database", null, false ]
 visible = false
 
 [node name="EditDatabaseDialog" parent="Dialogs" instance=ExtResource( 4 )]
-visible = false
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="." method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_activated"]
 [connection signal="item_selected" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_selected"]
+[connection signal="text_changed" from="Card/CardLayout/ToolLayout/CardId" to="." method="_on_CardId_text_changed"]
+[connection signal="pressed" from="Card/CardLayout/ToolLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]
 [connection signal="creation_confirmed" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_creation_confirmed"]
 [connection signal="deletion_confirmed" from="Dialogs/DeleteDatabaseDialog" to="." method="_on_DeleteDatabaseDialog_deletion_confirmed"]

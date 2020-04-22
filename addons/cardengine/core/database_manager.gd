@@ -41,7 +41,7 @@ func load_databases(folder: String):
 	else:
 		printerr("Could not read CardEngine database folder")
 
-func get_databases() -> Dictionary:
+func databases() -> Dictionary:
 	return _databases;
 	
 func create_database(id: String, name: String):
@@ -58,6 +58,14 @@ func write_database(db: CardDatabase):
 	file.set_value("meta", "id"  , db.id)
 	file.set_value("meta", "name", db.name)
 	file.set_value("meta", "path", db.path)
+	
+	for id in db.cards():
+		var card = db.get_card(id)
+		file.set_value("cards", card.id, {
+			"categories": card.categories(),
+			"values": card.values(),
+			"texts": card.texts()
+			})
 	
 	var err = file.save(db.path)
 	if err != OK:
@@ -76,8 +84,23 @@ func read_database(filename: String) -> CardDatabase:
 	var db = CardDatabase.new(file.get_value("meta", "id"  ),
 							  file.get_value("meta", "name"),
 							  file.get_value("meta", "path"))
+
+	if file.has_section("cards"):
+		for entry in file.get_section_keys("cards"):
+			var card = CardData.new(entry)
+			var data = file.get_value("cards", entry)
+			card.set_categories(data["categories"])
+			card.set_values    (data["values"    ])
+			card.set_texts     (data["texts"     ])
+			db.add_card(card)
 	
 	return db
+
+func get_database(id: String) -> CardDatabase:
+	if _databases.has(id):
+		return _databases[id]
+	else:
+		return null
 
 func delete_database(id: String):
 	if !_databases.has(id): return
