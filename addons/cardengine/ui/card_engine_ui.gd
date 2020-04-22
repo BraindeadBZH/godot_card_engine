@@ -13,6 +13,7 @@ func _on_CreateBtn_pressed():
 func _on_Databases_changed():
 	$Databases/DatabaseLayout/DatabaseList.clear()
 	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = true
+	
 	var databases = CardEngine.db().get_databases()
 	for id in databases:
 		var db = databases[id]
@@ -32,3 +33,7 @@ func _on_DeleteBtn_pressed():
 
 func _on_DeleteDatabaseDialog_deletion_confirmed():
 	CardEngine.db().delete_database($Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
+
+
+func _on_DatabaseList_item_activated(index):
+	$Dialogs/EditDatabaseDialog.popup_centered()

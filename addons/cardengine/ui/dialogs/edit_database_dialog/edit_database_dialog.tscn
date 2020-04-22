@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/cardengine/ui/dialogs/edit_database_dialog/edit_database_dialog.gd" type="Script" id=1]
+
+[node name="EditDatabaseDialog" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -750.0
+margin_bottom = -380.0
+window_title = "Edit Database"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CardsLayout" type="GridContainer" parent="MainLayout"]
+margin_right = 510.0
+margin_bottom = 272.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="ListLabel" type="Label" parent="MainLayout/CardsLayout"]
+margin_right = 253.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Card List"
+align = 1
+
+[node name="DetailsLabel" type="Label" parent="MainLayout/CardsLayout"]
+margin_left = 257.0
+margin_right = 510.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Card Details"
+align = 1
+
+[node name="CardList" type="ItemList" parent="MainLayout/CardsLayout"]
+margin_top = 18.0
+margin_right = 253.0
+margin_bottom = 272.0
+size_flags_vertical = 3
+
+[node name="DetailsLayout" type="VBoxContainer" parent="MainLayout/CardsLayout"]
+margin_left = 257.0
+margin_top = 18.0
+margin_right = 510.0
+margin_bottom = 272.0
+
+[node name="DetailsList" type="ItemList" parent="MainLayout/CardsLayout/DetailsLayout"]
+margin_right = 253.0
+margin_bottom = 220.0
+size_flags_vertical = 3
+
+[node name="ToolsLayout" type="HBoxContainer" parent="MainLayout/CardsLayout/DetailsLayout"]
+margin_top = 224.0
+margin_right = 253.0
+margin_bottom = 254.0
+alignment = 1
+
+[node name="DeleteBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
+margin_right = 100.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+disabled = true
+text = "Delete"
+
+[node name="Spacer" type="Control" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
+margin_left = 104.0
+margin_right = 149.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+
+[node name="LoadBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
+margin_left = 153.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+disabled = true
+text = "Load"
+
+[node name="Spacer" type="Control" parent="MainLayout"]
+margin_top = 276.0
+margin_right = 510.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
+margin_top = 290.0
+margin_right = 510.0
+margin_bottom = 320.0
+alignment = 1
+
+[node name="DoneBtn" type="Button" parent="MainLayout/ButtonLayout"]
+margin_left = 205.0
+margin_right = 305.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+text = "Done"
+[connection signal="pressed" from="MainLayout/ButtonLayout/DoneBtn" to="." method="_on_DoneBtn_pressed"]
