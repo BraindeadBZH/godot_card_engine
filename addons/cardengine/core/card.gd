@@ -30,7 +30,7 @@ func values() -> Dictionary:
 	return _values
 
 func set_values(values: Dictionary) -> void:
-	_values = values()
+	_values = values
 
 func add_value(id: String, value: float) -> void:
 	_values[id] = value
