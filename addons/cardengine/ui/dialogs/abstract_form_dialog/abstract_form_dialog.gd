@@ -1,5 +1,6 @@
 tool
 extends WindowDialog
+class_name AbstractFormDialog
 
 signal form_validated(form)
 

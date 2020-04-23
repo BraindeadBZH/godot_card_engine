@@ -19,6 +19,9 @@ func cards() -> Dictionary:
 func add_card(card: CardData) -> void:
 	_cards[card.id] = card
 
+func card_exists(id: String) -> bool:
+	return _cards.has(id)
+
 func get_card(id: String) -> CardData:
 	if _cards.has(id):
 		return _cards[id]

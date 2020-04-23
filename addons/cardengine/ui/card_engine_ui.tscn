@@ -53,7 +53,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "main: Main Database", null, false, "test: Test Database", null, false ]
+items = [ "delete: Delete test", null, false, "main: Main Database", null, false, "test: Test Database", null, false ]
 
 [node name="Card" type="Control" parent="."]
 visible = false
@@ -108,8 +108,8 @@ margin_left = 463.0
 margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
-text = "main: Main Database"
-items = [ "main: Main Database", null, false, 0, "main", "test: Test Database", null, false, 1, "test" ]
+text = "delete: Delete test"
+items = [ "delete: Delete test", null, false, 0, "delete", "main: Main Database", null, false, 1, "main", "test: Test Database", null, false, 2, "test" ]
 selected = 0
 
 [node name="ErrorLbl" type="Label" parent="Card/CardLayout/ToolLayout"]
@@ -255,6 +255,5 @@ text = "Delete"
 [connection signal="pressed" from="Card/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="." method="_on_AddCategBtn_pressed"]
 [connection signal="pressed" from="Card/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="." method="_on_AddValBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/GenericConfirmDialog" to="." method="_on_DeleteDatabaseDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/CategoryDialog" to="." method="_on_CategoryDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/ValueDialog" to="." method="_on_ValueDialog_form_validated"]

@@ -1,5 +1,5 @@
 tool
-extends "../abstract_form_dialog/abstract_form_dialog.gd"
+extends AbstractFormDialog
 
 func _ready():
 	setup("category", CardEngine.db())

@@ -7,6 +7,11 @@ var _selected_db = -1
 func _ready():
 	CardEngine.db().connect("changed", self, "_on_Databases_changed")
 
+func _database_delete():
+	if yield():
+		CardEngine.db().delete_database(
+			$Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
+
 func _append_category(id: String, name: String):
 	var list = $Card/CardLayout/DataLayout/CategList
 	list.add_item("%s: %s" % [id, name])
@@ -50,11 +55,7 @@ func _on_DatabaseList_item_selected(index):
 	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = false
 
 func _on_DeleteBtn_pressed():
-	$Dialogs/GenericConfirmDialog.popup_centered()
-
-func _on_DeleteDatabaseDialog_form_validated(form):
-	CardEngine.db().delete_database(
-		$Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
+	$Dialogs/GenericConfirmDialog.ask_confirmation("Database Delete", _database_delete())
 
 func _on_DatabaseList_item_activated(index):
 	$Dialogs/EditDatabaseDialog.popup_centered()
@@ -67,6 +68,9 @@ func _on_SaveBtn_pressed():
 	var id = $Card/CardLayout/ToolLayout/CardId.text
 	var db = CardEngine.db().get_database(
 		$Card/CardLayout/ToolLayout/DatabaseSelect.get_selected_metadata())
+	
+	if db.card_exists(id):
+		yield($Dialogs/GenericConfirmDialog.popup_with_action("save_card", "Overwrite Card"), "form_validated")
 	
 	var card = CardData.new(id)
 	for i in range($Card/CardLayout/DataLayout/CategList.get_item_count()):

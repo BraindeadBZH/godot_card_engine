@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "WindowDialog",
+"class": "AbstractFormDialog",
+"language": "GDScript",
+"path": "res://addons/cardengine/ui/dialogs/abstract_form_dialog/abstract_form_dialog.gd"
+}, {
 "base": "Node",
 "class": "AbstractManager",
 "language": "GDScript",
@@ -50,6 +55,7 @@ _global_script_classes=[ {
 "path": "res://addons/cardengine/core/utils.gd"
 } ]
 _global_script_class_icons={
+"AbstractFormDialog": "",
 "AbstractManager": "",
 "CardData": "",
 "CardDatabase": "",

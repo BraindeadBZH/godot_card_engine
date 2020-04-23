@@ -20,3 +20,5 @@ margin_left = 203.0
 margin_right = 279.0
 margin_bottom = 40.0
 size_flags_horizontal = 2
+[connection signal="form_validated" from="." to="." method="_on_GenericConfirmDialog_form_validated"]
+[connection signal="popup_hide" from="." to="." method="_on_GenericConfirmDialog_popup_hide"]
