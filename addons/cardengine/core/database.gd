@@ -20,7 +20,10 @@ func add_card(card: CardData) -> void:
 	_cards[card.id] = card
 
 func get_card(id: String) -> CardData:
-	return _cards[id]
+	if _cards.has(id):
+		return _cards[id]
+	else:
+		return null
 
 func remove_card(id: String) -> void:
 	_cards.erase(id)

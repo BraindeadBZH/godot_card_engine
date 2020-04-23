@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/delete_database_dialog/delete_database_dialog.gd" type="Script" id=2]
 
 [node name="DeleteDatabaseDialog" instance=ExtResource( 1 )]
-visible = true
 window_title = "Delete Database"
 script = ExtResource( 2 )
 
@@ -21,4 +20,3 @@ margin_left = 203.0
 margin_right = 279.0
 margin_bottom = 40.0
 size_flags_horizontal = 2
-[connection signal="form_validated" from="." to="." method="_on_DeleteDatabaseDialog_form_validated"]

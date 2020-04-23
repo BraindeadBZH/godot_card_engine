@@ -31,4 +31,3 @@ margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
-[connection signal="form_validated" from="." to="." method="_on_NewDatabaseDialog_form_validated"]

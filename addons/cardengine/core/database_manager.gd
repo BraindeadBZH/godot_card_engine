@@ -12,6 +12,7 @@ func clean():
 
 func validate_form(form_name: String, form: Dictionary) -> Array:
 	var errors = []
+	
 	if form_name == "new_database":
 		var id = form["id"]
 		if id.empty():
@@ -20,9 +21,15 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 			errors.append("Database ID already exists")
 		elif !Utils.is_id_valid(id):
 			errors.append("Invalid database ID, must only contains alphanumeric characters or _, no space and starts with a letter")
+	
 	elif form_name == "delete_database":
 		if !form["confirm"]:
 			errors.append("Please confirm first")
+	
+	elif form_name == "category":
+		if !Utils.is_id_valid(form["id"]):
+			errors.append("Invalid category ID")
+	
 	return errors
 
 func load_databases(folder: String):

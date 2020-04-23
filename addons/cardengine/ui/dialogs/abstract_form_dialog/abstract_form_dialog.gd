@@ -1,7 +1,7 @@
 tool
 extends WindowDialog
 
-signal form_validated()
+signal form_validated(form)
 
 var _form_name: String = ""
 var _manager: AbstractManager = null
@@ -28,10 +28,11 @@ func _on_CancelButton_pressed():
 
 func _on_SubmitButton_pressed():
 	_clear_errors()
-	var errors = _manager.validate_form(_form_name, _extract_form())
+	var form = _extract_form()
+	var errors = _manager.validate_form(_form_name, form)
 	
 	if errors.size() == 0:
-		emit_signal("form_validated")
+		emit_signal("form_validated", form)
 		hide()
 	else:
 		for err in errors:

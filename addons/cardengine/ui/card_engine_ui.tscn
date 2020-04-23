@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/card_engine_ui.gd" type="Script" id=1]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/cardengine/ui/dialogs/delete_database_dialog/delete_database_dialog.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_database_dialog/edit_database_dialog.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/cardengine/ui/dialogs/category_dialog/category_dialog.tscn" type="PackedScene" id=5]
 
 [node name="CardEngineUI" type="TabContainer"]
 anchor_right = 1.0
@@ -16,7 +17,6 @@ __meta__ = {
 }
 
 [node name="Databases" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -55,6 +55,7 @@ size_flags_vertical = 3
 items = [ "main - Main Database", null, false, "test - Test Database", null, false ]
 
 [node name="Card" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -93,28 +94,162 @@ rect_min_size = Vector2( 100, 30 )
 disabled = true
 text = "Save to"
 
-[node name="DatabaseSelect" type="OptionButton" parent="Card/CardLayout/ToolLayout"]
+[node name="LoadBtn" type="Button" parent="Card/CardLayout/ToolLayout"]
 margin_left = 359.0
-margin_right = 559.0
+margin_right = 459.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+disabled = true
+text = "Load from"
+
+[node name="DatabaseSelect" type="OptionButton" parent="Card/CardLayout/ToolLayout"]
+margin_left = 463.0
+margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
 text = "main - Main Database"
 items = [ "main - Main Database", null, false, 0, "main", "test - Test Database", null, false, 1, "test" ]
 selected = 0
 
+[node name="ErrorLbl" type="Label" parent="Card/CardLayout/ToolLayout"]
+margin_left = 667.0
+margin_top = 8.0
+margin_right = 667.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 0.917647, 0.27451, 0.27451, 1 )
+
+[node name="DataLayout" type="GridContainer" parent="Card/CardLayout"]
+margin_top = 34.0
+margin_right = 1272.0
+margin_bottom = 684.0
+size_flags_vertical = 3
+columns = 3
+
+[node name="CategLbl" type="Label" parent="Card/CardLayout/DataLayout"]
+margin_right = 421.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Categories"
+align = 1
+
+[node name="ValuesLbl" type="Label" parent="Card/CardLayout/DataLayout"]
+margin_left = 425.0
+margin_right = 846.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Values"
+align = 1
+
+[node name="TextsLbl" type="Label" parent="Card/CardLayout/DataLayout"]
+margin_left = 850.0
+margin_right = 1271.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Texts"
+align = 1
+
+[node name="CategList" type="ItemList" parent="Card/CardLayout/DataLayout"]
+margin_top = 18.0
+margin_right = 421.0
+margin_bottom = 616.0
+size_flags_vertical = 3
+
+[node name="ValuesList" type="ItemList" parent="Card/CardLayout/DataLayout"]
+margin_left = 425.0
+margin_top = 18.0
+margin_right = 846.0
+margin_bottom = 616.0
+size_flags_vertical = 3
+
+[node name="TextsList" type="ItemList" parent="Card/CardLayout/DataLayout"]
+margin_left = 850.0
+margin_top = 18.0
+margin_right = 1271.0
+margin_bottom = 616.0
+size_flags_vertical = 3
+
+[node name="CategToolLayout" type="HBoxContainer" parent="Card/CardLayout/DataLayout"]
+margin_top = 620.0
+margin_right = 421.0
+margin_bottom = 650.0
+
+[node name="AddCategBtn" type="Button" parent="Card/CardLayout/DataLayout/CategToolLayout"]
+margin_right = 208.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="DelCategBtn" type="Button" parent="Card/CardLayout/DataLayout/CategToolLayout"]
+margin_left = 212.0
+margin_right = 421.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+disabled = true
+text = "Delete"
+
+[node name="ValuesToolLayout" type="HBoxContainer" parent="Card/CardLayout/DataLayout"]
+margin_left = 425.0
+margin_top = 620.0
+margin_right = 846.0
+margin_bottom = 650.0
+
+[node name="AddValBtn" type="Button" parent="Card/CardLayout/DataLayout/ValuesToolLayout"]
+margin_right = 208.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="DelValBtn" type="Button" parent="Card/CardLayout/DataLayout/ValuesToolLayout"]
+margin_left = 212.0
+margin_right = 421.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+disabled = true
+text = "Delete"
+
+[node name="TextsToolLayout" type="HBoxContainer" parent="Card/CardLayout/DataLayout"]
+margin_left = 850.0
+margin_top = 620.0
+margin_right = 1271.0
+margin_bottom = 650.0
+
+[node name="AddTxtBtn" type="Button" parent="Card/CardLayout/DataLayout/TextsToolLayout"]
+margin_right = 208.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="DelTxtBtn" type="Button" parent="Card/CardLayout/DataLayout/TextsToolLayout"]
+margin_left = 212.0
+margin_right = 421.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+disabled = true
+text = "Delete"
+
 [node name="Dialogs" type="Node" parent="."]
 
 [node name="NewDatabaseDialog" parent="Dialogs" instance=ExtResource( 2 )]
 
 [node name="DeleteDatabaseDialog" parent="Dialogs" instance=ExtResource( 3 )]
-visible = false
 
 [node name="EditDatabaseDialog" parent="Dialogs" instance=ExtResource( 4 )]
+
+[node name="CategoryDialog" parent="Dialogs" instance=ExtResource( 5 )]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="." method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_activated"]
 [connection signal="item_selected" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_selected"]
 [connection signal="text_changed" from="Card/CardLayout/ToolLayout/CardId" to="." method="_on_CardId_text_changed"]
 [connection signal="pressed" from="Card/CardLayout/ToolLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]
-[connection signal="creation_confirmed" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_creation_confirmed"]
-[connection signal="deletion_confirmed" from="Dialogs/DeleteDatabaseDialog" to="." method="_on_DeleteDatabaseDialog_deletion_confirmed"]
+[connection signal="pressed" from="Card/CardLayout/ToolLayout/LoadBtn" to="." method="_on_LoadBtn_pressed"]
+[connection signal="pressed" from="Card/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="." method="_on_AddCategBtn_pressed"]
+[connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/DeleteDatabaseDialog" to="." method="_on_DeleteDatabaseDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/CategoryDialog" to="." method="_on_CategoryDialog_form_validated"]
