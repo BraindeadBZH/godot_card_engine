@@ -19,6 +19,10 @@ func _reset_form():
 func _extract_form() -> Dictionary:
 	return {}
 
+func _clear_errors():
+	$MainLayout/ErrorText.hide()
+	$MainLayout/ErrorText.text = ""
+	
 func _on_AbstractFormDialog_about_to_show():
 	_clear_errors()
 	_reset_form()
@@ -38,7 +42,3 @@ func _on_SubmitButton_pressed():
 		for err in errors:
 			$MainLayout/ErrorText.text += err + "\n"
 		$MainLayout/ErrorText.show()
-
-func _clear_errors():
-	$MainLayout/ErrorText.hide()
-	$MainLayout/ErrorText.text = ""

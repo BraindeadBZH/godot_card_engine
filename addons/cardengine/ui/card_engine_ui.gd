@@ -7,6 +7,21 @@ var _selected_db = -1
 func _ready():
 	CardEngine.db().connect("changed", self, "_on_Databases_changed")
 
+func _append_category(id: String, name: String):
+	var list = $Card/CardLayout/DataLayout/CategList
+	list.add_item("%s: %s" % [id, name])
+	list.set_item_metadata(list.get_item_count()-1, {"id": id, "name": name})
+
+func _append_value(id: String, value: float):
+	var list = $Card/CardLayout/DataLayout/ValuesList
+	list.add_item("%s = %f" % [id, value])
+	list.set_item_metadata(list.get_item_count()-1, {"id": id, "value": value})
+
+func _append_text(id: String, text: String):
+	var list = $Card/CardLayout/DataLayout/TextsList
+	list.add_item("%s: %s" % [id, text])
+	list.set_item_metadata(list.get_item_count()-1, {"id": id, "text": text})
+	
 func _on_CreateBtn_pressed():
 	$Dialogs/NewDatabaseDialog.popup_centered()
 
@@ -57,6 +72,12 @@ func _on_SaveBtn_pressed():
 	for i in range($Card/CardLayout/DataLayout/CategList.get_item_count()):
 		var data = $Card/CardLayout/DataLayout/CategList.get_item_metadata(i)
 		card.add_category(data["id"], data["name"])
+	for i in range($Card/CardLayout/DataLayout/ValuesList.get_item_count()):
+		var data = $Card/CardLayout/DataLayout/ValuesList.get_item_metadata(i)
+		card.add_value(data["id"], data["value"])
+	for i in range($Card/CardLayout/DataLayout/TextsList.get_item_count()):
+		var data = $Card/CardLayout/DataLayout/TextsList.get_item_metadata(i)
+		card.add_text(data["id"], data["text"])
 	db.add_card(card)
 	CardEngine.db().write_database(db)
 
@@ -99,17 +120,8 @@ func _on_AddCategBtn_pressed():
 func _on_CategoryDialog_form_validated(form):
 	_append_category(form["id"], form["name"])
 
-func _append_category(id: String, name: String):
-	var list = $Card/CardLayout/DataLayout/CategList
-	list.add_item("%s: %s" % [id, name])
-	list.set_item_metadata(list.get_item_count()-1, {"id": id, "name": name})
+func _on_AddValBtn_pressed():
+	$Dialogs/ValueDialog.popup_centered()
 
-func _append_value(id: String, value: float):
-	var list = $Card/CardLayout/DataLayout/ValuesList
-	list.add_item("%s = %f" % [id, value])
-	list.set_item_metadata(list.get_item_count()-1, {"id": id, "value": value})
-
-func _append_text(id: String, text: String):
-	var list = $Card/CardLayout/DataLayout/TextsList
-	list.add_item("%s: %s" % [id, text])
-	list.set_item_metadata(list.get_item_count()-1, {"id": id, "text": text})
+func _on_ValueDialog_form_validated(form):
+	_append_value(form["id"], form["value"])
