@@ -74,7 +74,14 @@ func _on_LoadBtn_pressed():
 	if card == null:
 		$Card/CardLayout/ToolLayout/ErrorLbl.text = "Unable to find the card in the database"
 	else:
-		pass # TODO
+		for categ in card.categories():
+			_append_category(categ, card.get_category(categ))
+		
+		for value in card.values():
+			_append_category(value, card.get_value(value))
+		
+		for text in card.texts():
+			_append_category(text, card.get_text(text))
 	
 func _on_CardId_text_changed(new_text):
 	if Utils.is_id_valid(new_text):
@@ -90,6 +97,19 @@ func _on_AddCategBtn_pressed():
 	$Dialogs/CategoryDialog.popup_centered()
 
 func _on_CategoryDialog_form_validated(form):
-	$Card/CardLayout/DataLayout/CategList.add_item(form["id"] + " - " + form["name"])
-	$Card/CardLayout/DataLayout/CategList.set_item_metadata(
-		$Card/CardLayout/DataLayout/CategList.get_item_count()-1, form)
+	_append_category(form["id"], form["name"])
+
+func _append_category(id: String, name: String):
+	var list = $Card/CardLayout/DataLayout/CategList
+	list.add_item("%s: %s" % [id, name])
+	list.set_item_metadata(list.get_item_count()-1, {"id": id, "name": name})
+
+func _append_value(id: String, value: float):
+	var list = $Card/CardLayout/DataLayout/ValuesList
+	list.add_item("%s = %f" % [id, value])
+	list.set_item_metadata(list.get_item_count()-1, {"id": id, "value": value})
+
+func _append_text(id: String, text: String):
+	var list = $Card/CardLayout/DataLayout/TextsList
+	list.add_item("%s: %s" % [id, text])
+	list.set_item_metadata(list.get_item_count()-1, {"id": id, "text": text})

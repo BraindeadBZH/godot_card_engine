@@ -31,16 +31,13 @@ func _on_CardList_item_selected(index):
 	var card = _db.get_card(id)
 	
 	list.add_item("Categories:")
-	var categs = card.categories()
-	for categ in categs:
-		list.add_item("  * %s: %s" % [categ, categs[categ]])
+	for categ in card.categories():
+		list.add_item("  * %s: %s" % [categ, card.get_category(categ)])
 		
 	list.add_item("Values:")
-	var values = card.values()
-	for value in values:
-		list.add_item("  * %s = %f" % [value, values[value]])
+	for value in card.values():
+		list.add_item("  * %s = %f" % [value, card.get_value(value)])
 		
 	list.add_item("Texts:")
-	var texts = card.texts()
-	for text in texts:
-		list.add_item("  * %s: %s" % [text, texts[text]])
+	for text in card.texts():
+		list.add_item("  * %s: %s" % [text, card.get_text(text)])
