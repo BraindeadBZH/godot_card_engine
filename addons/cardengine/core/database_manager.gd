@@ -30,6 +30,14 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 		if !Utils.is_id_valid(form["id"]):
 			errors.append("Invalid category ID")
 	
+	elif form_name == "value":
+		if !Utils.is_id_valid(form["id"]):
+			errors.append("Invalid value ID")
+	
+	elif form_name == "text":
+		if !Utils.is_id_valid(form["id"]):
+			errors.append("Invalid text ID")
+	
 	return errors
 
 func load_databases(folder: String):
