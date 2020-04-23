@@ -53,7 +53,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "delete: Delete test", null, false, "main: Main Database", null, false, "test: Test Database", null, false ]
+items = [ "main: Main Database", null, false, "test: Test Database", null, false ]
 
 [node name="Card" type="Control" parent="."]
 visible = false
@@ -108,8 +108,8 @@ margin_left = 463.0
 margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
-text = "delete: Delete test"
-items = [ "delete: Delete test", null, false, 0, "delete", "main: Main Database", null, false, 1, "main", "test: Test Database", null, false, 2, "test" ]
+text = "main: Main Database"
+items = [ "main: Main Database", null, false, 0, "main", "test: Test Database", null, false, 1, "test" ]
 selected = 0
 
 [node name="ErrorLbl" type="Label" parent="Card/CardLayout/ToolLayout"]

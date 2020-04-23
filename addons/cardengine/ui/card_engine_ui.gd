@@ -12,6 +12,24 @@ func _database_delete():
 		CardEngine.db().delete_database(
 			$Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
 
+func _save_card(id: String, db: CardDatabase):
+	var card = CardData.new(id)
+	for i in range($Card/CardLayout/DataLayout/CategList.get_item_count()):
+		var data = $Card/CardLayout/DataLayout/CategList.get_item_metadata(i)
+		card.add_category(data["id"], data["name"])
+	for i in range($Card/CardLayout/DataLayout/ValuesList.get_item_count()):
+		var data = $Card/CardLayout/DataLayout/ValuesList.get_item_metadata(i)
+		card.add_value(data["id"], data["value"])
+	for i in range($Card/CardLayout/DataLayout/TextsList.get_item_count()):
+		var data = $Card/CardLayout/DataLayout/TextsList.get_item_metadata(i)
+		card.add_text(data["id"], data["text"])
+	db.add_card(card)
+	CardEngine.db().write_database(db)
+
+func _overwrite_card(id: String, db: CardDatabase):
+	if yield():
+		_save_card(id, db)
+
 func _append_category(id: String, name: String):
 	var list = $Card/CardLayout/DataLayout/CategList
 	list.add_item("%s: %s" % [id, name])
@@ -70,20 +88,9 @@ func _on_SaveBtn_pressed():
 		$Card/CardLayout/ToolLayout/DatabaseSelect.get_selected_metadata())
 	
 	if db.card_exists(id):
-		yield($Dialogs/GenericConfirmDialog.popup_with_action("save_card", "Overwrite Card"), "form_validated")
-	
-	var card = CardData.new(id)
-	for i in range($Card/CardLayout/DataLayout/CategList.get_item_count()):
-		var data = $Card/CardLayout/DataLayout/CategList.get_item_metadata(i)
-		card.add_category(data["id"], data["name"])
-	for i in range($Card/CardLayout/DataLayout/ValuesList.get_item_count()):
-		var data = $Card/CardLayout/DataLayout/ValuesList.get_item_metadata(i)
-		card.add_value(data["id"], data["value"])
-	for i in range($Card/CardLayout/DataLayout/TextsList.get_item_count()):
-		var data = $Card/CardLayout/DataLayout/TextsList.get_item_metadata(i)
-		card.add_text(data["id"], data["text"])
-	db.add_card(card)
-	CardEngine.db().write_database(db)
+		$Dialogs/GenericConfirmDialog.ask_confirmation("Overwrite Card", _overwrite_card(id, db))
+	else:
+		_save_card(id, db)
 
 func _on_LoadBtn_pressed():
 	$Card/CardLayout/ToolLayout/ErrorLbl.text = ""
