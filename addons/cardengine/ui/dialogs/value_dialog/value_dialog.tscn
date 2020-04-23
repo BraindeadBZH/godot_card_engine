@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/value_dialog/value_dialog.gd" type="Script" id=2]
 
 [node name="ValueDialog" instance=ExtResource( 1 )]
-visible = true
 window_title = "Value"
 script = ExtResource( 2 )
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/dialogs/abstract_form_dialog/abstract_form_dialog.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/cardengine/ui/dialogs/delete_database_dialog/delete_database_dialog.gd" type="Script" id=2]
+[ext_resource path="res://addons/cardengine/ui/dialogs/generic_confirm_dialog/generic_confirm_dialog.gd" type="Script" id=2]
 
-[node name="DeleteDatabaseDialog" instance=ExtResource( 1 )]
-window_title = "Delete Database"
+[node name="GenericConfirmDialog" instance=ExtResource( 1 )]
+window_title = "Confirm Irreversible Action"
 script = ExtResource( 2 )
 
 [node name="ConfirmationLbl" type="Label" parent="MainLayout/Form" index="0"]

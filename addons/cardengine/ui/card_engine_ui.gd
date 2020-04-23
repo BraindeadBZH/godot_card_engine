@@ -50,7 +50,7 @@ func _on_DatabaseList_item_selected(index):
 	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = false
 
 func _on_DeleteBtn_pressed():
-	$Dialogs/DeleteDatabaseDialog.popup_centered()
+	$Dialogs/GenericConfirmDialog.popup_centered()
 
 func _on_DeleteDatabaseDialog_form_validated(form):
 	CardEngine.db().delete_database(

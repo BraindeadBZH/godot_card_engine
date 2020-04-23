@@ -5,6 +5,7 @@ class_name CardEngineInstance
 const CONF_FILE_PATH = "res://project.cardengine"
 
 var _conf: ConfigFile = ConfigFile.new()
+var _general: GeneralManager = GeneralManager.new()
 var _databases: DatabaseManager = DatabaseManager.new()
 
 func setup():
@@ -14,7 +15,11 @@ func setup():
 		_databases.load_databases(_conf.get_value("folders", "databases"))
 
 func clean():
+	_general.clean()
 	_databases.clean()
+
+func general() -> GeneralManager:
+	return _general
 
 func db() -> DatabaseManager:
 	return _databases
