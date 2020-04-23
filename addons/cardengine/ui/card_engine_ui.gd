@@ -99,10 +99,10 @@ func _on_LoadBtn_pressed():
 			_append_category(categ, card.get_category(categ))
 		
 		for value in card.values():
-			_append_category(value, card.get_value(value))
+			_append_value(value, card.get_value(value))
 		
 		for text in card.texts():
-			_append_category(text, card.get_text(text))
+			_append_text(text, card.get_text(text))
 	
 func _on_CardId_text_changed(new_text):
 	if Utils.is_id_valid(new_text):
