@@ -11,21 +11,21 @@ func _on_CreateBtn_pressed():
 	$Dialogs/NewDatabaseDialog.popup_centered()
 
 func _on_Databases_changed():
-	$Databases/DatabaseLayout/DatabaseList.clear()
-	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = true
+	var list = $Databases/DatabaseLayout/DatabaseList
+	var select = $Card/CardLayout/ToolLayout/DatabaseSelect
 	
-	$Card/CardLayout/ToolLayout/DatabaseSelect.clear()
+	list.clear()
+	select.clear()
+	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = true
 	
 	var databases = CardEngine.db().databases()
 	for id in databases:
 		var db = databases[id]
-		$Databases/DatabaseLayout/DatabaseList.add_item(db.id + " - " + db.name)
-		$Databases/DatabaseLayout/DatabaseList.set_item_metadata(
-			$Databases/DatabaseLayout/DatabaseList.get_item_count()-1, db.id)
+		list.add_item("%s: %s" % [db.id, db.name])
+		list.set_item_metadata(list.get_item_count()-1, db.id)
 			
-		$Card/CardLayout/ToolLayout/DatabaseSelect.add_item(db.id + " - " + db.name)
-		$Card/CardLayout/ToolLayout/DatabaseSelect.set_item_metadata(
-			$Card/CardLayout/ToolLayout/DatabaseSelect.get_item_count()-1, db.id)
+		select.add_item("%s: %s" % [db.id, db.name])
+		select.set_item_metadata(select.get_item_count()-1, db.id)
 
 func _on_NewDatabaseDialog_form_validated(form):
 	CardEngine.db().create_database(form["id"], form["name"])
