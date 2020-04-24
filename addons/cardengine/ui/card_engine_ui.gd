@@ -44,7 +44,7 @@ func _replace_category(idx: int, id: String, name: String):
 	
 func _append_value(id: String, value: float):
 	var list = $Card/CardLayout/DataLayout/ValuesList
-	list.add_item("%s = %f" % [id, value])
+	list.add_item("%s = %d" % [id, value])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "value": value})
 	
 func _replace_value(idx: int, id: String, value: float):

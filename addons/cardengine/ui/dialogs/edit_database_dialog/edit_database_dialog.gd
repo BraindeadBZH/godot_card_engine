@@ -36,7 +36,7 @@ func _on_CardList_item_selected(index):
 		
 	list.add_item("Values:")
 	for value in card.values():
-		list.add_item("  * %s = %f" % [value, card.get_value(value)])
+		list.add_item("  * %s = %d" % [value, card.get_value(value)])
 		
 	list.add_item("Texts:")
 	for text in card.texts():

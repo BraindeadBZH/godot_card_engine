@@ -32,10 +32,10 @@ func values() -> Dictionary:
 func set_values(values: Dictionary) -> void:
 	_values = values
 
-func add_value(id: String, value: float) -> void:
+func add_value(id: String, value: int) -> void:
 	_values[id] = value
 
-func get_value(id: String) -> float:
+func get_value(id: String) -> int:
 	return _values[id]
 
 func remove_value(id: String) -> void:
