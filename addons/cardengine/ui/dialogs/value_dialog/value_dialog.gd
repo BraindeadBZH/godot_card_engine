@@ -6,7 +6,7 @@ func _ready():
 
 func _reset_form():
 	$MainLayout/Form/ValueId.text = ""
-	$MainLayout/Form/ValueVal.value = ""
+	$MainLayout/Form/ValueVal.value = 0.0
 
 func _extract_form() -> Dictionary:
 	return {
