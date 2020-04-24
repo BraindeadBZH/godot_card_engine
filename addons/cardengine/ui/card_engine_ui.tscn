@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/card_engine_ui.gd" type="Script" id=1]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_database_dialog/edit_database_dialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/cardengine/ui/dialogs/category_dialog/category_dialog.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/cardengine/ui/dialogs/value_dialog/value_dialog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/cardengine/ui/dialogs/text_dialog/text_dialog.tscn" type="PackedScene" id=7]
 
 [node name="CardEngineUI" type="TabContainer"]
 anchor_right = 1.0
@@ -245,6 +246,9 @@ text = "Delete"
 [node name="CategoryDialog" parent="Dialogs" instance=ExtResource( 5 )]
 
 [node name="ValueDialog" parent="Dialogs" instance=ExtResource( 6 )]
+
+[node name="TextDialog" parent="Dialogs" instance=ExtResource( 7 )]
+visible = false
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="." method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_activated"]
@@ -254,6 +258,8 @@ text = "Delete"
 [connection signal="pressed" from="Card/CardLayout/ToolLayout/LoadBtn" to="." method="_on_LoadBtn_pressed"]
 [connection signal="pressed" from="Card/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="." method="_on_AddCategBtn_pressed"]
 [connection signal="pressed" from="Card/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="." method="_on_AddValBtn_pressed"]
+[connection signal="pressed" from="Card/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="." method="_on_AddTxtBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/CategoryDialog" to="." method="_on_CategoryDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/ValueDialog" to="." method="_on_ValueDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/TextDialog" to="." method="_on_TextDialog_form_validated"]

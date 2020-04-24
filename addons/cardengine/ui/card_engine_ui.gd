@@ -136,3 +136,9 @@ func _on_AddValBtn_pressed():
 
 func _on_ValueDialog_form_validated(form):
 	_append_value(form["id"], form["value"])
+
+func _on_AddTxtBtn_pressed():
+	$Dialogs/TextDialog.popup_centered()
+
+func _on_TextDialog_form_validated(form):
+	_append_text(form["id"], form["text"])
