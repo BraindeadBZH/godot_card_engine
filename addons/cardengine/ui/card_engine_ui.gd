@@ -3,6 +3,8 @@ extends Control
 class_name CardEngineUI
 
 var _selected_db = -1
+var _edited_index = -1
+var _edited_data = {}
 
 func _ready():
 	CardEngine.db().connect("changed", self, "_on_Databases_changed")
@@ -35,15 +37,30 @@ func _append_category(id: String, name: String):
 	list.add_item("%s: %s" % [id, name])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "name": name})
 
+func _replace_category(idx: int, id: String, name: String):
+	var list = $Card/CardLayout/DataLayout/CategList
+	list.set_item_text(idx, "%s: %s" % [id, name])
+	list.set_item_metadata(idx, {"id": id, "name": name})
+	
 func _append_value(id: String, value: float):
 	var list = $Card/CardLayout/DataLayout/ValuesList
 	list.add_item("%s = %f" % [id, value])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "value": value})
+	
+func _replace_value(idx: int, id: String, value: float):
+	var list = $Card/CardLayout/DataLayout/ValuesList
+	list.set_item_text(idx, "%s = %f" % [id, value])
+	list.set_item_metadata(idx, {"id": id, "value": value})
 
 func _append_text(id: String, text: String):
 	var list = $Card/CardLayout/DataLayout/TextsList
 	list.add_item("%s: %s" % [id, text])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "text": text})
+
+func _replace_text(idx: int, id: String, text: String):
+	var list = $Card/CardLayout/DataLayout/TextsList
+	list.set_item_text(idx, "%s: %s" % [id, text])
+	list.set_item_metadata(idx, {"id": id, "text": text})
 	
 func _on_CreateBtn_pressed():
 	$Dialogs/NewDatabaseDialog.popup_centered()
@@ -128,17 +145,41 @@ func _on_CardId_text_changed(new_text):
 func _on_AddCategBtn_pressed():
 	$Dialogs/CategoryDialog.popup_centered()
 
+func _on_CategList_item_activated(index):
+	_edited_index = index
+	_edited_data = $Card/CardLayout/DataLayout/CategList.get_item_metadata(index)
+	$Dialogs/CategoryDialog.popup_centered_edit(_edited_data)
+
 func _on_CategoryDialog_form_validated(form):
-	_append_category(form["id"], form["name"])
+	if form["edit"] && _edited_data["id"] == form["id"]:
+		_replace_category(_edited_index, form["id"], form["name"])
+	else:
+		_append_category(form["id"], form["name"])
 
 func _on_AddValBtn_pressed():
 	$Dialogs/ValueDialog.popup_centered()
 
+func _on_ValuesList_item_activated(index):
+	_edited_index = index
+	_edited_data = $Card/CardLayout/DataLayout/ValuesList.get_item_metadata(index)
+	$Dialogs/ValueDialog.popup_centered_edit(_edited_data)
+	
 func _on_ValueDialog_form_validated(form):
-	_append_value(form["id"], form["value"])
+	if form["edit"] && _edited_data["id"] == form["id"]:
+		_replace_value(_edited_index, form["id"], form["value"])
+	else:
+		_append_value(form["id"], form["value"])
 
 func _on_AddTxtBtn_pressed():
 	$Dialogs/TextDialog.popup_centered()
 
+func _on_TextsList_item_activated(index):
+	_edited_index = index
+	_edited_data = $Card/CardLayout/DataLayout/TextsList.get_item_metadata(index)
+	$Dialogs/TextDialog.popup_centered_edit(_edited_data)
+	
 func _on_TextDialog_form_validated(form):
-	_append_text(form["id"], form["text"])
+	if form["edit"] && _edited_data["id"] == form["id"]:
+		_replace_text(_edited_index, form["id"], form["text"])
+	else:
+		_append_text(form["id"], form["text"])

@@ -11,5 +11,10 @@ func _reset_form():
 func _extract_form() -> Dictionary:
 	return {
 		"id": $MainLayout/Form/CategId.text,
-		"name": $MainLayout/Form/CategName.text
+		"name": $MainLayout/Form/CategName.text,
+		"edit": is_edit()
 	}
+
+func _fill_form(data: Dictionary):
+	$MainLayout/Form/CategId.text = data["id"]
+	$MainLayout/Form/CategName.text = data["name"]

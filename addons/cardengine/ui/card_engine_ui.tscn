@@ -248,7 +248,6 @@ text = "Delete"
 [node name="ValueDialog" parent="Dialogs" instance=ExtResource( 6 )]
 
 [node name="TextDialog" parent="Dialogs" instance=ExtResource( 7 )]
-visible = false
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="." method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_activated"]
@@ -256,6 +255,9 @@ visible = false
 [connection signal="text_changed" from="Card/CardLayout/ToolLayout/CardId" to="." method="_on_CardId_text_changed"]
 [connection signal="pressed" from="Card/CardLayout/ToolLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]
 [connection signal="pressed" from="Card/CardLayout/ToolLayout/LoadBtn" to="." method="_on_LoadBtn_pressed"]
+[connection signal="item_activated" from="Card/CardLayout/DataLayout/CategList" to="." method="_on_CategList_item_activated"]
+[connection signal="item_activated" from="Card/CardLayout/DataLayout/ValuesList" to="." method="_on_ValuesList_item_activated"]
+[connection signal="item_activated" from="Card/CardLayout/DataLayout/TextsList" to="." method="_on_TextsList_item_activated"]
 [connection signal="pressed" from="Card/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="." method="_on_AddCategBtn_pressed"]
 [connection signal="pressed" from="Card/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="." method="_on_AddValBtn_pressed"]
 [connection signal="pressed" from="Card/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="." method="_on_AddTxtBtn_pressed"]
