@@ -9,7 +9,7 @@ var _edited_data = {}
 func _ready():
 	CardEngine.db().connect("changed", self, "_on_Databases_changed")
 
-func _database_delete():
+func _delete_database():
 	if yield():
 		CardEngine.db().delete_database(
 			$Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
@@ -120,7 +120,7 @@ func _on_DatabaseList_item_selected(index):
 	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = false
 
 func _on_DeleteBtn_pressed():
-	$Dialogs/GenericConfirmDialog.ask_confirmation("Database Delete", _database_delete())
+	$Dialogs/GenericConfirmDialog.ask_confirmation("Database Delete", _delete_database())
 
 func _on_DatabaseList_item_activated(index):
 	$Dialogs/EditDatabaseDialog.popup_centered()
