@@ -262,6 +262,7 @@ text = "Delete"
 [connection signal="pressed" from="Card/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="." method="_on_AddValBtn_pressed"]
 [connection signal="pressed" from="Card/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="." method="_on_AddTxtBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_form_validated"]
+[connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="." method="_on_EditDatabaseDialog_delete_card"]
 [connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="." method="_on_EditDatabaseDialog_edit_card"]
 [connection signal="form_validated" from="Dialogs/CategoryDialog" to="." method="_on_CategoryDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/ValueDialog" to="." method="_on_ValueDialog_form_validated"]

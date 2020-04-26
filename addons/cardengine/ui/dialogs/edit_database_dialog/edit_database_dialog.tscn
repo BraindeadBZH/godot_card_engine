@@ -109,5 +109,6 @@ rect_min_size = Vector2( 100, 30 )
 text = "Done"
 [connection signal="about_to_show" from="." to="." method="_on_EditDatabaseDialog_about_to_show"]
 [connection signal="item_selected" from="MainLayout/CardsLayout/CardList" to="." method="_on_CardList_item_selected"]
+[connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn" to="." method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="MainLayout/ButtonLayout/DoneBtn" to="." method="_on_DoneBtn_pressed"]

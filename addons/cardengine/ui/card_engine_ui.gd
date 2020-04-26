@@ -52,6 +52,13 @@ func _overwrite_card(id: String, db: CardDatabase):
 	if yield():
 		_save_card(id, db)
 
+func _delete_card(id: String, db_id: String):
+	if yield():
+		var db = CardEngine.db().get_database(db_id)
+		db.remove_card(id)
+		CardEngine.db().write_database(db)
+		$Dialogs/EditDatabaseDialog.remove_selected_card()
+
 func _append_category(id: String, name: String):
 	var list = $Card/CardLayout/DataLayout/CategList
 	list.add_item("%s: %s" % [id, name])
@@ -202,3 +209,6 @@ func _on_EditDatabaseDialog_edit_card(card, db):
 	current_tab = 1
 	_load_card(card, db)
 	$Card/CardLayout/ToolLayout/SaveBtn.disabled = false
+
+func _on_EditDatabaseDialog_delete_card(card, db):
+	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Card", _delete_card(card, db))

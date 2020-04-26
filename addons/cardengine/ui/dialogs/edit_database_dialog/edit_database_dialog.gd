@@ -2,8 +2,10 @@ tool
 extends WindowDialog
 
 signal edit_card(card, db)
+signal delete_card(card, db)
 
 var _db: CardDatabase = null
+var _selected_card_idx: int = -1
 var _selected_card: String = ""
 
 func set_database(id: String):
@@ -15,6 +17,12 @@ func set_database(id: String):
 	for card_id in cards:
 		var card = cards[card_id]
 		$MainLayout/CardsLayout/CardList.add_item(card.id)
+
+func remove_selected_card():
+	$MainLayout/CardsLayout/CardList.remove_item(_selected_card_idx)
+	$MainLayout/CardsLayout/DetailsLayout/DetailsList.clear()
+	$MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn.disabled = true
+	$MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn.disabled = true
 
 func _clear_lists():
 	$MainLayout/CardsLayout/CardList.clear()
@@ -32,6 +40,7 @@ func _on_CardList_item_selected(index):
 	var list = $MainLayout/CardsLayout/DetailsLayout/DetailsList
 	list.clear()
 	
+	_selected_card_idx = index
 	_selected_card = $MainLayout/CardsLayout/CardList.get_item_text(index)
 	
 	var card = _db.get_card(_selected_card)
@@ -56,3 +65,6 @@ func _on_CardList_item_selected(index):
 func _on_EditBtn_pressed():
 	emit_signal("edit_card", _selected_card, _db.id)
 	hide()
+
+func _on_DeleteBtn_pressed():
+	emit_signal("delete_card", _selected_card, _db.id)
