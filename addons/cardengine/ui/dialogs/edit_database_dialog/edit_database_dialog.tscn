@@ -81,13 +81,13 @@ margin_right = 149.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
-[node name="LoadBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
+[node name="EditBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
 margin_left = 153.0
 margin_right = 253.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
 disabled = true
-text = "Load"
+text = "Edit"
 
 [node name="Spacer" type="Control" parent="MainLayout"]
 margin_top = 276.0
@@ -109,4 +109,5 @@ rect_min_size = Vector2( 100, 30 )
 text = "Done"
 [connection signal="about_to_show" from="." to="." method="_on_EditDatabaseDialog_about_to_show"]
 [connection signal="item_selected" from="MainLayout/CardsLayout/CardList" to="." method="_on_CardList_item_selected"]
+[connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn" to="." method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="MainLayout/ButtonLayout/DoneBtn" to="." method="_on_DoneBtn_pressed"]

@@ -1,5 +1,5 @@
 tool
-extends Control
+extends TabContainer
 class_name CardEngineUI
 
 var _selected_db = -1
@@ -13,6 +13,26 @@ func _database_delete():
 	if yield():
 		CardEngine.db().delete_database(
 			$Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
+
+func _load_card(id: String, db_id: String):
+	$Card/CardLayout/DataLayout/CategList.clear()
+	$Card/CardLayout/DataLayout/ValuesList.clear()
+	$Card/CardLayout/DataLayout/TextsList.clear()
+	
+	var db = CardEngine.db().get_database(db_id)
+	var card = db.get_card(id)
+	if card == null:
+		$Card/CardLayout/ToolLayout/ErrorLbl.text = "Unable to find the card in the database"
+	else:
+		$Card/CardLayout/ToolLayout/CardId.text = card.id
+		for categ in card.categories():
+			_append_category(categ, card.get_category(categ))
+		
+		for value in card.values():
+			_append_value(value, card.get_value(value))
+		
+		for text in card.texts():
+			_append_text(text, card.get_text(text))
 
 func _save_card(id: String, db: CardDatabase):
 	var card = CardData.new(id)
@@ -121,27 +141,11 @@ func _on_SaveBtn_pressed():
 
 func _on_LoadBtn_pressed():
 	$Card/CardLayout/ToolLayout/ErrorLbl.text = ""
-	$Card/CardLayout/DataLayout/CategList.clear()
-	$Card/CardLayout/DataLayout/ValuesList.clear()
-	$Card/CardLayout/DataLayout/TextsList.clear()
 	
-	var id = $Card/CardLayout/ToolLayout/CardId.text
-	var db = CardEngine.db().get_database(
+	_load_card(
+		$Card/CardLayout/ToolLayout/CardId.text,
 		$Card/CardLayout/ToolLayout/DatabaseSelect.get_selected_metadata())
-	
-	var card = db.get_card(id)
-	if card == null:
-		$Card/CardLayout/ToolLayout/ErrorLbl.text = "Unable to find the card in the database"
-	else:
-		for categ in card.categories():
-			_append_category(categ, card.get_category(categ))
-		
-		for value in card.values():
-			_append_value(value, card.get_value(value))
-		
-		for text in card.texts():
-			_append_text(text, card.get_text(text))
-	
+
 func _on_CardId_text_changed(new_text):
 	if Utils.is_id_valid(new_text):
 		$Card/CardLayout/ToolLayout/SaveBtn.disabled = false
@@ -193,3 +197,8 @@ func _on_TextDialog_form_validated(form):
 		_replace_text(_edited_index, form["id"], form["text"])
 	else:
 		_append_text(form["id"], form["text"])
+
+func _on_EditDatabaseDialog_edit_card(card, db):
+	current_tab = 1
+	_load_card(card, db)
+	$Card/CardLayout/ToolLayout/SaveBtn.disabled = false
