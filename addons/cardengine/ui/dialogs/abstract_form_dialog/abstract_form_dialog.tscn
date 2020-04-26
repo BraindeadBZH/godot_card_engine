@@ -56,6 +56,5 @@ margin_right = 303.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
 text = "Cancel"
-[connection signal="about_to_show" from="." to="." method="_on_AbstractFormDialog_about_to_show"]
 [connection signal="pressed" from="MainLayout/ButtonLayout/SubmitButton" to="." method="_on_SubmitButton_pressed"]
 [connection signal="pressed" from="MainLayout/ButtonLayout/CancelButton" to="." method="_on_CancelButton_pressed"]
