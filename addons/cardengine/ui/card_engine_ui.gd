@@ -54,13 +54,23 @@ func _replace_value(idx: int, id: String, value: float):
 
 func _append_text(id: String, text: String):
 	var list = $Card/CardLayout/DataLayout/TextsList
-	list.add_item("%s: %s" % [id, text])
+	var lines = text.split("\n")
+	if lines.size() > 0:
+		list.add_item("%s: %s (...)" % [id, lines[0]])
+	else:
+		list.add_item("%s: %s" % [id, text])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "text": text})
+	list.set_item_tooltip(list.get_item_count()-1, text)
 
 func _replace_text(idx: int, id: String, text: String):
 	var list = $Card/CardLayout/DataLayout/TextsList
-	list.set_item_text(idx, "%s: %s" % [id, text])
+	var lines = text.split("\n")
+	if lines.size() > 0:
+		list.set_item_text(idx, "%s: %s (...)" % [id, lines[0]])
+	else:
+		list.set_item_text(idx, "%s: %s" % [id, text])
 	list.set_item_metadata(idx, {"id": id, "text": text})
+	list.set_item_tooltip(idx, text)
 	
 func _on_CreateBtn_pressed():
 	$Dialogs/NewDatabaseDialog.popup_centered()

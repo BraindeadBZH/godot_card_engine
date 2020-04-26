@@ -40,4 +40,7 @@ func _on_CardList_item_selected(index):
 		
 	list.add_item("Texts:")
 	for text in card.texts():
-		list.add_item("  * %s: %s" % [text, card.get_text(text)])
+		list.add_item("  * %s:" % text)
+		var lines = card.get_text(text).split("\n")
+		for line in lines:
+			list.add_item("       %s" % line)
