@@ -5,6 +5,9 @@ class_name CardEngineUI
 var _selected_db = -1
 var _edited_index = -1
 var _edited_data = {}
+var _selected_categ = -1
+var _selected_val = -1
+var _selected_text = -1
 
 func _ready():
 	CardEngine.db().connect("changed", self, "_on_Databases_changed")
@@ -68,7 +71,12 @@ func _replace_category(idx: int, id: String, name: String):
 	var list = $Card/CardLayout/DataLayout/CategList
 	list.set_item_text(idx, "%s: %s" % [id, name])
 	list.set_item_metadata(idx, {"id": id, "name": name})
-	
+
+func _delete_category(idx: int):
+	if yield():
+		$Card/CardLayout/DataLayout/CategList.remove_item(idx)
+		$Card/CardLayout/DataLayout/CategToolLayout/DelCategBtn.disabled = true
+
 func _append_value(id: String, value: float):
 	var list = $Card/CardLayout/DataLayout/ValuesList
 	list.add_item("%s = %d" % [id, value])
@@ -79,10 +87,15 @@ func _replace_value(idx: int, id: String, value: float):
 	list.set_item_text(idx, "%s = %f" % [id, value])
 	list.set_item_metadata(idx, {"id": id, "value": value})
 
+func _delete_value(idx: int):
+	if yield():
+		$Card/CardLayout/DataLayout/ValuesList.remove_item(idx)
+		$Card/CardLayout/DataLayout/ValuesToolLayout/DelValBtn.disabled = true
+		
 func _append_text(id: String, text: String):
 	var list = $Card/CardLayout/DataLayout/TextsList
 	var lines = text.split("\n")
-	if lines.size() > 0:
+	if lines.size() > 1:
 		list.add_item("%s: %s (...)" % [id, lines[0]])
 	else:
 		list.add_item("%s: %s" % [id, text])
@@ -92,13 +105,18 @@ func _append_text(id: String, text: String):
 func _replace_text(idx: int, id: String, text: String):
 	var list = $Card/CardLayout/DataLayout/TextsList
 	var lines = text.split("\n")
-	if lines.size() > 0:
+	if lines.size() > 1:
 		list.set_item_text(idx, "%s: %s (...)" % [id, lines[0]])
 	else:
 		list.set_item_text(idx, "%s: %s" % [id, text])
 	list.set_item_metadata(idx, {"id": id, "text": text})
 	list.set_item_tooltip(idx, text)
-	
+
+func _delete_text(idx: int):
+	if yield():
+		$Card/CardLayout/DataLayout/TextsList.remove_item(idx)
+		$Card/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn.disabled = true
+
 func _on_CreateBtn_pressed():
 	$Dialogs/NewDatabaseDialog.popup_centered()
 
@@ -166,6 +184,13 @@ func _on_CardId_text_changed(new_text):
 func _on_AddCategBtn_pressed():
 	$Dialogs/CategoryDialog.popup_centered()
 
+func _on_DelCategBtn_pressed():
+	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Category", _delete_category(_selected_categ))
+
+func _on_CategList_item_selected(index):
+	$Card/CardLayout/DataLayout/CategToolLayout/DelCategBtn.disabled = false
+	_selected_categ = index
+	
 func _on_CategList_item_activated(index):
 	_edited_index = index
 	_edited_data = $Card/CardLayout/DataLayout/CategList.get_item_metadata(index)
@@ -180,6 +205,13 @@ func _on_CategoryDialog_form_validated(form):
 func _on_AddValBtn_pressed():
 	$Dialogs/ValueDialog.popup_centered()
 
+func _on_DelValBtn_pressed():
+	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Value", _delete_value(_selected_val))
+
+func _on_ValuesList_item_selected(index):
+	$Card/CardLayout/DataLayout/ValuesToolLayout/DelValBtn.disabled = false
+	_selected_val = index
+
 func _on_ValuesList_item_activated(index):
 	_edited_index = index
 	_edited_data = $Card/CardLayout/DataLayout/ValuesList.get_item_metadata(index)
@@ -193,6 +225,13 @@ func _on_ValueDialog_form_validated(form):
 
 func _on_AddTxtBtn_pressed():
 	$Dialogs/TextDialog.popup_centered()
+
+func _on_DelTxtBtn_pressed():
+	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Text", _delete_text(_selected_text))
+
+func _on_TextsList_item_selected(index):
+	$Card/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn.disabled = false
+	_selected_text = index
 
 func _on_TextsList_item_activated(index):
 	_edited_index = index
