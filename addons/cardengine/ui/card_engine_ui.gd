@@ -18,16 +18,16 @@ func _delete_database():
 			$Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
 
 func _load_card(id: String, db_id: String):
-	$Card/CardLayout/DataLayout/CategList.clear()
-	$Card/CardLayout/DataLayout/ValuesList.clear()
-	$Card/CardLayout/DataLayout/TextsList.clear()
+	$Cards/CardLayout/DataLayout/CategList.clear()
+	$Cards/CardLayout/DataLayout/ValuesList.clear()
+	$Cards/CardLayout/DataLayout/TextsList.clear()
 	
 	var db = CardEngine.db().get_database(db_id)
 	var card = db.get_card(id)
 	if card == null:
-		$Card/CardLayout/ToolLayout/ErrorLbl.text = "Unable to find the card in the database"
+		$Cards/CardLayout/ToolLayout/ErrorLbl.text = "Unable to find the card in the database"
 	else:
-		$Card/CardLayout/ToolLayout/CardId.text = card.id
+		$Cards/CardLayout/ToolLayout/CardId.text = card.id
 		for categ in card.categories():
 			_append_category(categ, card.get_category(categ))
 		
@@ -39,14 +39,14 @@ func _load_card(id: String, db_id: String):
 
 func _save_card(id: String, db: CardDatabase):
 	var card = CardData.new(id)
-	for i in range($Card/CardLayout/DataLayout/CategList.get_item_count()):
-		var data = $Card/CardLayout/DataLayout/CategList.get_item_metadata(i)
+	for i in range($Cards/CardLayout/DataLayout/CategList.get_item_count()):
+		var data = $Cards/CardLayout/DataLayout/CategList.get_item_metadata(i)
 		card.add_category(data["id"], data["name"])
-	for i in range($Card/CardLayout/DataLayout/ValuesList.get_item_count()):
-		var data = $Card/CardLayout/DataLayout/ValuesList.get_item_metadata(i)
+	for i in range($Cards/CardLayout/DataLayout/ValuesList.get_item_count()):
+		var data = $Cards/CardLayout/DataLayout/ValuesList.get_item_metadata(i)
 		card.add_value(data["id"], data["value"])
-	for i in range($Card/CardLayout/DataLayout/TextsList.get_item_count()):
-		var data = $Card/CardLayout/DataLayout/TextsList.get_item_metadata(i)
+	for i in range($Cards/CardLayout/DataLayout/TextsList.get_item_count()):
+		var data = $Cards/CardLayout/DataLayout/TextsList.get_item_metadata(i)
 		card.add_text(data["id"], data["text"])
 	db.add_card(card)
 	CardEngine.db().write_database(db)
@@ -63,37 +63,37 @@ func _delete_card(id: String, db_id: String):
 		$Dialogs/EditDatabaseDialog.remove_selected_card()
 
 func _append_category(id: String, name: String):
-	var list = $Card/CardLayout/DataLayout/CategList
+	var list = $Cards/CardLayout/DataLayout/CategList
 	list.add_item("%s: %s" % [id, name])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "name": name})
 
 func _replace_category(idx: int, id: String, name: String):
-	var list = $Card/CardLayout/DataLayout/CategList
+	var list = $Cards/CardLayout/DataLayout/CategList
 	list.set_item_text(idx, "%s: %s" % [id, name])
 	list.set_item_metadata(idx, {"id": id, "name": name})
 
 func _delete_category(idx: int):
 	if yield():
-		$Card/CardLayout/DataLayout/CategList.remove_item(idx)
-		$Card/CardLayout/DataLayout/CategToolLayout/DelCategBtn.disabled = true
+		$Cards/CardLayout/DataLayout/CategList.remove_item(idx)
+		$Cards/CardLayout/DataLayout/CategToolLayout/DelCategBtn.disabled = true
 
 func _append_value(id: String, value: float):
-	var list = $Card/CardLayout/DataLayout/ValuesList
+	var list = $Cards/CardLayout/DataLayout/ValuesList
 	list.add_item("%s = %d" % [id, value])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "value": value})
 	
 func _replace_value(idx: int, id: String, value: float):
-	var list = $Card/CardLayout/DataLayout/ValuesList
+	var list = $Cards/CardLayout/DataLayout/ValuesList
 	list.set_item_text(idx, "%s = %f" % [id, value])
 	list.set_item_metadata(idx, {"id": id, "value": value})
 
 func _delete_value(idx: int):
 	if yield():
-		$Card/CardLayout/DataLayout/ValuesList.remove_item(idx)
-		$Card/CardLayout/DataLayout/ValuesToolLayout/DelValBtn.disabled = true
+		$Cards/CardLayout/DataLayout/ValuesList.remove_item(idx)
+		$Cards/CardLayout/DataLayout/ValuesToolLayout/DelValBtn.disabled = true
 		
 func _append_text(id: String, text: String):
-	var list = $Card/CardLayout/DataLayout/TextsList
+	var list = $Cards/CardLayout/DataLayout/TextsList
 	var lines = text.split("\n")
 	if lines.size() > 1:
 		list.add_item("%s: %s (...)" % [id, lines[0]])
@@ -103,7 +103,7 @@ func _append_text(id: String, text: String):
 	list.set_item_tooltip(list.get_item_count()-1, text)
 
 func _replace_text(idx: int, id: String, text: String):
-	var list = $Card/CardLayout/DataLayout/TextsList
+	var list = $Cards/CardLayout/DataLayout/TextsList
 	var lines = text.split("\n")
 	if lines.size() > 1:
 		list.set_item_text(idx, "%s: %s (...)" % [id, lines[0]])
@@ -114,15 +114,15 @@ func _replace_text(idx: int, id: String, text: String):
 
 func _delete_text(idx: int):
 	if yield():
-		$Card/CardLayout/DataLayout/TextsList.remove_item(idx)
-		$Card/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn.disabled = true
+		$Cards/CardLayout/DataLayout/TextsList.remove_item(idx)
+		$Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn.disabled = true
 
 func _on_CreateBtn_pressed():
 	$Dialogs/NewDatabaseDialog.popup_centered()
 
 func _on_Databases_changed():
 	var list = $Databases/DatabaseLayout/DatabaseList
-	var select = $Card/CardLayout/ToolLayout/DatabaseSelect
+	var select = $Cards/CardLayout/ToolLayout/DatabaseSelect
 	
 	list.clear()
 	select.clear()
@@ -153,11 +153,11 @@ func _on_DatabaseList_item_activated(index):
 		$Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db))
 
 func _on_SaveBtn_pressed():
-	$Card/CardLayout/ToolLayout/ErrorLbl.text = ""
+	$Cards/CardLayout/ToolLayout/ErrorLbl.text = ""
 	
-	var id = $Card/CardLayout/ToolLayout/CardId.text
+	var id = $Cards/CardLayout/ToolLayout/CardId.text
 	var db = CardEngine.db().get_database(
-		$Card/CardLayout/ToolLayout/DatabaseSelect.get_selected_metadata())
+		$Cards/CardLayout/ToolLayout/DatabaseSelect.get_selected_metadata())
 	
 	if db.card_exists(id):
 		$Dialogs/GenericConfirmDialog.ask_confirmation("Overwrite Card", _overwrite_card(id, db))
@@ -165,21 +165,21 @@ func _on_SaveBtn_pressed():
 		_save_card(id, db)
 
 func _on_LoadBtn_pressed():
-	$Card/CardLayout/ToolLayout/ErrorLbl.text = ""
+	$Cards/CardLayout/ToolLayout/ErrorLbl.text = ""
 	
 	_load_card(
-		$Card/CardLayout/ToolLayout/CardId.text,
-		$Card/CardLayout/ToolLayout/DatabaseSelect.get_selected_metadata())
+		$Cards/CardLayout/ToolLayout/CardId.text,
+		$Cards/CardLayout/ToolLayout/DatabaseSelect.get_selected_metadata())
 
 func _on_CardId_text_changed(new_text):
 	if Utils.is_id_valid(new_text):
-		$Card/CardLayout/ToolLayout/SaveBtn.disabled = false
-		$Card/CardLayout/ToolLayout/LoadBtn.disabled = false
-		$Card/CardLayout/ToolLayout/ErrorLbl.text = ""
+		$Cards/CardLayout/ToolLayout/SaveBtn.disabled = false
+		$Cards/CardLayout/ToolLayout/LoadBtn.disabled = false
+		$Cards/CardLayout/ToolLayout/ErrorLbl.text = ""
 	else:
-		$Card/CardLayout/ToolLayout/SaveBtn.disabled = true
-		$Card/CardLayout/ToolLayout/LoadBtn.disabled = true
-		$Card/CardLayout/ToolLayout/ErrorLbl.text = "Invalid ID"
+		$Cards/CardLayout/ToolLayout/SaveBtn.disabled = true
+		$Cards/CardLayout/ToolLayout/LoadBtn.disabled = true
+		$Cards/CardLayout/ToolLayout/ErrorLbl.text = "Invalid ID"
 
 func _on_AddCategBtn_pressed():
 	$Dialogs/CategoryDialog.popup_centered()
@@ -188,12 +188,12 @@ func _on_DelCategBtn_pressed():
 	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Category", _delete_category(_selected_categ))
 
 func _on_CategList_item_selected(index):
-	$Card/CardLayout/DataLayout/CategToolLayout/DelCategBtn.disabled = false
+	$Cards/CardLayout/DataLayout/CategToolLayout/DelCategBtn.disabled = false
 	_selected_categ = index
 	
 func _on_CategList_item_activated(index):
 	_edited_index = index
-	_edited_data = $Card/CardLayout/DataLayout/CategList.get_item_metadata(index)
+	_edited_data = $Cards/CardLayout/DataLayout/CategList.get_item_metadata(index)
 	$Dialogs/CategoryDialog.popup_centered_edit(_edited_data)
 
 func _on_CategoryDialog_form_validated(form):
@@ -209,12 +209,12 @@ func _on_DelValBtn_pressed():
 	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Value", _delete_value(_selected_val))
 
 func _on_ValuesList_item_selected(index):
-	$Card/CardLayout/DataLayout/ValuesToolLayout/DelValBtn.disabled = false
+	$Cards/CardLayout/DataLayout/ValuesToolLayout/DelValBtn.disabled = false
 	_selected_val = index
 
 func _on_ValuesList_item_activated(index):
 	_edited_index = index
-	_edited_data = $Card/CardLayout/DataLayout/ValuesList.get_item_metadata(index)
+	_edited_data = $Cards/CardLayout/DataLayout/ValuesList.get_item_metadata(index)
 	$Dialogs/ValueDialog.popup_centered_edit(_edited_data)
 	
 func _on_ValueDialog_form_validated(form):
@@ -230,12 +230,12 @@ func _on_DelTxtBtn_pressed():
 	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Text", _delete_text(_selected_text))
 
 func _on_TextsList_item_selected(index):
-	$Card/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn.disabled = false
+	$Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn.disabled = false
 	_selected_text = index
 
 func _on_TextsList_item_activated(index):
 	_edited_index = index
-	_edited_data = $Card/CardLayout/DataLayout/TextsList.get_item_metadata(index)
+	_edited_data = $Cards/CardLayout/DataLayout/TextsList.get_item_metadata(index)
 	$Dialogs/TextDialog.popup_centered_edit(_edited_data)
 	
 func _on_TextDialog_form_validated(form):
@@ -247,7 +247,7 @@ func _on_TextDialog_form_validated(form):
 func _on_EditDatabaseDialog_edit_card(card, db):
 	current_tab = 1
 	_load_card(card, db)
-	$Card/CardLayout/ToolLayout/SaveBtn.disabled = false
+	$Cards/CardLayout/ToolLayout/SaveBtn.disabled = false
 
 func _on_EditDatabaseDialog_delete_card(card, db):
 	$Dialogs/GenericConfirmDialog.ask_confirmation("Delete Card", _delete_card(card, db))

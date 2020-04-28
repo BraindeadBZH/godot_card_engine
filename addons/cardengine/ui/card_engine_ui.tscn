@@ -54,9 +54,8 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "main: Main Database", null, false, "test: Test Database", null, false ]
 
-[node name="Card" type="Control" parent="."]
+[node name="Cards" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,30 +64,30 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="CardLayout" type="VBoxContainer" parent="Card"]
+[node name="CardLayout" type="VBoxContainer" parent="Cards"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ToolLayout" type="HBoxContainer" parent="Card/CardLayout"]
+[node name="ToolLayout" type="HBoxContainer" parent="Cards/CardLayout"]
 margin_right = 1272.0
 margin_bottom = 30.0
 
-[node name="CardIdLbl" type="Label" parent="Card/CardLayout/ToolLayout"]
+[node name="CardIdLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
 margin_top = 8.0
 margin_right = 47.0
 margin_bottom = 22.0
 text = "Card ID"
 
-[node name="CardId" type="LineEdit" parent="Card/CardLayout/ToolLayout"]
+[node name="CardId" type="LineEdit" parent="Cards/CardLayout/ToolLayout"]
 margin_left = 51.0
 margin_right = 251.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
 
-[node name="SaveBtn" type="Button" parent="Card/CardLayout/ToolLayout"]
+[node name="SaveBtn" type="Button" parent="Cards/CardLayout/ToolLayout"]
 margin_left = 255.0
 margin_right = 355.0
 margin_bottom = 30.0
@@ -96,7 +95,7 @@ rect_min_size = Vector2( 100, 30 )
 disabled = true
 text = "Save to"
 
-[node name="LoadBtn" type="Button" parent="Card/CardLayout/ToolLayout"]
+[node name="LoadBtn" type="Button" parent="Cards/CardLayout/ToolLayout"]
 margin_left = 359.0
 margin_right = 459.0
 margin_bottom = 30.0
@@ -104,7 +103,7 @@ rect_min_size = Vector2( 100, 30 )
 disabled = true
 text = "Load from"
 
-[node name="DatabaseSelect" type="OptionButton" parent="Card/CardLayout/ToolLayout"]
+[node name="DatabaseSelect" type="OptionButton" parent="Cards/CardLayout/ToolLayout"]
 margin_left = 463.0
 margin_right = 663.0
 margin_bottom = 30.0
@@ -113,28 +112,28 @@ text = "main: Main Database"
 items = [ "main: Main Database", null, false, 0, "main", "test: Test Database", null, false, 1, "test" ]
 selected = 0
 
-[node name="ErrorLbl" type="Label" parent="Card/CardLayout/ToolLayout"]
+[node name="ErrorLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
 margin_left = 667.0
 margin_top = 8.0
 margin_right = 667.0
 margin_bottom = 22.0
 custom_colors/font_color = Color( 0.917647, 0.27451, 0.27451, 1 )
 
-[node name="DataLayout" type="GridContainer" parent="Card/CardLayout"]
+[node name="DataLayout" type="GridContainer" parent="Cards/CardLayout"]
 margin_top = 34.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
 columns = 3
 
-[node name="CategLbl" type="Label" parent="Card/CardLayout/DataLayout"]
+[node name="CategLbl" type="Label" parent="Cards/CardLayout/DataLayout"]
 margin_right = 421.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Categories"
 align = 1
 
-[node name="ValuesLbl" type="Label" parent="Card/CardLayout/DataLayout"]
+[node name="ValuesLbl" type="Label" parent="Cards/CardLayout/DataLayout"]
 margin_left = 425.0
 margin_right = 846.0
 margin_bottom = 14.0
@@ -142,7 +141,7 @@ size_flags_horizontal = 3
 text = "Values"
 align = 1
 
-[node name="TextsLbl" type="Label" parent="Card/CardLayout/DataLayout"]
+[node name="TextsLbl" type="Label" parent="Cards/CardLayout/DataLayout"]
 margin_left = 850.0
 margin_right = 1271.0
 margin_bottom = 14.0
@@ -150,39 +149,39 @@ size_flags_horizontal = 3
 text = "Texts"
 align = 1
 
-[node name="CategList" type="ItemList" parent="Card/CardLayout/DataLayout"]
+[node name="CategList" type="ItemList" parent="Cards/CardLayout/DataLayout"]
 margin_top = 18.0
 margin_right = 421.0
 margin_bottom = 616.0
 size_flags_vertical = 3
 
-[node name="ValuesList" type="ItemList" parent="Card/CardLayout/DataLayout"]
+[node name="ValuesList" type="ItemList" parent="Cards/CardLayout/DataLayout"]
 margin_left = 425.0
 margin_top = 18.0
 margin_right = 846.0
 margin_bottom = 616.0
 size_flags_vertical = 3
 
-[node name="TextsList" type="ItemList" parent="Card/CardLayout/DataLayout"]
+[node name="TextsList" type="ItemList" parent="Cards/CardLayout/DataLayout"]
 margin_left = 850.0
 margin_top = 18.0
 margin_right = 1271.0
 margin_bottom = 616.0
 size_flags_vertical = 3
 
-[node name="CategToolLayout" type="HBoxContainer" parent="Card/CardLayout/DataLayout"]
+[node name="CategToolLayout" type="HBoxContainer" parent="Cards/CardLayout/DataLayout"]
 margin_top = 620.0
 margin_right = 421.0
 margin_bottom = 650.0
 
-[node name="AddCategBtn" type="Button" parent="Card/CardLayout/DataLayout/CategToolLayout"]
+[node name="AddCategBtn" type="Button" parent="Cards/CardLayout/DataLayout/CategToolLayout"]
 margin_right = 208.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="DelCategBtn" type="Button" parent="Card/CardLayout/DataLayout/CategToolLayout"]
+[node name="DelCategBtn" type="Button" parent="Cards/CardLayout/DataLayout/CategToolLayout"]
 margin_left = 212.0
 margin_right = 421.0
 margin_bottom = 30.0
@@ -191,20 +190,20 @@ size_flags_horizontal = 3
 disabled = true
 text = "Delete"
 
-[node name="ValuesToolLayout" type="HBoxContainer" parent="Card/CardLayout/DataLayout"]
+[node name="ValuesToolLayout" type="HBoxContainer" parent="Cards/CardLayout/DataLayout"]
 margin_left = 425.0
 margin_top = 620.0
 margin_right = 846.0
 margin_bottom = 650.0
 
-[node name="AddValBtn" type="Button" parent="Card/CardLayout/DataLayout/ValuesToolLayout"]
+[node name="AddValBtn" type="Button" parent="Cards/CardLayout/DataLayout/ValuesToolLayout"]
 margin_right = 208.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="DelValBtn" type="Button" parent="Card/CardLayout/DataLayout/ValuesToolLayout"]
+[node name="DelValBtn" type="Button" parent="Cards/CardLayout/DataLayout/ValuesToolLayout"]
 margin_left = 212.0
 margin_right = 421.0
 margin_bottom = 30.0
@@ -213,20 +212,20 @@ size_flags_horizontal = 3
 disabled = true
 text = "Delete"
 
-[node name="TextsToolLayout" type="HBoxContainer" parent="Card/CardLayout/DataLayout"]
+[node name="TextsToolLayout" type="HBoxContainer" parent="Cards/CardLayout/DataLayout"]
 margin_left = 850.0
 margin_top = 620.0
 margin_right = 1271.0
 margin_bottom = 650.0
 
-[node name="AddTxtBtn" type="Button" parent="Card/CardLayout/DataLayout/TextsToolLayout"]
+[node name="AddTxtBtn" type="Button" parent="Cards/CardLayout/DataLayout/TextsToolLayout"]
 margin_right = 208.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="DelTxtBtn" type="Button" parent="Card/CardLayout/DataLayout/TextsToolLayout"]
+[node name="DelTxtBtn" type="Button" parent="Cards/CardLayout/DataLayout/TextsToolLayout"]
 margin_left = 212.0
 margin_right = 421.0
 margin_bottom = 30.0
@@ -252,21 +251,21 @@ text = "Delete"
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_activated"]
 [connection signal="item_selected" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_selected"]
-[connection signal="text_changed" from="Card/CardLayout/ToolLayout/CardId" to="." method="_on_CardId_text_changed"]
-[connection signal="pressed" from="Card/CardLayout/ToolLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]
-[connection signal="pressed" from="Card/CardLayout/ToolLayout/LoadBtn" to="." method="_on_LoadBtn_pressed"]
-[connection signal="item_activated" from="Card/CardLayout/DataLayout/CategList" to="." method="_on_CategList_item_activated"]
-[connection signal="item_selected" from="Card/CardLayout/DataLayout/CategList" to="." method="_on_CategList_item_selected"]
-[connection signal="item_activated" from="Card/CardLayout/DataLayout/ValuesList" to="." method="_on_ValuesList_item_activated"]
-[connection signal="item_selected" from="Card/CardLayout/DataLayout/ValuesList" to="." method="_on_ValuesList_item_selected"]
-[connection signal="item_activated" from="Card/CardLayout/DataLayout/TextsList" to="." method="_on_TextsList_item_activated"]
-[connection signal="item_selected" from="Card/CardLayout/DataLayout/TextsList" to="." method="_on_TextsList_item_selected"]
-[connection signal="pressed" from="Card/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="." method="_on_AddCategBtn_pressed"]
-[connection signal="pressed" from="Card/CardLayout/DataLayout/CategToolLayout/DelCategBtn" to="." method="_on_DelCategBtn_pressed"]
-[connection signal="pressed" from="Card/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="." method="_on_AddValBtn_pressed"]
-[connection signal="pressed" from="Card/CardLayout/DataLayout/ValuesToolLayout/DelValBtn" to="." method="_on_DelValBtn_pressed"]
-[connection signal="pressed" from="Card/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="." method="_on_AddTxtBtn_pressed"]
-[connection signal="pressed" from="Card/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn" to="." method="_on_DelTxtBtn_pressed"]
+[connection signal="text_changed" from="Cards/CardLayout/ToolLayout/CardId" to="." method="_on_CardId_text_changed"]
+[connection signal="pressed" from="Cards/CardLayout/ToolLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]
+[connection signal="pressed" from="Cards/CardLayout/ToolLayout/LoadBtn" to="." method="_on_LoadBtn_pressed"]
+[connection signal="item_activated" from="Cards/CardLayout/DataLayout/CategList" to="." method="_on_CategList_item_activated"]
+[connection signal="item_selected" from="Cards/CardLayout/DataLayout/CategList" to="." method="_on_CategList_item_selected"]
+[connection signal="item_activated" from="Cards/CardLayout/DataLayout/ValuesList" to="." method="_on_ValuesList_item_activated"]
+[connection signal="item_selected" from="Cards/CardLayout/DataLayout/ValuesList" to="." method="_on_ValuesList_item_selected"]
+[connection signal="item_activated" from="Cards/CardLayout/DataLayout/TextsList" to="." method="_on_TextsList_item_activated"]
+[connection signal="item_selected" from="Cards/CardLayout/DataLayout/TextsList" to="." method="_on_TextsList_item_selected"]
+[connection signal="pressed" from="Cards/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="." method="_on_AddCategBtn_pressed"]
+[connection signal="pressed" from="Cards/CardLayout/DataLayout/CategToolLayout/DelCategBtn" to="." method="_on_DelCategBtn_pressed"]
+[connection signal="pressed" from="Cards/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="." method="_on_AddValBtn_pressed"]
+[connection signal="pressed" from="Cards/CardLayout/DataLayout/ValuesToolLayout/DelValBtn" to="." method="_on_DelValBtn_pressed"]
+[connection signal="pressed" from="Cards/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="." method="_on_AddTxtBtn_pressed"]
+[connection signal="pressed" from="Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn" to="." method="_on_DelTxtBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="." method="_on_NewDatabaseDialog_form_validated"]
 [connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="." method="_on_EditDatabaseDialog_delete_card"]
 [connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="." method="_on_EditDatabaseDialog_edit_card"]
