@@ -54,6 +54,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
+items = [ "main: Main Database", null, false, "test: Test Database", null, false ]
 
 [node name="Cards" type="Control" parent="."]
 visible = false

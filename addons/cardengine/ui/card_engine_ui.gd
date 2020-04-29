@@ -77,14 +77,14 @@ func _delete_category(idx: int):
 		$Cards/CardLayout/DataLayout/CategList.remove_item(idx)
 		$Cards/CardLayout/DataLayout/CategToolLayout/DelCategBtn.disabled = true
 
-func _append_value(id: String, value: float):
+func _append_value(id: String, value: int):
 	var list = $Cards/CardLayout/DataLayout/ValuesList
 	list.add_item("%s = %d" % [id, value])
 	list.set_item_metadata(list.get_item_count()-1, {"id": id, "value": value})
 	
-func _replace_value(idx: int, id: String, value: float):
+func _replace_value(idx: int, id: String, value: int):
 	var list = $Cards/CardLayout/DataLayout/ValuesList
-	list.set_item_text(idx, "%s = %f" % [id, value])
+	list.set_item_text(idx, "%s = %d" % [id, value])
 	list.set_item_metadata(idx, {"id": id, "value": value})
 
 func _delete_value(idx: int):
