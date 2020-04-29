@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "AbstractManager",
 "class": "GeneralManager",
 "language": "GDScript",
-"path": "res://general_manager.gd"
+"path": "res://addons/cardengine/core/general_manager.gd"
 }, {
 "base": "Node",
 "class": "UtilsInstance",
