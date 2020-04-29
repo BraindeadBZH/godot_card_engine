@@ -117,6 +117,14 @@ func _delete_text(idx: int):
 		$Cards/CardLayout/DataLayout/TextsList.remove_item(idx)
 		$Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn.disabled = true
 
+func _select_database(db: String):
+	var select = $Cards/CardLayout/ToolLayout/DatabaseSelect
+	for i in range(select.get_item_count()):
+		var id = select.get_item_metadata(i)
+		if db == id:
+			select.select(i)
+			return
+
 func _on_CreateBtn_pressed():
 	$Dialogs/NewDatabaseDialog.popup_centered()
 
@@ -247,6 +255,7 @@ func _on_TextDialog_form_validated(form):
 func _on_EditDatabaseDialog_edit_card(card, db):
 	current_tab = 1
 	_load_card(card, db)
+	_select_database(db)
 	$Cards/CardLayout/ToolLayout/SaveBtn.disabled = false
 
 func _on_EditDatabaseDialog_delete_card(card, db):
