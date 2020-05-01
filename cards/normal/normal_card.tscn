@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/cardengine/card/abstract_card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cards/normal/normal_card.gd" type="Script" id=2]
+[ext_resource path="res://cards/normal/card_back_background.png" type="Texture" id=3]
+[ext_resource path="res://cards/normal/card_front_background.png" type="Texture" id=4]
+
+[node name="NormalCard" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="Front" index="0"]
+texture = ExtResource( 4 )
+
+[node name="Back" parent="." index="1"]
+visible = false
+
+[node name="Background" type="Sprite" parent="Back" index="0"]
+texture = ExtResource( 3 )
