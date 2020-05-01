@@ -42,9 +42,16 @@ margin_right = 144.0
 margin_bottom = 20.0
 text = "Create new database"
 
-[node name="DeleteBtn" type="Button" parent="Databases/DatabaseLayout/Toolbar"]
+[node name="EditBtn" type="Button" parent="Databases/DatabaseLayout/Toolbar"]
 margin_left = 148.0
-margin_right = 264.0
+margin_right = 248.0
+margin_bottom = 20.0
+disabled = true
+text = "Edit metadata"
+
+[node name="DeleteBtn" type="Button" parent="Databases/DatabaseLayout/Toolbar"]
+margin_left = 252.0
+margin_right = 368.0
 margin_bottom = 20.0
 disabled = true
 text = "Delete database"
@@ -54,7 +61,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "main: Main Database", null, false, "test: Test Database", null, false ]
+items = [ "main: Main Database", null, false, "test: Test database", null, false ]
 
 [node name="Cards" type="Control" parent="."]
 visible = false
@@ -110,7 +117,7 @@ margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
 text = "main: Main Database"
-items = [ "main: Main Database", null, false, 0, "main", "test: Test Database", null, false, 1, "test" ]
+items = [ "main: Main Database", null, false, 0, "main", "test: Test database", null, false, 1, "test" ]
 selected = 0
 
 [node name="ErrorLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
@@ -249,6 +256,7 @@ text = "Delete"
 
 [node name="TextDialog" parent="Dialogs" instance=ExtResource( 7 )]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="." method="_on_CreateBtn_pressed"]
+[connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/EditBtn" to="." method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_activated"]
 [connection signal="item_selected" from="Databases/DatabaseLayout/DatabaseList" to="." method="_on_DatabaseList_item_selected"]

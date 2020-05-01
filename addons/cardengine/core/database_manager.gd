@@ -17,7 +17,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 		var id = form["id"]
 		if id.empty():
 			errors.append("Database ID cannot be empty")
-		elif _databases.has(id):
+		elif !form["edit"] && _databases.has(id):
 			errors.append("Database ID already exists")
 		elif !Utils.is_id_valid(id):
 			errors.append("Invalid database ID, must only contains alphanumeric characters or _, no space and starts with a letter")
@@ -58,21 +58,14 @@ func load_databases(folder: String):
 
 func databases() -> Dictionary:
 	return _databases;
-	
-func create_database(id: String, name: String):
-	var db = CardDatabase.new(id, name, _folder + id + ".data")
-	_databases[id] = db
-	
-	write_database(db)
-	
-	emit_signal("changed")
 
 func write_database(db: CardDatabase):
 	var file = ConfigFile.new()
 	
-	file.set_value("meta", "id"  , db.id)
-	file.set_value("meta", "name", db.name)
-	file.set_value("meta", "path", db.path)
+	file.set_value("meta", "id"    , db.id    )
+	file.set_value("meta", "name"  , db.name  )
+	file.set_value("meta", "visual", db.visual)
+	file.set_value("meta", "path"  , db.path  )
 	
 	for id in db.cards():
 		var card = db.get_card(id)
@@ -96,9 +89,10 @@ func read_database(filename: String) -> CardDatabase:
 		printerr("Error while loading database")
 		return null
 	
-	var db = CardDatabase.new(file.get_value("meta", "id"  ),
-							  file.get_value("meta", "name"),
-							  file.get_value("meta", "path"))
+	var db = CardDatabase.new(file.get_value("meta", "id"    , ""),
+							  file.get_value("meta", "name"  , ""),
+							  file.get_value("meta", "visual", ""),
+							  file.get_value("meta", "path"  , ""))
 
 	if file.has_section("cards"):
 		for entry in file.get_section_keys("cards"):
@@ -111,11 +105,27 @@ func read_database(filename: String) -> CardDatabase:
 	
 	return db
 
+func create_database(id: String, name: String, visual: String):
+	var db = CardDatabase.new(id, name, visual, _folder + id + ".data")
+	_databases[id] = db
+	
+	write_database(db)
+	
+	emit_signal("changed")
+
 func get_database(id: String) -> CardDatabase:
 	if _databases.has(id):
 		return _databases[id]
 	else:
 		return null
+
+func change_database(db: CardDatabase, new_name: String, new_visual: String):
+	db.name = new_name
+	db.visual = new_visual
+	
+	write_database(db)
+	
+	emit_signal("changed")
 
 func delete_database(id: String):
 	if !_databases.has(id): return

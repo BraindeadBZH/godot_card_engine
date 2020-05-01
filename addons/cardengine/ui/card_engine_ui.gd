@@ -134,6 +134,7 @@ func _on_Databases_changed():
 	
 	list.clear()
 	select.clear()
+	$Databases/DatabaseLayout/Toolbar/EditBtn.disabled = true
 	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = true
 	
 	var databases = CardEngine.db().databases()
@@ -145,11 +146,21 @@ func _on_Databases_changed():
 		select.add_item("%s: %s" % [db.id, db.name])
 		select.set_item_metadata(select.get_item_count()-1, db.id)
 
+func _on_EditBtn_pressed():
+	var id = $Databases/DatabaseLayout/DatabaseList.get_item_metadata(_selected_db)
+	var db = CardEngine.db().get_database(id)
+	$Dialogs/NewDatabaseDialog.popup_centered_edit({"id": db.id, "name": db.name, "visual": db.visual})
+
 func _on_NewDatabaseDialog_form_validated(form):
-	CardEngine.db().create_database(form["id"], form["name"])
+	if form["edit"]:
+		var db = CardEngine.db().get_database(form["id"])
+		CardEngine.db().change_database(db, form["name"], form["visual"])
+	else:
+		CardEngine.db().create_database(form["id"], form["name"], form["card"])
 
 func _on_DatabaseList_item_selected(index):
 	_selected_db = index
+	$Databases/DatabaseLayout/Toolbar/EditBtn.disabled = false
 	$Databases/DatabaseLayout/Toolbar/DeleteBtn.disabled = false
 
 func _on_DeleteBtn_pressed():
