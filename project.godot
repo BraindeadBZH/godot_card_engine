@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://addons/cardengine/core/abstract_manager.gd"
 }, {
 "base": "Reference",
+"class": "AbstractStore",
+"language": "GDScript",
+"path": "res://addons/cardengine/store/abstract_store.gd"
+}, {
+"base": "Reference",
 "class": "CardData",
 "language": "GDScript",
 "path": "res://addons/cardengine/core/card.gd"
@@ -28,6 +33,11 @@ _global_script_classes=[ {
 "class": "CardDatabase",
 "language": "GDScript",
 "path": "res://addons/cardengine/core/database.gd"
+}, {
+"base": "AbstractStore",
+"class": "CardDeck",
+"language": "GDScript",
+"path": "res://addons/cardengine/store/card_deck.gd"
 }, {
 "base": "Node",
 "class": "CardEngineInstance",
@@ -39,6 +49,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/ui/card_engine_ui.gd"
 }, {
+"base": "AbstractStore",
+"class": "CardHand",
+"language": "GDScript",
+"path": "res://addons/cardengine/store/card_hand.gd"
+}, {
+"base": "AbstractStore",
+"class": "CardPile",
+"language": "GDScript",
+"path": "res://addons/cardengine/store/card_pile.gd"
+}, {
 "base": "AbstractManager",
 "class": "DatabaseManager",
 "language": "GDScript",
@@ -49,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/core/general_manager.gd"
 }, {
+"base": "Reference",
+"class": "PseudoRng",
+"language": "GDScript",
+"path": "res://addons/cardengine/rng/pseudo_rng.gd"
+}, {
 "base": "Node",
 "class": "UtilsInstance",
 "language": "GDScript",
@@ -57,12 +82,17 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AbstractFormDialog": "",
 "AbstractManager": "",
+"AbstractStore": "",
 "CardData": "",
 "CardDatabase": "",
+"CardDeck": "",
 "CardEngineInstance": "",
 "CardEngineUI": "",
+"CardHand": "",
+"CardPile": "",
 "DatabaseManager": "",
 "GeneralManager": "",
+"PseudoRng": "",
 "UtilsInstance": ""
 }
 
