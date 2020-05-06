@@ -5,6 +5,7 @@ class_name CardsUi
 onready var _db_select = $CardLayout/ToolLayout/DatabaseSelect
 onready var _save_btn = $CardLayout/ToolLayout/SaveBtn
 onready var _load_btn = $CardLayout/ToolLayout/LoadBtn
+onready var _success_lbl = $CardLayout/ToolLayout/SuccesLbl
 onready var _error_lbl = $CardLayout/ToolLayout/ErrorLbl
 onready var _card_id = $CardLayout/ToolLayout/CardId
 onready var _categ_list = $CardLayout/DataLayout/CategList
@@ -67,6 +68,7 @@ func save_card(id: String, db: CardDatabase):
 		card.add_text(data["id"], data["text"])
 	db.add_card(card)
 	CardEngine.db().write_database(db)
+	_success_lbl.text = "Card saved successfully"
 
 func overwrite_card(id: String, db: CardDatabase):
 	if yield():
@@ -139,6 +141,7 @@ func _on_Databases_changed():
 		_db_select.set_item_metadata(_db_select.get_item_count()-1, db.id)
 
 func _on_CardId_text_changed(new_text):
+	_success_lbl.text = ""
 	if Utils.is_id_valid(new_text):
 		_save_btn.disabled = false
 		_load_btn.disabled = false
@@ -149,6 +152,7 @@ func _on_CardId_text_changed(new_text):
 		_error_lbl.text = "Invalid ID"
 
 func _on_SaveBtn_pressed():
+	_success_lbl.text = ""
 	_error_lbl.text = ""
 	
 	var id = _card_id.text
@@ -160,6 +164,7 @@ func _on_SaveBtn_pressed():
 		save_card(id, db)
 
 func _on_LoadBtn_pressed():
+	_success_lbl.text = ""
 	_error_lbl.text = ""
 	load_card(_card_id.text, _db_select.get_selected_metadata())
 

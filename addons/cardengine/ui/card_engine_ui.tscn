@@ -124,10 +124,17 @@ text = "main: Main Database"
 items = [ "main: Main Database", null, false, 0, "main", "test: Test database", null, false, 1, "test", "delete: Delete", null, false, 2, "delete" ]
 selected = 0
 
-[node name="ErrorLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
+[node name="SuccesLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
 margin_left = 667.0
 margin_top = 8.0
 margin_right = 667.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 0.611765, 0.917647, 0.27451, 1 )
+
+[node name="ErrorLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
+margin_left = 671.0
+margin_top = 8.0
+margin_right = 671.0
 margin_bottom = 22.0
 custom_colors/font_color = Color( 0.917647, 0.27451, 0.27451, 1 )
 
