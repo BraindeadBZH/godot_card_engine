@@ -4,8 +4,8 @@ class_name DatabaseManager
 
 signal changed()
 
-var _folder = ""
-var _databases = {}
+var _folder: String = ""
+var _databases: Dictionary = {}
 
 func clean():
 	_databases = {}

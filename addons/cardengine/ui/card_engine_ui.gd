@@ -14,6 +14,7 @@ var _selected_db = -1
 func _ready():
 	$Databases.set_main_ui(self)
 	$Cards.set_main_ui(self)
+	$Containers.set_main_ui(self)
 
 func change_tab(index: int):
 	current_tab = index
