@@ -2,6 +2,7 @@ tool
 extends Control
 class_name ContainersUi
 
+onready var _manager = CardEngine.cont()
 onready var _cont_list = $ContainersLayout/ContainerList
 onready var _delete_btn = $ContainersLayout/Toolbar/DeleteBtn
 
@@ -9,10 +10,16 @@ var _main_ui: CardEngineUI = null
 var _selected_cont: int = -1
 
 func _ready():
-	CardEngine.cont().connect("changed", self, "_on_Containers_changed")
+	_manager.connect("changed", self, "_on_Containers_changed")
 
 func set_main_ui(ui: CardEngineUI) -> void:
 	_main_ui = ui
+
+func delete_container():
+	if yield():
+		_manager.delete_container(
+			_manager.get_container(
+				_cont_list.get_item_metadata(_selected_cont)))
 
 func _on_Containers_changed():
 	if _cont_list == null: return
@@ -30,10 +37,11 @@ func _on_CreateBtn_pressed():
 	_main_ui.show_new_container_dialog()
 
 func _on_DeleteBtn_pressed():
-	pass # Replace with function body.
+	_main_ui.show_confirmation_dialog("Delete container", funcref(self, "delete_container"))
 
 func _on_ContainerList_item_selected(index):
-	pass # Replace with function body.
+	_selected_cont = index
+	_delete_btn.disabled = false
 
 func _on_ContainerList_item_activated(index):
 	pass # Replace with function body.
@@ -42,5 +50,5 @@ func _on_NewContainerDialog_form_validated(form):
 	if form["edit"]:
 		pass
 	else:
-		CardEngine.cont().create_container(
+		_manager.create_container(
 			ContainerData.new(form["id"], form["name"], form["visual"]))

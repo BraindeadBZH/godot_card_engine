@@ -15,3 +15,20 @@ func is_valid_for_regex(value: String, regex: String) -> bool:
 		return true
 	else:
 		return false
+
+func directory_remove_recursive(path: String) -> bool:
+	var dir = Directory.new()
+	if dir.open(path) == OK:
+		dir.list_dir_begin(true, false)
+		var filename = dir.get_next()
+		while filename != "":
+			if dir.current_is_dir():
+				directory_remove_recursive("%s/%s" % [path, filename])
+			else:
+				dir.remove(filename)
+			filename = dir.get_next()
+		dir.list_dir_end()
+		dir.remove(".")
+		return true
+	else:
+		return false

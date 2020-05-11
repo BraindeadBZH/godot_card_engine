@@ -309,7 +309,6 @@ size_flags_vertical = 3
 [node name="TextDialog" parent="Dialogs" instance=ExtResource( 7 )]
 
 [node name="NewContainerDialog" parent="Dialogs" instance=ExtResource( 11 )]
-visible = false
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="Databases" method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/EditBtn" to="Databases" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="Databases" method="_on_DeleteBtn_pressed"]

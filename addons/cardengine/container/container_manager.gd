@@ -56,6 +56,18 @@ func create_container(cont: ContainerData) -> void:
 	
 	emit_signal("changed")
 
+func get_container(id: String) -> ContainerData:
+	if !_containers.has(id): return null
+	return _containers[id]
+
+func delete_container(cont: ContainerData) -> void:
+	var dir = Directory.new()
+	if Utils.directory_remove_recursive("%s/%s" % [_folder, cont.id]):
+		_containers.erase(cont.id)
+		emit_signal("changed")
+	else:
+		printerr("Container not accessible")
+
 func _write_metadata(cont: ContainerData) -> void:
 	var file = ConfigFile.new()
 	file.set_value("meta", "id"    , cont.id    )
