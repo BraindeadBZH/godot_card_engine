@@ -14,6 +14,7 @@ func setup():
 		printerr("Could not load CardEngine config file")
 	else:
 		_databases.load_databases(_conf.get_value("folders", "databases"))
+		_containers.load_containers(_conf.get_value("folders", "containers"))
 
 func clean():
 	_general.clean()

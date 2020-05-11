@@ -123,7 +123,7 @@ margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
 text = "main: Main Database"
-items = [ "main: Main Database", null, false, 0, "main", "test: Test database", null, false, 1, "test" ]
+items = [ "main: Main Database", null, false, 0, "main", "test: Test DB", null, false, 1, "test" ]
 selected = 0
 
 [node name="SuccesLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]

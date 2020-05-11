@@ -18,6 +18,7 @@ func _extract_form() -> Dictionary:
 	return {
 		"id": _cont_id.text,
 		"name": _cont_name.text,
+		"visual": _cont_visual.text,
 		"edit": is_edit()
 	}
 
@@ -25,6 +26,7 @@ func _fill_form(data: Dictionary):
 	_cont_id.editable = false
 	_cont_id.text = data["id"]
 	_cont_name.text = data["name"]
+	_cont_visual.text = data["visual"]
 
 func _on_SelectBtn_pressed():
 	_select_dlg.popup_centered_minsize(Vector2(400, 250))

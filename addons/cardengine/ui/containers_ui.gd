@@ -8,8 +8,23 @@ onready var _delete_btn = $ContainersLayout/Toolbar/DeleteBtn
 var _main_ui: CardEngineUI = null
 var _selected_cont: int = -1
 
+func _ready():
+	CardEngine.cont().connect("changed", self, "_on_Containers_changed")
+
 func set_main_ui(ui: CardEngineUI) -> void:
 	_main_ui = ui
+
+func _on_Containers_changed():
+	if _cont_list == null: return
+
+	_cont_list.clear()
+	_delete_btn.disabled = true
+	
+	var containers = CardEngine.cont().containers()
+	for id in containers:
+		var db = containers[id]
+		_cont_list.add_item("%s: %s" % [db.id, db.name])
+		_cont_list.set_item_metadata(_cont_list.get_item_count()-1, db.id)
 
 func _on_CreateBtn_pressed():
 	_main_ui.show_new_container_dialog()
@@ -24,4 +39,8 @@ func _on_ContainerList_item_activated(index):
 	pass # Replace with function body.
 
 func _on_NewContainerDialog_form_validated(form):
-	pass # Replace with function body.
+	if form["edit"]:
+		pass
+	else:
+		CardEngine.cont().create_container(
+			ContainerData.new(form["id"], form["name"], form["visual"]))

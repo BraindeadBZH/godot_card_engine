@@ -2,6 +2,8 @@ tool
 extends AbstractManager
 class_name ContainerManager
 
+signal changed()
+
 var _folder: String = ""
 var _containers: Dictionary = {}
 
@@ -11,7 +13,14 @@ func clean():
 func validate_form(form_name: String, form: Dictionary) -> Array:
 	var errors = []
 	
-	# TODO
+	if form_name == "new_container":
+		var id = form["id"]
+		if id.empty():
+			errors.append("Container ID cannot be empty")
+		elif !form["edit"] && _containers.has(id):
+			errors.append("Container ID already exists")
+		elif !Utils.is_id_valid(id):
+			errors.append("Invalid container ID, must only contains alphanumeric characters or _, no space and starts with a letter")
 	
 	return errors
 
@@ -22,7 +31,10 @@ func load_containers(folder: String) -> void:
 		dir.list_dir_begin(true, true)
 		var filename = dir.get_next()
 		while filename != "":
-			pass # TODO
+			if dir.current_is_dir():
+				var cont = _read_metadata(filename)
+				_containers[cont.id] = cont
+			filename = dir.get_next()
 		dir.list_dir_end()
 		emit_signal("changed")
 	else:
@@ -30,3 +42,35 @@ func load_containers(folder: String) -> void:
 
 func containers() -> Dictionary:
 	return _containers
+
+func create_container(cont: ContainerData) -> void:
+	_containers[cont.id] = cont
+	
+	var dir = Directory.new()
+	if dir.open(_folder) == OK:
+		dir.make_dir(cont.id)
+		_write_metadata(cont)
+	else:
+		printerr("Could not access CardEngine container folder")
+		return
+	
+	emit_signal("changed")
+
+func _write_metadata(cont: ContainerData) -> void:
+	var file = ConfigFile.new()
+	file.set_value("meta", "id"    , cont.id    )
+	file.set_value("meta", "name"  , cont.name  )
+	file.set_value("meta", "visual", cont.visual)
+	file.save("%s/%s/%s.data" % [_folder, cont.id, cont.id])
+
+func _read_metadata(id: String) -> ContainerData:
+	var file = ConfigFile.new()
+	
+	var err = file.load("%s/%s/%s.data" % [_folder, id, id])
+	if err != OK:
+		printerr("Error while loading container")
+		return null
+		
+	return ContainerData.new(file.get_value("meta", "id"    , ""),
+							 file.get_value("meta", "name"  , ""),
+							 file.get_value("meta", "visual", ""))

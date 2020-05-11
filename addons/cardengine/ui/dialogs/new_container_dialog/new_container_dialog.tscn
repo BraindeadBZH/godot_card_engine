@@ -4,7 +4,6 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_container_dialog/new_container_dialog.gd" type="Script" id=2]
 
 [node name="NewContainerDialog" instance=ExtResource( 1 )]
-visible = true
 script = ExtResource( 2 )
 
 [node name="ContainerIdLbl" type="Label" parent="MainLayout/Form" index="0"]
@@ -59,7 +58,7 @@ text = "Select"
 [node name="SelectDlg" type="FileDialog" parent="." index="2"]
 margin_right = 307.0
 margin_bottom = 130.0
-window_title = "Choose a card"
+window_title = "Open a File"
 resizable = true
 mode = 0
 filters = PoolStringArray( "*.tscn ; Card Scene" )
