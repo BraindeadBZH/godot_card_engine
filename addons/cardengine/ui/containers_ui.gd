@@ -12,7 +12,7 @@ func set_main_ui(ui: CardEngineUI) -> void:
 	_main_ui = ui
 
 func _on_CreateBtn_pressed():
-	pass # Replace with function body.
+	_main_ui.show_new_container_dialog()
 
 func _on_DeleteBtn_pressed():
 	pass # Replace with function body.
@@ -21,4 +21,7 @@ func _on_ContainerList_item_selected(index):
 	pass # Replace with function body.
 
 func _on_ContainerList_item_activated(index):
+	pass # Replace with function body.
+
+func _on_NewContainerDialog_form_validated(form):
 	pass # Replace with function body.
