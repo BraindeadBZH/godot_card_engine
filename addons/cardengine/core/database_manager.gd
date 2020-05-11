@@ -62,10 +62,9 @@ func databases() -> Dictionary:
 func write_database(db: CardDatabase):
 	var file = ConfigFile.new()
 	
-	file.set_value("meta", "id"    , db.id    )
-	file.set_value("meta", "name"  , db.name  )
-	file.set_value("meta", "visual", db.visual)
-	file.set_value("meta", "path"  , db.path  )
+	file.set_value("meta", "id"  , db.id  )
+	file.set_value("meta", "name", db.name)
+	file.set_value("meta", "path", db.path)
 	
 	for id in db.cards():
 		var card = db.get_card(id)
@@ -89,10 +88,9 @@ func read_database(filename: String) -> CardDatabase:
 		printerr("Error while loading database")
 		return null
 	
-	var db = CardDatabase.new(file.get_value("meta", "id"    , ""),
-							  file.get_value("meta", "name"  , ""),
-							  file.get_value("meta", "visual", ""),
-							  file.get_value("meta", "path"  , ""))
+	var db = CardDatabase.new(file.get_value("meta", "id"  , ""),
+							  file.get_value("meta", "name", ""),
+							  file.get_value("meta", "path", ""))
 
 	if file.has_section("cards"):
 		for entry in file.get_section_keys("cards"):
@@ -105,8 +103,8 @@ func read_database(filename: String) -> CardDatabase:
 	
 	return db
 
-func create_database(id: String, name: String, visual: String):
-	var db = CardDatabase.new(id, name, visual, _folder + id + ".data")
+func create_database(id: String, name: String):
+	var db = CardDatabase.new(id, name, _folder + id + ".data")
 	_databases[id] = db
 	
 	write_database(db)
@@ -119,9 +117,8 @@ func get_database(id: String) -> CardDatabase:
 	else:
 		return null
 
-func change_database(db: CardDatabase, new_name: String, new_visual: String):
+func change_database(db: CardDatabase, new_name: String):
 	db.name = new_name
-	db.visual = new_visual
 	
 	write_database(db)
 	

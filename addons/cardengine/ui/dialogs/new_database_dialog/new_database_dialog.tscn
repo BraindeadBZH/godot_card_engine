@@ -31,37 +31,3 @@ margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
-
-[node name="DatabaseCardLbl" type="Label" parent="MainLayout/Form" index="4"]
-margin_top = 61.0
-margin_right = 101.0
-margin_bottom = 75.0
-text = "Card Visual"
-
-[node name="DatabaseCardLayout" type="HBoxContainer" parent="MainLayout/Form" index="5"]
-margin_left = 105.0
-margin_top = 56.0
-margin_right = 402.0
-margin_bottom = 80.0
-
-[node name="DatabaseCard" type="LineEdit" parent="MainLayout/Form/DatabaseCardLayout" index="0"]
-margin_right = 235.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-editable = false
-
-[node name="DatabaseCardChange" type="Button" parent="MainLayout/Form/DatabaseCardLayout" index="1"]
-margin_left = 239.0
-margin_right = 297.0
-margin_bottom = 24.0
-text = "Change"
-
-[node name="CardSelect" type="FileDialog" parent="." index="2"]
-margin_right = 307.0
-margin_bottom = 130.0
-window_title = "Choose a card"
-mode_overrides_title = false
-mode = 0
-filters = PoolStringArray( "*.tscn ; Card Scene" )
-[connection signal="pressed" from="MainLayout/Form/DatabaseCardLayout/DatabaseCardChange" to="." method="_on_DatabaseCardChange_pressed"]
-[connection signal="file_selected" from="CardSelect" to="." method="_on_CardSelect_file_selected"]
