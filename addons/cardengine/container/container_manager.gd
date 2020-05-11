@@ -5,6 +5,7 @@ class_name ContainerManager
 signal changed()
 
 var _folder: String = ""
+var _tpl_folder: String = ""
 var _containers: Dictionary = {}
 
 func clean():
@@ -24,8 +25,9 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 	
 	return errors
 
-func load_containers(folder: String) -> void:
+func load_containers(folder: String, tpl_folder: String) -> void:
 	_folder = folder
+	_tpl_folder = tpl_folder
 	var dir = Directory.new()
 	if dir.open(_folder) == OK:
 		dir.list_dir_begin(true, true)
@@ -50,6 +52,7 @@ func create_container(cont: ContainerData) -> void:
 	if dir.open(_folder) == OK:
 		dir.make_dir(cont.id)
 		_write_metadata(cont)
+		_write_scene(cont)
 	else:
 		printerr("Could not access CardEngine container folder")
 		return
@@ -61,7 +64,6 @@ func get_container(id: String) -> ContainerData:
 	return _containers[id]
 
 func delete_container(cont: ContainerData) -> void:
-	var dir = Directory.new()
 	if Utils.directory_remove_recursive("%s/%s" % [_folder, cont.id]):
 		_containers.erase(cont.id)
 		emit_signal("changed")
@@ -74,6 +76,23 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("meta", "name"  , cont.name  )
 	file.set_value("meta", "visual", cont.visual)
 	file.save("%s/%s/%s.data" % [_folder, cont.id, cont.id])
+
+func _write_scene(cont: ContainerData) -> void:
+	var dir = Directory.new()
+	var tpl_path = "%s/container.gd" % _tpl_folder
+	var script_path = "%s/%s/%s.gd" % [_folder, cont.id, cont.id]
+	dir.copy(tpl_path, script_path)
+		
+	var root = AbstractContainer.new()
+	root.name = cont.id
+	root.set_script(load(script_path))
+	var scene = PackedScene.new()
+	var result = scene.pack(root)
+	if result == OK:
+		result = ResourceSaver.save(
+			"%s/%s/%s.tscn" % [_folder, cont.id, cont.id], scene)
+		if result != OK:
+			printerr("Cannot save container scene")
 
 func _read_metadata(id: String) -> ContainerData:
 	var file = ConfigFile.new()

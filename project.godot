@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "AbstractContainer",
+"language": "GDScript",
+"path": "res://addons/cardengine/container/abstract_container.gd"
+}, {
 "base": "WindowDialog",
 "class": "AbstractFormDialog",
 "language": "GDScript",
@@ -105,6 +110,7 @@ _global_script_classes=[ {
 "path": "res://addons/cardengine/core/utils.gd"
 } ]
 _global_script_class_icons={
+"AbstractContainer": "",
 "AbstractFormDialog": "",
 "AbstractManager": "",
 "AbstractStore": "",
