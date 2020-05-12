@@ -49,14 +49,14 @@ text = "Create new database"
 
 [node name="EditBtn" type="Button" parent="Databases/DatabaseLayout/Toolbar"]
 margin_left = 148.0
-margin_right = 248.0
+margin_right = 245.0
 margin_bottom = 20.0
 disabled = true
-text = "Edit metadata"
+text = "Edit database"
 
 [node name="DeleteBtn" type="Button" parent="Databases/DatabaseLayout/Toolbar"]
-margin_left = 252.0
-margin_right = 368.0
+margin_left = 249.0
+margin_right = 365.0
 margin_bottom = 20.0
 disabled = true
 text = "Delete database"
@@ -66,7 +66,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "main: Main Database", null, false, "test: Test database", null, false ]
+items = [ "main: Main Database", null, false, "test: Test DB", null, false ]
 
 [node name="Cards" type="Control" parent="."]
 visible = false

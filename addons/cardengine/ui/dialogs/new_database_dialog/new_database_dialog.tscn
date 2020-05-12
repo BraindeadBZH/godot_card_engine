@@ -4,7 +4,7 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.gd" type="Script" id=2]
 
 [node name="NewDatabaseDialog" instance=ExtResource( 1 )]
-window_title = "New Database"
+window_title = "Database"
 script = ExtResource( 2 )
 
 [node name="DatabaseIdLbl" type="Label" parent="MainLayout/Form" index="0"]

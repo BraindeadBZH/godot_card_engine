@@ -38,16 +38,14 @@ func _on_DatabaseList_item_selected(index):
 	_delete_btn.disabled = false
 
 func _on_DatabaseList_item_activated(index):
-	var id = _db_list.get_item_metadata(index)
-	_main_ui.show_edit_database_dialog(id)
+	var db = CardEngine.db().get_database(_db_list.get_item_metadata(index))
+	_main_ui.show_new_database_dialog({"id": db.id, "name": db.name})
 
 func _on_CreateBtn_pressed():
 	_main_ui.show_new_database_dialog()
 
 func _on_EditBtn_pressed():
-	var id = _db_list.get_item_metadata(_selected_db)
-	var db = CardEngine.db().get_database(id)
-	_main_ui.show_new_database_dialog({"id": db.id, "name": db.name})
+	_main_ui.show_edit_database_dialog(_db_list.get_item_metadata(_selected_db))
 
 func _on_NewDatabaseDialog_form_validated(form):
 	if form["edit"]:
