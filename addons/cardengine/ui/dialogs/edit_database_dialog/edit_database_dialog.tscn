@@ -8,6 +8,7 @@ anchor_bottom = 1.0
 margin_right = -750.0
 margin_bottom = -380.0
 window_title = "Edit Database"
+resizable = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
