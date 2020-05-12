@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.gd" type="Script" id=1]
+
+[node name="EditContainerDialog" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -750.0
+margin_bottom = -380.0
+window_title = "Edit Container"
+resizable = true
+script = ExtResource( 1 )

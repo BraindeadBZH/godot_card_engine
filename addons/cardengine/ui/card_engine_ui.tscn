@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/card_engine_ui.gd" type="Script" id=1]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://addons/cardengine/ui/cards_ui.gd" type="Script" id=9]
 [ext_resource path="res://addons/cardengine/ui/containers_ui.gd" type="Script" id=10]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_container_dialog/new_container_dialog.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.tscn" type="PackedScene" id=12]
 
 [node name="CardEngineUI" type="TabContainer"]
 anchor_right = 1.0
@@ -123,7 +124,7 @@ margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
 text = "main: Main Database"
-items = [ "main: Main Database", null, false, 0, "main", "test: Test DB", null, false, 1, "test" ]
+items = [ "main: Main Database", null, false, 0, "main", "test: Test database", null, false, 1, "test" ]
 selected = 0
 
 [node name="SuccesLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
@@ -281,6 +282,12 @@ margin_right = 117.0
 margin_bottom = 20.0
 text = "Create container"
 
+[node name="EditBtn" type="Button" parent="Containers/ContainersLayout/Toolbar"]
+margin_right = 12.0
+margin_bottom = 20.0
+disabled = true
+text = "Edit container"
+
 [node name="DeleteBtn" type="Button" parent="Containers/ContainersLayout/Toolbar"]
 margin_left = 121.0
 margin_right = 240.0
@@ -293,6 +300,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
+items = [ "test: Test container", null, false ]
 
 [node name="Dialogs" type="Node" parent="."]
 
@@ -309,6 +317,8 @@ size_flags_vertical = 3
 [node name="TextDialog" parent="Dialogs" instance=ExtResource( 7 )]
 
 [node name="NewContainerDialog" parent="Dialogs" instance=ExtResource( 11 )]
+
+[node name="EditContainerDialog" parent="Dialogs" instance=ExtResource( 12 )]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/CreateBtn" to="Databases" method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/EditBtn" to="Databases" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Databases/DatabaseLayout/Toolbar/DeleteBtn" to="Databases" method="_on_DeleteBtn_pressed"]
@@ -330,6 +340,7 @@ size_flags_vertical = 3
 [connection signal="pressed" from="Cards/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="Cards" method="_on_AddTxtBtn_pressed"]
 [connection signal="pressed" from="Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn" to="Cards" method="_on_DelTxtBtn_pressed"]
 [connection signal="pressed" from="Containers/ContainersLayout/Toolbar/CreateBtn" to="Containers" method="_on_CreateBtn_pressed"]
+[connection signal="pressed" from="Containers/ContainersLayout/Toolbar/EditBtn" to="Containers" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Containers/ContainersLayout/Toolbar/DeleteBtn" to="Containers" method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Containers/ContainersLayout/ContainerList" to="Containers" method="_on_ContainerList_item_activated"]
 [connection signal="item_selected" from="Containers/ContainersLayout/ContainerList" to="Containers" method="_on_ContainerList_item_selected"]

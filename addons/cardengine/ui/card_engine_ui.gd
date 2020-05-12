@@ -9,6 +9,7 @@ onready var _categ_dlg = $Dialogs/CategoryDialog
 onready var _value_dlg = $Dialogs/ValueDialog
 onready var _text_dlg = $Dialogs/TextDialog
 onready var _new_cont_dlg = $Dialogs/NewContainerDialog
+onready var _edit_cont_dlg = $Dialogs/EditContainerDialog
 
 var _selected_db = -1
 
@@ -56,3 +57,7 @@ func show_new_container_dialog(data: Dictionary = {}):
 		_new_cont_dlg.popup_centered()
 	else:
 		_new_cont_dlg.popup_centered_edit(data)
+
+func show_edit_container_dialog(id: String):
+	_edit_cont_dlg.popup_centered()
+	_edit_cont_dlg.set_container(id)
