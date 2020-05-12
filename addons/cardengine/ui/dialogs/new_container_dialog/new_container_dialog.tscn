@@ -4,6 +4,7 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_container_dialog/new_container_dialog.gd" type="Script" id=2]
 
 [node name="NewContainerDialog" instance=ExtResource( 1 )]
+window_title = "Container"
 script = ExtResource( 2 )
 
 [node name="ContainerIdLbl" type="Label" parent="MainLayout/Form" index="0"]

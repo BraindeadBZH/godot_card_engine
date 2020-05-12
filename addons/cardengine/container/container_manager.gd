@@ -63,6 +63,12 @@ func get_container(id: String) -> ContainerData:
 	if !_containers.has(id): return null
 	return _containers[id]
 
+func update_container(modified_cont: ContainerData) -> void:
+	_containers[modified_cont.id] = modified_cont
+	_write_metadata(modified_cont)
+	_write_scene(modified_cont)
+	emit_signal("changed")
+
 func delete_container(cont: ContainerData) -> void:
 	if Utils.directory_remove_recursive("%s/%s" % [_folder, cont.id]):
 		_containers.erase(cont.id)

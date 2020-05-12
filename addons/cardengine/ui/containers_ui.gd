@@ -29,9 +29,9 @@ func _on_Containers_changed():
 	
 	var containers = CardEngine.cont().containers()
 	for id in containers:
-		var db = containers[id]
-		_cont_list.add_item("%s: %s" % [db.id, db.name])
-		_cont_list.set_item_metadata(_cont_list.get_item_count()-1, db.id)
+		var cont = containers[id]
+		_cont_list.add_item("%s: %s" % [cont.id, cont.name])
+		_cont_list.set_item_metadata(_cont_list.get_item_count()-1, cont.id)
 
 func _on_CreateBtn_pressed():
 	_main_ui.show_new_container_dialog()
@@ -44,11 +44,13 @@ func _on_ContainerList_item_selected(index):
 	_delete_btn.disabled = false
 
 func _on_ContainerList_item_activated(index):
-	pass # Replace with function body.
+	var cont = CardEngine.cont().get_container(_cont_list.get_item_metadata(index))
+	_main_ui.show_new_container_dialog({"id": cont.id, "name": cont.name, "visual": cont.visual})
 
 func _on_NewContainerDialog_form_validated(form):
 	if form["edit"]:
-		pass
+		_manager.update_container(
+			ContainerData.new(form["id"], form["name"], form["visual"]))
 	else:
 		_manager.create_container(
 			ContainerData.new(form["id"], form["name"], form["visual"]))
