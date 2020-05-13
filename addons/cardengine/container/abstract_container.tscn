@@ -2,5 +2,8 @@
 
 [ext_resource path="res://addons/cardengine/container/abstract_container.gd" type="Script" id=1]
 
-[node name="AbstractContainer" type="Node2D"]
+[node name="AbstractContainer" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
