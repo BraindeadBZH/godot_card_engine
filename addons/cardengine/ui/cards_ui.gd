@@ -2,6 +2,7 @@ tool
 extends Control
 class_name CardsUi
 
+onready var _manager = CardEngine.db()
 onready var _db_select = $CardLayout/ToolLayout/DatabaseSelect
 onready var _save_btn = $CardLayout/ToolLayout/SaveBtn
 onready var _load_btn = $CardLayout/ToolLayout/LoadBtn
@@ -23,7 +24,7 @@ var _selected_val: int = -1
 var _selected_text: int = -1
 
 func _ready():
-	CardEngine.db().connect("changed", self, "_on_Databases_changed")
+	_manager.connect("changed", self, "_on_Databases_changed")
 
 func set_main_ui(ui: CardEngineUI) -> void:
 	_main_ui = ui
@@ -40,7 +41,7 @@ func load_card(id: String, db_id: String):
 	_value_list.clear()
 	_text_list.clear()
 	
-	var db = CardEngine.db().get_database(db_id)
+	var db = _manager.get_database(db_id)
 	var card = db.get_card(id)
 	if card == null:
 		_error_lbl.text = "Unable to find the card in the database"
@@ -67,7 +68,7 @@ func save_card(id: String, db: CardDatabase):
 		var data = _text_list.get_item_metadata(i)
 		card.add_text(data["id"], data["text"])
 	db.add_card(card)
-	CardEngine.db().update_database(db)
+	_manager.update_database(db)
 	_success_lbl.text = "Card saved successfully"
 
 func overwrite_card(id: String, db: CardDatabase):
@@ -76,10 +77,9 @@ func overwrite_card(id: String, db: CardDatabase):
 
 func delete_card(id: String, db_id: String):
 	if yield():
-		var db = CardEngine.db().get_database(db_id)
+		var db = _manager.get_database(db_id)
 		db.remove_card(id)
-		CardEngine.db().write_database(db)
-		$Dialogs/EditDatabaseDialog.remove_selected_card()
+		_manager.update_database(db)
 
 func append_category(id: String, name: String):
 	_categ_list.add_item("%s: %s" % [id, name])
@@ -134,7 +134,7 @@ func _on_Databases_changed():
 	if _db_select == null: return
 	
 	_db_select.clear()
-	var databases = CardEngine.db().databases()
+	var databases = _manager.databases()
 	for id in databases:
 		var db = databases[id]
 		_db_select.add_item("%s: %s" % [db.id, db.name])
@@ -156,7 +156,7 @@ func _on_SaveBtn_pressed():
 	_error_lbl.text = ""
 	
 	var id = _card_id.text
-	var db = CardEngine.db().get_database(_db_select.get_selected_metadata())
+	var db = _manager.get_database(_db_select.get_selected_metadata())
 	
 	if db.card_exists(id):
 		_main_ui.show_confirmation_dialog("Overwrite Card", funcref(self, "overwrite_card"), [id, db])

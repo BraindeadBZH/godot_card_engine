@@ -124,7 +124,7 @@ margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
 text = "main: Main Database"
-items = [ "main: Main Database", null, false, 0, "main", "test: Test database", null, false, 1, "test" ]
+items = [ "main: Main Database", null, false, 0, "main", "test: Test database", null, false, 1, "test", "delete: Delete", null, false, 2, "delete" ]
 selected = 0
 
 [node name="SuccesLbl" type="Label" parent="Cards/CardLayout/ToolLayout"]
@@ -301,6 +301,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
+items = [ "test: Test container", null, false ]
 
 [node name="Dialogs" type="Node" parent="."]
 
