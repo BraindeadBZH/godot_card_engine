@@ -11,8 +11,6 @@ onready var _text_dlg = $Dialogs/TextDialog
 onready var _new_cont_dlg = $Dialogs/NewContainerDialog
 onready var _edit_cont_dlg = $Dialogs/EditContainerDialog
 
-var _selected_db = -1
-
 func _ready():
 	$Databases.set_main_ui(self)
 	$Cards.set_main_ui(self)
