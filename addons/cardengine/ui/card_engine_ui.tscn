@@ -67,7 +67,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "main: Main Database", null, false, "test: Test DB", null, false ]
+items = [ "main: Main Database", null, false, "test: Test database", null, false ]
 
 [node name="Cards" type="Control" parent="."]
 visible = false
@@ -283,14 +283,15 @@ margin_bottom = 20.0
 text = "Create container"
 
 [node name="EditBtn" type="Button" parent="Containers/ContainersLayout/Toolbar"]
-margin_right = 12.0
+margin_left = 121.0
+margin_right = 221.0
 margin_bottom = 20.0
 disabled = true
 text = "Edit container"
 
 [node name="DeleteBtn" type="Button" parent="Containers/ContainersLayout/Toolbar"]
-margin_left = 121.0
-margin_right = 240.0
+margin_left = 225.0
+margin_right = 344.0
 margin_bottom = 20.0
 disabled = true
 text = "Delete container"
@@ -300,7 +301,6 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "test: Test container", null, false ]
 
 [node name="Dialogs" type="Node" parent="."]
 
