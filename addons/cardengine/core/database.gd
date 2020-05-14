@@ -29,22 +29,28 @@ func get_card(id: String) -> CardData:
 func remove_card(id: String) -> void:
 	_cards.erase(id)
 
-func fill_by_categories(store: AbstractStore, filter_categories: Array, inversed: bool = false) -> void:
+func fill_by_categories(store: AbstractStore, filter_categories: Array, or_op: bool = false) -> void:
 	for id in _cards:
 		var card = _cards[id]
-		for categ in card.categories():
-			if inversed && !filter_categories.has(categ):
-				store.add_card(_cards[id].duplicate())
-				return
-			if !inversed && filter_categories.has(categ):
-				store.add_card(_cards[id].duplicate())
-				return
+		var card_categories = card.categories()
+		var add = false
+		
+		for filter in filter_categories:
+			if filter.empty(): continue
+			var include = true
+			if filter.begin_with("-"): include = true
+			
+			if card_categories.has(filter):
+				if or_op:
+					add |= include
+				else:
+					add &= include
+			
+		if add: store.add_card(_cards[id].duplicate())
 
 func fill_by_ids(store: AbstractStore, filter_ids: Array, inversed: bool = false) -> void:
 	for id in _cards:
 		if inversed && !filter_ids.has(id):
 			store.add_card(_cards[id].duplicate())
-			return
 		if !inversed && filter_ids.has(id):
 			store.add_card(_cards[id].duplicate())
-			return
