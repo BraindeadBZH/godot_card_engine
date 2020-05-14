@@ -51,12 +51,12 @@ func _on_ContainerList_item_selected(index):
 
 func _on_ContainerList_item_activated(index):
 	var cont = CardEngine.cont().get_container(_cont_list.get_item_metadata(index))
-	_main_ui.show_new_container_dialog({"id": cont.id, "name": cont.name, "visual": cont.visual})
+	_main_ui.show_new_container_dialog({"id": cont.id, "name": cont.name})
 
 func _on_NewContainerDialog_form_validated(form):
 	if form["edit"]:
 		_manager.update_container(
-			ContainerData.new(form["id"], form["name"], form["visual"]))
+			ContainerData.new(form["id"], form["name"]))
 	else:
 		_manager.create_container(
-			ContainerData.new(form["id"], form["name"], form["visual"]))
+			ContainerData.new(form["id"], form["name"]))

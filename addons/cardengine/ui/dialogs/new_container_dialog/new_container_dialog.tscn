@@ -31,37 +31,3 @@ margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
-
-[node name="ContainerVisualLbl" type="Label" parent="MainLayout/Form" index="4"]
-margin_top = 61.0
-margin_right = 103.0
-margin_bottom = 75.0
-text = "Container Visual"
-
-[node name="VisualLayout" type="HBoxContainer" parent="MainLayout/Form" index="5"]
-margin_left = 107.0
-margin_top = 56.0
-margin_right = 402.0
-margin_bottom = 80.0
-
-[node name="ContainerVisual" type="LineEdit" parent="MainLayout/Form/VisualLayout" index="0"]
-margin_right = 240.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-editable = false
-
-[node name="SelectBtn" type="Button" parent="MainLayout/Form/VisualLayout" index="1"]
-margin_left = 244.0
-margin_right = 295.0
-margin_bottom = 24.0
-text = "Select"
-
-[node name="SelectDlg" type="FileDialog" parent="." index="2"]
-margin_right = 307.0
-margin_bottom = 130.0
-window_title = "Open a File"
-resizable = true
-mode = 0
-filters = PoolStringArray( "*.tscn ; Card Scene" )
-[connection signal="pressed" from="MainLayout/Form/VisualLayout/SelectBtn" to="." method="_on_SelectBtn_pressed"]
-[connection signal="file_selected" from="SelectDlg" to="." method="_on_SelectDlg_file_selected"]

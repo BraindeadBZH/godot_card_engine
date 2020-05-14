@@ -78,9 +78,8 @@ func delete_container(cont: ContainerData) -> void:
 
 func _write_metadata(cont: ContainerData) -> void:
 	var file = ConfigFile.new()
-	file.set_value("meta", "id"    , cont.id    )
-	file.set_value("meta", "name"  , cont.name  )
-	file.set_value("meta", "visual", cont.visual)
+	file.set_value("meta", "id"  , cont.id  )
+	file.set_value("meta", "name", cont.name)
 	file.save("%s/%s/%s.data" % [_folder, cont.id, cont.id])
 
 func _write_scene(cont: ContainerData) -> void:
@@ -108,6 +107,5 @@ func _read_metadata(id: String) -> ContainerData:
 		printerr("Error while loading container")
 		return null
 		
-	return ContainerData.new(file.get_value("meta", "id"    , ""),
-							 file.get_value("meta", "name"  , ""),
-							 file.get_value("meta", "visual", ""))
+	return ContainerData.new(file.get_value("meta", "id"  , ""),
+							 file.get_value("meta", "name", ""))
