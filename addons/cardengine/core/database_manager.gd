@@ -4,6 +4,8 @@ class_name DatabaseManager
 
 signal changed()
 
+const FORMAT_DB_PATH = "%s/%s.data"
+
 var _folder: String = ""
 var _databases: Dictionary = {}
 
@@ -48,7 +50,7 @@ func load_databases(folder: String):
 		var filename = dir.get_next()
 		while filename != "":
 			if Utils.is_db_file(filename):
-				var db = read_database(filename)
+				var db = _read_database(filename)
 				_databases[db.id] = db
 			filename = dir.get_next()
 		dir.list_dir_end()
@@ -59,12 +61,38 @@ func load_databases(folder: String):
 func databases() -> Dictionary:
 	return _databases;
 
-func write_database(db: CardDatabase):
+func create_database(db: CardDatabase) -> void:
+	_databases[db.id] = db
+	_write_database(db)
+	emit_signal("changed")
+
+func get_database(id: String) -> CardDatabase:
+	if _databases.has(id):
+		return _databases[id]
+	else:
+		return null
+
+func update_database(modified_db: CardDatabase):
+	_databases[modified_db.id] = modified_db
+	_write_database(modified_db)
+	emit_signal("changed")
+
+func delete_database(id: String):
+	if !_databases.has(id): return
+	
+	var db = _databases[id]
+	_databases.erase(id)
+	
+	var dir = Directory.new()
+	dir.remove(FORMAT_DB_PATH % [_folder, db.id])
+	
+	emit_signal("changed")
+
+func _write_database(db: CardDatabase):
 	var file = ConfigFile.new()
 	
 	file.set_value("meta", "id"  , db.id  )
 	file.set_value("meta", "name", db.name)
-	file.set_value("meta", "path", db.path)
 	
 	for id in db.cards():
 		var card = db.get_card(id)
@@ -74,12 +102,12 @@ func write_database(db: CardDatabase):
 			"texts": card.texts()
 			})
 	
-	var err = file.save(db.path)
+	var err = file.save(FORMAT_DB_PATH % [_folder, db.id])
 	if err != OK:
 		printerr("Error while writing database")
 		return
 
-func read_database(filename: String) -> CardDatabase:
+func _read_database(filename: String) -> CardDatabase:
 	var path = _folder + filename
 	var file = ConfigFile.new()
 	
@@ -89,8 +117,7 @@ func read_database(filename: String) -> CardDatabase:
 		return null
 	
 	var db = CardDatabase.new(file.get_value("meta", "id"  , ""),
-							  file.get_value("meta", "name", ""),
-							  file.get_value("meta", "path", ""))
+							  file.get_value("meta", "name", ""))
 
 	if file.has_section("cards"):
 		for entry in file.get_section_keys("cards"):
@@ -103,34 +130,3 @@ func read_database(filename: String) -> CardDatabase:
 	
 	return db
 
-func create_database(id: String, name: String):
-	var db = CardDatabase.new(id, name, _folder + id + ".data")
-	_databases[id] = db
-	
-	write_database(db)
-	
-	emit_signal("changed")
-
-func get_database(id: String) -> CardDatabase:
-	if _databases.has(id):
-		return _databases[id]
-	else:
-		return null
-
-func change_database(db: CardDatabase, new_name: String):
-	db.name = new_name
-	
-	write_database(db)
-	
-	emit_signal("changed")
-
-func delete_database(id: String):
-	if !_databases.has(id): return
-	
-	var db = _databases[id]
-	_databases.erase(id)
-	
-	var dir = Directory.new()
-	dir.remove(db.path)
-	
-	emit_signal("changed")

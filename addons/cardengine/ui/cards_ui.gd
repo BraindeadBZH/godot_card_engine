@@ -67,7 +67,7 @@ func save_card(id: String, db: CardDatabase):
 		var data = _text_list.get_item_metadata(i)
 		card.add_text(data["id"], data["text"])
 	db.add_card(card)
-	CardEngine.db().write_database(db)
+	CardEngine.db().update_database(db)
 	_success_lbl.text = "Card saved successfully"
 
 func overwrite_card(id: String, db: CardDatabase):
