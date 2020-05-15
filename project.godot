@@ -113,6 +113,11 @@ _global_script_classes=[ {
 "class": "UtilsInstance",
 "language": "GDScript",
 "path": "res://addons/cardengine/core/utils.gd"
+}, {
+"base": "AbstractContainer",
+"class": "test_private",
+"language": "GDScript",
+"path": "res://_private/containers/test/test.gd"
 } ]
 _global_script_class_icons={
 "AbstractCard": "",
@@ -135,7 +140,8 @@ _global_script_class_icons={
 "DatabasesUi": "",
 "GeneralManager": "",
 "PseudoRng": "",
-"UtilsInstance": ""
+"UtilsInstance": "",
+"test_private": ""
 }
 
 [application]

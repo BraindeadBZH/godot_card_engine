@@ -4,6 +4,12 @@ class_name ContainerManager
 
 signal changed()
 
+const FMT_PRIVATE_FOLDER = "%s/%s"
+const FMT_PRIVATE_DATA   = "%s/%s/%s.data"
+const FMT_PRIVATE_SCENE  = "%s/%s/%s.tscn"
+const FMT_PRIVATE_SCRIPT = "%s/%s/%s.gd"
+const FMT_PRIVATE_TPL    = "%s/container_private.gd.tpl"
+
 var _folder: String = ""
 var _tpl_folder: String = ""
 var _containers: Dictionary = {}
@@ -70,7 +76,7 @@ func update_container(modified_cont: ContainerData) -> void:
 	emit_signal("changed")
 
 func delete_container(cont: ContainerData) -> void:
-	if Utils.directory_remove_recursive("%s/%s" % [_folder, cont.id]):
+	if Utils.directory_remove_recursive(FMT_PRIVATE_FOLDER % [_folder, cont.id]):
 		_containers.erase(cont.id)
 		emit_signal("changed")
 	else:
@@ -80,13 +86,17 @@ func _write_metadata(cont: ContainerData) -> void:
 	var file = ConfigFile.new()
 	file.set_value("meta", "id"  , cont.id  )
 	file.set_value("meta", "name", cont.name)
-	file.save("%s/%s/%s.data" % [_folder, cont.id, cont.id])
+	file.save(FMT_PRIVATE_DATA % [_folder, cont.id, cont.id])
 
 func _write_scene(cont: ContainerData) -> void:
-	var dir = Directory.new()
-	var tpl_path = "%s/container.gd" % _tpl_folder
-	var script_path = "%s/%s/%s.gd" % [_folder, cont.id, cont.id]
-	dir.copy(tpl_path, script_path)
+	var tpl_path = FMT_PRIVATE_TPL % _tpl_folder
+	var script_path = FMT_PRIVATE_SCRIPT % [_folder, cont.id, cont.id]
+	Utils.copy_template(
+		tpl_path, script_path, 
+		{
+			"container_id": cont.id,
+			"container_name": cont.name
+		})
 		
 	var root = AbstractContainer.new()
 	root.name = cont.id
@@ -95,14 +105,14 @@ func _write_scene(cont: ContainerData) -> void:
 	var result = scene.pack(root)
 	if result == OK:
 		result = ResourceSaver.save(
-			"%s/%s/%s.tscn" % [_folder, cont.id, cont.id], scene)
+			FMT_PRIVATE_SCENE % [_folder, cont.id, cont.id], scene)
 		if result != OK:
 			printerr("Cannot save container scene")
 
 func _read_metadata(id: String) -> ContainerData:
 	var file = ConfigFile.new()
 	
-	var err = file.load("%s/%s/%s.data" % [_folder, id, id])
+	var err = file.load(FMT_PRIVATE_DATA % [_folder, id, id])
 	if err != OK:
 		printerr("Error while loading container")
 		return null
