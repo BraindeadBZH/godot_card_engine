@@ -2,5 +2,6 @@ config_version=1
 
 [folders]
 databases="res://_private/databases/"
-containers="res://_private/containers/"
+containers="res://containers/"
+containers_private="res://_private/containers/"
 container_tpl="res://addons/cardengine/container/templates/"

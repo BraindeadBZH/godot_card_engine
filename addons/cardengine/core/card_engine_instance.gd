@@ -15,6 +15,7 @@ func setup():
 	else:
 		_databases.load_databases(_conf.get_value("folders", "databases"))
 		_containers.load_containers(_conf.get_value("folders", "containers"),
+									_conf.get_value("folders", "containers_private"),
 									_conf.get_value("folders", "container_tpl"))
 
 func clean():

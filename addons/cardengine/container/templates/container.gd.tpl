@@ -1,2 +1,3 @@
 # Public class for {container_name}
-extends {container_id}_private
+extends "{private_script}"
+class_name {container_id}
