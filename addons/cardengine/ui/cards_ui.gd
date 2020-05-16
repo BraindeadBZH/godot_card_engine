@@ -22,7 +22,7 @@ var _edited_data: Dictionary = {}
 var _selected_categ: int = -1
 var _selected_val: int = -1
 var _selected_text: int = -1
-var _selected_db = -1
+var _selected_db: String = ""
 
 func _ready():
 	_manager.connect("changed", self, "_on_Databases_changed")
@@ -141,8 +141,8 @@ func _on_Databases_changed():
 		_db_select.add_item("%s: %s" % [db.id, db.name])
 		_db_select.set_item_metadata(_db_select.get_item_count()-1, db.id)
 	
-	if _selected_db != -1:
-		_db_select.select(_selected_db)
+	if _selected_db != "":
+		select_database(_selected_db)
 
 func _on_CardId_text_changed(new_text):
 	_success_lbl.text = ""
@@ -244,5 +244,5 @@ func _on_EditDatabaseDialog_edit_card(card, db):
 func _on_EditDatabaseDialog_delete_card(card, db):
 	_main_ui.show_confirmation_dialog("Delete Card", funcref(self, "delete_card"), [card, db])
 
-func _on_DatabaseSelect_item_selected(id):
-	_selected_db = id
+func _on_DatabaseSelect_item_selected(index):
+	_selected_db = _db_select.get_item_metadata(index)
