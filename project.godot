@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/rng/pseudo_rng.gd"
 }, {
+"base": "Resource",
+"class": "Query",
+"language": "GDScript",
+"path": "res://addons/cardengine/database/query.gd"
+}, {
 "base": "Node",
 "class": "UtilsInstance",
 "language": "GDScript",
@@ -140,6 +145,7 @@ _global_script_class_icons={
 "DatabasesUi": "",
 "GeneralManager": "",
 "PseudoRng": "",
+"Query": "",
 "UtilsInstance": "",
 "test": ""
 }
