@@ -56,7 +56,7 @@ func move_card(index: int, to: AbstractStore = null) -> CardData:
 	if index < 0 || index >= count(): return null
 	if to == null: return null
 	
-	var card = get_card(index).duplicate()
+	var card = get_card(index)
 	if to != null: to.add_card(card)
 	_cards.remove(index)
 	emit_signal("card_removed", index)
@@ -69,7 +69,7 @@ func copy_card(index: int, to: AbstractStore = null) -> CardData:
 	if index < 0 || index >= _cards.size(): return null
 	if to == null: return null
 	
-	var card = get_card(index)
+	var card = get_card(index).duplicate()
 	if to != null: to.add_card(card)
 	return card
 
