@@ -37,12 +37,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "CardData",
 "language": "GDScript",
-"path": "res://addons/cardengine/core/card.gd"
+"path": "res://addons/cardengine/card/card.gd"
 }, {
 "base": "Reference",
 "class": "CardDatabase",
 "language": "GDScript",
-"path": "res://addons/cardengine/core/database.gd"
+"path": "res://addons/cardengine/database/database.gd"
 }, {
 "base": "AbstractStore",
 "class": "CardDeck",
@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "AbstractManager",
 "class": "DatabaseManager",
 "language": "GDScript",
-"path": "res://addons/cardengine/core/database_manager.gd"
+"path": "res://addons/cardengine/database/database_manager.gd"
 }, {
 "base": "Control",
 "class": "DatabasesUi",
