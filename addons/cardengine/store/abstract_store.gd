@@ -6,12 +6,17 @@ class_name AbstractStore
 signal card_added()
 signal card_removed(index)
 signal card_replaced()
+signal cleared()
 
 var _cards: Array = []
 var _rng: PseudoRng = PseudoRng.new()
 
 func cards() -> Array:
 	return _cards
+
+func clear() -> void:
+	_cards.clear()
+	emit_signal("cleared")
 
 func replace_cards(new_cards: Array) -> void:
 	_cards = new_cards
