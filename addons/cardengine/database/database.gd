@@ -29,8 +29,8 @@ func get_card(id: String) -> CardData:
 func remove_card(id: String) -> void:
 	_cards.erase(id)
 
-func exec_query(store: AbstractStore, query: Query) -> void:
+func exec_query(query: Query, result: AbstractStore) -> void:
 	for id in _cards:
 		var card = _cards[id]
 		if query._match(card):
-			store.add_card(card)
+			result.add_card(card)

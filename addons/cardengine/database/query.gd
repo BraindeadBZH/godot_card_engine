@@ -1,31 +1,164 @@
 tool
-extends Resource
+extends Reference
 class_name Query
+
+var _from_stmt    : Array = []
+var _where_stmt   : Array = []
+var _contains_stmt: Array = []
 
 # Statements works this way:
 #   - Each items of the Array is interpreted as a OR
 #   - Within each item comma separated values are interpreted as AND
+
+func clear() -> Query:
+	_from_stmt.clear()
+	_where_stmt.clear()
+	_contains_stmt.clear()
+	return self
 
 # Restriction on categories
 # Accepts wildcards * for string and ? for single char
 # Example: ["knight,armor_*", "soldier,shield_*"]
 #          Cards have to have categories 'knight' and starting with 'armor_' or
 #          'soldier' and starting with 'shield'
-func from(statement: Array) -> Query:
+func from(statements: Array) -> Query:
+	for statement in statements:
+		var compiled = []
+		var expressions = statement.split(",", false)
+		for expression in expressions:
+			compiled.append(expression.strip_edges())
+		
+		_from_stmt.append(compiled)
 	return self
 
 # Restriction on values
 # Example: ["damage > 10,damage <= 20", "shield < 5"]
 #          Cards have to have damage value strictly superior to 11 and 
 #          inferior or equal to 20, or shield value strictly inferior to 5 
-func where(statement: Array) -> Query:
+func where(statements: Array) -> Query:
+	for statement in statements:
+		var compiled = []
+		var expressions = statement.split(",", false)
+		for expression in expressions:
+			var comparison = _expr_to_comp(expression)
+			if comparison.empty(): continue
+			compiled.append(comparison)
+		
+		_where_stmt.append(compiled)
 	return self
 
 # Restriction on texts (case insensitive)
 # Example: ["title:sword", "body:draw"]
 #          Cards have to have sword in the title or draw in the body
-func contains(statement: Array) -> Query:
+func contains(statements: Array) -> Query:
+	for statement in statements:
+		var compiled = []
+		var expressions = statement.split(",", false)
+		for expression in expressions:
+			compiled.append(_expr_to_contains(expression))
+		
+		_contains_stmt.append(compiled)
 	return self
 
 func _match(card: CardData) -> bool:
-	return false
+	var from_result = true
+	var where_result = true
+	var contains_result = true
+	
+	if !_from_stmt.empty():
+		from_result = _match_categs(card)
+		
+	if !_where_stmt.empty():
+		where_result = _match_values(card)
+		
+	if !_contains_stmt.empty():
+		contains_result = _match_texts(card)
+	
+	return from_result && where_result && contains_result
+
+func _match_categs(card: CardData) -> bool:
+	var or_result = false
+	
+	for or_stmt in _from_stmt:
+		var and_result = true
+		for and_stmt in or_stmt:
+				and_result &= card.match_category(and_stmt)
+		
+		or_stmt |= and_result
+	
+	return or_result
+
+func _match_values(card: CardData) -> bool:
+	var or_result = false
+	
+	for or_stmt in _where_stmt:
+		var and_result = true
+		for and_stmt in or_stmt:
+			if !card.has_value(and_stmt[0]): continue
+			var card_val = card.get_value(and_stmt[0])
+			match and_stmt[1]:
+				OP_EQUAL:
+					and_result &= card_val == and_stmt[2]
+				OP_LESS_EQUAL:
+					and_result &= card_val <= and_stmt[2]
+				OP_LESS:
+					and_result &= card_val  < and_stmt[2]
+				OP_GREATER_EQUAL:
+					and_result &= card_val >= and_stmt[2]
+				OP_GREATER:
+					and_result &= card_val  > and_stmt[2]
+		or_stmt |= and_result
+	
+	return or_result
+
+func _match_texts(card: CardData) -> bool:
+	var or_result = false
+	
+	for or_stmt in _contains_stmt:
+		var and_result = true
+		for and_stmt in or_stmt:
+			if !card.has_text(and_stmt[0]): continue
+			and_result &= card.get_text(and_stmt[0]).to_lower().find(and_stmt[1]) != -1
+		
+		or_stmt |= and_result
+	
+	return or_result
+
+func _expr_to_comp(input: String) -> Array:
+	var result: Array = []
+	
+	var operands = input.split(" ", false)
+	if operands.size() != 3:
+		printerr("'%s' is not a valid comparison expression" % input)
+		return []
+	
+	result.append(operands[0].strip_edges())
+	
+	match operands[1].strip_edges():
+		"=":
+			result.append(OP_EQUAL)
+		"<=":
+			result.append(OP_LESS_EQUAL)
+		"<":
+			result.append(OP_LESS)
+		">=":
+			result.append(OP_GREATER_EQUAL)
+		">":
+			result.append(OP_GREATER)
+	
+	result.append(int(operands[2].strip_edges()))
+	
+	return result
+
+func _expr_to_contains(input: String) -> Array:
+	var result: Array = []
+	
+	var operands = input.split(":", false)
+	if operands.size() != 2:
+		printerr("'%s' is not a valid contains expression" % input)
+		return []
+	
+	result.append(operands[0].strip_edges())
+	result.append(operands[1].strip_edges().to_lower())
+	
+	return result

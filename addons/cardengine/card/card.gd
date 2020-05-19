@@ -6,7 +6,7 @@ signal changed()
 
 var id: String = ""
 
-var _categ : Dictionary = {}
+var _categs : Dictionary = {}
 var _values: Dictionary = {}
 var _texts : Dictionary = {}
 
@@ -15,27 +15,35 @@ func _init(id: String):
 
 func duplicate() -> CardData:
 	var copy = get_script().new(id)
-	copy._categ  = _categ.duplicate()
+	copy._categs  = _categs.duplicate()
 	copy._values = _values.duplicate()
 	copy._texts  = _texts.duplicate()
 	return copy
 
 func categories() -> Dictionary:
-	return _categ
+	return _categs
 
 func set_categories(categories: Dictionary) -> void:
-	_categ = categories
+	_categs = categories
 	mark_changed()
 
 func add_category(id: String, name: String) -> void:
-	_categ[id] = name
+	_categs[id] = name
 	mark_changed()
 
+func has_category(id: String) -> bool:
+	return _categs.has(id)
+
+func match_category(id: String) -> bool:
+	for categ in _categs:
+		if categ.match(id): return true
+	return false
+
 func get_category(id: String) -> String:
-	return _categ[id]
+	return _categs[id]
 
 func remove_category(id: String) -> void:
-	_categ.erase(id)
+	_categs.erase(id)
 	mark_changed()
 
 func values() -> Dictionary:
@@ -48,6 +56,9 @@ func set_values(values: Dictionary) -> void:
 func add_value(id: String, value: int) -> void:
 	_values[id] = value
 	mark_changed()
+
+func has_value(id: String) -> bool:
+	return _values.has(id)
 
 func get_value(id: String) -> int:
 	return _values[id]
@@ -66,6 +77,9 @@ func set_texts(texts: Dictionary) -> void:
 func add_text(id: String, text: String) -> void:
 	_texts[id] = text
 	mark_changed()
+
+func has_text(id: String) -> bool:
+	return _texts.has(id)
 
 func get_text(id: String) -> String:
 	return _texts[id]
