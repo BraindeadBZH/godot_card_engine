@@ -7,7 +7,7 @@
 [ext_resource path="res://widgets/menu_button/button-focused.png" type="Texture" id=5]
 [ext_resource path="res://widgets/menu_button/button-mask.png" type="BitMap" id=6]
 [ext_resource path="res://widgets/menu_button/menu_button.gd" type="Script" id=7]
-[ext_resource path="res://widgets/menu_button/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -24,6 +24,9 @@ texture_focused = ExtResource( 5 )
 texture_click_mask = ExtResource( 6 )
 expand = true
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="lbl_text" type="Label" parent="."]
 anchor_left = 0.5

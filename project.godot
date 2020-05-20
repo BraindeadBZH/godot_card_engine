@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/core/abstract_manager.gd"
 }, {
+"base": "Node",
+"class": "AbstractScreen",
+"language": "GDScript",
+"path": "res://screens/abstract_screen.gd"
+}, {
 "base": "Reference",
 "class": "AbstractStore",
 "language": "GDScript",
@@ -129,6 +134,7 @@ _global_script_class_icons={
 "AbstractContainer": "",
 "AbstractFormDialog": "",
 "AbstractManager": "",
+"AbstractScreen": "",
 "AbstractStore": "",
 "CardData": "",
 "CardDatabase": "",

@@ -1,4 +1,4 @@
-extends "../abstract_screen.gd"
+extends AbstractScreen
 
 func _on_btn_new_game_pressed():
 	emit_signal("next_screen", "new_game")
