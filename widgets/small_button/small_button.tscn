@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://widgets/menu_button/menu_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 2 )
+
+[node name="SmallButton" instance=ExtResource( 1 )]
+margin_right = 175.0
+margin_bottom = 55.0
+
+[node name="Text" parent="." index="0"]
+custom_fonts/font = SubResource( 1 )

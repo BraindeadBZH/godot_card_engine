@@ -3,7 +3,8 @@ extends Node
 onready var _screen_layer = $ScreenLayer
 
 var _screens = {
-	"menu": preload("res://screens/menu/menu_screen.tscn")
+	"menu": preload("res://screens/menu/menu_screen.tscn"),
+	"library": preload("res://screens/library/library_screen.tscn")
 }
 
 func _ready():
