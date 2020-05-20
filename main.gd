@@ -8,6 +8,8 @@ var _screens = {
 }
 
 func _ready():
+	CardEngine.clean()
+	CardEngine.setup()
 	change_screen("menu")
 
 func change_screen(screen_name: String) -> void:
