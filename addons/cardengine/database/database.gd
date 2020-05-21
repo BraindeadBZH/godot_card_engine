@@ -1,24 +1,29 @@
 tool
-extends Reference
 class_name CardDatabase
+extends Reference
 
-var id    : String = ""
-var name  : String = ""
+var id: String = ""
+var name: String = ""
 
 var _cards: Dictionary = {}
 
-func _init(id: String, name: String):
-	self.id     = id
-	self.name   = name
+
+func _init(id: String, name: String) -> void:
+	self.id = id
+	self.name = name
+
 
 func cards() -> Dictionary:
 	return _cards
 
+
 func add_card(card: CardData) -> void:
 	_cards[card.id] = card
 
+
 func card_exists(id: String) -> bool:
 	return _cards.has(id)
+
 
 func get_card(id: String) -> CardData:
 	if _cards.has(id):
@@ -26,8 +31,10 @@ func get_card(id: String) -> CardData:
 	else:
 		return null
 
+
 func remove_card(id: String) -> void:
 	_cards.erase(id)
+
 
 func exec_query(query: Query, result: AbstractStore) -> void:
 	for id in _cards:

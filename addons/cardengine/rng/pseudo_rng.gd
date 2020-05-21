@@ -1,6 +1,5 @@
-extends Reference
 class_name PseudoRng
-
+extends Reference
 # Implements the Mersenne Twister algorithm (adapted from Python)
 # It allows to have multiple self-contained pseudo-random generator
 # running at the same time independently
@@ -8,19 +7,23 @@ class_name PseudoRng
 var index = 624
 var mt = []
 
+
 func _init():
 	mt.resize(624)
 	randomize()
 	set_seed(randi())
 
+
 func set_string_seed(str_seed: String) -> void:
 	set_seed(hash(str_seed))
+
 
 func set_seed(random_seed: int) -> void:
 	mt[0] = random_seed
 	
 	for i in range(1, 624):
 		mt[i] = _int32(1812433253 * (mt[i - 1] ^ mt[i - 1] >> 30) + i)
+
 
 func generate() -> int:
 	if index >= 624:
@@ -41,14 +44,18 @@ func generate() -> int:
 	
 	return _int32(y)
 
+
 func randomi() -> int:
 	return generate()
+
 
 func randomf() -> float:
 	return float(generate())/float(0xffffffff)
 
+
 func random_range(from: int, to: int) -> int:
-	return int(round(randomf()*(to-from)+from))
+	return int(round(randomf() * (to-from)+from))
+
 
 func _twist() -> void:
 	for i in range(624):
@@ -60,6 +67,7 @@ func _twist() -> void:
 		if y % 2 != 0:
 			mt[i] = mt[i] ^ 0x9908b0df
 	index = 0
+
 
 func _int32(x) -> int:
 	# Get the 32 least significant bits.

@@ -1,6 +1,7 @@
 tool
-extends AbstractManager
 class_name GeneralManager
+extends AbstractManager
+
 
 func validate_form(form_name: String, form: Dictionary) -> Array:
 	var errors = []

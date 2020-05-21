@@ -1,6 +1,6 @@
 tool
-extends AbstractManager
 class_name DatabaseManager
+extends AbstractManager
 
 signal changed()
 
@@ -9,8 +9,9 @@ const FORMAT_DB_PATH = "%s/%s.data"
 var _folder: String = ""
 var _databases: Dictionary = {}
 
-func clean():
+func clean() -> void:
 	_databases = {}
+
 
 func validate_form(form_name: String, form: Dictionary) -> Array:
 	var errors = []
@@ -42,7 +43,8 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 	
 	return errors
 
-func load_databases(folder: String):
+
+func load_databases(folder: String) -> void:
 	_folder = folder
 	var dir = Directory.new()
 	if dir.open(_folder) == OK:
@@ -58,13 +60,16 @@ func load_databases(folder: String):
 	else:
 		printerr("Could not read CardEngine database folder")
 
+
 func databases() -> Dictionary:
 	return _databases;
+
 
 func create_database(db: CardDatabase) -> void:
 	_databases[db.id] = db
 	_write_database(db)
 	emit_signal("changed")
+
 
 func get_database(id: String) -> CardDatabase:
 	if _databases.has(id):
@@ -72,10 +77,12 @@ func get_database(id: String) -> CardDatabase:
 	else:
 		return null
 
-func update_database(modified_db: CardDatabase):
+
+func update_database(modified_db: CardDatabase) -> void:
 	_databases[modified_db.id] = modified_db
 	_write_database(modified_db)
 	emit_signal("changed")
+
 
 func delete_database(id: String):
 	if !_databases.has(id): return
@@ -88,10 +95,11 @@ func delete_database(id: String):
 	
 	emit_signal("changed")
 
+
 func _write_database(db: CardDatabase):
 	var file = ConfigFile.new()
 	
-	file.set_value("meta", "id"  , db.id  )
+	file.set_value("meta", "id", db.id)
 	file.set_value("meta", "name", db.name)
 	
 	for id in db.cards():
@@ -107,6 +115,7 @@ func _write_database(db: CardDatabase):
 		printerr("Error while writing database")
 		return
 
+
 func _read_database(filename: String) -> CardDatabase:
 	var path = _folder + filename
 	var file = ConfigFile.new()
@@ -116,16 +125,16 @@ func _read_database(filename: String) -> CardDatabase:
 		printerr("Error while loading database")
 		return null
 	
-	var db = CardDatabase.new(file.get_value("meta", "id"  , ""),
-							  file.get_value("meta", "name", ""))
+	var db = CardDatabase.new(file.get_value("meta", "id", ""),
+			file.get_value("meta", "name", ""))
 
 	if file.has_section("cards"):
 		for entry in file.get_section_keys("cards"):
 			var card = CardData.new(entry)
 			var data = file.get_value("cards", entry)
 			card.set_categories(data["categories"])
-			card.set_values    (data["values"    ])
-			card.set_texts     (data["texts"     ])
+			card.set_values(data["values"])
+			card.set_texts(data["texts"])
 			db.add_card(card)
 	
 	return db

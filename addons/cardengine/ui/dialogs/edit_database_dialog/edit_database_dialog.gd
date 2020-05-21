@@ -4,18 +4,20 @@ extends WindowDialog
 signal edit_card(card, db)
 signal delete_card(card, db)
 
+var _db: CardDatabase = null
+var _selected_card_idx: int = -1
+var _selected_card: String = ""
+
 onready var _manager = CardEngine.db()
 onready var _card_list = $MainLayout/CardsLayout/CardList
 onready var _detail_list = $MainLayout/CardsLayout/DetailsLayout/DetailsList
 onready var _delete_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn
 onready var _edit_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn
 
-var _db: CardDatabase = null
-var _selected_card_idx: int = -1
-var _selected_card: String = ""
 
 func _ready():
 	_manager.connect("changed", self, "_on_db_changed")
+
 
 func set_database(id: String):
 	_db = _manager.get_database(id)
@@ -23,31 +25,38 @@ func set_database(id: String):
 	_clear_lists()
 	_fill_card_list()
 
+
 func remove_selected_card():
 	_card_list.remove_item(_selected_card_idx)
 	_detail_list.clear()
 	_delete_btn.disabled = true
 	_edit_btn.disabled = true
 
+
 func _clear_lists():
 	_card_list.clear()
 	_detail_list.clear()
 
+
 func _fill_card_list():
-	if _db == null: return
+	if _db == null:
+		return
 	
 	var cards = _db.cards()
 	for card_id in cards:
 		var card = cards[card_id]
 		_card_list.add_item(card.id)
 
+
 func _on_DoneBtn_pressed():
 	hide()
+
 
 func _on_EditDatabaseDialog_about_to_show():
 	_delete_btn.disabled = true
 	_edit_btn.disabled = true
 	_clear_lists()
+
 
 func _on_CardList_item_selected(index):
 	_detail_list.clear()
@@ -74,12 +83,15 @@ func _on_CardList_item_selected(index):
 	_delete_btn.disabled = false
 	_edit_btn.disabled = false
 
+
 func _on_EditBtn_pressed():
 	emit_signal("edit_card", _selected_card, _db.id)
 	hide()
 
+
 func _on_DeleteBtn_pressed():
 	emit_signal("delete_card", _selected_card, _db.id)
+
 
 func _on_db_changed():
 	_clear_lists()

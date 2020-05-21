@@ -1,14 +1,13 @@
 tool
-extends Reference
 class_name Query
-
-var _from_stmt    : Array = []
-var _where_stmt   : Array = []
-var _contains_stmt: Array = []
-
+extends Reference
 # Statements works this way:
 #   - Each items of the Array is interpreted as a OR
 #   - Within each item comma separated values are interpreted as AND
+
+var _from_stmt: Array = []
+var _where_stmt: Array = []
+var _contains_stmt: Array = []
 
 func clear() -> Query:
 	_from_stmt.clear()
@@ -74,7 +73,7 @@ func _match(card: CardData) -> bool:
 	if !_contains_stmt.empty():
 		contains_result = _match_texts(card)
 	
-	return from_result && where_result && contains_result
+	return from_result and where_result and contains_result
 
 func _match_categs(card: CardData) -> bool:
 	var or_result = false
@@ -82,9 +81,9 @@ func _match_categs(card: CardData) -> bool:
 	for or_stmt in _from_stmt:
 		var and_result = true
 		for and_stmt in or_stmt:
-			and_result = and_result && card.match_category(and_stmt)
+			and_result = and_result and card.match_category(and_stmt)
 		
-		or_result = or_result || and_result
+		or_result = or_result or and_result
 	
 	return or_result
 
@@ -94,21 +93,24 @@ func _match_values(card: CardData) -> bool:
 	for or_stmt in _where_stmt:
 		var and_result = true
 		for and_stmt in or_stmt:
-			if !card.has_value(and_stmt[0]): return false
+			if !card.has_value(and_stmt[0]):
+				return false
+			
 			var card_val = card.get_value(and_stmt[0])
+			
 			match and_stmt[1]:
 				OP_EQUAL:
-					and_result = and_result && card_val == and_stmt[2]
+					and_result = and_result and card_val == and_stmt[2]
 				OP_LESS_EQUAL:
-					and_result = and_result && card_val <= and_stmt[2]
+					and_result = and_result and card_val <= and_stmt[2]
 				OP_LESS:
-					and_result = and_result && card_val  < and_stmt[2]
+					and_result = and_result and card_val  < and_stmt[2]
 				OP_GREATER_EQUAL:
-					and_result = and_result && card_val >= and_stmt[2]
+					and_result = and_result and card_val >= and_stmt[2]
 				OP_GREATER:
-					and_result = and_result && card_val  > and_stmt[2]
+					and_result = and_result and card_val  > and_stmt[2]
 		
-		or_result = or_result || and_result
+		or_result = or_result or and_result
 	
 	return or_result
 
@@ -118,10 +120,12 @@ func _match_texts(card: CardData) -> bool:
 	for or_stmt in _contains_stmt:
 		var and_result = true
 		for and_stmt in or_stmt:
-			if !card.has_text(and_stmt[0]): return false
-			and_result = and_result && card.get_text(and_stmt[0]).to_lower().find(and_stmt[1]) != -1
+			if !card.has_text(and_stmt[0]):
+				return false
+			
+			and_result = and_result and card.get_text(and_stmt[0]).to_lower().find(and_stmt[1]) != -1
 		
-		or_result = or_result || and_result
+		or_result = or_result or and_result
 	
 	return or_result
 

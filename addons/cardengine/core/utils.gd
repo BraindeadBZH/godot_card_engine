@@ -1,12 +1,15 @@
 tool
-extends Node
 class_name UtilsInstance
+extends Node
+
 
 func is_id_valid(id: String) -> bool:
 	return is_valid_for_regex(id, "^[a-zA-Z]+([a-zA-Z0-9]|_)*$")
 
+
 func is_db_file(filename: String) -> bool:
 	return is_valid_for_regex(filename, "^[a-zA-Z]+([a-zA-Z0-9]|_)*\\.data$")
+
 
 func is_valid_for_regex(value: String, regex: String) -> bool:
 	var validation = RegEx.new()
@@ -15,6 +18,7 @@ func is_valid_for_regex(value: String, regex: String) -> bool:
 		return true
 	else:
 		return false
+
 
 func directory_remove_recursive(path: String) -> bool:
 	var dir = Directory.new()
@@ -32,6 +36,7 @@ func directory_remove_recursive(path: String) -> bool:
 		return true
 	else:
 		return false
+
 
 func copy_template(src_path: String, dst_path: String, params: Dictionary) -> bool:
 	var src_file = File.new()
