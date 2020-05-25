@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/cardengine/card/abstract_card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://cards/normal/normal_card.gd" type="Script" id=2]
 [ext_resource path="res://cards/normal/card_back_background.png" type="Texture" id=3]
 [ext_resource path="res://cards/normal/card_front_background.png" type="Texture" id=4]
+[ext_resource path="res://cards/normal/card_name_background.png" type="Texture" id=5]
+[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
 
 [node name="NormalCard" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -11,8 +19,26 @@ script = ExtResource( 2 )
 [node name="Background" type="Sprite" parent="Front" index="0"]
 texture = ExtResource( 4 )
 
-[node name="Back" parent="." index="1"]
-visible = false
+[node name="NameBackground" type="Sprite" parent="Front" index="1"]
+texture = ExtResource( 5 )
+
+[node name="Name" type="Label" parent="Front/NameBackground" index="0"]
+margin_left = -140.0
+margin_top = -20.0
+margin_right = 140.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 1
+text = "Card Name"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="Sprite" parent="Back" index="0"]
 texture = ExtResource( 3 )
+[connection signal="data_changed" from="." to="." method="_on_NormalCard_data_changed"]

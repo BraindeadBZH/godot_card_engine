@@ -1,13 +1,14 @@
 class_name AbstractContainer
 extends Control
 
-export(PackedScene) var card_visual
-export(String) var database
-export(Dictionary) var query = {"from": [], "where": [], "contains": []}
+export(PackedScene) var card_visual: PackedScene = null
+export(String) var database: String = ""
+export(Dictionary) var query: Dictionary = {"from": [], "where": [], "contains": []}
 
 var _store: AbstractStore = null
 
 onready var _manager = CardEngine.db()
+onready var _cards = $Cards
 
 
 func set_store(store: AbstractStore) -> void:
@@ -31,6 +32,25 @@ func _update_store() -> void:
 
 
 func _update_container() -> void:
-	# TODO
+	if card_visual == null:
+		return
+		
+	_clear()
+	
 	for card in _store.cards():
-		print("Card: %s" % card.id)
+		var instance := card_visual.instance()
+		if not instance is AbstractCard:
+			printerr("Container visual instance must inherit AbstractCard")
+			continue
+		
+		instance.name = card.id
+		instance.owner = self
+		instance.set_data(card)
+		_cards.add_child(instance)
+
+func _clear() -> void:
+	if _cards == null:
+		return
+	
+	for child in _cards.get_children():
+		_cards.remove_child(child)

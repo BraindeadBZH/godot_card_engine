@@ -3,6 +3,7 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.gd" type="Script" id=1]
 
 [node name="EditContainerDialog" type="WindowDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -750.0
@@ -10,3 +11,76 @@ margin_bottom = -380.0
 window_title = "Edit Container"
 resizable = true
 script = ExtResource( 1 )
+
+[node name="MainTabs" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layout" type="Control" parent="MainTabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -486.0
+margin_bottom = -268.0
+
+[node name="LayoutLayout" type="VBoxContainer" parent="MainTabs/Layout"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AlignmentTitle" type="Label" parent="MainTabs/Layout/LayoutLayout"]
+margin_right = 190.0
+margin_bottom = 14.0
+text = "Alignement"
+
+[node name="AlignmentSeparator" type="HSeparator" parent="MainTabs/Layout/LayoutLayout"]
+margin_top = 18.0
+margin_right = 190.0
+margin_bottom = 22.0
+
+[node name="AlignmentLayout" type="HBoxContainer" parent="MainTabs/Layout/LayoutLayout"]
+margin_top = 26.0
+margin_right = 190.0
+margin_bottom = 50.0
+
+[node name="LeftAlign" type="CheckBox" parent="MainTabs/Layout/LayoutLayout/AlignmentLayout"]
+margin_right = 52.0
+margin_bottom = 24.0
+text = "Left"
+
+[node name="CenterAlign" type="CheckBox" parent="MainTabs/Layout/LayoutLayout/AlignmentLayout"]
+margin_left = 56.0
+margin_right = 126.0
+margin_bottom = 24.0
+text = "Center"
+
+[node name="RightAlign" type="CheckBox" parent="MainTabs/Layout/LayoutLayout/AlignmentLayout"]
+margin_left = 130.0
+margin_right = 190.0
+margin_bottom = 24.0
+text = "Right"
+
+[node name="Events" type="Control" parent="MainTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Animations" type="Control" parent="MainTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
