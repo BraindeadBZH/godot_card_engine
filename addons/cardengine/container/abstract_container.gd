@@ -44,9 +44,8 @@ func _update_container() -> void:
 			continue
 		
 		instance.name = card.id
-		instance.owner = self
-		instance.set_data(card)
 		_cards.add_child(instance)
+		instance.set_data(card)
 
 func _clear() -> void:
 	if _cards == null:

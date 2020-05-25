@@ -7,6 +7,10 @@ func is_id_valid(id: String) -> bool:
 	return is_valid_for_regex(id, "^[a-zA-Z]+([a-zA-Z0-9]|_)*$")
 
 
+func is_class_name_valid(name: String) -> bool:
+	return is_valid_for_regex(name, "^[a-zA-Z]*$")
+
+
 func is_db_file(filename: String) -> bool:
 	return is_valid_for_regex(filename, "^[a-zA-Z]+([a-zA-Z0-9]|_)*\\.data$")
 
