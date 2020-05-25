@@ -127,7 +127,7 @@ _global_script_classes=[ {
 "base": "AbstractContainer",
 "class": "TestContainerPrivate",
 "language": "GDScript",
-"path": "res://_private/containers/test_container/test_container.gd"
+"path": "res://_private/containers/test_container/test_container_private.gd"
 }, {
 "base": "Node",
 "class": "UtilsInstance",

@@ -8,8 +8,8 @@ const FMT_SCENE_TPL = "%s/container.tscn.tpl"
 
 const FMT_PRIVATE_FOLDER = "%s/%s"
 const FMT_PRIVATE_DATA = "%s/%s/%s.data"
-const FMT_PRIVATE_SCENE = "%s/%s/%s.tscn"
-const FMT_PRIVATE_SCRIPT = "%s/%s/%s.gd"
+const FMT_PRIVATE_SCENE = "%s/%s/%s_private.tscn"
+const FMT_PRIVATE_SCRIPT = "%s/%s/%s_private.gd"
 const FMT_PRIVATE_TPL = "%s/container_private.gd.tpl"
 
 const FMT_IMPL_FOLDER = "%s/%s"
