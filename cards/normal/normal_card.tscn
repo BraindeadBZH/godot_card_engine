@@ -15,6 +15,7 @@ font_data = ExtResource( 6 )
 
 [node name="NormalCard" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+size = Vector2( 420, 600 )
 
 [node name="Background" type="Sprite" parent="Front" index="0"]
 texture = ExtResource( 4 )
