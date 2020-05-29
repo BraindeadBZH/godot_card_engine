@@ -8,6 +8,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CardPath" type="Path2D" parent="."]
+curve = null
+
 [node name="Cards" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
