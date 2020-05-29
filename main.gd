@@ -9,6 +9,7 @@ onready var _screen_layer = $ScreenLayer
 
 
 func _ready():
+	randomize()
 	CardEngine.clean()
 	CardEngine.setup()
 	change_screen("menu")

@@ -2,6 +2,8 @@ class_name AbstractContainer
 extends Control
 
 enum LayoutMode {GRID, PATH}
+enum FineTuningMode {LINEAR, SYMMETRIC, RANDOM}
+enum ScaleMode {KEEP_RATIO, IGNORE_RATIO}
 
 export(PackedScene) var card_visual: PackedScene = null
 export(String) var database: String = ""
@@ -9,20 +11,39 @@ export(Dictionary) var query: Dictionary = {"from": [], "where": [], "contains":
 
 var _store: AbstractStore = null
 
-var _layout_mode = LayoutMode.PATH
+var _layout_mode = LayoutMode.GRID
 
 # Grid parameters
 var _grid_card_width: float = 200
 var _grid_fixed_width: bool = true
-var _grid_card_spacing: Vector2 = Vector2(1.2, 1.2)
+var _grid_card_spacing: Vector2 = Vector2(0.75, 1.2)
 var _grid_halign: int = HALIGN_CENTER
 var _grid_valign: int = VALIGN_CENTER
-var _grid_columns: int = 3
+var _grid_columns: int = -1
 var _grid_fluid: bool = true
 
 # Path parameters
 var _path_card_width: float = 200
 var _path_spacing: float = 0.5
+
+# Position fine tuning
+var _fine_pos: bool = true
+var _fine_pos_mode = FineTuningMode.SYMMETRIC
+var _fine_pos_min: Vector2 = Vector2(0.0, 0.0)
+var _fine_pos_max: Vector2 = Vector2(0.0, 60.0)
+
+# Angle fine tuning
+var _fine_angle: bool = true
+var _fine_angle_mode = FineTuningMode.RANDOM
+var _fine_angle_min: float = deg2rad(-10.0)
+var _fine_angle_max: float = deg2rad(10.0)
+
+# Scale fine tuning
+var _fine_scale: bool = true
+var _fine_scale_mode = FineTuningMode.RANDOM
+var _fine_scale_ratio = ScaleMode.KEEP_RATIO
+var _fine_scale_min: Vector2 = Vector2(0.85, 0.85)
+var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 
 onready var _manager = CardEngine.db()
 onready var _cards = $Cards
@@ -69,11 +90,19 @@ func _update_container() -> void:
 
 
 func _layout_cards():
+	for child in _cards.get_children():
+		if child is AbstractCard:
+			child.position = Vector2(0.0, 0.0)
+			child.rotation = 0.0
+			child.scale = Vector2(0.0, 0.0)
+			
 	match _layout_mode:
 		LayoutMode.GRID:
 			_grid_layout()
 		LayoutMode.PATH:
 			_path_layout()
+	
+	_fine_tune()
 
 
 func _grid_layout():
@@ -176,6 +205,69 @@ func _path_layout():
 			path_offset += path_offset_delta
 	
 	visual_instance.queue_free()
+
+
+func _fine_tune():
+	var card_index: float = 0.0
+	var card_count: float = _store.count() - 1
+	
+	for child in _cards.get_children():
+		if child is AbstractCard:
+			if _fine_pos:
+				match _fine_pos_mode:
+					FineTuningMode.LINEAR:
+						child.position += lerp(
+							_fine_pos_min,
+							_fine_pos_max,
+							card_index / card_count)
+					FineTuningMode.SYMMETRIC:
+						child.position += lerp(
+							_fine_pos_min,
+							_fine_pos_max,
+							abs(((card_index * 2.0) / card_count) - 1.0))
+					FineTuningMode.RANDOM:
+						child.position += Vector2(
+							_fine_pos_min.x + randf() * (_fine_pos_max.x - _fine_pos_min.x),
+							_fine_pos_min.y + randf() * (_fine_pos_max.y - _fine_pos_min.y))
+			
+			if _fine_angle:
+				match _fine_angle_mode:
+					FineTuningMode.LINEAR:
+						child.rotation += lerp_angle(
+							_fine_angle_min,
+							_fine_angle_max,
+							card_index / card_count)
+					FineTuningMode.SYMMETRIC:
+						child.rotation += lerp_angle(
+							_fine_angle_min,
+							_fine_angle_max,
+							abs(((card_index * 2.0) / card_count) - 1.0))
+					FineTuningMode.RANDOM:
+						child.rotation += _fine_angle_min + randf() * (_fine_angle_max - _fine_angle_min)
+			
+			if _fine_scale:
+				match _fine_scale_mode:
+					FineTuningMode.LINEAR:
+						child.scale *= lerp(
+							_fine_scale_min,
+							_fine_scale_max,
+							card_index / card_count)
+					FineTuningMode.SYMMETRIC:
+						child.scale *= lerp(
+							_fine_scale_min,
+							_fine_scale_max,
+							abs(((card_index * 2.0) / card_count) - 1.0))
+					FineTuningMode.RANDOM:
+						match _fine_scale_ratio:
+							ScaleMode.IGNORE_RATIO:
+								child.scale *= Vector2(
+									_fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x),
+									_fine_scale_min.y + randf() * (_fine_scale_max.y - _fine_scale_min.y))
+							ScaleMode.KEEP_RATIO:
+								var random_scale = _fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x)
+								child.scale *= Vector2(random_scale, random_scale)
+			
+			card_index += 1.0
 
 
 func _clear() -> void:
