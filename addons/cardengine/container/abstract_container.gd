@@ -20,7 +20,7 @@ var _grid_card_spacing: Vector2 = Vector2(0.75, 1.2)
 var _grid_halign: int = HALIGN_CENTER
 var _grid_valign: int = VALIGN_CENTER
 var _grid_columns: int = -1
-var _grid_fluid: bool = true
+var _grid_expand: bool = true
 
 # Path parameters
 var _path_card_width: float = 200
@@ -133,7 +133,7 @@ func _grid_layout():
 		row_width = _store.count() * _grid_card_width * _grid_card_spacing.x
 		col_height = height_adjusted * _grid_card_spacing.y
 	
-	if _grid_fluid:
+	if _grid_expand:
 		if row_width > rect_size.x:
 			rect_min_size.x = row_width
 		
