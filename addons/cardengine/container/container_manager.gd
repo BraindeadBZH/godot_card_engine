@@ -111,8 +111,42 @@ func delete_container(cont: ContainerData) -> void:
 
 func _write_metadata(cont: ContainerData) -> void:
 	var file = ConfigFile.new()
-	file.set_value("meta", "id"  , cont.id  )
+	file.set_value("meta", "id", cont.id)
 	file.set_value("meta", "name", cont.name)
+	file.set_value("meta", "mode", cont.mode)
+	
+	# Grid data
+	file.set_value("grid", "card_width", cont.grid_card_width)
+	file.set_value("grid", "fixed_width", cont.grid_fixed_width)
+	file.set_value("grid", "card_spacing", cont.grid_card_spacing)
+	file.set_value("grid", "halign", cont.grid_halign)
+	file.set_value("grid", "valign", cont.grid_valign)
+	file.set_value("grid", "columns", cont.grid_columns)
+	file.set_value("grid", "expand", cont.grid_expand)
+	
+	# Path data
+	file.set_value("path", "card_width", cont.path_card_width)
+	file.set_value("path", "spacing", cont.path_spacing)
+	
+	# Position data
+	file.set_value("position", "enabled", cont.fine_pos)
+	file.set_value("position", "mode", cont.fine_pos_mode)
+	file.set_value("position", "min", cont.fine_pos_min)
+	file.set_value("position", "max", cont.fine_pos_max)
+	
+	# Angle data
+	file.set_value("angle", "enabled", cont.fine_angle)
+	file.set_value("angle", "mode", cont.fine_angle_mode)
+	file.set_value("angle", "min", cont.fine_angle_min)
+	file.set_value("angle", "max", cont.fine_angle_max)
+	
+	# Scale data
+	file.set_value("scale", "enabled", cont.fine_scale)
+	file.set_value("scale", "mode", cont.fine_scale_mode)
+	file.set_value("scale", "ratio", cont.fine_scale_ratio)
+	file.set_value("scale", "min", cont.fine_scale_min)
+	file.set_value("scale", "max", cont.fine_scale_max)
+
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
 
@@ -125,14 +159,27 @@ func _write_private_scene(cont: ContainerData) -> String:
 	var script_path = FMT_PRIVATE_SCRIPT % [_private_folder, cont.id, cont.id]
 	var params = {
 		"container_id": cont.id,
-		"container_name": cont.name}
+		"container_name": cont.name,
+		"mode": _translate_mode(cont.mode),
+		"grid_width": cont.grid_card_width,
+		"grid_fixed": _translate_bool(cont.grid_fixed_width),
+		"grid_spacing_h": cont.grid_card_spacing.x,
+		"grid_spacing_v": cont.grid_card_spacing.y,
+		"grid_align_h": _translate_align(cont.grid_halign),
+		"grid_align_v": _translate_align(cont.grid_valign),
+		"grid_columns": cont.grid_columns,
+		"grid_expand": _translate_bool(cont.grid_expand),
+		"path_width": cont.path_card_width,
+		"path_spacing": cont.path_spacing,
+	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
 	tpl_path = FMT_SCENE_TPL % _tpl_folder
 	var scene_path = FMT_PRIVATE_SCENE % [_private_folder, cont.id, cont.id]
 	params = {
 		"parent_scene": "res://addons/cardengine/container/abstract_container.tscn",
-		"script_path": script_path}
+		"script_path": script_path,
+	}
 	Utils.copy_template(tpl_path, scene_path, params)
 	
 	return scene_path
@@ -167,6 +214,78 @@ func _read_metadata(id: String) -> ContainerData:
 	if err != OK:
 		printerr("Error while loading container")
 		return null
+	
+	var cont = ContainerData.new(
+		file.get_value("meta", "id"  , ""),
+		file.get_value("meta", "name", ""))
+	
+	cont.mode = file.get_value("meta", "mode", "grid")
+	
+	# Grid data
+	cont.grid_card_width = file.get_value("grid", "card_width", 200)
+	cont.grid_fixed_width = file.get_value("grid", "fixed_width", true)
+	cont.grid_card_spacing = file.get_value("grid", "card_spacing", Vector2(1.0, 1.0))
+	cont.grid_halign = file.get_value("grid", "halign", "center")
+	cont.grid_valign = file.get_value("grid", "valign", "middle")
+	cont.grid_columns = file.get_value("grid", "columns", 3)
+	cont.grid_expand = file.get_value("grid", "expand", true)
+	
+	# Path data
+	cont.path_card_width = file.get_value("path", "card_width", 200)
+	cont.path_spacing = file.get_value("path", "spacing", 1.0)
+	
+	# Position data
+	cont.fine_pos = file.get_value("position", "enabled", false)
+	cont.fine_pos_mode = file.get_value("position", "mode", "linear")
+	cont.fine_pos_min = file.get_value("position", "min", Vector2(0.0, 0.0))
+	cont.fine_pos_max = file.get_value("position", "max", Vector2(0.0, 0.0))
+	
+	# Angle data
+	cont.fine_angle = file.get_value("angle", "enabled", false)
+	cont.fine_angle_mode = file.get_value("angle", "mode", "linear")
+	cont.fine_angle_min = file.get_value("angle", "min", 0.0)
+	cont.fine_angle_max = file.get_value("angle", "max", 0.0)
+	
+	# Scale data
+	cont.fine_scale = file.get_value("scale", "enabled", false)
+	cont.fine_scale_mode = file.get_value("scale", "mode", "linear")
+	cont.fine_scale_ratio = file.get_value("scale", "ratio", "keep")
+	cont.fine_scale_min = file.get_value("scale", "min", Vector2(0.0, 0.0))
+	cont.fine_scale_max = file.get_value("scale", "max", Vector2(0.0, 0.0))
 		
-	return ContainerData.new(file.get_value("meta", "id"  , ""),
-							 file.get_value("meta", "name", ""))
+	return cont
+
+
+func _translate_mode(mode: String) -> String:
+	match mode:
+		"grid":
+			return "LayoutMode.GRID"
+		"path":
+			return "LayoutMode.PATH"
+		_:
+			return "LayoutMode.GRID"
+
+
+func _translate_bool(val: bool) -> String:
+	if val:
+		return "true"
+	else:
+		return "false"
+
+
+func _translate_align(align: String) -> String:
+	match align:
+		"left":
+			return "HALIGN_LEFT"
+		"center":
+			return "HALIGN_CENTER"
+		"right":
+			return "HALIGN_RIGHT"
+		"top":
+			return "VALIGN_TOP"
+		"middle":
+			return "VALIGN_CENTER"
+		"bottom":
+			return "VALIGN_BOTTOM"
+		_:
+			return "0"

@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.gd" type="Script" id=1]
 
 [node name="EditContainerDialog" type="WindowDialog"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -750.0
@@ -15,15 +14,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainTabs" type="TabContainer" parent="."]
+[node name="MainLayout" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainTabs" type="TabContainer" parent="MainLayout"]
+margin_right = 510.0
+margin_bottom = 286.0
+size_flags_vertical = 3
 tab_align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Layout" type="Control" parent="MainTabs"]
+[node name="Layout" type="Control" parent="MainLayout/MainTabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -31,50 +42,50 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="LayoutLayout" type="VBoxContainer" parent="MainTabs/Layout"]
+[node name="LayoutLayout" type="VBoxContainer" parent="MainLayout/MainTabs/Layout"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ModeSwitchLayout" type="HBoxContainer" parent="MainTabs/Layout/LayoutLayout"]
-margin_right = 522.0
+[node name="ModeSwitchLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
+margin_right = 502.0
 margin_bottom = 40.0
 
-[node name="GridModeLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
+[node name="GridModeLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
 margin_top = 13.0
-margin_right = 219.0
+margin_right = 209.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 text = "Grid mode"
 align = 2
 
-[node name="ModeSwitch" type="CheckButton" parent="MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
-margin_left = 223.0
-margin_right = 299.0
+[node name="ModeSwitch" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
+margin_left = 213.0
+margin_right = 289.0
 margin_bottom = 40.0
 
-[node name="PathModeLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
-margin_left = 303.0
+[node name="PathModeLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
+margin_left = 293.0
 margin_top = 13.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 text = "Path mode"
 
-[node name="ModeLayout" type="HBoxContainer" parent="MainTabs/Layout/LayoutLayout"]
+[node name="ModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
 margin_top = 44.0
-margin_right = 522.0
-margin_bottom = 304.0
+margin_right = 502.0
+margin_bottom = 250.0
 size_flags_vertical = 3
 
-[node name="GridMode" type="Control" parent="MainTabs/Layout/LayoutLayout/ModeLayout"]
-margin_right = 522.0
-margin_bottom = 260.0
+[node name="GridMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
+margin_right = 502.0
+margin_bottom = 206.0
 size_flags_horizontal = 3
 
-[node name="GridModeLayout" type="GridContainer" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode"]
+[node name="GridModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 columns = 2
@@ -82,15 +93,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridCardWidthLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridCardWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_top = 5.0
 margin_right = 136.0
 margin_bottom = 19.0
 text = "Card width"
 
-[node name="GridCardWidth" type="SpinBox" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridCardWidth" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_left = 140.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 24.0
 hint_tooltip = "If fixed width is ON, it defines the width of the cards in pixels."
 size_flags_horizontal = 3
@@ -98,34 +109,34 @@ max_value = 1000.0
 value = 200.0
 allow_greater = true
 
-[node name="FixedWidthLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="FixedWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_top = 41.0
 margin_right = 136.0
 margin_bottom = 55.0
 text = "Fixed width"
 
-[node name="FixedWidth" type="CheckButton" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="FixedWidth" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_left = 140.0
 margin_top = 28.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 68.0
 hint_tooltip = "If OFF the width of the cards will be defined based on the width of the container and the spacing to fill the container."
 pressed = true
 
-[node name="GridCardSpacingLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridCardSpacingLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_top = 77.0
 margin_right = 136.0
 margin_bottom = 91.0
 text = "Spacing"
 
-[node name="GridCardSpacingLayout" type="HBoxContainer" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridCardSpacingLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_left = 140.0
 margin_top = 72.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 96.0
 
-[node name="GridCardSpacingH" type="SpinBox" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout"]
-margin_right = 189.0
+[node name="GridCardSpacingH" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout"]
+margin_right = 179.0
 margin_bottom = 24.0
 hint_tooltip = "Define the horizontal spacing between cards relative to their width. A value of 1 means the spacing is the same as the width."
 size_flags_horizontal = 3
@@ -134,9 +145,9 @@ step = 0.1
 value = 1.0
 allow_greater = true
 
-[node name="GridCardSpacingV" type="SpinBox" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout"]
-margin_left = 193.0
-margin_right = 382.0
+[node name="GridCardSpacingV" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout"]
+margin_left = 183.0
+margin_right = 362.0
 margin_bottom = 24.0
 hint_tooltip = "Define the vertical spacing between cards relative to their height. A value of 1 means the spacing is the same as the height."
 size_flags_horizontal = 3
@@ -145,74 +156,74 @@ step = 0.1
 value = 1.0
 allow_greater = true
 
-[node name="GridAlignHLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridAlignHLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_top = 103.0
 margin_right = 136.0
 margin_bottom = 117.0
 text = "Horizontal Alignment"
 
-[node name="GridAlignH" type="OptionButton" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridAlignH" type="OptionButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_left = 140.0
 margin_top = 100.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 120.0
 hint_tooltip = "In case fixed sized cards does not fill up the container width, it determines the placement of the cards horizontally."
 text = "Left"
 items = [ "Left", null, false, 0, null, "Center", null, false, 1, null, "Right", null, false, 2, null ]
 selected = 0
 
-[node name="GridAlignVLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridAlignVLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_top = 127.0
 margin_right = 136.0
 margin_bottom = 141.0
 text = "Vertical Alignment"
 
-[node name="GridAlignV" type="OptionButton" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridAlignV" type="OptionButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_left = 140.0
 margin_top = 124.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 144.0
 hint_tooltip = "In case fixed sized cards does not fill up the container height, it determines the placement of the cards vertically."
 text = "Top"
 items = [ "Top", null, false, 0, null, "Middle", null, false, 1, null, "Bottom", null, false, 2, null ]
 selected = 0
 
-[node name="GridColumnsLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridColumnsLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_top = 153.0
 margin_right = 136.0
 margin_bottom = 167.0
 text = "Columns"
 
-[node name="GridColumns" type="SpinBox" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridColumns" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_left = 140.0
 margin_top = 148.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 172.0
 hint_tooltip = "If set to a strictly positive number, it limits the number of colums for the grid."
 min_value = -1.0
 value = -1.0
 allow_greater = true
 
-[node name="GridExpandLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridExpandLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_top = 189.0
 margin_right = 136.0
 margin_bottom = 203.0
 text = "Expand container"
 
-[node name="GridExpand" type="CheckButton" parent="MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
+[node name="GridExpand" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
 margin_left = 140.0
 margin_top = 176.0
-margin_right = 522.0
+margin_right = 502.0
 margin_bottom = 216.0
 hint_tooltip = "If ON in case fixed width cards exceed the size of the container, it expands the container minimum size. Particularly useful when placed in a ScrollContainer."
 
-[node name="PathMode" type="Control" parent="MainTabs/Layout/LayoutLayout/ModeLayout"]
+[node name="PathMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
 visible = false
 margin_right = 522.0
 margin_bottom = 260.0
 size_flags_horizontal = 3
 
-[node name="PathModeLayout2" type="GridContainer" parent="MainTabs/Layout/LayoutLayout/ModeLayout/PathMode"]
+[node name="PathModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 columns = 2
@@ -220,13 +231,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PathCardWidthLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout2"]
+[node name="PathCardWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
 margin_top = 5.0
 margin_right = 67.0
 margin_bottom = 19.0
 text = "Card width"
 
-[node name="PathCardWidth" type="SpinBox" parent="MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout2"]
+[node name="PathCardWidth" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
 margin_left = 71.0
 margin_right = 522.0
 margin_bottom = 24.0
@@ -236,13 +247,13 @@ max_value = 1000.0
 value = 200.0
 allow_greater = true
 
-[node name="PathSpacingLbl" type="Label" parent="MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout2"]
+[node name="PathSpacingLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
 margin_top = 33.0
 margin_right = 67.0
 margin_bottom = 47.0
 text = "Spacing"
 
-[node name="PathSpacing" type="SpinBox" parent="MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout2"]
+[node name="PathSpacing" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
 margin_left = 71.0
 margin_top = 28.0
 margin_right = 522.0
@@ -254,7 +265,7 @@ step = 0.1
 value = 1.0
 allow_greater = true
 
-[node name="Events" type="Control" parent="MainTabs"]
+[node name="Events" type="Control" parent="MainLayout/MainTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -263,7 +274,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Animations" type="Control" parent="MainTabs"]
+[node name="Animations" type="Control" parent="MainLayout/MainTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -271,4 +282,26 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
-[connection signal="toggled" from="MainTabs/Layout/LayoutLayout/ModeSwitchLayout/ModeSwitch" to="." method="_on_ModeSwitch_toggled"]
+
+[node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
+margin_top = 290.0
+margin_right = 510.0
+margin_bottom = 320.0
+alignment = 1
+
+[node name="SaveBtn" type="Button" parent="MainLayout/ButtonLayout"]
+margin_left = 153.0
+margin_right = 253.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+text = "Save"
+
+[node name="CancelBtn" type="Button" parent="MainLayout/ButtonLayout"]
+margin_left = 257.0
+margin_right = 357.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+text = "Cancel"
+[connection signal="toggled" from="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout/ModeSwitch" to="." method="_on_ModeSwitch_toggled"]
+[connection signal="pressed" from="MainLayout/ButtonLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]
+[connection signal="pressed" from="MainLayout/ButtonLayout/CancelBtn" to="." method="_on_CancelBtn_pressed"]

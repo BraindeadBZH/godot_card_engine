@@ -3,7 +3,7 @@ extends Control
 
 enum LayoutMode {GRID, PATH}
 enum FineTuningMode {LINEAR, SYMMETRIC, RANDOM}
-enum ScaleMode {KEEP_RATIO, IGNORE_RATIO}
+enum AspectMode {KEEP, IGNORE}
 
 export(PackedScene) var card_visual: PackedScene = null
 export(String) var database: String = ""
@@ -27,21 +27,21 @@ var _path_card_width: float = 200
 var _path_spacing: float = 0.5
 
 # Position fine tuning
-var _fine_pos: bool = true
+var _fine_pos: bool = false
 var _fine_pos_mode = FineTuningMode.SYMMETRIC
 var _fine_pos_min: Vector2 = Vector2(0.0, 0.0)
 var _fine_pos_max: Vector2 = Vector2(0.0, 60.0)
 
 # Angle fine tuning
-var _fine_angle: bool = true
+var _fine_angle: bool = false
 var _fine_angle_mode = FineTuningMode.RANDOM
 var _fine_angle_min: float = deg2rad(-10.0)
 var _fine_angle_max: float = deg2rad(10.0)
 
 # Scale fine tuning
-var _fine_scale: bool = true
+var _fine_scale: bool = false
 var _fine_scale_mode = FineTuningMode.RANDOM
-var _fine_scale_ratio = ScaleMode.KEEP_RATIO
+var _fine_scale_ratio = AspectMode.KEEP
 var _fine_scale_min: Vector2 = Vector2(0.85, 0.85)
 var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 
@@ -259,11 +259,11 @@ func _fine_tune():
 							abs(((card_index * 2.0) / card_count) - 1.0))
 					FineTuningMode.RANDOM:
 						match _fine_scale_ratio:
-							ScaleMode.IGNORE_RATIO:
+							AspectMode.IGNORE:
 								child.scale *= Vector2(
 									_fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x),
 									_fine_scale_min.y + randf() * (_fine_scale_max.y - _fine_scale_min.y))
-							ScaleMode.KEEP_RATIO:
+							AspectMode.KEEP:
 								var random_scale = _fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x)
 								child.scale *= Vector2(random_scale, random_scale)
 			
