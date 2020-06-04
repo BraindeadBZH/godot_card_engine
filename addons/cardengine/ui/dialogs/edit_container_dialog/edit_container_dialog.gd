@@ -16,6 +16,7 @@ onready var _grid_align_v = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/
 onready var _grid_columns = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridColumns
 onready var _grid_expand = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridExpand
 onready var _path_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathCardWidth
+onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathFixedWidth
 onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
 
 
@@ -40,6 +41,7 @@ func _update() -> void:
 	_grid_columns.value = _data.grid_columns
 	_grid_expand.pressed = _data.grid_expand
 	_path_width.value = _data.path_card_width
+	_path_fixed.pressed = _data.path_fixed_width
 	_path_spacing.value = _data.path_spacing
 	
 	match _data.mode:
@@ -76,6 +78,7 @@ func _save() -> void:
 	_data.grid_columns = _grid_columns.value
 	_data.grid_expand = _grid_expand.pressed
 	_data.path_card_width = _path_width.value
+	_data.path_fixed_width = _path_fixed.pressed
 	_data.path_spacing = _path_spacing.value
 	
 	if _mode_switch.pressed:

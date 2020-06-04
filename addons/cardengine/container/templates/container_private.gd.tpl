@@ -17,4 +17,5 @@ func _ready():
 
 	# Path parameters
 	_path_card_width = {path_width}
+	_path_fixed_width = {path_fixed}
 	_path_spacing = {path_spacing}

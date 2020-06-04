@@ -17,6 +17,7 @@ var grid_expand: bool = true
 
 # Path parameters
 var path_card_width: float = 200
+var path_fixed_width: bool = true
 var path_spacing: float = 1.0
 
 # Position fine tuning

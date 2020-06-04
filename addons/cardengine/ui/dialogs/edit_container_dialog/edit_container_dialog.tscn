@@ -219,8 +219,8 @@ hint_tooltip = "If ON in case fixed width cards exceed the size of the container
 
 [node name="PathMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
 visible = false
-margin_right = 522.0
-margin_bottom = 260.0
+margin_right = 502.0
+margin_bottom = 206.0
 size_flags_horizontal = 3
 
 [node name="PathModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode"]
@@ -233,13 +233,13 @@ __meta__ = {
 
 [node name="PathCardWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
 margin_top = 5.0
-margin_right = 67.0
+margin_right = 73.0
 margin_bottom = 19.0
 text = "Card width"
 
 [node name="PathCardWidth" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-margin_left = 71.0
-margin_right = 522.0
+margin_left = 77.0
+margin_right = 502.0
 margin_bottom = 24.0
 hint_tooltip = " It defines the width of the cards in pixels."
 size_flags_horizontal = 3
@@ -247,17 +247,29 @@ max_value = 1000.0
 value = 200.0
 allow_greater = true
 
+[node name="PathFixedWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
+margin_top = 41.0
+margin_right = 73.0
+margin_bottom = 55.0
+text = "Fixed width"
+
+[node name="PathFixedWidth" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
+margin_left = 77.0
+margin_top = 28.0
+margin_right = 502.0
+margin_bottom = 68.0
+
 [node name="PathSpacingLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-margin_top = 33.0
-margin_right = 67.0
-margin_bottom = 47.0
+margin_top = 77.0
+margin_right = 73.0
+margin_bottom = 91.0
 text = "Spacing"
 
 [node name="PathSpacing" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-margin_left = 71.0
-margin_top = 28.0
-margin_right = 522.0
-margin_bottom = 52.0
+margin_left = 77.0
+margin_top = 72.0
+margin_right = 502.0
+margin_bottom = 96.0
 hint_tooltip = "Define the horizontal spacing between cards relative to their width. A value of 1 means the spacing is the same as the width."
 size_flags_horizontal = 3
 max_value = 10.0

@@ -24,6 +24,7 @@ var _grid_expand: bool = true
 
 # Path parameters
 var _path_card_width: float = 200
+var _path_fixed_width: bool = false
 var _path_spacing: float = 0.5
 
 # Position fine tuning
@@ -186,11 +187,16 @@ func _grid_layout():
 
 func _path_layout():
 	var visual_instance: AbstractCard = card_visual.instance()
-	var width_ratio: float = _path_card_width / visual_instance.size.x
+	var width_ratio: float = 0.0
 	var curve: Curve2D = _path.get_curve()
 	var path_length: float = curve.get_baked_length()
 	var path_offset: float = 0.0
 	var path_offset_delta: float = 0.0
+	
+	if not _path_fixed_width:
+		_path_card_width = path_length / (_store.count() * _path_spacing)
+	
+	width_ratio = _path_card_width / visual_instance.size.x
 
 	# Path offset
 	path_offset = _path_card_width / 2

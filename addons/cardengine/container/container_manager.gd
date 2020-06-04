@@ -126,6 +126,7 @@ func _write_metadata(cont: ContainerData) -> void:
 	
 	# Path data
 	file.set_value("path", "card_width", cont.path_card_width)
+	file.set_value("path", "fixed_width", cont.path_fixed_width)
 	file.set_value("path", "spacing", cont.path_spacing)
 	
 	# Position data
@@ -170,6 +171,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"grid_columns": cont.grid_columns,
 		"grid_expand": _translate_bool(cont.grid_expand),
 		"path_width": cont.path_card_width,
+		"path_fixed": _translate_bool(cont.path_fixed_width),
 		"path_spacing": cont.path_spacing,
 	}
 	Utils.copy_template(tpl_path, script_path, params)
@@ -232,6 +234,7 @@ func _read_metadata(id: String) -> ContainerData:
 	
 	# Path data
 	cont.path_card_width = file.get_value("path", "card_width", 200)
+	cont.path_fixed_width = file.get_value("path", "fixed_width", true)
 	cont.path_spacing = file.get_value("path", "spacing", 1.0)
 	
 	# Position data
