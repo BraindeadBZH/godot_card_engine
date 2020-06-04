@@ -94,7 +94,7 @@ func _save() -> void:
 		2:
 			_data.grid_halign = "right"
 	
-	match _grid_align_h.selected:
+	match _grid_align_v.selected:
 		0:
 			_data.grid_valign = "top"
 		1:
