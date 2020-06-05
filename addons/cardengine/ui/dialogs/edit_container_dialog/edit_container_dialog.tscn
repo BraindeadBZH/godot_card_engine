@@ -6,7 +6,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -750.0
-margin_bottom = -380.0
+margin_bottom = -193.0
 window_title = "Edit Container"
 resizable = true
 script = ExtResource( 1 )
@@ -27,7 +27,7 @@ __meta__ = {
 
 [node name="MainTabs" type="TabContainer" parent="MainLayout"]
 margin_right = 510.0
-margin_bottom = 286.0
+margin_bottom = 473.0
 size_flags_vertical = 3
 tab_align = 0
 __meta__ = {
@@ -77,12 +77,12 @@ text = "Path mode"
 [node name="ModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
 margin_top = 44.0
 margin_right = 502.0
-margin_bottom = 250.0
+margin_bottom = 437.0
 size_flags_vertical = 3
 
 [node name="GridMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
 margin_right = 502.0
-margin_bottom = 206.0
+margin_bottom = 393.0
 size_flags_horizontal = 3
 
 [node name="GridModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode"]
@@ -277,6 +277,316 @@ step = 0.1
 value = 1.0
 allow_greater = true
 
+[node name="FineTuning" type="Control" parent="MainLayout/MainTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="TuningLayout" type="VBoxContainer" parent="MainLayout/MainTabs/FineTuning"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PositionTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
+margin_right = 502.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Position"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PostionLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 144.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 27.0
+text = "Enabled"
+
+[node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_left = 102.0
+margin_right = 502.0
+margin_bottom = 40.0
+hint_tooltip = "If enabled allow to move the card relative to the position defined by the layout."
+size_flags_horizontal = 3
+
+[node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_top = 47.0
+margin_right = 98.0
+margin_bottom = 61.0
+text = "Mode"
+
+[node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_left = 102.0
+margin_top = 44.0
+margin_right = 502.0
+margin_bottom = 64.0
+hint_tooltip = "Linear: the position will be interpolated linearly from min to max.
+Symmetric: like linear but flip direction in the middle of the cards.
+Random: randomly pick a position in the min/max range. "
+text = "Linear"
+items = [ "Linear", null, false, 0, null, "Symmetric", null, false, 1, null, "Random", null, false, 2, null ]
+selected = 0
+
+[node name="RangeMinLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_top = 73.0
+margin_right = 98.0
+margin_bottom = 87.0
+text = "Minimum (x, y)"
+
+[node name="RangeMinLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_left = 102.0
+margin_top = 68.0
+margin_right = 502.0
+margin_bottom = 92.0
+
+[node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout"]
+margin_right = 198.0
+margin_bottom = 24.0
+hint_tooltip = "Minimal horizontal relative position."
+size_flags_horizontal = 3
+
+[node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout"]
+margin_left = 202.0
+margin_right = 400.0
+margin_bottom = 24.0
+hint_tooltip = "Minimal vertical relative position."
+size_flags_horizontal = 3
+
+[node name="RangeMaxLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_top = 101.0
+margin_right = 98.0
+margin_bottom = 115.0
+text = "Maximum (x, y)"
+
+[node name="RangeMaxLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
+margin_left = 102.0
+margin_top = 96.0
+margin_right = 502.0
+margin_bottom = 120.0
+
+[node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout"]
+margin_right = 198.0
+margin_bottom = 24.0
+hint_tooltip = "Maximal horizontal relative position."
+size_flags_horizontal = 3
+
+[node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout"]
+margin_left = 202.0
+margin_right = 400.0
+margin_bottom = 24.0
+hint_tooltip = "Maximal vertical relative position."
+size_flags_horizontal = 3
+
+[node name="AngleTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
+margin_top = 148.0
+margin_right = 502.0
+margin_bottom = 168.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Angle"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AngleLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
+margin_top = 172.0
+margin_right = 502.0
+margin_bottom = 265.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
+margin_top = 13.0
+margin_right = 110.0
+margin_bottom = 27.0
+text = "Enabled"
+
+[node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
+margin_left = 114.0
+margin_right = 502.0
+margin_bottom = 40.0
+hint_tooltip = "If enabled allow to rotate the card relative to the angle defined by the layout."
+size_flags_horizontal = 3
+
+[node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
+margin_top = 47.0
+margin_right = 110.0
+margin_bottom = 61.0
+text = "Mode"
+
+[node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
+margin_left = 114.0
+margin_top = 44.0
+margin_right = 502.0
+margin_bottom = 64.0
+hint_tooltip = "Linear: the angle will be interpolated linearly from min to max.
+Symmetric: like linear but flip direction in the middle of the cards.
+Random: randomly pick an angle in the min/max range. "
+text = "Linear"
+items = [ "Linear", null, false, 0, null, "Symmetric", null, false, 1, null, "Random", null, false, 2, null ]
+selected = 0
+
+[node name="RangeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
+margin_top = 73.0
+margin_right = 110.0
+margin_bottom = 87.0
+text = "Range (min, max)"
+
+[node name="RangeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
+margin_left = 114.0
+margin_top = 68.0
+margin_right = 502.0
+margin_bottom = 92.0
+
+[node name="RangeMin" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout"]
+margin_right = 192.0
+margin_bottom = 24.0
+hint_tooltip = "Minimal relative angle."
+size_flags_horizontal = 3
+
+[node name="RangeMax" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout"]
+margin_left = 196.0
+margin_right = 388.0
+margin_bottom = 24.0
+hint_tooltip = "Maximal relative angle."
+size_flags_horizontal = 3
+
+[node name="ScaleTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
+margin_top = 269.0
+margin_right = 502.0
+margin_bottom = 289.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Scale"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScaleLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
+margin_top = 293.0
+margin_right = 502.0
+margin_bottom = 437.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 27.0
+text = "Enabled"
+
+[node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_left = 102.0
+margin_right = 502.0
+margin_bottom = 40.0
+hint_tooltip = "If enabled allow to scale the card relative to the scale defined by the layout."
+size_flags_horizontal = 3
+
+[node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_top = 47.0
+margin_right = 98.0
+margin_bottom = 61.0
+text = "Mode"
+
+[node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_left = 102.0
+margin_top = 44.0
+margin_right = 502.0
+margin_bottom = 64.0
+hint_tooltip = "Linear: the scale will be interpolated linearly from min to max.
+Symmetric: like linear but flip direction in the middle of the cards.
+Random: randomly pick a scale in the min/max range. "
+text = "Linear"
+items = [ "Linear", null, false, 0, null, "Symmetric", null, false, 1, null, "Random", null, false, 2, null ]
+selected = 0
+
+[node name="RatioLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_top = 71.0
+margin_right = 98.0
+margin_bottom = 85.0
+text = "Aspect ratio"
+
+[node name="Ratio" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_left = 102.0
+margin_top = 68.0
+margin_right = 502.0
+margin_bottom = 88.0
+hint_tooltip = "Keep: keep the aspect ratio of the cards. (ignore the y scaling)
+Ignore: allows independent x and y scaling."
+text = "Keep"
+items = [ "Keep", null, false, 0, null, "Ignore", null, false, 1, null ]
+selected = 0
+
+[node name="RangeMinLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_top = 97.0
+margin_right = 98.0
+margin_bottom = 111.0
+text = "Minimum (x, y)"
+
+[node name="RangeMinLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_left = 102.0
+margin_top = 92.0
+margin_right = 502.0
+margin_bottom = 116.0
+
+[node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout"]
+margin_right = 198.0
+margin_bottom = 24.0
+hint_tooltip = "Minimal horizontal relative scaling."
+size_flags_horizontal = 3
+
+[node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout"]
+margin_left = 202.0
+margin_right = 400.0
+margin_bottom = 24.0
+hint_tooltip = "Minimal vertical relative scaling."
+size_flags_horizontal = 3
+
+[node name="RangeMaxLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_top = 125.0
+margin_right = 98.0
+margin_bottom = 139.0
+text = "Maximum (x, y)"
+
+[node name="RangeMaxLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
+margin_left = 102.0
+margin_top = 120.0
+margin_right = 502.0
+margin_bottom = 144.0
+
+[node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout"]
+margin_right = 198.0
+margin_bottom = 24.0
+hint_tooltip = "Maximal horizontal relative scaling."
+size_flags_horizontal = 3
+
+[node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout"]
+margin_left = 202.0
+margin_right = 400.0
+margin_bottom = 24.0
+hint_tooltip = "Maximal vertical relative scaling."
+size_flags_horizontal = 3
+
 [node name="Events" type="Control" parent="MainLayout/MainTabs"]
 visible = false
 anchor_right = 1.0
@@ -296,9 +606,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
-margin_top = 290.0
+margin_top = 477.0
 margin_right = 510.0
-margin_bottom = 320.0
+margin_bottom = 507.0
 alignment = 1
 
 [node name="SaveBtn" type="Button" parent="MainLayout/ButtonLayout"]
