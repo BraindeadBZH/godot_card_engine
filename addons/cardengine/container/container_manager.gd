@@ -173,6 +173,23 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"path_width": cont.path_card_width,
 		"path_fixed": _translate_bool(cont.path_fixed_width),
 		"path_spacing": cont.path_spacing,
+		"pos_enabled": _translate_bool(cont.fine_pos),
+		"pos_mode": _translate_fine_tune_mode(cont.fine_pos_mode),
+		"pos_range_min_h": cont.fine_pos_min.x,
+		"pos_range_min_v": cont.fine_pos_min.y,
+		"pos_range_max_h": cont.fine_pos_max.x,
+		"pos_range_max_v": cont.fine_pos_max.y,
+		"angle_enabled": _translate_bool(cont.fine_angle),
+		"angle_mode": _translate_fine_tune_mode(cont.fine_angle_mode),
+		"angle_range_min": cont.fine_angle_min,
+		"angle_range_max": cont.fine_angle_max,
+		"scale_enabled": _translate_bool(cont.fine_scale),
+		"scale_mode": _translate_fine_tune_mode(cont.fine_scale_mode),
+		"scale_ratio": _translate_ratio_mode(cont.fine_scale_ratio),
+		"scale_range_min_h": cont.fine_scale_min.x,
+		"scale_range_min_v": cont.fine_scale_min.y,
+		"scale_range_max_h": cont.fine_scale_max.x,
+		"scale_range_max_v": cont.fine_scale_max.y,
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -292,3 +309,25 @@ func _translate_align(align: String) -> String:
 			return "VALIGN_BOTTOM"
 		_:
 			return "0"
+
+
+func _translate_fine_tune_mode(mode: String) -> String:
+	match mode:
+		"linear":
+			return "FineTuningMode.LINEAR"
+		"symmetric":
+			return "FineTuningMode.SYMMETRIC"
+		"random":
+			return "FineTuningMode.RANDOM"
+		_:
+			return ""
+
+
+func _translate_ratio_mode(mode: String) -> String:
+	match mode:
+		"keep":
+			return "AspectMode.KEEP"
+		"ignore":
+			return "AspectMode.IGNORE"
+		_:
+			return ""

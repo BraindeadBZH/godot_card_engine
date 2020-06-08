@@ -19,6 +19,26 @@ onready var _path_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/Pa
 onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathFixedWidth
 onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
 
+onready var _pos_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Enabled
+onready var _pos_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Mode
+onready var _pos_range_min_h = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout/RangeH
+onready var _pos_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout/RangeV
+onready var _pos_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout/RangeH
+onready var _pos_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout/RangeV
+
+onready var _angle_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/Enabled
+onready var _angle_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/Mode
+onready var _angle_range_min = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout/RangeMin
+onready var _angle_range_max = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout/RangeMax
+
+onready var _scale_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Enabled
+onready var _scale_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Mode
+onready var _scale_ratio = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Ratio
+onready var _scale_range_min_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout/RangeH
+onready var _scale_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout/RangeV
+onready var _scale_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeH
+onready var _scale_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeV
+
 
 func _ready():
 	_grid_mode.visible = true
@@ -65,6 +85,48 @@ func _update() -> void:
 			_grid_align_v.select(1)
 		"bottom":
 			_grid_align_v.select(2)
+	
+	_pos_enabled.pressed = _data.fine_pos
+	_pos_range_min_h.value = _data.fine_pos_min.x
+	_pos_range_min_v.value = _data.fine_pos_min.y
+	_pos_range_max_h.value = _data.fine_pos_max.x
+	_pos_range_max_v.value = _data.fine_pos_max.y
+	match _data.fine_pos_mode:
+		"linear":
+			_pos_mode.select(0)
+		"symmetric":
+			_pos_mode.select(1)
+		"random":
+			_pos_mode.select(2)
+	
+	_angle_enabled.pressed = _data.fine_angle
+	_angle_range_min.value = _data.fine_angle_min
+	_angle_range_max.value = _data.fine_angle_max
+	match _data.fine_angle_mode:
+		"linear":
+			_angle_mode.select(0)
+		"symmetric":
+			_angle_mode.select(1)
+		"random":
+			_angle_mode.select(2)
+	
+	_scale_enabled.pressed = _data.fine_scale
+	_scale_range_min_h.value = _data.fine_scale_min.x
+	_scale_range_min_v.value = _data.fine_scale_min.y
+	_scale_range_max_h.value = _data.fine_scale_max.x
+	_scale_range_max_v.value = _data.fine_scale_max.y
+	match _data.fine_scale_mode:
+		"linear":
+			_scale_mode.select(0)
+		"symmetric":
+			_scale_mode.select(1)
+		"random":
+			_scale_mode.select(2)
+	match _data.fine_scale_ratio:
+		"keep":
+			_scale_ratio.select(0)
+		"ignore":
+			_scale_ratio.select(1)
 
 
 func _save() -> void:
@@ -101,6 +163,48 @@ func _save() -> void:
 			_data.grid_valign = "middle"
 		2:
 			_data.grid_valign = "bottom"
+	
+	_data.fine_pos = _pos_enabled.pressed
+	_data.fine_pos_min.x = _pos_range_min_h.value
+	_data.fine_pos_min.y = _pos_range_min_v.value
+	_data.fine_pos_max.x = _pos_range_max_h.value
+	_data.fine_pos_max.y = _pos_range_max_v.value
+	match _pos_mode.selected:
+		0:
+			_data.fine_pos_mode = "linear"
+		1:
+			_data.fine_pos_mode = "symmetric"
+		2:
+			_data.fine_pos_mode = "random"
+	
+	_data.fine_angle = _angle_enabled.pressed
+	_data.fine_angle_min = _angle_range_min.value
+	_data.fine_angle_max = _angle_range_max.value
+	match _angle_mode.selected:
+		0:
+			_data.fine_angle_mode = "linear"
+		1:
+			_data.fine_angle_mode = "symmetric"
+		2:
+			_data.fine_angle_mode = "random"
+	
+	_data.fine_scale = _scale_enabled.pressed
+	_data.fine_scale_min.x = _scale_range_min_h.value
+	_data.fine_scale_min.y = _scale_range_min_v.value
+	_data.fine_scale_max.x = _scale_range_max_h.value
+	_data.fine_scale_max.y = _scale_range_max_v.value
+	match _scale_mode.selected:
+		0:
+			_data.fine_scale_mode = "linear"
+		1:
+			_data.fine_scale_mode = "symmetric"
+		2:
+			_data.fine_scale_mode = "random"
+	match _scale_ratio.selected:
+		0:
+			_data.fine_scale_ratio = "keep"
+		1:
+			_data.fine_scale_ratio = "ignore"
 	
 	_manager.update_container(_data)
 

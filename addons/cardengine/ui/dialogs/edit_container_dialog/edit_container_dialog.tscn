@@ -360,6 +360,10 @@ margin_right = 198.0
 margin_bottom = 24.0
 hint_tooltip = "Minimal horizontal relative position."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout"]
 margin_left = 202.0
@@ -367,6 +371,10 @@ margin_right = 400.0
 margin_bottom = 24.0
 hint_tooltip = "Minimal vertical relative position."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
 
 [node name="RangeMaxLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
 margin_top = 101.0
@@ -385,6 +393,10 @@ margin_right = 198.0
 margin_bottom = 24.0
 hint_tooltip = "Maximal horizontal relative position."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout"]
 margin_left = 202.0
@@ -392,6 +404,10 @@ margin_right = 400.0
 margin_bottom = 24.0
 hint_tooltip = "Maximal vertical relative position."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
 
 [node name="AngleTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
 margin_top = 148.0
@@ -461,6 +477,10 @@ margin_right = 192.0
 margin_bottom = 24.0
 hint_tooltip = "Minimal relative angle."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
 
 [node name="RangeMax" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout"]
 margin_left = 196.0
@@ -468,6 +488,10 @@ margin_right = 388.0
 margin_bottom = 24.0
 hint_tooltip = "Maximal relative angle."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
 
 [node name="ScaleTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
 margin_top = 269.0
@@ -554,6 +578,11 @@ margin_right = 198.0
 margin_bottom = 24.0
 hint_tooltip = "Minimal horizontal relative scaling."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout"]
 margin_left = 202.0
@@ -561,6 +590,11 @@ margin_right = 400.0
 margin_bottom = 24.0
 hint_tooltip = "Minimal vertical relative scaling."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
 
 [node name="RangeMaxLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
 margin_top = 125.0
@@ -579,6 +613,11 @@ margin_right = 198.0
 margin_bottom = 24.0
 hint_tooltip = "Maximal horizontal relative scaling."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout"]
 margin_left = 202.0
@@ -586,6 +625,11 @@ margin_right = 400.0
 margin_bottom = 24.0
 hint_tooltip = "Maximal vertical relative scaling."
 size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
 
 [node name="Events" type="Control" parent="MainLayout/MainTabs"]
 visible = false
