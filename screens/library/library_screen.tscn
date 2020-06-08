@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://screens/library/library_screen.gd" type="Script" id=1]
 [ext_resource path="res://screens/library/background.png" type="Texture" id=2]
 [ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://containers/test_container/test_container.tscn" type="PackedScene" id=4]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -90,10 +88,4 @@ margin_bottom = -20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="LibraryContainer" parent="LibraryBg/LibraryScroll" instance=ExtResource( 4 )]
-margin_right = 1200.0
-margin_bottom = 560.0
-card_visual = ExtResource( 6 )
-database = "main"
 [connection signal="pressed" from="TitleBg/BackBtn" to="." method="_on_BackBtn_pressed"]
