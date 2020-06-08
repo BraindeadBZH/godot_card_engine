@@ -5,77 +5,287 @@ name="Main Database"
 
 [cards]
 
-card1={
+card_146={
 "categories": {
-"categ0": "Some category",
-"categ1": "Edited bis"
+"common": "Common",
+"sorcery": "Sorcery"
 },
 "texts": {
-"name": "Card One",
-"text0": "This is my text
-It can span over multiple lines
-Edited"
+"desc": "Destroy target artifact.",
+"name": "Shenanigans"
 },
 "values": {
-"value0": 15,
-"value1": 4,
-"value2": 20
+"mana": 1
 }
 }
-card2={
+card_52={
 "categories": {
-
+"enchantment": "Enchantment",
+"uncommon": "Uncommon"
 },
 "texts": {
-"name": "Card Two"
+"desc": "Whenever an opponent casts a red spell, you gain 2 life.",
+"name": "Warmth"
 },
 "values": {
-"value1": 100
+"mana": 1
 }
 }
-card3={
+card_2={
 "categories": {
-"test": "test"
+"creature": "Creature",
+"spirit": "Spirit",
+"uncommon": "Uncommon"
 },
 "texts": {
-"name": "Card Three"
+"desc": "Azorius Herald can't be blocked.
+When Azorius Herald enters the battlefield, you gain 4 life.
+When Azorius Herald enters the battlefield, sacrifice it unless Blue was spent to cast it.",
+"name": "Azorius Herald"
 },
 "values": {
-
+"mana": 2
 }
 }
-card4={
+card_162={
 "categories": {
-
+"creature": "Creature",
+"hydra": "Hydra",
+"rare": "Rare"
 },
 "texts": {
-"name": "Card Four"
+"desc": "This spell can't be countered.
+Haste, protection from blue
+Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.",
+"name": "Mistcutter Hydra"
 },
 "values": {
-
+"mana": -1
 }
 }
-card5={
+card_118={
 "categories": {
-"categ0": "Some category"
+"rare": "Rare",
+"sorcery": "Sorcery"
 },
 "texts": {
-"name": "Card Five",
-"text0": "This is my text"
+"desc": "Target player takes two extra turns after this one.",
+"name": "Time Stretch"
 },
 "values": {
-"value1": 4
+"mana": 8
 }
 }
-card6={
+card_181={
 "categories": {
-"categ0": "Some category"
+"aura": "Aura",
+"common": "Common",
+"enchantment": "Enchantment"
 },
 "texts": {
-"name": "Card Six",
-"text0": "This is my text"
+"desc": "Enchant creature
+Enchanted creature gets +2/+2 and has \"Green: Regenerate this creature.\"",
+"name": "Savage Silhouette"
 },
 "values": {
-"value1": 4
+"mana": 2
+}
+}
+card_62={
+"categories": {
+"common": "Common",
+"creature": "Creature",
+"human_knight": "Human Knight"
+},
+"texts": {
+"desc": "First strike",
+"name": "Youthful Knight"
+},
+"values": {
+"mana": 1
+}
+}
+card_106={
+"categories": {
+"artifact_creature": "Artifact Creature",
+"slith": "Slith",
+"uncommon": "Uncommon"
+},
+"texts": {
+"desc": "Whenever Arcbound Slith deals combat damage to a player, put a +1/+1 counter on it.",
+"name": "Arcbound Slith"
+},
+"values": {
+"mana": 2
+}
+}
+card_201={
+"categories": {
+"common": "Common",
+"sorcery": "Sorcery"
+},
+"texts": {
+"desc": "Destroy target land.",
+"name": "Lay Waste"
+},
+"values": {
+"mana": 3
+}
+}
+card_126={
+"categories": {
+"creature": "Creature",
+"human_artificier": "Human Artificier"
+},
+"texts": {
+"desc": "When Thopter Engineer enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.",
+"name": "Thopter Engineer"
+},
+"values": {
+"mana": 2
+}
+}
+card_51={
+"categories": {
+"legendary_creature": "Legendary Creature",
+"mythic_rare": "Mythic Rare",
+"sphinx": "Sphinx"
+},
+"texts": {
+"desc": "Flying, vigilance, menace
+Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library. You may cast it without paying its mana cost if its converted mana cost is odd. If you don't cast it, draw a card.",
+"name": "Yennett, Cryptic Sovereign"
+},
+"values": {
+"mana": 2
+}
+}
+card_80={
+"categories": {
+"aura": "Aura",
+"enchantment": "Enchantment",
+"uncommon": "Uncommon"
+},
+"texts": {
+"desc": "Enchant creature
+Enchanted creature gets +3/+3.
+At the beginning of the upkeep of enchanted creature's controller, put a -1/-1 counter on that creature.",
+"name": "Unstable Mutation"
+},
+"values": {
+"mana": 1
+}
+}
+card_7={
+"categories": {
+"artifact_creature": "Artifact Creature",
+"human_artificier": "Human Artificier",
+"rare": "Rare"
+},
+"texts": {
+"desc": "Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.",
+"name": "Master Transmuter"
+},
+"values": {
+"mana": 3
+}
+}
+card_233={
+"categories": {
+"artifact": "Artifact",
+"uncommon": "Uncommon"
+},
+"texts": {
+"desc": "Tap: Add Colorless.
+Tap: Add White or Black. Talisman of Hierarchy deals 1 damage to you.",
+"name": "Talisman of Hierarchy"
+},
+"values": {
+"mana": 2
+}
+}
+card_46={
+"categories": {
+"creature": "Creature",
+"kavu": "Kavu",
+"uncommon": "Uncommon"
+},
+"texts": {
+"desc": "Trample
+Whenever an opponent gains life, put that many +1/+1 counters on Kavu Predator.",
+"name": "Kavu Predator"
+},
+"values": {
+"mana": 1
+}
+}
+card_142={
+"categories": {
+"common": "Common",
+"creature": "Creature",
+"cyclops": "Cyclops"
+},
+"texts": {
+"desc": "When Quakefoot Cyclops enters the battlefield, up to two target creatures can't block this turn.",
+"name": "Quakefoot Cyclops"
+},
+"values": {
+"mana": 4
+}
+}
+card_44={
+"categories": {
+"common": "Common",
+"instant": "Instant"
+},
+"texts": {
+"desc": "As an additional cost to cast this spell, sacrifice a creature.
+Fling deals damage equal to the sacrificed creature's power to any target.",
+"name": "Fling"
+},
+"values": {
+"mana": 1
+}
+}
+card_302={
+"categories": {
+"basic_land": "Basic Land",
+"forest": "Forest"
+},
+"texts": {
+"desc": "Forest",
+"name": "Forest"
+},
+"values": {
+"mana": 0
+}
+}
+card_74={
+"categories": {
+"creature": "Creature",
+"human_cleric": "Human Cleric",
+"uncommon": "Uncommon"
+},
+"texts": {
+"desc": "Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.",
+"name": "Disciple of Griselbrand"
+},
+"values": {
+"mana": 1
+}
+}
+card_28={
+"categories": {
+"human_advisor": "Human Advisor",
+"legendary_creature": "Legendary Creature",
+"rare": "Rare"
+},
+"texts": {
+"desc": "Sacrifice three white creatures: Exile target creature.
+Whenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.",
+"name": "Teysa, Orzhov Scion"
+},
+"values": {
+"mana": 1
 }
 }
