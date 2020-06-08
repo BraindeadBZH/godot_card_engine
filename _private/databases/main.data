@@ -1,0 +1,81 @@
+[meta]
+
+id="main"
+name="Main Database"
+
+[cards]
+
+card1={
+"categories": {
+"categ0": "Some category",
+"categ1": "Edited bis"
+},
+"texts": {
+"name": "Card One",
+"text0": "This is my text
+It can span over multiple lines
+Edited"
+},
+"values": {
+"value0": 15,
+"value1": 4,
+"value2": 20
+}
+}
+card2={
+"categories": {
+
+},
+"texts": {
+"name": "Card Two"
+},
+"values": {
+"value1": 100
+}
+}
+card3={
+"categories": {
+"test": "test"
+},
+"texts": {
+"name": "Card Three"
+},
+"values": {
+
+}
+}
+card4={
+"categories": {
+
+},
+"texts": {
+"name": "Card Four"
+},
+"values": {
+
+}
+}
+card5={
+"categories": {
+"categ0": "Some category"
+},
+"texts": {
+"name": "Card Five",
+"text0": "This is my text"
+},
+"values": {
+"value1": 4
+}
+}
+card6={
+"categories": {
+"categ0": "Some category"
+},
+"texts": {
+"name": "Card Six",
+"text0": "This is my text"
+},
+"values": {
+"value1": 4
+}
+}

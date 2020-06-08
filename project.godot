@@ -119,16 +119,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/database/query.gd"
 }, {
-"base": "TestContainerPrivate",
-"class": "TestContainer",
-"language": "GDScript",
-"path": "res://containers/test_container/test_container.gd"
-}, {
-"base": "AbstractContainer",
-"class": "TestContainerPrivate",
-"language": "GDScript",
-"path": "res://_private/containers/test_container/test_container_private.gd"
-}, {
 "base": "Node",
 "class": "UtilsInstance",
 "language": "GDScript",
@@ -157,8 +147,6 @@ _global_script_class_icons={
 "GeneralManager": "",
 "PseudoRng": "",
 "Query": "",
-"TestContainer": "",
-"TestContainerPrivate": "",
 "UtilsInstance": ""
 }
 
