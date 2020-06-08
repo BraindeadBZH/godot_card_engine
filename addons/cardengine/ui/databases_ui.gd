@@ -35,7 +35,7 @@ func _on_Databases_changed() -> void:
 	var databases = _manager.databases()
 	for id in databases:
 		var db = databases[id]
-		_db_list.add_item("%s: %s" % [db.id, db.name])
+		_db_list.add_item("%s: %s (%d cards)" % [db.id, db.name, db.count()])
 		_db_list.set_item_metadata(_db_list.get_item_count()-1, db.id)
 
 

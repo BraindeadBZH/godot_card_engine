@@ -13,6 +13,10 @@ func _init(id: String, name: String) -> void:
 	self.name = name
 
 
+func count() -> int:
+	return _cards.size()
+
+
 func cards() -> Dictionary:
 	return _cards
 
