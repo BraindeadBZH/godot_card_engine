@@ -8,6 +8,7 @@ signal card_replaced()
 signal cleared()
 
 var _cards: Array = []
+var _categs: Dictionary = {}
 var _rng: PseudoRng = PseudoRng.new()
 
 
@@ -17,12 +18,14 @@ func cards() -> Array:
 
 func clear() -> void:
 	_cards.clear()
+	_categs.clear()
 	emit_signal("cleared")
 
 
 func replace_cards(new_cards: Array) -> void:
 	_cards = new_cards
 	emit_signal("card_replaced")
+	_update_categories()
 
 
 func count() -> int:
@@ -48,9 +51,21 @@ func get_last() -> CardData:
 	return _cards.back()
 
 
+func categories() -> Dictionary:
+	return _categs
+
+
+func get_category(id: String) -> Dictionary:
+	if not _categs.has(id):
+		return {}
+	
+	return _categs[id]
+
+
 func add_card(card: CardData) -> void:
 	_cards.append(card)
 	emit_signal("card_added")
+	_update_categories()
 
 
 func remove_card(index: int) -> void:
@@ -59,16 +74,19 @@ func remove_card(index: int) -> void:
 	
 	_cards.remove(index)
 	emit_signal("card_removed", index)
+	_update_categories()
 
 
 func remove_first() -> void:
 	_cards.pop_front()
 	emit_signal("card_removed", 0)
+	_update_categories()
 
 
 func remove_last() -> void:
 	_cards.pop_back()
 	emit_signal("card_removed", count()-1)
+	_update_categories()
 
 
 func move_card(index: int, to: AbstractStore = null) -> CardData:
@@ -81,6 +99,7 @@ func move_card(index: int, to: AbstractStore = null) -> CardData:
 	to.add_card(card)
 	_cards.remove(index)
 	emit_signal("card_removed", index)
+	_update_categories()
 	return card
 
 
@@ -105,3 +124,17 @@ func copy_random_card(to: AbstractStore = null) -> CardData:
 
 func rng() -> PseudoRng:
 	return _rng
+
+
+func _update_categories():
+	_categs.clear()
+	
+	for card in _cards:
+		for categ in card.categories():
+			if _categs.has(categ):
+				_categs[categ]["count"] += 1
+			else:
+				_categs[categ] = {
+					"name": card.get_category(categ),
+					"count": 1,
+				}

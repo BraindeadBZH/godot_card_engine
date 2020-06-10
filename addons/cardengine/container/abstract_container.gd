@@ -51,6 +51,10 @@ onready var _cards = $Cards
 onready var _path = $CardPath
 
 
+func store() -> AbstractStore:
+	return _store
+
+
 func set_store(store: AbstractStore) -> void:
 	_store = store
 	_update_store()

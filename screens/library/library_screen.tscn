@@ -42,11 +42,10 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="TitleBg"]
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 20.0
+margin_left = 10.0
 margin_top = -21.0
-margin_right = -20.0
+margin_right = 130.0
 margin_bottom = 21.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -66,6 +65,24 @@ margin_top = -27.5
 margin_right = 0.0
 margin_bottom = 27.5
 button_text = "Back"
+
+[node name="CategoriesLbl" type="Label" parent="TitleBg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 130.0
+margin_top = -21.0
+margin_right = 196.0
+margin_bottom = -9.0
+text = "Categories"
+
+[node name="Categories" type="OptionButton" parent="TitleBg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 130.0
+margin_top = -2.0
+margin_right = 301.0
+margin_bottom = 18.0
+clip_text = true
 
 [node name="LibraryBg" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -99,3 +116,4 @@ size_flags_vertical = 3
 card_visual = ExtResource( 6 )
 database = "main"
 [connection signal="pressed" from="TitleBg/BackBtn" to="." method="_on_BackBtn_pressed"]
+[connection signal="item_selected" from="TitleBg/Categories" to="." method="_on_Categories_item_selected"]
