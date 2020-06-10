@@ -150,7 +150,7 @@ func _grid_layout():
 		if row_width > rect_size.x:
 			rect_min_size.x = row_width
 		
-		if col_height > rect_size.y:
+		if col_height > rect_size.y || _grid_columns > 0:
 			rect_min_size.y = col_height
 	
 	spacing_offset.x = (_grid_card_width * _grid_card_spacing.x - _grid_card_width) / 2.0
