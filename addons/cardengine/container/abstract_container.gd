@@ -7,7 +7,7 @@ enum AspectMode {KEEP, IGNORE}
 
 export(PackedScene) var card_visual: PackedScene = null
 export(String) var database: String = ""
-export(Dictionary) var query: Dictionary = {"from": [], "where": [], "contains": []}
+export(Dictionary) var query: Dictionary = {"from": [], "where": [], "contains": []} setget set_query
 
 var _store: AbstractStore = null
 
@@ -56,7 +56,15 @@ func set_store(store: AbstractStore) -> void:
 	_update_store()
 
 
+func set_query(new_query: Dictionary) -> void:
+	query = new_query
+	_update_store()
+
+
 func _update_store() -> void:
+	if _store == null:
+		return
+	
 	_store.clear()
 	
 	var db = _manager.get_database(database)

@@ -1,0 +1,43 @@
+[meta]
+
+id="card_list"
+name="CardList"
+mode="grid"
+
+[grid]
+
+card_width=200.0
+fixed_width=false
+card_spacing=Vector2( 1.2, 1.1 )
+halign="center"
+valign="top"
+columns=4
+expand=true
+
+[path]
+
+card_width=200.0
+fixed_width=true
+spacing=1.0
+
+[position]
+
+enabled=false
+mode="linear"
+min=Vector2( 0, 0 )
+max=Vector2( 0, 0 )
+
+[angle]
+
+enabled=false
+mode="linear"
+min=0.0
+max=0.0
+
+[scale]
+
+enabled=false
+mode="linear"
+ratio="keep"
+min=Vector2( 0, 0 )
+max=Vector2( 0, 0 )
