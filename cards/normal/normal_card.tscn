@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/cardengine/card/abstract_card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://cards/normal/normal_card.gd" type="Script" id=2]
@@ -7,12 +7,31 @@
 [ext_resource path="res://cards/normal/card_name_background.png" type="Texture" id=5]
 [ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://cards/normal/card_shadow.png" type="Texture" id=7]
+[ext_resource path="res://cards/normal/card_desc_background.png" type="Texture" id=8]
+[ext_resource path="res://cards/normal/card_cost_background.png" type="Texture" id=9]
+[ext_resource path="res://cards/normal/card_picture_placeholder.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
+size = 28
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 17
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 52
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 11
 font_data = ExtResource( 6 )
 
 [node name="NormalCard" instance=ExtResource( 1 )]
@@ -30,15 +49,176 @@ texture = ExtResource( 4 )
 texture = ExtResource( 5 )
 
 [node name="Name" type="Label" parent="Front/NameBackground" index="0"]
-margin_left = -140.0
-margin_top = -20.0
-margin_right = 140.0
-margin_bottom = 20.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -151.0
+margin_top = -24.0
+margin_right = -195.0
+margin_bottom = -67.0
 custom_fonts/font = SubResource( 1 )
 text = "Card Name"
 align = 1
 valign = 1
 clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DescBackground" type="Sprite" parent="Front" index="2"]
+position = Vector2( 0, 150 )
+texture = ExtResource( 8 )
+
+[node name="Desc" type="Label" parent="Front/DescBackground" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -138.0
+margin_top = -91.0
+margin_right = -167.0
+margin_bottom = -117.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.141176, 0.141176, 0.141176, 1 )
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus, enim eu blandit sodales, risus mi egestas felis, non mattis tellus est vel turpis. Sed fermentum rutrum varius. "
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CostBackground" type="Sprite" parent="Front" index="3"]
+position = Vector2( -184.699, -281.75 )
+texture = ExtResource( 9 )
+
+[node name="Cost" type="Label" parent="Front/CostBackground" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = -41.0
+margin_right = -48.0
+margin_bottom = -48.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PictureGroup" type="Node2D" parent="Front" index="4"]
+
+[node name="Common" type="Sprite" parent="Front/PictureGroup" index="0"]
+position = Vector2( 0, -150 )
+texture = ExtResource( 10 )
+
+[node name="Text" type="Label" parent="Front/PictureGroup/Common" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -152.0
+margin_top = -104.0
+margin_right = -152.0
+margin_bottom = -104.0
+custom_fonts/font = SubResource( 1 )
+text = "Common"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Uncommon" type="Sprite" parent="Front/PictureGroup" index="1"]
+visible = false
+position = Vector2( 0, -150 )
+texture = ExtResource( 10 )
+
+[node name="Text" type="Label" parent="Front/PictureGroup/Uncommon" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -152.0
+margin_top = -104.0
+margin_right = -152.0
+margin_bottom = -104.0
+custom_fonts/font = SubResource( 1 )
+text = "Uncommon"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rare" type="Sprite" parent="Front/PictureGroup" index="2"]
+visible = false
+position = Vector2( 0, -150 )
+texture = ExtResource( 10 )
+
+[node name="Text" type="Label" parent="Front/PictureGroup/Rare" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -152.0
+margin_top = -104.0
+margin_right = -152.0
+margin_bottom = -104.0
+custom_fonts/font = SubResource( 1 )
+text = "Rare"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MythicRare" type="Sprite" parent="Front/PictureGroup" index="3"]
+visible = false
+position = Vector2( 0, -150 )
+texture = ExtResource( 10 )
+
+[node name="Text" type="Label" parent="Front/PictureGroup/MythicRare" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -152.0
+margin_top = -104.0
+margin_right = -152.0
+margin_bottom = -104.0
+custom_fonts/font = SubResource( 1 )
+text = "Mythic Rare"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BasicLand" type="Sprite" parent="Front/PictureGroup" index="4"]
+visible = false
+position = Vector2( 0, -150 )
+texture = ExtResource( 10 )
+
+[node name="Text" type="Label" parent="Front/PictureGroup/BasicLand" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -152.0
+margin_top = -104.0
+margin_right = -152.0
+margin_bottom = -104.0
+custom_fonts/font = SubResource( 1 )
+text = "Basic Land"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CardId" type="Label" parent="Front" index="5"]
+margin_left = 124.0
+margin_top = -298.0
+margin_right = 189.0
+margin_bottom = -284.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "card_id"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

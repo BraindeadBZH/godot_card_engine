@@ -134,6 +134,7 @@ card_201={
 }
 card_126={
 "categories": {
+"common": "Common",
 "creature": "Creature",
 "human_artificier": "Human Artificier"
 },
@@ -154,7 +155,7 @@ card_51={
 "texts": {
 "desc": "Flying, vigilance, menace
 Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library. You may cast it without paying its mana cost if its converted mana cost is odd. If you don't cast it, draw a card.",
-"name": "Yennett, Cryptic Sovereign"
+"name": "Yennett"
 },
 "values": {
 "mana": 2
