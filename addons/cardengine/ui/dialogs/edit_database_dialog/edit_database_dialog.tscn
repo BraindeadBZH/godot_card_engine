@@ -25,20 +25,98 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FiltersLayout" type="GridContainer" parent="MainLayout"]
+margin_right = 510.0
+margin_bottom = 66.0
+columns = 3
+
+[node name="CategFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
+margin_right = 167.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Filter by category:"
+
+[node name="ValFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
+margin_left = 171.0
+margin_right = 338.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Filter by value:"
+
+[node name="TxtFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
+margin_left = 342.0
+margin_right = 509.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Filter by text:"
+
+[node name="CategFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
+margin_top = 18.0
+margin_right = 167.0
+margin_bottom = 38.0
+
+[node name="ValFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
+margin_left = 171.0
+margin_top = 18.0
+margin_right = 338.0
+margin_bottom = 38.0
+
+[node name="TxtFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
+margin_left = 342.0
+margin_top = 18.0
+margin_right = 509.0
+margin_bottom = 38.0
+
+[node name="Placeholder" type="Control" parent="MainLayout/FiltersLayout"]
+margin_top = 42.0
+margin_right = 167.0
+margin_bottom = 66.0
+
+[node name="CompLayout" type="HBoxContainer" parent="MainLayout/FiltersLayout"]
+margin_left = 171.0
+margin_top = 42.0
+margin_right = 338.0
+margin_bottom = 66.0
+
+[node name="CompOp" type="OptionButton" parent="MainLayout/FiltersLayout/CompLayout"]
+margin_right = 81.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "="
+items = [ "=", null, false, 0, null, ">", null, false, 1, null, ">=", null, false, 2, null, "<", null, false, 3, null, "<=", null, false, 4, null ]
+selected = 0
+
+[node name="CompVal" type="SpinBox" parent="MainLayout/FiltersLayout/CompLayout"]
+margin_left = 85.0
+margin_right = 167.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
+
+[node name="ContainsFilter" type="LineEdit" parent="MainLayout/FiltersLayout"]
+margin_left = 342.0
+margin_top = 42.0
+margin_right = 509.0
+margin_bottom = 66.0
+
 [node name="CardsLayout" type="GridContainer" parent="MainLayout"]
+margin_top = 70.0
 margin_right = 510.0
 margin_bottom = 272.0
 size_flags_vertical = 3
 columns = 2
 
-[node name="ListLabel" type="Label" parent="MainLayout/CardsLayout"]
+[node name="ListLbl" type="Label" parent="MainLayout/CardsLayout"]
 margin_right = 253.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Card List"
 align = 1
 
-[node name="DetailsLabel" type="Label" parent="MainLayout/CardsLayout"]
+[node name="DetailsLbl" type="Label" parent="MainLayout/CardsLayout"]
 margin_left = 257.0
 margin_right = 510.0
 margin_bottom = 14.0
@@ -49,24 +127,24 @@ align = 1
 [node name="CardList" type="ItemList" parent="MainLayout/CardsLayout"]
 margin_top = 18.0
 margin_right = 253.0
-margin_bottom = 272.0
+margin_bottom = 202.0
 size_flags_vertical = 3
 
 [node name="DetailsLayout" type="VBoxContainer" parent="MainLayout/CardsLayout"]
 margin_left = 257.0
 margin_top = 18.0
 margin_right = 510.0
-margin_bottom = 272.0
+margin_bottom = 202.0
 
 [node name="DetailsList" type="ItemList" parent="MainLayout/CardsLayout/DetailsLayout"]
 margin_right = 253.0
-margin_bottom = 220.0
+margin_bottom = 150.0
 size_flags_vertical = 3
 
 [node name="ToolsLayout" type="HBoxContainer" parent="MainLayout/CardsLayout/DetailsLayout"]
-margin_top = 224.0
+margin_top = 154.0
 margin_right = 253.0
-margin_bottom = 254.0
+margin_bottom = 184.0
 alignment = 1
 
 [node name="DeleteBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
@@ -109,6 +187,12 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
 text = "Done"
 [connection signal="about_to_show" from="." to="." method="_on_EditDatabaseDialog_about_to_show"]
+[connection signal="item_selected" from="MainLayout/FiltersLayout/CategFilter" to="." method="_on_CategFilter_item_selected"]
+[connection signal="item_selected" from="MainLayout/FiltersLayout/ValFilter" to="." method="_on_ValFilter_item_selected"]
+[connection signal="item_selected" from="MainLayout/FiltersLayout/TxtFilter" to="." method="_on_TxtFilter_item_selected"]
+[connection signal="item_selected" from="MainLayout/FiltersLayout/CompLayout/CompOp" to="." method="_on_CompOp_item_selected"]
+[connection signal="value_changed" from="MainLayout/FiltersLayout/CompLayout/CompVal" to="." method="_on_CompVal_value_changed"]
+[connection signal="text_changed" from="MainLayout/FiltersLayout/ContainsFilter" to="." method="_on_ContainsFilter_text_changed"]
 [connection signal="item_selected" from="MainLayout/CardsLayout/CardList" to="." method="_on_CardList_item_selected"]
 [connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
 [connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn" to="." method="_on_EditBtn_pressed"]
