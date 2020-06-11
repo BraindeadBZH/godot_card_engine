@@ -1,13 +1,16 @@
 extends AbstractScreen
 
-var _selected_categ: String = ""
-var _selected_val: String = ""
+var _selected_categ: String = "all"
+var _selected_val: String = "none"
+var _selected_txt: String = "none"
 
 onready var _container = $LibraryBg/LibraryScroll/LibraryContainer
 onready var _categs = $TitleBg/Categories
 onready var _values = $TitleBg/Values
 onready var _comp_op = $TitleBg/ComparisonOperator
 onready var _comp_val = $TitleBg/ComparisonValue
+onready var _texts = $TitleBg/Texts
+onready var _contains = $TitleBg/Contains
 
 
 func _ready():
@@ -21,15 +24,18 @@ func _apply_filters():
 	var where: Array = []
 	var contains: Array = []
 	
-	if not _categs.selected == 0:
+	if _categs.selected > 0:
 		from.append(_selected_categ)
 	
-	if not _values.selected == 0:
+	if _values.selected > 0:
 		where.append(
 			"%s %s %d" % [
 				_selected_val,
 				_comp_op.get_item_text(_comp_op.selected),
 				_comp_val.value])
+	
+	if _texts.selected > 0 and not _contains.text.empty():
+		contains.append("%s:%s" % [_selected_txt, _contains.text])
 	
 	_container.set_query({
 			"from": from,
@@ -42,6 +48,7 @@ func _apply_filters():
 func _update_filters():
 	_update_categs()
 	_update_values()
+	_update_texts()
 
 
 func _update_categs():
@@ -62,6 +69,15 @@ func _update_values():
 		_values.add_item(id)
 		if id == _selected_val:
 			_values.select(_values.get_item_count() - 1)
+
+
+func _update_texts():
+	_texts.clear()
+	_texts.add_item("None")
+	for id in _container.store().texts():
+		_texts.add_item(id)
+		if id == _selected_txt:
+			_texts.select(_texts.get_item_count() - 1)
 
 
 func _on_BackBtn_pressed() -> void:
@@ -91,4 +107,17 @@ func _on_ComparisonValue_value_changed(_value):
 
 
 func _on_ComparisonOperator_item_selected(_id):
+	_apply_filters()
+
+
+func _on_Texts_item_selected(id):
+	if id == 0:
+		_selected_txt = "none"
+	else:
+		_selected_txt = _texts.get_item_text(id)
+	
+	_apply_filters()
+
+
+func _on_Contains_text_changed(_new_text):
 	_apply_filters()

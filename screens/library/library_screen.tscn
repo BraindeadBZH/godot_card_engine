@@ -120,6 +120,29 @@ max_value = 1000.0
 allow_greater = true
 allow_lesser = true
 
+[node name="Texts" type="OptionButton" parent="TitleBg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 501.0
+margin_top = -21.0
+margin_right = 672.0
+margin_bottom = -1.0
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Contains" type="LineEdit" parent="TitleBg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 501.0
+margin_top = 4.0
+margin_right = 672.0
+margin_bottom = 28.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LibraryBg" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -156,3 +179,5 @@ database = "main"
 [connection signal="item_selected" from="TitleBg/Values" to="." method="_on_Values_item_selected"]
 [connection signal="item_selected" from="TitleBg/ComparisonOperator" to="." method="_on_ComparisonOperator_item_selected"]
 [connection signal="value_changed" from="TitleBg/ComparisonValue" to="." method="_on_ComparisonValue_value_changed"]
+[connection signal="item_selected" from="TitleBg/Texts" to="." method="_on_Texts_item_selected"]
+[connection signal="text_changed" from="TitleBg/Contains" to="." method="_on_Contains_text_changed"]
