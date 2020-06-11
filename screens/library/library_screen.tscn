@@ -73,7 +73,10 @@ margin_left = 130.0
 margin_top = -21.0
 margin_right = 196.0
 margin_bottom = -9.0
-text = "Categories"
+text = "Categories:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Categories" type="OptionButton" parent="TitleBg"]
 anchor_top = 0.5
@@ -83,6 +86,39 @@ margin_top = -2.0
 margin_right = 301.0
 margin_bottom = 18.0
 clip_text = true
+
+[node name="Values" type="OptionButton" parent="TitleBg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 317.0
+margin_top = -21.0
+margin_right = 488.0
+margin_bottom = -1.0
+clip_text = true
+
+[node name="ComparisonOperator" type="OptionButton" parent="TitleBg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 317.0
+margin_top = 4.0
+margin_right = 391.0
+margin_bottom = 24.0
+text = "="
+clip_text = true
+items = [ "=", null, false, 0, null, ">", null, false, 1, null, ">=", null, false, 2, null, "<", null, false, 3, null, "<=", null, false, 4, null ]
+selected = 0
+
+[node name="ComparisonValue" type="SpinBox" parent="TitleBg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 399.0
+margin_top = 2.0
+margin_right = 488.0
+margin_bottom = 26.0
+min_value = -1000.0
+max_value = 1000.0
+allow_greater = true
+allow_lesser = true
 
 [node name="LibraryBg" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -117,3 +153,6 @@ card_visual = ExtResource( 6 )
 database = "main"
 [connection signal="pressed" from="TitleBg/BackBtn" to="." method="_on_BackBtn_pressed"]
 [connection signal="item_selected" from="TitleBg/Categories" to="." method="_on_Categories_item_selected"]
+[connection signal="item_selected" from="TitleBg/Values" to="." method="_on_Values_item_selected"]
+[connection signal="item_selected" from="TitleBg/ComparisonOperator" to="." method="_on_ComparisonOperator_item_selected"]
+[connection signal="value_changed" from="TitleBg/ComparisonValue" to="." method="_on_ComparisonValue_value_changed"]

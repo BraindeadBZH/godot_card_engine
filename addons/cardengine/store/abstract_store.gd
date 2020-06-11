@@ -9,6 +9,8 @@ signal cleared()
 
 var _cards: Array = []
 var _categs: Dictionary = {}
+var _values: Array = []
+var _texts: Array = []
 var _rng: PseudoRng = PseudoRng.new()
 
 
@@ -19,13 +21,15 @@ func cards() -> Array:
 func clear() -> void:
 	_cards.clear()
 	_categs.clear()
+	_values.clear()
+	_texts.clear()
 	emit_signal("cleared")
 
 
 func replace_cards(new_cards: Array) -> void:
 	_cards = new_cards
 	emit_signal("card_replaced")
-	_update_categories()
+	_update_stats()
 
 
 func count() -> int:
@@ -61,11 +65,18 @@ func get_category(id: String) -> Dictionary:
 	
 	return _categs[id]
 
+func values() -> Array:
+	return _values
+
+
+func texts() -> Array:
+	return _texts
+
 
 func add_card(card: CardData) -> void:
 	_cards.append(card)
 	emit_signal("card_added")
-	_update_categories()
+	_update_stats()
 
 
 func remove_card(index: int) -> void:
@@ -74,19 +85,19 @@ func remove_card(index: int) -> void:
 	
 	_cards.remove(index)
 	emit_signal("card_removed", index)
-	_update_categories()
+	_update_stats()
 
 
 func remove_first() -> void:
 	_cards.pop_front()
 	emit_signal("card_removed", 0)
-	_update_categories()
+	_update_stats()
 
 
 func remove_last() -> void:
 	_cards.pop_back()
 	emit_signal("card_removed", count()-1)
-	_update_categories()
+	_update_stats()
 
 
 func move_card(index: int, to: AbstractStore = null) -> CardData:
@@ -99,7 +110,7 @@ func move_card(index: int, to: AbstractStore = null) -> CardData:
 	to.add_card(card)
 	_cards.remove(index)
 	emit_signal("card_removed", index)
-	_update_categories()
+	_update_stats()
 	return card
 
 
@@ -126,6 +137,12 @@ func rng() -> PseudoRng:
 	return _rng
 
 
+func _update_stats():
+	_update_categories()
+	_update_values()
+	_update_texts()
+
+
 func _update_categories():
 	_categs.clear()
 	
@@ -138,3 +155,21 @@ func _update_categories():
 					"name": card.get_category(categ),
 					"count": 1,
 				}
+
+
+func _update_values():
+	_values.clear()
+	
+	for card in _cards:
+		for value in card.values():
+			if not _values.has(value):
+				_values.append(value)
+
+
+func _update_texts():
+	_texts.clear()
+	
+	for card in _cards:
+		for text in card.texts():
+			if not _texts.has(text):
+				_texts.append(text)
