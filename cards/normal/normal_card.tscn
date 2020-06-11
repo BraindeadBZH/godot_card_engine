@@ -211,12 +211,12 @@ __meta__ = {
 }
 
 [node name="CardId" type="Label" parent="Front" index="5"]
-margin_left = 124.0
-margin_top = -298.0
-margin_right = 189.0
-margin_bottom = -284.0
+margin_left = 76.0
+margin_top = 230.0
+margin_right = 141.0
+margin_bottom = 244.0
 custom_fonts/font = SubResource( 4 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.67451, 0.67451, 0.67451, 1 )
 text = "card_id"
 align = 2
 __meta__ = {
