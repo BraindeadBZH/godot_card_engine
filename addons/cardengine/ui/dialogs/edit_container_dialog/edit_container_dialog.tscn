@@ -74,15 +74,41 @@ margin_bottom = 27.0
 size_flags_horizontal = 3
 text = "Path mode"
 
-[node name="ModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
+[node name="FaceSwitchLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
 margin_top = 44.0
+margin_right = 502.0
+margin_bottom = 84.0
+
+[node name="FaceDownLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout"]
+margin_top = 13.0
+margin_right = 209.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "Face down"
+align = 2
+
+[node name="FaceSwitch" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout"]
+margin_left = 213.0
+margin_right = 289.0
+margin_bottom = 40.0
+
+[node name="FaceUpLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout"]
+margin_left = 293.0
+margin_top = 13.0
+margin_right = 502.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "Face up"
+
+[node name="ModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
+margin_top = 88.0
 margin_right = 502.0
 margin_bottom = 437.0
 size_flags_vertical = 3
 
 [node name="GridMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
 margin_right = 502.0
-margin_bottom = 393.0
+margin_bottom = 349.0
 size_flags_horizontal = 3
 
 [node name="GridModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode"]

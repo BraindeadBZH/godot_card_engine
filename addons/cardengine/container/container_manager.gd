@@ -114,6 +114,7 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("meta", "id", cont.id)
 	file.set_value("meta", "name", cont.name)
 	file.set_value("meta", "mode", cont.mode)
+	file.set_value("meta", "face_up", cont.face_up)
 	
 	# Grid data
 	file.set_value("grid", "card_width", cont.grid_card_width)
@@ -162,6 +163,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"container_id": cont.id,
 		"container_name": cont.name,
 		"mode": _translate_mode(cont.mode),
+		"face_up": _translate_bool(cont.face_up),
 		"grid_width": cont.grid_card_width,
 		"grid_fixed": _translate_bool(cont.grid_fixed_width),
 		"grid_spacing_h": cont.grid_card_spacing.x,
@@ -239,6 +241,7 @@ func _read_metadata(id: String) -> ContainerData:
 		file.get_value("meta", "name", ""))
 	
 	cont.mode = file.get_value("meta", "mode", "grid")
+	cont.face_up = file.get_value("meta", "face_up", true)
 	
 	# Grid data
 	cont.grid_card_width = file.get_value("grid", "card_width", 200)

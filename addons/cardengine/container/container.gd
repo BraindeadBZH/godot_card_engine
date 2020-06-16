@@ -5,6 +5,7 @@ extends Reference
 var id: String = ""
 var name: String = ""
 var mode: String = "grid"
+var face_up: bool = true
 
 # Grid parameters
 var grid_card_width: float = 200

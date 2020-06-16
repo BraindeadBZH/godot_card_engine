@@ -3,6 +3,7 @@
 id="card_list"
 name="CardList"
 mode="grid"
+face_up=true
 
 [grid]
 

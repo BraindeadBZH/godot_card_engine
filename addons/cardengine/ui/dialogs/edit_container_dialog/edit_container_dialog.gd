@@ -5,6 +5,7 @@ var _data: ContainerData = null
 
 onready var _manager: ContainerManager = CardEngine.cont()
 onready var _mode_switch = $MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout/ModeSwitch
+onready var _face_switch = $MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout/FaceSwitch
 onready var _grid_mode = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode
 onready var _path_mode = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode
 onready var _grid_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardWidth
@@ -54,6 +55,7 @@ func _update() -> void:
 	if _data == null:
 		return
 	
+	_face_switch.pressed = _data.face_up
 	_grid_width.value = _data.grid_card_width
 	_grid_fixed.pressed = _data.grid_fixed_width
 	_grid_spacing_h.value = _data.grid_card_spacing.x
@@ -133,6 +135,7 @@ func _save() -> void:
 	if _data == null:
 		return
 	
+	_data.face_up = _face_switch.pressed
 	_data.grid_card_width = _grid_width.value
 	_data.grid_fixed_width = _grid_fixed.pressed
 	_data.grid_card_spacing.x = _grid_spacing_h.value

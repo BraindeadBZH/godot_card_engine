@@ -5,6 +5,7 @@ extends AbstractContainer
 
 func _ready():
 	_layout_mode = LayoutMode.GRID
+	_face_up = true
 
 	# Grid parameters
 	_grid_card_width = 200

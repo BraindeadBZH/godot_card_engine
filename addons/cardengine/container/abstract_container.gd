@@ -12,6 +12,7 @@ export(Dictionary) var query: Dictionary = {"from": [], "where": [], "contains":
 var _store: AbstractStore = null
 
 var _layout_mode = LayoutMode.GRID
+var _face_up: float = true
 
 # Grid parameters
 var _grid_card_width: float = 200
@@ -98,6 +99,11 @@ func _update_container() -> void:
 		instance.name = card.id
 		_cards.add_child(instance)
 		instance.set_data(card)
+		
+		if _face_up:
+			instance.flip(AbstractCard.CardSide.FRONT)
+		else:
+			instance.flip(AbstractCard.CardSide.BACK)
 	
 	_layout_cards()
 
