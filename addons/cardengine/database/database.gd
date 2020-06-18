@@ -44,4 +44,4 @@ func exec_query(query: Query, result: AbstractStore) -> void:
 	for id in _cards:
 		var card = _cards[id]
 		if query._match(card):
-			result.add_card(card)
+			result.add_card(card.duplicate())
