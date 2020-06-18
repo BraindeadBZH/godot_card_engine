@@ -68,7 +68,8 @@ func _fill_card_list():
 	_store.clear()
 	_db.exec_query(_query, _store)
 	
-	_update_filters()
+	if _store.count() > 0:
+		_update_filters()
 	
 	var cards = _store.cards()
 	_list_lbl.text = "Card List (%d cards)" % cards.size()

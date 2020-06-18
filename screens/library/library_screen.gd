@@ -46,7 +46,8 @@ func _apply_filters():
 	db.exec_query(q, _store)
 	_container.set_store(_store)
 	
-	_update_filters()
+	if _store.count() > 0:
+		_update_filters()
 
 
 func _update_filters():
