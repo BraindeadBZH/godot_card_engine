@@ -1,9 +1,11 @@
 extends AbstractScreen
 
+var _store: CardDeck = CardDeck.new()
 var _selected_categ: String = "all"
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
+onready var _manager = CardEngine.db()
 onready var _container = $LibraryBg/LibraryScroll/LibraryContainer
 onready var _categs = $TitleBg/Categories
 onready var _values = $TitleBg/Values
@@ -15,8 +17,7 @@ onready var _contains = $TitleBg/Contains
 
 func _ready():
 	if _container != null:
-		_container.set_store(CardDeck.new())
-		_update_filters()
+		_apply_filters()
 
 
 func _apply_filters():
@@ -37,10 +38,13 @@ func _apply_filters():
 	if _texts.selected > 0 and not _contains.text.empty():
 		contains.append("%s:%s" % [_selected_txt, _contains.text])
 	
-	_container.set_query({
-			"from": from,
-			"where": where,
-			"contains": contains})
+	_store.clear()
+	
+	var db = _manager.get_database("main")
+	var q = Query.new()
+	q.from(from).where(where).contains(contains)
+	db.exec_query(q, _store)
+	_container.set_store(_store)
 	
 	_update_filters()
 
@@ -54,8 +58,8 @@ func _update_filters():
 func _update_categs():
 	_categs.clear()
 	_categs.add_item("All")
-	for id in _container.store().categories():
-		var categ = _container.store().get_category(id)
+	for id in _store.categories():
+		var categ = _store.get_category(id)
 		_categs.add_item("%s (%d)" % [categ["name"], categ["count"]])
 		_categs.set_item_metadata(_categs.get_item_count() - 1, id)
 		if id == _selected_categ:
@@ -65,7 +69,7 @@ func _update_categs():
 func _update_values():
 	_values.clear()
 	_values.add_item("None")
-	for id in _container.store().values():
+	for id in _store.values():
 		_values.add_item(id)
 		if id == _selected_val:
 			_values.select(_values.get_item_count() - 1)
@@ -74,7 +78,7 @@ func _update_values():
 func _update_texts():
 	_texts.clear()
 	_texts.add_item("None")
-	for id in _container.store().texts():
+	for id in _store.texts():
 		_texts.add_item(id)
 		if id == _selected_txt:
 			_texts.select(_texts.get_item_count() - 1)

@@ -6,8 +6,6 @@ enum FineTuningMode {LINEAR, SYMMETRIC, RANDOM}
 enum AspectMode {KEEP, IGNORE}
 
 export(PackedScene) var card_visual: PackedScene = null
-export(String) var database: String = ""
-export(Dictionary) var query: Dictionary = {"from": [], "where": [], "contains": []} setget set_query
 
 var _store: AbstractStore = null
 
@@ -47,7 +45,6 @@ var _fine_scale_ratio = AspectMode.KEEP
 var _fine_scale_min: Vector2 = Vector2(0.85, 0.85)
 var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 
-onready var _manager = CardEngine.db()
 onready var _cards = $Cards
 onready var _path = $CardPath
 
@@ -58,34 +55,14 @@ func store() -> AbstractStore:
 
 func set_store(store: AbstractStore) -> void:
 	_store = store
-	_update_store()
-
-
-func set_query(new_query: Dictionary) -> void:
-	query = new_query
-	_update_store()
-
-
-func _update_store() -> void:
-	if _store == null:
-		return
-	
-	_store.clear()
-	
-	var db = _manager.get_database(database)
-	if db == null:
-		printerr("Database '%s' not found" % database)
-		return
-	
-	var q = Query.new()
-	q.from(query["from"]).where(query["where"]).contains(query["contains"])
-	db.exec_query(q, _store)
-	
 	_update_container()
 
 
 func _update_container() -> void:
 	if card_visual == null:
+		return
+	
+	if _store == null:
 		return
 	
 	_clear()

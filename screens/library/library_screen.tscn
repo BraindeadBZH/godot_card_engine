@@ -173,7 +173,6 @@ margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 card_visual = ExtResource( 6 )
-database = "main"
 [connection signal="pressed" from="TitleBg/BackBtn" to="." method="_on_BackBtn_pressed"]
 [connection signal="item_selected" from="TitleBg/Categories" to="." method="_on_Categories_item_selected"]
 [connection signal="item_selected" from="TitleBg/Values" to="." method="_on_Values_item_selected"]
