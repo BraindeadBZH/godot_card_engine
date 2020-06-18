@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://_private/containers/home_display/home_display_private.tscn" type="PackedScene" id=1]
+[ext_resource path="res://containers/home_display/home_display.gd" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 1, -29, -1, 29, 33, 79.1812, -102, -3, 102, 3, 242, 175.181, -11, 69, 11, -69, 441, 63.1812 )
+}
+
+[node name="HomeDisplay" instance=ExtResource( 1 )]
+rect_min_size = Vector2( 500, 300 )
+script = ExtResource( 2 )
+
+[node name="CardPath" parent="." index="0"]
+curve = SubResource( 1 )

@@ -86,19 +86,20 @@ func _update_container() -> void:
 
 
 func _layout_cards():
-	for child in _cards.get_children():
-		if child is AbstractCard:
-			child.position = Vector2(0.0, 0.0)
-			child.rotation = 0.0
-			child.scale = Vector2(0.0, 0.0)
-			
-	match _layout_mode:
-		LayoutMode.GRID:
-			_grid_layout()
-		LayoutMode.PATH:
-			_path_layout()
+	if _cards != null:
+		for child in _cards.get_children():
+			if child is AbstractCard:
+				child.position = Vector2(0.0, 0.0)
+				child.rotation = 0.0
+				child.scale = Vector2(0.0, 0.0)
+				
+		match _layout_mode:
+			LayoutMode.GRID:
+				_grid_layout()
+			LayoutMode.PATH:
+				_path_layout()
 	
-	_fine_tune()
+		_fine_tune()
 
 
 func _grid_layout():

@@ -198,6 +198,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 	tpl_path = FMT_SCENE_TPL % _tpl_folder
 	var scene_path = FMT_PRIVATE_SCENE % [_private_folder, cont.id, cont.id]
 	params = {
+		"container_name": "%sPrivate" % cont.name,
 		"parent_scene": "res://addons/cardengine/container/abstract_container.tscn",
 		"script_path": script_path,
 	}
@@ -223,6 +224,7 @@ func _write_public_scene(cont: ContainerData, private_scene: String) -> void:
 	tpl_path = FMT_SCENE_TPL % _tpl_folder
 	var scene_path = FMT_IMPL_SCENE % [_folder, cont.id, cont.id]
 	params = {
+		"container_name": cont.name,
 		"parent_scene": private_scene,
 		"script_path": script_path}
 	Utils.copy_template(tpl_path, scene_path, params)
