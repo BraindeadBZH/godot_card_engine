@@ -4,6 +4,7 @@ extends Reference
 
 signal card_added()
 signal card_removed(index)
+signal multiple_cards_removed()
 signal card_replaced()
 signal cleared()
 
@@ -64,6 +65,7 @@ func get_category(id: String) -> Dictionary:
 		return {}
 	
 	return _categs[id]
+
 
 func values() -> Array:
 	return _values
@@ -135,6 +137,14 @@ func copy_random_card(to: AbstractStore = null) -> CardData:
 
 func rng() -> PseudoRng:
 	return _rng
+
+
+func keep(count: int) -> void:
+	if count > _cards.size():
+		return
+	_cards.resize(count)
+	emit_signal("multiple_cards_removed")
+	_update_stats()
 
 
 func _update_stats():
