@@ -44,6 +44,7 @@ func _apply_filters():
 	var q = Query.new()
 	q.from(from).where(where).contains(contains)
 	db.exec_query(q, _store)
+	_store.sort_by_value("mana")
 	_container.set_store(_store)
 	
 	if _store.count() > 0:
