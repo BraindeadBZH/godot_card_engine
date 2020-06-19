@@ -6,10 +6,12 @@ onready var _display = $HomeDisplay
 func _ready():
 	var db = CardEngine.db().get_database("main")
 	var q = Query.new()
-	var store = CardDeck.new()
+	var store = CardPile.new()
 	
-	q.from(["common"]).where(["mana = 1"])
+	q.from(["common"])
 	db.exec_query(q, store)
+	store.shuffle()
+	store.keep(3)
 	_display.set_store(store)
 
 
