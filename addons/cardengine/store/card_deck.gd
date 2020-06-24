@@ -5,7 +5,22 @@ extends AbstractStore
 signal sorted()
 
 
-class DeckSorter:
+class DeckIdSorter:
+	func sort_ascending(left: CardData, right: CardData) -> bool:
+		if left.id.casecmp_to(right.id) == -1:
+			return true
+		
+		return false
+	
+	
+	func sort_descending(left: CardData, right: CardData) -> bool:
+		if left.id.casecmp_to(right.id) == 1:
+			return true
+		
+		return false
+
+
+class DeckValueSorter:
 	var _value: String = ""
 	
 	
@@ -33,8 +48,17 @@ class DeckSorter:
 		return false
 
 
+func sort_by_id(ascending: bool = true):
+	var sorter = DeckIdSorter.new()
+	if ascending:
+		_cards.sort_custom(sorter, "sort_ascending")
+	else:
+		_cards.sort_custom(sorter, "sort_descending")
+	emit_signal("sorted")
+
+
 func sort_by_value(value: String, ascending: bool = true):
-	var sorter = DeckSorter.new(value)
+	var sorter = DeckValueSorter.new(value)
 	if ascending:
 		_cards.sort_custom(sorter, "sort_ascending")
 	else:

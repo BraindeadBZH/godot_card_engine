@@ -70,6 +70,7 @@ func _fill_card_list():
 	
 	if _store.count() > 0:
 		_update_filters()
+		_store.sort_by_id()
 	
 	var cards = _store.cards()
 	_list_lbl.text = "Card List (%d cards)" % cards.size()
