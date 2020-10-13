@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/store/card_pile.gd"
 }, {
+"base": "Reference",
+"class": "CardState",
+"language": "GDScript",
+"path": "res://addons/cardengine/card/card_state.gd"
+}, {
 "base": "Control",
 "class": "CardsUi",
 "language": "GDScript",
@@ -160,6 +165,7 @@ _global_script_class_icons={
 "CardList": "",
 "CardListPrivate": "",
 "CardPile": "",
+"CardState": "",
 "CardsUi": "",
 "ContainerData": "",
 "ContainerManager": "",
@@ -201,7 +207,7 @@ timers/tooltip_delay_sec=0.1
 [rendering]
 
 quality/2d/use_pixel_snap=true
-quality/filters/use_nearest_mipmap_filter=true
+quality/filters/anisotropic_filter_level=8
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-quality/filters/msaa=3
+quality/filters/msaa=4
 environment/default_environment="res://default_env.tres"
