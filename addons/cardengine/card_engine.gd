@@ -14,9 +14,13 @@ func _enter_tree():
 
 func _exit_tree():
 	remove_control_from_bottom_panel(_main_control)
-	_tool_btn = null
+	
+	if _tool_btn != null:
+		_tool_btn.queue_free()
+		_tool_btn = null
 	
 	if _main_control != null:
 		_main_control.queue_free()
+		_main_control = null
 	
 	CardEngine.clean()
