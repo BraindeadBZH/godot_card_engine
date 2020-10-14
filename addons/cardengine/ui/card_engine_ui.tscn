@@ -16,7 +16,7 @@
 [node name="CardEngineUI" type="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 200 )
+rect_min_size = Vector2( 0, 500 )
 tab_align = 0
 script = ExtResource( 1 )
 __meta__ = {
@@ -67,7 +67,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "main: Main Database", null, false, "test: Test database", null, false ]
+items = [ "main: Main Database (20 cards)", null, false ]
 
 [node name="Cards" type="Control" parent="."]
 visible = false
@@ -301,8 +301,16 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
+items = [ "card_list: CardList", null, false, "home_display: HomeDisplay", null, false ]
 
-[node name="Dialogs" type="Node" parent="."]
+[node name="Dialogs" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="NewDatabaseDialog" parent="Dialogs" instance=ExtResource( 2 )]
 
