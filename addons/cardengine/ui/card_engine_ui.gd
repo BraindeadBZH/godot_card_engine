@@ -1,7 +1,8 @@
 tool
 class_name CardEngineUI
-extends TabContainer
+extends Control
 
+onready var _tabs = $Tabs
 onready var _confirm_dlg = $Dialogs/GenericConfirmDialog
 onready var _new_db_dlg = $Dialogs/NewDatabaseDialog
 onready var _edit_db_dlg = $Dialogs/EditDatabaseDialog
@@ -13,13 +14,13 @@ onready var _edit_cont_dlg = $Dialogs/EditContainerDialog
 
 
 func _ready():
-	$Databases.set_main_ui(self)
-	$Cards.set_main_ui(self)
-	$Containers.set_main_ui(self)
+	$Tabs/Databases.set_main_ui(self)
+	$Tabs/Cards.set_main_ui(self)
+	$Tabs/Containers.set_main_ui(self)
 
 
 func change_tab(index: int) -> void:
-	current_tab = index
+	_tabs.current_tab = index
 
 
 func show_new_database_dialog(data: Dictionary = {}) -> void:

@@ -59,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/core/card_engine_instance.gd"
 }, {
-"base": "TabContainer",
+"base": "Control",
 "class": "CardEngineUI",
 "language": "GDScript",
 "path": "res://addons/cardengine/ui/card_engine_ui.gd"
