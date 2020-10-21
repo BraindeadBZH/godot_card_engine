@@ -40,8 +40,8 @@ func remove_card(id: String) -> void:
 	_cards.erase(id)
 
 
-func exec_query(query: Query, result: AbstractStore) -> void:
-	for id in _cards:
-		var card = _cards[id]
-		if query._match(card):
-			result.add_card(card.duplicate())
+#func exec_query(query: Query, result: AbstractStore) -> void:
+#	for id in _cards:
+#		var card = _cards[id]
+#		if query._match(card):
+#			result.add_card(card.duplicate())

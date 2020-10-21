@@ -42,3 +42,7 @@ mode="linear"
 ratio="keep"
 min=Vector2( 0, 0 )
 max=Vector2( 0, 0 )
+
+[order]
+
+duration=0.3

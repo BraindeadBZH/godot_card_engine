@@ -35,6 +35,7 @@ __meta__ = {
 }
 
 [node name="Layout" type="Control" parent="MainLayout/MainTabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -657,7 +658,7 @@ step = 0.01
 allow_greater = true
 allow_lesser = true
 
-[node name="Events" type="Control" parent="MainLayout/MainTabs"]
+[node name="Transitions" type="Control" parent="MainLayout/MainTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -665,6 +666,51 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[node name="TransLayout" type="VBoxContainer" parent="MainLayout/MainTabs/Transitions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrderTitle" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout"]
+margin_right = 502.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "On re-order"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrderLayout" type="GridContainer" parent="MainLayout/MainTabs/Transitions/TransLayout"]
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 48.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
+margin_top = 5.0
+margin_right = 55.0
+margin_bottom = 19.0
+text = "Duration"
+
+[node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
+margin_left = 59.0
+margin_right = 502.0
+margin_bottom = 24.0
+hint_tooltip = "Duration of the transition in miliseconds"
+size_flags_horizontal = 3
+max_value = 10000.0
+value = 300.0
+rounded = true
+allow_greater = true
 
 [node name="Animations" type="Control" parent="MainLayout/MainTabs"]
 visible = false

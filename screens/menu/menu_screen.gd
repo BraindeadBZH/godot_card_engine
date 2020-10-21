@@ -8,10 +8,12 @@ func _ready():
 	var q = Query.new()
 	var store = CardPile.new()
 	
-	q.from(["common"])
-	db.exec_query(q, store)
+	var cards = q.from(["common"]).execute(db)
+	
+	store.populate(db, cards)
 	store.shuffle()
 	store.keep(3)
+	
 	_display.set_store(store)
 
 

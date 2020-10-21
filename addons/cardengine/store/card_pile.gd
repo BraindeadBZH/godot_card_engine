@@ -7,14 +7,15 @@ signal card_drawn()
 
 
 func shuffle() -> void:
-	var shuffled = []
-	for card in _cards:
-		shuffled.insert(rng().randomf() * shuffled.size(), card)
-	replace_cards(shuffled)
-	emit_signal("shuffled")
+#	var shuffled = []
+#	for card in _cards:
+#		shuffled.insert(rng().randomf() * shuffled.size(), card)
+#	replace_cards(shuffled)
+#	emit_signal("shuffled")
+	pass # TODO
 
 
-func draw() -> CardData:
+func draw() -> CardInstance:
 	if is_empty():
 		return null
 	

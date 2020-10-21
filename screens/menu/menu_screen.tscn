@@ -6,8 +6,13 @@
 [ext_resource path="res://containers/home_display/home_display.tscn" type="PackedScene" id=4]
 [ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=5]
 
-[node name="MenuScreen" type="Node"]
+[node name="MenuScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0

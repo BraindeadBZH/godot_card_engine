@@ -17,7 +17,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Transition" type="Tween" parent="."]
+[node name="Transitions" type="Tween" parent="."]
 [connection signal="button_down" from="MouseArea" to="." method="_on_MouseArea_button_down"]
 [connection signal="button_up" from="MouseArea" to="." method="_on_MouseArea_button_up"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_MouseArea_mouse_entered"]

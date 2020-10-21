@@ -15,6 +15,7 @@ func clear() -> Query:
 	_contains_stmt.clear()
 	return self
 
+
 # Restriction on categories
 # Accepts wildcards * for string and ? for single char
 # Example: ["knight,armor_*", "soldier,shield_*"]
@@ -29,6 +30,7 @@ func from(statements: Array) -> Query:
 		
 		_from_stmt.append(compiled)
 	return self
+
 
 # Restriction on values
 # Example: ["damage > 10,damage <= 20", "shield < 5"]
@@ -46,6 +48,7 @@ func where(statements: Array) -> Query:
 		_where_stmt.append(compiled)
 	return self
 
+
 # Restriction on texts (case insensitive)
 # Example: ["title:sword", "body:draw"]
 #          Cards have to have sword in the title or draw in the body
@@ -59,7 +62,20 @@ func contains(statements: Array) -> Query:
 		_contains_stmt.append(compiled)
 	return self
 
-func _match(card: CardData) -> bool:
+
+# Executes the query on the give database
+# Returns an Array of ids matching the query
+func execute(db: CardDatabase) -> Array:
+	var result := Array()
+	
+	for id in db.cards():
+		if match_card(db.get_card(id)):
+			result.append(id)
+	
+	return result
+
+
+func match_card(card: CardData) -> bool:
 	var from_result = true
 	var where_result = true
 	var contains_result = true

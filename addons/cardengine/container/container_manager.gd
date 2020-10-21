@@ -148,6 +148,9 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("scale", "ratio", cont.fine_scale_ratio)
 	file.set_value("scale", "min", cont.fine_scale_min)
 	file.set_value("scale", "max", cont.fine_scale_max)
+	
+	# Transitions data
+	file.set_value("order", "duration", cont.order_duration)
 
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
@@ -192,6 +195,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"scale_range_min_v": cont.fine_scale_min.y,
 		"scale_range_max_h": cont.fine_scale_max.x,
 		"scale_range_max_v": cont.fine_scale_max.y,
+		"order_duration": cont.order_duration
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -277,6 +281,9 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.fine_scale_ratio = file.get_value("scale", "ratio", "keep")
 	cont.fine_scale_min = file.get_value("scale", "min", Vector2(0.0, 0.0))
 	cont.fine_scale_max = file.get_value("scale", "max", Vector2(0.0, 0.0))
+	
+	# Transitions data
+	cont.order_duration = file.get_value("order", "duration", 0.0)
 		
 	return cont
 

@@ -39,3 +39,6 @@ func _ready():
 	_fine_scale_ratio = {scale_ratio}
 	_fine_scale_min = Vector2({scale_range_min_h}, {scale_range_min_v})
 	_fine_scale_max = Vector2({scale_range_max_h}, {scale_range_max_v})
+
+	# Transitions
+	_order_duration = {order_duration}

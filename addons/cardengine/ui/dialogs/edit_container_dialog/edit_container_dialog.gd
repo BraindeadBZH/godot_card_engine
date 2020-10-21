@@ -40,6 +40,8 @@ onready var _scale_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/Sc
 onready var _scale_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeH
 onready var _scale_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeV
 
+onready var _transi_order_duration = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Duration
+
 
 func _ready():
 	_grid_mode.visible = true
@@ -129,6 +131,8 @@ func _update() -> void:
 			_scale_ratio.select(0)
 		"ignore":
 			_scale_ratio.select(1)
+	
+	_transi_order_duration.value = _data.order_duration * 1000
 
 
 func _save() -> void:
@@ -208,6 +212,8 @@ func _save() -> void:
 			_data.fine_scale_ratio = "keep"
 		1:
 			_data.fine_scale_ratio = "ignore"
+	
+	_data.order_duration = _transi_order_duration.value / 1000.0
 	
 	_manager.update_container(_data)
 

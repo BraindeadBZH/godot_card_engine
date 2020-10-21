@@ -40,6 +40,9 @@ var fine_scale_ratio = "keep"
 var fine_scale_min: Vector2 = Vector2(0.0, 0.0)
 var fine_scale_max: Vector2 = Vector2(0.0, 0.0)
 
+# Tansitions
+var order_duration: float = 0.0
+
 
 func _init(id: String, name: String) -> void:
 	self.id = id

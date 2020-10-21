@@ -1,6 +1,8 @@
 class_name AbstractContainer
 extends Control
 
+const CARD_NODE_FMT = "card_%s"
+
 enum LayoutMode {GRID, PATH}
 enum FineTuningMode {LINEAR, SYMMETRIC, RANDOM}
 enum AspectMode {KEEP, IGNORE}
@@ -46,6 +48,9 @@ var _fine_scale_ratio = AspectMode.KEEP
 var _fine_scale_min: Vector2 = Vector2(0.85, 0.85)
 var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 
+# Transitions
+var _order_duration: float = 0.0
+
 onready var _cards = $Cards
 onready var _path = $CardPath
 
@@ -56,6 +61,10 @@ func store() -> AbstractStore:
 
 func set_store(store: AbstractStore) -> void:
 	_store = store
+	_store.connect("card_added", self, "_update_container")
+	_store.connect("card_removed", self, "_update_container")
+	_store.connect("cards_removed", self, "_update_container")
+	_store.connect("filtered", self, "_update_container")
 	_update_container()
 
 
@@ -68,20 +77,32 @@ func _update_container() -> void:
 	
 	_clear()
 	
+	# Adding missing cards
 	for card in _store.cards():
-		var instance := card_visual.instance()
-		if not instance is AbstractCard:
+		if _cards.find_node(CARD_NODE_FMT % card.ref(), false, false) != null:
+			continue
+			
+		var visual_inst := card_visual.instance()
+		if not visual_inst is AbstractCard:
 			printerr("Container visual instance must inherit AbstractCard")
 			continue
 		
-		instance.name = card.id
-		_cards.add_child(instance)
-		instance.set_data(card)
+		visual_inst.name = CARD_NODE_FMT % card.ref()
+		_cards.add_child(visual_inst)
+		visual_inst.set_instance(card)
+		visual_inst.set_transitions(_order_duration)
 		
 		if _face_up:
-			instance.flip(AbstractCard.CardSide.FRONT)
+			visual_inst.flip(AbstractCard.CardSide.FRONT)
 		else:
-			instance.flip(AbstractCard.CardSide.BACK)
+			visual_inst.flip(AbstractCard.CardSide.BACK)
+	
+	# Sorting according to store order
+	var index = 0
+	for card in _store.cards():
+		var visual = _cards.find_node(CARD_NODE_FMT % card.ref(), false, false)
+		_cards.move_child(visual, index)
+		index += 1
 	
 	_layout_cards()
 
@@ -261,7 +282,9 @@ func _clear() -> void:
 		return
 	
 	for child in _cards.get_children():
-		_cards.remove_child(child)
+		if not _store.has_card(child.instance()):
+			_cards.remove_child(child)
+			child.queue_free()
 
 
 func _on_AbstractContainer_resized():

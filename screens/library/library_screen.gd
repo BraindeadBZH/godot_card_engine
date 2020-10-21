@@ -16,8 +16,11 @@ onready var _contains = $TitleBg/Contains
 
 
 func _ready():
-	if _container != null:
-		_apply_filters()
+	var db = CardEngine.db().get_database("main")
+	
+	_store.populate(db)
+	_container.set_store(_store)
+	_apply_filters()
 
 
 func _apply_filters():
@@ -38,14 +41,11 @@ func _apply_filters():
 	if _texts.selected > 0 and not _contains.text.empty():
 		contains.append("%s:%s" % [_selected_txt, _contains.text])
 	
-	_store.clear()
 	
-	var db = _manager.get_database("main")
-	var q = Query.new()
-	q.from(from).where(where).contains(contains)
-	db.exec_query(q, _store)
-	_store.sort_by_value("mana")
-	_container.set_store(_store)
+	var filter = Query.new()
+	filter.from(from).where(where).contains(contains)
+	
+	_store.apply_filter(filter)
 	
 	if _store.count() > 0:
 		_update_filters()

@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/store/card_hand.gd"
 }, {
+"base": "Reference",
+"class": "CardInstance",
+"language": "GDScript",
+"path": "res://addons/cardengine/store/card_instance.gd"
+}, {
 "base": "CardListPrivate",
 "class": "CardList",
 "language": "GDScript",
@@ -162,6 +167,7 @@ _global_script_class_icons={
 "CardEngineInstance": "",
 "CardEngineUI": "",
 "CardHand": "",
+"CardInstance": "",
 "CardList": "",
 "CardListPrivate": "",
 "CardPile": "",

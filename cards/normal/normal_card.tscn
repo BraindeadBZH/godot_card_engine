@@ -235,4 +235,4 @@ margin_left = -210.0
 margin_top = -300.0
 margin_right = 210.0
 margin_bottom = 300.0
-[connection signal="data_changed" from="." to="." method="_on_NormalCard_data_changed"]
+[connection signal="instance_changed" from="." to="." method="_on_NormalCard_instance_changed"]

@@ -39,3 +39,6 @@ func _ready():
 	_fine_scale_ratio = AspectMode.KEEP
 	_fine_scale_min = Vector2(0, 0)
 	_fine_scale_max = Vector2(0, 0)
+
+	# Transitions
+	_order_duration = 0.3
