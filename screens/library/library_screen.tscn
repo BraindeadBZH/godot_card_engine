@@ -143,6 +143,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="RaritySort" type="CheckButton" parent="TitleBg"]
+margin_left = 673.5
+margin_top = -0.5
+margin_right = 834.5
+margin_bottom = 39.5
+text = "Sort by rarity"
+
+[node name="ManaSort" type="CheckButton" parent="TitleBg"]
+margin_left = 673.5
+margin_top = 24.0
+margin_right = 834.5
+margin_bottom = 64.0
+text = "Sort by mana"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameSort" type="CheckButton" parent="TitleBg"]
+margin_left = 821.5
+margin_top = -0.5
+margin_right = 982.5
+margin_bottom = 39.5
+text = "Sort by name"
+
 [node name="LibraryBg" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -180,3 +204,6 @@ card_visual = ExtResource( 6 )
 [connection signal="value_changed" from="TitleBg/ComparisonValue" to="." method="_on_ComparisonValue_value_changed"]
 [connection signal="item_selected" from="TitleBg/Texts" to="." method="_on_Texts_item_selected"]
 [connection signal="text_changed" from="TitleBg/Contains" to="." method="_on_Contains_text_changed"]
+[connection signal="toggled" from="TitleBg/RaritySort" to="." method="_on_RaritySort_toggled"]
+[connection signal="toggled" from="TitleBg/ManaSort" to="." method="_on_ManaSort_toggled"]
+[connection signal="toggled" from="TitleBg/NameSort" to="." method="_on_NameSort_toggled"]

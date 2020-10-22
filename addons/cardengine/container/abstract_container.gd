@@ -65,6 +65,7 @@ func set_store(store: AbstractStore) -> void:
 	_store.connect("card_removed", self, "_update_container")
 	_store.connect("cards_removed", self, "_update_container")
 	_store.connect("filtered", self, "_update_container")
+	_store.connect("sorted", self, "_update_container")
 	_update_container()
 
 
