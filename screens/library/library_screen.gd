@@ -146,13 +146,13 @@ func _on_Contains_text_changed(_new_text) -> void:
 	_apply_filters()
 
 
-func _on_RaritySort_toggled(button_pressed: bool) -> void:
+func _on_RaritySort_toggled(_button_pressed: bool) -> void:
 	_apply_filters()
 
 
-func _on_ManaSort_toggled(button_pressed: bool) -> void:
+func _on_ManaSort_toggled(_button_pressed: bool) -> void:
 	_apply_filters()
 
 
-func _on_NameSort_toggled(button_pressed: bool) -> void:
+func _on_NameSort_toggled(_button_pressed: bool) -> void:
 	_apply_filters()

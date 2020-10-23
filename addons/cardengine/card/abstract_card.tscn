@@ -18,8 +18,13 @@ __meta__ = {
 }
 
 [node name="Transitions" type="Tween" parent="."]
+
+[node name="MergeWindow" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
 [connection signal="button_down" from="MouseArea" to="." method="_on_MouseArea_button_down"]
 [connection signal="button_up" from="MouseArea" to="." method="_on_MouseArea_button_up"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_MouseArea_mouse_entered"]
 [connection signal="mouse_exited" from="MouseArea" to="." method="_on_MouseArea_mouse_exited"]
 [connection signal="pressed" from="MouseArea" to="." method="_on_MouseArea_pressed"]
+[connection signal="timeout" from="MergeWindow" to="." method="_on_MergeWindow_timeout"]
