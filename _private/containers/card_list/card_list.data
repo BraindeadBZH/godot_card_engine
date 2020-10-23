@@ -48,3 +48,15 @@ max=Vector2( 0, 0 )
 duration=0.3
 type="quad"
 easing="in_out"
+
+[in]
+
+duration=0.5
+type="elastic"
+easing="out"
+
+[out]
+
+duration=0.0
+type="linear"
+easing="in"

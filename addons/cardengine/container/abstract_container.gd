@@ -9,6 +9,7 @@ enum AspectMode {KEEP, IGNORE}
 
 export(PackedScene) var card_visual: PackedScene = null
 export(NodePath) var in_anchor: NodePath = ""
+export(NodePath) var out_anchor: NodePath = ""
 
 var _store: AbstractStore = null
 
@@ -77,6 +78,20 @@ func _update_container() -> void:
 		return
 	
 	_clear()
+	
+	if not in_anchor.is_empty():
+		var anchor: Node2D = get_node(in_anchor)
+		_transitions.in_anchor.enabled = true
+		_transitions.in_anchor.position = anchor.global_position
+		_transitions.in_anchor.scale = anchor.global_scale
+		_transitions.in_anchor.rotation = anchor.global_rotation
+	
+	if not out_anchor.is_empty():
+		var anchor: Node2D = get_node(out_anchor)
+		_transitions.out_anchor.enabled = true
+		_transitions.out_anchor.position = anchor.global_position
+		_transitions.out_anchor.scale = anchor.global_scale
+		_transitions.out_anchor.rotation = anchor.global_rotation
 	
 	# Adding missing cards
 	for card in _store.cards():

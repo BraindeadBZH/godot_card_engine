@@ -45,6 +45,14 @@ var order_duration: float = 0.0
 var order_type: String = "cubic"
 var order_easing: String = "in_out"
 
+var in_duration: float = 0.0
+var in_type: String = "cubic"
+var in_easing: String = "in_out"
+
+var out_duration: float = 0.0
+var out_type: String = "cubic"
+var out_easing: String = "in_out"
+
 
 func _init(id: String, name: String) -> void:
 	self.id = id

@@ -44,6 +44,14 @@ onready var _trans_order_duration = $MainLayout/MainTabs/Transitions/TransLayout
 onready var _trans_order_type = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Type
 onready var _trans_order_easing = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Easing
 
+onready var _trans_in_duration = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Duration
+onready var _trans_in_type = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Type
+onready var _trans_in_easing = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Easing
+
+onready var _trans_out_duration = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Duration
+onready var _trans_out_type = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Type
+onready var _trans_out_easing = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Easing
+
 
 func _ready():
 	_grid_mode.visible = true
@@ -98,6 +106,14 @@ func _update() -> void:
 	_trans_order_duration.value = _data.order_duration * 1000
 	_trans_order_type.select(_trans_type_to_select(_data.order_type))
 	_trans_order_easing.select(_trans_easing_to_select(_data.order_easing))
+	
+	_trans_in_duration.value = _data.in_duration * 1000
+	_trans_in_type.select(_trans_type_to_select(_data.in_type))
+	_trans_in_easing.select(_trans_easing_to_select(_data.in_easing))
+	
+	_trans_out_duration.value = _data.out_duration * 1000
+	_trans_out_type.select(_trans_type_to_select(_data.out_type))
+	_trans_out_easing.select(_trans_easing_to_select(_data.out_easing))
 
 
 func _save() -> void:
@@ -143,6 +159,14 @@ func _save() -> void:
 	_data.order_duration = _trans_order_duration.value / 1000.0
 	_data.order_type = _select_to_trans_type(_trans_order_type.selected)
 	_data.order_easing = _select_to_trans_easing(_trans_order_easing.selected)
+	
+	_data.in_duration = _trans_in_duration.value / 1000.0
+	_data.in_type = _select_to_trans_type(_trans_in_type.selected)
+	_data.in_easing = _select_to_trans_easing(_trans_in_easing.selected)
+	
+	_data.out_duration = _trans_out_duration.value / 1000.0
+	_data.out_type = _select_to_trans_type(_trans_out_type.selected)
+	_data.out_easing = _select_to_trans_easing(_trans_out_easing.selected)
 	
 	_manager.update_container(_data)
 

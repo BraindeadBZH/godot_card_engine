@@ -153,6 +153,14 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("order", "duration", cont.order_duration)
 	file.set_value("order", "type", cont.order_type)
 	file.set_value("order", "easing", cont.order_easing)
+	
+	file.set_value("in", "duration", cont.in_duration)
+	file.set_value("in", "type", cont.in_type)
+	file.set_value("in", "easing", cont.in_easing)
+	
+	file.set_value("out", "duration", cont.out_duration)
+	file.set_value("out", "type", cont.out_type)
+	file.set_value("out", "easing", cont.out_easing)
 
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
@@ -199,7 +207,13 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"scale_range_max_v": cont.fine_scale_max.y,
 		"order_duration": cont.order_duration,
 		"order_type": _translate_trans_type(cont.order_type),
-		"order_easing": _translate_trans_easing(cont.order_easing)
+		"order_easing": _translate_trans_easing(cont.order_easing),
+		"in_duration": cont.in_duration,
+		"in_type": _translate_trans_type(cont.in_type),
+		"in_easing": _translate_trans_easing(cont.in_easing),
+		"out_duration": cont.out_duration,
+		"out_type": _translate_trans_type(cont.out_type),
+		"out_easing": _translate_trans_easing(cont.out_easing)
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -290,6 +304,14 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.order_duration = file.get_value("order", "duration", 0.0)
 	cont.order_type = file.get_value("order", "type", "linear")
 	cont.order_easing = file.get_value("order", "easing", "in")
+	
+	cont.in_duration = file.get_value("in", "duration", 0.0)
+	cont.in_type = file.get_value("in", "type", "linear")
+	cont.in_easing = file.get_value("in", "easing", "in")
+	
+	cont.out_duration = file.get_value("out", "duration", 0.0)
+	cont.out_type = file.get_value("out", "type", "linear")
+	cont.out_easing = file.get_value("out", "easing", "in")
 		
 	return cont
 

@@ -44,3 +44,11 @@ func _ready():
 	_transitions.order.duration = 0.3
 	_transitions.order.type = Tween.TRANS_QUAD
 	_transitions.order.easing = Tween.EASE_IN_OUT
+
+	_transitions.in_anchor.duration = 0.5
+	_transitions.in_anchor.type = Tween.TRANS_ELASTIC
+	_transitions.in_anchor.easing = Tween.EASE_OUT
+
+	_transitions.out_anchor.duration = 0
+	_transitions.out_anchor.type = Tween.TRANS_LINEAR
+	_transitions.out_anchor.easing = Tween.EASE_IN

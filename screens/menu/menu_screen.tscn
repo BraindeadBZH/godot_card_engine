@@ -61,10 +61,6 @@ button_text = "Quit"
 margin_left = 20.0
 margin_top = 20.0
 card_visual = ExtResource( 5 )
-in_anchor = NodePath("../InAnchor")
-
-[node name="InAnchor" type="Position2D" parent="."]
-position = Vector2( -51, 279 )
 [connection signal="pressed" from="NewGameBtn" to="." method="_on_NewGameBtn_pressed"]
 [connection signal="pressed" from="LibraryBtn" to="." method="_on_LibraryBtn_pressed"]
 [connection signal="pressed" from="QuitBtn" to="." method="_on_QuitBtn_pressed"]

@@ -44,3 +44,11 @@ func _ready():
 	_transitions.order.duration = {order_duration}
 	_transitions.order.type = {order_type}
 	_transitions.order.easing = {order_easing}
+
+	_transitions.in_anchor.duration = {in_duration}
+	_transitions.in_anchor.type = {in_type}
+	_transitions.in_anchor.easing = {in_easing}
+
+	_transitions.out_anchor.duration = {out_duration}
+	_transitions.out_anchor.type = {out_type}
+	_transitions.out_anchor.easing = {out_easing}

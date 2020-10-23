@@ -90,9 +90,36 @@ func _on_MouseArea_button_up() -> void:
 
 func _on_MergeWindow_timeout() -> void:
 	if _root_state == null:
-		position = _merge_state.pos
-		scale = _merge_state.scale
-		rotation = _merge_state.rot
+		if _transitions.in_anchor.enabled == true:
+			_trans.remove_all()
+			
+			global_position = _transitions.in_anchor.position
+			global_scale = _transitions.in_anchor.scale
+			global_rotation = _transitions.in_anchor.rotation
+
+			_trans.interpolate_property(
+				self, "position", position, _merge_state.pos,
+				_transitions.in_anchor.duration,
+				_transitions.in_anchor.type,
+				_transitions.in_anchor.easing)
+
+			_trans.interpolate_property(
+				self, "scale", scale, _merge_state.scale,
+				_transitions.in_anchor.duration,
+				_transitions.in_anchor.type,
+				_transitions.in_anchor.easing)
+
+			_trans.interpolate_property(
+				self, "rotation", rotation, _merge_state.rot,
+				_transitions.in_anchor.duration,
+				_transitions.in_anchor.type,
+				_transitions.in_anchor.easing)
+			
+			_trans.start()
+		else:
+			position = _merge_state.pos
+			scale = _merge_state.scale
+			rotation = _merge_state.rot
 	else:
 		if _root_state.eq(_merge_state):
 			return
