@@ -49,7 +49,7 @@ var _fine_scale_min: Vector2 = Vector2(0.85, 0.85)
 var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 
 # Transitions
-var _order_duration: float = 0.0
+var _transitions: CardTransitions = CardTransitions.new()
 
 onready var _cards = $Cards
 onready var _path = $CardPath
@@ -91,7 +91,7 @@ func _update_container() -> void:
 		visual_inst.name = CARD_NODE_FMT % card.ref()
 		_cards.add_child(visual_inst)
 		visual_inst.set_instance(card)
-		visual_inst.set_transitions(_order_duration)
+		visual_inst.set_transitions(_transitions)
 		
 		if _face_up:
 			visual_inst.flip(AbstractCard.CardSide.FRONT)

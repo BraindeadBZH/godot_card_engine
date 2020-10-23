@@ -36,12 +36,14 @@ var fine_angle_max: float = 0.0
 # Scale fine tuning
 var fine_scale: bool = false
 var fine_scale_mode: String = "linear"
-var fine_scale_ratio = "keep"
+var fine_scale_ratio: String = "keep"
 var fine_scale_min: Vector2 = Vector2(0.0, 0.0)
 var fine_scale_max: Vector2 = Vector2(0.0, 0.0)
 
 # Tansitions
 var order_duration: float = 0.0
+var order_type: String = "cubic"
+var order_easing: String = "in_out"
 
 
 func _init(id: String, name: String) -> void:

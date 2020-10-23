@@ -41,4 +41,6 @@ func _ready():
 	_fine_scale_max = Vector2(0, 0)
 
 	# Transitions
-	_order_duration = 0.3
+	_transitions.order.duration = 0.3
+	_transitions.order.type = Tween.TRANS_QUAD
+	_transitions.order.easing = Tween.EASE_IN_OUT

@@ -40,7 +40,9 @@ onready var _scale_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/Sc
 onready var _scale_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeH
 onready var _scale_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeV
 
-onready var _transi_order_duration = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Duration
+onready var _trans_order_duration = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Duration
+onready var _trans_order_type = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Type
+onready var _trans_order_easing = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Easing
 
 
 func _ready():
@@ -68,71 +70,34 @@ func _update() -> void:
 	_path_fixed.pressed = _data.path_fixed_width
 	_path_spacing.value = _data.path_spacing
 	
-	match _data.mode:
-		"grid":
-			_mode_switch.pressed = false
-		"path":
-			_mode_switch.pressed = true
+	_mode_switch.pressed = _layout_mode_to_switch(_data.mode)
 	
-	match _data.grid_halign:
-		"left":
-			_grid_align_h.select(0)
-		"center":
-			_grid_align_h.select(1)
-		"right":
-			_grid_align_h.select(2)
-	
-	match _data.grid_valign:
-		"top":
-			_grid_align_v.select(0)
-		"middle":
-			_grid_align_v.select(1)
-		"bottom":
-			_grid_align_v.select(2)
+	_grid_align_h.select(_halign_to_select(_data.grid_halign))
+	_grid_align_v.select(_valign_to_select(_data.grid_valign))
 	
 	_pos_enabled.pressed = _data.fine_pos
 	_pos_range_min_h.value = _data.fine_pos_min.x
 	_pos_range_min_v.value = _data.fine_pos_min.y
 	_pos_range_max_h.value = _data.fine_pos_max.x
 	_pos_range_max_v.value = _data.fine_pos_max.y
-	match _data.fine_pos_mode:
-		"linear":
-			_pos_mode.select(0)
-		"symmetric":
-			_pos_mode.select(1)
-		"random":
-			_pos_mode.select(2)
+	_pos_mode.select(_finetune_mode_to_select(_data.fine_pos_mode))
 	
 	_angle_enabled.pressed = _data.fine_angle
 	_angle_range_min.value = _data.fine_angle_min
 	_angle_range_max.value = _data.fine_angle_max
-	match _data.fine_angle_mode:
-		"linear":
-			_angle_mode.select(0)
-		"symmetric":
-			_angle_mode.select(1)
-		"random":
-			_angle_mode.select(2)
+	_angle_mode.select(_finetune_mode_to_select(_data.fine_angle_mode))
 	
 	_scale_enabled.pressed = _data.fine_scale
 	_scale_range_min_h.value = _data.fine_scale_min.x
 	_scale_range_min_v.value = _data.fine_scale_min.y
 	_scale_range_max_h.value = _data.fine_scale_max.x
 	_scale_range_max_v.value = _data.fine_scale_max.y
-	match _data.fine_scale_mode:
-		"linear":
-			_scale_mode.select(0)
-		"symmetric":
-			_scale_mode.select(1)
-		"random":
-			_scale_mode.select(2)
-	match _data.fine_scale_ratio:
-		"keep":
-			_scale_ratio.select(0)
-		"ignore":
-			_scale_ratio.select(1)
+	_scale_mode.select(_finetune_mode_to_select(_data.fine_scale_mode))
+	_scale_ratio.select(_scale_ratio_to_select(_data.fine_scale_ratio))
 	
-	_transi_order_duration.value = _data.order_duration * 1000
+	_trans_order_duration.value = _data.order_duration * 1000
+	_trans_order_type.select(_trans_type_to_select(_data.order_type))
+	_trans_order_easing.select(_trans_easing_to_select(_data.order_easing))
 
 
 func _save() -> void:
@@ -150,72 +115,229 @@ func _save() -> void:
 	_data.path_fixed_width = _path_fixed.pressed
 	_data.path_spacing = _path_spacing.value
 	
-	if _mode_switch.pressed:
-		_data.mode = "path"
-	else:
-		_data.mode = "grid"
+	_data.mode = _switch_to_layout_mode(_mode_switch.pressed)
 	
-	match _grid_align_h.selected:
-		0:
-			_data.grid_halign = "left"
-		1:
-			_data.grid_halign = "center"
-		2:
-			_data.grid_halign = "right"
-	
-	match _grid_align_v.selected:
-		0:
-			_data.grid_valign = "top"
-		1:
-			_data.grid_valign = "middle"
-		2:
-			_data.grid_valign = "bottom"
+	_data.grid_halign = _select_to_halign(_grid_align_h.selected)
+	_data.grid_valign = _select_to_valign(_grid_align_v.selected)
 	
 	_data.fine_pos = _pos_enabled.pressed
 	_data.fine_pos_min.x = _pos_range_min_h.value
 	_data.fine_pos_min.y = _pos_range_min_v.value
 	_data.fine_pos_max.x = _pos_range_max_h.value
 	_data.fine_pos_max.y = _pos_range_max_v.value
-	match _pos_mode.selected:
-		0:
-			_data.fine_pos_mode = "linear"
-		1:
-			_data.fine_pos_mode = "symmetric"
-		2:
-			_data.fine_pos_mode = "random"
+	_data.fine_pos_mode = _select_to_finetune_mode(_pos_mode.selected)
 	
 	_data.fine_angle = _angle_enabled.pressed
 	_data.fine_angle_min = _angle_range_min.value
 	_data.fine_angle_max = _angle_range_max.value
-	match _angle_mode.selected:
-		0:
-			_data.fine_angle_mode = "linear"
-		1:
-			_data.fine_angle_mode = "symmetric"
-		2:
-			_data.fine_angle_mode = "random"
+	_data.fine_angle_mode = _select_to_finetune_mode(_angle_mode.selected)
 	
 	_data.fine_scale = _scale_enabled.pressed
 	_data.fine_scale_min.x = _scale_range_min_h.value
 	_data.fine_scale_min.y = _scale_range_min_v.value
 	_data.fine_scale_max.x = _scale_range_max_h.value
 	_data.fine_scale_max.y = _scale_range_max_v.value
-	match _scale_mode.selected:
-		0:
-			_data.fine_scale_mode = "linear"
-		1:
-			_data.fine_scale_mode = "symmetric"
-		2:
-			_data.fine_scale_mode = "random"
-	match _scale_ratio.selected:
-		0:
-			_data.fine_scale_ratio = "keep"
-		1:
-			_data.fine_scale_ratio = "ignore"
+	_data.fine_scale_mode = _select_to_finetune_mode(_scale_mode.selected)
+	_data.fine_scale_ratio = _select_to_scale_ratio(_scale_ratio.selected)
 	
-	_data.order_duration = _transi_order_duration.value / 1000.0
+	_data.order_duration = _trans_order_duration.value / 1000.0
+	_data.order_type = _select_to_trans_type(_trans_order_type.selected)
+	_data.order_easing = _select_to_trans_easing(_trans_order_easing.selected)
 	
 	_manager.update_container(_data)
+
+
+func _layout_mode_to_switch(mode: String) -> bool:
+	match mode:
+		"grid":
+			return false
+		"path":
+			return true
+		_:
+			return false
+
+
+func _switch_to_layout_mode(switch: bool) -> String:
+	if switch:
+		return "path"
+	else:
+		return "grid"
+
+
+func _halign_to_select(align: String) -> int:
+	match align:
+		"left":
+			return 0
+		"center":
+			return 1
+		"right":
+			return 2
+		_:
+			return 0
+
+
+func _select_to_halign(select: int) -> String:
+	match select:
+		0:
+			return "left"
+		1:
+			return "center"
+		2:
+			return "right"
+		_:
+			return "left"
+
+
+func _valign_to_select(align: String) -> int:
+	match align:
+		"top":
+			return 0
+		"middle":
+			return 1
+		"bottom":
+			return 2
+		_:
+			return 0
+
+
+func _select_to_valign(select: int) -> String:
+	match select:
+		0:
+			return "top"
+		1:
+			return "middle"
+		2:
+			return "bottom"
+		_:
+			return "top"
+
+
+func _finetune_mode_to_select(mode: String) -> int:
+	match mode:
+		"linear":
+			return 0
+		"symmetric":
+			return 1
+		"random":
+			return 2
+		_:
+			return 0
+
+
+func _select_to_finetune_mode(select: int) -> String:
+	match select:
+		0:
+			return "linear"
+		1:
+			return "symmetric"
+		2:
+			return "random"
+		_:
+			return "linear"
+
+
+func _scale_ratio_to_select(ratio: String) -> int:
+	match ratio:
+		"keep":
+			return 0
+		"ignore":
+			return 1
+		_:
+			return 0
+
+
+func _select_to_scale_ratio(select: int) -> String:
+	match select:
+		0:
+			return "keep"
+		1:
+			return "ignore"
+		_:
+			return "keep"
+
+
+func _trans_type_to_select(type: String) -> int:
+	match type:
+		"linear":
+			return 0
+		"sine":
+			return 1
+		"quint":
+			return 2
+		"quart":
+			return 3
+		"quad":
+			return 4
+		"expo":
+			return 5
+		"elastic":
+			return 6
+		"cubic":
+			return 7
+		"circ":
+			return 8
+		"bounce":
+			return 9
+		"back":
+			return 10
+		_:
+			return 0
+
+
+func _select_to_trans_type(select: int) -> String:
+	match select:
+		0:
+			return "linear"
+		1:
+			return "sine"
+		2:
+			return "quint"
+		3:
+			return "quart"
+		4:
+			return "quad"
+		5:
+			return "expo"
+		6:
+			return "elastic"
+		7:
+			return "cubic"
+		8:
+			return "circ"
+		9:
+			return "bounce"
+		10:
+			return "back"
+		_:
+			return "linear"
+
+
+func _trans_easing_to_select(easing: String) -> int:
+	match easing:
+		"in":
+			return 0
+		"out":
+			return 1
+		"in_out":
+			return 2
+		"out_in":
+			return 3
+		_:
+			return 0
+
+
+func _select_to_trans_easing(select: int) -> String:
+	match select:
+		0:
+			return "in"
+		1:
+			return "out"
+		2:
+			return "in_out"
+		3:
+			return "out_in"
+		_:
+			return "in"
 
 
 func _on_ModeSwitch_toggled(button_pressed):

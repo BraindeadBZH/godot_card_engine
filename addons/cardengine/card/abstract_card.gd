@@ -11,7 +11,7 @@ var _inst: CardInstance = null
 var _side = CardSide.FRONT
 var _root_state: CardState = null
 var _merge_state: CardState = null
-var _order_duration: float = 0.0
+var _transitions: CardTransitions = CardTransitions.new()
 
 onready var _front = $Front
 onready var _back  = $Back
@@ -58,8 +58,8 @@ func set_root_state(state: CardState) -> void:
 	_merge_state = state
 
 
-func set_transitions(order_duration: float):
-	_order_duration = order_duration
+func set_transitions(transitions: CardTransitions):
+	_transitions = transitions
 
 
 func _mouse_click() -> void:
@@ -101,15 +101,21 @@ func _on_MergeWindow_timeout() -> void:
 
 		_trans.interpolate_property(
 			self, "position", _root_state.pos, _merge_state.pos,
-			_order_duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+			_transitions.order.duration,
+			_transitions.order.type,
+			_transitions.order.easing)
 
 		_trans.interpolate_property(
 			self, "scale", _root_state.scale, _merge_state.scale,
-			_order_duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+			_transitions.order.duration,
+			_transitions.order.type,
+			_transitions.order.easing)
 
 		_trans.interpolate_property(
 			self, "rotation", _root_state.rot, _merge_state.rot,
-			_order_duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+			_transitions.order.duration,
+			_transitions.order.type,
+			_transitions.order.easing)
 		
 		_trans.start()
 	

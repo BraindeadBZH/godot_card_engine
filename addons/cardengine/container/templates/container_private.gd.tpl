@@ -41,4 +41,6 @@ func _ready():
 	_fine_scale_max = Vector2({scale_range_max_h}, {scale_range_max_v})
 
 	# Transitions
-	_order_duration = {order_duration}
+	_transitions.order.duration = {order_duration}
+	_transitions.order.type = {order_type}
+	_transitions.order.easing = {order_easing}

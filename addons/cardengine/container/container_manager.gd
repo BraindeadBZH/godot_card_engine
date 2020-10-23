@@ -151,6 +151,8 @@ func _write_metadata(cont: ContainerData) -> void:
 	
 	# Transitions data
 	file.set_value("order", "duration", cont.order_duration)
+	file.set_value("order", "type", cont.order_type)
+	file.set_value("order", "easing", cont.order_easing)
 
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
@@ -195,7 +197,9 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"scale_range_min_v": cont.fine_scale_min.y,
 		"scale_range_max_h": cont.fine_scale_max.x,
 		"scale_range_max_v": cont.fine_scale_max.y,
-		"order_duration": cont.order_duration
+		"order_duration": cont.order_duration,
+		"order_type": _translate_trans_type(cont.order_type),
+		"order_easing": _translate_trans_easing(cont.order_easing)
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -284,6 +288,8 @@ func _read_metadata(id: String) -> ContainerData:
 	
 	# Transitions data
 	cont.order_duration = file.get_value("order", "duration", 0.0)
+	cont.order_type = file.get_value("order", "type", "linear")
+	cont.order_easing = file.get_value("order", "easing", "in")
 		
 	return cont
 
@@ -341,5 +347,47 @@ func _translate_ratio_mode(mode: String) -> String:
 			return "AspectMode.KEEP"
 		"ignore":
 			return "AspectMode.IGNORE"
+		_:
+			return ""
+
+
+func _translate_trans_type(type: String) -> String:
+	match type:
+		"linear":
+			return "Tween.TRANS_LINEAR"
+		"sine":
+			return "Tween.TRANS_SINE"
+		"quint":
+			return "Tween.TRANS_QUINT"
+		"quart":
+			return "Tween.TRANS_QUART"
+		"quad":
+			return "Tween.TRANS_QUAD"
+		"expo":
+			return "Tween.TRANS_EXPO"
+		"elastic":
+			return "Tween.TRANS_ELASTIC"
+		"cubic":
+			return "Tween.TRANS_CUBIC"
+		"circ":
+			return "Tween.TRANS_CIRC"
+		"bounce":
+			return "Tween.TRANS_BOUNCE"
+		"back":
+			return "Tween.TRANS_BACK"
+		_:
+			return ""
+
+
+func _translate_trans_easing(easing: String) -> String:
+	match easing:
+		"in":
+			return "Tween.EASE_IN"
+		"out":
+			return "Tween.EASE_OUT"
+		"in_out":
+			return "Tween.EASE_IN_OUT"
+		"out_in":
+			return "Tween.EASE_OUT_IN"
 		_:
 			return ""
