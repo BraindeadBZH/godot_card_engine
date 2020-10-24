@@ -207,6 +207,8 @@ scale = Vector2( 0.001, 0.001 )
 
 [node name="OutAnchor" type="Position2D" parent="."]
 position = Vector2( 1360, 401 )
+rotation = 1.5708
+scale = Vector2( 0.001, 0.001 )
 [connection signal="pressed" from="TitleBg/BackBtn" to="." method="_on_BackBtn_pressed"]
 [connection signal="item_selected" from="TitleBg/Categories" to="." method="_on_Categories_item_selected"]
 [connection signal="item_selected" from="TitleBg/Values" to="." method="_on_Values_item_selected"]

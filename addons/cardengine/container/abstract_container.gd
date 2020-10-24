@@ -82,16 +82,16 @@ func _update_container() -> void:
 	if not in_anchor.is_empty():
 		var anchor: Node2D = get_node(in_anchor)
 		_transitions.in_anchor.enabled = true
-		_transitions.in_anchor.position = anchor.global_position
-		_transitions.in_anchor.scale = anchor.global_scale
-		_transitions.in_anchor.rotation = anchor.global_rotation
+		_transitions.in_anchor.position = anchor.position
+		_transitions.in_anchor.scale = anchor.scale
+		_transitions.in_anchor.rotation = anchor.rotation
 	
 	if not out_anchor.is_empty():
 		var anchor: Node2D = get_node(out_anchor)
 		_transitions.out_anchor.enabled = true
-		_transitions.out_anchor.position = anchor.global_position
-		_transitions.out_anchor.scale = anchor.global_scale
-		_transitions.out_anchor.rotation = anchor.global_rotation
+		_transitions.out_anchor.position = anchor.position
+		_transitions.out_anchor.scale = anchor.scale
+		_transitions.out_anchor.rotation = anchor.rotation
 	
 	# Adding missing cards
 	for card in _store.cards():
@@ -107,6 +107,7 @@ func _update_container() -> void:
 		_cards.add_child(visual_inst)
 		visual_inst.set_instance(card)
 		visual_inst.set_transitions(_transitions)
+		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
 		
 		if _face_up:
 			visual_inst.flip(AbstractCard.CardSide.FRONT)
@@ -127,7 +128,7 @@ func _layout_cards():
 	var card_index: int = 0
 	
 	for child in _cards.get_children():
-		if child is AbstractCard:
+		if child is AbstractCard && not child.is_flagged_for_removal():
 			var state = CardState.new()
 			
 			match _layout_mode:
@@ -299,9 +300,13 @@ func _clear() -> void:
 	
 	for child in _cards.get_children():
 		if not _store.has_card(child.instance()):
-			_cards.remove_child(child)
-			child.queue_free()
+			child.flag_for_removal()
 
 
-func _on_AbstractContainer_resized():
+func _on_AbstractContainer_resized() -> void:
 	_layout_cards()
+
+
+func _on_need_removal(card: AbstractCard) -> void:
+	_cards.remove_child(card)
+	card.queue_free()

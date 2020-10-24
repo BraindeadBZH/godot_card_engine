@@ -2,6 +2,7 @@ class_name AbstractCard
 extends Node2D
 
 signal instance_changed()
+signal need_removal()
 
 enum CardSide {FRONT, BACK}
 
@@ -12,6 +13,7 @@ var _side = CardSide.FRONT
 var _root_state: CardState = null
 var _merge_state: CardState = null
 var _transitions: CardTransitions = CardTransitions.new()
+var _remove_flag: bool = false
 
 onready var _front = $Front
 onready var _back  = $Back
@@ -23,14 +25,6 @@ func _ready() -> void:
 	_trans.start()
 
 
-func side() -> int:
-	return _side
-
-
-func root_state() -> CardState:
-	return _root_state
-
-
 func set_instance(inst: CardInstance) -> void:
 	_inst = inst
 	emit_signal("instance_changed")
@@ -38,6 +32,29 @@ func set_instance(inst: CardInstance) -> void:
 
 func instance() -> CardInstance:
 	return _inst
+
+
+func root_state() -> CardState:
+	return _root_state
+
+
+func set_root_state(state: CardState) -> void:
+	_mergeWin.stop()
+	_mergeWin.start()
+	
+	_merge_state = state
+
+
+func transitions() -> CardTransitions:
+	return _transitions
+
+
+func set_transitions(transitions: CardTransitions):
+	_transitions = transitions
+
+
+func side() -> int:
+	return _side
 
 
 func flip(side_up: int) -> void:
@@ -51,15 +68,37 @@ func flip(side_up: int) -> void:
 		_back.visible = true
 
 
-func set_root_state(state: CardState) -> void:
-	_mergeWin.stop()
-	_mergeWin.start()
+func is_flagged_for_removal() -> bool:
+	return _remove_flag
+
+
+func flag_for_removal() -> void:
+	_remove_flag = true
 	
-	_merge_state = state
+	if _transitions.out_anchor.enabled:
+		_trans.remove_all()
 
+		_trans.interpolate_property(
+			self, "position", position, _transitions.out_anchor.position,
+			_transitions.out_anchor.duration,
+			_transitions.out_anchor.type,
+			_transitions.out_anchor.easing)
 
-func set_transitions(transitions: CardTransitions):
-	_transitions = transitions
+		_trans.interpolate_property(
+			self, "scale", scale, _transitions.out_anchor.scale,
+			_transitions.out_anchor.duration,
+			_transitions.out_anchor.type,
+			_transitions.out_anchor.easing)
+
+		_trans.interpolate_property(
+			self, "rotation", rotation, _transitions.out_anchor.rotation,
+			_transitions.out_anchor.duration,
+			_transitions.out_anchor.type,
+			_transitions.out_anchor.easing)
+		
+		_trans.start()
+	else:
+		emit_signal("need_removal")
 
 
 func _mouse_click() -> void:
@@ -90,12 +129,12 @@ func _on_MouseArea_button_up() -> void:
 
 func _on_MergeWindow_timeout() -> void:
 	if _root_state == null:
-		if _transitions.in_anchor.enabled == true:
+		if _transitions.in_anchor.enabled:
 			_trans.remove_all()
 			
-			global_position = _transitions.in_anchor.position
-			global_scale = _transitions.in_anchor.scale
-			global_rotation = _transitions.in_anchor.rotation
+			position = _transitions.in_anchor.position
+			scale = _transitions.in_anchor.scale
+			rotation = _transitions.in_anchor.rotation
 
 			_trans.interpolate_property(
 				self, "position", position, _merge_state.pos,
@@ -147,3 +186,8 @@ func _on_MergeWindow_timeout() -> void:
 		_trans.start()
 	
 	_root_state = _merge_state
+
+
+func _on_Transitions_tween_all_completed() -> void:
+	if _remove_flag:
+		emit_signal("need_removal")

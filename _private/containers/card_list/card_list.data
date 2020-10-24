@@ -57,6 +57,6 @@ easing="out"
 
 [out]
 
-duration=0.0
-type="linear"
+duration=0.5
+type="quad"
 easing="in"

@@ -49,6 +49,6 @@ func _ready():
 	_transitions.in_anchor.type = Tween.TRANS_BACK
 	_transitions.in_anchor.easing = Tween.EASE_OUT
 
-	_transitions.out_anchor.duration = 0
-	_transitions.out_anchor.type = Tween.TRANS_LINEAR
+	_transitions.out_anchor.duration = 0.5
+	_transitions.out_anchor.type = Tween.TRANS_QUAD
 	_transitions.out_anchor.easing = Tween.EASE_IN

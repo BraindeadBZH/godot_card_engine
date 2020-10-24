@@ -27,4 +27,5 @@ one_shot = true
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_MouseArea_mouse_entered"]
 [connection signal="mouse_exited" from="MouseArea" to="." method="_on_MouseArea_mouse_exited"]
 [connection signal="pressed" from="MouseArea" to="." method="_on_MouseArea_pressed"]
+[connection signal="tween_all_completed" from="Transitions" to="." method="_on_Transitions_tween_all_completed"]
 [connection signal="timeout" from="MergeWindow" to="." method="_on_MergeWindow_timeout"]
