@@ -52,7 +52,7 @@ easing="in_out"
 [in]
 
 duration=0.5
-type="elastic"
+type="back"
 easing="out"
 
 [out]

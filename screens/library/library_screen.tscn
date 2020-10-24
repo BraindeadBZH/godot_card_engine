@@ -202,6 +202,8 @@ out_anchor = NodePath("../../../OutAnchor")
 
 [node name="InAnchor" type="Position2D" parent="."]
 position = Vector2( -110, 390 )
+rotation = -1.5708
+scale = Vector2( 0.001, 0.001 )
 
 [node name="OutAnchor" type="Position2D" parent="."]
 position = Vector2( 1360, 401 )
