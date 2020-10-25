@@ -80,18 +80,30 @@ func _update_container() -> void:
 	_clear()
 	
 	if not in_anchor.is_empty():
-		var anchor: Node2D = get_node(in_anchor)
-		_transitions.in_anchor.enabled = true
-		_transitions.in_anchor.position = anchor.position
-		_transitions.in_anchor.scale = anchor.scale
-		_transitions.in_anchor.rotation = anchor.rotation
+		var anchor = get_node(in_anchor)
+		if anchor is Node2D:
+			_transitions.in_anchor.enabled = true
+			_transitions.in_anchor.position = anchor.position
+			_transitions.in_anchor.scale = anchor.scale
+			_transitions.in_anchor.rotation = anchor.rotation
+		elif anchor is Control:
+			_transitions.in_anchor.enabled = true
+			_transitions.in_anchor.position = anchor.rect_position
+			_transitions.in_anchor.scale = anchor.rect_scale
+			_transitions.in_anchor.rotation = deg2rad(anchor.rect_rotation)
 	
 	if not out_anchor.is_empty():
-		var anchor: Node2D = get_node(out_anchor)
-		_transitions.out_anchor.enabled = true
-		_transitions.out_anchor.position = anchor.position
-		_transitions.out_anchor.scale = anchor.scale
-		_transitions.out_anchor.rotation = anchor.rotation
+		var anchor = get_node(out_anchor)
+		if anchor is Node2D:
+			_transitions.out_anchor.enabled = true
+			_transitions.out_anchor.position = anchor.position
+			_transitions.out_anchor.scale = anchor.scale
+			_transitions.out_anchor.rotation = anchor.rotation
+		elif anchor is Control:
+			_transitions.out_anchor.enabled = true
+			_transitions.out_anchor.position = anchor.rect_position
+			_transitions.out_anchor.scale = anchor.rect_scale
+			_transitions.out_anchor.rotation = deg2rad(anchor.rect_rotation)
 	
 	# Adding missing cards
 	for card in _store.cards():
@@ -304,7 +316,7 @@ func _clear() -> void:
 
 
 func _on_AbstractContainer_resized() -> void:
-	_layout_cards()
+	_update_container()
 
 
 func _on_need_removal(card: AbstractCard) -> void:

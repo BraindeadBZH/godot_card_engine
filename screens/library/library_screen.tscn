@@ -197,18 +197,36 @@ margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 card_visual = ExtResource( 6 )
-in_anchor = NodePath("../../../InAnchor")
-out_anchor = NodePath("../../../OutAnchor")
+in_anchor = NodePath("InAnchor")
+out_anchor = NodePath("OutAnchor")
 
-[node name="InAnchor" type="Position2D" parent="."]
-position = Vector2( -264.5, 390 )
-rotation = -1.5708
-scale = Vector2( 0.001, 0.001 )
+[node name="InAnchor" type="Control" parent="LibraryBg/LibraryScroll/LibraryContainer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -20.0
+margin_right = -160.0
+margin_bottom = 20.0
+rect_rotation = -90.0
+rect_scale = Vector2( 0.001, 0.001 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="OutAnchor" type="Position2D" parent="."]
-position = Vector2( 1360, 401 )
-rotation = 1.5708
-scale = Vector2( 0.001, 0.001 )
+[node name="OutAnchor" type="Control" parent="LibraryBg/LibraryScroll/LibraryContainer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 160.0
+margin_top = -20.0
+margin_right = 200.0
+margin_bottom = 20.0
+rect_rotation = 90.0
+rect_scale = Vector2( 0.001, 0.001 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="TitleBg/BackBtn" to="." method="_on_BackBtn_pressed"]
 [connection signal="item_selected" from="TitleBg/Categories" to="." method="_on_Categories_item_selected"]
 [connection signal="item_selected" from="TitleBg/Values" to="." method="_on_Values_item_selected"]
