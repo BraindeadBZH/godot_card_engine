@@ -35,7 +35,6 @@ __meta__ = {
 }
 
 [node name="Layout" type="Control" parent="MainLayout/MainTabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -336,7 +335,6 @@ __meta__ = {
 margin_top = 24.0
 margin_right = 502.0
 margin_bottom = 144.0
-size_flags_vertical = 3
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
@@ -453,7 +451,6 @@ __meta__ = {
 margin_top = 172.0
 margin_right = 502.0
 margin_bottom = 265.0
-size_flags_vertical = 3
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
@@ -537,7 +534,6 @@ __meta__ = {
 margin_top = 293.0
 margin_right = 502.0
 margin_bottom = 437.0
-size_flags_vertical = 3
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
@@ -659,6 +655,7 @@ allow_greater = true
 allow_lesser = true
 
 [node name="Transitions" type="Control" parent="MainLayout/MainTabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -881,6 +878,34 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[node name="AnimLayout" type="VBoxContainer" parent="MainLayout/MainTabs/Animations"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IdleTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_right = 502.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Idle animation"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IdleLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 24.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
 margin_top = 477.0
