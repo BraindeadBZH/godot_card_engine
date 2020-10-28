@@ -63,8 +63,8 @@ easing="in"
 
 [flip_start]
 
-duration=0.3
-type="expo"
+duration=0.2
+type="back"
 easing="in"
 
 [flip_end]
