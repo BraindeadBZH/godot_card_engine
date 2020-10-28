@@ -53,6 +53,14 @@ var out_duration: float = 0.0
 var out_type: String = "cubic"
 var out_easing: String = "in_out"
 
+var flip_start_duration: float = 0.0
+var flip_start_type: String = "cubic"
+var flip_start_easing: String = "in_out"
+
+var flip_end_duration: float = 0.0
+var flip_end_type: String = "cubic"
+var flip_end_easing: String = "in_out"
+
 
 func _init(id: String, name: String) -> void:
 	self.id = id

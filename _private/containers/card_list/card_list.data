@@ -60,3 +60,15 @@ easing="out"
 duration=0.5
 type="quad"
 easing="in"
+
+[flip_start]
+
+duration=0.3
+type="expo"
+easing="in"
+
+[flip_end]
+
+duration=0.3
+type="bounce"
+easing="out"

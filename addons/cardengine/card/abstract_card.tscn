@@ -22,6 +22,8 @@ __meta__ = {
 [node name="MergeWindow" type="Timer" parent="."]
 wait_time = 0.01
 one_shot = true
+
+[node name="FlipAnim" type="Tween" parent="."]
 [connection signal="button_down" from="MouseArea" to="." method="_on_MouseArea_button_down"]
 [connection signal="button_up" from="MouseArea" to="." method="_on_MouseArea_button_up"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_MouseArea_mouse_entered"]
@@ -29,3 +31,4 @@ one_shot = true
 [connection signal="pressed" from="MouseArea" to="." method="_on_MouseArea_pressed"]
 [connection signal="tween_all_completed" from="Transitions" to="." method="_on_Transitions_tween_all_completed"]
 [connection signal="timeout" from="MergeWindow" to="." method="_on_MergeWindow_timeout"]
+[connection signal="tween_all_completed" from="FlipAnim" to="." method="_on_FlipAnim_tween_all_completed"]

@@ -70,6 +70,10 @@ func set_store(store: AbstractStore) -> void:
 	_update_container()
 
 
+func _card_clicked(card: AbstractCard) -> void:
+	pass
+
+
 func _update_container() -> void:
 	if card_visual == null:
 		return
@@ -120,11 +124,12 @@ func _update_container() -> void:
 		visual_inst.set_instance(card)
 		visual_inst.set_transitions(_transitions)
 		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
+		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
 		
 		if _face_up:
-			visual_inst.flip(AbstractCard.CardSide.FRONT)
+			visual_inst.set_side(AbstractCard.CardSide.FRONT)
 		else:
-			visual_inst.flip(AbstractCard.CardSide.BACK)
+			visual_inst.set_side(AbstractCard.CardSide.BACK)
 	
 	# Sorting according to store order
 	var index = 0
@@ -322,3 +327,6 @@ func _on_AbstractContainer_resized() -> void:
 func _on_need_removal(card: AbstractCard) -> void:
 	_cards.remove_child(card)
 	card.queue_free()
+
+func _on_card_clicked(card: AbstractCard) -> void:
+	_card_clicked(card)

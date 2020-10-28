@@ -161,6 +161,14 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("out", "duration", cont.out_duration)
 	file.set_value("out", "type", cont.out_type)
 	file.set_value("out", "easing", cont.out_easing)
+	
+	file.set_value("flip_start", "duration", cont.flip_start_duration)
+	file.set_value("flip_start", "type", cont.flip_start_type)
+	file.set_value("flip_start", "easing", cont.flip_start_easing)
+	
+	file.set_value("flip_end", "duration", cont.flip_end_duration)
+	file.set_value("flip_end", "type", cont.flip_end_type)
+	file.set_value("flip_end", "easing", cont.flip_end_easing)
 
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
@@ -213,7 +221,13 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"in_easing": _translate_trans_easing(cont.in_easing),
 		"out_duration": cont.out_duration,
 		"out_type": _translate_trans_type(cont.out_type),
-		"out_easing": _translate_trans_easing(cont.out_easing)
+		"out_easing": _translate_trans_easing(cont.out_easing),
+		"flip_start_duration": cont.flip_start_duration,
+		"flip_start_type": _translate_trans_type(cont.flip_start_type),
+		"flip_start_easing": _translate_trans_easing(cont.flip_start_easing),
+		"flip_end_duration": cont.flip_end_duration,
+		"flip_end_type": _translate_trans_type(cont.flip_end_type),
+		"flip_end_easing": _translate_trans_easing(cont.flip_end_easing)
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -312,6 +326,14 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.out_duration = file.get_value("out", "duration", 0.0)
 	cont.out_type = file.get_value("out", "type", "linear")
 	cont.out_easing = file.get_value("out", "easing", "in")
+	
+	cont.flip_start_duration = file.get_value("flip_start", "duration", 0.0)
+	cont.flip_start_type = file.get_value("flip_start", "type", "linear")
+	cont.flip_start_easing = file.get_value("flip_start", "easing", "in")
+	
+	cont.flip_end_duration = file.get_value("flip_end", "duration", 0.0)
+	cont.flip_end_type = file.get_value("flip_end", "type", "linear")
+	cont.flip_end_easing = file.get_value("flip_end", "easing", "in")
 		
 	return cont
 

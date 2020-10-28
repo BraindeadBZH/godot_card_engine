@@ -52,3 +52,11 @@ func _ready():
 	_transitions.out_anchor.duration = 0.5
 	_transitions.out_anchor.type = Tween.TRANS_QUAD
 	_transitions.out_anchor.easing = Tween.EASE_IN
+
+	_transitions.flip_start.duration = 0.3
+	_transitions.flip_start.type = Tween.TRANS_EXPO
+	_transitions.flip_start.easing = Tween.EASE_IN
+
+	_transitions.flip_end.duration = 0.3
+	_transitions.flip_end.type = Tween.TRANS_BOUNCE
+	_transitions.flip_end.easing = Tween.EASE_OUT

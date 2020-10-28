@@ -52,3 +52,11 @@ func _ready():
 	_transitions.out_anchor.duration = {out_duration}
 	_transitions.out_anchor.type = {out_type}
 	_transitions.out_anchor.easing = {out_easing}
+
+	_transitions.flip_start.duration = {flip_start_duration}
+	_transitions.flip_start.type = {flip_start_type}
+	_transitions.flip_start.easing = {flip_start_easing}
+
+	_transitions.flip_end.duration = {flip_end_duration}
+	_transitions.flip_end.type = {flip_end_type}
+	_transitions.flip_end.easing = {flip_end_easing}

@@ -52,6 +52,14 @@ onready var _trans_out_duration = $MainLayout/MainTabs/Transitions/TransLayout/O
 onready var _trans_out_type = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Type
 onready var _trans_out_easing = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Easing
 
+onready var _trans_flip_start_duration = $MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout/Duration
+onready var _trans_flip_start_type = $MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout/Type
+onready var _trans_flip_start_easing = $MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout/Easing
+
+onready var _trans_flip_end_duration = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Duration
+onready var _trans_flip_end_type = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Type
+onready var _trans_flip_end_easing = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Easing
+
 
 func _ready():
 	_grid_mode.visible = true
@@ -114,6 +122,14 @@ func _update() -> void:
 	_trans_out_duration.value = _data.out_duration * 1000
 	_trans_out_type.select(_trans_type_to_select(_data.out_type))
 	_trans_out_easing.select(_trans_easing_to_select(_data.out_easing))
+	
+	_trans_flip_start_duration.value = _data.flip_start_duration * 1000
+	_trans_flip_start_type.select(_trans_type_to_select(_data.flip_start_type))
+	_trans_flip_start_easing.select(_trans_easing_to_select(_data.flip_start_easing))
+	
+	_trans_flip_end_duration.value = _data.flip_end_duration * 1000
+	_trans_flip_end_type.select(_trans_type_to_select(_data.flip_end_type))
+	_trans_flip_end_easing.select(_trans_easing_to_select(_data.flip_end_easing))
 
 
 func _save() -> void:
@@ -167,6 +183,14 @@ func _save() -> void:
 	_data.out_duration = _trans_out_duration.value / 1000.0
 	_data.out_type = _select_to_trans_type(_trans_out_type.selected)
 	_data.out_easing = _select_to_trans_easing(_trans_out_easing.selected)
+	
+	_data.flip_start_duration = _trans_flip_start_duration.value / 1000.0
+	_data.flip_start_type = _select_to_trans_type(_trans_flip_start_type.selected)
+	_data.flip_start_easing = _select_to_trans_easing(_trans_flip_start_easing.selected)
+	
+	_data.flip_end_duration = _trans_flip_end_duration.value / 1000.0
+	_data.flip_end_type = _select_to_trans_type(_trans_flip_end_type.selected)
+	_data.flip_end_easing = _select_to_trans_easing(_trans_flip_end_easing.selected)
 	
 	_manager.update_container(_data)
 
