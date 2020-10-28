@@ -90,9 +90,9 @@ _global_script_classes=[ {
 "path": "res://addons/cardengine/store/card_pile.gd"
 }, {
 "base": "Reference",
-"class": "CardState",
+"class": "CardTransform",
 "language": "GDScript",
-"path": "res://addons/cardengine/card/card_state.gd"
+"path": "res://addons/cardengine/card/card_transform.gd"
 }, {
 "base": "Reference",
 "class": "CardTransitions",
@@ -176,7 +176,7 @@ _global_script_class_icons={
 "CardList": "",
 "CardListPrivate": "",
 "CardPile": "",
-"CardState": "",
+"CardTransform": "",
 "CardTransitions": "",
 "CardsUi": "",
 "ContainerData": "",

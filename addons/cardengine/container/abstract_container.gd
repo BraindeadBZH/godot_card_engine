@@ -141,21 +141,21 @@ func _layout_cards():
 	
 	for child in _cards.get_children():
 		if child is AbstractCard && not child.is_flagged_for_removal():
-			var state = CardState.new()
+			var trans = CardTransform.new()
 			
 			match _layout_mode:
 				LayoutMode.GRID:
-					_grid_layout(state, card_index, child.size)
+					_grid_layout(trans, card_index, child.size)
 				LayoutMode.PATH:
-					_path_layout(state, card_index, child.size)
+					_path_layout(trans, card_index, child.size)
 		
-			_fine_tune(state, card_index, child.size)
+			_fine_tune(trans, card_index, child.size)
 			
-			child.set_root_state(state)
+			child.set_root_trans(trans)
 			card_index += 1
 
 
-func _grid_layout(state: CardState, grid_cell: int, card_size: Vector2):
+func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 	var width_ratio: float = 0.0
 	var height_adjusted: float = 0.0
 	var row_width: float = 0.0
@@ -223,11 +223,11 @@ func _grid_layout(state: CardState, grid_cell: int, card_size: Vector2):
 	pos.x += grid_offset.x
 	pos.y += grid_offset.y
 	
-	state.scale = Vector2(width_ratio, width_ratio)
-	state.pos = pos
+	trans.scale = Vector2(width_ratio, width_ratio)
+	trans.pos = pos
 
 
-func _path_layout(state: CardState, card_index: int, card_size: Vector2):
+func _path_layout(trans: CardTransform, card_index: int, card_size: Vector2):
 	var width_ratio: float = 0.0
 	var curve: Curve2D = _path.get_curve()
 	var path_length: float = curve.get_baked_length()
@@ -244,66 +244,66 @@ func _path_layout(state: CardState, card_index: int, card_size: Vector2):
 	path_offset_delta /= _store.count() - 1
 	path_offset = _path_card_width / 2 + path_offset_delta * card_index
 	
-	state.scale =  Vector2(width_ratio, width_ratio)
-	state.pos = curve.interpolate_baked(path_offset)
+	trans.scale =  Vector2(width_ratio, width_ratio)
+	trans.pos = curve.interpolate_baked(path_offset)
 
 
-func _fine_tune(state: CardState, card_index: int, card_size: Vector2):
+func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
 	var card_count: float = _store.count() - 1
 	
 	if _fine_pos:
 		match _fine_pos_mode:
 			FineTuningMode.LINEAR:
-				state.pos += lerp(
+				trans.pos += lerp(
 					_fine_pos_min,
 					_fine_pos_max,
 					card_index / card_count)
 			FineTuningMode.SYMMETRIC:
-				state.pos += lerp(
+				trans.pos += lerp(
 					_fine_pos_min,
 					_fine_pos_max,
 					abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
-				state.pos += Vector2(
+				trans.pos += Vector2(
 					_fine_pos_min.x + randf() * (_fine_pos_max.x - _fine_pos_min.x),
 					_fine_pos_min.y + randf() * (_fine_pos_max.y - _fine_pos_min.y))
 	
 	if _fine_angle:
 		match _fine_angle_mode:
 			FineTuningMode.LINEAR:
-				state.rot += lerp_angle(
+				trans.rot += lerp_angle(
 					_fine_angle_min,
 					_fine_angle_max,
 					card_index / card_count)
 			FineTuningMode.SYMMETRIC:
-				state.rot += lerp_angle(
+				trans.rot += lerp_angle(
 					_fine_angle_min,
 					_fine_angle_max,
 					abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
-				state.rot += _fine_angle_min + randf() * (_fine_angle_max - _fine_angle_min)
+				trans.rot += _fine_angle_min + randf() * (_fine_angle_max - _fine_angle_min)
 	
 	if _fine_scale:
 		match _fine_scale_mode:
 			FineTuningMode.LINEAR:
-				state.scale += lerp(
+				trans.scale += lerp(
 					_fine_scale_min,
 					_fine_scale_max,
 					card_index / card_count)
 			FineTuningMode.SYMMETRIC:
-				state.scale += lerp(
+				trans.scale += lerp(
 					_fine_scale_min,
 					_fine_scale_max,
 					abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
 				match _fine_scale_ratio:
 					AspectMode.IGNORE:
-						state.scale += Vector2(
+						trans.scale += Vector2(
 							_fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x),
 							_fine_scale_min.y + randf() * (_fine_scale_max.y - _fine_scale_min.y))
 					AspectMode.KEEP:
 						var random_scale = _fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x)
-						state.scale += Vector2(random_scale, random_scale)
+						trans.scale += Vector2(random_scale, random_scale)
 
 
 func _clear() -> void:

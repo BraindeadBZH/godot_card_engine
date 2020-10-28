@@ -10,19 +10,19 @@ export(Vector2) var size: Vector2 = Vector2(0.0, 0.0)
 
 var _inst: CardInstance = null
 var _side = CardSide.FRONT
-var _root_state: CardState = null
-var _merge_state: CardState = null
+var _root_trans: CardTransform = null
+var _merge_trans: CardTransform = null
 var _transitions: CardTransitions = CardTransitions.new()
 var _remove_flag: bool = false
 
 onready var _front = $Front
 onready var _back  = $Back
-onready var _trans = $Transitions
+onready var _transi = $Transitions
 onready var _mergeWin = $MergeWindow
 
 
 func _ready() -> void:
-	_trans.start()
+	_transi.start()
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -34,15 +34,15 @@ func instance() -> CardInstance:
 	return _inst
 
 
-func root_state() -> CardState:
-	return _root_state
+func root_trans() -> CardTransform:
+	return _root_trans
 
 
-func set_root_state(state: CardState) -> void:
+func set_root_trans(transform: CardTransform) -> void:
 	_mergeWin.stop()
 	_mergeWin.start()
 	
-	_merge_state = state
+	_merge_trans = transform
 
 
 func transitions() -> CardTransitions:
@@ -76,27 +76,27 @@ func flag_for_removal() -> void:
 	_remove_flag = true
 	
 	if _transitions.out_anchor.enabled:
-		_trans.remove_all()
+		_transi.remove_all()
 
-		_trans.interpolate_property(
+		_transi.interpolate_property(
 			self, "position", position, _transitions.out_anchor.position,
 			_transitions.out_anchor.duration,
 			_transitions.out_anchor.type,
 			_transitions.out_anchor.easing)
 
-		_trans.interpolate_property(
+		_transi.interpolate_property(
 			self, "scale", scale, _transitions.out_anchor.scale,
 			_transitions.out_anchor.duration,
 			_transitions.out_anchor.type,
 			_transitions.out_anchor.easing)
 
-		_trans.interpolate_property(
+		_transi.interpolate_property(
 			self, "rotation", rotation, _transitions.out_anchor.rotation,
 			_transitions.out_anchor.duration,
 			_transitions.out_anchor.type,
 			_transitions.out_anchor.easing)
 		
-		_trans.start()
+		_transi.start()
 	else:
 		emit_signal("need_removal")
 
@@ -128,64 +128,64 @@ func _on_MouseArea_button_up() -> void:
 
 
 func _on_MergeWindow_timeout() -> void:
-	if _root_state == null:
+	if _root_trans == null:
 		if _transitions.in_anchor.enabled:
-			_trans.remove_all()
+			_transi.remove_all()
 			
 			position = _transitions.in_anchor.position
 			scale = _transitions.in_anchor.scale
 			rotation = _transitions.in_anchor.rotation
 
-			_trans.interpolate_property(
-				self, "position", position, _merge_state.pos,
+			_transi.interpolate_property(
+				self, "position", position, _merge_trans.pos,
 				_transitions.in_anchor.duration,
 				_transitions.in_anchor.type,
 				_transitions.in_anchor.easing)
 
-			_trans.interpolate_property(
-				self, "scale", scale, _merge_state.scale,
+			_transi.interpolate_property(
+				self, "scale", scale, _merge_trans.scale,
 				_transitions.in_anchor.duration,
 				_transitions.in_anchor.type,
 				_transitions.in_anchor.easing)
 
-			_trans.interpolate_property(
-				self, "rotation", rotation, _merge_state.rot,
+			_transi.interpolate_property(
+				self, "rotation", rotation, _merge_trans.rot,
 				_transitions.in_anchor.duration,
 				_transitions.in_anchor.type,
 				_transitions.in_anchor.easing)
 			
-			_trans.start()
+			_transi.start()
 		else:
-			position = _merge_state.pos
-			scale = _merge_state.scale
-			rotation = _merge_state.rot
+			position = _merge_trans.pos
+			scale = _merge_trans.scale
+			rotation = _merge_trans.rot
 	else:
-		if _root_state.eq(_merge_state):
+		if _root_trans.eq(_merge_trans):
 			return
 		
-		_trans.remove_all()
+		_transi.remove_all()
 
-		_trans.interpolate_property(
-			self, "position", _root_state.pos, _merge_state.pos,
+		_transi.interpolate_property(
+			self, "position", _root_trans.pos, _merge_trans.pos,
 			_transitions.order.duration,
 			_transitions.order.type,
 			_transitions.order.easing)
 
-		_trans.interpolate_property(
-			self, "scale", _root_state.scale, _merge_state.scale,
+		_transi.interpolate_property(
+			self, "scale", _root_trans.scale, _merge_trans.scale,
 			_transitions.order.duration,
 			_transitions.order.type,
 			_transitions.order.easing)
 
-		_trans.interpolate_property(
-			self, "rotation", _root_state.rot, _merge_state.rot,
+		_transi.interpolate_property(
+			self, "rotation", _root_trans.rot, _merge_trans.rot,
 			_transitions.order.duration,
 			_transitions.order.type,
 			_transitions.order.easing)
 		
-		_trans.start()
+		_transi.start()
 	
-	_root_state = _merge_state
+	_root_trans = _merge_trans
 
 
 func _on_Transitions_tween_all_completed() -> void:
