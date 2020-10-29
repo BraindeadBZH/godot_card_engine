@@ -38,6 +38,7 @@ func _on_Animations_changed() -> void:
 	_delete_btn.disabled = true
 	
 	_anim_list.add_item("Choose...")
+	_anim_list.set_item_disabled(0, true)
 	
 	var animations = _manager.animations()
 	var index: int = 1
