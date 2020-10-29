@@ -101,13 +101,15 @@ func clear() -> void:
 	emit_signal("cleared")
 
 
-func populate(db: CardDatabase, ids: Array = []) -> void:
+func populate(db: CardDatabase, ids: Array) -> void:
 	clear()
-	if ids.empty():
-		ids = db.cards().keys()
-		
+	
 	for id in ids:
 		add_card(CardInstance.new(db.get_card(id)))
+
+
+func populate_all(db: CardDatabase):
+	populate(db, db.cards().keys())
 
 
 func apply_filter(filter: Query) -> void:

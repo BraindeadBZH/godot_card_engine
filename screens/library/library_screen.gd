@@ -21,7 +21,7 @@ onready var _name_sort = $TitleBg/NameSort
 func _ready() -> void:
 	var db = CardEngine.db().get_database("main")
 	
-	_store.populate(db)
+	_store.populate_all(db)
 	_container.set_store(_store)
 	_apply_filters()
 
