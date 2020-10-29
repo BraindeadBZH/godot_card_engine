@@ -8,6 +8,7 @@ var _conf: ConfigFile = ConfigFile.new()
 var _general: GeneralManager = GeneralManager.new()
 var _databases: DatabaseManager = DatabaseManager.new()
 var _containers: ContainerManager = ContainerManager.new()
+var _animations: AnimationManager = AnimationManager.new()
 
 
 func setup() -> void:
@@ -18,12 +19,14 @@ func setup() -> void:
 		_containers.load_containers(_conf.get_value("folders", "containers"),
 				_conf.get_value("folders", "containers_private"),
 				_conf.get_value("folders", "container_tpl"))
+		_animations.load_animations(_conf.get_value("folders", "animations"))
 
 
 func clean() -> void:
 	_general.clean()
 	_databases.clean()
 	_containers.clean()
+	_animations.clean()
 
 
 func general() -> GeneralManager:
@@ -36,3 +39,7 @@ func db() -> DatabaseManager:
 
 func cont() -> ContainerManager:
 	return _containers
+
+
+func anim() -> AnimationManager:
+	return _animations

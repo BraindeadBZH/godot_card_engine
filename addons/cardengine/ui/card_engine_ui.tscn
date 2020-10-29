@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/card_engine_ui.gd" type="Script" id=1]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" type="PackedScene" id=2]
@@ -12,12 +12,17 @@
 [ext_resource path="res://addons/cardengine/ui/containers_ui.gd" type="Script" id=10]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_container_dialog/new_container_dialog.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.tscn" type="PackedScene" id=12]
+[ext_resource path="res://addons/cardengine/ui/animations_ui.gd" type="Script" id=13]
+[ext_resource path="res://addons/cardengine/ui/dialogs/new_animation_dialog/new_animation_dialog.tscn" type="PackedScene" id=16]
 
 [node name="CardEngineUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 500 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tabs" type="TabContainer" parent="."]
 anchor_right = 1.0
@@ -308,6 +313,78 @@ margin_bottom = 684.0
 size_flags_vertical = 3
 items = [ "card_list: CardList", null, false, "home_display: HomeDisplay", null, false ]
 
+[node name="Animations" type="Control" parent="Tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 13 )
+
+[node name="AnimationsLayout" type="VBoxContainer" parent="Tabs/Animations"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Toolbar" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout"]
+margin_right = 1272.0
+margin_bottom = 20.0
+
+[node name="CreateBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_right = 121.0
+margin_bottom = 20.0
+text = "Create animation"
+
+[node name="OrLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_left = 125.0
+margin_top = 3.0
+margin_right = 188.0
+margin_bottom = 17.0
+text = "or"
+
+[node name="AnimSelect" type="OptionButton" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_left = 192.0
+margin_right = 307.0
+margin_bottom = 20.0
+text = "Choose..."
+items = [ "Choose...", null, false, 0, null ]
+selected = 0
+
+[node name="EditBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_left = 311.0
+margin_right = 415.0
+margin_bottom = 20.0
+disabled = true
+text = "Edit animation"
+
+[node name="SaveBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_left = 311.0
+margin_right = 415.0
+margin_bottom = 20.0
+disabled = true
+text = "Save animation"
+
+[node name="DeleteBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_left = 419.0
+margin_right = 542.0
+margin_bottom = 20.0
+disabled = true
+text = "Delete animation"
+
+[node name="AnimEdit" type="GraphEdit" parent="Tabs/Animations/AnimationsLayout"]
+margin_top = 24.0
+margin_right = 1272.0
+margin_bottom = 684.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Dialogs" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
@@ -332,6 +409,8 @@ margin_bottom = -4.0
 [node name="NewContainerDialog" parent="Dialogs" instance=ExtResource( 11 )]
 
 [node name="EditContainerDialog" parent="Dialogs" instance=ExtResource( 12 )]
+
+[node name="NewAnimationDialog" parent="Dialogs" instance=ExtResource( 16 )]
 [connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/CreateBtn" to="Tabs/Databases" method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/EditBtn" to="Tabs/Databases" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/DeleteBtn" to="Tabs/Databases" method="_on_DeleteBtn_pressed"]
@@ -358,6 +437,11 @@ margin_bottom = -4.0
 [connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/DeleteBtn" to="Tabs/Containers" method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Tabs/Containers/ContainersLayout/ContainerList" to="Tabs/Containers" method="_on_ContainerList_item_activated"]
 [connection signal="item_selected" from="Tabs/Containers/ContainersLayout/ContainerList" to="Tabs/Containers" method="_on_ContainerList_item_selected"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/CreateBtn" to="Tabs/Animations" method="_on_CreateBtn_pressed"]
+[connection signal="item_selected" from="Tabs/Animations/AnimationsLayout/Toolbar/AnimSelect" to="Tabs/Animations" method="_on_AnimSelect_item_selected"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/EditBtn" to="Tabs/Animations" method="_on_EditBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/SaveBtn" to="Tabs/Animations" method="_on_SaveBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/DeleteBtn" to="Tabs/Animations" method="_on_DeleteBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="Tabs/Databases" method="_on_NewDatabaseDialog_form_validated"]
 [connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_delete_card"]
 [connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_edit_card"]
@@ -365,3 +449,4 @@ margin_bottom = -4.0
 [connection signal="form_validated" from="Dialogs/ValueDialog" to="Tabs/Cards" method="_on_ValueDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/TextDialog" to="Tabs/Cards" method="_on_TextDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/NewContainerDialog" to="Tabs/Containers" method="_on_NewContainerDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/NewAnimationDialog" to="Tabs/Animations" method="_on_NewAnimationDialog_form_validated"]

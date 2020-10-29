@@ -15,6 +15,10 @@ func is_db_file(filename: String) -> bool:
 	return is_valid_for_regex(filename, "^[a-zA-Z]+([a-zA-Z0-9]|_)*\\.data$")
 
 
+func is_anim_file(filename: String) -> bool:
+	return is_valid_for_regex(filename, "^[a-zA-Z]+([a-zA-Z0-9]|_)*\\.anim$")
+
+
 func is_valid_for_regex(value: String, regex: String) -> bool:
 	var validation = RegEx.new()
 	validation.compile(regex)

@@ -11,12 +11,14 @@ onready var _value_dlg = $Dialogs/ValueDialog
 onready var _text_dlg = $Dialogs/TextDialog
 onready var _new_cont_dlg = $Dialogs/NewContainerDialog
 onready var _edit_cont_dlg = $Dialogs/EditContainerDialog
+onready var _new_anim_dlg = $Dialogs/NewAnimationDialog
 
 
 func _ready():
 	$Tabs/Databases.set_main_ui(self)
 	$Tabs/Cards.set_main_ui(self)
 	$Tabs/Containers.set_main_ui(self)
+	$Tabs/Animations.set_main_ui(self)
 
 
 func change_tab(index: int) -> void:
@@ -70,3 +72,10 @@ func show_new_container_dialog(data: Dictionary = {}) -> void:
 func show_edit_container_dialog(id: String) -> void:
 	_edit_cont_dlg.popup_centered()
 	_edit_cont_dlg.set_container(id)
+
+
+func show_new_animation_dialog(data: Dictionary = {}) -> void:
+	if data.empty():
+		_new_anim_dlg.popup_centered()
+	else:
+		_new_anim_dlg.popup_centered_edit(data)
