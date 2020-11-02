@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation_manager.gd"
 }, {
+"base": "Reference",
+"class": "AnimationStep",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/animation_step.gd"
+}, {
 "base": "Control",
 "class": "AnimationsUi",
 "language": "GDScript",
@@ -169,6 +174,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/database/query.gd"
 }, {
+"base": "Reference",
+"class": "StepTransition",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/step_transition.gd"
+}, {
+"base": "Reference",
+"class": "StepValue",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/step_value.gd"
+}, {
 "base": "Node",
 "class": "UtilsInstance",
 "language": "GDScript",
@@ -183,6 +198,7 @@ _global_script_class_icons={
 "AbstractStore": "",
 "AnimationData": "",
 "AnimationManager": "",
+"AnimationStep": "",
 "AnimationsUi": "",
 "CardData": "",
 "CardDatabase": "",
@@ -207,6 +223,8 @@ _global_script_class_icons={
 "HomeDisplayPrivate": "",
 "PseudoRng": "",
 "Query": "",
+"StepTransition": "",
+"StepValue": "",
 "UtilsInstance": ""
 }
 

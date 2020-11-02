@@ -32,8 +32,9 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 	return errors
 
 
-func load_animations(folder: String) -> void:
-	_folder = folder
+func load_animations(node_folder: String, anim_folder: String) -> void:
+	_folder = anim_folder
+	
 	var dir = Directory.new()
 	if dir.open(_folder) == OK:
 		dir.list_dir_begin(true, true)
@@ -90,7 +91,9 @@ func _write_animation(anim: AnimationData):
 	file.set_value("meta", "id", anim.id)
 	file.set_value("meta", "name", anim.name)
 	
-	# TODO
+	file.set_value("seq", "pos", _from_sequence(anim.position_seq()))
+	file.set_value("seq", "scale", _from_sequence(anim.scale_seq()))
+	file.set_value("seq", "rot", _from_sequence(anim.rotation_seq()))
 	
 	var err = file.save(FORMAT_ANIM_PATH % [_folder, anim.id])
 	if err != OK:
@@ -109,8 +112,169 @@ func _read_animation(filename: String) -> AnimationData:
 	
 	var anim = AnimationData.new(file.get_value("meta", "id", ""),
 			file.get_value("meta", "name", ""))
-
-	# TODO
+	
+	anim.set_position_seq(_to_sequence(file.get_value("seq", "pos", [])))
+	anim.set_scale_seq(_to_sequence(file.get_value("seq", "scale", [])))
+	anim.set_rotation_seq(_to_sequence(file.get_value("seq", "rot", [])))
 	
 	return anim
+
+
+func _from_sequence(seq: Array) -> Array:
+	var data := []
+	for step in seq:
+		var step_data := {}
+		step_data["editable"] = step.editable
+		
+		if step.transi != null:
+			step_data["transi"] = {}
+			step_data["transi"]["duration"] = step.transi.duration
+			step_data["transi"]["type"] = _from_transi_type(step.transi.type)
+			step_data["transi"]["easing"] = _from_transi_easing(step.transi.easing)
+			
+		if step.val != null:
+			step_data["val"] = {}
+			step_data["val"]["mode"] = _from_val_mode(step.val.mode)
+			step_data["val"]["vec_val"] = step.val.vec_val
+			step_data["val"]["num_val"] = step.val.num_val
+			step_data["val"]["vec_range"] = step.val.vec_range
+			step_data["val"]["num_range"] = step.val.num_range
+			
+		data.append(step_data)
+	
+	return data
+
+
+func _to_sequence(data: Array) -> Array:
+	var seq := []
+	
+	for step_data in data:
+		var transi: StepTransition = null
+		var val: StepValue = null
+		
+		if step_data.has("transi"):
+			transi = StepTransition.new(
+				step_data["transi"]["duration"],
+				_to_transi_type(step_data["transi"]["type"]),
+				_to_transi_easing(step_data["transi"]["easing"]))
+		
+		if step_data.has("val"):
+			val = StepValue.new(_to_val_mode(step_data["val"]["mode"]))
+			val.vec_val = step_data["val"]["vec_val"]
+			val.num_val = step_data["val"]["num_val"]
+			val.vec_range = step_data["val"]["vec_range"]
+			val.num_range = step_data["val"]["num_range"]
+			
+		var step = AnimationStep.new(transi, val, step_data["editable"])
+		seq.append(step)
+		
+	return seq
+
+
+func _from_transi_type(type: int) -> String:
+	match type:
+		Tween.TRANS_LINEAR:
+			return "linear"
+		Tween.TRANS_SINE:
+			return "sine"
+		Tween.TRANS_QUINT:
+			return "quint"
+		Tween.TRANS_QUART:
+			return "quart"
+		Tween.TRANS_QUAD:
+			return "quad"
+		Tween.TRANS_EXPO:
+			return "expo"
+		Tween.TRANS_ELASTIC:
+			return "elastic"
+		Tween.TRANS_CUBIC:
+			return "cubic"
+		Tween.TRANS_CIRC:
+			return "circ"
+		Tween.TRANS_BOUNCE:
+			return "bounce"
+		Tween.TRANS_BACK:
+			return "back"
+		_:
+			return "linear"
+
+
+func _to_transi_type(type: String) -> int:
+	match type:
+		"linear":
+			return Tween.TRANS_LINEAR
+		"sine":
+			return Tween.TRANS_SINE
+		"quint":
+			return Tween.TRANS_QUINT
+		"quart":
+			return Tween.TRANS_QUART
+		"quad":
+			return Tween.TRANS_QUAD
+		"expo":
+			return Tween.TRANS_EXPO
+		"elastic":
+			return Tween.TRANS_ELASTIC
+		"cubic":
+			return Tween.TRANS_CUBIC
+		"circ":
+			return Tween.TRANS_CIRC
+		"bounce":
+			return Tween.TRANS_BOUNCE
+		"back":
+			return Tween.TRANS_BACK
+		_:
+			return Tween.TRANS_LINEAR
+
+
+func _from_transi_easing(easing: int) -> String:
+	match easing:
+		Tween.EASE_IN:
+			return "in"
+		Tween.EASE_OUT:
+			return "out"
+		Tween.EASE_IN_OUT:
+			return "in_out"
+		Tween.EASE_OUT_IN:
+			return "out_in"
+		_:
+			return "in"
+
+
+func _to_transi_easing(easing: String) -> int:
+	match easing:
+		"in":
+			return Tween.EASE_IN
+		"out":
+			return Tween.EASE_OUT
+		"in_out":
+			return Tween.EASE_IN_OUT
+		"out_in":
+			return Tween.EASE_OUT_IN
+		_:
+			return Tween.EASE_IN
+
+
+func _from_val_mode(mode: int) -> String:
+	match mode:
+		StepValue.Mode.INITIAL:
+			return "initial"
+		StepValue.Mode.FIXED:
+			return "fixed"
+		StepValue.Mode.RANDOM:
+			return "random"
+		_:
+			return "initial"
+
+
+func _to_val_mode(mode: String) -> int:
+	match mode:
+		"initial":
+			return StepValue.Mode.INITIAL
+		"fixed":
+			return StepValue.Mode.FIXED
+		"random":
+			return StepValue.Mode.RANDOM
+		_:
+			return StepValue.Mode.INITIAL
 

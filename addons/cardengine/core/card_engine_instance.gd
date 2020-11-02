@@ -19,7 +19,9 @@ func setup() -> void:
 		_containers.load_containers(_conf.get_value("folders", "containers"),
 				_conf.get_value("folders", "containers_private"),
 				_conf.get_value("folders", "container_tpl"))
-		_animations.load_animations(_conf.get_value("folders", "animations"))
+		_animations.load_animations(
+			_conf.get_value("folders", "animation_nodes"),
+			_conf.get_value("folders", "animations"))
 
 
 func clean() -> void:

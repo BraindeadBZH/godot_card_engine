@@ -66,3 +66,12 @@ func copy_template(src_path: String, dst_path: String, params: Dictionary) -> bo
 	dst_file.close()
 	
 	return true
+
+
+func delete_all_children(node: Node) -> void:
+	if node == null:
+		return
+		
+	for child in node.get_children():
+		node.remove_child(child)
+		child.queue_free()
