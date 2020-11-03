@@ -17,7 +17,7 @@ func _init(id: String, name: String) -> void:
 
 func init_position_seq() -> void:
 		var step0 := AnimationStep.new(
-			null, StepValue.new(StepValue.Mode.INITIAL), false)
+			null, StepValue.new(StepValue.Mode.INITIAL), false, false)
 		
 		var step1 := AnimationStep.new(
 			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
@@ -25,11 +25,15 @@ func init_position_seq() -> void:
 		
 		var step2 := AnimationStep.new(
 			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
-			StepValue.new(StepValue.Mode.INITIAL), false)
+			StepValue.new(StepValue.Mode.INITIAL), true, false)
 		
 		_pos_seq.append(step0)
 		_pos_seq.append(step1)
 		_pos_seq.append(step2)
+
+
+func clear_position_seq() -> void:
+	_pos_seq.clear()
 
 
 func position_seq() -> Array:
@@ -53,19 +57,24 @@ func remove_position_step(index: int) -> void:
 
 func init_scale_seq() -> void:
 		var step0 := AnimationStep.new(
-			null, StepValue.new(StepValue.Mode.INITIAL), false)
+			null, StepValue.new(StepValue.Mode.INITIAL), false, false)
 		
 		var step1 := AnimationStep.new(
 			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
 			StepValue.new(StepValue.Mode.FIXED))
+		step1.val.vec_val = Vector2(1.0, 1.0)
 		
 		var step2 := AnimationStep.new(
 			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
-			StepValue.new(StepValue.Mode.INITIAL), false)
+			StepValue.new(StepValue.Mode.INITIAL), true, false)
 		
 		_scale_seq.append(step0)
 		_scale_seq.append(step1)
 		_scale_seq.append(step2)
+
+
+func clear_scale_seq() -> void:
+	_scale_seq.clear()
 
 
 func scale_seq() -> Array:
@@ -89,7 +98,7 @@ func remove_scale_step(index: int) -> void:
 
 func init_rotation_seq() -> void:
 		var step0 := AnimationStep.new(
-			null, StepValue.new(StepValue.Mode.INITIAL), false)
+			null, StepValue.new(StepValue.Mode.INITIAL), false, false)
 		
 		var step1 := AnimationStep.new(
 			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
@@ -97,11 +106,15 @@ func init_rotation_seq() -> void:
 		
 		var step2 := AnimationStep.new(
 			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
-			StepValue.new(StepValue.Mode.INITIAL), false)
+			StepValue.new(StepValue.Mode.INITIAL), true, false)
 		
 		_rot_seq.append(step0)
 		_rot_seq.append(step1)
 		_rot_seq.append(step2)
+
+
+func clear_rotation_seq() -> void:
+	_rot_seq.clear()
 
 
 func rotation_seq() -> Array:

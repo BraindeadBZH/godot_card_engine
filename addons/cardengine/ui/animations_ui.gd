@@ -11,6 +11,7 @@ onready var _anim_list = $AnimationsLayout/Toolbar/AnimSelect
 onready var _edit_btn = $AnimationsLayout/Toolbar/EditBtn
 onready var _delete_btn = $AnimationsLayout/Toolbar/DeleteBtn
 onready var _save_btn = $AnimationsLayout/Toolbar/SaveBtn
+onready var _reset_btn = $AnimationsLayout/Toolbar/ResetBtn
 onready var _pos_seq = $AnimationsLayout/AnimEditLayout/PosSeqScroll/PosSeqLayout
 onready var _scale_seq = $AnimationsLayout/AnimEditLayout/ScaleSeqScroll/ScaleSeqLayout
 onready var _rot_seq = $AnimationsLayout/AnimEditLayout/RotSeqScroll/RotSeqLayout
@@ -35,9 +36,11 @@ func _select_anim(index: int) -> void:
 	
 	if index > 0:
 		_selected_anim = index
-		_opened_anim = _manager.get_animation(_anim_list.get_item_metadata(_selected_anim))
+		_opened_anim = _manager.get_animation(
+			_anim_list.get_item_metadata(_selected_anim))
 		_edit_btn.disabled = false
 		_save_btn.disabled = false
+		_reset_btn.disabled = false
 		_delete_btn.disabled = false
 		_load_animation()
 	else:
@@ -45,6 +48,7 @@ func _select_anim(index: int) -> void:
 		_opened_anim = null
 		_edit_btn.disabled = true
 		_save_btn.disabled = true
+		_reset_btn.disabled = true
 		_delete_btn.disabled = true
 		_clear_animation()
 
@@ -63,41 +67,143 @@ func _load_animation() -> void:
 	var scale_steps = _opened_anim.scale_seq()
 	var rot_steps = _opened_anim.rotation_seq()
 	
-	if pos_steps.empty():
+	_load_sequence(pos_steps, "pos", _pos_seq)
+	_load_sequence(scale_steps, "scale", _scale_seq)
+	_load_sequence(rot_steps, "rot", _rot_seq)
+
+
+func _load_sequence(seq: Array, type: String, layout: Control) -> void:
+	if seq.empty():
 		var btn = Button.new()
 		btn.text = "Initialize"
-		_pos_seq.add_child(btn)
-		btn.connect("pressed", self, "_on_InitBtn_pressed", ["pos"])
+		layout.add_child(btn)
+		btn.connect("pressed", self, "_on_InitBtn_pressed", [type])
 	else:
-		var lbl = Label.new()
-		lbl.text = "Steps count: %d" % pos_steps.size()
-		_pos_seq.add_child(lbl)
-	
-	if scale_steps.empty():
+		var index := 0
+		for step in seq:
+			var is_last = index == seq.size()-1
+			if step.transi != null:
+				var btn = Button.new()
+				btn.text = "%dms %s %s" % [
+					step.transi.duration * 1000.0,
+					_transi_type_display(step.transi.type),
+					_transi_easing_display(step.transi.easing)]
+				btn.disabled = not step.editable_transi
+				layout.add_child(btn)
+			
+			if step.val != null:
+				var btn = Button.new()
+				if type == "pos":
+					match step.val.mode:
+						StepValue.Mode.INITIAL:
+							btn.text = "init(0.0, 0.0)"
+						StepValue.Mode.FIXED:
+							btn.text = "(%.1f, %.1f)" % [
+								step.val.vec_val.x,
+								step.val.vec_val.y]
+						StepValue.Mode.RANDOM:
+							btn.text = "rand(%.1f-%.1f, %.1f-%.1f)" % [
+								step.val.vec_val.x,
+								step.val.vec_range.x,
+								step.val.vec_val.y,
+								step.val.vec_range.y]
+				elif type == "scale":
+					match step.val.mode:
+						StepValue.Mode.INITIAL:
+							btn.text = "init(1.0, 1.0)"
+						StepValue.Mode.FIXED:
+							btn.text = "(%.1f, %.1f)" % [
+								step.val.vec_val.x,
+								step.val.vec_val.y]
+						StepValue.Mode.RANDOM:
+							btn.text = "rand(%.1f-%.1f, %.1f-%.1f)" % [
+								step.val.vec_val.x,
+								step.val.vec_range.x,
+								step.val.vec_val.y,
+								step.val.vec_range.y]
+				elif type == "rot":
+					match step.val.mode:
+						StepValue.Mode.INITIAL:
+							btn.text = "init(0.0°)"
+						StepValue.Mode.FIXED:
+							btn.text = "%.1f°" % step.val.num_val
+						StepValue.Mode.RANDOM:
+							btn.text = "rand(%.1f°-%.1f°)" % [
+								step.val.num_val,
+								step.val.num_range]
+				btn.disabled = not step.editable_val
+				layout.add_child(btn)
+			
+			if not is_last:
+				var lbl = Label.new()
+				lbl.text = ">"
+				layout.add_child(lbl)
+			
+			index += 1
 		var btn = Button.new()
-		btn.text = "Initialize"
-		_scale_seq.add_child(btn)
-		btn.connect("pressed", self, "_on_InitBtn_pressed", ["scale"])
-	else:
-		var lbl = Label.new()
-		lbl.text = "Steps count: %d" % scale_steps.size()
-		_pos_seq.add_child(lbl)
-	
-	if rot_steps.empty():
-		var btn = Button.new()
-		btn.text = "Initialize"
-		_rot_seq.add_child(btn)
-		btn.connect("pressed", self, "_on_InitBtn_pressed", ["rot"])
-	else:
-		var lbl = Label.new()
-		lbl.text = "Steps count: %d" % rot_steps.size()
-		_pos_seq.add_child(lbl)
+		btn.text = "Clear sequence"
+		layout.add_child(btn)
+		btn.connect("pressed", self, "_on_ClearSeqBtn_pressed", [type])
 
 
 func _clear_animation() -> void:
 	Utils.delete_all_children(_pos_seq)
 	Utils.delete_all_children(_scale_seq)
 	Utils.delete_all_children(_rot_seq)
+
+
+func _transi_type_display(type: int) -> String:
+	match type:
+		Tween.TRANS_LINEAR:
+			return "Linear"
+		Tween.TRANS_SINE:
+			return "Sine"
+		Tween.TRANS_QUINT:
+			return "Quint"
+		Tween.TRANS_QUART:
+			return "Quart"
+		Tween.TRANS_QUAD:
+			return "Quad"
+		Tween.TRANS_EXPO:
+			return "Expo"
+		Tween.TRANS_ELASTIC:
+			return "Elastic"
+		Tween.TRANS_CUBIC:
+			return "Cubic"
+		Tween.TRANS_CIRC:
+			return "Circ"
+		Tween.TRANS_BOUNCE:
+			return "Bounce"
+		Tween.TRANS_BACK:
+			return "Back"
+		_:
+			return "None"
+
+
+func _transi_easing_display(easing: int) -> String:
+	match easing:
+		Tween.EASE_IN:
+			return "In"
+		Tween.EASE_OUT:
+			return "Out"
+		Tween.EASE_IN_OUT:
+			return "In/Out"
+		Tween.EASE_OUT_IN:
+			return "Out/In"
+		_:
+			return "None"
+
+
+func _val_mode_display(mode: int) -> String:
+	match mode:
+		StepValue.Mode.INITIAL:
+			return "Initial"
+		StepValue.Mode.FIXED:
+			return "Fixed"
+		StepValue.Mode.RANDOM:
+			return "Random"
+		_:
+			return "None"
 
 
 func _on_Animations_changed() -> void:
@@ -153,6 +259,7 @@ func _on_SaveBtn_pressed() -> void:
 	_manager.update_animation(_opened_anim)
 	_select_anim_by_id(id)
 
+
 func _on_InitBtn_pressed(seq: String) -> void:
 	match seq:
 		"pos":
@@ -164,4 +271,23 @@ func _on_InitBtn_pressed(seq: String) -> void:
 		_:
 			pass
 	
+	_load_animation()
+
+
+func _on_ClearSeqBtn_pressed(seq: String) -> void:
+	match seq:
+		"pos":
+			_opened_anim.clear_position_seq()
+		"scale":
+			_opened_anim.clear_scale_seq()
+		"rot":
+			_opened_anim.clear_rotation_seq()
+		_:
+			pass
+	
+	_load_animation()
+
+
+func _on_ResetBtn_pressed() -> void:
+	_opened_anim = _manager.reset_animation(_opened_anim)
 	_load_animation()

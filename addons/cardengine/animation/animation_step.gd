@@ -4,10 +4,12 @@ extends Reference
 
 var transi: StepTransition = null
 var val: StepValue = null
-var editable: bool = true
+var editable_transi: bool = true
+var editable_val: bool = true
 
 
-func _init(t: StepTransition, v: StepValue, e: bool = true) -> void:
+func _init(t: StepTransition, v: StepValue, et: bool = true, ev: bool = true) -> void:
 	transi = t
 	val = v
-	editable = e
+	editable_transi = et
+	editable_val = ev

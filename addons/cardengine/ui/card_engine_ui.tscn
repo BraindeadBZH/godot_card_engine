@@ -33,7 +33,6 @@ __meta__ = {
 }
 
 [node name="Databases" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -315,6 +314,7 @@ size_flags_vertical = 3
 items = [ "card_list: CardList", null, false, "home_display: HomeDisplay", null, false ]
 
 [node name="Animations" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -351,7 +351,7 @@ margin_left = 142.0
 margin_right = 230.0
 margin_bottom = 20.0
 text = "Choose..."
-items = [ "Choose...", null, false, 0, null ]
+items = [ "Choose...", null, true, 0, null, "Test Animation (test)", null, false, 1, "test" ]
 selected = 0
 
 [node name="EditBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
@@ -367,6 +367,13 @@ margin_right = 451.0
 margin_bottom = 20.0
 disabled = true
 text = "Save animation"
+
+[node name="ResetBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_left = 342.0
+margin_right = 451.0
+margin_bottom = 20.0
+disabled = true
+text = "Reset animation"
 
 [node name="DeleteBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
 margin_left = 455.0
@@ -494,6 +501,7 @@ margin_bottom = -4.0
 [connection signal="item_selected" from="Tabs/Animations/AnimationsLayout/Toolbar/AnimSelect" to="Tabs/Animations" method="_on_AnimSelect_item_selected"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/EditBtn" to="Tabs/Animations" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/SaveBtn" to="Tabs/Animations" method="_on_SaveBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/ResetBtn" to="Tabs/Animations" method="_on_ResetBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/DeleteBtn" to="Tabs/Animations" method="_on_DeleteBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="Tabs/Databases" method="_on_NewDatabaseDialog_form_validated"]
 [connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_delete_card"]

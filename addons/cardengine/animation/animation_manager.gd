@@ -41,7 +41,7 @@ func load_animations(node_folder: String, anim_folder: String) -> void:
 		var filename = dir.get_next()
 		while filename != "":
 			if Utils.is_anim_file(filename):
-				var anim = _read_animation(filename)
+				var anim = _read_animation(_folder + filename)
 				_animations[anim.id] = anim
 			filename = dir.get_next()
 		dir.list_dir_end()
@@ -85,6 +85,14 @@ func delete_animation(id: String):
 	emit_signal("changed")
 
 
+func reset_animation(anim: AnimationData) -> AnimationData:
+	var new_anim = _read_animation(FORMAT_ANIM_PATH % [_folder, anim.id])
+	
+	_animations[anim.id] = new_anim
+	
+	return new_anim
+
+
 func _write_animation(anim: AnimationData):
 	var file = ConfigFile.new()
 	
@@ -102,10 +110,9 @@ func _write_animation(anim: AnimationData):
 
 
 func _read_animation(filename: String) -> AnimationData:
-	var path = _folder + filename
 	var file = ConfigFile.new()
 	
-	var err = file.load(path)
+	var err = file.load(filename)
 	if err != OK:
 		printerr("Error while loading animation")
 		return null
@@ -124,7 +131,8 @@ func _from_sequence(seq: Array) -> Array:
 	var data := []
 	for step in seq:
 		var step_data := {}
-		step_data["editable"] = step.editable
+		step_data["editable_transi"] = step.editable_transi
+		step_data["editable_val"] = step.editable_val
 		
 		if step.transi != null:
 			step_data["transi"] = {}
@@ -165,7 +173,10 @@ func _to_sequence(data: Array) -> Array:
 			val.vec_range = step_data["val"]["vec_range"]
 			val.num_range = step_data["val"]["num_range"]
 			
-		var step = AnimationStep.new(transi, val, step_data["editable"])
+		var step = AnimationStep.new(
+			transi, val,
+			step_data["editable_transi"],
+			step_data["editable_val"])
 		seq.append(step)
 		
 	return seq
