@@ -44,7 +44,12 @@ func set_position_seq(seq: Array) -> void:
 	_pos_seq = seq
 
 
-func add_position_step(step: AnimationStep) -> void:
+func add_position_step(step: AnimationStep = null) -> void:
+	if step == null:
+		step = AnimationStep.new(
+			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
+			StepValue.new(StepValue.Mode.FIXED))
+	
 	_pos_seq.insert(_pos_seq.size()-1, step)
 
 
@@ -85,7 +90,13 @@ func set_scale_seq(seq: Array) -> void:
 	_scale_seq = seq
 
 
-func add_scale_step(step: AnimationStep) -> void:
+func add_scale_step(step: AnimationStep = null) -> void:
+	if step == null:
+		step = AnimationStep.new(
+			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
+			StepValue.new(StepValue.Mode.FIXED))
+		step.val.vec_val = Vector2(1.0, 1.0)
+	
 	_scale_seq.insert(_scale_seq.size()-1, step)
 
 
@@ -125,7 +136,12 @@ func set_rotation_seq(seq: Array) -> void:
 	_rot_seq = seq
 
 
-func add_rotation_step(step: AnimationStep) -> void:
+func add_rotation_step(step: AnimationStep = null) -> void:
+	if step == null:
+		step = AnimationStep.new(
+			StepTransition.new(0.3, Tween.TRANS_LINEAR, Tween.EASE_IN),
+			StepValue.new(StepValue.Mode.FIXED))
+	
 	_rot_seq.insert(_rot_seq.size()-1, step)
 
 

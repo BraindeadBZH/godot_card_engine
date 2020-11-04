@@ -79,9 +79,28 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 		layout.add_child(btn)
 		btn.connect("pressed", self, "_on_InitBtn_pressed", [type])
 	else:
+		var add_btn = Button.new()
+		add_btn.text = "Add step"
+		layout.add_child(add_btn)
+		add_btn.connect("pressed", self, "_on_AddStepBtn_pressed", [type])
+		
+		var clear_btn = Button.new()
+		clear_btn.text = "Clear sequence"
+		layout.add_child(clear_btn)
+		clear_btn.connect("pressed", self, "_on_ClearSeqBtn_pressed", [type])
+		
+		var tool_sep = Label.new()
+		tool_sep.text = "=>"
+		layout.add_child(tool_sep)
+		
 		var index := 0
 		for step in seq:
+			var step_lbl = Label.new()
+			step_lbl.text = "%d >" % index
+			layout.add_child(step_lbl)
+			
 			var is_last = index == seq.size()-1
+			
 			if step.transi != null:
 				var btn = Button.new()
 				btn.text = "%dms %s %s" % [
@@ -134,21 +153,7 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 				btn.disabled = not step.editable_val
 				layout.add_child(btn)
 			
-			if not is_last:
-				var lbl = Label.new()
-				lbl.text = ">"
-				layout.add_child(lbl)
-			
 			index += 1
-			
-		var lbl = Label.new()
-		lbl.text = "|"
-		layout.add_child(lbl)
-		
-		var btn = Button.new()
-		btn.text = "Clear sequence"
-		layout.add_child(btn)
-		btn.connect("pressed", self, "_on_ClearSeqBtn_pressed", [type])
 
 
 func _clear_animation() -> void:
@@ -273,6 +278,20 @@ func _on_InitBtn_pressed(seq: String) -> void:
 			_opened_anim.init_scale_seq()
 		"rot":
 			_opened_anim.init_rotation_seq()
+		_:
+			pass
+	
+	_load_animation()
+
+
+func _on_AddStepBtn_pressed(seq: String) -> void:
+	match seq:
+		"pos":
+			_opened_anim.add_position_step()
+		"scale":
+			_opened_anim.add_scale_step()
+		"rot":
+			_opened_anim.add_rotation_step()
 		_:
 			pass
 	
