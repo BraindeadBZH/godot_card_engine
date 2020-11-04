@@ -108,6 +108,7 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 					_transi_type_display(step.transi.type),
 					_transi_easing_display(step.transi.easing)]
 				btn.disabled = not step.editable_transi
+				btn.hint_tooltip = "Edit step transition"
 				layout.add_child(btn)
 			
 			if step.val != null:
@@ -151,7 +152,15 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 								step.val.num_val,
 								step.val.num_range]
 				btn.disabled = not step.editable_val
+				btn.hint_tooltip = "Edit step value"
 				layout.add_child(btn)
+			
+			if index > 0 and index < seq.size()-1 and seq.size() > 3:
+				var del_btn = Button.new()
+				del_btn.text = "X"
+				del_btn.hint_tooltip = "Delete step"
+				layout.add_child(del_btn)
+				del_btn.connect("pressed", self, "_on_DelStepBtn_pressed", [type, index])
 			
 			index += 1
 
@@ -314,4 +323,18 @@ func _on_ClearSeqBtn_pressed(seq: String) -> void:
 
 func _on_ResetBtn_pressed() -> void:
 	_opened_anim = _manager.reset_animation(_opened_anim)
+	_load_animation()
+
+
+func _on_DelStepBtn_pressed(seq: String, idx: int) -> void:
+	match seq:
+		"pos":
+			_opened_anim.remove_position_step(idx)
+		"scale":
+			_opened_anim.remove_scale_step(idx)
+		"rot":
+			_opened_anim.remove_rotation_step(idx)
+		_:
+			pass
+	
 	_load_animation()
