@@ -140,6 +140,11 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 				layout.add_child(lbl)
 			
 			index += 1
+			
+		var lbl = Label.new()
+		lbl.text = "|"
+		layout.add_child(lbl)
+		
 		var btn = Button.new()
 		btn.text = "Clear sequence"
 		layout.add_child(btn)

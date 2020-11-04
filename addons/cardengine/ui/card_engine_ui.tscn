@@ -358,6 +358,7 @@ selected = 0
 margin_left = 234.0
 margin_right = 338.0
 margin_bottom = 20.0
+hint_tooltip = "Change animation name"
 disabled = true
 text = "Edit animation"
 
@@ -365,6 +366,7 @@ text = "Edit animation"
 margin_left = 342.0
 margin_right = 451.0
 margin_bottom = 20.0
+hint_tooltip = "Save the animation to disk"
 disabled = true
 text = "Save animation"
 
@@ -372,6 +374,7 @@ text = "Save animation"
 margin_left = 342.0
 margin_right = 451.0
 margin_bottom = 20.0
+hint_tooltip = "Reset animation from disk"
 disabled = true
 text = "Reset animation"
 
@@ -379,6 +382,7 @@ text = "Reset animation"
 margin_left = 455.0
 margin_right = 578.0
 margin_bottom = 20.0
+hint_tooltip = "Delete animation from disk"
 disabled = true
 text = "Delete animation"
 
