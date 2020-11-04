@@ -158,11 +158,25 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 				layout.add_child(btn)
 			
 			if index > 0 and index < seq.size()-1 and seq.size() > 3:
+				if index > 1:
+					var left_btn = Button.new()
+					left_btn.text = "<"
+					left_btn.hint_tooltip = "Move to the left"
+					layout.add_child(left_btn)
+					left_btn.connect("pressed", self, "_on_LeftBtn_pressed", [type, index])
+					
 				var del_btn = Button.new()
 				del_btn.text = "X"
 				del_btn.hint_tooltip = "Delete step"
 				layout.add_child(del_btn)
 				del_btn.connect("pressed", self, "_on_DelStepBtn_pressed", [type, index])
+				
+				if index < seq.size()-2:
+					var right_btn = Button.new()
+					right_btn.text = ">"
+					right_btn.hint_tooltip = "Move to the right"
+					layout.add_child(right_btn)
+					right_btn.connect("pressed", self, "_on_RightBtn_pressed", [type, index])
 			
 			index += 1
 
@@ -336,6 +350,34 @@ func _on_DelStepBtn_pressed(seq: String, idx: int) -> void:
 			_opened_anim.remove_scale_step(idx)
 		"rot":
 			_opened_anim.remove_rotation_step(idx)
+		_:
+			pass
+	
+	_load_animation()
+
+
+func _on_LeftBtn_pressed(seq: String, idx: int) -> void:
+	match seq:
+		"pos":
+			_opened_anim.shift_position_step_left(idx)
+		"scale":
+			_opened_anim.shift_scale_step_left(idx)
+		"rot":
+			_opened_anim.shift_rotation_step_left(idx)
+		_:
+			pass
+	
+	_load_animation()
+
+
+func _on_RightBtn_pressed(seq: String, idx: int) -> void:
+	match seq:
+		"pos":
+			_opened_anim.shift_position_step_right(idx)
+		"scale":
+			_opened_anim.shift_scale_step_right(idx)
+		"rot":
+			_opened_anim.shift_rotation_step_right(idx)
 		_:
 			pass
 	

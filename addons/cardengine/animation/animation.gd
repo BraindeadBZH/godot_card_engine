@@ -60,6 +60,20 @@ func remove_position_step(index: int) -> void:
 	_pos_seq.remove(index)
 
 
+func shift_position_step_left(index: int) -> void:
+	if index <= 0 and index >= _pos_seq.size()-1:
+		return
+	
+	Utils.shift_elt_left(_pos_seq, index)
+
+
+func shift_position_step_right(index: int) -> void:
+	if index <= 0 and index >= _pos_seq.size()-1:
+		return
+	
+	Utils.shift_elt_right(_pos_seq, index)
+
+
 func init_scale_seq() -> void:
 		var step0 := AnimationStep.new(
 			null, StepValue.new(StepValue.Mode.INITIAL), false, false)
@@ -107,6 +121,20 @@ func remove_scale_step(index: int) -> void:
 	_scale_seq.remove(index)
 
 
+func shift_scale_step_left(index: int) -> void:
+	if index <= 0 and index >= _scale_seq.size()-1:
+		return
+	
+	Utils.shift_elt_left(_scale_seq, index)
+
+
+func shift_scale_step_right(index: int) -> void:
+	if index <= 0 and index >= _scale_seq.size()-1:
+		return
+	
+	Utils.shift_elt_right(_scale_seq, index)
+
+
 func init_rotation_seq() -> void:
 		var step0 := AnimationStep.new(
 			null, StepValue.new(StepValue.Mode.INITIAL), false, false)
@@ -150,3 +178,17 @@ func remove_rotation_step(index: int) -> void:
 		return
 	
 	_rot_seq.remove(index)
+
+
+func shift_rotation_step_left(index: int) -> void:
+	if index <= 0 and index >= _rot_seq.size()-1:
+		return
+	
+	Utils.shift_elt_left(_rot_seq, index)
+
+
+func shift_rotation_step_right(index: int) -> void:
+	if index <= 0 and index >= _rot_seq.size()-1:
+		return
+	
+	Utils.shift_elt_right(_rot_seq, index)

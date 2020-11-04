@@ -75,3 +75,13 @@ func delete_all_children(node: Node) -> void:
 	for child in node.get_children():
 		node.remove_child(child)
 		child.queue_free()
+
+func shift_elt_left(arr: Array, idx: int) -> void:
+	var elt = arr[idx]
+	arr.remove(idx)
+	arr.insert(idx-1, elt)
+
+func shift_elt_right(arr: Array, idx: int) -> void:
+	var elt = arr[idx]
+	arr.remove(idx)
+	arr.insert(idx+1, elt)
