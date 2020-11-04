@@ -81,11 +81,13 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 	else:
 		var add_btn = Button.new()
 		add_btn.text = "Add step"
+		add_btn.hint_tooltip = "Insert a step before the last step"
 		layout.add_child(add_btn)
 		add_btn.connect("pressed", self, "_on_AddStepBtn_pressed", [type])
 		
 		var clear_btn = Button.new()
 		clear_btn.text = "Clear sequence"
+		clear_btn.hint_tooltip = "Remove all the steps"
 		layout.add_child(clear_btn)
 		clear_btn.connect("pressed", self, "_on_ClearSeqBtn_pressed", [type])
 		
