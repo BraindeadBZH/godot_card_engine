@@ -4,7 +4,7 @@ extends AbstractManager
 
 signal changed()
 
-const FORMAT_ANIM_PATH = "%s/%s.anim"
+const FORMAT_ANIM_PATH = "%s/%s.data"
 
 var _folder: String = ""
 var _animations: Dictionary = {}
