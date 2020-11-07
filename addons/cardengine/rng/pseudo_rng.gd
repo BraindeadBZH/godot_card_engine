@@ -57,6 +57,14 @@ func random_range(from: int, to: int) -> int:
 	return int(round(randomf() * (to-from)+from))
 
 
+func randomf_range(from: float, to: float) -> float:
+	return randomf() * (to-from)+from
+
+
+func random_vec2_range(from: Vector2, to: Vector2) -> Vector2:
+	return Vector2(randomf_range(from.x, to.x), randomf_range(from.y, to.y))
+
+
 func _twist() -> void:
 	for i in range(624):
 		# Get the most significant bit and add it to the less significant

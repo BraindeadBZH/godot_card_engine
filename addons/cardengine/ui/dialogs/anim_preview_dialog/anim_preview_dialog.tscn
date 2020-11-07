@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.gd" type="Script" id=1]
+[ext_resource path="res://addons/cardengine/ui/dialogs/anim_preview_dialog/card_preview.png" type="Texture" id=2]
+
+[node name="AnimPreviewDialog" type="WindowDialog"]
+margin_right = 800.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 700, 700 )
+window_title = "Animation Preview"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Center" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreviewCard" type="Sprite" parent="Center"]
+texture = ExtResource( 2 )
+
+[node name="AnimPlayer" type="Tween" parent="."]
+[connection signal="about_to_show" from="." to="." method="_on_AnimPreviewDialog_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_AnimPreviewDialog_popup_hide"]
+[connection signal="tween_all_completed" from="AnimPlayer" to="." method="_on_AnimPlayer_tween_all_completed"]

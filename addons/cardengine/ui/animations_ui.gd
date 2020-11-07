@@ -480,4 +480,4 @@ func _on_StepValueDialog_form_validated(form) -> void:
 
 
 func _on_PreviewBtn_pressed() -> void:
-	pass # Replace with function body.
+	_main_ui.show_preview_dialog(_opened_anim)

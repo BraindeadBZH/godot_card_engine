@@ -14,6 +14,7 @@ onready var _edit_cont_dlg = $Dialogs/EditContainerDialog
 onready var _new_anim_dlg = $Dialogs/NewAnimationDialog
 onready var _step_val_dlg = $Dialogs/StepValueDialog
 onready var _step_transi_dlg = $Dialogs/StepTransiDialog
+onready var _preview_dlg = $Dialogs/AnimPreviewDialog
 
 
 func _ready():
@@ -95,3 +96,7 @@ func show_step_transi_dialog(data: Dictionary = {}) -> void:
 		_step_transi_dlg.popup_centered()
 	else:
 		_step_transi_dlg.popup_centered_edit(data)
+
+
+func show_preview_dialog(anim: AnimationData) -> void:
+	_preview_dlg.show_anim(anim)

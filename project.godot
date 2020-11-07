@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/store/abstract_store.gd"
 }, {
+"base": "WindowDialog",
+"class": "AnimPreviewDialog",
+"language": "GDScript",
+"path": "res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.gd"
+}, {
 "base": "Reference",
 "class": "AnimationData",
 "language": "GDScript",
@@ -196,6 +201,7 @@ _global_script_class_icons={
 "AbstractManager": "",
 "AbstractScreen": "",
 "AbstractStore": "",
+"AnimPreviewDialog": "",
 "AnimationData": "",
 "AnimationManager": "",
 "AnimationStep": "",

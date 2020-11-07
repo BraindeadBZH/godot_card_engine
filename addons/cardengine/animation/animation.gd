@@ -8,6 +8,7 @@ var name: String = ""
 var _pos_seq: Array = []
 var _scale_seq: Array = []
 var _rot_seq: Array = []
+var _rng: PseudoRng = PseudoRng.new()
 
 
 func _init(id: String, name: String) -> void:
@@ -192,3 +193,75 @@ func shift_rotation_step_right(index: int) -> void:
 		return
 	
 	Utils.shift_elt_right(_rot_seq, index)
+
+
+func setup_for(tween: Tween, node: Node2D) -> void:
+	_setup_pos(tween, node)
+	_setup_scale(tween, node)
+	_setup_rotation(tween, node)
+
+
+func _setup_pos(tween: Tween, node: Node2D) -> void:
+	var prev_val: Vector2 = node.position
+	var delay: float = 0.0
+	
+	for step in _pos_seq:
+		if step.transi != null:
+			var final_pos = node.position + step.val.vec_val
+			match step.val.mode:
+				StepValue.Mode.INITIAL:
+					final_pos = node.position
+				StepValue.Mode.RANDOM:
+					final_pos = node.position + _rng.random_vec2_range(
+						step.val.vec_val, step.val.vec_range)
+			tween.interpolate_property(
+				node, "position",
+				prev_val, final_pos,
+				step.transi.duration, step.transi.type, step.transi.easing, delay)
+			
+			prev_val = final_pos
+			delay += step.transi.duration
+
+
+func _setup_scale(tween: Tween, node: Node2D) -> void:
+	var prev_val: Vector2 = node.scale
+	var delay: float = 0.0
+	
+	for step in _scale_seq:
+		if step.transi != null:
+			var final_scale = node.scale * step.val.vec_val
+			match step.val.mode:
+				StepValue.Mode.INITIAL:
+					final_scale = node.scale
+				StepValue.Mode.RANDOM:
+					final_scale = node.scale * _rng.random_vec2_range(
+						step.val.vec_val, step.val.vec_range)
+			tween.interpolate_property(
+				node, "scale",
+				prev_val, final_scale,
+				step.transi.duration, step.transi.type, step.transi.easing, delay)
+			
+			prev_val = final_scale
+			delay += step.transi.duration
+
+
+func _setup_rotation(tween: Tween, node: Node2D) -> void:
+	var prev_val: float = node.rotation_degrees
+	var delay: float = 0.0
+	
+	for step in _rot_seq:
+		if step.transi != null:
+			var final_rot = node.rotation_degrees + step.val.num_val
+			match step.val.mode:
+				StepValue.Mode.INITIAL:
+					final_rot = node.rotation_degrees
+				StepValue.Mode.RANDOM:
+					final_rot = node.rotation_degrees + _rng.randomf_range(
+						step.val.num_val, step.val.num_range)
+			tween.interpolate_property(
+				node, "rotation_degrees",
+				prev_val, final_rot,
+				step.transi.duration, step.transi.type, step.transi.easing, delay)
+			
+			prev_val = final_rot
+			delay += step.transi.duration
