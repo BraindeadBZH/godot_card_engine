@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/cardengine/ui/dialogs/abstract_form_dialog/abstract_form_dialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/cardengine/ui/dialogs/step_value_dialog/step_value_dialog.gd" type="Script" id=2]
+
+[node name="StepValueDialog" instance=ExtResource( 1 )]
+window_title = "Value"
+script = ExtResource( 2 )
+
+[node name="ModeLbl" type="Label" parent="MainLayout/Form" index="0"]
+margin_top = 3.0
+margin_right = 38.0
+margin_bottom = 17.0
+text = "Mode"
+
+[node name="Mode" type="OptionButton" parent="MainLayout/Form" index="1"]
+margin_left = 42.0
+margin_right = 402.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Initial"
+items = [ "Initial", null, false, 0, null, "Fixed", null, false, 1, null, "Random", null, false, 2, null ]
+selected = 0
+
+[node name="NumValueLbl" type="Label" parent="MainLayout/Form" index="2"]
+margin_top = 29.0
+margin_right = 38.0
+margin_bottom = 43.0
+text = "Value"
+
+[node name="NumValue" type="SpinBox" parent="MainLayout/Form" index="3"]
+margin_left = 42.0
+margin_top = 24.0
+margin_right = 402.0
+margin_bottom = 48.0
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="VecValueLbl" type="Label" parent="MainLayout/Form" index="4"]
+margin_top = 57.0
+margin_right = 38.0
+margin_bottom = 71.0
+text = "Value"
+
+[node name="VecValueLayout" type="HBoxContainer" parent="MainLayout/Form" index="5"]
+margin_left = 42.0
+margin_top = 52.0
+margin_right = 402.0
+margin_bottom = 76.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VecValueX" type="SpinBox" parent="MainLayout/Form/VecValueLayout" index="0"]
+margin_right = 178.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="VecValueY" type="SpinBox" parent="MainLayout/Form/VecValueLayout" index="1"]
+margin_left = 182.0
+margin_right = 360.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="NumRangeLbl" type="Label" parent="MainLayout/Form" index="6"]
+margin_top = 85.0
+margin_right = 38.0
+margin_bottom = 99.0
+text = "Range"
+
+[node name="NumRange" type="SpinBox" parent="MainLayout/Form" index="7"]
+margin_left = 42.0
+margin_top = 80.0
+margin_right = 402.0
+margin_bottom = 104.0
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="VecRangeLbl" type="Label" parent="MainLayout/Form" index="8"]
+margin_top = 113.0
+margin_right = 38.0
+margin_bottom = 127.0
+text = "Range"
+
+[node name="VecRangeLayout" type="HBoxContainer" parent="MainLayout/Form" index="9"]
+margin_left = 42.0
+margin_top = 108.0
+margin_right = 402.0
+margin_bottom = 132.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VecRangeX" type="SpinBox" parent="MainLayout/Form/VecRangeLayout" index="0"]
+margin_right = 178.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="VecRangeY" type="SpinBox" parent="MainLayout/Form/VecRangeLayout" index="1"]
+margin_left = 182.0
+margin_right = 360.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true

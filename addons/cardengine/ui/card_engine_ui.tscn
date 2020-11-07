@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/card_engine_ui.gd" type="Script" id=1]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" type="PackedScene" id=2]
@@ -13,12 +13,14 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_container_dialog/new_container_dialog.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/cardengine/ui/animations_ui.gd" type="Script" id=13]
+[ext_resource path="res://addons/cardengine/ui/dialogs/step_value_dialog/step_value_dialog.tscn" type="PackedScene" id=14]
+[ext_resource path="res://addons/cardengine/ui/dialogs/step_transi_dialog/step_transi_dialog.tscn" type="PackedScene" id=15]
 [ext_resource path="res://addons/cardengine/ui/dialogs/new_animation_dialog/new_animation_dialog.tscn" type="PackedScene" id=16]
 
 [node name="CardEngineUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 500 )
+rect_min_size = Vector2( 0, 550 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -362,27 +364,35 @@ hint_tooltip = "Change animation name"
 disabled = true
 text = "Edit animation"
 
+[node name="PreviewBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
+margin_top = 126.0
+margin_right = 119.0
+margin_bottom = 326.0
+hint_tooltip = "See what the animation looks like"
+disabled = true
+text = "Preview animation"
+
 [node name="SaveBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
 margin_left = 342.0
 margin_right = 451.0
 margin_bottom = 20.0
-hint_tooltip = "Save the animation to disk"
+hint_tooltip = "Write the animation to disk"
 disabled = true
 text = "Save animation"
 
 [node name="ResetBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 342.0
-margin_right = 451.0
+margin_left = 455.0
+margin_right = 571.0
 margin_bottom = 20.0
-hint_tooltip = "Reset animation from disk"
+hint_tooltip = "Reload the animation from disk"
 disabled = true
 text = "Reset animation"
 
 [node name="DeleteBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 455.0
-margin_right = 578.0
+margin_left = 575.0
+margin_right = 698.0
 margin_bottom = 20.0
-hint_tooltip = "Delete animation from disk"
+hint_tooltip = "Remove the animation from disk"
 disabled = true
 text = "Delete animation"
 
@@ -475,6 +485,10 @@ margin_bottom = -4.0
 [node name="EditContainerDialog" parent="Dialogs" instance=ExtResource( 12 )]
 
 [node name="NewAnimationDialog" parent="Dialogs" instance=ExtResource( 16 )]
+
+[node name="StepValueDialog" parent="Dialogs" instance=ExtResource( 14 )]
+
+[node name="StepTransiDialog" parent="Dialogs" instance=ExtResource( 15 )]
 [connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/CreateBtn" to="Tabs/Databases" method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/EditBtn" to="Tabs/Databases" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/DeleteBtn" to="Tabs/Databases" method="_on_DeleteBtn_pressed"]
@@ -504,6 +518,7 @@ margin_bottom = -4.0
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/CreateBtn" to="Tabs/Animations" method="_on_CreateBtn_pressed"]
 [connection signal="item_selected" from="Tabs/Animations/AnimationsLayout/Toolbar/AnimSelect" to="Tabs/Animations" method="_on_AnimSelect_item_selected"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/EditBtn" to="Tabs/Animations" method="_on_EditBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/PreviewBtn" to="Tabs/Animations" method="_on_PreviewBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/SaveBtn" to="Tabs/Animations" method="_on_SaveBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/ResetBtn" to="Tabs/Animations" method="_on_ResetBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/DeleteBtn" to="Tabs/Animations" method="_on_DeleteBtn_pressed"]
@@ -515,3 +530,4 @@ margin_bottom = -4.0
 [connection signal="form_validated" from="Dialogs/TextDialog" to="Tabs/Cards" method="_on_TextDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/NewContainerDialog" to="Tabs/Containers" method="_on_NewContainerDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/NewAnimationDialog" to="Tabs/Animations" method="_on_NewAnimationDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/StepTransiDialog" to="Tabs/Animations" method="_on_StepTransiDialog_form_validated"]

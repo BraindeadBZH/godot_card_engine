@@ -29,6 +29,14 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 		if !form["confirm"]:
 			errors.append("Please confirm first")
 	
+	elif form_name == "step_transi":
+		if form["duration"] <= 0:
+			errors.append("Duration has to striclty greater than 0")
+		if form["type"] < 0 and form["type"] > 10:
+			errors.append("Invalid transition type")
+		if form["easing"] < 0 and form["easing"] > 3:
+			errors.append("Invalid transition easing")
+	
 	return errors
 
 

@@ -12,6 +12,8 @@ onready var _text_dlg = $Dialogs/TextDialog
 onready var _new_cont_dlg = $Dialogs/NewContainerDialog
 onready var _edit_cont_dlg = $Dialogs/EditContainerDialog
 onready var _new_anim_dlg = $Dialogs/NewAnimationDialog
+onready var _step_val_dlg = $Dialogs/StepValueDialog
+onready var _step_transi_dlg = $Dialogs/StepTransiDialog
 
 
 func _ready():
@@ -79,3 +81,19 @@ func show_new_animation_dialog(data: Dictionary = {}) -> void:
 		_new_anim_dlg.popup_centered()
 	else:
 		_new_anim_dlg.popup_centered_edit(data)
+
+
+func show_step_value_dialog(is_vec: bool, data: Dictionary = {}) -> void:
+	if data.empty():
+		_step_val_dlg.is_vec = is_vec
+		_step_val_dlg.popup_centered()
+	else:
+		_step_val_dlg.is_vec = is_vec
+		_step_val_dlg.popup_centered_edit(data)
+
+
+func show_step_transi_dialog(data: Dictionary = {}) -> void:
+	if data.empty():
+		_step_transi_dlg.popup_centered()
+	else:
+		_step_transi_dlg.popup_centered_edit(data)

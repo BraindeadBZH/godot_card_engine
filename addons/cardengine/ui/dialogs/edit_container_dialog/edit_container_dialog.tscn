@@ -104,12 +104,12 @@ text = "Face up"
 [node name="ModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
 margin_top = 88.0
 margin_right = 502.0
-margin_bottom = 437.0
+margin_bottom = 502.0
 size_flags_vertical = 3
 
 [node name="GridMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
 margin_right = 502.0
-margin_bottom = 349.0
+margin_bottom = 414.0
 size_flags_horizontal = 3
 
 [node name="GridModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode"]
@@ -451,7 +451,7 @@ __meta__ = {
 [node name="AngleLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
 margin_top = 172.0
 margin_right = 502.0
-margin_bottom = 265.0
+margin_bottom = 264.0
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
@@ -519,9 +519,9 @@ allow_greater = true
 allow_lesser = true
 
 [node name="ScaleTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-margin_top = 269.0
+margin_top = 268.0
 margin_right = 502.0
-margin_bottom = 289.0
+margin_bottom = 288.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
 text = "Scale"
@@ -532,9 +532,9 @@ __meta__ = {
 }
 
 [node name="ScaleLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-margin_top = 293.0
+margin_top = 292.0
 margin_right = 502.0
-margin_bottom = 437.0
+margin_bottom = 436.0
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
@@ -656,6 +656,7 @@ allow_greater = true
 allow_lesser = true
 
 [node name="Transitions" type="Control" parent="MainLayout/MainTabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -693,12 +694,12 @@ __meta__ = {
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
 margin_top = 5.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 19.0
-text = "Duration (ms)"
+text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_right = 502.0
 margin_bottom = 24.0
 hint_tooltip = "Duration of the transition in miliseconds"
@@ -707,15 +708,16 @@ max_value = 10000.0
 value = 300.0
 rounded = true
 allow_greater = true
+suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
 margin_top = 31.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 45.0
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 28.0
 margin_right = 502.0
 margin_bottom = 48.0
@@ -725,12 +727,12 @@ selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
 margin_top = 55.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 69.0
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 52.0
 margin_right = 502.0
 margin_bottom = 72.0
@@ -759,12 +761,12 @@ columns = 2
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
 margin_top = 5.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 19.0
-text = "Duration (ms)"
+text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_right = 502.0
 margin_bottom = 24.0
 hint_tooltip = "Duration of the transition in miliseconds"
@@ -773,15 +775,16 @@ max_value = 10000.0
 value = 300.0
 rounded = true
 allow_greater = true
+suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
 margin_top = 31.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 45.0
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 28.0
 margin_right = 502.0
 margin_bottom = 48.0
@@ -791,12 +794,12 @@ selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
 margin_top = 55.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 69.0
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 52.0
 margin_right = 502.0
 margin_bottom = 72.0
@@ -825,12 +828,12 @@ columns = 2
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
 margin_top = 5.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 19.0
-text = "Duration (ms)"
+text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_right = 502.0
 margin_bottom = 24.0
 hint_tooltip = "Duration of the transition in miliseconds"
@@ -839,15 +842,16 @@ max_value = 10000.0
 value = 300.0
 rounded = true
 allow_greater = true
+suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
 margin_top = 31.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 45.0
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 28.0
 margin_right = 502.0
 margin_bottom = 48.0
@@ -857,12 +861,12 @@ selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
 margin_top = 55.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 69.0
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 52.0
 margin_right = 502.0
 margin_bottom = 72.0
@@ -891,12 +895,12 @@ columns = 2
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout"]
 margin_top = 5.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 19.0
-text = "Duration (ms)"
+text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_right = 502.0
 margin_bottom = 24.0
 hint_tooltip = "Duration of the transition in miliseconds"
@@ -905,15 +909,16 @@ max_value = 10000.0
 value = 300.0
 rounded = true
 allow_greater = true
+suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout"]
 margin_top = 31.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 45.0
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 28.0
 margin_right = 502.0
 margin_bottom = 48.0
@@ -923,12 +928,12 @@ selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout"]
 margin_top = 55.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 69.0
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipStartLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 52.0
 margin_right = 502.0
 margin_bottom = 72.0
@@ -957,12 +962,12 @@ columns = 2
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout"]
 margin_top = 5.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 19.0
-text = "Duration (ms)"
+text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_right = 502.0
 margin_bottom = 24.0
 hint_tooltip = "Duration of the transition in miliseconds"
@@ -971,15 +976,16 @@ max_value = 10000.0
 value = 300.0
 rounded = true
 allow_greater = true
+suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout"]
 margin_top = 31.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 45.0
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 28.0
 margin_right = 502.0
 margin_bottom = 48.0
@@ -989,12 +995,12 @@ selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout"]
 margin_top = 55.0
-margin_right = 87.0
+margin_right = 55.0
 margin_bottom = 69.0
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout"]
-margin_left = 91.0
+margin_left = 59.0
 margin_top = 52.0
 margin_right = 502.0
 margin_bottom = 72.0
@@ -1003,7 +1009,6 @@ items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In Out", nul
 selected = 0
 
 [node name="Animations" type="Control" parent="MainLayout/MainTabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -1014,6 +1019,8 @@ margin_bottom = -4.0
 [node name="AnimLayout" type="VBoxContainer" parent="MainLayout/MainTabs/Animations"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 0.5
+margin_bottom = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1033,11 +1040,65 @@ __meta__ = {
 [node name="IdleLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
 margin_top = 24.0
 margin_right = 502.0
-margin_bottom = 24.0
+margin_bottom = 140.0
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_top = 3.0
+margin_right = 93.0
+margin_bottom = 17.0
+text = "Animation"
+
+[node name="Anim" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_left = 97.0
+margin_right = 502.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="LoopLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_top = 37.0
+margin_right = 93.0
+margin_bottom = 51.0
+text = "Loop"
+
+[node name="Loop" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_left = 97.0
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 64.0
+
+[node name="DelayModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_top = 71.0
+margin_right = 93.0
+margin_bottom = 85.0
+text = "Delay mode"
+
+[node name="DelayMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_left = 97.0
+margin_top = 68.0
+margin_right = 502.0
+margin_bottom = 88.0
+text = "Fixed"
+items = [ "Fixed", null, false, 0, null, "Random", null, false, 1, null ]
+selected = 0
+
+[node name="DelayDurationLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_top = 97.0
+margin_right = 93.0
+margin_bottom = 111.0
+text = "Delay duration"
+
+[node name="DelayDuration" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
+margin_left = 97.0
+margin_top = 92.0
+margin_right = 502.0
+margin_bottom = 116.0
+max_value = 10000.0
+allow_greater = true
+suffix = "ms"
 
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
 margin_top = 542.0

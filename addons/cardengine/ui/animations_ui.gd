@@ -12,6 +12,7 @@ onready var _edit_btn = $AnimationsLayout/Toolbar/EditBtn
 onready var _delete_btn = $AnimationsLayout/Toolbar/DeleteBtn
 onready var _save_btn = $AnimationsLayout/Toolbar/SaveBtn
 onready var _reset_btn = $AnimationsLayout/Toolbar/ResetBtn
+onready var _preview_btn = $AnimationsLayout/Toolbar/PreviewBtn
 onready var _pos_seq = $AnimationsLayout/AnimEditLayout/PosSeqScroll/PosSeqLayout
 onready var _scale_seq = $AnimationsLayout/AnimEditLayout/ScaleSeqScroll/ScaleSeqLayout
 onready var _rot_seq = $AnimationsLayout/AnimEditLayout/RotSeqScroll/RotSeqLayout
@@ -42,6 +43,7 @@ func _select_anim(index: int) -> void:
 		_save_btn.disabled = false
 		_reset_btn.disabled = false
 		_delete_btn.disabled = false
+		_preview_btn.disabled = false
 		_load_animation()
 	else:
 		_selected_anim = -1
@@ -50,6 +52,7 @@ func _select_anim(index: int) -> void:
 		_save_btn.disabled = true
 		_reset_btn.disabled = true
 		_delete_btn.disabled = true
+		_preview_btn.disabled = true
 		_clear_animation()
 
 
@@ -112,6 +115,7 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 				btn.disabled = not step.editable_transi
 				btn.hint_tooltip = "Edit step transition"
 				layout.add_child(btn)
+				btn.connect("pressed", self, "_on_TransiBtn_pressed", [type, index])
 			
 			if step.val != null:
 				var btn = Button.new()
@@ -156,6 +160,7 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 				btn.disabled = not step.editable_val
 				btn.hint_tooltip = "Edit step value"
 				layout.add_child(btn)
+				btn.connect("pressed", self, "_on_ValueBtn_pressed", [type, index])
 			
 			if index > 0 and index < seq.size()-1 and seq.size() > 3:
 				if index > 1:
@@ -382,3 +387,64 @@ func _on_RightBtn_pressed(seq: String, idx: int) -> void:
 			pass
 	
 	_load_animation()
+
+
+func _on_TransiBtn_pressed(seq: String, idx: int) -> void:
+	var data := {}
+	
+	data["seq"] = seq
+	data["index"] = idx
+	
+	match seq:
+		"pos":
+			data["duration"] = _opened_anim.position_seq()[idx].transi.duration
+			data["type"] = _opened_anim.position_seq()[idx].transi.type
+			data["easing"] = _opened_anim.position_seq()[idx].transi.easing
+		"scale":
+			data["duration"] = _opened_anim.scale_seq()[idx].transi.duration
+			data["type"] = _opened_anim.scale_seq()[idx].transi.type
+			data["easing"] = _opened_anim.scale_seq()[idx].transi.easing
+		"rot":
+			data["duration"] = _opened_anim.rotation_seq()[idx].transi.duration
+			data["type"] = _opened_anim.rotation_seq()[idx].transi.type
+			data["easing"] = _opened_anim.rotation_seq()[idx].transi.easing
+		_:
+			return
+			
+	_main_ui.show_step_transi_dialog(data)
+
+
+func _on_StepTransiDialog_form_validated(form) -> void:
+	match form["seq"]:
+		"pos":
+			_opened_anim.position_seq()[form["index"]].transi.duration = form["duration"]
+			_opened_anim.position_seq()[form["index"]].transi.type = form["type"]
+			_opened_anim.position_seq()[form["index"]].transi.easing = form["easing"]
+		"scale":
+			_opened_anim.scale_seq()[form["index"]].transi.duration = form["duration"]
+			_opened_anim.scale_seq()[form["index"]].transi.type = form["type"]
+			_opened_anim.scale_seq()[form["index"]].transi.easing = form["easing"]
+		"rot":
+			_opened_anim.rotation_seq()[form["index"]].transi.duration = form["duration"]
+			_opened_anim.rotation_seq()[form["index"]].transi.type = form["type"]
+			_opened_anim.rotation_seq()[form["index"]].transi.easing = form["easing"]
+		_:
+			return
+	
+	_load_animation()
+
+
+func _on_ValueBtn_pressed(seq: String, idx: int) -> void:
+	match seq:
+		"pos":
+			_main_ui.show_step_value_dialog(true)
+		"scale":
+			_main_ui.show_step_value_dialog(true)
+		"rot":
+			_main_ui.show_step_value_dialog(false)
+		_:
+			pass
+
+
+func _on_PreviewBtn_pressed() -> void:
+	pass # Replace with function body.
