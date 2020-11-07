@@ -124,11 +124,11 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 						StepValue.Mode.INITIAL:
 							btn.text = "init(0.0, 0.0)"
 						StepValue.Mode.FIXED:
-							btn.text = "(%.1f, %.1f)" % [
+							btn.text = "(%.2f, %.2f)" % [
 								step.val.vec_val.x,
 								step.val.vec_val.y]
 						StepValue.Mode.RANDOM:
-							btn.text = "rand(%.1f-%.1f, %.1f-%.1f)" % [
+							btn.text = "rand(%.2f-%.2f, %.2f-%.2f)" % [
 								step.val.vec_val.x,
 								step.val.vec_range.x,
 								step.val.vec_val.y,
@@ -138,11 +138,11 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 						StepValue.Mode.INITIAL:
 							btn.text = "init(1.0, 1.0)"
 						StepValue.Mode.FIXED:
-							btn.text = "(%.1f, %.1f)" % [
+							btn.text = "(%.2f, %.2f)" % [
 								step.val.vec_val.x,
 								step.val.vec_val.y]
 						StepValue.Mode.RANDOM:
-							btn.text = "rand(%.1f-%.1f, %.1f-%.1f)" % [
+							btn.text = "rand(%.2f-%.2f, %.2f-%.2f)" % [
 								step.val.vec_val.x,
 								step.val.vec_range.x,
 								step.val.vec_val.y,
@@ -152,9 +152,9 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 						StepValue.Mode.INITIAL:
 							btn.text = "init(0.0°)"
 						StepValue.Mode.FIXED:
-							btn.text = "%.1f°" % step.val.num_val
+							btn.text = "%.2f°" % step.val.num_val
 						StepValue.Mode.RANDOM:
-							btn.text = "rand(%.1f°-%.1f°)" % [
+							btn.text = "rand(%.2f°-%.2f°)" % [
 								step.val.num_val,
 								step.val.num_range]
 				btn.disabled = not step.editable_val
@@ -435,15 +435,48 @@ func _on_StepTransiDialog_form_validated(form) -> void:
 
 
 func _on_ValueBtn_pressed(seq: String, idx: int) -> void:
+	var data := {}
+	
+	data["seq"] = seq
+	data["index"] = idx
+	
 	match seq:
 		"pos":
-			_main_ui.show_step_value_dialog(true)
+			data["mode"] = _opened_anim.position_seq()[idx].val.mode
+			data["value"] = _opened_anim.position_seq()[idx].val.vec_val
+			data["range"] = _opened_anim.position_seq()[idx].val.vec_range
 		"scale":
-			_main_ui.show_step_value_dialog(true)
+			data["mode"] = _opened_anim.scale_seq()[idx].val.mode
+			data["value"] = _opened_anim.scale_seq()[idx].val.vec_val
+			data["range"] = _opened_anim.scale_seq()[idx].val.vec_range
 		"rot":
-			_main_ui.show_step_value_dialog(false)
+			data["mode"] = _opened_anim.rotation_seq()[idx].val.mode
+			data["value"] = _opened_anim.rotation_seq()[idx].val.num_val
+			data["range"] = _opened_anim.rotation_seq()[idx].val.num_range
 		_:
-			pass
+			return
+			
+	_main_ui.show_step_value_dialog(data)
+
+
+func _on_StepValueDialog_form_validated(form) -> void:
+	match form["seq"]:
+		"pos":
+			_opened_anim.position_seq()[form["index"]].val.mode = form["mode"]
+			_opened_anim.position_seq()[form["index"]].val.vec_val = form["value"]
+			_opened_anim.position_seq()[form["index"]].val.vec_range = form["range"]
+		"scale":
+			_opened_anim.scale_seq()[form["index"]].val.mode = form["mode"]
+			_opened_anim.scale_seq()[form["index"]].val.vec_val = form["value"]
+			_opened_anim.scale_seq()[form["index"]].val.vec_range = form["range"]
+		"rot":
+			_opened_anim.rotation_seq()[form["index"]].val.mode = form["mode"]
+			_opened_anim.rotation_seq()[form["index"]].val.num_val = form["value"]
+			_opened_anim.rotation_seq()[form["index"]].val.num_range = form["range"]
+		_:
+			return
+	
+	_load_animation()
 
 
 func _on_PreviewBtn_pressed() -> void:

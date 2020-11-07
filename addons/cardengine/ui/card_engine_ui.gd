@@ -83,12 +83,10 @@ func show_new_animation_dialog(data: Dictionary = {}) -> void:
 		_new_anim_dlg.popup_centered_edit(data)
 
 
-func show_step_value_dialog(is_vec: bool, data: Dictionary = {}) -> void:
+func show_step_value_dialog(data: Dictionary = {}) -> void:
 	if data.empty():
-		_step_val_dlg.is_vec = is_vec
 		_step_val_dlg.popup_centered()
 	else:
-		_step_val_dlg.is_vec = is_vec
 		_step_val_dlg.popup_centered_edit(data)
 
 

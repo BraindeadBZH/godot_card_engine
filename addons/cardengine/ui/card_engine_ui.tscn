@@ -530,4 +530,5 @@ margin_bottom = -4.0
 [connection signal="form_validated" from="Dialogs/TextDialog" to="Tabs/Cards" method="_on_TextDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/NewContainerDialog" to="Tabs/Containers" method="_on_NewContainerDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/NewAnimationDialog" to="Tabs/Animations" method="_on_NewAnimationDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/StepValueDialog" to="Tabs/Animations" method="_on_StepValueDialog_form_validated"]
 [connection signal="form_validated" from="Dialogs/StepTransiDialog" to="Tabs/Animations" method="_on_StepTransiDialog_form_validated"]
