@@ -5,8 +5,10 @@ extends Node2D
 signal instance_changed()
 signal need_removal()
 signal clicked()
+signal state_changed(new_state)
 
 enum CardSide {FRONT, BACK}
+enum CardState {IDLE, FOCUSED, PRESSED}
 
 export(Vector2) var size: Vector2 = Vector2(0.0, 0.0)
 
@@ -17,12 +19,16 @@ var _merge_trans: CardTransform = null
 var _transitions: CardTransitions = CardTransitions.new()
 var _remove_flag: bool = false
 var _flip_started: bool = false
+var _state = CardState.IDLE
+var _rng: PseudoRng = PseudoRng.new()
 
 onready var _front = $Front
 onready var _back  = $Back
+onready var _mouse = $MouseArea
 onready var _transi = $Transitions
 onready var _mergeWin = $MergeWindow
 onready var _flip = $FlipAnim
+onready var _anim_player = $AnimPlayer
 
 
 func _ready() -> void:
@@ -102,6 +108,22 @@ func flip() -> void:
 	_flip_started = true
 
 
+func change_anim(anim: AnimationData, repeat: bool = false) -> void:
+		_anim_player.stop_all()
+		_anim_player.remove_all()
+		_anim_player.repeat = repeat
+		
+		position = _root_trans.pos
+		scale = _root_trans.scale
+		rotation = _root_trans.rot
+		
+		if anim != null:
+			_setup_pos_anim(anim)
+			_setup_scale_anim(anim)
+			_setup_rotation_anim(anim)
+			_anim_player.start()
+
+
 func is_flagged_for_removal() -> bool:
 	return _remove_flag
 
@@ -135,14 +157,86 @@ func flag_for_removal() -> void:
 		emit_signal("need_removal")
 
 
+func _setup_pos_anim(anim: AnimationData) -> void:
+	var prev_val: Vector2 = _root_trans.pos
+	var delay: float = 0.0
+	
+	for step in anim.position_seq():
+		if step.transi != null:
+			var final_pos = _root_trans.pos + step.val.vec_val
+			match step.val.mode:
+				StepValue.Mode.INITIAL:
+					final_pos = _root_trans.pos
+				StepValue.Mode.RANDOM:
+					final_pos = _root_trans.pos + _rng.random_vec2_range(
+						step.val.vec_val, step.val.vec_range)
+			
+			_anim_player.interpolate_property(
+				self, "position",
+				prev_val, final_pos,
+				step.transi.duration, step.transi.type, step.transi.easing, delay)
+			
+			prev_val = final_pos
+			delay += step.transi.duration
+
+
+func _setup_scale_anim(anim: AnimationData) -> void:
+	var prev_val: Vector2 = _root_trans.scale
+	var delay: float = 0.0
+	
+	for step in anim.scale_seq():
+		if step.transi != null:
+			var final_scale = _root_trans.scale * step.val.vec_val
+			match step.val.mode:
+				StepValue.Mode.INITIAL:
+					final_scale = _root_trans.scale
+				StepValue.Mode.RANDOM:
+					final_scale = _root_trans.scale * _rng.random_vec2_range(
+						step.val.vec_val, step.val.vec_range)
+			
+			_anim_player.interpolate_property(
+				self, "scale",
+				prev_val, final_scale,
+				step.transi.duration, step.transi.type, step.transi.easing, delay)
+			
+			prev_val = final_scale
+			delay += step.transi.duration
+
+
+func _setup_rotation_anim(anim: AnimationData) -> void:
+	var prev_val: float = _root_trans.rot
+	var delay: float = 0.0
+	
+	for step in anim.rotation_seq():
+		if step.transi != null:
+			var final_rot = _root_trans.rot + deg2rad(step.val.num_val)
+			match step.val.mode:
+				StepValue.Mode.INITIAL:
+					final_rot = deg2rad(_root_trans.rot)
+				StepValue.Mode.RANDOM:
+					final_rot = _root_trans.rot + deg2rad(_rng.randomf_range(
+						step.val.num_val, step.val.num_range))
+			
+			_anim_player.interpolate_property(
+				self, "rotation",
+				prev_val, final_rot,
+				step.transi.duration, step.transi.type, step.transi.easing, delay)
+			
+			prev_val = final_rot
+			delay += step.transi.duration
+
+
+func _change_state(new_state) -> void:
+	_state = new_state
+	emit_signal("state_changed", new_state)
+
+
 func _on_MouseArea_mouse_entered() -> void:
-	pass
-#	print("Mouse entered ", _data.id)
+	_change_state(CardState.FOCUSED)
 
 
 func _on_MouseArea_mouse_exited() -> void:
-	pass
-#	print("Mouse exited ", _data.id)
+	_change_state(CardState.IDLE)
 
 
 func _on_MouseArea_pressed() -> void:
@@ -150,13 +244,14 @@ func _on_MouseArea_pressed() -> void:
 
 
 func _on_MouseArea_button_down() -> void:
-	pass
-#	print("Mouse pressed ", _inst.data().id)
+	_change_state(CardState.PRESSED)
 
 
 func _on_MouseArea_button_up() -> void:
-	pass
-#	print("Mouse released ", _inst.data().id)
+	if _mouse.is_hovered():
+		_change_state(CardState.FOCUSED)
+	else:
+		_change_state(CardState.IDLE)
 
 
 func _on_MergeWindow_timeout() -> void:
@@ -218,6 +313,7 @@ func _on_MergeWindow_timeout() -> void:
 		_transi.start()
 	
 	_root_trans = _merge_trans
+	_change_state(CardState.IDLE)
 
 
 func _on_Transitions_tween_all_completed() -> void:
@@ -238,4 +334,3 @@ func _on_FlipAnim_tween_all_completed() -> void:
 			_transitions.flip_end.type,
 			_transitions.flip_end.easing)
 		_flip.start()
-	

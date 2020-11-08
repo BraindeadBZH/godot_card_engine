@@ -1,0 +1,50 @@
+[meta]
+
+id="popout"
+name="Popout Animation"
+
+[seq]
+
+pos=[  ]
+scale=[ {
+"editable_transi": false,
+"editable_val": false,
+"val": {
+"mode": "initial",
+"num_range": 0.0,
+"num_val": 0.0,
+"vec_range": Vector2( 0, 0 ),
+"vec_val": Vector2( 0, 0 )
+}
+}, {
+"editable_transi": true,
+"editable_val": true,
+"transi": {
+"duration": 0.3,
+"easing": "out",
+"type": "expo"
+},
+"val": {
+"mode": "fixed",
+"num_range": 0.0,
+"num_val": 0.0,
+"vec_range": Vector2( 0, 0 ),
+"vec_val": Vector2( 1.15, 1.15 )
+}
+}, {
+"editable_transi": true,
+"editable_val": false,
+"transi": {
+"duration": 0.5,
+"easing": "out",
+"type": "elastic"
+},
+"val": {
+"mode": "initial",
+"num_range": 0.0,
+"num_val": 0.0,
+"vec_range": Vector2( 0, 0 ),
+"vec_val": Vector2( 0, 0 )
+}
+} ]
+rot=[  ]

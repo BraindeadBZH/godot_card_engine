@@ -125,6 +125,7 @@ func _update_container() -> void:
 		visual_inst.set_transitions(_transitions)
 		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
 		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
+		visual_inst.connect("state_changed", self, "_on_card_state_changed", [visual_inst])
 		
 		if _face_up:
 			visual_inst.set_side(AbstractCard.CardSide.FRONT)
@@ -320,6 +321,16 @@ func _clear() -> void:
 			child.flag_for_removal()
 
 
+func _setup_idle_anim(card: AbstractCard) -> void:
+	# TODO: loading selected anim and parameters
+	card.change_anim(CardEngine.anim().get_animation("floating"), true)
+
+
+func _setup_focused_anim(card: AbstractCard) -> void:
+	# TODO: loading selected anim and parameters
+	card.change_anim(CardEngine.anim().get_animation("popout"))
+
+
 func _on_AbstractContainer_resized() -> void:
 	_update_container()
 
@@ -328,5 +339,17 @@ func _on_need_removal(card: AbstractCard) -> void:
 	_cards.remove_child(card)
 	card.queue_free()
 
+
 func _on_card_clicked(card: AbstractCard) -> void:
 	_card_clicked(card)
+
+
+func _on_card_state_changed(new_state: int, card: AbstractCard) -> void:
+	match new_state:
+		AbstractCard.CardState.IDLE:
+			_setup_idle_anim(card)
+		AbstractCard.CardState.FOCUSED:
+			_setup_focused_anim(card)
+		_:
+			card.change_anim(null)
+

@@ -35,7 +35,6 @@ __meta__ = {
 }
 
 [node name="Layout" type="Control" parent="MainLayout/MainTabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -1009,6 +1008,7 @@ items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In Out", nul
 selected = 0
 
 [node name="Animations" type="Control" parent="MainLayout/MainTabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

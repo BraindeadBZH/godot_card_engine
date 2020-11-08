@@ -27,9 +27,5 @@ __meta__ = {
 }
 
 [node name="PreviewCard" parent="Center" instance=ExtResource( 2 )]
-
-[node name="AnimPlayer" type="Tween" parent="."]
-repeat = true
-playback/repeat = true
 [connection signal="about_to_show" from="." to="." method="_on_AnimPreviewDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_AnimPreviewDialog_popup_hide"]

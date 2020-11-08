@@ -8,7 +8,6 @@ var name: String = ""
 var _pos_seq: Array = []
 var _scale_seq: Array = []
 var _rot_seq: Array = []
-var _rng: PseudoRng = PseudoRng.new()
 
 
 func _init(id: String, name: String) -> void:
@@ -193,78 +192,3 @@ func shift_rotation_step_right(index: int) -> void:
 		return
 	
 	Utils.shift_elt_right(_rot_seq, index)
-
-
-func setup_for(tween: Tween, card: AbstractCard) -> void:
-	_setup_pos(tween, card)
-	_setup_scale(tween, card)
-	_setup_rotation(tween, card)
-
-
-func _setup_pos(tween: Tween, card: AbstractCard) -> void:
-	var prev_val: Vector2 = card.root_trans().pos
-	var delay: float = 0.0
-	
-	for step in _pos_seq:
-		if step.transi != null:
-			var final_pos = card.root_trans().pos + step.val.vec_val
-			match step.val.mode:
-				StepValue.Mode.INITIAL:
-					final_pos = card.root_trans().pos
-				StepValue.Mode.RANDOM:
-					final_pos = card.root_trans().pos + _rng.random_vec2_range(
-						step.val.vec_val, step.val.vec_range)
-			
-			tween.interpolate_property(
-				card, "position",
-				prev_val, final_pos,
-				step.transi.duration, step.transi.type, step.transi.easing, delay)
-			
-			prev_val = final_pos
-			delay += step.transi.duration
-
-
-func _setup_scale(tween: Tween, card: AbstractCard) -> void:
-	var prev_val: Vector2 = card.root_trans().scale
-	var delay: float = 0.0
-	
-	for step in _scale_seq:
-		if step.transi != null:
-			var final_scale = card.root_trans().scale * step.val.vec_val
-			match step.val.mode:
-				StepValue.Mode.INITIAL:
-					final_scale = card.root_trans().scale
-				StepValue.Mode.RANDOM:
-					final_scale = card.root_trans().scale * _rng.random_vec2_range(
-						step.val.vec_val, step.val.vec_range)
-			
-			tween.interpolate_property(
-				card, "scale",
-				prev_val, final_scale,
-				step.transi.duration, step.transi.type, step.transi.easing, delay)
-			
-			prev_val = final_scale
-			delay += step.transi.duration
-
-
-func _setup_rotation(tween: Tween, card: AbstractCard) -> void:
-	var prev_val: float = card.root_trans().rot
-	var delay: float = 0.0
-	
-	for step in _rot_seq:
-		if step.transi != null:
-			var final_rot = card.root_trans().rot + deg2rad(step.val.num_val)
-			match step.val.mode:
-				StepValue.Mode.INITIAL:
-					final_rot = deg2rad(card.root_trans().rot)
-				StepValue.Mode.RANDOM:
-					final_rot = card.root_trans().rot + deg2rad(_rng.randomf_range(
-						step.val.num_val, step.val.num_range))
-			
-			tween.interpolate_property(
-				card, "rotation",
-				prev_val, final_rot,
-				step.transi.duration, step.transi.type, step.transi.easing, delay)
-			
-			prev_val = final_rot
-			delay += step.transi.duration
