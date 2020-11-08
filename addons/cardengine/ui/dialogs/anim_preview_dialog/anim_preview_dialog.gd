@@ -25,9 +25,3 @@ func _on_AnimPreviewDialog_about_to_show() -> void:
 func _on_AnimPreviewDialog_popup_hide() -> void:
 	_anim_player.stop_all()
 	_anim_player.remove_all()
-
-
-func _on_AnimPlayer_tween_all_completed() -> void:
-	_anim_player.remove_all()
-	_anim.setup_for(_anim_player, _preview_card)
-	_anim_player.start()

@@ -214,6 +214,7 @@ func _setup_pos(tween: Tween, node: Node2D) -> void:
 				StepValue.Mode.RANDOM:
 					final_pos = node.position + _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
+			
 			tween.interpolate_property(
 				node, "position",
 				prev_val, final_pos,
@@ -236,6 +237,7 @@ func _setup_scale(tween: Tween, node: Node2D) -> void:
 				StepValue.Mode.RANDOM:
 					final_scale = node.scale * _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
+			
 			tween.interpolate_property(
 				node, "scale",
 				prev_val, final_scale,
@@ -258,6 +260,7 @@ func _setup_rotation(tween: Tween, node: Node2D) -> void:
 				StepValue.Mode.RANDOM:
 					final_rot = node.rotation_degrees + _rng.randomf_range(
 						step.val.num_val, step.val.num_range)
+			
 			tween.interpolate_property(
 				node, "rotation_degrees",
 				prev_val, final_rot,
