@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.gd" type="Script" id=1]
-[ext_resource path="res://addons/cardengine/ui/dialogs/anim_preview_dialog/card_preview.png" type="Texture" id=2]
+[ext_resource path="res://addons/cardengine/card/preview_card.tscn" type="PackedScene" id=2]
 
 [node name="AnimPreviewDialog" type="WindowDialog"]
 margin_right = 800.0
@@ -26,8 +26,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviewCard" type="Sprite" parent="Center"]
-texture = ExtResource( 2 )
+[node name="PreviewCard" parent="Center" instance=ExtResource( 2 )]
 
 [node name="AnimPlayer" type="Tween" parent="."]
 repeat = true

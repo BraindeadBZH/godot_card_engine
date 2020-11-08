@@ -5,7 +5,7 @@ extends WindowDialog
 var _anim: AnimationData = null
 
 onready var _anim_player: Tween = $AnimPlayer
-onready var _preview_card: Node2D = $Center/PreviewCard
+onready var _preview_card: AbstractCard = $Center/PreviewCard
 
 
 func show_anim(anim: AnimationData) -> void:
@@ -14,9 +14,7 @@ func show_anim(anim: AnimationData) -> void:
 
 
 func _on_AnimPreviewDialog_about_to_show() -> void:
-	_preview_card.position = Vector2(0.0, 0.0)
-	_preview_card.scale = Vector2(1.0, 1.0)
-	_preview_card.rotation = 0
+	_preview_card.set_root_trans_immediate(CardTransform.new())
 	
 	_anim.setup_for(_anim_player, _preview_card)
 	_anim_player.start()

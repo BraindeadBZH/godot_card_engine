@@ -1,3 +1,4 @@
+tool
 class_name AbstractCard
 extends Node2D
 
@@ -47,6 +48,13 @@ func set_root_trans(transform: CardTransform) -> void:
 	_mergeWin.start()
 	
 	_merge_trans = transform
+
+
+func set_root_trans_immediate(transform: CardTransform) -> void:
+	_root_trans = transform
+	position = transform.pos
+	scale = transform.scale
+	rotation = transform.rot
 
 
 func transitions() -> CardTransitions:
