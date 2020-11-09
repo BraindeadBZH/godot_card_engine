@@ -61,6 +61,7 @@ onready var _trans_flip_end_duration = $MainLayout/MainTabs/Transitions/TransLay
 onready var _trans_flip_end_type = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Type
 onready var _trans_flip_end_easing = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Easing
 
+onready var _interactive = $MainLayout/MainTabs/Animations/AnimLayout/InterLayout/Inter
 onready var _idle_anim = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/Anim
 onready var _idle_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/Loop
 onready var _focused_anim = $MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout/Anim
@@ -136,6 +137,8 @@ func _update() -> void:
 	_trans_flip_end_duration.value = _data.flip_end_duration * 1000
 	_trans_flip_end_type.select(_trans_type_to_select(_data.flip_end_type))
 	_trans_flip_end_easing.select(_trans_easing_to_select(_data.flip_end_easing))
+	
+	_interactive.pressed = _data.interactive
 	
 	_idle_anim.clear()
 	_focused_anim.clear()
@@ -228,6 +231,7 @@ func _save() -> void:
 	_data.flip_end_type = _select_to_trans_type(_trans_flip_end_type.selected)
 	_data.flip_end_easing = _select_to_trans_easing(_trans_flip_end_easing.selected)
 	
+	_data.interactive = _interactive.pressed
 	_data.idle_anim = _idle_anim.get_selected_metadata()
 	_data.idle_anim_repeat = _idle_anim_repeat.pressed
 	_data.focused_anim = _focused_anim.get_selected_metadata()

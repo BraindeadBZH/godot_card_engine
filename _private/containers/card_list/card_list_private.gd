@@ -61,6 +61,7 @@ func _ready():
 	_transitions.flip_end.type = Tween.TRANS_BOUNCE
 	_transitions.flip_end.easing = Tween.EASE_OUT
 
+	_interactive = true
 	_idle_anim = "none"
 	_idle_anim_repeat = false
 	_focused_anim = "popout"

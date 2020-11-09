@@ -171,6 +171,7 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("flip_end", "easing", cont.flip_end_easing)
 	
 	# Animations data
+	file.set_value("anim_general", "interactive", cont.interactive)
 	file.set_value("idle_anim", "id", cont.idle_anim)
 	file.set_value("idle_anim", "repeat", cont.idle_anim_repeat)
 	file.set_value("focused_anim", "id", cont.focused_anim)
@@ -234,6 +235,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"flip_end_duration": cont.flip_end_duration,
 		"flip_end_type": _translate_trans_type(cont.flip_end_type),
 		"flip_end_easing": _translate_trans_easing(cont.flip_end_easing),
+		"interactive": _translate_bool(cont.interactive),
 		"idle_anim": cont.idle_anim,
 		"idle_anim_repeat": _translate_bool(cont.idle_anim_repeat),
 		"focused_anim": cont.focused_anim,
@@ -345,6 +347,7 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.flip_end_type = file.get_value("flip_end", "type", "linear")
 	cont.flip_end_easing = file.get_value("flip_end", "easing", "in")
 	
+	cont.interactive = file.get_value("anim_general", "interactive", true)
 	cont.idle_anim = file.get_value("idle_anim", "id", "none")
 	cont.idle_anim_repeat = file.get_value("idle_anim", "repeat", false)
 	cont.focused_anim = file.get_value("focused_anim", "id", "none")

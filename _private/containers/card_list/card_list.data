@@ -73,6 +73,10 @@ duration=0.3
 type="bounce"
 easing="out"
 
+[anim_general]
+
+interactive=true
+
 [idle_anim]
 
 id="none"

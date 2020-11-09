@@ -62,6 +62,7 @@ var flip_end_type: String = "cubic"
 var flip_end_easing: String = "in_out"
 
 # Animations
+var interactive: bool = true
 var idle_anim: String = "none"
 var idle_anim_repeat: bool = false
 var focused_anim: String = "none"

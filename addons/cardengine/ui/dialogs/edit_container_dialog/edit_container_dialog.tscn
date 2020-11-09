@@ -1025,6 +1025,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="InterTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_right = 502.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "General"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InterLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 140.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InterLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/InterLayout"]
+margin_top = 37.0
+margin_right = 93.0
+margin_bottom = 51.0
+text = "Interactive"
+
+[node name="Inter" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/InterLayout"]
+margin_left = 97.0
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
 [node name="IdleTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
 margin_right = 502.0
 margin_bottom = 20.0
@@ -1075,7 +1109,7 @@ margin_right = 502.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
-text = "Idle animation"
+text = "Focused animation"
 align = 1
 valign = 1
 __meta__ = {

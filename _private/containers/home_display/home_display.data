@@ -73,6 +73,10 @@ duration=0.0
 type="linear"
 easing="in"
 
+[anim_general]
+
+interactive=false
+
 [idle_anim]
 
 id="floating"

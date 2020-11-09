@@ -53,6 +53,7 @@ var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 var _transitions: CardTransitions = CardTransitions.new()
 
 # Animations
+var _interactive: bool = true
 var _idle_anim: String = "none"
 var _idle_anim_repeat: bool = false
 var _focused_anim: String = "none"
@@ -129,6 +130,7 @@ func _update_container() -> void:
 		_cards.add_child(visual_inst)
 		visual_inst.set_instance(card)
 		visual_inst.set_transitions(_transitions)
+		visual_inst.set_interactive(_interactive)
 		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
 		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
 		visual_inst.connect("state_changed", self, "_on_card_state_changed", [visual_inst])
@@ -361,5 +363,5 @@ func _on_card_state_changed(new_state: int, card: AbstractCard) -> void:
 		AbstractCard.CardState.FOCUSED:
 			_setup_focused_anim(card)
 		_:
-			card.change_anim(null)
+			pass
 

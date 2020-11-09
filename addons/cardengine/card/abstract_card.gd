@@ -8,7 +8,7 @@ signal clicked()
 signal state_changed(new_state)
 
 enum CardSide {FRONT, BACK}
-enum CardState {IDLE, FOCUSED, PRESSED}
+enum CardState {NONE, IDLE, FOCUSED, PRESSED}
 
 export(Vector2) var size: Vector2 = Vector2(0.0, 0.0)
 
@@ -19,8 +19,9 @@ var _merge_trans: CardTransform = null
 var _transitions: CardTransitions = CardTransitions.new()
 var _remove_flag: bool = false
 var _flip_started: bool = false
-var _state = CardState.IDLE
+var _state = CardState.NONE
 var _rng: PseudoRng = PseudoRng.new()
+var _interactive: bool = true
 
 onready var _front = $Front
 onready var _back  = $Back
@@ -106,6 +107,10 @@ func flip() -> void:
 	_flip.start()
 	
 	_flip_started = true
+
+
+func set_interactive(state: bool) -> void:
+	_interactive = state
 
 
 func change_anim(anim: AnimationData, repeat: bool = false) -> void:
@@ -227,27 +232,45 @@ func _setup_rotation_anim(anim: AnimationData) -> void:
 
 
 func _change_state(new_state) -> void:
+	if new_state == _state:
+		return
+	
 	_state = new_state
 	emit_signal("state_changed", new_state)
 
 
 func _on_MouseArea_mouse_entered() -> void:
+	if not _interactive:
+		return
+		
 	_change_state(CardState.FOCUSED)
 
 
 func _on_MouseArea_mouse_exited() -> void:
+	if not _interactive:
+		return
+		
 	_change_state(CardState.IDLE)
 
 
 func _on_MouseArea_pressed() -> void:
+	if not _interactive:
+		return
+	
 	emit_signal("clicked")
 
 
 func _on_MouseArea_button_down() -> void:
+	if not _interactive:
+		return
+	
 	_change_state(CardState.PRESSED)
 
 
 func _on_MouseArea_button_up() -> void:
+	if not _interactive:
+		return
+		
 	if _mouse.is_hovered():
 		_change_state(CardState.FOCUSED)
 	else:
