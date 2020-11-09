@@ -72,3 +72,13 @@ easing="in"
 duration=0.3
 type="bounce"
 easing="out"
+
+[idle_anim]
+
+id="none"
+repeat=false
+
+[focused_anim]
+
+id="popout"
+repeat=false

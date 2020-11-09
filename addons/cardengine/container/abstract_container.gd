@@ -52,6 +52,12 @@ var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 # Transitions
 var _transitions: CardTransitions = CardTransitions.new()
 
+# Animations
+var _idle_anim: String = "none"
+var _idle_anim_repeat: bool = false
+var _focused_anim: String = "none"
+var _focused_anim_repeat: bool = false
+
 onready var _cards = $Cards
 onready var _path = $CardPath
 
@@ -322,13 +328,17 @@ func _clear() -> void:
 
 
 func _setup_idle_anim(card: AbstractCard) -> void:
-	# TODO: loading selected anim and parameters
-	card.change_anim(CardEngine.anim().get_animation("floating"), true)
+	if _idle_anim != "none":
+		card.change_anim(CardEngine.anim().get_animation(_idle_anim), _idle_anim_repeat)
+	else:
+		card.change_anim(null)
 
 
 func _setup_focused_anim(card: AbstractCard) -> void:
-	# TODO: loading selected anim and parameters
-	card.change_anim(CardEngine.anim().get_animation("popout"))
+	if _focused_anim != "none":
+		card.change_anim(CardEngine.anim().get_animation(_focused_anim), _focused_anim_repeat)
+	else:
+		card.change_anim(null)
 
 
 func _on_AbstractContainer_resized() -> void:

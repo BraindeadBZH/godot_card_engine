@@ -60,3 +60,8 @@ func _ready():
 	_transitions.flip_end.duration = {flip_end_duration}
 	_transitions.flip_end.type = {flip_end_type}
 	_transitions.flip_end.easing = {flip_end_easing}
+
+	_idle_anim = "{idle_anim}"
+	_idle_anim_repeat = {idle_anim_repeat}
+	_focused_anim = "{focused_anim}"
+	_focused_anim_repeat = {focused_anim_repeat}

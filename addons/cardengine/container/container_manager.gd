@@ -169,6 +169,12 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("flip_end", "duration", cont.flip_end_duration)
 	file.set_value("flip_end", "type", cont.flip_end_type)
 	file.set_value("flip_end", "easing", cont.flip_end_easing)
+	
+	# Animations data
+	file.set_value("idle_anim", "id", cont.idle_anim)
+	file.set_value("idle_anim", "repeat", cont.idle_anim_repeat)
+	file.set_value("focused_anim", "id", cont.focused_anim)
+	file.set_value("focused_anim", "repeat", cont.focused_anim_repeat)
 
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
@@ -227,7 +233,11 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"flip_start_easing": _translate_trans_easing(cont.flip_start_easing),
 		"flip_end_duration": cont.flip_end_duration,
 		"flip_end_type": _translate_trans_type(cont.flip_end_type),
-		"flip_end_easing": _translate_trans_easing(cont.flip_end_easing)
+		"flip_end_easing": _translate_trans_easing(cont.flip_end_easing),
+		"idle_anim": cont.idle_anim,
+		"idle_anim_repeat": _translate_bool(cont.idle_anim_repeat),
+		"focused_anim": cont.focused_anim,
+		"focused_anim_repeat": _translate_bool(cont.focused_anim_repeat)
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -334,6 +344,11 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.flip_end_duration = file.get_value("flip_end", "duration", 0.0)
 	cont.flip_end_type = file.get_value("flip_end", "type", "linear")
 	cont.flip_end_easing = file.get_value("flip_end", "easing", "in")
+	
+	cont.idle_anim = file.get_value("idle_anim", "id", "none")
+	cont.idle_anim_repeat = file.get_value("idle_anim", "repeat", false)
+	cont.focused_anim = file.get_value("focused_anim", "id", "none")
+	cont.focused_anim_repeat = file.get_value("focused_anim", "repeat", false)
 		
 	return cont
 

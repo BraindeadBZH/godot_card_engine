@@ -61,6 +61,12 @@ var flip_end_duration: float = 0.0
 var flip_end_type: String = "cubic"
 var flip_end_easing: String = "in_out"
 
+# Animations
+var idle_anim: String = "none"
+var idle_anim_repeat: bool = false
+var focused_anim: String = "none"
+var focused_anim_repeat: bool = false
+
 
 func _init(id: String, name: String) -> void:
 	self.id = id

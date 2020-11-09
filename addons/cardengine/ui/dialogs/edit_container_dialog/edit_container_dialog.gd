@@ -4,6 +4,7 @@ extends WindowDialog
 var _data: ContainerData = null
 
 onready var _manager: ContainerManager = CardEngine.cont()
+onready var _anims: AnimationManager = CardEngine.anim()
 onready var _mode_switch = $MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout/ModeSwitch
 onready var _face_switch = $MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout/FaceSwitch
 onready var _grid_mode = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode
@@ -59,6 +60,11 @@ onready var _trans_flip_start_easing = $MainLayout/MainTabs/Transitions/TransLay
 onready var _trans_flip_end_duration = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Duration
 onready var _trans_flip_end_type = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Type
 onready var _trans_flip_end_easing = $MainLayout/MainTabs/Transitions/TransLayout/FlipEndLayout/Easing
+
+onready var _idle_anim = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/Anim
+onready var _idle_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/Loop
+onready var _focused_anim = $MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout/Anim
+onready var _focused_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout/Loop
 
 
 func _ready():
@@ -130,6 +136,36 @@ func _update() -> void:
 	_trans_flip_end_duration.value = _data.flip_end_duration * 1000
 	_trans_flip_end_type.select(_trans_type_to_select(_data.flip_end_type))
 	_trans_flip_end_easing.select(_trans_easing_to_select(_data.flip_end_easing))
+	
+	_idle_anim.clear()
+	_focused_anim.clear()
+	
+	_idle_anim.add_item("None")
+	_idle_anim.set_item_metadata(0, "none")
+	_focused_anim.add_item("None")
+	_focused_anim.set_item_metadata(0, "none")
+	
+	var index = 1
+	var select_idle = 0
+	var select_focused = 0
+	for id in _anims.animations():
+		var anim = _anims.get_animation(id)
+		_idle_anim.add_item(anim.name)
+		_idle_anim.set_item_metadata(index, anim.id)
+		_focused_anim.add_item(anim.name)
+		_focused_anim.set_item_metadata(index, anim.id)
+		
+		if _data.idle_anim == anim.id:
+			select_idle = index
+		if _data.focused_anim == anim.id:
+			select_focused = index
+		
+		index += 1
+	
+	_idle_anim.select(select_idle)
+	_idle_anim_repeat.pressed = _data.idle_anim_repeat
+	_focused_anim.select(select_focused)
+	_focused_anim_repeat.pressed = _data.focused_anim_repeat
 
 
 func _save() -> void:
@@ -191,6 +227,11 @@ func _save() -> void:
 	_data.flip_end_duration = _trans_flip_end_duration.value / 1000.0
 	_data.flip_end_type = _select_to_trans_type(_trans_flip_end_type.selected)
 	_data.flip_end_easing = _select_to_trans_easing(_trans_flip_end_easing.selected)
+	
+	_data.idle_anim = _idle_anim.get_selected_metadata()
+	_data.idle_anim_repeat = _idle_anim_repeat.pressed
+	_data.focused_anim = _focused_anim.get_selected_metadata()
+	_data.focused_anim_repeat = _focused_anim_repeat.pressed
 	
 	_manager.update_container(_data)
 
