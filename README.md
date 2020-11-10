@@ -12,6 +12,7 @@ Currently under development, do not expect it to work.
 * **Database**: persistent card data storage
 * **Container**: UI element to display cards in a given layout using a card visual 
 * **Store**: in memory card data storage (deck, pile, hand)
+* **Animation**: a sequence of values linked together by transition, defined by a duration and an easing curve
 
 
 ## What is implemented
@@ -21,14 +22,15 @@ Currently under development, do not expect it to work.
 * Creating, modifying and deleting containers
 * Containers layouting as a grid or along a path
 * Fine tuning containers layout with linear/symmetric interpolation or random position, scale and rotation
-* Basic card visualization
+* Container transition animation (card re-order, card added, card removed)
+* Container event animation (idle, focused)
+* Animation editor
 
 
 ## What is not implemented
 
-* Containers animation
-* Containers event handling
-* More advanced card visualization
+* Additional containers animations
+* Card modifiers
 * Other features to be defined...
 
 
@@ -37,6 +39,7 @@ Currently under development, do not expect it to work.
 * _private: contains the generated code and data file, none of this file should be edited manually
 * addons/cardengine: contains the code for the in editor plugin and for the core elements
 * containers: contains the public code for your custom containers
+* cards: contains the public code for your custom cards
 
 
 ## How to use the UI
@@ -59,3 +62,7 @@ You can use the Cards tab to manage the cards. The "Card ID" field with the "Sav
 ### The Containers tab
 
 You can use the Containers tab to manage the containers. When creating a container it creates a scene inside the containers folder that use can add to your scenes to use it. Using the "Edit container" button allows you to modify the layout and other parameters. Double-clicking an item in the list allows you to change the container's name.
+
+### The Animations tab
+
+You can use the Animations tab to manage the animations. Created animations will be available to the containers editor. You have a sequence for the position, the rotation and the scale of the card. A sequence has to be initialized first before editing. This will create a default sequence with mandatory steps so the card start and return to its initial state. For each step, you can edit the the transition and the value. Important to note that values are relative to the card intial state. You can at anytime press the preview button to see what your sequences do. No change is saved to disk until the save button is pressed. Pressing the reset button will reload the animation from disk.
