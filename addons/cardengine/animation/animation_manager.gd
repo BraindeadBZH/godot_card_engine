@@ -32,6 +32,10 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 	elif form_name == "step_transi":
 		if form["duration"] <= 0:
 			errors.append("Duration has to striclty greater than 0")
+		if form["duration_range_min"] <= 0:
+			errors.append("Duration has to striclty greater than 0")
+		if form["duration_range_max"] <= 0:
+			errors.append("Duration has to striclty greater than 0")
 		if form["type"] < 0 and form["type"] > 10:
 			errors.append("Invalid transition type")
 		if form["easing"] < 0 and form["easing"] > 3:
@@ -144,7 +148,10 @@ func _from_sequence(seq: Array) -> Array:
 		
 		if step.transi != null:
 			step_data["transi"] = {}
+			step_data["transi"]["random_duration"] = step.transi.random_duration
 			step_data["transi"]["duration"] = step.transi.duration
+			step_data["transi"]["duration_range_min"] = step.transi.duration_range_min
+			step_data["transi"]["duration_range_max"] = step.transi.duration_range_max
 			step_data["transi"]["type"] = _from_transi_type(step.transi.type)
 			step_data["transi"]["easing"] = _from_transi_easing(step.transi.easing)
 			
@@ -173,6 +180,9 @@ func _to_sequence(data: Array) -> Array:
 				step_data["transi"]["duration"],
 				_to_transi_type(step_data["transi"]["type"]),
 				_to_transi_easing(step_data["transi"]["easing"]))
+			transi.random_duration = step_data["transi"]["random_duration"]
+			transi.duration_range_min = step_data["transi"]["duration_range_min"]
+			transi.duration_range_max = step_data["transi"]["duration_range_max"]
 		
 		if step_data.has("val"):
 			val = StepValue.new(_to_val_mode(step_data["val"]["mode"]))

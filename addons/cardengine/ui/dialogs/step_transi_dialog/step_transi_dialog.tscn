@@ -7,16 +7,28 @@
 window_title = "Value"
 script = ExtResource( 2 )
 
-[node name="DurationLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 5.0
-margin_right = 55.0
-margin_bottom = 19.0
+[node name="RandomLbl" type="Label" parent="MainLayout/Form" index="0"]
+margin_top = 13.0
+margin_right = 109.0
+margin_bottom = 27.0
+text = "Random duration"
+
+[node name="Random" type="CheckButton" parent="MainLayout/Form" index="1"]
+margin_left = 113.0
+margin_right = 402.0
+margin_bottom = 40.0
+
+[node name="DurationLbl" type="Label" parent="MainLayout/Form" index="2"]
+margin_top = 49.0
+margin_right = 109.0
+margin_bottom = 63.0
 text = "Duration"
 
-[node name="Duration" type="SpinBox" parent="MainLayout/Form" index="1"]
-margin_left = 59.0
+[node name="Duration" type="SpinBox" parent="MainLayout/Form" index="3"]
+margin_left = 113.0
+margin_top = 44.0
 margin_right = 402.0
-margin_bottom = 24.0
+margin_bottom = 68.0
 min_value = -1000.0
 max_value = 1000.0
 rounded = true
@@ -24,34 +36,71 @@ allow_greater = true
 allow_lesser = true
 suffix = "ms"
 
-[node name="TypeLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 31.0
-margin_right = 55.0
-margin_bottom = 45.0
+[node name="DurationRangeLbl" type="Label" parent="MainLayout/Form" index="4"]
+visible = false
+margin_top = 77.0
+margin_right = 109.0
+margin_bottom = 91.0
+text = "Duration range"
+
+[node name="DurationRangeLayout" type="HBoxContainer" parent="MainLayout/Form" index="5"]
+visible = false
+margin_top = 72.0
+margin_right = 322.0
+margin_bottom = 96.0
+
+[node name="DurationRangeMin" type="SpinBox" parent="MainLayout/Form/DurationRangeLayout" index="0"]
+margin_right = 159.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+suffix = "ms"
+
+[node name="DurationRangeMax" type="SpinBox" parent="MainLayout/Form/DurationRangeLayout" index="1"]
+margin_left = 163.0
+margin_right = 322.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+min_value = -1000.0
+max_value = 1000.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+suffix = "ms"
+
+[node name="TypeLbl" type="Label" parent="MainLayout/Form" index="6"]
+margin_top = 75.0
+margin_right = 109.0
+margin_bottom = 89.0
 text = "Type"
 
-[node name="Type" type="OptionButton" parent="MainLayout/Form" index="3"]
-margin_left = 59.0
-margin_top = 28.0
+[node name="Type" type="OptionButton" parent="MainLayout/Form" index="7"]
+margin_left = 113.0
+margin_top = 72.0
 margin_right = 402.0
-margin_bottom = 48.0
+margin_bottom = 92.0
 size_flags_horizontal = 3
 text = "Linear"
 items = [ "Linear", null, false, 0, null, "Sine", null, false, 1, null, "Quint", null, false, 2, null, "Quart", null, false, 3, null, "Quad", null, false, 4, null, "Expo", null, false, 5, null, "Elastic", null, false, 6, null, "Cubic", null, false, 7, null, "Circ", null, false, 8, null, "Bounce", null, false, 9, null, "Back", null, false, 10, null ]
 selected = 0
 
-[node name="EasingLbl" type="Label" parent="MainLayout/Form" index="4"]
-margin_top = 55.0
-margin_right = 55.0
-margin_bottom = 69.0
+[node name="EasingLbl" type="Label" parent="MainLayout/Form" index="8"]
+margin_top = 99.0
+margin_right = 109.0
+margin_bottom = 113.0
 text = "Easing"
 
-[node name="Easing" type="OptionButton" parent="MainLayout/Form" index="5"]
-margin_left = 59.0
-margin_top = 52.0
+[node name="Easing" type="OptionButton" parent="MainLayout/Form" index="9"]
+margin_left = 113.0
+margin_top = 96.0
 margin_right = 402.0
-margin_bottom = 72.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 text = "In"
 items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In/Out", null, false, 2, null, "Out/In", null, false, 3, null ]
 selected = 0
+[connection signal="pressed" from="MainLayout/Form/Random" to="." method="_on_Random_pressed"]

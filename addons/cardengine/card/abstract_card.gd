@@ -169,6 +169,12 @@ func _setup_pos_anim(anim: AnimationData) -> void:
 	for step in anim.position_seq():
 		if step.transi != null:
 			var final_pos = _root_trans.pos + step.val.vec_val
+			var final_duration = step.transi.duration
+			
+			if step.transi.random_duration:
+				final_duration = _rng.randomf_range(
+					step.transi.duration_range_min, step.transi.duration_range_max)
+			
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
 					final_pos = _root_trans.pos
@@ -179,10 +185,10 @@ func _setup_pos_anim(anim: AnimationData) -> void:
 			_anim_player.interpolate_property(
 				self, "position",
 				prev_val, final_pos,
-				step.transi.duration, step.transi.type, step.transi.easing, delay)
+				final_duration, step.transi.type, step.transi.easing, delay)
 			
 			prev_val = final_pos
-			delay += step.transi.duration
+			delay += final_duration
 
 
 func _setup_scale_anim(anim: AnimationData) -> void:
@@ -192,6 +198,12 @@ func _setup_scale_anim(anim: AnimationData) -> void:
 	for step in anim.scale_seq():
 		if step.transi != null:
 			var final_scale = _root_trans.scale * step.val.vec_val
+			var final_duration = step.transi.duration
+			
+			if step.transi.random_duration:
+				final_duration = _rng.randomf_range(
+					step.transi.duration_range_min, step.transi.duration_range_max)
+			
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
 					final_scale = _root_trans.scale
@@ -202,10 +214,10 @@ func _setup_scale_anim(anim: AnimationData) -> void:
 			_anim_player.interpolate_property(
 				self, "scale",
 				prev_val, final_scale,
-				step.transi.duration, step.transi.type, step.transi.easing, delay)
+				final_duration, step.transi.type, step.transi.easing, delay)
 			
 			prev_val = final_scale
-			delay += step.transi.duration
+			delay += final_duration
 
 
 func _setup_rotation_anim(anim: AnimationData) -> void:
@@ -215,6 +227,12 @@ func _setup_rotation_anim(anim: AnimationData) -> void:
 	for step in anim.rotation_seq():
 		if step.transi != null:
 			var final_rot = _root_trans.rot + deg2rad(step.val.num_val)
+			var final_duration = step.transi.duration
+			
+			if step.transi.random_duration:
+				final_duration = _rng.randomf_range(
+					step.transi.duration_range_min, step.transi.duration_range_max)
+			
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
 					final_rot = deg2rad(_root_trans.rot)
@@ -225,10 +243,10 @@ func _setup_rotation_anim(anim: AnimationData) -> void:
 			_anim_player.interpolate_property(
 				self, "rotation",
 				prev_val, final_rot,
-				step.transi.duration, step.transi.type, step.transi.easing, delay)
+				final_duration, step.transi.type, step.transi.easing, delay)
 			
 			prev_val = final_rot
-			delay += step.transi.duration
+			delay += final_duration
 
 
 func _change_state(new_state) -> void:

@@ -21,7 +21,10 @@ scale=[ {
 "editable_val": true,
 "transi": {
 "duration": 1.0,
+"duration_range_max": 1.0,
+"duration_range_min": 0.5,
 "easing": "out",
+"random_duration": true,
 "type": "quad"
 },
 "val": {
@@ -36,7 +39,10 @@ scale=[ {
 "editable_val": true,
 "transi": {
 "duration": 2.0,
+"duration_range_max": 2.0,
+"duration_range_min": 1.0,
 "easing": "in_out",
+"random_duration": true,
 "type": "quad"
 },
 "val": {
@@ -51,7 +57,10 @@ scale=[ {
 "editable_val": false,
 "transi": {
 "duration": 0.5,
+"duration_range_max": 1.0,
+"duration_range_min": 0.5,
 "easing": "in",
+"random_duration": true,
 "type": "quad"
 },
 "val": {
@@ -77,7 +86,10 @@ rot=[ {
 "editable_val": true,
 "transi": {
 "duration": 2.0,
+"duration_range_max": 2.0,
+"duration_range_min": 1.0,
 "easing": "out",
+"random_duration": true,
 "type": "quad"
 },
 "val": {
@@ -92,7 +104,10 @@ rot=[ {
 "editable_val": true,
 "transi": {
 "duration": 1.0,
+"duration_range_max": 2.0,
+"duration_range_min": 1.0,
 "easing": "in_out",
+"random_duration": true,
 "type": "quad"
 },
 "val": {
@@ -107,7 +122,10 @@ rot=[ {
 "editable_val": false,
 "transi": {
 "duration": 0.5,
+"duration_range_max": 0.5,
+"duration_range_min": 0.3,
 "easing": "in",
+"random_duration": true,
 "type": "quad"
 },
 "val": {

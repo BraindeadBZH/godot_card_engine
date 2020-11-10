@@ -108,10 +108,17 @@ func _load_sequence(seq: Array, type: String, layout: Control) -> void:
 			
 			if step.transi != null:
 				var btn = Button.new()
-				btn.text = "%dms %s %s" % [
-					step.transi.duration * 1000.0,
-					_transi_type_display(step.transi.type),
-					_transi_easing_display(step.transi.easing)]
+				if step.transi.random_duration:
+					btn.text = "rand(%dms, %dms) %s %s" % [
+						step.transi.duration_range_min * 1000.0,
+						step.transi.duration_range_max * 1000.0,
+						_transi_type_display(step.transi.type),
+						_transi_easing_display(step.transi.easing)]
+				else:
+					btn.text = "%dms %s %s" % [
+						step.transi.duration * 1000.0,
+						_transi_type_display(step.transi.type),
+						_transi_easing_display(step.transi.easing)]
 				btn.disabled = not step.editable_transi
 				btn.hint_tooltip = "Edit step transition"
 				layout.add_child(btn)
@@ -397,15 +404,24 @@ func _on_TransiBtn_pressed(seq: String, idx: int) -> void:
 	
 	match seq:
 		"pos":
+			data["random_duration"] = _opened_anim.position_seq()[idx].transi.random_duration
 			data["duration"] = _opened_anim.position_seq()[idx].transi.duration
+			data["duration_range_min"] = _opened_anim.position_seq()[idx].transi.duration_range_min
+			data["duration_range_max"] = _opened_anim.position_seq()[idx].transi.duration_range_max
 			data["type"] = _opened_anim.position_seq()[idx].transi.type
 			data["easing"] = _opened_anim.position_seq()[idx].transi.easing
 		"scale":
+			data["random_duration"] = _opened_anim.scale_seq()[idx].transi.random_duration
 			data["duration"] = _opened_anim.scale_seq()[idx].transi.duration
+			data["duration_range_min"] = _opened_anim.scale_seq()[idx].transi.duration_range_min
+			data["duration_range_max"] = _opened_anim.scale_seq()[idx].transi.duration_range_max
 			data["type"] = _opened_anim.scale_seq()[idx].transi.type
 			data["easing"] = _opened_anim.scale_seq()[idx].transi.easing
 		"rot":
+			data["random_duration"] = _opened_anim.rotation_seq()[idx].transi.random_duration
 			data["duration"] = _opened_anim.rotation_seq()[idx].transi.duration
+			data["duration_range_min"] = _opened_anim.rotation_seq()[idx].transi.duration_range_min
+			data["duration_range_max"] = _opened_anim.rotation_seq()[idx].transi.duration_range_max
 			data["type"] = _opened_anim.rotation_seq()[idx].transi.type
 			data["easing"] = _opened_anim.rotation_seq()[idx].transi.easing
 		_:
@@ -417,15 +433,24 @@ func _on_TransiBtn_pressed(seq: String, idx: int) -> void:
 func _on_StepTransiDialog_form_validated(form) -> void:
 	match form["seq"]:
 		"pos":
+			_opened_anim.position_seq()[form["index"]].transi.random_duration = form["random_duration"]
 			_opened_anim.position_seq()[form["index"]].transi.duration = form["duration"]
+			_opened_anim.position_seq()[form["index"]].transi.duration_range_min = form["duration_range_min"]
+			_opened_anim.position_seq()[form["index"]].transi.duration_range_max = form["duration_range_max"]
 			_opened_anim.position_seq()[form["index"]].transi.type = form["type"]
 			_opened_anim.position_seq()[form["index"]].transi.easing = form["easing"]
 		"scale":
+			_opened_anim.scale_seq()[form["index"]].transi.random_duration = form["random_duration"]
 			_opened_anim.scale_seq()[form["index"]].transi.duration = form["duration"]
+			_opened_anim.scale_seq()[form["index"]].transi.duration_range_min = form["duration_range_min"]
+			_opened_anim.scale_seq()[form["index"]].transi.duration_range_max = form["duration_range_max"]
 			_opened_anim.scale_seq()[form["index"]].transi.type = form["type"]
 			_opened_anim.scale_seq()[form["index"]].transi.easing = form["easing"]
 		"rot":
+			_opened_anim.rotation_seq()[form["index"]].transi.random_duration = form["random_duration"]
 			_opened_anim.rotation_seq()[form["index"]].transi.duration = form["duration"]
+			_opened_anim.rotation_seq()[form["index"]].transi.duration_range_min = form["duration_range_min"]
+			_opened_anim.rotation_seq()[form["index"]].transi.duration_range_max = form["duration_range_max"]
 			_opened_anim.rotation_seq()[form["index"]].transi.type = form["type"]
 			_opened_anim.rotation_seq()[form["index"]].transi.easing = form["easing"]
 		_:
