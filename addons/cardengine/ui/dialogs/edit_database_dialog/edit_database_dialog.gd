@@ -74,9 +74,17 @@ func _fill_card_list():
 		_store.sort({"meta:id": true})
 	
 	var cards = _store.cards()
+	var index = 0
 	_list_lbl.text = "Card List (%d cards)" % cards.size()
 	for card in cards:
-		_card_list.add_item(card.data().id)
+		if card.data().has_text("name"):
+			_card_list.add_item(
+				"%s (%s)" % [card.data().id, card.data().get_text("name")])
+		else:
+			_card_list.add_item(card.data().id)
+		
+		_card_list.set_item_metadata(index, card.data().id)
+		index += 1
 
 
 func _apply_filters():
@@ -154,7 +162,7 @@ func _on_CardList_item_selected(index):
 	_detail_list.clear()
 	
 	_selected_card_idx = index
-	_selected_card = _card_list.get_item_text(index)
+	_selected_card = _card_list.get_item_metadata(index)
 	
 	var card = _db.get_card(_selected_card)
 	_detail_list.add_item("Categories:")
