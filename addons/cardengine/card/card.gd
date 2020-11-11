@@ -32,28 +32,28 @@ func set_categories(categories: Dictionary) -> void:
 	mark_changed()
 
 
-func add_category(id: String, name: String) -> void:
-	_categs[id] = name
+func add_category(meta_categ: String, categ: String) -> void:
+	_categs[meta_categ] = categ
 	mark_changed()
 
 
-func has_category(id: String) -> bool:
-	return _categs.has(id)
+func has_meta_category(meta_categ: String) -> bool:
+	return _categs.has(meta_categ)
 
 
-func match_category(id: String) -> bool:
-	for categ in _categs:
-		if categ.match(id):
+func match_category(categ: String) -> bool:
+	for meta in _categs:
+		if _categs[meta].match(categ):
 			return true
 	return false
 
 
-func get_category(id: String) -> String:
-	return _categs[id]
+func get_category(meta_category: String) -> String:
+	return _categs[meta_category]
 
 
-func remove_category(id: String) -> void:
-	_categs.erase(id)
+func remove_category(meta_category: String) -> void:
+	_categs.erase(meta_category)
 	mark_changed()
 
 

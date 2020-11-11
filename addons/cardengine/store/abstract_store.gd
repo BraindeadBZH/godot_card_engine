@@ -28,9 +28,9 @@ class StoreSorter:
 				var idx: int = 0
 				
 				for categ in order:
-					if ldata.has_category(categ):
+					if ldata.has_meta_category(categ):
 						lidx = idx
-					if rdata.has_category(categ):
+					if rdata.has_meta_category(categ):
 						ridx = idx
 					idx += 1
 					
@@ -309,12 +309,12 @@ func _update_categories():
 	_categs.clear()
 	
 	for card in _cards:
-		for categ in card.data().categories():
-			if _categs.has(categ):
-				_categs[categ]["count"] += 1
+		for meta in card.data().categories():
+			if _categs.has(meta):
+				_categs[meta]["count"] += 1
 			else:
-				_categs[categ] = {
-					"name": card.data().get_category(categ),
+				_categs[meta] = {
+					"name": card.data().get_category(meta),
 					"count": 1,
 				}
 

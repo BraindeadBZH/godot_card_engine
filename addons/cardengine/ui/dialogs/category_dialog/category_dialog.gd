@@ -1,8 +1,8 @@
 tool
 extends AbstractFormDialog
 
-onready var _categ_id = $MainLayout/Form/CategId
-onready var _categ_name = $MainLayout/Form/CategName
+onready var _meta_categ = $MainLayout/Form/MetaCateg
+onready var _categ = $MainLayout/Form/Categ
 
 
 func _ready():
@@ -10,18 +10,18 @@ func _ready():
 
 
 func _reset_form() -> void:
-	_categ_id.text = ""
-	_categ_name.text = ""
+	_meta_categ.text = ""
+	_categ.text = ""
 
 
 func _extract_form() -> Dictionary:
 	return {
-		"id": _categ_id.text,
-		"name": _categ_name.text,
+		"meta_categ": _meta_categ.text,
+		"categ": _categ.text,
 		"edit": is_edit()
 	}
 
 
 func _fill_form(data: Dictionary) -> void:
-	_categ_id.text = data["id"]
-	_categ_name.text = data["name"]
+	_meta_categ.text = data["meta_categ"]
+	_categ.text = data["categ"]

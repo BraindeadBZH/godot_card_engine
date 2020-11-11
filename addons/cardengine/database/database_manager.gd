@@ -30,8 +30,11 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 			errors.append("Please confirm first")
 	
 	elif form_name == "category":
-		if !Utils.is_id_valid(form["id"]):
-			errors.append("Invalid category ID")
+		if !Utils.is_id_valid(form["meta_categ"]):
+			errors.append("Invalid meta-category")
+			
+		if !Utils.is_id_valid(form["categ"]):
+			errors.append("Invalid category")
 	
 	elif form_name == "value":
 		if !Utils.is_id_valid(form["id"]):

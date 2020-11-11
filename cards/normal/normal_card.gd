@@ -15,17 +15,19 @@ onready var _card_id = $Front/CardId
 func _update_picture() -> void:
 	for child in _picture_group.get_children():
 		child.visible = false
-		
-	if _inst.data().has_category("common"):
-		_common.visible = true
-	elif _inst.data().has_category("uncommon"):
-		_uncommon.visible = true
-	elif _inst.data().has_category("rare"):
-		_rare.visible = true
-	elif _inst.data().has_category("mythic_rare"):
-		_mythic_rare.visible = true
-	elif _inst.data().has_category("basic_land"):
-		_basic_land.visible = true
+	
+	if _inst.data().has_meta_category("rarity"):
+		if _inst.data().get_category("rarity") == "common":
+			_common.visible = true
+		elif _inst.data().get_category("rarity") == "uncommon":
+			_uncommon.visible = true
+		elif _inst.data().get_category("rarity") == "rare":
+			_rare.visible = true
+		elif _inst.data().get_category("rarity") == "mythic_rare":
+			_mythic_rare.visible = true
+	elif _inst.data().has_meta_category("class"):
+		if _inst.data().get_category("class") == "basic_land":
+			_basic_land.visible = true
 
 
 func _on_NormalCard_instance_changed() -> void:

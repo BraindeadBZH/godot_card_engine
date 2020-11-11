@@ -66,7 +66,7 @@ func save_card(id: String, db: CardDatabase) -> void:
 	var card = CardData.new(id)
 	for i in range(_categ_list.get_item_count()):
 		var data = _categ_list.get_item_metadata(i)
-		card.add_category(data["id"], data["name"])
+		card.add_category(data["meta_categ"], data["categ"])
 	for i in range(_value_list.get_item_count()):
 		var data = _value_list.get_item_metadata(i)
 		card.add_value(data["id"], data["value"])
@@ -90,14 +90,16 @@ func delete_card(id: String, db_id: String) -> void:
 		_manager.update_database(db)
 
 
-func append_category(id: String, name: String) -> void:
-	_categ_list.add_item("%s: %s" % [id, name])
-	_categ_list.set_item_metadata(_categ_list.get_item_count()-1, {"id": id, "name": name})
+func append_category(meta_categ: String, categ: String) -> void:
+	_categ_list.add_item("%s: %s" % [meta_categ, categ])
+	_categ_list.set_item_metadata(
+		_categ_list.get_item_count()-1,
+		{"meta_categ": meta_categ, "categ": categ})
 
 
-func replace_category(idx: int, id: String, name: String) -> void:
-	_categ_list.set_item_text(idx, "%s: %s" % [id, name])
-	_categ_list.set_item_metadata(idx, {"id": id, "name": name})
+func replace_category(idx: int, meta_categ: String, categ: String) -> void:
+	_categ_list.set_item_text(idx, "%s: %s" % [meta_categ, categ])
+	_categ_list.set_item_metadata(idx, {"meta_categ": meta_categ, "categ": categ})
 
 
 func delete_category(idx: int) -> void:
@@ -216,10 +218,10 @@ func _on_CategList_item_activated(index) -> void:
 
 
 func _on_CategoryDialog_form_validated(form) -> void:
-	if form["edit"] and _edited_data["id"] == form["id"]:
-		replace_category(_edited_index, form["id"], form["name"])
+	if form["edit"] and _edited_data["meta_categ"] == form["meta_categ"]:
+		replace_category(_edited_index, form["meta_categ"], form["categ"])
 	else:
-		append_category(form["id"], form["name"])
+		append_category(form["meta_categ"], form["categ"])
 
 
 func _on_AddValBtn_pressed() -> void:

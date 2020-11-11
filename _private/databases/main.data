@@ -7,8 +7,8 @@ name="Main Database"
 
 card_146={
 "categories": {
-"common": "Common",
-"sorcery": "Sorcery"
+"class": "sorcery",
+"rarity": "common"
 },
 "texts": {
 "desc": "Destroy target artifact.",
@@ -20,8 +20,8 @@ card_146={
 }
 card_52={
 "categories": {
-"enchantment": "Enchantment",
-"uncommon": "Uncommon"
+"class": "enchantment",
+"rarity": "uncommon"
 },
 "texts": {
 "desc": "Whenever an opponent casts a red spell, you gain 2 life.",
@@ -33,9 +33,9 @@ card_52={
 }
 card_2={
 "categories": {
-"creature": "Creature",
-"spirit": "Spirit",
-"uncommon": "Uncommon"
+"class": "creature",
+"creature_type": "spirit",
+"rarity": "uncommon"
 },
 "texts": {
 "desc": "Azorius Herald can't be blocked.
@@ -49,9 +49,9 @@ When Azorius Herald enters the battlefield, sacrifice it unless Blue was spent t
 }
 card_162={
 "categories": {
-"creature": "Creature",
-"hydra": "Hydra",
-"rare": "Rare"
+"class": "creature",
+"creature_type": "hydra",
+"rarity": "rare"
 },
 "texts": {
 "desc": "This spell can't be countered.
@@ -65,8 +65,8 @@ Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.",
 }
 card_118={
 "categories": {
-"rare": "Rare",
-"sorcery": "Sorcery"
+"class": "sorcery",
+"rarity": "rare"
 },
 "texts": {
 "desc": "Target player takes two extra turns after this one.",
@@ -78,9 +78,9 @@ card_118={
 }
 card_181={
 "categories": {
-"aura": "Aura",
-"common": "Common",
-"enchantment": "Enchantment"
+"class": "enchantment",
+"enchantment_type": "aura",
+"rarity": "common"
 },
 "texts": {
 "desc": "Enchant creature
@@ -93,9 +93,9 @@ Enchanted creature gets +2/+2 and has \"Green: Regenerate this creature.\"",
 }
 card_62={
 "categories": {
-"common": "Common",
-"creature": "Creature",
-"human_knight": "Human Knight"
+"class": "creature",
+"creature_type": "human_knight",
+"rarity": "common"
 },
 "texts": {
 "desc": "First strike",
@@ -107,9 +107,9 @@ card_62={
 }
 card_106={
 "categories": {
-"artifact_creature": "Artifact Creature",
-"slith": "Slith",
-"uncommon": "Uncommon"
+"class": "artifact_creature",
+"creature_type": "slith",
+"rarity": "uncommon"
 },
 "texts": {
 "desc": "Whenever Arcbound Slith deals combat damage to a player, put a +1/+1 counter on it.",
@@ -121,8 +121,8 @@ card_106={
 }
 card_201={
 "categories": {
-"common": "Common",
-"sorcery": "Sorcery"
+"class": "sorcery",
+"rarity": "common"
 },
 "texts": {
 "desc": "Destroy target land.",
@@ -134,9 +134,9 @@ card_201={
 }
 card_126={
 "categories": {
-"common": "Common",
-"creature": "Creature",
-"human_artificier": "Human Artificier"
+"class": "creature",
+"creature_class": "human_artificier",
+"rarity": "common"
 },
 "texts": {
 "desc": "When Thopter Engineer enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.",
@@ -148,9 +148,9 @@ card_126={
 }
 card_51={
 "categories": {
-"legendary_creature": "Legendary Creature",
-"mythic_rare": "Mythic Rare",
-"sphinx": "Sphinx"
+"class": "legendary_creature",
+"creature_type": "sphinx",
+"rarity": "mythic_rare"
 },
 "texts": {
 "desc": "Flying, vigilance, menace
@@ -163,9 +163,9 @@ Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library
 }
 card_80={
 "categories": {
-"aura": "Aura",
-"enchantment": "Enchantment",
-"uncommon": "Uncommon"
+"class": "enchantment",
+"enchantment_type": "aura",
+"rarity": "uncommon"
 },
 "texts": {
 "desc": "Enchant creature
@@ -179,9 +179,9 @@ At the beginning of the upkeep of enchanted creature's controller, put a -1/-1 c
 }
 card_7={
 "categories": {
-"artifact_creature": "Artifact Creature",
-"human_artificier": "Human Artificier",
-"rare": "Rare"
+"class": "artifact_creature",
+"creature_type": "human_artificier",
+"rarity": "rare"
 },
 "texts": {
 "desc": "Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.",
@@ -193,8 +193,8 @@ card_7={
 }
 card_233={
 "categories": {
-"artifact": "Artifact",
-"uncommon": "Uncommon"
+"class": "artifact",
+"rarity": "uncommon"
 },
 "texts": {
 "desc": "Tap: Add Colorless.
@@ -207,9 +207,9 @@ Tap: Add White or Black. Talisman of Hierarchy deals 1 damage to you.",
 }
 card_46={
 "categories": {
-"creature": "Creature",
-"kavu": "Kavu",
-"uncommon": "Uncommon"
+"class": "creature",
+"creature_type": "kavu",
+"rarity": "uncommon"
 },
 "texts": {
 "desc": "Trample
@@ -222,9 +222,9 @@ Whenever an opponent gains life, put that many +1/+1 counters on Kavu Predator."
 }
 card_142={
 "categories": {
-"common": "Common",
-"creature": "Creature",
-"cyclops": "Cyclops"
+"class": "creature",
+"creature_type": "cyclops",
+"rarity": "common"
 },
 "texts": {
 "desc": "When Quakefoot Cyclops enters the battlefield, up to two target creatures can't block this turn.",
@@ -236,8 +236,8 @@ card_142={
 }
 card_44={
 "categories": {
-"common": "Common",
-"instant": "Instant"
+"class": "instant",
+"rarity": "common"
 },
 "texts": {
 "desc": "As an additional cost to cast this spell, sacrifice a creature.
@@ -250,8 +250,8 @@ Fling deals damage equal to the sacrificed creature's power to any target.",
 }
 card_302={
 "categories": {
-"basic_land": "Basic Land",
-"forest": "Forest"
+"class": "basic_land",
+"land_type": "forest"
 },
 "texts": {
 "desc": "Forest",
@@ -263,9 +263,9 @@ card_302={
 }
 card_74={
 "categories": {
-"creature": "Creature",
-"human_cleric": "Human Cleric",
-"uncommon": "Uncommon"
+"class": "creature",
+"creature_type": "human_cleric",
+"rarity": "uncommon"
 },
 "texts": {
 "desc": "Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.",
@@ -277,9 +277,9 @@ card_74={
 }
 card_28={
 "categories": {
-"human_advisor": "Human Advisor",
-"legendary_creature": "Legendary Creature",
-"rare": "Rare"
+"class": "legendary_creature",
+"creature_type": "human_advisor",
+"rarity": "rare"
 },
 "texts": {
 "desc": "Sacrifice three white creatures: Exile target creature.

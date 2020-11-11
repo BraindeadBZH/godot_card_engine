@@ -7,25 +7,25 @@
 window_title = "Category"
 script = ExtResource( 2 )
 
-[node name="CategIdLbl" type="Label" parent="MainLayout/Form" index="0"]
+[node name="MetaCategLbl" type="Label" parent="MainLayout/Form" index="0"]
 margin_top = 5.0
 margin_right = 38.0
 margin_bottom = 19.0
-text = "ID"
+text = "Meta-category"
 
-[node name="CategId" type="LineEdit" parent="MainLayout/Form" index="1"]
+[node name="MetaCateg" type="LineEdit" parent="MainLayout/Form" index="1"]
 margin_left = 42.0
 margin_right = 402.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="CategNameLbl" type="Label" parent="MainLayout/Form" index="2"]
+[node name="CategLbl" type="Label" parent="MainLayout/Form" index="2"]
 margin_top = 33.0
 margin_right = 38.0
 margin_bottom = 47.0
-text = "Name"
+text = "Category"
 
-[node name="CategName" type="LineEdit" parent="MainLayout/Form" index="3"]
+[node name="Categ" type="LineEdit" parent="MainLayout/Form" index="3"]
 margin_left = 42.0
 margin_top = 28.0
 margin_right = 402.0
