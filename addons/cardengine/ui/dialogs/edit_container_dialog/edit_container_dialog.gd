@@ -66,6 +66,8 @@ onready var _idle_anim = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/A
 onready var _idle_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/Loop
 onready var _focused_anim = $MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout/Anim
 onready var _focused_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout/Loop
+onready var _clicked_anim = $MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout/Anim
+onready var _clicked_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout/Loop
 
 
 func _ready():
@@ -140,35 +142,35 @@ func _update() -> void:
 	
 	_interactive.pressed = _data.interactive
 	
-	_idle_anim.clear()
-	_focused_anim.clear()
+	_load_animation(_idle_anim, _data.idle_anim)
+	_idle_anim_repeat.pressed = _data.idle_anim_repeat
 	
-	_idle_anim.add_item("None")
-	_idle_anim.set_item_metadata(0, "none")
-	_focused_anim.add_item("None")
-	_focused_anim.set_item_metadata(0, "none")
+	_load_animation(_focused_anim, _data.focused_anim)
+	_focused_anim_repeat.pressed = _data.focused_anim_repeat
+	
+	_load_animation(_clicked_anim, _data.clicked_anim)
+	_clicked_anim_repeat.pressed = _data.clicked_anim_repeat
+
+
+func _load_animation(select: OptionButton, selected_id: String) -> void:
+	select.clear()
+	
+	select.add_item("None")
+	select.set_item_metadata(0, "none")
 	
 	var index = 1
-	var select_idle = 0
-	var select_focused = 0
+	var selected_idx = 0
 	for id in _anims.animations():
 		var anim = _anims.get_animation(id)
-		_idle_anim.add_item(anim.name)
-		_idle_anim.set_item_metadata(index, anim.id)
-		_focused_anim.add_item(anim.name)
-		_focused_anim.set_item_metadata(index, anim.id)
+		select.add_item(anim.name)
+		select.set_item_metadata(index, anim.id)
 		
-		if _data.idle_anim == anim.id:
-			select_idle = index
-		if _data.focused_anim == anim.id:
-			select_focused = index
+		if selected_id == anim.id:
+			selected_idx = index
 		
 		index += 1
 	
-	_idle_anim.select(select_idle)
-	_idle_anim_repeat.pressed = _data.idle_anim_repeat
-	_focused_anim.select(select_focused)
-	_focused_anim_repeat.pressed = _data.focused_anim_repeat
+	select.select(selected_idx)
 
 
 func _save() -> void:
@@ -236,6 +238,8 @@ func _save() -> void:
 	_data.idle_anim_repeat = _idle_anim_repeat.pressed
 	_data.focused_anim = _focused_anim.get_selected_metadata()
 	_data.focused_anim_repeat = _focused_anim_repeat.pressed
+	_data.clicked_anim = _clicked_anim.get_selected_metadata()
+	_data.clicked_anim_repeat = _clicked_anim_repeat.pressed
 	
 	_manager.update_container(_data)
 

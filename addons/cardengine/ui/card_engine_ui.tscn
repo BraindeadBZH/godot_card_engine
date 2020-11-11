@@ -354,7 +354,7 @@ margin_left = 142.0
 margin_right = 230.0
 margin_bottom = 20.0
 text = "Choose..."
-items = [ "Choose...", null, true, 0, null, "Floating Animation (floating)", null, false, 1, "floating", "Popout Animation (popout)", null, false, 2, "popout" ]
+items = [ "Choose...", null, true, 0, null, "Flip Animation (flip)", null, false, 1, "flip", "Floating Animation (floating)", null, false, 2, "floating", "Popout Animation (popout)", null, false, 3, "popout" ]
 selected = 0
 
 [node name="EditBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]

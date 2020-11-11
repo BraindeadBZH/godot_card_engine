@@ -28,13 +28,11 @@ onready var _back  = $Back
 onready var _mouse = $MouseArea
 onready var _transi = $Transitions
 onready var _mergeWin = $MergeWindow
-onready var _flip = $FlipAnim
 onready var _anim_player = $AnimPlayer
 
 
 func _ready() -> void:
 	_transi.start()
-	_flip.start()
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -95,18 +93,6 @@ func change_side() -> void:
 		set_side(CardSide.BACK)
 	else:
 		set_side(CardSide.FRONT)
-
-
-func flip() -> void:
-	_flip.remove_all()
-	_flip.interpolate_property(
-		self, "scale", scale, Vector2(0.0, scale.y),
-		_transitions.flip_start.duration,
-		_transitions.flip_start.type,
-		_transitions.flip_start.easing)
-	_flip.start()
-	
-	_flip_started = true
 
 
 func set_interactive(state: bool) -> void:
@@ -189,6 +175,9 @@ func _setup_pos_anim(anim: AnimationData) -> void:
 			
 			prev_val = final_pos
 			delay += final_duration
+			
+			if step.transi.flip_card:
+				_anim_player.interpolate_callback(self, delay, "change_side")
 
 
 func _setup_scale_anim(anim: AnimationData) -> void:
@@ -218,6 +207,9 @@ func _setup_scale_anim(anim: AnimationData) -> void:
 			
 			prev_val = final_scale
 			delay += final_duration
+			
+			if step.transi.flip_card:
+				_anim_player.interpolate_callback(self, delay, "change_side")
 
 
 func _setup_rotation_anim(anim: AnimationData) -> void:
@@ -247,27 +239,31 @@ func _setup_rotation_anim(anim: AnimationData) -> void:
 			
 			prev_val = final_rot
 			delay += final_duration
+			
+			if step.transi.flip_card:
+				_anim_player.interpolate_callback(self, delay, "change_side")
 
 
-func _change_state(new_state) -> void:
+func _change_state(new_state, emit: bool = true) -> void:
 	if new_state == _state:
 		return
 	
 	_state = new_state
-	emit_signal("state_changed", new_state)
+	if emit:
+		emit_signal("state_changed", new_state)
 
 
 func _on_MouseArea_mouse_entered() -> void:
 	if not _interactive:
 		return
-		
+	
 	_change_state(CardState.FOCUSED)
 
 
 func _on_MouseArea_mouse_exited() -> void:
 	if not _interactive:
 		return
-		
+	
 	_change_state(CardState.IDLE)
 
 
@@ -288,9 +284,9 @@ func _on_MouseArea_button_down() -> void:
 func _on_MouseArea_button_up() -> void:
 	if not _interactive:
 		return
-		
+	
 	if _mouse.is_hovered():
-		_change_state(CardState.FOCUSED)
+		_change_state(CardState.FOCUSED, false)
 	else:
 		_change_state(CardState.IDLE)
 
@@ -360,18 +356,3 @@ func _on_MergeWindow_timeout() -> void:
 func _on_Transitions_tween_all_completed() -> void:
 	if _remove_flag:
 		emit_signal("need_removal")
-
-
-func _on_FlipAnim_tween_all_completed() -> void:
-	if _flip_started:
-		_flip_started = false
-		
-		change_side()
-		
-		_flip.remove_all()
-		_flip.interpolate_property(
-			self, "scale", scale, _root_trans.scale,
-			_transitions.flip_end.duration,
-			_transitions.flip_end.type,
-			_transitions.flip_end.easing)
-		_flip.start()

@@ -23,8 +23,6 @@ one_shot = true
 
 [node name="Transitions" type="Tween" parent="."]
 
-[node name="FlipAnim" type="Tween" parent="."]
-
 [node name="AnimPlayer" type="Tween" parent="."]
 repeat = true
 playback/repeat = true
@@ -35,4 +33,3 @@ playback/repeat = true
 [connection signal="pressed" from="MouseArea" to="." method="_on_MouseArea_pressed"]
 [connection signal="timeout" from="MergeWindow" to="." method="_on_MergeWindow_timeout"]
 [connection signal="tween_all_completed" from="Transitions" to="." method="_on_Transitions_tween_all_completed"]
-[connection signal="tween_all_completed" from="FlipAnim" to="." method="_on_FlipAnim_tween_all_completed"]

@@ -154,6 +154,7 @@ func _from_sequence(seq: Array) -> Array:
 			step_data["transi"]["duration_range_max"] = step.transi.duration_range_max
 			step_data["transi"]["type"] = _from_transi_type(step.transi.type)
 			step_data["transi"]["easing"] = _from_transi_easing(step.transi.easing)
+			step_data["transi"]["flip_card"] = step.transi.flip_card
 			
 		if step.val != null:
 			step_data["val"] = {}
@@ -183,6 +184,7 @@ func _to_sequence(data: Array) -> Array:
 			transi.random_duration = step_data["transi"]["random_duration"]
 			transi.duration_range_min = step_data["transi"]["duration_range_min"]
 			transi.duration_range_max = step_data["transi"]["duration_range_max"]
+			transi.flip_card = step_data["transi"]["flip_card"]
 		
 		if step_data.has("val"):
 			val = StepValue.new(_to_val_mode(step_data["val"]["mode"]))

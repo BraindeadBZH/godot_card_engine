@@ -58,6 +58,8 @@ var _idle_anim: String = "none"
 var _idle_anim_repeat: bool = false
 var _focused_anim: String = "none"
 var _focused_anim_repeat: bool = false
+var _clicked_anim: String = "none"
+var _clicked_anim_repeat: bool = false
 
 onready var _cards = $Cards
 onready var _path = $CardPath
@@ -343,6 +345,13 @@ func _setup_focused_anim(card: AbstractCard) -> void:
 		card.change_anim(null)
 
 
+func _setup_clicked_anim(card: AbstractCard) -> void:
+	if _clicked_anim != "none":
+		card.change_anim(CardEngine.anim().get_animation(_clicked_anim), _clicked_anim_repeat)
+	else:
+		card.change_anim(null)
+
+
 func _on_AbstractContainer_resized() -> void:
 	_update_container()
 
@@ -353,7 +362,9 @@ func _on_need_removal(card: AbstractCard) -> void:
 
 
 func _on_card_clicked(card: AbstractCard) -> void:
-	_card_clicked(card)
+	if _interactive:
+		_setup_clicked_anim(card)
+		_card_clicked(card)
 
 
 func _on_card_state_changed(new_state: int, card: AbstractCard) -> void:

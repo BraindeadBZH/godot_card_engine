@@ -67,6 +67,8 @@ var idle_anim: String = "none"
 var idle_anim_repeat: bool = false
 var focused_anim: String = "none"
 var focused_anim_repeat: bool = false
+var clicked_anim: String = "none"
+var clicked_anim_repeat: bool = false
 
 
 func _init(id: String, name: String) -> void:

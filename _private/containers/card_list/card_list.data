@@ -86,3 +86,8 @@ repeat=false
 
 id="popout"
 repeat=false
+
+[clicked_anim]
+
+id="flip"
+repeat=false

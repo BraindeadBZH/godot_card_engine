@@ -86,3 +86,8 @@ repeat=true
 
 id="none"
 repeat=false
+
+[clicked_anim]
+
+id="none"
+repeat=false

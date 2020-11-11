@@ -66,3 +66,5 @@ func _ready():
 	_idle_anim_repeat = true
 	_focused_anim = "none"
 	_focused_anim_repeat = false
+	_clicked_anim = "none"
+	_clicked_anim_repeat = false

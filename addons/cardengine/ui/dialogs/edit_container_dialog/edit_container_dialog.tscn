@@ -1149,6 +1149,51 @@ margin_top = 24.0
 margin_right = 502.0
 margin_bottom = 64.0
 
+[node name="ClickedTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_right = 502.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Clicked animation"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClickedLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 140.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
+margin_top = 3.0
+margin_right = 93.0
+margin_bottom = 17.0
+text = "Animation"
+
+[node name="Anim" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
+margin_left = 97.0
+margin_right = 502.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="LoopLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
+margin_top = 37.0
+margin_right = 93.0
+margin_bottom = 51.0
+text = "Loop"
+
+[node name="Loop" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
+margin_left = 97.0
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 64.0
+
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
 margin_top = 542.0
 margin_right = 510.0

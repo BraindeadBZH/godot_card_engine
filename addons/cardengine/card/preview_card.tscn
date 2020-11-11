@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/cardengine/card/abstract_card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/cardengine/card/card_preview.png" type="Texture" id=2]
+[ext_resource path="res://addons/cardengine/card/card_preview_bg.png" type="Texture" id=3]
 
 [node name="PreviewCard" instance=ExtResource( 1 )]
 size = Vector2( 420, 600 )
 
 [node name="Preview" type="Sprite" parent="Front" index="0"]
 texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Back" index="0"]
+texture = ExtResource( 3 )

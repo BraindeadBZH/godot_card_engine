@@ -410,6 +410,7 @@ func _on_TransiBtn_pressed(seq: String, idx: int) -> void:
 			data["duration_range_max"] = _opened_anim.position_seq()[idx].transi.duration_range_max
 			data["type"] = _opened_anim.position_seq()[idx].transi.type
 			data["easing"] = _opened_anim.position_seq()[idx].transi.easing
+			data["flip_card"] = _opened_anim.position_seq()[idx].transi.flip_card
 		"scale":
 			data["random_duration"] = _opened_anim.scale_seq()[idx].transi.random_duration
 			data["duration"] = _opened_anim.scale_seq()[idx].transi.duration
@@ -417,6 +418,7 @@ func _on_TransiBtn_pressed(seq: String, idx: int) -> void:
 			data["duration_range_max"] = _opened_anim.scale_seq()[idx].transi.duration_range_max
 			data["type"] = _opened_anim.scale_seq()[idx].transi.type
 			data["easing"] = _opened_anim.scale_seq()[idx].transi.easing
+			data["flip_card"] = _opened_anim.scale_seq()[idx].transi.flip_card
 		"rot":
 			data["random_duration"] = _opened_anim.rotation_seq()[idx].transi.random_duration
 			data["duration"] = _opened_anim.rotation_seq()[idx].transi.duration
@@ -424,6 +426,7 @@ func _on_TransiBtn_pressed(seq: String, idx: int) -> void:
 			data["duration_range_max"] = _opened_anim.rotation_seq()[idx].transi.duration_range_max
 			data["type"] = _opened_anim.rotation_seq()[idx].transi.type
 			data["easing"] = _opened_anim.rotation_seq()[idx].transi.easing
+			data["flip_card"] = _opened_anim.rotation_seq()[idx].transi.flip_card
 		_:
 			return
 			
@@ -439,6 +442,7 @@ func _on_StepTransiDialog_form_validated(form) -> void:
 			_opened_anim.position_seq()[form["index"]].transi.duration_range_max = form["duration_range_max"]
 			_opened_anim.position_seq()[form["index"]].transi.type = form["type"]
 			_opened_anim.position_seq()[form["index"]].transi.easing = form["easing"]
+			_opened_anim.position_seq()[form["index"]].transi.flip_card = form["flip_card"]
 		"scale":
 			_opened_anim.scale_seq()[form["index"]].transi.random_duration = form["random_duration"]
 			_opened_anim.scale_seq()[form["index"]].transi.duration = form["duration"]
@@ -446,6 +450,7 @@ func _on_StepTransiDialog_form_validated(form) -> void:
 			_opened_anim.scale_seq()[form["index"]].transi.duration_range_max = form["duration_range_max"]
 			_opened_anim.scale_seq()[form["index"]].transi.type = form["type"]
 			_opened_anim.scale_seq()[form["index"]].transi.easing = form["easing"]
+			_opened_anim.scale_seq()[form["index"]].transi.flip_card = form["flip_card"]
 		"rot":
 			_opened_anim.rotation_seq()[form["index"]].transi.random_duration = form["random_duration"]
 			_opened_anim.rotation_seq()[form["index"]].transi.duration = form["duration"]
@@ -453,6 +458,7 @@ func _on_StepTransiDialog_form_validated(form) -> void:
 			_opened_anim.rotation_seq()[form["index"]].transi.duration_range_max = form["duration_range_max"]
 			_opened_anim.rotation_seq()[form["index"]].transi.type = form["type"]
 			_opened_anim.rotation_seq()[form["index"]].transi.easing = form["easing"]
+			_opened_anim.rotation_seq()[form["index"]].transi.flip_card = form["flip_card"]
 		_:
 			return
 	

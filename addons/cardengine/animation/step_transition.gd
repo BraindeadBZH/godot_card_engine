@@ -8,6 +8,7 @@ var duration_range_min: float = 0.1
 var duration_range_max: float = 0.3
 var type: int = Tween.TRANS_LINEAR
 var easing: int = Tween.EASE_IN
+var flip_card: bool = false
 
 func _init(d: float, t: int, e: int) -> void:
 	duration = d

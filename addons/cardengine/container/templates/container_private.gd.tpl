@@ -66,3 +66,5 @@ func _ready():
 	_idle_anim_repeat = {idle_anim_repeat}
 	_focused_anim = "{focused_anim}"
 	_focused_anim_repeat = {focused_anim_repeat}
+	_clicked_anim = "{clicked_anim}"
+	_clicked_anim_repeat = {clicked_anim_repeat}
