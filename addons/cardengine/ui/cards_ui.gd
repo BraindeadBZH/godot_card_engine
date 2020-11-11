@@ -42,6 +42,9 @@ func select_database(db: String) -> void:
 
 
 func load_card(id: String, db_id: String) -> void:
+	_success_lbl.text = ""
+	_error_lbl.text = ""
+	
 	_categ_list.clear()
 	_value_list.clear()
 	_text_list.clear()
