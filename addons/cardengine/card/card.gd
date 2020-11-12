@@ -48,8 +48,11 @@ func match_category(meta_categ: String, categ: String) -> bool:
 	return false
 
 
-func get_category(meta_category: String) -> String:
-	return _categs[meta_category]
+func get_category(meta_categ: String) -> String:
+	if _categs.has(meta_categ):
+		return _categs[meta_categ]
+	else:
+		return ""
 
 
 func remove_category(meta_category: String) -> void:

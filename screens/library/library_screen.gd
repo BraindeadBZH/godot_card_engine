@@ -60,7 +60,7 @@ func _apply_filters() -> void:
 	var sorting: Dictionary = {}
 	
 	if _rarity_sort.pressed:
-		sorting["category:array"] = ["common", "uncommon", "rare", "mythic_rare"]
+		sorting["category:rarity"] = ["common", "uncommon", "rare", "mythic_rare"]
 	
 	if _mana_sort.pressed:
 		sorting["value:mana"] = true

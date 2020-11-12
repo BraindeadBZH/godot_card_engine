@@ -21,23 +21,24 @@ class StoreSorter:
 		var split: Array = key.split(":", false)
 		
 		if split[0] == "category":
-			if split[1] == "array":
-				var order: Array = _info[key]
-				var lidx: int = -1
-				var ridx: int = -1
-				var idx: int = 0
-				
-				for categ in order:
-					if ldata.has_meta_category(categ):
-						lidx = idx
-					if rdata.has_meta_category(categ):
-						ridx = idx
-					idx += 1
-					
-				if lidx == ridx:
-					return _recurive_sort(ldata, rdata, depth+1)
-				elif lidx < ridx:
-					return true
+			var order: Array = _info[key]
+			var lval = ldata.get_category(split[1])
+			var rval = rdata.get_category(split[1])
+			var lidx: int = -1
+			var ridx: int = -1
+			var idx: int = 0
+			
+			for categ in order:
+				if categ == lval:
+					lidx = idx
+				if categ == rval:
+					ridx = idx
+				idx += 1
+
+			if lidx == ridx:
+				return _recurive_sort(ldata, rdata, depth+1)
+			elif lidx < ridx:
+				return true
 		else:
 			var asc: bool = _info[key]
 			
