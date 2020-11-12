@@ -41,9 +41,9 @@ func has_meta_category(meta_categ: String) -> bool:
 	return _categs.has(meta_categ)
 
 
-func match_category(categ: String) -> bool:
-	for meta in _categs:
-		if _categs[meta].match(categ):
+func match_category(meta_categ: String, categ: String) -> bool:
+	if _categs.has(meta_categ):
+		if _categs[meta_categ].match(categ):
 			return true
 	return false
 

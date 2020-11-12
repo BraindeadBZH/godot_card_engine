@@ -183,11 +183,11 @@ func categories() -> Dictionary:
 	return _categs
 
 
-func get_category(id: String) -> Dictionary:
-	if not _categs.has(id):
+func get_meta_category(meta: String) -> Dictionary:
+	if not _categs.has(meta):
 		return {}
 	
-	return _categs[id]
+	return _categs[meta]
 
 
 func values() -> Array:
@@ -310,11 +310,16 @@ func _update_categories():
 	
 	for card in _cards:
 		for meta in card.data().categories():
+			var val = card.data().get_category(meta)
 			if _categs.has(meta):
 				_categs[meta]["count"] += 1
+				if _categs[meta]["values"].has(val):
+					_categs[meta]["values"][val] += 1
+				else:
+					_categs[meta]["values"][val] = 1
 			else:
 				_categs[meta] = {
-					"name": card.data().get_category(meta),
+					"values": {val: 1},
 					"count": 1,
 				}
 

@@ -9,7 +9,7 @@ var _store: CardDeck = CardDeck.new()
 var _query: Query = Query.new()
 var _selected_card_idx: int = -1
 var _selected_card: String = ""
-var _selected_categ: String = "all"
+var _selected_categ: Dictionary = {}
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
@@ -18,7 +18,7 @@ onready var _card_list = $MainLayout/CardsLayout/CardList
 onready var _detail_list = $MainLayout/CardsLayout/DetailsLayout/DetailsList
 onready var _delete_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn
 onready var _edit_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn
-onready var _categ_filter = $MainLayout/FiltersLayout/CategFilter
+onready var _categ_filter_list = $MainLayout/CategFilterScroll/CategFilterList
 onready var _val_filter = $MainLayout/FiltersLayout/ValFilter
 onready var _txt_filter = $MainLayout/FiltersLayout/TxtFilter
 onready var _comp_op = $MainLayout/FiltersLayout/CompLayout/CompOp
@@ -34,10 +34,10 @@ func _ready():
 func set_database(id: String):
 	_db = _manager.get_database(id)
 	_query.clear()
-	_categ_filter.clear()
+	Utils.delete_all_children(_categ_filter_list)
 	_val_filter.clear()
 	_txt_filter.clear()
-	_selected_categ = "all"
+	_selected_categ = {}
 	_selected_val = "none"
 	_selected_txt = "none"
 	_comp_op.select(0)
@@ -88,12 +88,17 @@ func _fill_card_list():
 
 
 func _apply_filters():
-	var from: Array = []
+	var from: Array = [""]
 	var where: Array = []
 	var contains: Array = []
 	
-	if _categ_filter.selected > 0:
-		from.append(_categ_filter.get_selected_metadata())
+	for layout in _categ_filter_list.get_children():
+		for child in layout.get_children():
+			if child is OptionButton:
+				if child.selected > 0:
+					if not from[0].empty():
+						from[0] += ","
+					from[0] += "%s:%s" % [child.name, child.get_selected_metadata()]
 	
 	if _val_filter.selected > 0:
 		where.append(
@@ -120,14 +125,39 @@ func _update_filters():
 
 
 func _update_categs():
-	_categ_filter.clear()
-	_categ_filter.add_item("All")
-	for id in _store.categories():
-		var categ = _store.get_category(id)
-		_categ_filter.add_item("%s (%d)" % [categ["name"], categ["count"]])
-		_categ_filter.set_item_metadata(_categ_filter.get_item_count() - 1, id)
-		if id == _selected_categ:
-			_categ_filter.select(_categ_filter.get_item_count() - 1)
+	Utils.delete_all_children(_categ_filter_list)
+	
+	for meta in _store.categories():
+		var meta_categ = _store.get_meta_category(meta)
+		var layout := VBoxContainer.new()
+		var label := Label.new()
+		var select := OptionButton.new()
+		var index = 1
+		var selected = 0
+		
+		layout.name = "%s_layout" % meta
+		label.name = "%s_lbl" % meta
+		select.name = "%s" % meta
+		
+		label.text = "Filter by %s (%d)" % [meta, meta_categ["count"]]
+		select.add_item("All")
+		
+		for categ in meta_categ["values"]:
+			select.add_item("%s (%d)" % [categ,  meta_categ["values"][categ]])
+			select.set_item_metadata(index, categ)
+			
+			if _selected_categ.has(meta) and _selected_categ[meta] == categ:
+				selected = index
+			
+			index += 1
+		
+		layout.add_child(label)
+		layout.add_child(select)
+		_categ_filter_list.add_child(layout)
+		
+		select.select(selected)
+		
+		select.connect("item_selected", self, "_on_CategFilter_item_selected", [select, meta])
 
 
 func _update_values():
@@ -198,15 +228,6 @@ func _on_db_changed():
 	_fill_card_list()
 
 
-func _on_CategFilter_item_selected(id):
-	if id == 0:
-		_selected_categ = "all"
-	else:
-		_selected_categ = _categ_filter.get_item_metadata(id)
-		
-	_apply_filters()
-
-
 func _on_ValFilter_item_selected(id):
 	if id == 0:
 		_selected_val = "none"
@@ -234,4 +255,13 @@ func _on_CompVal_value_changed(_value):
 
 
 func _on_ContainsFilter_text_changed(_new_text):
+	_apply_filters()
+
+
+func _on_CategFilter_item_selected(index: int, select: OptionButton, meta_categ: String):
+	if index == 0:
+		_selected_categ.erase(meta_categ)
+	else:
+		_selected_categ[meta_categ] = select.get_item_metadata(index)
+	
 	_apply_filters()

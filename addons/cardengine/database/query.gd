@@ -18,15 +18,15 @@ func clear() -> Query:
 
 # Restriction on categories
 # Accepts wildcards * for string and ? for single char
-# Example: ["knight,armor_*", "soldier,shield_*"]
-#          Cards have to have categories 'knight' and starting with 'armor_' or
-#          'soldier' and starting with 'shield'
+# Example: ["class:armor,type:shield_*", "class:creature"]
+#          Cards must be of "class" "armor" and of "type" starting with "shield_"
+#          or of "class" "creature"
 func from(statements: Array) -> Query:
 	for statement in statements:
 		var compiled = []
 		var expressions = statement.split(",", false)
 		for expression in expressions:
-			compiled.append(expression.strip_edges())
+			compiled.append(_expr_to_from(expression))
 		
 		_from_stmt.append(compiled)
 	return self
@@ -34,7 +34,7 @@ func from(statements: Array) -> Query:
 
 # Restriction on values
 # Example: ["damage > 10,damage <= 20", "shield < 5"]
-#          Cards have to have damage value strictly superior to 11 and 
+#          Cards must have damage value strictly superior to 11 and 
 #          inferior or equal to 20, or shield value strictly inferior to 5 
 func where(statements: Array) -> Query:
 	for statement in statements:
@@ -51,7 +51,7 @@ func where(statements: Array) -> Query:
 
 # Restriction on texts (case insensitive)
 # Example: ["title:sword", "body:draw"]
-#          Cards have to have sword in the title or draw in the body
+#          Cards must have "sword" in the "title" or "draw" in the "body"
 func contains(statements: Array) -> Query:
 	for statement in statements:
 		var compiled = []
@@ -91,17 +91,19 @@ func match_card(card: CardData) -> bool:
 	
 	return from_result and where_result and contains_result
 
+
 func _match_categs(card: CardData) -> bool:
 	var or_result = false
 	
 	for or_stmt in _from_stmt:
 		var and_result = true
 		for and_stmt in or_stmt:
-			and_result = and_result and card.match_category(and_stmt)
-		
+			and_result = and_result and card.match_category(and_stmt[0], and_stmt[1])
+
 		or_result = or_result or and_result
 	
 	return or_result
+
 
 func _match_values(card: CardData) -> bool:
 	var or_result = false
@@ -130,6 +132,7 @@ func _match_values(card: CardData) -> bool:
 	
 	return or_result
 
+
 func _match_texts(card: CardData) -> bool:
 	var or_result = false
 	
@@ -144,6 +147,21 @@ func _match_texts(card: CardData) -> bool:
 		or_result = or_result or and_result
 	
 	return or_result
+
+
+func _expr_to_from(input: String) -> Array:
+	var result: Array = []
+	
+	var operands = input.split(":", false)
+	if operands.size() != 2:
+		printerr("'%s' is not a valid from expression" % input)
+		return []
+	
+	result.append(operands[0].strip_edges())
+	result.append(operands[1].strip_edges())
+	
+	return result
+
 
 func _expr_to_comp(input: String) -> Array:
 	var result: Array = []
@@ -170,6 +188,7 @@ func _expr_to_comp(input: String) -> Array:
 	result.append(int(operands[2].strip_edges()))
 	
 	return result
+
 
 func _expr_to_contains(input: String) -> Array:
 	var result: Array = []

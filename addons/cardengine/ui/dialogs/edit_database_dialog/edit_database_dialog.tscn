@@ -28,58 +28,39 @@ __meta__ = {
 [node name="FiltersLayout" type="GridContainer" parent="MainLayout"]
 margin_right = 510.0
 margin_bottom = 66.0
-columns = 3
-
-[node name="CategFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
-margin_right = 167.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-text = "Filter by category:"
+columns = 2
 
 [node name="ValFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
-margin_left = 171.0
-margin_right = 338.0
+margin_right = 253.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Filter by value:"
 
 [node name="TxtFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
-margin_left = 342.0
-margin_right = 509.0
+margin_left = 257.0
+margin_right = 510.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Filter by text:"
 
-[node name="CategFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
-margin_top = 18.0
-margin_right = 167.0
-margin_bottom = 38.0
-
 [node name="ValFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
-margin_left = 171.0
 margin_top = 18.0
-margin_right = 338.0
+margin_right = 253.0
 margin_bottom = 38.0
 
 [node name="TxtFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
-margin_left = 342.0
+margin_left = 257.0
 margin_top = 18.0
-margin_right = 509.0
+margin_right = 510.0
 margin_bottom = 38.0
 
-[node name="Placeholder" type="Control" parent="MainLayout/FiltersLayout"]
-margin_top = 42.0
-margin_right = 167.0
-margin_bottom = 66.0
-
 [node name="CompLayout" type="HBoxContainer" parent="MainLayout/FiltersLayout"]
-margin_left = 171.0
 margin_top = 42.0
-margin_right = 338.0
+margin_right = 253.0
 margin_bottom = 66.0
 
 [node name="CompOp" type="OptionButton" parent="MainLayout/FiltersLayout/CompLayout"]
-margin_right = 81.0
+margin_right = 124.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "="
@@ -87,8 +68,8 @@ items = [ "=", null, false, 0, null, ">", null, false, 1, null, ">=", null, fals
 selected = 0
 
 [node name="CompVal" type="SpinBox" parent="MainLayout/FiltersLayout/CompLayout"]
-margin_left = 85.0
-margin_right = 167.0
+margin_left = 128.0
+margin_right = 253.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -97,13 +78,24 @@ allow_greater = true
 allow_lesser = true
 
 [node name="ContainsFilter" type="LineEdit" parent="MainLayout/FiltersLayout"]
-margin_left = 342.0
+margin_left = 257.0
 margin_top = 42.0
-margin_right = 509.0
+margin_right = 510.0
 margin_bottom = 66.0
 
-[node name="CardsLayout" type="GridContainer" parent="MainLayout"]
+[node name="CategFilterScroll" type="ScrollContainer" parent="MainLayout"]
 margin_top = 70.0
+margin_right = 510.0
+margin_bottom = 70.0
+scroll_vertical_enabled = false
+
+[node name="CategFilterList" type="HBoxContainer" parent="MainLayout/CategFilterScroll"]
+margin_right = 510.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CardsLayout" type="GridContainer" parent="MainLayout"]
+margin_top = 74.0
 margin_right = 510.0
 margin_bottom = 272.0
 size_flags_vertical = 3
@@ -127,24 +119,24 @@ align = 1
 [node name="CardList" type="ItemList" parent="MainLayout/CardsLayout"]
 margin_top = 18.0
 margin_right = 253.0
-margin_bottom = 202.0
+margin_bottom = 198.0
 size_flags_vertical = 3
 
 [node name="DetailsLayout" type="VBoxContainer" parent="MainLayout/CardsLayout"]
 margin_left = 257.0
 margin_top = 18.0
 margin_right = 510.0
-margin_bottom = 202.0
+margin_bottom = 198.0
 
 [node name="DetailsList" type="ItemList" parent="MainLayout/CardsLayout/DetailsLayout"]
 margin_right = 253.0
-margin_bottom = 150.0
+margin_bottom = 146.0
 size_flags_vertical = 3
 
 [node name="ToolsLayout" type="HBoxContainer" parent="MainLayout/CardsLayout/DetailsLayout"]
-margin_top = 154.0
+margin_top = 150.0
 margin_right = 253.0
-margin_bottom = 184.0
+margin_bottom = 180.0
 alignment = 1
 
 [node name="DeleteBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
@@ -187,7 +179,6 @@ margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
 text = "Done"
 [connection signal="about_to_show" from="." to="." method="_on_EditDatabaseDialog_about_to_show"]
-[connection signal="item_selected" from="MainLayout/FiltersLayout/CategFilter" to="." method="_on_CategFilter_item_selected"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/ValFilter" to="." method="_on_ValFilter_item_selected"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/TxtFilter" to="." method="_on_TxtFilter_item_selected"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/CompLayout/CompOp" to="." method="_on_CompOp_item_selected"]

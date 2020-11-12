@@ -135,7 +135,7 @@ card_201={
 card_126={
 "categories": {
 "class": "creature",
-"creature_class": "human_artificier",
+"creature_type": "human_artificier",
 "rarity": "common"
 },
 "texts": {
