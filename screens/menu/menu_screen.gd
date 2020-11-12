@@ -8,7 +8,7 @@ func _ready():
 	var q = Query.new()
 	var store = CardPile.new()
 	
-	var cards = q.from(["common"]).execute(db)
+	var cards = q.from(["rarity:common"]).execute(db)
 	
 	store.populate(db, cards)
 	store.shuffle()

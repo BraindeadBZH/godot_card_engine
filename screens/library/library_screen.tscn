@@ -40,13 +40,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
+[node name="TitleLayout" type="HBoxContainer" parent="TitleBg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 10.0
-margin_top = -21.0
-margin_right = 130.0
-margin_bottom = 21.0
+margin_top = 5.0
+margin_right = -10.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="TitleBg/TitleLayout"]
+margin_top = 5.0
+margin_right = 98.0
+margin_bottom = 47.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Library"
@@ -55,117 +63,152 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackBtn" parent="TitleBg" instance=ExtResource( 5 )]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -175.0
-margin_top = -27.5
-margin_right = 0.0
-margin_bottom = 27.5
-button_text = "Back"
+[node name="Separator" type="Control" parent="TitleBg/TitleLayout"]
+margin_left = 102.0
+margin_right = 122.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 20, 0 )
 
-[node name="CategoriesLbl" type="Label" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 130.0
-margin_top = -21.0
-margin_right = 196.0
-margin_bottom = -9.0
-text = "Categories:"
+[node name="CategoriesLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
+margin_left = 126.0
+margin_right = 369.0
+margin_bottom = 52.0
+
+[node name="ClassLayout" type="HBoxContainer" parent="TitleBg/TitleLayout/CategoriesLayout"]
+margin_right = 243.0
+margin_bottom = 20.0
+
+[node name="ClassLbl" type="Label" parent="TitleBg/TitleLayout/CategoriesLayout/ClassLayout"]
+margin_top = 3.0
+margin_right = 88.0
+margin_bottom = 17.0
+text = "Filter by class"
+
+[node name="Class" type="OptionButton" parent="TitleBg/TitleLayout/CategoriesLayout/ClassLayout"]
+margin_left = 92.0
+margin_right = 242.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 150, 0 )
+
+[node name="RarityLayout" type="HBoxContainer" parent="TitleBg/TitleLayout/CategoriesLayout"]
+margin_top = 24.0
+margin_right = 243.0
+margin_bottom = 48.0
+
+[node name="RarityLbl" type="Label" parent="TitleBg/TitleLayout/CategoriesLayout/RarityLayout"]
+margin_top = -1.0
+margin_right = 89.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 0, 24 )
+text = "Filter by rarity"
+valign = 1
+
+[node name="Rarity" type="OptionButton" parent="TitleBg/TitleLayout/CategoriesLayout/RarityLayout"]
+margin_left = 93.0
+margin_right = 243.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+
+[node name="ValuesLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
+margin_left = 373.0
+margin_right = 523.0
+margin_bottom = 52.0
+
+[node name="Values" type="OptionButton" parent="TitleBg/TitleLayout/ValuesLayout"]
+margin_right = 150.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 150, 0 )
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Categories" type="OptionButton" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 130.0
-margin_top = -2.0
-margin_right = 301.0
-margin_bottom = 18.0
-clip_text = true
+[node name="ComparisionLayout" type="HBoxContainer" parent="TitleBg/TitleLayout/ValuesLayout"]
+margin_top = 24.0
+margin_right = 150.0
+margin_bottom = 48.0
 
-[node name="Values" type="OptionButton" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 317.0
-margin_top = -21.0
-margin_right = 488.0
-margin_bottom = -1.0
-clip_text = true
-
-[node name="ComparisonOperator" type="OptionButton" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 317.0
-margin_top = 4.0
-margin_right = 391.0
+[node name="ComparisonOperator" type="OptionButton" parent="TitleBg/TitleLayout/ValuesLayout/ComparisionLayout"]
+margin_right = 72.0
 margin_bottom = 24.0
+size_flags_horizontal = 3
 text = "="
 clip_text = true
 items = [ "=", null, false, 0, null, ">", null, false, 1, null, ">=", null, false, 2, null, "<", null, false, 3, null, "<=", null, false, 4, null ]
 selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ComparisonValue" type="SpinBox" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 399.0
-margin_top = 2.0
-margin_right = 488.0
-margin_bottom = 26.0
+[node name="ComparisonValue" type="SpinBox" parent="TitleBg/TitleLayout/ValuesLayout/ComparisionLayout"]
+margin_left = 76.0
+margin_right = 150.0
+margin_bottom = 24.0
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Texts" type="OptionButton" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 501.0
-margin_top = -21.0
-margin_right = 672.0
-margin_bottom = -1.0
+[node name="TextsLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
+margin_left = 527.0
+margin_right = 677.0
+margin_bottom = 52.0
+
+[node name="Texts" type="OptionButton" parent="TitleBg/TitleLayout/TextsLayout"]
+margin_right = 150.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 150, 0 )
 clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Contains" type="LineEdit" parent="TitleBg"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 501.0
-margin_top = 4.0
-margin_right = 672.0
-margin_bottom = 28.0
+[node name="Contains" type="LineEdit" parent="TitleBg/TitleLayout/TextsLayout"]
+margin_top = 24.0
+margin_right = 150.0
+margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RaritySort" type="CheckButton" parent="TitleBg"]
-margin_left = 673.5
-margin_top = -0.5
-margin_right = 834.5
-margin_bottom = 39.5
+[node name="SortLayout" type="GridContainer" parent="TitleBg/TitleLayout"]
+margin_left = 681.0
+margin_right = 908.0
+margin_bottom = 52.0
+columns = 2
+
+[node name="RaritySort" type="CheckBox" parent="TitleBg/TitleLayout/SortLayout"]
+margin_right = 112.0
+margin_bottom = 24.0
 text = "Sort by rarity"
 
-[node name="ManaSort" type="CheckButton" parent="TitleBg"]
-margin_left = 673.5
-margin_top = 24.0
-margin_right = 834.5
-margin_bottom = 64.0
+[node name="ManaSort" type="CheckBox" parent="TitleBg/TitleLayout/SortLayout"]
+margin_left = 116.0
+margin_right = 227.0
+margin_bottom = 24.0
 text = "Sort by mana"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="NameSort" type="CheckButton" parent="TitleBg"]
-margin_left = 821.5
-margin_top = -0.5
-margin_right = 982.5
-margin_bottom = 39.5
+[node name="NameSort" type="CheckBox" parent="TitleBg/TitleLayout/SortLayout"]
+margin_top = 28.0
+margin_right = 112.0
+margin_bottom = 52.0
 text = "Sort by name"
+
+[node name="Spacer" type="Control" parent="TitleBg/TitleLayout"]
+margin_left = 912.0
+margin_right = 1016.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="BackBtn" parent="TitleBg/TitleLayout" instance=ExtResource( 5 )]
+margin_left = 1020.0
+margin_right = 1220.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 200, 0 )
+button_text = "Back"
 
 [node name="LibraryBg" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -227,13 +270,14 @@ rect_scale = Vector2( 0.001, 0.001 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="TitleBg/BackBtn" to="." method="_on_BackBtn_pressed"]
-[connection signal="item_selected" from="TitleBg/Categories" to="." method="_on_Categories_item_selected"]
-[connection signal="item_selected" from="TitleBg/Values" to="." method="_on_Values_item_selected"]
-[connection signal="item_selected" from="TitleBg/ComparisonOperator" to="." method="_on_ComparisonOperator_item_selected"]
-[connection signal="value_changed" from="TitleBg/ComparisonValue" to="." method="_on_ComparisonValue_value_changed"]
-[connection signal="item_selected" from="TitleBg/Texts" to="." method="_on_Texts_item_selected"]
-[connection signal="text_changed" from="TitleBg/Contains" to="." method="_on_Contains_text_changed"]
-[connection signal="toggled" from="TitleBg/RaritySort" to="." method="_on_RaritySort_toggled"]
-[connection signal="toggled" from="TitleBg/ManaSort" to="." method="_on_ManaSort_toggled"]
-[connection signal="toggled" from="TitleBg/NameSort" to="." method="_on_NameSort_toggled"]
+[connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class" to="." method="_on_Class_item_selected"]
+[connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity" to="." method="_on_Rarity_item_selected"]
+[connection signal="item_selected" from="TitleBg/TitleLayout/ValuesLayout/Values" to="." method="_on_Values_item_selected"]
+[connection signal="item_selected" from="TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonOperator" to="." method="_on_ComparisonOperator_item_selected"]
+[connection signal="value_changed" from="TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonValue" to="." method="_on_ComparisonValue_value_changed"]
+[connection signal="item_selected" from="TitleBg/TitleLayout/TextsLayout/Texts" to="." method="_on_Texts_item_selected"]
+[connection signal="text_changed" from="TitleBg/TitleLayout/TextsLayout/Contains" to="." method="_on_Contains_text_changed"]
+[connection signal="toggled" from="TitleBg/TitleLayout/SortLayout/RaritySort" to="." method="_on_RaritySort_toggled"]
+[connection signal="toggled" from="TitleBg/TitleLayout/SortLayout/ManaSort" to="." method="_on_ManaSort_toggled"]
+[connection signal="toggled" from="TitleBg/TitleLayout/SortLayout/NameSort" to="." method="_on_NameSort_toggled"]
+[connection signal="pressed" from="TitleBg/TitleLayout/BackBtn" to="." method="_on_BackBtn_pressed"]

@@ -1,21 +1,23 @@
 extends AbstractScreen
 
 var _store: CardDeck = CardDeck.new()
-var _selected_categ: String = "all"
+var _selected_class: String = "none"
+var _selected_rarity: String = "none"
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
 onready var _manager = CardEngine.db()
 onready var _container = $LibraryBg/LibraryScroll/LibraryContainer
-onready var _categs = $TitleBg/Categories
-onready var _values = $TitleBg/Values
-onready var _comp_op = $TitleBg/ComparisonOperator
-onready var _comp_val = $TitleBg/ComparisonValue
-onready var _texts = $TitleBg/Texts
-onready var _contains = $TitleBg/Contains
-onready var _rarity_sort = $TitleBg/RaritySort
-onready var _mana_sort = $TitleBg/ManaSort
-onready var _name_sort = $TitleBg/NameSort
+onready var _class = $TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class
+onready var _rarity = $TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity
+onready var _values = $TitleBg/TitleLayout/ValuesLayout/Values
+onready var _comp_op = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonOperator
+onready var _comp_val = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonValue
+onready var _texts = $TitleBg/TitleLayout/TextsLayout/Texts
+onready var _contains = $TitleBg/TitleLayout/TextsLayout/Contains
+onready var _rarity_sort = $TitleBg/TitleLayout/SortLayout/RaritySort
+onready var _mana_sort = $TitleBg/TitleLayout/SortLayout/ManaSort
+onready var _name_sort = $TitleBg/TitleLayout/SortLayout/NameSort
 
 
 func _ready() -> void:
@@ -27,12 +29,17 @@ func _ready() -> void:
 
 
 func _apply_filters() -> void:
-	var from: Array = []
+	var from: Array = [""]
 	var where: Array = []
 	var contains: Array = []
 	
-	if _categs.selected > 0:
-		from.append(_selected_categ)
+	if _selected_class != "none":
+		from[0] += "class:%s" % _selected_class
+	
+	if _selected_rarity != "none":
+		if not from[0].empty():
+			from[0] += ","
+		from[0] += "rarity:%s" % _selected_rarity
 	
 	if _values.selected > 0:
 		where.append(
@@ -69,20 +76,48 @@ func _apply_filters() -> void:
 
 
 func _update_filters() -> void:
-	_update_categs()
+	_update_class()
+	_update_rarity()
 	_update_values()
 	_update_texts()
 
 
-func _update_categs() -> void:
-	_categs.clear()
-	_categs.add_item("All")
-	for id in _store.categories():
-		var categ = _store.get_category(id)
-		_categs.add_item("%s (%d)" % [categ["name"], categ["count"]])
-		_categs.set_item_metadata(_categs.get_item_count() - 1, id)
-		if id == _selected_categ:
-			_categs.select(_categs.get_item_count() - 1)
+func _update_class() -> void:
+	var classes = _store.get_meta_category("class")
+	var index = 1
+	var selected = 0
+	
+	_class.clear()
+	_class.add_item("All")
+	_class.set_item_metadata(0, "none")
+	
+	for clazz in classes["values"]:
+		_class.add_item("%s (%d)" % [clazz, classes["values"][clazz]])
+		_class.set_item_metadata(index, clazz)
+		if clazz == _selected_class:
+			selected = index
+		index += 1
+	
+	_class.select(selected)
+
+
+func _update_rarity() -> void:
+	var rarities = _store.get_meta_category("rarity")
+	var index = 1
+	var selected = 0
+	
+	_rarity.clear()
+	_rarity.add_item("All")
+	_rarity.set_item_metadata(0, "none")
+	
+	for rarity in rarities["values"]:
+		_rarity.add_item("%s (%d)" % [rarity, rarities["values"][rarity]])
+		_rarity.set_item_metadata(index, rarity)
+		if rarity == _selected_rarity:
+			selected = index
+		index += 1
+	
+	_rarity.select(selected)
 
 
 func _update_values() -> void:
@@ -107,11 +142,20 @@ func _on_BackBtn_pressed() -> void:
 	emit_signal("next_screen", "menu")
 
 
-func _on_Categories_item_selected(id) -> void:
-	if id == 0:
-		_selected_categ = "all"
+func _on_Class_item_selected(index: int) -> void:
+	if index == 0:
+		_selected_class = "none"
 	else:
-		_selected_categ = _categs.get_item_metadata(id)
+		_selected_class = _class.get_item_metadata(index)
+	
+	_apply_filters()
+
+
+func _on_Rarity_item_selected(index: int) -> void:
+	if index == 0:
+		_selected_rarity = "none"
+	else:
+		_selected_rarity = _rarity.get_item_metadata(index)
 	
 	_apply_filters()
 
