@@ -61,18 +61,6 @@ duration=0.0
 type="linear"
 easing="in"
 
-[flip_start]
-
-duration=0.0
-type="linear"
-easing="in"
-
-[flip_end]
-
-duration=0.0
-type="linear"
-easing="in"
-
 [anim_general]
 
 interactive=false

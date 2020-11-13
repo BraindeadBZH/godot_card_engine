@@ -18,7 +18,6 @@ var _root_trans: CardTransform = null
 var _merge_trans: CardTransform = null
 var _transitions: CardTransitions = CardTransitions.new()
 var _remove_flag: bool = false
-var _flip_started: bool = false
 var _state = CardState.NONE
 var _rng: PseudoRng = PseudoRng.new()
 var _interactive: bool = true

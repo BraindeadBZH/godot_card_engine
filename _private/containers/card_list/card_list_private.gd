@@ -53,14 +53,6 @@ func _ready():
 	_transitions.out_anchor.type = Tween.TRANS_QUAD
 	_transitions.out_anchor.easing = Tween.EASE_IN
 
-	_transitions.flip_start.duration = 0.2
-	_transitions.flip_start.type = Tween.TRANS_BACK
-	_transitions.flip_start.easing = Tween.EASE_IN
-
-	_transitions.flip_end.duration = 0.3
-	_transitions.flip_end.type = Tween.TRANS_BOUNCE
-	_transitions.flip_end.easing = Tween.EASE_OUT
-
 	_interactive = true
 	_idle_anim = "none"
 	_idle_anim_repeat = false

@@ -18,5 +18,3 @@ class AnchorTransition extends BasicTransition:
 var order: BasicTransition = BasicTransition.new()
 var in_anchor: AnchorTransition = AnchorTransition.new()
 var out_anchor: AnchorTransition = AnchorTransition.new()
-var flip_start: BasicTransition = BasicTransition.new()
-var flip_end: BasicTransition = BasicTransition.new()

@@ -162,14 +162,6 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("out", "type", cont.out_type)
 	file.set_value("out", "easing", cont.out_easing)
 	
-	file.set_value("flip_start", "duration", cont.flip_start_duration)
-	file.set_value("flip_start", "type", cont.flip_start_type)
-	file.set_value("flip_start", "easing", cont.flip_start_easing)
-	
-	file.set_value("flip_end", "duration", cont.flip_end_duration)
-	file.set_value("flip_end", "type", cont.flip_end_type)
-	file.set_value("flip_end", "easing", cont.flip_end_easing)
-	
 	# Animations data
 	file.set_value("anim_general", "interactive", cont.interactive)
 	file.set_value("idle_anim", "id", cont.idle_anim)
@@ -231,12 +223,6 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"out_duration": cont.out_duration,
 		"out_type": _translate_trans_type(cont.out_type),
 		"out_easing": _translate_trans_easing(cont.out_easing),
-		"flip_start_duration": cont.flip_start_duration,
-		"flip_start_type": _translate_trans_type(cont.flip_start_type),
-		"flip_start_easing": _translate_trans_easing(cont.flip_start_easing),
-		"flip_end_duration": cont.flip_end_duration,
-		"flip_end_type": _translate_trans_type(cont.flip_end_type),
-		"flip_end_easing": _translate_trans_easing(cont.flip_end_easing),
 		"interactive": _translate_bool(cont.interactive),
 		"idle_anim": cont.idle_anim,
 		"idle_anim_repeat": _translate_bool(cont.idle_anim_repeat),
@@ -342,14 +328,6 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.out_duration = file.get_value("out", "duration", 0.0)
 	cont.out_type = file.get_value("out", "type", "linear")
 	cont.out_easing = file.get_value("out", "easing", "in")
-	
-	cont.flip_start_duration = file.get_value("flip_start", "duration", 0.0)
-	cont.flip_start_type = file.get_value("flip_start", "type", "linear")
-	cont.flip_start_easing = file.get_value("flip_start", "easing", "in")
-	
-	cont.flip_end_duration = file.get_value("flip_end", "duration", 0.0)
-	cont.flip_end_type = file.get_value("flip_end", "type", "linear")
-	cont.flip_end_easing = file.get_value("flip_end", "easing", "in")
 	
 	cont.interactive = file.get_value("anim_general", "interactive", true)
 	cont.idle_anim = file.get_value("idle_anim", "id", "none")
