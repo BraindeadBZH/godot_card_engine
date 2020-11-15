@@ -2,7 +2,7 @@ class_name CardTransitions
 extends Reference
 
 
-class BasicTransition:
+class BasicTransition extends Reference:
 	var enabled: bool = false
 	var duration: float = 0.3
 	var type = Tween.TRANS_LINEAR
