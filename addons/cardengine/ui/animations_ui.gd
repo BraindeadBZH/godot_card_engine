@@ -213,6 +213,15 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			if next_step != null and not(next_step.editable_transi and next_step.editable_val):
 				down_btn.disabled = true
 			
+			var dup_btn = Button.new()
+			dup_btn.text = "D"
+			dup_btn.hint_tooltip = "Duplicate step"
+			step_layout.add_child(dup_btn)
+			dup_btn.connect("pressed", self, "_on_DupBtn_pressed", [seq, step])
+			
+			if not(step.editable_transi and step.editable_val):
+					dup_btn.disabled = true
+			
 			var del_btn = Button.new()
 			del_btn.text = "X"
 			del_btn.hint_tooltip = "Delete step"
@@ -461,6 +470,11 @@ func _on_UpBtn_pressed(seq: AnimationSequence, idx: int) -> void:
 
 func _on_DownBtn_pressed(seq: AnimationSequence, idx: int) -> void:
 	seq.shift_step_right(idx)
+	_load_animation()
+
+
+func _on_DupBtn_pressed(seq: AnimationSequence, step: AnimationStep) -> void:
+	seq.add_step(step.duplicate(), true)
 	_load_animation()
 
 
