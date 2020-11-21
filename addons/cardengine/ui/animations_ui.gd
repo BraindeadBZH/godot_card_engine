@@ -152,7 +152,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 								step.val.vec_val.x,
 								step.val.vec_val.y]
 						StepValue.Mode.RANDOM:
-							btn.text = "rand(%.2f-%.2f, %.2f-%.2f)" % [
+							btn.text = "rand(%.2f to %.2f, %.2f to %.2f)" % [
 								step.val.vec_val.x,
 								step.val.vec_range.x,
 								step.val.vec_val.y,
@@ -166,7 +166,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 								step.val.vec_val.x,
 								step.val.vec_val.y]
 						StepValue.Mode.RANDOM:
-							btn.text = "rand(%.2f-%.2f, %.2f-%.2f)" % [
+							btn.text = "rand(%.2f to %.2f, %.2f to %.2f)" % [
 								step.val.vec_val.x,
 								step.val.vec_range.x,
 								step.val.vec_val.y,
@@ -178,7 +178,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 						StepValue.Mode.FIXED:
 							btn.text = "%.2f°" % step.val.num_val
 						StepValue.Mode.RANDOM:
-							btn.text = "rand(%.2f°-%.2f°)" % [
+							btn.text = "rand(%.2f° to %.2f°)" % [
 								step.val.num_val,
 								step.val.num_range]
 				btn.disabled = not step.editable_val
