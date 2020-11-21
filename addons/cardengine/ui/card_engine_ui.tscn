@@ -354,7 +354,7 @@ margin_left = 142.0
 margin_right = 230.0
 margin_bottom = 20.0
 text = "Choose..."
-items = [ "Choose...", null, true, 0, null, "Home Display Animation (home)", null, false, 1, "home" ]
+items = [ "Choose...", null, true, 0, null, "Home Display Animation (home)", null, false, 1, "home", "Card List Animation (list)", null, false, 2, "list" ]
 selected = 0
 
 [node name="EditBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]

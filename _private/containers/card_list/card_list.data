@@ -64,4 +64,4 @@ easing="in"
 [anim]
 
 interactive=true
-id="none"
+id="list"

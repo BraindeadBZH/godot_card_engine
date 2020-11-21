@@ -54,4 +54,4 @@ func _ready():
 	_transitions.out_anchor.easing = Tween.EASE_IN
 
 	_interactive = true
-	_anim = "none"
+	_anim = "list"
