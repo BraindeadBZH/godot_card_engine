@@ -418,7 +418,7 @@ func _on_InitBtn_pressed(seq: AnimationSequence) -> void:
 
 
 func _on_AddStepBtn_pressed(seq: AnimationSequence) -> void:
-	seq.add_step()
+	seq.add_step(null, true)
 	_load_animation()
 
 

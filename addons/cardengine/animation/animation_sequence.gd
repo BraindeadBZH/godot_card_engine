@@ -71,11 +71,30 @@ func step(index: int) -> AnimationStep:
 	return _data[index]
 
 
-func add_step(step: AnimationStep = null) -> void:
+func first_step() -> AnimationStep:
+	if _data.empty():
+		return null
+	
+	return _data.front()
+
+
+func last_step() -> AnimationStep:
+	if _data.empty():
+		return null
+	
+	return _data.back()
+
+
+func add_step(step: AnimationStep = null, check_last: bool = false) -> void:
 	if step == null:
 		step = AnimationStep.new(_default_transition(), _default_value())
-
-	_data.append(step)
+	
+	var last := last_step()
+	
+	if check_last and length() > 1 and last != null and not (last.editable_transi and last.editable_val):
+		_data.insert(_data.size()-1, step)
+	else:
+		_data.append(step)
 
 
 func remove_step(index: int) -> void:
@@ -86,14 +105,14 @@ func remove_step(index: int) -> void:
 
 
 func shift_step_left(index: int) -> void:
-	if index <= 0 or index >= _data.size()-1:
+	if index <= 0 or index >= _data.size():
 		return
 
 	Utils.shift_elt_left(_data, index)
 
 
 func shift_step_right(index: int) -> void:
-	if index <= 0 or index >= _data.size()-1:
+	if index < 0 or index >= _data.size()-1:
 		return
 
 	Utils.shift_elt_right(_data, index)
