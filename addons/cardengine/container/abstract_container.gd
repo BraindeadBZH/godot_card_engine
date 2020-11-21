@@ -12,6 +12,7 @@ export(NodePath) var in_anchor: NodePath = ""
 export(NodePath) var out_anchor: NodePath = ""
 
 var _store: AbstractStore = null
+var _rng: PseudoRng = PseudoRng.new()
 
 var _layout_mode: int = LayoutMode.GRID
 var _face_up: float = true
@@ -275,9 +276,7 @@ func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
 					_fine_pos_max,
 					abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
-				trans.pos += Vector2(
-					_fine_pos_min.x + randf() * (_fine_pos_max.x - _fine_pos_min.x),
-					_fine_pos_min.y + randf() * (_fine_pos_max.y - _fine_pos_min.y))
+				trans.pos += _rng.random_vec2_range(_fine_pos_min, _fine_pos_max)
 	
 	if _fine_angle:
 		match _fine_angle_mode:
@@ -292,29 +291,27 @@ func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
 					_fine_angle_max,
 					abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
-				trans.rot += _fine_angle_min + randf() * (_fine_angle_max - _fine_angle_min)
+				trans.rot += _rng.randomf_range(_fine_angle_min, _fine_angle_max)
 	
 	if _fine_scale:
 		match _fine_scale_mode:
 			FineTuningMode.LINEAR:
-				trans.scale += lerp(
+				trans.scale *= lerp(
 					_fine_scale_min,
 					_fine_scale_max,
 					card_index / card_count)
 			FineTuningMode.SYMMETRIC:
-				trans.scale += lerp(
+				trans.scale *= lerp(
 					_fine_scale_min,
 					_fine_scale_max,
 					abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
 				match _fine_scale_ratio:
 					AspectMode.IGNORE:
-						trans.scale += Vector2(
-							_fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x),
-							_fine_scale_min.y + randf() * (_fine_scale_max.y - _fine_scale_min.y))
+						trans.scale *= _rng.random_vec2_range(_fine_scale_min, _fine_scale_max)
 					AspectMode.KEEP:
-						var random_scale = _fine_scale_min.x + randf() * (_fine_scale_max.x - _fine_scale_min.x)
-						trans.scale += Vector2(random_scale, random_scale)
+						var random_scale = _rng.randomf_range(_fine_scale_min.x, _fine_scale_max.x)
+						trans.scale *= Vector2(random_scale, random_scale)
 
 
 func _clear() -> void:
