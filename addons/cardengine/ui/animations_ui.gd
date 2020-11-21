@@ -343,6 +343,23 @@ func _on_SaveBtn_pressed() -> void:
 	_select_anim_by_id(id)
 
 
+func _on_ResetBtn_pressed() -> void:
+	_opened_anim = _manager.reset_animation(_opened_anim)
+	
+	if _idle_btn.pressed:
+		_anim_block = _opened_anim.idle_loop()
+	elif _focused_btn.pressed:
+		_anim_block = _opened_anim.focused_animation()
+	elif _activated_btn.pressed:
+		_anim_block = _opened_anim.activated_animation()
+	elif _deactivated_btn.pressed:
+		_anim_block = _opened_anim.deactivated_animation()
+	elif _unfocused_btn.pressed:
+		_anim_block = _opened_anim.unfocused_animation()
+		
+	_load_animation()
+
+
 func _on_PreviewBtn_pressed() -> void:
 	_main_ui.show_preview_dialog(_opened_anim)
 
@@ -351,6 +368,7 @@ func _on_IdleBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
 	
+	_idle_btn.pressed = true
 	_focused_btn.pressed = false
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = false
@@ -365,6 +383,7 @@ func _on_FocusedBtn_pressed() -> void:
 		return
 	
 	_idle_btn.pressed = false
+	_focused_btn.pressed = true
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = false
 	_unfocused_btn.pressed = false
@@ -379,6 +398,7 @@ func _on_ActivatedBtn_pressed() -> void:
 	
 	_idle_btn.pressed = false
 	_focused_btn.pressed = false
+	_activated_btn.pressed = true
 	_deactivated_btn.pressed = false
 	_unfocused_btn.pressed = false
 	
@@ -393,6 +413,7 @@ func _on_DeactivatedBtn_pressed() -> void:
 	_idle_btn.pressed = false
 	_focused_btn.pressed = false
 	_activated_btn.pressed = false
+	_deactivated_btn.pressed = true
 	_unfocused_btn.pressed = false
 	
 	_anim_block = _opened_anim.deactivated_animation()
@@ -407,6 +428,7 @@ func _on_UnfocusedBtn_pressed() -> void:
 	_focused_btn.pressed = false
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = false
+	_unfocused_btn.pressed = true
 	
 	_anim_block = _opened_anim.unfocused_animation()
 	_load_animation()
@@ -424,11 +446,6 @@ func _on_AddStepBtn_pressed(seq: AnimationSequence) -> void:
 
 func _on_ClearSeqBtn_pressed(seq: AnimationSequence) -> void:
 	seq.clear_sequence()
-	_load_animation()
-
-
-func _on_ResetBtn_pressed() -> void:
-	_opened_anim = _manager.reset_animation(_opened_anim)
 	_load_animation()
 
 
