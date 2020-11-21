@@ -162,16 +162,24 @@ func flag_for_removal() -> void:
 		emit_signal("need_removal")
 
 
-func _setup_pos_sequence(seq: PositionSequence, initial: Vector2, player: Tween) -> Vector2:
-	var prev_val: Vector2 = initial
+func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
+	var prev_val: Vector2 = Vector2(0.0, 0.0)
 	var delay: float = 0.0
+	
+	match seq.from_mode():
+		AnimationSequence.INIT_ORIGIN:
+			prev_val = Vector2(0.0, 0.0)
+		AnimationSequence.INIT_FOCUSED:
+			prev_val = _trans_focused.pos
+		AnimationSequence.INIT_ACTIVATED:
+			prev_val = _trans_activated.pos
 	
 	if seq.from_mode() == AnimationSequence.INIT_ORIGIN:
 		prev_val = Vector2(0.0, 0.0)
 
 	for step in seq.sequence():
 		if step.transi != null:
-			var final_pos: Vector2 = step.val.vec_val
+			var final_pos: Vector2 = Vector2(0.0, 0.0)
 			var final_duration: float = step.transi.duration
 
 			if step.transi.random_duration:
@@ -180,9 +188,15 @@ func _setup_pos_sequence(seq: PositionSequence, initial: Vector2, player: Tween)
 
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
-					final_pos = initial
-					if seq.to_mode() == AnimationSequence.INIT_ORIGIN:
-						final_pos = Vector2(0.0, 0.0)
+					match seq.to_mode():
+						AnimationSequence.INIT_ORIGIN:
+							final_pos = Vector2(0.0, 0.0)
+						AnimationSequence.INIT_FOCUSED:
+							final_pos = _trans_focused.pos
+						AnimationSequence.INIT_ACTIVATED:
+							final_pos = _trans_activated.pos
+				StepValue.Mode.FIXED:
+					final_pos = step.val.vec_val
 				StepValue.Mode.RANDOM:
 					final_pos = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
@@ -201,16 +215,21 @@ func _setup_pos_sequence(seq: PositionSequence, initial: Vector2, player: Tween)
 	return prev_val
 
 
-func _setup_scale_sequence(seq: ScaleSequence, initial: Vector2, player: Tween) -> Vector2:
-	var prev_val: Vector2 = initial
+func _setup_scale_sequence(seq: ScaleSequence, player: Tween) -> Vector2:
+	var prev_val: Vector2 = Vector2(1.0, 1.0)
 	var delay: float = 0.0
 	
-	if seq.from_mode() == AnimationSequence.INIT_ORIGIN:
-		prev_val = Vector2(1.0, 1.0)
+	match seq.from_mode():
+		AnimationSequence.INIT_ORIGIN:
+			prev_val = Vector2(1.0, 1.0)
+		AnimationSequence.INIT_FOCUSED:
+			prev_val = _trans_focused.scale
+		AnimationSequence.INIT_ACTIVATED:
+			prev_val = _trans_activated.scale
 
 	for step in seq.sequence():
 		if step.transi != null:
-			var final_scale: Vector2 = step.val.vec_val
+			var final_scale: Vector2 = Vector2(1.0, 1.0)
 			var final_duration: float = step.transi.duration
 
 			if step.transi.random_duration:
@@ -219,9 +238,15 @@ func _setup_scale_sequence(seq: ScaleSequence, initial: Vector2, player: Tween) 
 
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
-					final_scale = initial
-					if seq.to_mode() == AnimationSequence.INIT_ORIGIN:
-						final_scale = Vector2(1.0, 1.0)
+					match seq.to_mode():
+						AnimationSequence.INIT_ORIGIN:
+							final_scale = Vector2(1.0, 1.0)
+						AnimationSequence.INIT_FOCUSED:
+							final_scale = _trans_focused.scale
+						AnimationSequence.INIT_ACTIVATED:
+							final_scale = _trans_activated.scale
+				StepValue.Mode.FIXED:
+					final_scale = step.val.vec_val
 				StepValue.Mode.RANDOM:
 					final_scale = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
@@ -240,16 +265,21 @@ func _setup_scale_sequence(seq: ScaleSequence, initial: Vector2, player: Tween) 
 	return prev_val
 
 
-func _setup_rotation_sequence(seq: RotationSequence, initial: float, player: Tween) -> float:
-	var prev_val: float = initial
+func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
+	var prev_val: float = 0.0
 	var delay: float = 0.0
 	
-	if seq.from_mode() == AnimationSequence.INIT_ORIGIN:
-		prev_val = 0.0
+	match seq.from_mode():
+		AnimationSequence.INIT_ORIGIN:
+			prev_val = 0.0
+		AnimationSequence.INIT_FOCUSED:
+			prev_val = _trans_focused.rot
+		AnimationSequence.INIT_ACTIVATED:
+			prev_val = _trans_activated.rot
 
 	for step in seq.sequence():
 		if step.transi != null:
-			var final_rot: float = deg2rad(step.val.num_val)
+			var final_rot: float = 0.0
 			var final_duration: float = step.transi.duration
 
 			if step.transi.random_duration:
@@ -258,9 +288,15 @@ func _setup_rotation_sequence(seq: RotationSequence, initial: float, player: Twe
 
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
-					final_rot = initial
-					if seq.to_mode() == AnimationSequence.INIT_ORIGIN:
-						final_rot = 0.0
+					match seq.to_mode():
+						AnimationSequence.INIT_ORIGIN:
+							final_rot = 0.0
+						AnimationSequence.INIT_FOCUSED:
+							final_rot = _trans_focused.rot
+						AnimationSequence.INIT_ACTIVATED:
+							final_rot = _trans_activated.rot
+				StepValue.Mode.FIXED:
+					final_rot = deg2rad(step.val.num_val)
 				StepValue.Mode.RANDOM:
 					final_rot = deg2rad(_rng.randomf_range(
 						step.val.num_val, step.val.num_range))
@@ -304,67 +340,67 @@ func _change_anim(anim: String) -> void:
 			
 			_setup_pos_sequence(
 				_anim.idle_loop().position_sequence(),
-				_trans_origin.pos, _anim_player)
+				_anim_player)
 				
 			_setup_scale_sequence(
 				_anim.idle_loop().scale_sequence(),
-				_trans_origin.scale, _anim_player)
+				_anim_player)
 				
 			_setup_rotation_sequence(
 				_anim.idle_loop().rotation_sequence(),
-				_trans_origin.rot, _anim_player)
+				_anim_player)
 			
 		"focused":
 			_trans_focused.pos = _setup_pos_sequence(
 				_anim.focused_animation().position_sequence(),
-				_trans_origin.pos, _anim_player)
+				_anim_player)
 				
 			_trans_focused.scale = _setup_scale_sequence(
 				_anim.focused_animation().scale_sequence(),
-				_trans_origin.scale, _anim_player)
+				_anim_player)
 				
 			_trans_focused.rot = _setup_rotation_sequence(
 				_anim.focused_animation().rotation_sequence(),
-				_trans_origin.rot, _anim_player)
+				_anim_player)
 				
 		"activated":
 			_trans_activated.pos = _setup_pos_sequence(
 				_anim.activated_animation().position_sequence(),
-				_trans_focused.pos, _anim_player)
+				_anim_player)
 				
 			_trans_activated.scale = _setup_scale_sequence(
 				_anim.activated_animation().scale_sequence(),
-				_trans_focused.scale, _anim_player)
+				_anim_player)
 				
 			_trans_activated.rot = _setup_rotation_sequence(
 				_anim.activated_animation().rotation_sequence(),
-				_trans_focused.rot, _anim_player)
+				_anim_player)
 				
 		"deactivated":
 			_setup_pos_sequence(
 				_anim.deactivated_animation().position_sequence(),
-				_trans_activated.pos, _anim_player)
+				_anim_player)
 				
 			_setup_scale_sequence(
 				_anim.deactivated_animation().scale_sequence(),
-				_trans_activated.scale, _anim_player)
+				_anim_player)
 				
 			_setup_rotation_sequence(
 				_anim.deactivated_animation().rotation_sequence(),
-				_trans_activated.rot, _anim_player)
+				_anim_player)
 				
 		"unfocused":
 			_setup_pos_sequence(
 				_anim.unfocused_animation().position_sequence(),
-				_trans_focused.pos, _anim_player)
+				_anim_player)
 				
 			_setup_scale_sequence(
 				_anim.unfocused_animation().scale_sequence(),
-				_trans_focused.scale, _anim_player)
+				_anim_player)
 				
 			_setup_rotation_sequence(
 				_anim.unfocused_animation().rotation_sequence(),
-				_trans_focused.rot, _anim_player)
+				_anim_player)
 			
 	_anim_player.start()
 

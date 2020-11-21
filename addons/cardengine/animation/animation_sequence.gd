@@ -2,7 +2,7 @@ tool
 class_name AnimationSequence
 extends Reference
 
-enum {INIT_DISABLED, INIT_ORIGIN, INIT_STEP}
+enum {INIT_DISABLED, INIT_ORIGIN, INIT_FOCUSED, INIT_ACTIVATED}
 
 var _to_mode: int
 var _from_mode: int
