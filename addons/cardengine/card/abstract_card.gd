@@ -116,6 +116,9 @@ func set_interactive(state: bool) -> void:
 
 
 func set_animation(anim: AnimationData) -> void:
+	if anim == null:
+		_anim_player.remove_all()
+	
 	_state = CardState.NONE
 	_anim = anim
 	_current_anim = ""
