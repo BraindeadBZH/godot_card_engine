@@ -8,7 +8,7 @@ signal clicked()
 signal state_changed(new_state)
 
 enum CardSide {FRONT, BACK}
-enum CardState {NONE, IDLE, FOCUSED, PRESSED}
+enum CardState {NONE, IDLE, FOCUSED, ACTIVE}
 
 export(Vector2) var size: Vector2 = Vector2(0.0, 0.0)
 
@@ -21,17 +21,32 @@ var _remove_flag: bool = false
 var _state = CardState.NONE
 var _rng: PseudoRng = PseudoRng.new()
 var _interactive: bool = true
+var _anim: AnimationData = AnimationData.new("empty", "Empty")
+var _current_anim: String = ""
+var _anim_queue: Array = []
+var _trans_origin: CardTransform = CardTransform.new()
+var _trans_focused: CardTransform = CardTransform.new()
+var _trans_activated: CardTransform = CardTransform.new()
 
-onready var _front = $Front
-onready var _back  = $Back
-onready var _mouse = $MouseArea
+onready var _cont = $AnimContainer
+onready var _front = $AnimContainer/Front
+onready var _back  = $AnimContainer/Back
 onready var _transi = $Transitions
 onready var _mergeWin = $MergeWindow
-onready var _anim_player = $AnimPlayer
+onready var _anim_player = $AnimationPlayer
 
 
-func _ready() -> void:
-	_transi.start()
+func _process(delta: float) -> void:
+	if _anim_queue.empty():
+		return
+		
+	var next = _anim_queue.front()
+
+	if _current_anim != "idle" and next == "idle" and _anim_player.is_active():
+		return
+	
+	_anim_queue.pop_front()
+	_change_anim(next)
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -59,6 +74,8 @@ func set_root_trans_immediate(transform: CardTransform) -> void:
 	position = transform.pos
 	scale = transform.scale
 	rotation = transform.rot
+	
+	_change_state(CardState.IDLE)
 
 
 func transitions() -> CardTransitions:
@@ -98,20 +115,12 @@ func set_interactive(state: bool) -> void:
 	_interactive = state
 
 
-func change_anim(anim: AnimationData, repeat: bool = false) -> void:
-		_anim_player.stop_all()
-		_anim_player.remove_all()
-		_anim_player.repeat = repeat
-		
-		position = _root_trans.pos
-		scale = _root_trans.scale
-		rotation = _root_trans.rot
-		
-		if anim != null:
-			_setup_pos_anim(anim)
-			_setup_scale_anim(anim)
-			_setup_rotation_anim(anim)
-			_anim_player.start()
+func set_animation(anim: AnimationData) -> void:
+	_state = CardState.NONE
+	_anim = anim
+	_current_anim = ""
+	_anim_queue.clear()
+	_change_state(CardState.IDLE)
 
 
 func is_flagged_for_removal() -> bool:
@@ -147,115 +156,218 @@ func flag_for_removal() -> void:
 		emit_signal("need_removal")
 
 
-func _setup_pos_anim(anim: AnimationData) -> void:
-	var prev_val: Vector2 = _root_trans.pos
+func _setup_pos_sequence(seq: PositionSequence, initial: Vector2, player: Tween) -> Vector2:
+	var prev_val: Vector2 = initial
 	var delay: float = 0.0
 	
-	for step in anim.position_seq():
+	if seq.from_mode() == AnimationSequence.INIT_ORIGIN:
+		prev_val = Vector2(0.0, 0.0)
+
+	for step in seq.sequence():
 		if step.transi != null:
-			var final_pos = _root_trans.pos + step.val.vec_val
-			var final_duration = step.transi.duration
-			
+			var final_pos: Vector2 = step.val.vec_val
+			var final_duration: float = step.transi.duration
+
 			if step.transi.random_duration:
 				final_duration = _rng.randomf_range(
 					step.transi.duration_range_min, step.transi.duration_range_max)
-			
+
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
-					final_pos = _root_trans.pos
+					final_pos = initial
+					if seq.to_mode() == AnimationSequence.INIT_ORIGIN:
+						final_pos = Vector2(0.0, 0.0)
 				StepValue.Mode.RANDOM:
-					final_pos = _root_trans.pos + _rng.random_vec2_range(
+					final_pos = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
 			
-			_anim_player.interpolate_property(
-				self, "position",
+			player.interpolate_property(
+				_cont, "position",
 				prev_val, final_pos,
 				final_duration, step.transi.type, step.transi.easing, delay)
-			
+
 			prev_val = final_pos
 			delay += final_duration
-			
+
 			if step.transi.flip_card:
-				_anim_player.interpolate_callback(self, delay, "change_side")
+				player.interpolate_callback(self, delay, "change_side")
+	
+	return prev_val
 
 
-func _setup_scale_anim(anim: AnimationData) -> void:
-	var prev_val: Vector2 = _root_trans.scale
+func _setup_scale_sequence(seq: ScaleSequence, initial: Vector2, player: Tween) -> Vector2:
+	var prev_val: Vector2 = initial
 	var delay: float = 0.0
 	
-	for step in anim.scale_seq():
+	if seq.from_mode() == AnimationSequence.INIT_ORIGIN:
+		prev_val = Vector2(1.0, 1.0)
+
+	for step in seq.sequence():
 		if step.transi != null:
-			var final_scale = _root_trans.scale * step.val.vec_val
-			var final_duration = step.transi.duration
-			
+			var final_scale: Vector2 = step.val.vec_val
+			var final_duration: float = step.transi.duration
+
 			if step.transi.random_duration:
 				final_duration = _rng.randomf_range(
 					step.transi.duration_range_min, step.transi.duration_range_max)
-			
+
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
-					final_scale = _root_trans.scale
+					final_scale = initial
+					if seq.to_mode() == AnimationSequence.INIT_ORIGIN:
+						final_scale = Vector2(1.0, 1.0)
 				StepValue.Mode.RANDOM:
-					final_scale = _root_trans.scale * _rng.random_vec2_range(
+					final_scale = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
 			
-			_anim_player.interpolate_property(
-				self, "scale",
+			player.interpolate_property(
+				_cont, "scale",
 				prev_val, final_scale,
 				final_duration, step.transi.type, step.transi.easing, delay)
-			
+
 			prev_val = final_scale
 			delay += final_duration
-			
+
 			if step.transi.flip_card:
-				_anim_player.interpolate_callback(self, delay, "change_side")
+				player.interpolate_callback(self, delay, "change_side")
+	
+	return prev_val
 
 
-func _setup_rotation_anim(anim: AnimationData) -> void:
-	var prev_val: float = _root_trans.rot
+func _setup_rotation_sequence(seq: RotationSequence, initial: float, player: Tween) -> float:
+	var prev_val: float = initial
 	var delay: float = 0.0
 	
-	for step in anim.rotation_seq():
+	if seq.from_mode() == AnimationSequence.INIT_ORIGIN:
+		prev_val = 0.0
+
+	for step in seq.sequence():
 		if step.transi != null:
-			var final_rot = _root_trans.rot + deg2rad(step.val.num_val)
-			var final_duration = step.transi.duration
-			
+			var final_rot: float = deg2rad(step.val.num_val)
+			var final_duration: float = step.transi.duration
+
 			if step.transi.random_duration:
 				final_duration = _rng.randomf_range(
 					step.transi.duration_range_min, step.transi.duration_range_max)
-			
+
 			match step.val.mode:
 				StepValue.Mode.INITIAL:
-					final_rot = deg2rad(_root_trans.rot)
+					final_rot = initial
+					if seq.to_mode() == AnimationSequence.INIT_ORIGIN:
+						final_rot = 0.0
 				StepValue.Mode.RANDOM:
-					final_rot = _root_trans.rot + deg2rad(_rng.randomf_range(
+					final_rot = deg2rad(_rng.randomf_range(
 						step.val.num_val, step.val.num_range))
-			
-			_anim_player.interpolate_property(
-				self, "rotation",
+
+			player.interpolate_property(
+				_cont, "rotation",
 				prev_val, final_rot,
 				final_duration, step.transi.type, step.transi.easing, delay)
-			
+
 			prev_val = final_rot
 			delay += final_duration
-			
+
 			if step.transi.flip_card:
-				_anim_player.interpolate_callback(self, delay, "change_side")
+				player.interpolate_callback(self, delay, "change_side")
+	
+	return prev_val
 
 
-func _change_state(new_state, emit: bool = true) -> void:
+func _change_state(new_state) -> void:
 	if new_state == _state:
 		return
 	
+	if new_state == CardState.IDLE and _current_anim != "idle":
+		_change_anim("idle")
+	
 	_state = new_state
-	if emit:
-		emit_signal("state_changed", new_state)
+	emit_signal("state_changed", new_state)
+
+
+func _change_anim(anim: String) -> void:
+	if _anim == null:
+		return
+	
+	_anim_player.remove_all()
+	_anim_player.repeat = false
+	_current_anim = anim
+	
+	match anim:
+		"idle":
+			_anim_player.repeat = true
+			
+			_setup_pos_sequence(
+				_anim.idle_loop().position_sequence(),
+				_trans_origin.pos, _anim_player)
+				
+			_setup_scale_sequence(
+				_anim.idle_loop().scale_sequence(),
+				_trans_origin.scale, _anim_player)
+				
+			_setup_rotation_sequence(
+				_anim.idle_loop().rotation_sequence(),
+				_trans_origin.rot, _anim_player)
+			
+		"focused":
+			_trans_focused.pos = _setup_pos_sequence(
+				_anim.focused_animation().position_sequence(),
+				_trans_origin.pos, _anim_player)
+				
+			_trans_focused.scale = _setup_scale_sequence(
+				_anim.focused_animation().scale_sequence(),
+				_trans_origin.scale, _anim_player)
+				
+			_trans_focused.rot = _setup_rotation_sequence(
+				_anim.focused_animation().rotation_sequence(),
+				_trans_origin.rot, _anim_player)
+				
+		"activated":
+			_trans_activated.pos = _setup_pos_sequence(
+				_anim.activated_animation().position_sequence(),
+				_trans_focused.pos, _anim_player)
+				
+			_trans_activated.scale = _setup_scale_sequence(
+				_anim.activated_animation().scale_sequence(),
+				_trans_focused.scale, _anim_player)
+				
+			_trans_activated.rot = _setup_rotation_sequence(
+				_anim.activated_animation().rotation_sequence(),
+				_trans_focused.rot, _anim_player)
+				
+		"deactivated":
+			_setup_pos_sequence(
+				_anim.deactivated_animation().position_sequence(),
+				_trans_activated.pos, _anim_player)
+				
+			_setup_scale_sequence(
+				_anim.deactivated_animation().scale_sequence(),
+				_trans_activated.scale, _anim_player)
+				
+			_setup_rotation_sequence(
+				_anim.deactivated_animation().rotation_sequence(),
+				_trans_activated.rot, _anim_player)
+				
+		"unfocused":
+			_setup_pos_sequence(
+				_anim.unfocused_animation().position_sequence(),
+				_trans_focused.pos, _anim_player)
+				
+			_setup_scale_sequence(
+				_anim.unfocused_animation().scale_sequence(),
+				_trans_focused.scale, _anim_player)
+				
+			_setup_rotation_sequence(
+				_anim.unfocused_animation().rotation_sequence(),
+				_trans_focused.rot, _anim_player)
+			
+	_anim_player.start()
 
 
 func _on_MouseArea_mouse_entered() -> void:
 	if not _interactive:
 		return
 	
+	_anim_queue.push_back("focused")
 	_change_state(CardState.FOCUSED)
 
 
@@ -263,6 +375,8 @@ func _on_MouseArea_mouse_exited() -> void:
 	if not _interactive:
 		return
 	
+	_anim_queue.push_back("unfocused")
+	_anim_queue.push_back("idle")
 	_change_state(CardState.IDLE)
 
 
@@ -277,17 +391,16 @@ func _on_MouseArea_button_down() -> void:
 	if not _interactive:
 		return
 	
-	_change_state(CardState.PRESSED)
+	_anim_queue.push_back("activated")
+	_change_state(CardState.ACTIVE)
 
 
 func _on_MouseArea_button_up() -> void:
 	if not _interactive:
 		return
-	
-	if _mouse.is_hovered():
-		_change_state(CardState.FOCUSED, false)
-	else:
-		_change_state(CardState.IDLE)
+		
+	_anim_queue.push_back("deactivated")
+	_change_state(CardState.FOCUSED)
 
 
 func _on_MergeWindow_timeout() -> void:

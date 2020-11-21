@@ -61,21 +61,7 @@ duration=0.0
 type="linear"
 easing="in"
 
-[anim_general]
+[anim]
 
 interactive=false
-
-[idle_anim]
-
-id="floating"
-repeat=true
-
-[focused_anim]
-
-id="none"
-repeat=false
-
-[clicked_anim]
-
-id="none"
-repeat=false
+id="home"

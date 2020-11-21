@@ -163,13 +163,8 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("out", "easing", cont.out_easing)
 	
 	# Animations data
-	file.set_value("anim_general", "interactive", cont.interactive)
-	file.set_value("idle_anim", "id", cont.idle_anim)
-	file.set_value("idle_anim", "repeat", cont.idle_anim_repeat)
-	file.set_value("focused_anim", "id", cont.focused_anim)
-	file.set_value("focused_anim", "repeat", cont.focused_anim_repeat)
-	file.set_value("clicked_anim", "id", cont.clicked_anim)
-	file.set_value("clicked_anim", "repeat", cont.clicked_anim_repeat)
+	file.set_value("anim", "interactive", cont.interactive)
+	file.set_value("anim", "id", cont.anim)
 
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
@@ -224,12 +219,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"out_type": _translate_trans_type(cont.out_type),
 		"out_easing": _translate_trans_easing(cont.out_easing),
 		"interactive": _translate_bool(cont.interactive),
-		"idle_anim": cont.idle_anim,
-		"idle_anim_repeat": _translate_bool(cont.idle_anim_repeat),
-		"focused_anim": cont.focused_anim,
-		"focused_anim_repeat": _translate_bool(cont.focused_anim_repeat),
-		"clicked_anim": cont.clicked_anim,
-		"clicked_anim_repeat": _translate_bool(cont.clicked_anim_repeat)
+		"anim": cont.anim,
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -328,14 +318,9 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.out_duration = file.get_value("out", "duration", 0.0)
 	cont.out_type = file.get_value("out", "type", "linear")
 	cont.out_easing = file.get_value("out", "easing", "in")
-	
-	cont.interactive = file.get_value("anim_general", "interactive", true)
-	cont.idle_anim = file.get_value("idle_anim", "id", "none")
-	cont.idle_anim_repeat = file.get_value("idle_anim", "repeat", false)
-	cont.focused_anim = file.get_value("focused_anim", "id", "none")
-	cont.focused_anim_repeat = file.get_value("focused_anim", "repeat", false)
-	cont.clicked_anim = file.get_value("clicked_anim", "id", "none")
-	cont.clicked_anim_repeat = file.get_value("clicked_anim", "repeat", false)
+
+	cont.interactive = file.get_value("anim", "interactive", true)
+	cont.anim = file.get_value("anim", "id", "none")
 		
 	return cont
 

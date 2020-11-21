@@ -45,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.gd"
 }, {
 "base": "Reference",
+"class": "AnimationBlock",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/animation_block.gd"
+}, {
+"base": "Reference",
 "class": "AnimationData",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation.gd"
@@ -53,6 +58,11 @@ _global_script_classes=[ {
 "class": "AnimationManager",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation_manager.gd"
+}, {
+"base": "Reference",
+"class": "AnimationSequence",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/animation_sequence.gd"
 }, {
 "base": "Reference",
 "class": "AnimationStep",
@@ -169,6 +179,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://_private/containers/home_display/home_display_private.gd"
 }, {
+"base": "AnimationSequence",
+"class": "PositionSequence",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/position_sequence.gd"
+}, {
 "base": "Reference",
 "class": "PseudoRng",
 "language": "GDScript",
@@ -178,6 +193,16 @@ _global_script_classes=[ {
 "class": "Query",
 "language": "GDScript",
 "path": "res://addons/cardengine/database/query.gd"
+}, {
+"base": "AnimationSequence",
+"class": "RotationSequence",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/rotation_sequence.gd"
+}, {
+"base": "AnimationSequence",
+"class": "ScaleSequence",
+"language": "GDScript",
+"path": "res://addons/cardengine/animation/scale_sequence.gd"
 }, {
 "base": "Reference",
 "class": "StepTransition",
@@ -202,8 +227,10 @@ _global_script_class_icons={
 "AbstractScreen": "",
 "AbstractStore": "",
 "AnimPreviewDialog": "",
+"AnimationBlock": "",
 "AnimationData": "",
 "AnimationManager": "",
+"AnimationSequence": "",
 "AnimationStep": "",
 "AnimationsUi": "",
 "CardData": "",
@@ -227,8 +254,11 @@ _global_script_class_icons={
 "GeneralManager": "",
 "HomeDisplay": "",
 "HomeDisplayPrivate": "",
+"PositionSequence": "",
 "PseudoRng": "",
 "Query": "",
+"RotationSequence": "",
+"ScaleSequence": "",
 "StepTransition": "",
 "StepValue": "",
 "UtilsInstance": ""
@@ -244,6 +274,14 @@ config/icon="res://icon.png"
 
 Utils="*res://addons/cardengine/core/utils.gd"
 CardEngine="*res://addons/cardengine/core/card_engine_instance.gd"
+
+[debug]
+
+gdscript/warnings/unused_class_variable=true
+gdscript/warnings/unsafe_property_access=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
 
 [display]
 

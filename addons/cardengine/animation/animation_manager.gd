@@ -111,9 +111,25 @@ func _write_animation(anim: AnimationData):
 	file.set_value("meta", "id", anim.id)
 	file.set_value("meta", "name", anim.name)
 	
-	file.set_value("seq", "pos", _from_sequence(anim.position_seq()))
-	file.set_value("seq", "scale", _from_sequence(anim.scale_seq()))
-	file.set_value("seq", "rot", _from_sequence(anim.rotation_seq()))
+	file.set_value("idle", "pos", _from_sequence(anim.idle_loop().position_sequence()))
+	file.set_value("idle", "scale", _from_sequence(anim.idle_loop().scale_sequence()))
+	file.set_value("idle", "rot", _from_sequence(anim.idle_loop().rotation_sequence()))
+	
+	file.set_value("focused", "pos", _from_sequence(anim.focused_animation().position_sequence()))
+	file.set_value("focused", "scale", _from_sequence(anim.focused_animation().scale_sequence()))
+	file.set_value("focused", "rot", _from_sequence(anim.focused_animation().rotation_sequence()))
+	
+	file.set_value("activated", "pos", _from_sequence(anim.activated_animation().position_sequence()))
+	file.set_value("activated", "scale", _from_sequence(anim.activated_animation().scale_sequence()))
+	file.set_value("activated", "rot", _from_sequence(anim.activated_animation().rotation_sequence()))
+	
+	file.set_value("deactivated", "pos", _from_sequence(anim.deactivated_animation().position_sequence()))
+	file.set_value("deactivated", "scale", _from_sequence(anim.deactivated_animation().scale_sequence()))
+	file.set_value("deactivated", "rot", _from_sequence(anim.deactivated_animation().rotation_sequence()))
+	
+	file.set_value("unfocused", "pos", _from_sequence(anim.unfocused_animation().position_sequence()))
+	file.set_value("unfocused", "scale", _from_sequence(anim.unfocused_animation().scale_sequence()))
+	file.set_value("unfocused", "rot", _from_sequence(anim.unfocused_animation().rotation_sequence()))
 	
 	var err = file.save(FORMAT_ANIM_PATH % [_folder, anim.id])
 	if err != OK:
@@ -129,23 +145,40 @@ func _read_animation(filename: String) -> AnimationData:
 		printerr("Error while loading animation")
 		return null
 	
-	var anim = AnimationData.new(file.get_value("meta", "id", ""),
-			file.get_value("meta", "name", ""))
+	var anim = AnimationData.new(
+		file.get_value("meta", "id", ""),
+		file.get_value("meta", "name", ""))
 	
-	anim.set_position_seq(_to_sequence(file.get_value("seq", "pos", [])))
-	anim.set_scale_seq(_to_sequence(file.get_value("seq", "scale", [])))
-	anim.set_rotation_seq(_to_sequence(file.get_value("seq", "rot", [])))
+	_to_sequence(file.get_value("idle", "pos", []), anim.idle_loop().position_sequence())
+	_to_sequence(file.get_value("idle", "scale", []), anim.idle_loop().scale_sequence())
+	_to_sequence(file.get_value("idle", "rot", []), anim.idle_loop().rotation_sequence())
+	
+	_to_sequence(file.get_value("focused", "pos", []), anim.focused_animation().position_sequence())
+	_to_sequence(file.get_value("focused", "scale", []), anim.focused_animation().scale_sequence())
+	_to_sequence(file.get_value("focused", "rot", []), anim.focused_animation().rotation_sequence())
+	
+	_to_sequence(file.get_value("activated", "pos", []), anim.activated_animation().position_sequence())
+	_to_sequence(file.get_value("activated", "scale", []), anim.activated_animation().scale_sequence())
+	_to_sequence(file.get_value("activated", "rot", []), anim.activated_animation().rotation_sequence())
+	
+	_to_sequence(file.get_value("deactivated", "pos", []), anim.deactivated_animation().position_sequence())
+	_to_sequence(file.get_value("deactivated", "scale", []), anim.deactivated_animation().scale_sequence())
+	_to_sequence(file.get_value("deactivated", "rot", []), anim.deactivated_animation().rotation_sequence())
+	
+	_to_sequence(file.get_value("unfocused", "pos", []), anim.unfocused_animation().position_sequence())
+	_to_sequence(file.get_value("unfocused", "scale", []), anim.unfocused_animation().scale_sequence())
+	_to_sequence(file.get_value("unfocused", "rot", []), anim.unfocused_animation().rotation_sequence())
 	
 	return anim
 
 
-func _from_sequence(seq: Array) -> Array:
+func _from_sequence(seq: AnimationSequence) -> Array:
 	var data := []
-	for step in seq:
+	for step in seq.sequence():
 		var step_data := {}
 		step_data["editable_transi"] = step.editable_transi
 		step_data["editable_val"] = step.editable_val
-		
+
 		if step.transi != null:
 			step_data["transi"] = {}
 			step_data["transi"]["random_duration"] = step.transi.random_duration
@@ -155,7 +188,7 @@ func _from_sequence(seq: Array) -> Array:
 			step_data["transi"]["type"] = _from_transi_type(step.transi.type)
 			step_data["transi"]["easing"] = _from_transi_easing(step.transi.easing)
 			step_data["transi"]["flip_card"] = step.transi.flip_card
-			
+
 		if step.val != null:
 			step_data["val"] = {}
 			step_data["val"]["mode"] = _from_val_mode(step.val.mode)
@@ -163,19 +196,17 @@ func _from_sequence(seq: Array) -> Array:
 			step_data["val"]["num_val"] = step.val.num_val
 			step_data["val"]["vec_range"] = step.val.vec_range
 			step_data["val"]["num_range"] = step.val.num_range
-			
+
 		data.append(step_data)
-	
+
 	return data
 
 
-func _to_sequence(data: Array) -> Array:
-	var seq := []
-	
+func _to_sequence(data: Array, seq: AnimationSequence) -> void:
 	for step_data in data:
 		var transi: StepTransition = null
 		var val: StepValue = null
-		
+
 		if step_data.has("transi"):
 			transi = StepTransition.new(
 				step_data["transi"]["duration"],
@@ -185,21 +216,20 @@ func _to_sequence(data: Array) -> Array:
 			transi.duration_range_min = step_data["transi"]["duration_range_min"]
 			transi.duration_range_max = step_data["transi"]["duration_range_max"]
 			transi.flip_card = step_data["transi"]["flip_card"]
-		
+
 		if step_data.has("val"):
 			val = StepValue.new(_to_val_mode(step_data["val"]["mode"]))
 			val.vec_val = step_data["val"]["vec_val"]
 			val.num_val = step_data["val"]["num_val"]
 			val.vec_range = step_data["val"]["vec_range"]
 			val.num_range = step_data["val"]["num_range"]
-			
+
 		var step = AnimationStep.new(
 			transi, val,
 			step_data["editable_transi"],
 			step_data["editable_val"])
-		seq.append(step)
 		
-	return seq
+		seq.add_step(step)
 
 
 func _from_transi_type(type: int) -> String:

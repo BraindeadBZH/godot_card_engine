@@ -7,8 +7,18 @@
 [node name="PreviewCard" instance=ExtResource( 1 )]
 size = Vector2( 420, 600 )
 
-[node name="Preview" type="Sprite" parent="Front" index="0"]
+[node name="Background" type="Sprite" parent="AnimContainer/Front" index="0"]
 texture = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="Back" index="0"]
+[node name="Background" type="Sprite" parent="AnimContainer/Back" index="0"]
 texture = ExtResource( 3 )
+
+[node name="MouseArea" parent="AnimContainer" index="2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -210.0
+margin_top = -300.0
+margin_right = 210.0
+margin_bottom = 300.0

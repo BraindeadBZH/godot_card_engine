@@ -35,6 +35,7 @@ __meta__ = {
 }
 
 [node name="Layout" type="Control" parent="MainLayout/MainTabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -874,7 +875,6 @@ items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In Out", nul
 selected = 0
 
 [node name="Animations" type="Control" parent="MainLayout/MainTabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -891,7 +891,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InterTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+[node name="GeneralTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
 margin_right = 502.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
@@ -903,162 +903,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InterLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+[node name="GeneralLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
 margin_top = 24.0
 margin_right = 502.0
-margin_bottom = 140.0
+margin_bottom = 88.0
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InterLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/InterLayout"]
-margin_top = 37.0
-margin_right = 93.0
-margin_bottom = 51.0
+[node name="InterLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
+margin_top = 13.0
+margin_right = 69.0
+margin_bottom = 27.0
 text = "Interactive"
 
-[node name="Inter" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/InterLayout"]
-margin_left = 97.0
-margin_top = 24.0
+[node name="Inter" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
+margin_left = 73.0
 margin_right = 502.0
-margin_bottom = 64.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 
-[node name="IdleTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-margin_right = 502.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 0, 20 )
-size_flags_horizontal = 3
-text = "Idle animation"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IdleLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-margin_top = 24.0
-margin_right = 502.0
-margin_bottom = 140.0
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
-margin_top = 3.0
-margin_right = 93.0
-margin_bottom = 17.0
+[node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
+margin_top = 47.0
+margin_right = 69.0
+margin_bottom = 61.0
 text = "Animation"
 
-[node name="Anim" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
-margin_left = 97.0
-margin_right = 502.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="LoopLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
-margin_top = 37.0
-margin_right = 93.0
-margin_bottom = 51.0
-text = "Loop"
-
-[node name="Loop" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/IdleLayout"]
-margin_left = 97.0
-margin_top = 24.0
+[node name="Anim" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
+margin_left = 73.0
+margin_top = 44.0
 margin_right = 502.0
 margin_bottom = 64.0
-
-[node name="FocusedTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-margin_right = 502.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
-text = "Focused animation"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FocusedLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-margin_top = 24.0
-margin_right = 502.0
-margin_bottom = 140.0
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout"]
-margin_top = 3.0
-margin_right = 93.0
-margin_bottom = 17.0
-text = "Animation"
-
-[node name="Anim" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout"]
-margin_left = 97.0
-margin_right = 502.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="LoopLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout"]
-margin_top = 37.0
-margin_right = 93.0
-margin_bottom = 51.0
-text = "Loop"
-
-[node name="Loop" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout"]
-margin_left = 97.0
-margin_top = 24.0
-margin_right = 502.0
-margin_bottom = 64.0
-
-[node name="ClickedTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-margin_right = 502.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 0, 20 )
-size_flags_horizontal = 3
-text = "Clicked animation"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ClickedLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-margin_top = 24.0
-margin_right = 502.0
-margin_bottom = 140.0
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
-margin_top = 3.0
-margin_right = 93.0
-margin_bottom = 17.0
-text = "Animation"
-
-[node name="Anim" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
-margin_left = 97.0
-margin_right = 502.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="LoopLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
-margin_top = 37.0
-margin_right = 93.0
-margin_bottom = 51.0
-text = "Loop"
-
-[node name="Loop" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout"]
-margin_left = 97.0
-margin_top = 24.0
-margin_right = 502.0
-margin_bottom = 64.0
 
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
 margin_top = 542.0

@@ -38,17 +38,17 @@ font_data = ExtResource( 6 )
 script = ExtResource( 2 )
 size = Vector2( 420, 600 )
 
-[node name="Shadow" type="Sprite" parent="." index="0"]
+[node name="Shadow" type="Sprite" parent="AnimContainer" index="0"]
 position = Vector2( -1.34912, 0.400543 )
 texture = ExtResource( 7 )
 
-[node name="Background" type="Sprite" parent="Front" index="0"]
+[node name="Background" type="Sprite" parent="AnimContainer/Front" index="0"]
 texture = ExtResource( 4 )
 
-[node name="NameBackground" type="Sprite" parent="Front" index="1"]
+[node name="NameBackground" type="Sprite" parent="AnimContainer/Front" index="1"]
 texture = ExtResource( 5 )
 
-[node name="Name" type="Label" parent="Front/NameBackground" index="0"]
+[node name="Name" type="Label" parent="AnimContainer/Front/NameBackground" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -151.0
@@ -64,11 +64,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DescBackground" type="Sprite" parent="Front" index="2"]
+[node name="DescBackground" type="Sprite" parent="AnimContainer/Front" index="2"]
 position = Vector2( 0, 150 )
 texture = ExtResource( 8 )
 
-[node name="Desc" type="Label" parent="Front/DescBackground" index="0"]
+[node name="Desc" type="Label" parent="AnimContainer/Front/DescBackground" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -138.0
@@ -84,11 +84,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CostBackground" type="Sprite" parent="Front" index="3"]
+[node name="CostBackground" type="Sprite" parent="AnimContainer/Front" index="3"]
 position = Vector2( -184.699, -281.75 )
 texture = ExtResource( 9 )
 
-[node name="Cost" type="Label" parent="Front/CostBackground" index="0"]
+[node name="Cost" type="Label" parent="AnimContainer/Front/CostBackground" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -48.0
@@ -104,13 +104,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PictureGroup" type="Node2D" parent="Front" index="4"]
+[node name="PictureGroup" type="Node2D" parent="AnimContainer/Front" index="4"]
 
-[node name="Common" type="Sprite" parent="Front/PictureGroup" index="0"]
+[node name="Common" type="Sprite" parent="AnimContainer/Front/PictureGroup" index="0"]
 position = Vector2( 0, -150 )
 texture = ExtResource( 10 )
 
-[node name="Text" type="Label" parent="Front/PictureGroup/Common" index="0"]
+[node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/Common" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -152.0
@@ -126,12 +126,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Uncommon" type="Sprite" parent="Front/PictureGroup" index="1"]
+[node name="Uncommon" type="Sprite" parent="AnimContainer/Front/PictureGroup" index="1"]
 visible = false
 position = Vector2( 0, -150 )
 texture = ExtResource( 10 )
 
-[node name="Text" type="Label" parent="Front/PictureGroup/Uncommon" index="0"]
+[node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/Uncommon" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -152.0
@@ -147,12 +147,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rare" type="Sprite" parent="Front/PictureGroup" index="2"]
+[node name="Rare" type="Sprite" parent="AnimContainer/Front/PictureGroup" index="2"]
 visible = false
 position = Vector2( 0, -150 )
 texture = ExtResource( 10 )
 
-[node name="Text" type="Label" parent="Front/PictureGroup/Rare" index="0"]
+[node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/Rare" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -152.0
@@ -168,12 +168,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MythicRare" type="Sprite" parent="Front/PictureGroup" index="3"]
+[node name="MythicRare" type="Sprite" parent="AnimContainer/Front/PictureGroup" index="3"]
 visible = false
 position = Vector2( 0, -150 )
 texture = ExtResource( 10 )
 
-[node name="Text" type="Label" parent="Front/PictureGroup/MythicRare" index="0"]
+[node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/MythicRare" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -152.0
@@ -189,12 +189,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BasicLand" type="Sprite" parent="Front/PictureGroup" index="4"]
+[node name="BasicLand" type="Sprite" parent="AnimContainer/Front/PictureGroup" index="4"]
 visible = false
 position = Vector2( 0, -150 )
 texture = ExtResource( 10 )
 
-[node name="Text" type="Label" parent="Front/PictureGroup/BasicLand" index="0"]
+[node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/BasicLand" index="0"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -152.0
@@ -210,7 +210,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CardId" type="Label" parent="Front" index="5"]
+[node name="CardId" type="Label" parent="AnimContainer/Front" index="5"]
 margin_left = 76.0
 margin_top = 230.0
 margin_right = 141.0
@@ -223,10 +223,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="Sprite" parent="Back" index="0"]
+[node name="Background" type="Sprite" parent="AnimContainer/Back" index="0"]
 texture = ExtResource( 3 )
 
-[node name="MouseArea" parent="." index="3"]
+[node name="MouseArea" parent="AnimContainer" index="3"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

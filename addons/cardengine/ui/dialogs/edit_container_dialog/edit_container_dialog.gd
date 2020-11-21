@@ -53,13 +53,8 @@ onready var _trans_out_duration = $MainLayout/MainTabs/Transitions/TransLayout/O
 onready var _trans_out_type = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Type
 onready var _trans_out_easing = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Easing
 
-onready var _interactive = $MainLayout/MainTabs/Animations/AnimLayout/InterLayout/Inter
-onready var _idle_anim = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/Anim
-onready var _idle_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/IdleLayout/Loop
-onready var _focused_anim = $MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout/Anim
-onready var _focused_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/FocusedLayout/Loop
-onready var _clicked_anim = $MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout/Anim
-onready var _clicked_anim_repeat = $MainLayout/MainTabs/Animations/AnimLayout/ClickedLayout/Loop
+onready var _interactive = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Inter
+onready var _anim = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Anim
 
 
 func _ready():
@@ -126,14 +121,7 @@ func _update() -> void:
 	
 	_interactive.pressed = _data.interactive
 	
-	_load_animation(_idle_anim, _data.idle_anim)
-	_idle_anim_repeat.pressed = _data.idle_anim_repeat
-	
-	_load_animation(_focused_anim, _data.focused_anim)
-	_focused_anim_repeat.pressed = _data.focused_anim_repeat
-	
-	_load_animation(_clicked_anim, _data.clicked_anim)
-	_clicked_anim_repeat.pressed = _data.clicked_anim_repeat
+	_load_animation(_anim, _data.anim)
 
 
 func _load_animation(select: OptionButton, selected_id: String) -> void:
@@ -210,12 +198,7 @@ func _save() -> void:
 	_data.out_easing = _select_to_trans_easing(_trans_out_easing.selected)
 	
 	_data.interactive = _interactive.pressed
-	_data.idle_anim = _idle_anim.get_selected_metadata()
-	_data.idle_anim_repeat = _idle_anim_repeat.pressed
-	_data.focused_anim = _focused_anim.get_selected_metadata()
-	_data.focused_anim_repeat = _focused_anim_repeat.pressed
-	_data.clicked_anim = _clicked_anim.get_selected_metadata()
-	_data.clicked_anim_repeat = _clicked_anim_repeat.pressed
+	_data.anim = _anim.get_selected_metadata()
 	
 	_manager.update_container(_data)
 

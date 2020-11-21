@@ -1,15 +1,15 @@
 extends AbstractCard
 
-onready var _name = $Front/NameBackground/Name
-onready var _desc = $Front/DescBackground/Desc
-onready var _cost = $Front/CostBackground/Cost
-onready var _picture_group = $Front/PictureGroup
-onready var _common = $Front/PictureGroup/Common
-onready var _uncommon = $Front/PictureGroup/Uncommon
-onready var _rare = $Front/PictureGroup/Rare
-onready var _mythic_rare = $Front/PictureGroup/MythicRare
-onready var _basic_land = $Front/PictureGroup/BasicLand
-onready var _card_id = $Front/CardId
+onready var _name = $AnimContainer/Front/NameBackground/Name
+onready var _desc = $AnimContainer/Front/DescBackground/Desc
+onready var _cost = $AnimContainer/Front/CostBackground/Cost
+onready var _picture_group = $AnimContainer/Front/PictureGroup
+onready var _common = $AnimContainer/Front/PictureGroup/Common
+onready var _uncommon = $AnimContainer/Front/PictureGroup/Uncommon
+onready var _rare = $AnimContainer/Front/PictureGroup/Rare
+onready var _mythic_rare = $AnimContainer/Front/PictureGroup/MythicRare
+onready var _basic_land = $AnimContainer/Front/PictureGroup/BasicLand
+onready var _card_id = $AnimContainer/Front/CardId
 
 
 func _update_picture() -> void:

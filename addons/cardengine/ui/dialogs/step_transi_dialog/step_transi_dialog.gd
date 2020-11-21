@@ -1,7 +1,7 @@
 tool
 extends AbstractFormDialog
 
-var _seq: String = ""
+var _seq: AnimationSequence = null
 var _index: int = -1
 
 onready var _random = $MainLayout/Form/Random

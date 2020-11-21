@@ -354,7 +354,7 @@ margin_left = 142.0
 margin_right = 230.0
 margin_bottom = 20.0
 text = "Choose..."
-items = [ "Choose...", null, true, 0, null, "Flip Animation (flip)", null, false, 1, "flip", "Floating Animation (floating)", null, false, 2, "floating", "Popout Animation (popout)", null, false, 3, "popout" ]
+items = [ "Choose...", null, true, 0, null, "Home Display Animation (home)", null, false, 1, "home" ]
 selected = 0
 
 [node name="EditBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
@@ -366,98 +366,217 @@ disabled = true
 text = "Edit animation"
 
 [node name="PreviewBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_top = 126.0
-margin_right = 119.0
-margin_bottom = 326.0
+margin_left = 342.0
+margin_right = 472.0
+margin_bottom = 20.0
 hint_tooltip = "See what the animation looks like"
 disabled = true
 text = "Preview animation"
 
 [node name="SaveBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 342.0
-margin_right = 451.0
+margin_left = 476.0
+margin_right = 585.0
 margin_bottom = 20.0
 hint_tooltip = "Write the animation to disk"
 disabled = true
 text = "Save animation"
 
 [node name="ResetBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 455.0
-margin_right = 571.0
+margin_left = 589.0
+margin_right = 705.0
 margin_bottom = 20.0
 hint_tooltip = "Reload the animation from disk"
 disabled = true
 text = "Reset animation"
 
 [node name="DeleteBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 575.0
-margin_right = 698.0
+margin_left = 709.0
+margin_right = 832.0
 margin_bottom = 20.0
 hint_tooltip = "Remove the animation from disk"
 disabled = true
 text = "Delete animation"
 
-[node name="AnimEditLayout" type="GridContainer" parent="Tabs/Animations/AnimationsLayout"]
+[node name="AnimChainLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout"]
 margin_top = 24.0
+margin_right = 1272.0
+margin_bottom = 44.0
+
+[node name="AnimChainLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_top = 3.0
+margin_right = 104.0
+margin_bottom = 17.0
+text = "Animation chain"
+
+[node name="IdleBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 108.0
+margin_right = 180.0
+margin_bottom = 20.0
+disabled = true
+toggle_mode = true
+text = "Idle Loop"
+
+[node name="ChainSep1" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 184.0
+margin_top = 3.0
+margin_right = 192.0
+margin_bottom = 17.0
+text = ">"
+
+[node name="FocusedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 196.0
+margin_right = 331.0
+margin_bottom = 20.0
+disabled = true
+toggle_mode = true
+text = "Focused Animation"
+
+[node name="ChainSep2" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 335.0
+margin_top = 3.0
+margin_right = 343.0
+margin_bottom = 17.0
+text = ">"
+
+[node name="ActivatedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 347.0
+margin_right = 489.0
+margin_bottom = 20.0
+disabled = true
+toggle_mode = true
+text = "Activated Animation"
+
+[node name="ChainSep3" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 493.0
+margin_top = 3.0
+margin_right = 501.0
+margin_bottom = 17.0
+text = ">"
+
+[node name="DeactivatedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 505.0
+margin_right = 663.0
+margin_bottom = 20.0
+disabled = true
+toggle_mode = true
+text = "Deactivated Animation"
+
+[node name="ChainSep4" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 667.0
+margin_top = 3.0
+margin_right = 675.0
+margin_bottom = 17.0
+text = ">"
+
+[node name="UnfocusedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
+margin_left = 679.0
+margin_right = 829.0
+margin_bottom = 20.0
+disabled = true
+toggle_mode = true
+text = "Unfocused Animation"
+
+[node name="AnimEditLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout"]
+margin_top = 48.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-columns = 2
 
-[node name="PosSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
-margin_top = 8.0
-margin_right = 119.0
-margin_bottom = 22.0
+[node name="SeqLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
+margin_right = 1272.0
+margin_bottom = 636.0
+size_flags_horizontal = 3
+
+[node name="PosSeqContainer" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
+margin_right = 421.0
+margin_bottom = 636.0
+size_flags_horizontal = 3
+
+[node name="PosSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
+margin_right = 421.0
+margin_bottom = 14.0
 text = "Position Sequence"
 
-[node name="PosSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
-margin_left = 123.0
-margin_right = 1272.0
-margin_bottom = 30.0
+[node name="PosSeqToolsLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
+margin_top = 18.0
+margin_right = 421.0
+margin_bottom = 18.0
+
+[node name="PosSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
+margin_top = 22.0
+margin_right = 421.0
+margin_bottom = 636.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
-scroll_vertical_enabled = false
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
 
-[node name="PosSeqLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/PosSeqScroll"]
-margin_bottom = 30.0
+[node name="PosSeqLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqScroll"]
+margin_right = 421.0
+margin_bottom = 614.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScaleSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
-margin_top = 42.0
-margin_right = 119.0
-margin_bottom = 56.0
+[node name="ScaleSeqContainer" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
+margin_left = 425.0
+margin_right = 846.0
+margin_bottom = 636.0
+size_flags_horizontal = 3
+
+[node name="ScaleSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
+margin_right = 421.0
+margin_bottom = 14.0
 text = "Scale Sequence"
 
-[node name="ScaleSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
-margin_left = 123.0
-margin_top = 34.0
-margin_right = 1272.0
-margin_bottom = 64.0
+[node name="ScaleSeqToolsLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
+margin_top = 18.0
+margin_right = 421.0
+margin_bottom = 18.0
+
+[node name="ScaleSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
+margin_top = 22.0
+margin_right = 421.0
+margin_bottom = 636.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
-scroll_vertical_enabled = false
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
 
-[node name="ScaleSeqLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/ScaleSeqScroll"]
-margin_bottom = 30.0
+[node name="ScaleSeqLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqScroll"]
+margin_right = 421.0
+margin_bottom = 614.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RotSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
-margin_top = 76.0
-margin_right = 119.0
-margin_bottom = 90.0
+[node name="RotSeqContainer" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
+margin_left = 850.0
+margin_right = 1272.0
+margin_bottom = 636.0
+size_flags_horizontal = 3
+
+[node name="RotSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
+margin_right = 422.0
+margin_bottom = 14.0
 text = "Rotation Sequence"
 
-[node name="RotSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
-margin_left = 123.0
-margin_top = 68.0
-margin_right = 1272.0
-margin_bottom = 98.0
+[node name="RotSeqToolsLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
+margin_top = 18.0
+margin_right = 422.0
+margin_bottom = 18.0
+
+[node name="RotSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
+margin_top = 22.0
+margin_right = 422.0
+margin_bottom = 636.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
-scroll_vertical_enabled = false
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
 
-[node name="RotSeqLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/RotSeqScroll"]
-margin_bottom = 30.0
+[node name="RotSeqLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqScroll"]
+margin_right = 422.0
+margin_bottom = 614.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Dialogs" type="Control" parent="."]
@@ -525,6 +644,11 @@ margin_bottom = -4.0
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/SaveBtn" to="Tabs/Animations" method="_on_SaveBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/ResetBtn" to="Tabs/Animations" method="_on_ResetBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/DeleteBtn" to="Tabs/Animations" method="_on_DeleteBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/IdleBtn" to="Tabs/Animations" method="_on_IdleBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/FocusedBtn" to="Tabs/Animations" method="_on_FocusedBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/ActivatedBtn" to="Tabs/Animations" method="_on_ActivatedBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/DeactivatedBtn" to="Tabs/Animations" method="_on_DeactivatedBtn_pressed"]
+[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/UnfocusedBtn" to="Tabs/Animations" method="_on_UnfocusedBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="Tabs/Databases" method="_on_NewDatabaseDialog_form_validated"]
 [connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_delete_card"]
 [connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_edit_card"]

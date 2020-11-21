@@ -13,7 +13,7 @@ export(NodePath) var out_anchor: NodePath = ""
 
 var _store: AbstractStore = null
 
-var _layout_mode = LayoutMode.GRID
+var _layout_mode: int = LayoutMode.GRID
 var _face_up: float = true
 
 # Grid parameters
@@ -54,12 +54,7 @@ var _transitions: CardTransitions = CardTransitions.new()
 
 # Animations
 var _interactive: bool = true
-var _idle_anim: String = "none"
-var _idle_anim_repeat: bool = false
-var _focused_anim: String = "none"
-var _focused_anim_repeat: bool = false
-var _clicked_anim: String = "none"
-var _clicked_anim_repeat: bool = false
+var _anim: String = "none"
 
 onready var _cards = $Cards
 onready var _path = $CardPath
@@ -133,9 +128,9 @@ func _update_container() -> void:
 		visual_inst.set_instance(card)
 		visual_inst.set_transitions(_transitions)
 		visual_inst.set_interactive(_interactive)
+		visual_inst.set_animation(CardEngine.anim().get_animation(_anim))
 		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
 		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
-		visual_inst.connect("state_changed", self, "_on_card_state_changed", [visual_inst])
 		
 		if _face_up:
 			visual_inst.set_side(AbstractCard.CardSide.FRONT)
@@ -331,27 +326,6 @@ func _clear() -> void:
 			child.flag_for_removal()
 
 
-func _setup_idle_anim(card: AbstractCard) -> void:
-	if _idle_anim != "none":
-		card.change_anim(CardEngine.anim().get_animation(_idle_anim), _idle_anim_repeat)
-	else:
-		card.change_anim(null)
-
-
-func _setup_focused_anim(card: AbstractCard) -> void:
-	if _focused_anim != "none":
-		card.change_anim(CardEngine.anim().get_animation(_focused_anim), _focused_anim_repeat)
-	else:
-		card.change_anim(null)
-
-
-func _setup_clicked_anim(card: AbstractCard) -> void:
-	if _clicked_anim != "none":
-		card.change_anim(CardEngine.anim().get_animation(_clicked_anim), _clicked_anim_repeat)
-	else:
-		card.change_anim(null)
-
-
 func _on_AbstractContainer_resized() -> void:
 	_update_container()
 
@@ -363,16 +337,4 @@ func _on_need_removal(card: AbstractCard) -> void:
 
 func _on_card_clicked(card: AbstractCard) -> void:
 	if _interactive:
-		_setup_clicked_anim(card)
 		_card_clicked(card)
-
-
-func _on_card_state_changed(new_state: int, card: AbstractCard) -> void:
-	match new_state:
-		AbstractCard.CardState.IDLE:
-			_setup_idle_anim(card)
-		AbstractCard.CardState.FOCUSED:
-			_setup_focused_anim(card)
-		_:
-			pass
-

@@ -6,7 +6,6 @@ var _selected_rarity: String = "none"
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
-onready var _manager = CardEngine.db()
 onready var _container = $LibraryBg/LibraryScroll/LibraryContainer
 onready var _class = $TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class
 onready var _rarity = $TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity

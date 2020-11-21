@@ -54,9 +54,4 @@ func _ready():
 	_transitions.out_anchor.easing = Tween.EASE_IN
 
 	_interactive = false
-	_idle_anim = "floating"
-	_idle_anim_repeat = true
-	_focused_anim = "none"
-	_focused_anim_repeat = false
-	_clicked_anim = "none"
-	_clicked_anim_repeat = false
+	_anim = "home"

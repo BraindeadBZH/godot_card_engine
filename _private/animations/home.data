@@ -1,12 +1,11 @@
 [meta]
 
-id="popout"
-name="Popout Animation"
+id="home"
+name="Home Display Animation"
 
-[seq]
+[idle]
 
-pos=[  ]
-scale=[ {
+pos=[ {
 "editable_transi": false,
 "editable_val": false,
 "val": {
@@ -23,29 +22,29 @@ scale=[ {
 "duration": 0.3,
 "duration_range_max": 0.3,
 "duration_range_min": 0.1,
-"easing": "out",
+"easing": "in",
 "flip_card": false,
 "random_duration": false,
-"type": "expo"
+"type": "quad"
 },
 "val": {
 "mode": "fixed",
 "num_range": 0.0,
 "num_val": 0.0,
 "vec_range": Vector2( 0, 0 ),
-"vec_val": Vector2( 1.15, 1.15 )
+"vec_val": Vector2( 0, 30 )
 }
 }, {
 "editable_transi": true,
 "editable_val": false,
 "transi": {
-"duration": 0.5,
+"duration": 0.3,
 "duration_range_max": 0.3,
 "duration_range_min": 0.1,
 "easing": "out",
 "flip_card": false,
 "random_duration": false,
-"type": "elastic"
+"type": "quad"
 },
 "val": {
 "mode": "initial",
@@ -55,4 +54,29 @@ scale=[ {
 "vec_val": Vector2( 0, 0 )
 }
 } ]
+scale=[  ]
+rot=[  ]
+
+[focused]
+
+pos=[  ]
+scale=[  ]
+rot=[  ]
+
+[activated]
+
+pos=[  ]
+scale=[  ]
+rot=[  ]
+
+[deactivated]
+
+pos=[  ]
+scale=[  ]
+rot=[  ]
+
+[unfocused]
+
+pos=[  ]
+scale=[  ]
 rot=[  ]

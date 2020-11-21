@@ -5,8 +5,8 @@ extends Reference
 class BasicTransition extends Reference:
 	var enabled: bool = false
 	var duration: float = 0.3
-	var type = Tween.TRANS_LINEAR
-	var easing = Tween.EASE_IN
+	var type: int = Tween.TRANS_LINEAR
+	var easing: int = Tween.EASE_IN
 
 
 class AnchorTransition extends BasicTransition:
