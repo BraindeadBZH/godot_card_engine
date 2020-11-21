@@ -119,6 +119,9 @@ func set_animation(anim: AnimationData) -> void:
 	if anim == null:
 		_anim_player.remove_all()
 	
+	_cont.position = Vector2(0.0, 0.0)
+	_cont.scale = Vector2(1.0, 1.0)
+	_cont.rotation = 0.0
 	_state = CardState.NONE
 	_anim = anim
 	_current_anim = ""
