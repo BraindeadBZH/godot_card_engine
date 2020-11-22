@@ -8,9 +8,9 @@ func _ready():
 	_face_up = true
 
 	# Grid parameters
-	_grid_card_width = 200
+	_grid_card_width = 150
 	_grid_fixed_width = true
-	_grid_card_spacing = Vector2(0.3, 1)
+	_grid_card_spacing = Vector2(0.5, 1)
 	_grid_halign = HALIGN_CENTER
 	_grid_valign = VALIGN_CENTER
 	_grid_columns = -1
