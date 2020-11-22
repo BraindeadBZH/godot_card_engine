@@ -441,12 +441,16 @@ func _on_MouseArea_mouse_entered() -> void:
 	if not _interactive:
 		return
 	
+	z_index = 1
+	
 	_anim_queue.push_back("focused")
 
 
 func _on_MouseArea_mouse_exited() -> void:
 	if not _interactive:
 		return
+	
+	z_index = 0
 	
 	_anim_queue.push_back("unfocused")
 	_anim_queue.push_back("idle")
