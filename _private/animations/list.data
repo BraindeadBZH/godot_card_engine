@@ -31,6 +31,7 @@ scale=[ {
 "duration_range_min": 0.1,
 "easing": "out",
 "flip_card": false,
+"interactive": true,
 "random_duration": false,
 "type": "quad"
 },
@@ -65,6 +66,7 @@ pos=[ {
 "duration_range_min": 0.1,
 "easing": "out",
 "flip_card": false,
+"interactive": true,
 "random_duration": false,
 "type": "quad"
 },
@@ -100,6 +102,7 @@ pos=[ {
 "duration_range_min": 0.1,
 "easing": "out",
 "flip_card": false,
+"interactive": true,
 "random_duration": false,
 "type": "quad"
 },
@@ -130,6 +133,7 @@ scale=[ {
 "duration_range_min": 0.1,
 "easing": "out",
 "flip_card": true,
+"interactive": false,
 "random_duration": false,
 "type": "quad"
 },
@@ -149,6 +153,7 @@ scale=[ {
 "duration_range_min": 0.1,
 "easing": "in",
 "flip_card": false,
+"interactive": false,
 "random_duration": false,
 "type": "quad"
 },
@@ -184,6 +189,7 @@ scale=[ {
 "duration_range_min": 0.1,
 "easing": "out",
 "flip_card": false,
+"interactive": true,
 "random_duration": false,
 "type": "bounce"
 },

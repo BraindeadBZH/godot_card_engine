@@ -4,31 +4,33 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/step_transi_dialog/step_transi_dialog.gd" type="Script" id=2]
 
 [node name="StepTransiDialog" instance=ExtResource( 1 )]
+margin_top = 1.0
+margin_bottom = -458.0
 window_title = "Value"
 script = ExtResource( 2 )
 
 [node name="Form" parent="MainLayout" index="1"]
-margin_bottom = 160.0
+margin_bottom = 207.0
 
 [node name="RandomLbl" type="Label" parent="MainLayout/Form" index="0"]
 margin_top = 13.0
-margin_right = 128.0
+margin_right = 134.0
 margin_bottom = 27.0
 text = "Random duration"
 
 [node name="Random" type="CheckButton" parent="MainLayout/Form" index="1"]
-margin_left = 132.0
+margin_left = 138.0
 margin_right = 402.0
 margin_bottom = 40.0
 
 [node name="DurationLbl" type="Label" parent="MainLayout/Form" index="2"]
 margin_top = 49.0
-margin_right = 128.0
+margin_right = 134.0
 margin_bottom = 63.0
 text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/Form" index="3"]
-margin_left = 132.0
+margin_left = 138.0
 margin_top = 44.0
 margin_right = 402.0
 margin_bottom = 68.0
@@ -77,12 +79,12 @@ suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/Form" index="6"]
 margin_top = 75.0
-margin_right = 128.0
+margin_right = 134.0
 margin_bottom = 89.0
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/Form" index="7"]
-margin_left = 132.0
+margin_left = 138.0
 margin_top = 72.0
 margin_right = 402.0
 margin_bottom = 92.0
@@ -93,12 +95,12 @@ selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/Form" index="8"]
 margin_top = 99.0
-margin_right = 128.0
+margin_right = 134.0
 margin_bottom = 113.0
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/Form" index="9"]
-margin_left = 132.0
+margin_left = 138.0
 margin_top = 96.0
 margin_right = 402.0
 margin_bottom = 116.0
@@ -109,17 +111,30 @@ selected = 0
 
 [node name="FlipCardLbl" type="Label" parent="MainLayout/Form" index="10"]
 margin_top = 133.0
-margin_right = 128.0
+margin_right = 134.0
 margin_bottom = 147.0
 text = "Flip card when done"
 
 [node name="FlipCard" type="CheckButton" parent="MainLayout/Form" index="11"]
-margin_left = 132.0
+margin_left = 138.0
 margin_top = 120.0
 margin_right = 402.0
 margin_bottom = 160.0
 
-[node name="ButtonLayout" parent="MainLayout" index="2"]
+[node name="InteractiveLbl" type="Label" parent="MainLayout/Form" index="12"]
+margin_top = 177.0
+margin_right = 134.0
+margin_bottom = 191.0
+text = "Interactive transition"
+
+[node name="Interactive" type="CheckButton" parent="MainLayout/Form" index="13"]
+margin_left = 138.0
 margin_top = 164.0
-margin_bottom = 194.0
+margin_right = 402.0
+margin_bottom = 204.0
+hint_tooltip = "Enable/Disable interaction during transition"
+
+[node name="ButtonLayout" parent="MainLayout" index="2"]
+margin_top = 211.0
+margin_bottom = 241.0
 [connection signal="pressed" from="MainLayout/Form/Random" to="." method="_on_Random_pressed"]

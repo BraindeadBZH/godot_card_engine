@@ -188,6 +188,7 @@ func _from_sequence(seq: AnimationSequence) -> Array:
 			step_data["transi"]["type"] = _from_transi_type(step.transi.type)
 			step_data["transi"]["easing"] = _from_transi_easing(step.transi.easing)
 			step_data["transi"]["flip_card"] = step.transi.flip_card
+			step_data["transi"]["interactive"] = step.transi.interactive
 
 		if step.val != null:
 			step_data["val"] = {}
@@ -216,6 +217,7 @@ func _to_sequence(data: Array, seq: AnimationSequence) -> void:
 			transi.duration_range_min = step_data["transi"]["duration_range_min"]
 			transi.duration_range_max = step_data["transi"]["duration_range_max"]
 			transi.flip_card = step_data["transi"]["flip_card"]
+			transi.interactive = step_data["transi"]["interactive"]
 
 		if step_data.has("val"):
 			val = StepValue.new(_to_val_mode(step_data["val"]["mode"]))

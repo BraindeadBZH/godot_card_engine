@@ -498,6 +498,7 @@ func _on_TransiBtn_pressed(seq: AnimationSequence, idx: int) -> void:
 	data["type"] = seq.step(idx).transi.type
 	data["easing"] = seq.step(idx).transi.easing
 	data["flip_card"] = seq.step(idx).transi.flip_card
+	data["interactive"] = seq.step(idx).transi.interactive
 	
 	_main_ui.show_step_transi_dialog(data)
 
@@ -516,6 +517,7 @@ func _on_StepTransiDialog_form_validated(form) -> void:
 	seq.step(idx).transi.type = form["type"]
 	seq.step(idx).transi.easing = form["easing"]
 	seq.step(idx).transi.flip_card = form["flip_card"]
+	seq.step(idx).transi.interactive = form["interactive"]
 	
 	_load_animation()
 

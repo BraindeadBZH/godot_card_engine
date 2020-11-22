@@ -24,6 +24,7 @@ pos=[ {
 "duration_range_min": 0.5,
 "easing": "out",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },
@@ -43,6 +44,7 @@ pos=[ {
 "duration_range_min": 0.5,
 "easing": "in_out",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },
@@ -62,6 +64,7 @@ pos=[ {
 "duration_range_min": 0.5,
 "easing": "in_out",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },
@@ -81,6 +84,7 @@ pos=[ {
 "duration_range_min": 0.5,
 "easing": "in_out",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },
@@ -100,6 +104,7 @@ pos=[ {
 "duration_range_min": 0.5,
 "easing": "in",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },
@@ -131,6 +136,7 @@ rot=[ {
 "duration_range_min": 1.0,
 "easing": "out",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },
@@ -150,6 +156,7 @@ rot=[ {
 "duration_range_min": 1.0,
 "easing": "in_out",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },
@@ -169,6 +176,7 @@ rot=[ {
 "duration_range_min": 1.0,
 "easing": "in",
 "flip_card": false,
+"interactive": true,
 "random_duration": true,
 "type": "quad"
 },

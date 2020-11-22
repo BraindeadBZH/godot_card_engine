@@ -14,6 +14,7 @@ onready var _duration_range_layout = $MainLayout/Form/DurationRangeLayout
 onready var _type = $MainLayout/Form/Type
 onready var _easing = $MainLayout/Form/Easing
 onready var _flip_card = $MainLayout/Form/FlipCard
+onready var _inter = $MainLayout/Form/Interactive
 
 
 func _ready():
@@ -27,6 +28,8 @@ func _reset_form() -> void:
 	_duration_range_max.value = 0
 	_type.select(0)
 	_easing.select(0)
+	_flip_card.pressed = false
+	_inter.pressed = false
 	_update_layout()
 
 
@@ -40,7 +43,8 @@ func _extract_form() -> Dictionary:
 		"duration_range_max": _duration_range_max.value / 1000.0,
 		"type": _type.selected,
 		"easing": _easing.selected,
-		"flip_card": _flip_card.pressed
+		"flip_card": _flip_card.pressed,
+		"interactive": _inter.pressed
 	}
 
 
@@ -54,6 +58,7 @@ func _fill_form(data: Dictionary) -> void:
 	_type.select(data["type"])
 	_easing.select(data["easing"])
 	_flip_card.pressed = data["flip_card"]
+	_inter.pressed = data["interactive"]
 	_update_layout()
 
 
