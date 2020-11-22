@@ -44,10 +44,17 @@ func delete_animation() -> void:
 func _select_anim(index: int) -> void:
 	_anim_list.select(index)
 	
+	_idle_btn.pressed = false
+	_focused_btn.pressed = false
+	_activated_btn.pressed = false
+	_deactivated_btn.pressed = false
+	_unfocused_btn.pressed = false
+	
 	if index > 0:
 		_selected_anim = index
 		_opened_anim = _manager.get_animation(
 			_anim_list.get_item_metadata(_selected_anim))
+		_anim_block = null
 		_edit_btn.disabled = false
 		_save_btn.disabled = false
 		_reset_btn.disabled = false
@@ -62,6 +69,7 @@ func _select_anim(index: int) -> void:
 	else:
 		_selected_anim = -1
 		_opened_anim = null
+		_anim_block = null
 		_edit_btn.disabled = true
 		_save_btn.disabled = true
 		_reset_btn.disabled = true
