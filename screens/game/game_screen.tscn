@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://screens/game/game_screen.gd" type="Script" id=1]
+[ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://containers/hand/hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=4]
+
+[node name="GameScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.45098, 0.509804, 0.701961, 1 )
+
+[node name="DeckZone" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -520.0
+margin_top = -110.0
+margin_right = -440.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+color = Color( 0.917647, 0.890196, 0.521569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiscardZone" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 440.0
+margin_top = -110.0
+margin_right = 511.0
+margin_bottom = -30.0
+rect_min_size = Vector2( 80, 80 )
+color = Color( 0.917647, 0.890196, 0.521569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayZone" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -240.5
+margin_right = 150.0
+margin_bottom = 59.5
+rect_min_size = Vector2( 300, 300 )
+color = Color( 0.866667, 0.564706, 0.564706, 1 )
+
+[node name="HandZone" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -400.0
+margin_top = -160.0
+margin_right = 400.0
+rect_min_size = Vector2( 800, 160 )
+color = Color( 0.239216, 0.286275, 0.439216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandContainer" parent="HandZone" instance=ExtResource( 3 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -370.0
+margin_top = -140.0
+margin_right = 370.0
+margin_bottom = 140.0
+card_visual = ExtResource( 4 )
+in_anchor = NodePath("../HandInAnchor")
+out_anchor = NodePath("../HandOutAnchor")
+
+[node name="HandInAnchor" type="Control" parent="HandZone"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -10.0
+margin_right = -460.0
+margin_bottom = 30.0
+rect_rotation = 45.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandOutAnchor" type="Control" parent="HandZone"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 460.0
+margin_top = -10.0
+margin_right = 500.0
+margin_bottom = 30.0
+rect_rotation = 90.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuBtn" parent="." instance=ExtResource( 2 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -175.0
+margin_right = 0.0
+button_text = "MENU"
+[connection signal="pressed" from="MenuBtn" to="." method="_on_MenuBtn_pressed"]

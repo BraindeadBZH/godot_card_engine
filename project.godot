@@ -169,6 +169,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/core/general_manager.gd"
 }, {
+"base": "HandContainerPrivate",
+"class": "HandContainer",
+"language": "GDScript",
+"path": "res://containers/hand/hand.gd"
+}, {
+"base": "AbstractContainer",
+"class": "HandContainerPrivate",
+"language": "GDScript",
+"path": "res://_private/containers/hand/hand_private.gd"
+}, {
 "base": "HomeDisplayPrivate",
 "class": "HomeDisplay",
 "language": "GDScript",
@@ -252,6 +262,8 @@ _global_script_class_icons={
 "DatabaseManager": "",
 "DatabasesUi": "",
 "GeneralManager": "",
+"HandContainer": "",
+"HandContainerPrivate": "",
 "HomeDisplay": "",
 "HomeDisplayPrivate": "",
 "PositionSequence": "",

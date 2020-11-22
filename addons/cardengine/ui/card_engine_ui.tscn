@@ -314,7 +314,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
-items = [ "card_list: CardList", null, false, "home_display: HomeDisplay", null, false ]
+items = [ "card_list: CardList", null, false, "hand: HandContainer", null, false, "home_display: HomeDisplay", null, false ]
 
 [node name="Animations" type="Control" parent="Tabs"]
 visible = false

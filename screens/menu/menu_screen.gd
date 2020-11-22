@@ -18,7 +18,7 @@ func _ready():
 
 
 func _on_NewGameBtn_pressed() -> void:
-	emit_signal("next_screen", "new_game")
+	emit_signal("next_screen", "game")
 
 
 func _on_LibraryBtn_pressed() -> void:

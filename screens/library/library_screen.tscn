@@ -96,9 +96,8 @@ margin_right = 243.0
 margin_bottom = 48.0
 
 [node name="RarityLbl" type="Label" parent="TitleBg/TitleLayout/CategoriesLayout/RarityLayout"]
-margin_top = -1.0
 margin_right = 89.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 text = "Filter by rarity"
 valign = 1

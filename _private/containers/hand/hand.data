@@ -1,0 +1,67 @@
+[meta]
+
+id="hand"
+name="HandContainer"
+mode="grid"
+face_up=true
+
+[grid]
+
+card_width=200.0
+fixed_width=true
+card_spacing=Vector2( 0.3, 1 )
+halign="center"
+valign="middle"
+columns=-1
+expand=false
+
+[path]
+
+card_width=200.0
+fixed_width=true
+spacing=0.5
+
+[position]
+
+enabled=true
+mode="symmetric"
+min=Vector2( 0, -20 )
+max=Vector2( 0, 20 )
+
+[angle]
+
+enabled=true
+mode="linear"
+min=-10.0
+max=10.0
+
+[scale]
+
+enabled=false
+mode="linear"
+ratio="keep"
+min=Vector2( 0, 0 )
+max=Vector2( 0, 0 )
+
+[order]
+
+duration=0.3
+type="quad"
+easing="in_out"
+
+[in]
+
+duration=0.3
+type="quad"
+easing="in_out"
+
+[out]
+
+duration=0.3
+type="quad"
+easing="in_out"
+
+[anim]
+
+interactive=true
+id="hand"
