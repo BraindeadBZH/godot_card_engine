@@ -298,8 +298,7 @@ timers/tooltip_delay_sec=0.1
 
 [rendering]
 
-quality/2d/use_pixel_snap=true
-quality/filters/anisotropic_filter_level=8
+quality/filters/anisotropic_filter_level=16
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-quality/filters/msaa=4
+quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"
