@@ -69,6 +69,7 @@ class StoreSorter:
 		return false
 
 
+signal changed()
 signal card_added()
 signal card_removed(index)
 signal cards_removed()
@@ -100,6 +101,7 @@ func clear() -> void:
 	_texts.clear()
 	_filter = null
 	emit_signal("cleared")
+	emit_signal("changed")
 
 
 func populate(db: CardDatabase, ids: Array) -> void:
@@ -117,6 +119,7 @@ func apply_filter(filter: Query) -> void:
 	_filter = filter
 	_update_filtered()
 	emit_signal("filtered")
+	emit_signal("changed")
 
 
 func sort(sort_info: Dictionary) -> void:
@@ -126,6 +129,7 @@ func sort(sort_info: Dictionary) -> void:
 	else:
 		_filtered.sort_custom(sorter, "sort")
 	emit_signal("sorted")
+	emit_signal("changed")
 
 
 func count() -> int:
@@ -201,9 +205,10 @@ func texts() -> Array:
 
 func add_card(card: CardInstance) -> void:
 	_cards.append(card)
-	emit_signal("card_added")
 	_update_stats()
 	_update_filtered()
+	emit_signal("card_added")
+	emit_signal("changed")
 
 
 func remove_card(ref: int) -> void:
@@ -211,23 +216,26 @@ func remove_card(ref: int) -> void:
 	
 	if index >= 0:
 		_cards.remove(index)
-		emit_signal("card_removed", index)
 		_update_stats()
 		_update_filtered()
+		emit_signal("card_removed", index)
+		emit_signal("changed")
 
 
 func remove_first() -> void:
 	_cards.pop_front()
-	emit_signal("card_removed", 0)
 	_update_stats()
 	_update_filtered()
+	emit_signal("card_removed", 0)
+	emit_signal("changed")
 
 
 func remove_last() -> void:
 	_cards.pop_back()
-	emit_signal("card_removed", count()-1)
 	_update_stats()
 	_update_filtered()
+	emit_signal("card_removed", count()-1)
+	emit_signal("changed")
 
 
 func move_card(ref: int, to: AbstractStore = null) -> CardInstance:
@@ -237,9 +245,10 @@ func move_card(ref: int, to: AbstractStore = null) -> CardInstance:
 		var card = _cards[index]
 		to.add_card(card)
 		_cards.remove(index)
-		emit_signal("card_removed", index)
 		_update_stats()
 		_update_filtered()
+		emit_signal("card_removed", index)
+		emit_signal("changed")
 		return card
 	
 	return null
@@ -272,9 +281,10 @@ func keep(count: int) -> void:
 	if count > _cards.size():
 		return
 	_cards.resize(count)
-	emit_signal("cards_removed")
 	_update_stats()
 	_update_filtered()
+	emit_signal("cards_removed")
+	emit_signal("changed")
 
 
 func _ref2idx(ref: int) -> int:
