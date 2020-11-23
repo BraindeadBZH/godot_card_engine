@@ -29,7 +29,7 @@ Currently under development, do not expect it to work.
 
 ## What is not implemented
 
-* Additional containers animations
+* Drag and drop support
 * Card modifiers
 * Other features to be defined...
 
