@@ -31,6 +31,7 @@ Currently under development, do not expect it to work.
 
 * Drag and drop support
 * Card modifiers
+* Saving store to disks
 * Other features to be defined...
 
 
