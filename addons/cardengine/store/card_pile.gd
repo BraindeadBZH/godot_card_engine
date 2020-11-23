@@ -7,12 +7,10 @@ signal card_drawn()
 
 
 func shuffle() -> void:
-#	var shuffled = []
-#	for card in _cards:
-#		shuffled.insert(rng().randomf() * shuffled.size(), card)
-#	replace_cards(shuffled)
-#	emit_signal("shuffled")
-	pass # TODO
+	randomize()
+	_cards.shuffle()
+	emit_signal("shuffled")
+	emit_signal("changed")
 
 
 func draw() -> CardInstance:
@@ -22,5 +20,6 @@ func draw() -> CardInstance:
 	var card = get_last()
 	remove_last()
 	emit_signal("card_drawn")
+	emit_signal("changed")
 	
 	return card
