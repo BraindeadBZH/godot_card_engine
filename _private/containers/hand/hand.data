@@ -51,9 +51,9 @@ easing="in_out"
 
 [in]
 
-duration=0.3
-type="quad"
-easing="in_out"
+duration=0.75
+type="back"
+easing="out"
 
 [out]
 

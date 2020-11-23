@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://screens/game/game_screen.gd" type="Script" id=1]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://containers/hand/hand.tscn" type="PackedScene" id=3]
 [ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 5 )
 
 [node name="GameScreen" type="Control"]
 anchor_right = 1.0
@@ -26,9 +31,43 @@ anchor_bottom = 1.0
 margin_left = -520.0
 margin_top = -110.0
 margin_right = -440.0
-margin_bottom = -30.0
+margin_bottom = -29.5
 rect_min_size = Vector2( 80, 80 )
 color = Color( 0.917647, 0.890196, 0.521569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrawCount" type="Label" parent="DeckZone"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -30.25
+margin_right = 20.0
+margin_bottom = 9.75
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.498039 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "00"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="DrawBtn" type="Button" parent="DeckZone"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = -30.5
+margin_right = -5.0
+margin_bottom = -5.0
+text = "Draw"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,6 +83,41 @@ margin_right = 511.0
 margin_bottom = -30.0
 rect_min_size = Vector2( 80, 80 )
 color = Color( 0.917647, 0.890196, 0.521569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiscardCount" type="Label" parent="DiscardZone"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -30.0
+margin_right = 20.0
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.498039 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ReshuffleBtn" type="Button" parent="DiscardZone"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = -30.0
+margin_right = -5.0
+margin_bottom = -5.0
+disabled = true
+text = "Reshuffle"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -123,4 +197,11 @@ anchor_right = 1.0
 margin_left = -175.0
 margin_right = 0.0
 button_text = "MENU"
+
+[node name="StartingHandDelay" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.5
+autostart = true
+[connection signal="pressed" from="DeckZone/DrawBtn" to="." method="_on_DrawBtn_pressed"]
 [connection signal="pressed" from="MenuBtn" to="." method="_on_MenuBtn_pressed"]
+[connection signal="timeout" from="StartingHandDelay" to="." method="_on_StartingHandDelay_timeout"]
