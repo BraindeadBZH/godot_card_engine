@@ -257,50 +257,56 @@ func _path_layout(trans: CardTransform, card_index: int, card_size: Vector2):
 
 
 func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
-	var card_count: float = _store.count() - 1
+	var card_count: float = _store.count() - 1.0
 	
 	if _fine_pos:
 		match _fine_pos_mode:
 			FineTuningMode.LINEAR:
-				trans.pos += lerp(
-					_fine_pos_min,
-					_fine_pos_max,
-					card_index / card_count)
+				if card_count > 0:
+					trans.pos += lerp(
+						_fine_pos_min,
+						_fine_pos_max,
+						card_index / card_count)
 			FineTuningMode.SYMMETRIC:
-				trans.pos += lerp(
-					_fine_pos_min,
-					_fine_pos_max,
-					abs(((card_index * 2.0) / card_count) - 1.0))
+				if card_count > 0:
+					trans.pos += lerp(
+						_fine_pos_min,
+						_fine_pos_max,
+						abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
 				trans.pos += _rng.random_vec2_range(_fine_pos_min, _fine_pos_max)
 	
 	if _fine_angle:
 		match _fine_angle_mode:
 			FineTuningMode.LINEAR:
-				trans.rot += lerp_angle(
-					_fine_angle_min,
-					_fine_angle_max,
-					card_index / card_count)
+				if card_count > 0:
+					trans.rot += lerp_angle(
+						_fine_angle_min,
+						_fine_angle_max,
+						card_index / card_count)
 			FineTuningMode.SYMMETRIC:
-				trans.rot += lerp_angle(
-					_fine_angle_min,
-					_fine_angle_max,
-					abs(((card_index * 2.0) / card_count) - 1.0))
+				if card_count > 0:
+					trans.rot += lerp_angle(
+						_fine_angle_min,
+						_fine_angle_max,
+						abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
 				trans.rot += _rng.randomf_range(_fine_angle_min, _fine_angle_max)
 	
 	if _fine_scale:
 		match _fine_scale_mode:
 			FineTuningMode.LINEAR:
-				trans.scale *= lerp(
-					_fine_scale_min,
-					_fine_scale_max,
-					card_index / card_count)
+				if card_count > 0:
+					trans.scale *= lerp(
+						_fine_scale_min,
+						_fine_scale_max,
+						card_index / card_count)
 			FineTuningMode.SYMMETRIC:
-				trans.scale *= lerp(
-					_fine_scale_min,
-					_fine_scale_max,
-					abs(((card_index * 2.0) / card_count) - 1.0))
+				if card_count > 0:
+					trans.scale *= lerp(
+						_fine_scale_min,
+						_fine_scale_max,
+						abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
 				match _fine_scale_ratio:
 					AspectMode.IGNORE:
