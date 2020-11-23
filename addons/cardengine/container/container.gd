@@ -41,25 +41,25 @@ var fine_scale_min: Vector2 = Vector2(0.0, 0.0)
 var fine_scale_max: Vector2 = Vector2(0.0, 0.0)
 
 # Tansitions
-var order_duration: float = 0.0
-var order_type: String = "cubic"
-var order_easing: String = "in_out"
+var order_duration: float = 0.3
+var order_type: String = "linear"
+var order_easing: String = "in"
 
-var in_duration: float = 0.0
-var in_type: String = "cubic"
-var in_easing: String = "in_out"
+var in_duration: float = 0.3
+var in_type: String = "linear"
+var in_easing: String = "in"
 
-var out_duration: float = 0.0
-var out_type: String = "cubic"
-var out_easing: String = "in_out"
+var out_duration: float = 0.3
+var out_type: String = "linear"
+var out_easing: String = "in"
 
-var flip_start_duration: float = 0.0
-var flip_start_type: String = "cubic"
-var flip_start_easing: String = "in_out"
+var flip_start_duration: float = 0.3
+var flip_start_type: String = "linear"
+var flip_start_easing: String = "in"
 
-var flip_end_duration: float = 0.0
-var flip_end_type: String = "cubic"
-var flip_end_easing: String = "in_out"
+var flip_end_duration: float = 0.3
+var flip_end_type: String = "linear"
+var flip_end_easing: String = "in"
 
 # Animations
 var interactive: bool = true
