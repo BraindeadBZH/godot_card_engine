@@ -200,7 +200,8 @@ button_text = "MENU"
 
 [node name="StartingHandDelay" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.5
+wait_time = 0.1
+one_shot = true
 autostart = true
 [connection signal="pressed" from="DeckZone/DrawBtn" to="." method="_on_DrawBtn_pressed"]
 [connection signal="pressed" from="MenuBtn" to="." method="_on_MenuBtn_pressed"]

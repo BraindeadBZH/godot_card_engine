@@ -42,6 +42,7 @@ func _on_DiscardPile_changed() -> void:
 
 
 func _on_StartingHandDelay_timeout() -> void:
+	
 	var card = _draw_pile.draw()
 	
 	if card == null:
@@ -51,6 +52,8 @@ func _on_StartingHandDelay_timeout() -> void:
 	
 	if _hand.count() >= STARTING_HAND_SIZE:
 		_hand_delay.stop()
+	else:
+		_hand_delay.start(0.75)
 
 
 func _on_DrawBtn_pressed() -> void:
