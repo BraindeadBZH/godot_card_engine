@@ -19,9 +19,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MergeWindow" type="Timer" parent="."]
+[node name="TransiMerge" type="Timer" parent="."]
 wait_time = 0.01
 one_shot = true
+
+[node name="EventMerge" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
 
 [node name="Transitions" type="Tween" parent="."]
 
@@ -31,5 +35,6 @@ one_shot = true
 [connection signal="mouse_entered" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_mouse_entered"]
 [connection signal="mouse_exited" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_mouse_exited"]
 [connection signal="pressed" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_pressed"]
-[connection signal="timeout" from="MergeWindow" to="." method="_on_MergeWindow_timeout"]
+[connection signal="timeout" from="TransiMerge" to="." method="_on_TransiMerge_timeout"]
+[connection signal="timeout" from="EventMerge" to="." method="_on_EventMerge_timeout"]
 [connection signal="tween_all_completed" from="Transitions" to="." method="_on_Transitions_tween_all_completed"]

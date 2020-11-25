@@ -24,7 +24,7 @@ var _interactive: bool = true
 var _interaction_paused: bool = false
 var _anim: AnimationData = AnimationData.new("empty", "Empty")
 var _current_anim: String = ""
-var _anim_queue: Array = []
+var _event_queue: Array = []
 var _trans_origin: CardTransform = CardTransform.new()
 var _trans_focused: CardTransform = CardTransform.new()
 var _trans_activated: CardTransform = CardTransform.new()
@@ -33,33 +33,9 @@ onready var _cont = $AnimContainer
 onready var _front = $AnimContainer/Front
 onready var _back  = $AnimContainer/Back
 onready var _transi = $Transitions
-onready var _mergeWin = $MergeWindow
+onready var _transi_merge = $TransiMerge
 onready var _anim_player = $AnimationPlayer
-
-
-func _process(delta: float) -> void:
-	if _anim_queue.empty() or _interaction_paused:
-		return
-		
-	var next = _anim_queue.front()
-
-	if _current_anim != "idle" and next == "idle" and _anim_player.is_active():
-		return
-	
-	match next:
-		"idle":
-			_change_state(CardState.IDLE)
-		"focused":
-			_change_state(CardState.FOCUSED)
-		"activated":
-			_change_state(CardState.ACTIVE)
-		"deactivated":
-			_change_state(CardState.FOCUSED)
-		"unfocused":
-			_change_state(CardState.IDLE)
-	
-	_anim_queue.pop_front()
-	_change_anim(next)
+onready var _event_merge = $EventMerge
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -76,8 +52,8 @@ func root_trans() -> CardTransform:
 
 
 func set_root_trans(transform: CardTransform) -> void:
-	_mergeWin.stop()
-	_mergeWin.start()
+	_transi_merge.stop()
+	_transi_merge.start()
 	
 	_merge_trans = transform
 
@@ -142,7 +118,7 @@ func set_animation(anim: AnimationData) -> void:
 	_state = CardState.NONE
 	_anim = anim
 	_current_anim = ""
-	_anim_queue.clear()
+	_event_queue.clear()
 	_change_anim("idle")
 
 
@@ -350,7 +326,7 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 	return prev_val
 
 
-func _change_state(new_state) -> void:
+func _change_state(new_state: int) -> void:
 	if new_state == _state:
 		return
 	
@@ -437,13 +413,74 @@ func _change_anim(anim: String) -> void:
 	_anim_player.start()
 
 
+func _post_event(event: String) -> void:
+	_event_queue.push_back(event)
+
+
+func _merge_events() -> void:
+	var merged := []
+	var prev = ""
+	
+	for event in _event_queue:
+		if prev != event:
+			var need_merge = false
+			
+			if event == "focused" && prev == "unfocused":
+				need_merge = true
+			elif event == "unfocused" && prev == "focused":
+				need_merge = true
+			elif event == "activated" && prev == "deactivated":
+				need_merge = true
+			elif event == "deactivated" && prev == "activated":
+				need_merge = true
+			
+			if need_merge:
+				merged.pop_back()
+				if not merged.empty():
+					prev = merged.back()
+				else:
+					prev = ""
+			else:
+				merged.push_back(event)
+				prev = event
+	
+	_event_queue = merged
+
+
+func _on_EventMerge_timeout() -> void:
+	_merge_events()
+	
+	if _event_queue.empty() or _interaction_paused:
+		return
+	
+	var next = _event_queue.front()
+
+	if _current_anim != "idle" and next == "idle" and _anim_player.is_active():
+		return
+	
+	match next:
+		"idle":
+			_change_state(CardState.IDLE)
+		"focused":
+			_change_state(CardState.FOCUSED)
+		"activated":
+			_change_state(CardState.ACTIVE)
+		"deactivated":
+			_change_state(CardState.FOCUSED)
+		"unfocused":
+			_change_state(CardState.IDLE)
+	
+	_event_queue.pop_front()
+	_change_anim(next)
+
+
 func _on_MouseArea_mouse_entered() -> void:
 	if not _interactive:
 		return
 	
 	z_index = 1
 	
-	_anim_queue.push_back("focused")
+	_post_event("focused")
 
 
 func _on_MouseArea_mouse_exited() -> void:
@@ -452,8 +489,8 @@ func _on_MouseArea_mouse_exited() -> void:
 	
 	z_index = 0
 	
-	_anim_queue.push_back("unfocused")
-	_anim_queue.push_back("idle")
+	_post_event("unfocused")
+	_post_event("idle")
 
 
 func _on_MouseArea_pressed() -> void:
@@ -467,17 +504,17 @@ func _on_MouseArea_button_down() -> void:
 	if not _interactive:
 		return
 	
-	_anim_queue.push_back("activated")
+	_post_event("activated")
 
 
 func _on_MouseArea_button_up() -> void:
 	if not _interactive:
 		return
 		
-	_anim_queue.push_back("deactivated")
+	_post_event("deactivated")
 
 
-func _on_MergeWindow_timeout() -> void:
+func _on_TransiMerge_timeout() -> void:
 	if _root_trans == null:
 		if _transitions.in_anchor.enabled:
 			_transi.remove_all()
