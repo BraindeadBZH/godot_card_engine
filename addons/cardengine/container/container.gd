@@ -65,6 +65,16 @@ var flip_end_easing: String = "in"
 var interactive: bool = true
 var anim: String = "none"
 
+var adjust_mode: String = "focused"
+var adjust_pos_x_mode: String = "disabled"
+var adjust_pos_y_mode: String = "disabled"
+var adjust_pos: Vector2 = Vector2(0.0, 0.0)
+var adjust_scale_x_mode: String = "disabled"
+var adjust_scale_y_mode: String = "disabled"
+var adjust_scale: Vector2 = Vector2(0.0, 0.0)
+var adjust_rot_mode: String = "disabled"
+var adjust_rot: float = 0.0
+
 
 func _init(id: String, name: String) -> void:
 	self.id = id

@@ -65,3 +65,15 @@ easing="in_out"
 
 interactive=true
 id="hand"
+
+[adjust]
+
+mode="focused"
+pos_mode_x="disabled"
+pos_mode_y="absolute"
+pos=Vector2( 0, 0 )
+scale_mode_x="disabled"
+scale_mode_y="disabled"
+scale=Vector2( 0, 0 )
+rot_mode="absolute"
+rot=0.0

@@ -65,3 +65,15 @@ easing="in"
 
 interactive=true
 id="list"
+
+[adjust]
+
+mode="focused"
+pos_mode_x="disabled"
+pos_mode_y="disabled"
+pos=Vector2( 0, 0 )
+scale_mode_x="disabled"
+scale_mode_y="disabled"
+scale=Vector2( 0, 0 )
+rot_mode="disabled"
+rot=0.0

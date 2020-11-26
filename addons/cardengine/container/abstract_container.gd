@@ -57,6 +57,16 @@ var _transitions: CardTransitions = CardTransitions.new()
 var _interactive: bool = true
 var _anim: String = "none"
 
+var _adjust_mode: String = "focused"
+var _adjust_pos_x_mode: String = "disabled"
+var _adjust_pos_y_mode: String = "disabled"
+var _adjust_pos: Vector2 = Vector2(0.0, 0.0)
+var _adjust_scale_x_mode: String = "disabled"
+var _adjust_scale_y_mode: String = "disabled"
+var _adjust_scale: Vector2 = Vector2(0.0, 0.0)
+var _adjust_rot_mode: String = "disabled"
+var _adjust_rot: float = 0.0
+
 onready var _cards = $Cards
 onready var _path = $CardPath
 
@@ -160,6 +170,10 @@ func _layout_cards():
 			_fine_tune(trans, card_index, child.size)
 			
 			child.set_root_trans(trans)
+			child.set_adjusted_trans(
+				_adjusted_trans(trans),
+				_adjust_mode == "focused",
+				_adjust_mode == "activated")
 			card_index += 1
 
 
@@ -314,6 +328,55 @@ func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
 					AspectMode.KEEP:
 						var random_scale = _rng.randomf_range(_fine_scale_min.x, _fine_scale_max.x)
 						trans.scale *= Vector2(random_scale, random_scale)
+
+
+func _adjusted_trans(origin: CardTransform) -> CardTransform:
+	var adjusted := CardTransform.new()
+	var has_adjust := false
+	
+	adjusted.pos = origin.pos
+	adjusted.scale = origin.scale
+	adjusted.rot = origin.rot
+	
+	if _adjust_pos_x_mode == "relative":
+		adjusted.pos.x += _adjust_pos.x
+		has_adjust = true
+	elif _adjust_pos_x_mode == "absolute":
+		adjusted.pos.x = _adjust_pos.x
+		has_adjust = true
+	
+	if _adjust_pos_y_mode == "relative":
+		adjusted.pos.y += _adjust_pos.y
+		has_adjust = true
+	elif _adjust_pos_y_mode == "absolute":
+		adjusted.pos.y = _adjust_pos.y
+		has_adjust = true
+	
+	if _adjust_scale_x_mode == "relative":
+		adjusted.scale.x += _adjust_scale.x
+		has_adjust = true
+	elif _adjust_scale_x_mode == "absolute":
+		adjusted.scale.x = _adjust_scale.x
+		has_adjust = true
+	
+	if _adjust_scale_y_mode == "relative":
+		adjusted.scale.y += _adjust_scale.y
+		has_adjust = true
+	elif _adjust_scale_y_mode == "absolute":
+		adjusted.scale.y = _adjust_scale.y
+		has_adjust = true
+	
+	if _adjust_rot_mode == "relative":
+		adjusted.rot += deg2rad(_adjust_rot)
+		has_adjust = true
+	elif _adjust_rot_mode == "absolute":
+		adjusted.rot = deg2rad(_adjust_rot)
+		has_adjust = true
+	
+	if has_adjust:
+		return adjusted
+	else:
+		return null
 
 
 func _clear() -> void:

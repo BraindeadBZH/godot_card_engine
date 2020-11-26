@@ -676,7 +676,7 @@ margin_right = 502.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_horizontal = 3
-text = "On re-order"
+text = "On layout change"
 align = 1
 valign = 1
 __meta__ = {
@@ -936,6 +936,194 @@ margin_top = 44.0
 margin_right = 502.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
+
+[node name="LayoutTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_top = 92.0
+margin_right = 502.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Change to layout"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LayoutLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
+margin_top = 116.0
+margin_right = 502.0
+margin_bottom = 292.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_top = 3.0
+margin_right = 94.0
+margin_bottom = 17.0
+text = "Mode"
+
+[node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_left = 98.0
+margin_right = 502.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "On focused"
+items = [ "On focused", null, false, 0, null, "On activated", null, false, 1, null ]
+selected = 0
+
+[node name="PosModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_top = 27.0
+margin_right = 94.0
+margin_bottom = 41.0
+text = "Position mode"
+
+[node name="PosModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_left = 98.0
+margin_top = 24.0
+margin_right = 502.0
+margin_bottom = 44.0
+
+[node name="PosXMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout"]
+margin_right = 200.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "No change"
+items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
+selected = 0
+
+[node name="PosYMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout"]
+margin_left = 204.0
+margin_right = 404.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "No change"
+items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
+selected = 0
+
+[node name="PosLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_top = 53.0
+margin_right = 94.0
+margin_bottom = 67.0
+text = "Position"
+
+[node name="PosLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_left = 98.0
+margin_top = 48.0
+margin_right = 502.0
+margin_bottom = 72.0
+
+[node name="PosX" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout"]
+margin_right = 200.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+suffix = "x"
+
+[node name="PosY" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout"]
+margin_left = 204.0
+margin_right = 404.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+suffix = "y"
+
+[node name="ScaleModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_top = 79.0
+margin_right = 94.0
+margin_bottom = 93.0
+text = "Scale mode"
+
+[node name="ScaleModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_left = 98.0
+margin_top = 76.0
+margin_right = 502.0
+margin_bottom = 96.0
+
+[node name="ScaleXMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout"]
+margin_right = 200.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "No change"
+items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
+selected = 0
+
+[node name="ScaleYMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout"]
+margin_left = 204.0
+margin_right = 404.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "No change"
+items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
+selected = 0
+
+[node name="ScaleLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_top = 105.0
+margin_right = 94.0
+margin_bottom = 119.0
+text = "Scale"
+
+[node name="ScaleLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_left = 98.0
+margin_top = 100.0
+margin_right = 502.0
+margin_bottom = 124.0
+
+[node name="ScaleX" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout"]
+margin_right = 200.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "x"
+
+[node name="ScaleY" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout"]
+margin_left = 204.0
+margin_right = 404.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "y"
+
+[node name="RotModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_top = 131.0
+margin_right = 94.0
+margin_bottom = 145.0
+text = "Rotation mode"
+
+[node name="RotMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_left = 98.0
+margin_top = 128.0
+margin_right = 502.0
+margin_bottom = 148.0
+size_flags_horizontal = 3
+text = "No change"
+items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
+selected = 0
+
+[node name="RotLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_top = 157.0
+margin_right = 94.0
+margin_bottom = 171.0
+text = "Rotation"
+
+[node name="Rot" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
+margin_left = 98.0
+margin_top = 152.0
+margin_right = 502.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
 
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
 margin_top = 542.0

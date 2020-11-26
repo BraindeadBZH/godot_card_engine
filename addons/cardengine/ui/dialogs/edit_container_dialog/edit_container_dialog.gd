@@ -55,6 +55,17 @@ onready var _trans_out_easing = $MainLayout/MainTabs/Transitions/TransLayout/Out
 
 onready var _interactive = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Inter
 onready var _anim = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Anim
+onready var _adjust_mode = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/Mode
+onready var _adjust_pos_mode_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout/PosXMode
+onready var _adjust_pos_mode_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout/PosYMode
+onready var _adjust_pos_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout/PosX
+onready var _adjust_pos_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout/PosY
+onready var _adjust_scale_mode_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout/ScaleXMode
+onready var _adjust_scale_mode_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout/ScaleYMode
+onready var _adjust_scale_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout/ScaleX
+onready var _adjust_scale_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout/ScaleY
+onready var _adjust_rot_mode = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/RotMode
+onready var _adjust_rot = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/Rot
 
 
 func _ready():
@@ -120,11 +131,22 @@ func _update() -> void:
 	_trans_out_easing.select(_trans_easing_to_select(_data.out_easing))
 	
 	_interactive.pressed = _data.interactive
+	_load_animation_list(_anim, _data.anim)
 	
-	_load_animation(_anim, _data.anim)
+	_adjust_mode.select(_adjust_mode_to_select(_data.adjust_mode))
+	_adjust_pos_mode_x.select(_adjust_value_mode_to_select(_data.adjust_pos_x_mode))
+	_adjust_pos_mode_y.select(_adjust_value_mode_to_select(_data.adjust_pos_y_mode))
+	_adjust_pos_x.value = _data.adjust_pos.x
+	_adjust_pos_y.value = _data.adjust_pos.y
+	_adjust_scale_mode_x.select(_adjust_value_mode_to_select(_data.adjust_scale_x_mode))
+	_adjust_scale_mode_y.select(_adjust_value_mode_to_select(_data.adjust_scale_y_mode))
+	_adjust_scale_x.value = _data.adjust_scale.x
+	_adjust_scale_y.value = _data.adjust_scale.y
+	_adjust_rot_mode.select(_adjust_value_mode_to_select(_data.adjust_rot_mode))
+	_adjust_rot.value = _data.adjust_rot
 
 
-func _load_animation(select: OptionButton, selected_id: String) -> void:
+func _load_animation_list(select: OptionButton, selected_id: String) -> void:
 	select.clear()
 	
 	select.add_item("None")
@@ -199,6 +221,18 @@ func _save() -> void:
 	
 	_data.interactive = _interactive.pressed
 	_data.anim = _anim.get_selected_metadata()
+	
+	_data.adjust_mode = _select_to_adjust_mode(_adjust_mode.selected)
+	_data.adjust_pos_x_mode = _select_to_adjust_value_mode(_adjust_pos_mode_x.selected)
+	_data.adjust_pos_y_mode = _select_to_adjust_value_mode(_adjust_pos_mode_y.selected)
+	_data.adjust_pos.x = _adjust_pos_x.value
+	_data.adjust_pos.y = _adjust_pos_y.value
+	_data.adjust_scale_x_mode = _select_to_adjust_value_mode(_adjust_scale_mode_x.selected)
+	_data.adjust_scale_y_mode = _select_to_adjust_value_mode(_adjust_scale_mode_y.selected)
+	_data.adjust_scale.x = _adjust_scale_x.value
+	_data.adjust_scale.y = _adjust_scale_y.value
+	_data.adjust_rot_mode = _select_to_adjust_value_mode(_adjust_rot_mode.selected)
+	_data.adjust_rot = _adjust_rot.value
 	
 	_manager.update_container(_data)
 
@@ -394,6 +428,50 @@ func _select_to_trans_easing(select: int) -> String:
 			return "out_in"
 		_:
 			return "in"
+
+
+func _adjust_mode_to_select(mode: String) -> int:
+	match mode:
+		"focused":
+			return 0
+		"activated":
+			return 1
+		_:
+			return 0
+
+
+func _select_to_adjust_mode(select: int) -> String:
+	match select:
+		0:
+			return "focused"
+		1:
+			return "activated"
+		_:
+			return "focused"
+
+
+func _adjust_value_mode_to_select(mode: String) -> int:
+	match mode:
+		"disabled":
+			return 0
+		"relative":
+			return 1
+		"absolute":
+			return 2
+		_:
+			return 0
+
+
+func _select_to_adjust_value_mode(select: int) -> String:
+	match select:
+		0:
+			return "disabled"
+		1:
+			return "relative"
+		2:
+			return "absolute"
+		_:
+			return "disabled"
 
 
 func _on_ModeSwitch_toggled(button_pressed):

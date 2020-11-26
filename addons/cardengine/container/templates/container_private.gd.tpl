@@ -55,3 +55,13 @@ func _ready():
 
 	_interactive = {interactive}
 	_anim = "{anim}"
+
+	_adjust_mode = "{adjust_mode}"
+	_adjust_pos_x_mode = "{adjust_pos_x_mode}"
+	_adjust_pos_y_mode = "{adjust_pos_y_mode}"
+	_adjust_pos = Vector2({adjust_pos_x}, {adjust_pos_y})
+	_adjust_scale_x_mode = "{adjust_scale_x_mode}"
+	_adjust_scale_y_mode = "{adjust_scale_y_mode}"
+	_adjust_scale = Vector2({adjust_scale_x}, {adjust_scale_y})
+	_adjust_rot_mode = "{adjust_rot_mode}"
+	_adjust_rot = {adjust_rot}

@@ -165,6 +165,16 @@ func _write_metadata(cont: ContainerData) -> void:
 	# Animations data
 	file.set_value("anim", "interactive", cont.interactive)
 	file.set_value("anim", "id", cont.anim)
+	
+	file.set_value("adjust", "mode", cont.adjust_mode)
+	file.set_value("adjust", "pos_mode_x", cont.adjust_pos_x_mode)
+	file.set_value("adjust", "pos_mode_y", cont.adjust_pos_y_mode)
+	file.set_value("adjust", "pos", cont.adjust_pos)
+	file.set_value("adjust", "scale_mode_x", cont.adjust_scale_x_mode)
+	file.set_value("adjust", "scale_mode_y", cont.adjust_scale_y_mode)
+	file.set_value("adjust", "scale", cont.adjust_scale)
+	file.set_value("adjust", "rot_mode", cont.adjust_rot_mode)
+	file.set_value("adjust", "rot", cont.adjust_rot)
 
 	file.save(FMT_PRIVATE_DATA % [_private_folder, cont.id, cont.id])
 
@@ -220,6 +230,17 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"out_easing": _translate_trans_easing(cont.out_easing),
 		"interactive": _translate_bool(cont.interactive),
 		"anim": cont.anim,
+		"adjust_mode": cont.adjust_mode,
+		"adjust_pos_x_mode": cont.adjust_pos_x_mode,
+		"adjust_pos_y_mode": cont.adjust_pos_y_mode,
+		"adjust_pos_x": cont.adjust_pos.x,
+		"adjust_pos_y": cont.adjust_pos.y,
+		"adjust_scale_x_mode": cont.adjust_scale_x_mode,
+		"adjust_scale_y_mode": cont.adjust_scale_y_mode,
+		"adjust_scale_x": cont.adjust_scale.x,
+		"adjust_scale_y": cont.adjust_scale.y,
+		"adjust_rot_mode": cont.adjust_rot_mode,
+		"adjust_rot": cont.adjust_rot
 	}
 	Utils.copy_template(tpl_path, script_path, params)
 	
@@ -321,6 +342,16 @@ func _read_metadata(id: String) -> ContainerData:
 
 	cont.interactive = file.get_value("anim", "interactive", true)
 	cont.anim = file.get_value("anim", "id", "none")
+	
+	cont.adjust_mode = file.get_value("adjust", "mode", "focused")
+	cont.adjust_pos_x_mode = file.get_value("adjust", "pos_mode_x", "disabled")
+	cont.adjust_pos_y_mode = file.get_value("adjust", "pos_mode_y", "disabled")
+	cont.adjust_pos = file.get_value("adjust", "pos", Vector2(0.0, 0.0))
+	cont.adjust_scale_x_mode = file.get_value("adjust", "scale_mode_x", "disabled")
+	cont.adjust_scale_y_mode = file.get_value("adjust", "scale_mode_y", "disabled")
+	cont.adjust_scale = file.get_value("adjust", "scale", Vector2(0.0, 0.0))
+	cont.adjust_rot_mode = file.get_value("adjust", "rot_mode", "disabled")
+	cont.adjust_rot = file.get_value("adjust", "rot", 0.0)
 		
 	return cont
 

@@ -39,7 +39,7 @@ pos=[ {
 "num_range": 0.0,
 "num_val": 0.0,
 "vec_range": Vector2( 0, 0 ),
-"vec_val": Vector2( 0, -500 )
+"vec_val": Vector2( 0, -240 )
 }
 } ]
 scale=[ {
@@ -70,7 +70,7 @@ scale=[ {
 "num_range": 0.0,
 "num_val": 0.0,
 "vec_range": Vector2( 0, 0 ),
-"vec_val": Vector2( 1.5, 1.5 )
+"vec_val": Vector2( 1.9, 1.9 )
 }
 } ]
 rot=[  ]

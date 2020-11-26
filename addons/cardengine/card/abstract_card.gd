@@ -16,6 +16,9 @@ var _inst: CardInstance = null
 var _side = CardSide.FRONT
 var _root_trans: CardTransform = null
 var _merge_trans: CardTransform = null
+var _adjusted_trans: CardTransform = null
+var _adjust_on_focused: bool = false
+var _adjust_on_activated: bool = false
 var _transitions: CardTransitions = CardTransitions.new()
 var _remove_flag: bool = false
 var _state = CardState.NONE
@@ -75,6 +78,12 @@ func set_transitions(transitions: CardTransitions):
 	_transitions = transitions
 
 
+func set_adjusted_trans(transform: CardTransform, on_focused: bool, on_activated: bool) -> void:
+	_adjusted_trans = transform
+	_adjust_on_focused = on_focused
+	_adjust_on_activated = on_activated
+
+
 func side() -> int:
 	return _side
 
@@ -130,29 +139,52 @@ func flag_for_removal() -> void:
 	_remove_flag = true
 	
 	if _transitions.out_anchor.enabled:
-		_transi.remove_all()
-
-		_transi.interpolate_property(
-			self, "position", position, _transitions.out_anchor.position,
-			_transitions.out_anchor.duration,
-			_transitions.out_anchor.type,
-			_transitions.out_anchor.easing)
-
-		_transi.interpolate_property(
-			self, "scale", scale, _transitions.out_anchor.scale,
-			_transitions.out_anchor.duration,
-			_transitions.out_anchor.type,
-			_transitions.out_anchor.easing)
-
-		_transi.interpolate_property(
-			self, "rotation", rotation, _transitions.out_anchor.rotation,
-			_transitions.out_anchor.duration,
-			_transitions.out_anchor.type,
-			_transitions.out_anchor.easing)
-		
-		_transi.start()
+		_transition(_root_trans, null)
 	else:
 		emit_signal("need_removal")
+
+
+func _transition(from: CardTransform, to: CardTransform) -> void:
+	var duration: float = _transitions.order.duration
+	var type: int = _transitions.order.type
+	var easing: int = _transitions.order.easing
+	
+	if from == null:
+		from = CardTransform.new()
+		from.pos = _transitions.in_anchor.position
+		from.scale = _transitions.in_anchor.scale
+		from.rot = _transitions.in_anchor.rotation
+		
+		duration = _transitions.in_anchor.duration
+		type = _transitions.in_anchor.type
+		easing = _transitions.in_anchor.easing
+	
+	if to == null:
+		to = CardTransform.new()
+		to.pos = _transitions.out_anchor.position
+		to.scale = _transitions.out_anchor.scale
+		to.rot = _transitions.out_anchor.rotation
+		
+		duration = _transitions.out_anchor.duration
+		type = _transitions.out_anchor.type
+		easing = _transitions.out_anchor.easing
+	
+	position = from.pos
+	scale = from.scale
+	rotation = from.rot
+	
+	_transi.remove_all()
+
+	_transi.interpolate_property(
+		self, "position", from.pos, to.pos, duration, type, easing)
+
+	_transi.interpolate_property(
+		self, "scale", from.scale, to.scale, duration, type, easing)
+
+	_transi.interpolate_property(
+		self, "rotation", from.rot, to.rot, duration, type, easing)
+	
+	_transi.start()
 
 
 func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
@@ -359,6 +391,9 @@ func _change_anim(anim: String) -> void:
 				_anim_player)
 			
 		"focused":
+			if _adjust_on_focused and _adjusted_trans != null:
+				_transition(_root_trans, _adjusted_trans)
+			
 			_trans_focused.pos = _setup_pos_sequence(
 				_anim.focused_animation().position_sequence(),
 				_anim_player)
@@ -372,6 +407,9 @@ func _change_anim(anim: String) -> void:
 				_anim_player)
 				
 		"activated":
+			if _adjust_on_activated and _adjusted_trans != null:
+				_transition(_root_trans, _adjusted_trans)
+				
 			_trans_activated.pos = _setup_pos_sequence(
 				_anim.activated_animation().position_sequence(),
 				_anim_player)
@@ -385,6 +423,9 @@ func _change_anim(anim: String) -> void:
 				_anim_player)
 				
 		"deactivated":
+			if _adjust_on_activated and _adjusted_trans != null:
+				_transition(_adjusted_trans, _root_trans)
+				
 			_setup_pos_sequence(
 				_anim.deactivated_animation().position_sequence(),
 				_anim_player)
@@ -398,6 +439,9 @@ func _change_anim(anim: String) -> void:
 				_anim_player)
 				
 		"unfocused":
+			if _adjust_on_focused and _adjusted_trans != null:
+				_transition(_adjusted_trans, _root_trans)
+				
 			_setup_pos_sequence(
 				_anim.unfocused_animation().position_sequence(),
 				_anim_player)
@@ -517,31 +561,7 @@ func _on_MouseArea_button_up() -> void:
 func _on_TransiMerge_timeout() -> void:
 	if _root_trans == null:
 		if _transitions.in_anchor.enabled:
-			_transi.remove_all()
-			
-			position = _transitions.in_anchor.position
-			scale = _transitions.in_anchor.scale
-			rotation = _transitions.in_anchor.rotation
-
-			_transi.interpolate_property(
-				self, "position", position, _merge_trans.pos,
-				_transitions.in_anchor.duration,
-				_transitions.in_anchor.type,
-				_transitions.in_anchor.easing)
-
-			_transi.interpolate_property(
-				self, "scale", scale, _merge_trans.scale,
-				_transitions.in_anchor.duration,
-				_transitions.in_anchor.type,
-				_transitions.in_anchor.easing)
-
-			_transi.interpolate_property(
-				self, "rotation", rotation, _merge_trans.rot,
-				_transitions.in_anchor.duration,
-				_transitions.in_anchor.type,
-				_transitions.in_anchor.easing)
-			
-			_transi.start()
+			_transition(null, _merge_trans)
 		else:
 			position = _merge_trans.pos
 			scale = _merge_trans.scale
@@ -550,27 +570,7 @@ func _on_TransiMerge_timeout() -> void:
 		if _root_trans.eq(_merge_trans):
 			return
 		
-		_transi.remove_all()
-
-		_transi.interpolate_property(
-			self, "position", _root_trans.pos, _merge_trans.pos,
-			_transitions.order.duration,
-			_transitions.order.type,
-			_transitions.order.easing)
-
-		_transi.interpolate_property(
-			self, "scale", _root_trans.scale, _merge_trans.scale,
-			_transitions.order.duration,
-			_transitions.order.type,
-			_transitions.order.easing)
-
-		_transi.interpolate_property(
-			self, "rotation", _root_trans.rot, _merge_trans.rot,
-			_transitions.order.duration,
-			_transitions.order.type,
-			_transitions.order.easing)
-		
-		_transi.start()
+		_transition(_root_trans, _merge_trans)
 	
 	_root_trans = _merge_trans
 	_change_anim("idle")

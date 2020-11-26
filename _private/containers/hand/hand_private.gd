@@ -55,3 +55,14 @@ func _ready():
 
 	_interactive = true
 	_anim = "hand"
+
+	_adjust_mode = "focused"
+	_adjust_pos_x_mode = "disabled"
+	_adjust_pos_y_mode = "absolute"
+	_adjust_pos = Vector2(0, 0)
+	_adjust_scale_x_mode = "disabled"
+	_adjust_scale_y_mode = "disabled"
+	_adjust_scale = Vector2(0, 0)
+	_adjust_rot_mode = "absolute"
+	_adjust_rot = 0
+
