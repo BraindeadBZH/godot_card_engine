@@ -6,6 +6,7 @@ var _selected_rarity: String = "none"
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
+onready var _scroll = $BuilderLayout/LibraryBg/LibraryScroll
 onready var _container = $BuilderLayout/LibraryBg/LibraryScroll/LibraryContainer
 onready var _class = $TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class
 onready var _rarity = $TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity
@@ -199,3 +200,8 @@ func _on_ManaSort_toggled(_button_pressed: bool) -> void:
 
 func _on_NameSort_toggled(_button_pressed: bool) -> void:
 	_apply_filters()
+
+
+func _on_LibraryScroll_resized() -> void:
+	if _scroll != null:
+		_container.rect_min_size = _scroll.rect_size

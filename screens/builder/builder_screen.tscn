@@ -304,3 +304,4 @@ __meta__ = {
 [connection signal="toggled" from="TitleBg/TitleLayout/SortLayout/ManaSort" to="." method="_on_ManaSort_toggled"]
 [connection signal="toggled" from="TitleBg/TitleLayout/SortLayout/NameSort" to="." method="_on_NameSort_toggled"]
 [connection signal="pressed" from="TitleBg/TitleLayout/BackBtn" to="." method="_on_BackBtn_pressed"]
+[connection signal="resized" from="BuilderLayout/LibraryBg/LibraryScroll" to="." method="_on_LibraryScroll_resized"]
