@@ -114,57 +114,7 @@ pos=[ {
 "vec_val": Vector2( 0, 0 )
 }
 } ]
-scale=[ {
-"editable_transi": false,
-"editable_val": false,
-"val": {
-"mode": "initial",
-"num_range": 0.0,
-"num_val": 0.0,
-"vec_range": Vector2( 0, 0 ),
-"vec_val": Vector2( 0, 0 )
-}
-}, {
-"editable_transi": true,
-"editable_val": true,
-"transi": {
-"duration": 0.3,
-"duration_range_max": 0.3,
-"duration_range_min": 0.1,
-"easing": "out",
-"flip_card": true,
-"interactive": false,
-"random_duration": false,
-"type": "quad"
-},
-"val": {
-"mode": "fixed",
-"num_range": 0.0,
-"num_val": 0.0,
-"vec_range": Vector2( 0, 0 ),
-"vec_val": Vector2( 0, 1 )
-}
-}, {
-"editable_transi": true,
-"editable_val": false,
-"transi": {
-"duration": 0.3,
-"duration_range_max": 0.3,
-"duration_range_min": 0.1,
-"easing": "in",
-"flip_card": false,
-"interactive": false,
-"random_duration": false,
-"type": "quad"
-},
-"val": {
-"mode": "initial",
-"num_range": 0.0,
-"num_val": 0.0,
-"vec_range": Vector2( 0, 0 ),
-"vec_val": Vector2( 0, 0 )
-}
-} ]
+scale=[  ]
 rot=[  ]
 
 [unfocused]

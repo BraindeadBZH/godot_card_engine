@@ -1,17 +1,17 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://screens/library/library_screen.gd" type="Script" id=1]
-[ext_resource path="res://screens/library/background.png" type="Texture" id=2]
+[ext_resource path="res://screens/builder/builder_screen.gd" type="Script" id=1]
+[ext_resource path="res://screens/builder/background.png" type="Texture" id=2]
 [ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://containers/card_list/card_list.tscn" type="PackedScene" id=4]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 36
+size = 20
 font_data = ExtResource( 3 )
 
-[node name="LibraryScreen" type="Control"]
+[node name="BuilderScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -43,35 +43,35 @@ __meta__ = {
 [node name="TitleLayout" type="HBoxContainer" parent="TitleBg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
+margin_left = 5.0
 margin_top = 5.0
-margin_right = -10.0
+margin_right = -5.0
 margin_bottom = -5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="TitleBg/TitleLayout"]
-margin_top = 5.0
-margin_right = 98.0
-margin_bottom = 47.0
+margin_right = 57.0
+margin_bottom = 51.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Library"
+text = "Deck
+Builder"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Separator" type="Control" parent="TitleBg/TitleLayout"]
-margin_left = 102.0
-margin_right = 122.0
+margin_left = 61.0
+margin_right = 81.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="CategoriesLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
-margin_left = 126.0
-margin_right = 369.0
+margin_left = 85.0
+margin_right = 328.0
 margin_bottom = 52.0
 
 [node name="ClassLayout" type="HBoxContainer" parent="TitleBg/TitleLayout/CategoriesLayout"]
@@ -109,8 +109,8 @@ margin_bottom = 24.0
 rect_min_size = Vector2( 150, 0 )
 
 [node name="ValuesLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
-margin_left = 373.0
-margin_right = 523.0
+margin_left = 332.0
+margin_right = 482.0
 margin_bottom = 52.0
 
 [node name="Values" type="OptionButton" parent="TitleBg/TitleLayout/ValuesLayout"]
@@ -152,8 +152,8 @@ __meta__ = {
 }
 
 [node name="TextsLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
-margin_left = 527.0
-margin_right = 677.0
+margin_left = 486.0
+margin_right = 636.0
 margin_bottom = 52.0
 
 [node name="Texts" type="OptionButton" parent="TitleBg/TitleLayout/TextsLayout"]
@@ -174,8 +174,8 @@ __meta__ = {
 }
 
 [node name="SortLayout" type="GridContainer" parent="TitleBg/TitleLayout"]
-margin_left = 681.0
-margin_right = 908.0
+margin_left = 640.0
+margin_right = 867.0
 margin_bottom = 52.0
 columns = 2
 
@@ -197,32 +197,40 @@ margin_bottom = 52.0
 text = "Sort by name"
 
 [node name="Spacer" type="Control" parent="TitleBg/TitleLayout"]
-margin_left = 912.0
-margin_right = 1016.0
+margin_left = 871.0
+margin_right = 1026.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="BackBtn" parent="TitleBg/TitleLayout" instance=ExtResource( 5 )]
-margin_left = 1020.0
-margin_right = 1220.0
+margin_left = 1030.0
+margin_right = 1230.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 200, 0 )
 button_text = "Back"
 
-[node name="LibraryBg" type="ColorRect" parent="."]
+[node name="BuilderLayout" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = 100.0
 margin_right = -20.0
 margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LibraryBg" type="ColorRect" parent="BuilderLayout"]
+margin_right = 1036.0
+margin_bottom = 600.0
 rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
 color = Color( 0, 0, 0, 0.784314 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LibraryScroll" type="ScrollContainer" parent="LibraryBg"]
+[node name="LibraryScroll" type="ScrollContainer" parent="BuilderLayout/LibraryBg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -233,39 +241,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LibraryContainer" parent="LibraryBg/LibraryScroll" instance=ExtResource( 4 )]
-margin_right = 1200.0
+[node name="LibraryContainer" parent="BuilderLayout/LibraryBg/LibraryScroll" instance=ExtResource( 4 )]
+margin_right = 996.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 card_visual = ExtResource( 6 )
-in_anchor = NodePath("InAnchor")
-out_anchor = NodePath("OutAnchor")
+in_anchor = NodePath("../../InAnchor")
+out_anchor = NodePath("../../OutAnchor")
 
-[node name="InAnchor" type="Control" parent="LibraryBg/LibraryScroll/LibraryContainer"]
+[node name="InAnchor" type="Control" parent="BuilderLayout/LibraryBg"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -20.0
-margin_right = -160.0
-margin_bottom = 20.0
-rect_rotation = -90.0
-rect_scale = Vector2( 0.001, 0.001 )
+rect_rotation = 90.0
+rect_scale = Vector2( 1e-05, 1e-05 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OutAnchor" type="Control" parent="LibraryBg/LibraryScroll/LibraryContainer"]
+[node name="OutAnchor" type="Control" parent="BuilderLayout/LibraryBg"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 160.0
-margin_top = -20.0
-margin_right = 200.0
-margin_bottom = 20.0
 rect_rotation = 90.0
-rect_scale = Vector2( 0.001, 0.001 )
+rect_scale = Vector2( 1e-05, 1e-05 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeckBg" type="ColorRect" parent="BuilderLayout"]
+margin_left = 1040.0
+margin_right = 1240.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 200, 0 )
+color = Color( 0, 0, 0, 0.784314 )
+
+[node name="Title" type="Label" parent="BuilderLayout/DeckBg"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.0
+margin_top = -25.5
+margin_right = 53.0
+margin_bottom = 25.5
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Coming soon"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

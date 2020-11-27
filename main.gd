@@ -2,7 +2,7 @@ extends Node
 
 var _screens = {
 	"menu": preload("res://screens/menu/menu_screen.tscn"),
-	"library": preload("res://screens/library/library_screen.tscn"),
+	"builder": preload("res://screens/builder/builder_screen.tscn"),
 	"game": preload("res://screens/game/game_screen.tscn")
 }
 
