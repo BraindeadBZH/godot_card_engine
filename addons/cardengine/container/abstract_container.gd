@@ -353,14 +353,14 @@ func _adjusted_trans(origin: CardTransform) -> CardTransform:
 		has_adjust = true
 	
 	if _adjust_scale_x_mode == "relative":
-		adjusted.scale.x += _adjust_scale.x
+		adjusted.scale.x *= _adjust_scale.x
 		has_adjust = true
 	elif _adjust_scale_x_mode == "absolute":
 		adjusted.scale.x = _adjust_scale.x
 		has_adjust = true
 	
 	if _adjust_scale_y_mode == "relative":
-		adjusted.scale.y += _adjust_scale.y
+		adjusted.scale.y *= _adjust_scale.y
 		has_adjust = true
 	elif _adjust_scale_y_mode == "absolute":
 		adjusted.scale.y = _adjust_scale.y
