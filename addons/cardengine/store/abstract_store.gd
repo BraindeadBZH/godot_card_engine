@@ -291,7 +291,7 @@ func _ref2idx(ref: int) -> int:
 	var search: int = 0
 	
 	for card in _cards:
-		if card.reference() == ref:
+		if card.ref() == ref:
 			return search
 		
 		search += 1
