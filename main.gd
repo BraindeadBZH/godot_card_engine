@@ -16,6 +16,12 @@ func _ready():
 	change_screen("menu")
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and not event.is_pressed():
+		if CardEngine.general().is_dragging():
+			CardEngine.general().stop_drag()
+
+
 func change_screen(screen_name: String) -> void:
 	if !_screens.has(screen_name): return
 	

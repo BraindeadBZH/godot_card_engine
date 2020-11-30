@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://containers/card_list/card_drag_background.png" type="Texture" id=1]
+[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://containers/card_list/card_list_drag.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="CardListDrag" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1080.0
+margin_bottom = -690.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( -14, -14 )
+scale = Vector2( 0.66, 0.66 )
+z_index = 99
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Name" type="Label" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.492
+margin_top = 21.2808
+margin_right = -20.508
+margin_bottom = -20.7192
+custom_fonts/font = SubResource( 1 )
+text = "Card Name"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}

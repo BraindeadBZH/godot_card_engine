@@ -5,7 +5,7 @@
 [ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://containers/card_list/card_list.tscn" type="PackedScene" id=4]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/cardengine/core/drop_area.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -246,7 +246,6 @@ margin_right = 996.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-card_visual = ExtResource( 6 )
 in_anchor = NodePath("../../InAnchor")
 out_anchor = NodePath("../../OutAnchor")
 
@@ -290,6 +289,14 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Coming soon"
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DropArea" type="Control" parent="BuilderLayout/DeckBg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/cardengine/card/abstract_card.gd" type="Script" id=1]
+[ext_resource path="res://addons/cardengine/card/mouse_area.gd" type="Script" id=2]
 
 [node name="AbstractCard" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,6 +16,7 @@ visible = false
 [node name="MouseArea" type="TextureButton" parent="AnimContainer"]
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -32,6 +34,7 @@ autostart = true
 [node name="AnimationPlayer" type="Tween" parent="."]
 [connection signal="button_down" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_down"]
 [connection signal="button_up" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_up"]
+[connection signal="drag_started" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_drag_started"]
 [connection signal="mouse_entered" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_mouse_entered"]
 [connection signal="mouse_exited" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_mouse_exited"]
 [connection signal="pressed" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_pressed"]

@@ -31,6 +31,7 @@ var _event_queue: Array = []
 var _trans_origin: CardTransform = CardTransform.new()
 var _trans_focused: CardTransform = CardTransform.new()
 var _trans_activated: CardTransform = CardTransform.new()
+var _is_dragged: bool = false
 
 onready var _cont = $AnimContainer
 onready var _front = $AnimContainer/Front
@@ -39,6 +40,11 @@ onready var _transi = $Transitions
 onready var _transi_merge = $TransiMerge
 onready var _anim_player = $AnimationPlayer
 onready var _event_merge = $EventMerge
+onready var _mouse = $AnimContainer/MouseArea
+
+
+func _ready() -> void:
+	CardEngine.general().connect("drag_stopped", self, "_on_drag_stopped")
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -111,6 +117,7 @@ func change_side() -> void:
 
 func set_interactive(state: bool) -> void:
 	_interactive = state
+	_mouse.set_drag_enabled(state)
 
 
 func set_interaction_paused(state: bool) -> void:
@@ -129,6 +136,10 @@ func set_animation(anim: AnimationData) -> void:
 	_current_anim = ""
 	_event_queue.clear()
 	_change_anim("idle")
+
+
+func set_drag_widget(scene: PackedScene) -> void:
+	_mouse.set_drag_widget(scene)
 
 
 func is_flagged_for_removal() -> bool:
@@ -499,7 +510,7 @@ func _on_EventMerge_timeout() -> void:
 	
 	var next = _event_queue.front()
 
-	if _current_anim != "idle" and next == "idle" and _anim_player.is_active():
+	if _current_anim != "idle" and _anim_player.is_active():
 		return
 	
 	match next:
@@ -519,7 +530,7 @@ func _on_EventMerge_timeout() -> void:
 
 
 func _on_MouseArea_mouse_entered() -> void:
-	if not _interactive:
+	if not _interactive or CardEngine.general().is_dragging():
 		return
 	
 	z_index = 1
@@ -528,7 +539,7 @@ func _on_MouseArea_mouse_entered() -> void:
 
 
 func _on_MouseArea_mouse_exited() -> void:
-	if not _interactive:
+	if not _interactive or CardEngine.general().is_dragging():
 		return
 	
 	z_index = 0
@@ -538,21 +549,21 @@ func _on_MouseArea_mouse_exited() -> void:
 
 
 func _on_MouseArea_pressed() -> void:
-	if not _interactive:
+	if not _interactive or CardEngine.general().is_dragging():
 		return
 	
 	emit_signal("clicked")
 
 
 func _on_MouseArea_button_down() -> void:
-	if not _interactive:
+	if not _interactive or CardEngine.general().is_dragging():
 		return
 	
 	_post_event("activated")
 
 
 func _on_MouseArea_button_up() -> void:
-	if not _interactive:
+	if not _interactive or CardEngine.general().is_dragging():
 		return
 		
 	_post_event("deactivated")
@@ -579,3 +590,20 @@ func _on_TransiMerge_timeout() -> void:
 func _on_Transitions_tween_all_completed() -> void:
 	if _remove_flag:
 		emit_signal("need_removal")
+
+
+func _on_MouseArea_drag_started() -> void:
+	CardEngine.general().start_drag(_inst)
+	_is_dragged = true
+
+
+func _on_drag_stopped() -> void:
+	if _is_dragged:
+		_post_event("deactivated")
+		
+		if not _mouse.is_hovered():
+			_post_event("unfocused")
+			_post_event("idle")
+		
+		z_index = 0
+		_is_dragged = false

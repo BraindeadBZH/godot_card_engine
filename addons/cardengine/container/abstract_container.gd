@@ -8,6 +8,7 @@ enum FineTuningMode {LINEAR, SYMMETRIC, RANDOM}
 enum AspectMode {KEEP, IGNORE}
 
 export(PackedScene) var card_visual: PackedScene = null
+export(PackedScene) var drag_widget: PackedScene = null
 export(NodePath) var in_anchor: NodePath = ""
 export(NodePath) var out_anchor: NodePath = ""
 
@@ -136,6 +137,7 @@ func _update_container() -> void:
 		visual_inst.set_transitions(_transitions)
 		visual_inst.set_interactive(_interactive)
 		visual_inst.set_animation(CardEngine.anim().get_animation(_anim))
+		visual_inst.set_drag_widget(drag_widget)
 		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
 		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
 		
