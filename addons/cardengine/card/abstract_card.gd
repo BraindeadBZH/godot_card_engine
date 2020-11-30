@@ -378,7 +378,7 @@ func _change_state(new_state: int) -> void:
 
 
 func _change_anim(anim: String) -> void:
-	if _anim == null:
+	if _anim == null or _remove_flag:
 		return
 	
 	_anim_player.remove_all()
