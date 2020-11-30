@@ -20,6 +20,8 @@ func _ready() -> void:
 	_draw_pile.connect("changed", self, "_on_DrawPile_changed")
 	# warning-ignore:return_value_discarded
 	_discard_pile.connect("changed", self, "_on_DiscardPile_changed")
+	# warning-ignore:return_value_discarded
+	_hand.connect("changed", self, "_on_Hand_changed")
 	
 	var db = CardEngine.db().get_database("main")
 	
@@ -35,14 +37,30 @@ func _on_MenuBtn_pressed() -> void:
 
 func _on_DrawPile_changed() -> void:
 	_draw_count.text = "%d" % _draw_pile.count()
+	
+	if _draw_pile.count() <= 0 or _hand.count() >= MAX_HAND_SIZE:
+		_draw_btn.disabled = true
+	else:
+		_draw_btn.disabled = false
 
 
 func _on_DiscardPile_changed() -> void:
 	_discard_count.text = "%d" % _discard_pile.count()
+	
+	if _discard_pile.count() > 0:
+		_reshuffle_btn.disabled = false
+	else:
+		_reshuffle_btn.disabled = true
+
+
+func _on_Hand_changed() -> void:
+	if _draw_pile.count() <= 0 or _hand.count() >= MAX_HAND_SIZE:
+		_draw_btn.disabled = true
+	else:
+		_draw_btn.disabled = false
 
 
 func _on_StartingHandDelay_timeout() -> void:
-	
 	var card = _draw_pile.draw()
 	
 	if card == null:
@@ -63,6 +81,11 @@ func _on_DrawBtn_pressed() -> void:
 		return
 	
 	_hand.add_card(card)
-	
-	if _hand.count() >= MAX_HAND_SIZE:
-		_draw_btn.disabled = true
+
+
+func _on_CardDrop_dropped(card: CardInstance) -> void:
+	_hand.play_card(card, _discard_pile)
+
+
+func _on_ReshuffleBtn_pressed() -> void:
+	pass # TODO

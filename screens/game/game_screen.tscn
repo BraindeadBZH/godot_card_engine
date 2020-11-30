@@ -3,7 +3,7 @@
 [ext_resource path="res://screens/game/game_screen.gd" type="Script" id=1]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://containers/hand/hand.tscn" type="PackedScene" id=3]
-[ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/cardengine/core/drop_area.gd" type="Script" id=4]
 [ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="DynamicFont" id=1]
@@ -51,7 +51,7 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.498039 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
-text = "00"
+text = "0"
 align = 1
 valign = 1
 __meta__ = {
@@ -134,6 +134,14 @@ margin_bottom = 59.5
 rect_min_size = Vector2( 300, 300 )
 color = Color( 0.866667, 0.564706, 0.564706, 1 )
 
+[node name="CardDrop" type="Control" parent="PlayZone"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HandZone" type="ColorRect" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -157,7 +165,6 @@ margin_left = -370.0
 margin_top = -140.0
 margin_right = 370.0
 margin_bottom = 80.0
-card_visual = ExtResource( 4 )
 in_anchor = NodePath("../HandInAnchor")
 out_anchor = NodePath("../HandOutAnchor")
 
@@ -204,5 +211,7 @@ wait_time = 0.1
 one_shot = true
 autostart = true
 [connection signal="pressed" from="DeckZone/DrawBtn" to="." method="_on_DrawBtn_pressed"]
+[connection signal="pressed" from="DiscardZone/ReshuffleBtn" to="." method="_on_ReshuffleBtn_pressed"]
+[connection signal="dropped" from="PlayZone/CardDrop" to="." method="_on_CardDrop_dropped"]
 [connection signal="pressed" from="MenuBtn" to="." method="_on_MenuBtn_pressed"]
 [connection signal="timeout" from="StartingHandDelay" to="." method="_on_StartingHandDelay_timeout"]
