@@ -276,30 +276,37 @@ margin_bottom = 600.0
 rect_min_size = Vector2( 200, 0 )
 color = Color( 0, 0, 0, 0.784314 )
 
-[node name="Title" type="Label" parent="BuilderLayout/DeckBg"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.0
-margin_top = -25.5
-margin_right = 53.0
-margin_bottom = 25.5
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Coming soon"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DropArea" type="Control" parent="BuilderLayout/DeckBg"]
+[node name="CardDrop" type="Control" parent="BuilderLayout/DeckBg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DeckLayout" type="VBoxContainer" parent="BuilderLayout/DeckBg/CardDrop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeckScroll" type="ScrollContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
+margin_right = 180.0
+margin_bottom = 580.0
+mouse_filter = 1
+size_flags_vertical = 3
+
+[node name="DeckList" type="VBoxContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll"]
+margin_right = 180.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 [connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class" to="." method="_on_Class_item_selected"]
 [connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity" to="." method="_on_Rarity_item_selected"]
 [connection signal="item_selected" from="TitleBg/TitleLayout/ValuesLayout/Values" to="." method="_on_Values_item_selected"]
@@ -312,3 +319,4 @@ __meta__ = {
 [connection signal="toggled" from="TitleBg/TitleLayout/SortLayout/NameSort" to="." method="_on_NameSort_toggled"]
 [connection signal="pressed" from="TitleBg/TitleLayout/BackBtn" to="." method="_on_BackBtn_pressed"]
 [connection signal="resized" from="BuilderLayout/LibraryBg/LibraryScroll" to="." method="_on_LibraryScroll_resized"]
+[connection signal="dropped" from="BuilderLayout/DeckBg/CardDrop" to="." method="_on_CardDrop_dropped"]

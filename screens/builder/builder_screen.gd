@@ -1,6 +1,7 @@
 extends AbstractScreen
 
 var _store: CardDeck = CardDeck.new()
+var _deck: CardDeck = CardDeck.new()
 var _selected_class: String = "none"
 var _selected_rarity: String = "none"
 var _selected_val: String = "none"
@@ -18,6 +19,7 @@ onready var _contains = $TitleBg/TitleLayout/TextsLayout/Contains
 onready var _rarity_sort = $TitleBg/TitleLayout/SortLayout/RaritySort
 onready var _mana_sort = $TitleBg/TitleLayout/SortLayout/ManaSort
 onready var _name_sort = $TitleBg/TitleLayout/SortLayout/NameSort
+onready var _deck_list = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll/DeckList
 
 
 func _ready() -> void:
@@ -138,6 +140,24 @@ func _update_texts() -> void:
 			_texts.select(_texts.get_item_count() - 1)
 
 
+func _update_deck_list() -> void:
+	Utils.delete_all_children(_deck_list)
+	
+	for card in _deck.cards():
+		var btn = Button.new()
+		
+		var mana = card.data().get_value("mana")
+		if mana >= 0:
+			btn.text = "%s (%d)" % [card.data().get_text("name"), mana]
+		else:
+			btn.text = "%s (X)" % card.data().get_text("name")
+		
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.rect_min_size = Vector2(100.0, 30.0)
+		
+		_deck_list.add_child(btn)
+
+
 func _on_BackBtn_pressed() -> void:
 	emit_signal("next_screen", "menu")
 
@@ -205,3 +225,8 @@ func _on_NameSort_toggled(_button_pressed: bool) -> void:
 func _on_LibraryScroll_resized() -> void:
 	if _scroll != null:
 		_container.rect_min_size = _scroll.rect_size
+
+
+func _on_CardDrop_dropped(card: CardInstance) -> void:
+	_deck.add_card(CardInstance.new(card.data()))
+	_update_deck_list()
