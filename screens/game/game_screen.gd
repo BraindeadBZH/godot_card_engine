@@ -1,6 +1,6 @@
 extends AbstractScreen
 
-const STARTING_HAND_SIZE: int = 3
+const STARTING_HAND_SIZE: int = 4
 const MAX_HAND_SIZE: int = 8
 
 var _hand: CardHand = CardHand.new()
@@ -71,7 +71,7 @@ func _on_StartingHandDelay_timeout() -> void:
 	if _hand.count() >= STARTING_HAND_SIZE:
 		_hand_delay.stop()
 	else:
-		_hand_delay.start(0.75)
+		_hand_delay.start(0.7)
 
 
 func _on_DrawBtn_pressed() -> void:

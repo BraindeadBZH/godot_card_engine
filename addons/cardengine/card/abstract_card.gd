@@ -32,6 +32,8 @@ var _trans_origin: CardTransform = CardTransform.new()
 var _trans_focused: CardTransform = CardTransform.new()
 var _trans_activated: CardTransform = CardTransform.new()
 var _is_dragged: bool = false
+var _follow_mouse: bool = false
+var _waiting_card_return: bool = false
 
 onready var _cont = $AnimContainer
 onready var _front = $AnimContainer/Front
@@ -45,6 +47,11 @@ onready var _mouse = $AnimContainer/MouseArea
 
 func _ready() -> void:
 	CardEngine.general().connect("drag_stopped", self, "_on_drag_stopped")
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and _is_dragged and _follow_mouse:
+		position += event.relative
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -135,11 +142,16 @@ func set_animation(anim: AnimationData) -> void:
 	_anim = anim
 	_current_anim = ""
 	_event_queue.clear()
+	_precompute_trans()
 	_change_anim("idle")
 
 
 func set_drag_widget(scene: PackedScene) -> void:
 	_mouse.set_drag_widget(scene)
+	if scene == null:
+		_follow_mouse = true
+	else:
+		_follow_mouse = false
 
 
 func is_flagged_for_removal() -> bool:
@@ -209,9 +221,6 @@ func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
 			prev_val = _trans_focused.pos
 		AnimationSequence.INIT_ACTIVATED:
 			prev_val = _trans_activated.pos
-	
-	if seq.from_mode() == AnimationSequence.INIT_ORIGIN:
-		prev_val = Vector2(0.0, 0.0)
 
 	for step in seq.sequence():
 		if step.transi != null:
@@ -369,6 +378,32 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 	return prev_val
 
 
+func _precompute_trans() -> void:
+	_trans_focused.pos = _setup_pos_sequence(
+		_anim.focused_animation().position_sequence(),
+		_anim_player)
+		
+	_trans_focused.scale = _setup_scale_sequence(
+		_anim.focused_animation().scale_sequence(),
+		_anim_player)
+		
+	_trans_focused.rot = _setup_rotation_sequence(
+		_anim.focused_animation().rotation_sequence(),
+		_anim_player)
+	
+	_trans_activated.pos = _setup_pos_sequence(
+		_anim.activated_animation().position_sequence(),
+		_anim_player)
+		
+	_trans_activated.scale = _setup_scale_sequence(
+		_anim.activated_animation().scale_sequence(),
+		_anim_player)
+		
+	_trans_activated.rot = _setup_rotation_sequence(
+		_anim.activated_animation().rotation_sequence(),
+		_anim_player)
+
+
 func _change_state(new_state: int) -> void:
 	if new_state == _state:
 		return
@@ -389,6 +424,10 @@ func _change_anim(anim: String) -> void:
 		"idle":
 			_anim_player.repeat = true
 			
+			_cont.position = Vector2(0.0, 0.0)
+			_cont.scale = Vector2(1.0, 1.0)
+			_cont.rotation = 0.0
+			
 			_setup_pos_sequence(
 				_anim.idle_loop().position_sequence(),
 				_anim_player)
@@ -405,37 +444,49 @@ func _change_anim(anim: String) -> void:
 			if _adjust_on_focused and _adjusted_trans != null:
 				_transition(_root_trans, _adjusted_trans)
 			
-			_trans_focused.pos = _setup_pos_sequence(
+			_cont.position = Vector2(0.0, 0.0)
+			_cont.scale = Vector2(1.0, 1.0)
+			_cont.rotation = 0.0
+			
+			_setup_pos_sequence(
 				_anim.focused_animation().position_sequence(),
 				_anim_player)
 				
-			_trans_focused.scale = _setup_scale_sequence(
+			_setup_scale_sequence(
 				_anim.focused_animation().scale_sequence(),
 				_anim_player)
 				
-			_trans_focused.rot = _setup_rotation_sequence(
+			_setup_rotation_sequence(
 				_anim.focused_animation().rotation_sequence(),
 				_anim_player)
 				
 		"activated":
 			if _adjust_on_activated and _adjusted_trans != null:
 				_transition(_root_trans, _adjusted_trans)
+			
+			_cont.position = _trans_focused.pos
+			_cont.scale = _trans_focused.scale
+			_cont.rotation = _trans_focused.rot
 				
-			_trans_activated.pos = _setup_pos_sequence(
+			_setup_pos_sequence(
 				_anim.activated_animation().position_sequence(),
 				_anim_player)
 				
-			_trans_activated.scale = _setup_scale_sequence(
+			_setup_scale_sequence(
 				_anim.activated_animation().scale_sequence(),
 				_anim_player)
 				
-			_trans_activated.rot = _setup_rotation_sequence(
+			_setup_rotation_sequence(
 				_anim.activated_animation().rotation_sequence(),
 				_anim_player)
 				
 		"deactivated":
 			if _adjust_on_activated and _adjusted_trans != null:
 				_transition(_adjusted_trans, _root_trans)
+			
+			_cont.position = _trans_activated.pos
+			_cont.scale = _trans_activated.scale
+			_cont.rotation = _trans_activated.rot
 				
 			_setup_pos_sequence(
 				_anim.deactivated_animation().position_sequence(),
@@ -452,6 +503,10 @@ func _change_anim(anim: String) -> void:
 		"unfocused":
 			if _adjust_on_focused and _adjusted_trans != null:
 				_transition(_adjusted_trans, _root_trans)
+			
+			_cont.position = _trans_focused.pos
+			_cont.scale = _trans_focused.scale
+			_cont.rotation = _trans_focused.rot
 				
 			_setup_pos_sequence(
 				_anim.unfocused_animation().position_sequence(),
@@ -510,7 +565,7 @@ func _on_EventMerge_timeout() -> void:
 	
 	var next = _event_queue.front()
 
-	if _current_anim != "idle" and _anim_player.is_active():
+	if _current_anim != "idle" and next == "idle" and _anim_player.is_active():
 		return
 	
 	match next:
@@ -590,20 +645,42 @@ func _on_TransiMerge_timeout() -> void:
 func _on_Transitions_tween_all_completed() -> void:
 	if _remove_flag:
 		emit_signal("need_removal")
+	
+	if _waiting_card_return:
+		_waiting_card_return = false
+		_mouse.mouse_filter = Control.MOUSE_FILTER_STOP
+		
+		_post_event("unfocused")
+		_post_event("idle")
 
 
 func _on_MouseArea_drag_started() -> void:
 	CardEngine.general().start_drag(_inst)
 	_is_dragged = true
+	
+	if _follow_mouse:
+		_mouse.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
 func _on_drag_stopped() -> void:
 	if _is_dragged:
-		_post_event("deactivated")
-		
-		if not _mouse.is_hovered():
-			_post_event("unfocused")
-			_post_event("idle")
-		
 		z_index = 0
 		_is_dragged = false
+		
+		if _follow_mouse:
+			var current := CardTransform.new()
+			current.pos = position
+			current.scale = scale
+			current.rot = rotation
+			_waiting_card_return = true
+			
+			if _adjusted_trans != null:
+				_transition(current, _adjusted_trans)
+			else:
+				_transition(current, _root_trans)
+		else:
+			_post_event("deactivated")
+			
+			if not _mouse.is_hovered():
+				_post_event("unfocused")
+				_post_event("idle")
