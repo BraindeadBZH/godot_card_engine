@@ -71,6 +71,7 @@ class StoreSorter:
 
 signal changed()
 signal card_added()
+signal cards_added()
 signal card_removed(index)
 signal cards_removed()
 signal filtered()
@@ -203,6 +204,15 @@ func texts() -> Array:
 	return _texts
 
 
+func add_cards(cards: Array) -> void:
+	for card in cards:
+		_cards.append(card)
+	_update_stats()
+	_update_filtered()
+	emit_signal("cards_added")
+	emit_signal("changed")
+
+
 func add_card(card: CardInstance) -> void:
 	_cards.append(card)
 	_update_stats()
@@ -238,7 +248,12 @@ func remove_last() -> void:
 	emit_signal("changed")
 
 
-func move_card(ref: int, to: AbstractStore = null) -> CardInstance:
+func move_cards(to: AbstractStore) -> void:
+	to.add_cards(cards())
+	clear()
+
+
+func move_card(ref: int, to: AbstractStore) -> CardInstance:
 	var index: int = _ref2idx(ref)
 	
 	if index >= 0:
@@ -254,11 +269,11 @@ func move_card(ref: int, to: AbstractStore = null) -> CardInstance:
 	return null
 
 
-func move_random_card(to: AbstractStore = null) -> CardInstance:
+func move_random_card(to: AbstractStore) -> CardInstance:
 	return move_card(_rng.random_range(0, count()-1), to)
 
 
-func copy_card(ref: int, to: AbstractStore = null) -> CardInstance:
+func copy_card(ref: int, to: AbstractStore) -> CardInstance:
 	var index: int = _ref2idx(ref)
 	
 	if index >= 0:
@@ -269,7 +284,7 @@ func copy_card(ref: int, to: AbstractStore = null) -> CardInstance:
 	return null
 
 
-func copy_random_card(to: AbstractStore = null) -> CardInstance:
+func copy_random_card(to: AbstractStore) -> CardInstance:
 	return copy_card(_rng.random_range(0, _cards.size()-1), to)
 
 

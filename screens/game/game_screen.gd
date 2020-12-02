@@ -88,4 +88,5 @@ func _on_CardDrop_dropped(card: CardInstance) -> void:
 
 
 func _on_ReshuffleBtn_pressed() -> void:
-	pass # TODO
+	_discard_pile.move_cards(_draw_pile)
+	_draw_pile.shuffle()
