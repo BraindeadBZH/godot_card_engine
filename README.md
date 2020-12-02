@@ -25,13 +25,17 @@ Currently under development, do not expect it to work.
 * Container transition animation (card re-order, card added, card removed)
 * Container event animation (idle, focused)
 * Animation editor
+* Drag and drop support
 
 
 ## What is not implemented
 
-* Drag and drop support
 * Card modifiers
 * Saving store to disks
+* Manual sorting
+* Container to container drag and drop
+* Filters on DropArea
+* Add animation loop when card is focused or active.
 * Other features to be defined...
 
 
