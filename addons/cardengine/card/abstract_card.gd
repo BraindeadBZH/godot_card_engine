@@ -162,9 +162,19 @@ func flag_for_removal() -> void:
 	_remove_flag = true
 	
 	if _transitions.out_anchor.enabled:
-		_transition(_root_trans, null)
+		_transition(_current_trans(), null)
 	else:
 		emit_signal("need_removal")
+
+
+func _current_trans() -> CardTransform:
+	var trans = CardTransform.new()
+	
+	trans.pos = position
+	trans.scale = scale
+	trans.rot = rotation
+	
+	return trans
 
 
 func _transition(from: CardTransform, to: CardTransform) -> void:
@@ -667,17 +677,16 @@ func _on_drag_stopped() -> void:
 		z_index = 0
 		_is_dragged = false
 		
+		if _remove_flag:
+			return
+		
 		if _follow_mouse:
-			var current := CardTransform.new()
-			current.pos = position
-			current.scale = scale
-			current.rot = rotation
 			_waiting_card_return = true
 			
 			if _adjusted_trans != null:
-				_transition(current, _adjusted_trans)
+				_transition(_current_trans(), _adjusted_trans)
 			else:
-				_transition(current, _root_trans)
+				_transition(_current_trans(), _root_trans)
 		else:
 			_post_event("deactivated")
 			
