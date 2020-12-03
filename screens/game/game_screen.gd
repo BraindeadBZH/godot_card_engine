@@ -2,10 +2,15 @@ extends AbstractScreen
 
 const STARTING_HAND_SIZE: int = 4
 const MAX_HAND_SIZE: int = 8
+const MAX_MANA: int = 10
+
+var _mana_point := preload("res://screens/game/mana_point.png")
+var _mana_empty := preload("res://screens/game/mana_empty.png")
 
 var _hand: CardHand = CardHand.new()
 var _draw_pile: CardPile = CardPile.new()
 var _discard_pile: CardPile = CardPile.new()
+var _mana: int = MAX_MANA
 
 onready var _hand_cont = $HandZone/HandContainer
 onready var _draw_count = $DeckZone/DrawCount
@@ -29,6 +34,17 @@ func _ready() -> void:
 	_draw_pile.shuffle()
 	
 	_hand_cont.set_store(_hand)
+	
+	_update_mana()
+
+
+func _update_mana() -> void:
+	for i in range(1, MAX_MANA+1):
+		var ctrl: TextureRect = get_node("ManaBar/Mana%d" % i)
+		if i <= _mana:
+			ctrl.texture = _mana_point
+		else:
+			ctrl.texture = _mana_empty
 
 
 func _on_MenuBtn_pressed() -> void:
@@ -84,9 +100,26 @@ func _on_DrawBtn_pressed() -> void:
 
 
 func _on_CardDrop_dropped(card: CardInstance) -> void:
-	_hand.play_card(card, _discard_pile)
+	var card_mana = card.data().get_value("mana")
+	
+	if _mana > 0 and _mana >= card_mana:
+		_hand.play_card(card, _discard_pile)
+		if card_mana < 0:
+			_mana = 0
+		else:
+			_mana -= card_mana
+		
+		_update_mana()
 
 
 func _on_ReshuffleBtn_pressed() -> void:
 	_discard_pile.move_cards(_draw_pile)
 	_draw_pile.shuffle()
+
+
+func _on_EndTurnBtn_pressed() -> void:
+	_mana = MAX_MANA
+	_update_mana()
+	
+	if _hand.count() < STARTING_HAND_SIZE:
+		_hand_delay.start(0.1)

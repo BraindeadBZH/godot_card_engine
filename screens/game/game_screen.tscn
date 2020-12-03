@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://screens/game/game_screen.gd" type="Script" id=1]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://containers/hand/hand.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/cardengine/core/drop_area.gd" type="Script" id=4]
 [ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://screens/game/mana_point.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 34
 font_data = ExtResource( 5 )
 
 [node name="GameScreen" type="Control"]
@@ -142,6 +147,132 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ManaBar" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = 140.0
+margin_right = 400.0
+margin_bottom = 195.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="ManaBar"]
+margin_left = 46.0
+margin_right = 134.0
+margin_bottom = 55.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.498039 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Mana  "
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Mana1" type="TextureRect" parent="ManaBar"]
+margin_left = 138.0
+margin_right = 178.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana2" type="TextureRect" parent="ManaBar"]
+margin_left = 182.0
+margin_right = 222.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana3" type="TextureRect" parent="ManaBar"]
+margin_left = 226.0
+margin_right = 266.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana4" type="TextureRect" parent="ManaBar"]
+margin_left = 270.0
+margin_right = 310.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana5" type="TextureRect" parent="ManaBar"]
+margin_left = 314.0
+margin_right = 354.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana6" type="TextureRect" parent="ManaBar"]
+margin_left = 358.0
+margin_right = 398.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana7" type="TextureRect" parent="ManaBar"]
+margin_left = 402.0
+margin_right = 442.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana8" type="TextureRect" parent="ManaBar"]
+margin_left = 446.0
+margin_right = 486.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana9" type="TextureRect" parent="ManaBar"]
+margin_left = 490.0
+margin_right = 530.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Mana10" type="TextureRect" parent="ManaBar"]
+margin_left = 534.0
+margin_right = 574.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="EndTurnBtn" parent="ManaBar" instance=ExtResource( 2 )]
+margin_left = 578.0
+margin_right = 753.0
+rect_min_size = Vector2( 175, 55 )
+button_text = "END TURN"
+
 [node name="HandZone" type="ColorRect" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -213,5 +344,6 @@ autostart = true
 [connection signal="pressed" from="DeckZone/DrawBtn" to="." method="_on_DrawBtn_pressed"]
 [connection signal="pressed" from="DiscardZone/ReshuffleBtn" to="." method="_on_ReshuffleBtn_pressed"]
 [connection signal="dropped" from="PlayZone/CardDrop" to="." method="_on_CardDrop_dropped"]
+[connection signal="pressed" from="ManaBar/EndTurnBtn" to="." method="_on_EndTurnBtn_pressed"]
 [connection signal="pressed" from="MenuBtn" to="." method="_on_MenuBtn_pressed"]
 [connection signal="timeout" from="StartingHandDelay" to="." method="_on_StartingHandDelay_timeout"]
