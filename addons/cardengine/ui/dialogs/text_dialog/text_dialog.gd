@@ -6,7 +6,7 @@ onready var _text = $MainLayout/Form/Text
 
 
 func _ready():
-	setup("category", CardEngine.db())
+	setup("text", CardEngine.db())
 
 
 func _reset_form() -> void:
