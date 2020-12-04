@@ -49,6 +49,10 @@ func load_card(id: String, db_id: String) -> void:
 	_value_list.clear()
 	_text_list.clear()
 	
+	_del_categ_btn.disabled = true
+	_del_value_btn.disabled = true
+	_del_text_btn.disabled = true
+	
 	var db = _manager.get_database(db_id)
 	var card = db.get_card(id)
 	if card == null:
