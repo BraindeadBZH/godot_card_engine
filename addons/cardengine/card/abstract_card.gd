@@ -389,6 +389,9 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 
 
 func _precompute_trans() -> void:
+	if _anim == null:
+		return
+	
 	_trans_focused.pos = _setup_pos_sequence(
 		_anim.focused_animation().position_sequence(),
 		_anim_player)
