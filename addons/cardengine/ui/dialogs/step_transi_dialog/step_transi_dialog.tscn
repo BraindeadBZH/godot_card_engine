@@ -6,7 +6,7 @@
 [node name="StepTransiDialog" instance=ExtResource( 1 )]
 margin_top = 1.0
 margin_bottom = -458.0
-window_title = "Value"
+window_title = "Transition"
 script = ExtResource( 2 )
 
 [node name="Form" parent="MainLayout" index="1"]
