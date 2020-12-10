@@ -148,13 +148,19 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				step_layout.add_child(btn)
 				btn.connect("pressed", self, "_on_TransiBtn_pressed", [seq, index])
 			
+			var initial_txt = "initial(%s)"
+			if index == 0:
+				initial_txt = initial_txt % _initial_mode_display(seq.from_mode())
+			else:
+				initial_txt = initial_txt % _initial_mode_display(seq.to_mode())
+			
 			if step.val != null:
 				var btn = Button.new()
 				btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				if seq is PositionSequence:
 					match step.val.mode:
 						StepValue.Mode.INITIAL:
-							btn.text = "initial()"
+							btn.text = initial_txt
 						StepValue.Mode.FIXED:
 							btn.text = "(%.2f, %.2f)" % [
 								step.val.vec_val.x,
@@ -168,7 +174,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				elif seq is ScaleSequence:
 					match step.val.mode:
 						StepValue.Mode.INITIAL:
-							btn.text = "initial()"
+							btn.text = initial_txt
 						StepValue.Mode.FIXED:
 							btn.text = "(%.2f, %.2f)" % [
 								step.val.vec_val.x,
@@ -182,7 +188,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				elif seq is RotationSequence:
 					match step.val.mode:
 						StepValue.Mode.INITIAL:
-							btn.text = "initial()"
+							btn.text = initial_txt
 						StepValue.Mode.FIXED:
 							btn.text = "%.2f°" % step.val.num_val
 						StepValue.Mode.RANDOM:
@@ -304,6 +310,20 @@ func _val_mode_display(mode: int) -> String:
 			return "Random"
 		_:
 			return "None"
+
+
+func _initial_mode_display(mode: int) -> String:
+	match mode:
+		AnimationSequence.INIT_DISABLED:
+			return "none"
+		AnimationSequence.INIT_ORIGIN:
+			return "origin"
+		AnimationSequence.INIT_FOCUSED:
+			return "focused"
+		AnimationSequence.INIT_ACTIVATED:
+			return "activated"
+		_:
+			return "none"
 
 
 func _on_Animations_changed() -> void:
