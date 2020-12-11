@@ -273,6 +273,11 @@ func move_random_card(to: AbstractStore) -> CardInstance:
 	return move_card(_rng.random_range(0, count()-1), to)
 
 
+func copy_cards(to: AbstractStore) -> void:
+	for card in _cards:
+		to.add_card(card.duplicate())
+
+
 func copy_card(ref: int, to: AbstractStore) -> CardInstance:
 	var index: int = _ref2idx(ref)
 	
