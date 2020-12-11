@@ -103,7 +103,7 @@ func _on_CardDrop_dropped(card: CardInstance) -> void:
 	var card_mana = card.data().get_value("mana")
 	
 	if _mana >= card_mana:
-		_hand.play_card(card, _discard_pile)
+		_hand.play_card(card.ref(), _discard_pile)
 		if card_mana < 0:
 			_mana = 0
 		else:

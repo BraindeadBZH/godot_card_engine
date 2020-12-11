@@ -5,10 +5,10 @@ extends AbstractStore
 signal card_played(ref)
 
 
-func play_card(card: CardInstance, discard_pile: AbstractStore = null) -> void:
-	remove_card(card.ref())
-	
+func play_card(ref: int, discard_pile: AbstractStore = null) -> void:
 	if discard_pile != null:
-		discard_pile.add_card(card)
+		discard_pile.add_card(get_card(_ref2idx(ref)))
 	
-	emit_signal("card_played", card.ref())
+	remove_card(ref)
+	
+	emit_signal("card_played", ref)
