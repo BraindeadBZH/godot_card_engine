@@ -386,7 +386,7 @@ func _clear() -> void:
 		return
 	
 	for child in _cards.get_children():
-		if not _store.has_card(child.instance()):
+		if not _store.has_card(child.instance().ref()):
 			child.flag_for_removal()
 
 

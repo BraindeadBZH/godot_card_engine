@@ -147,13 +147,13 @@ func is_empty() -> bool:
 		return _filtered.empty()
 
 
-func has_card(search: CardInstance) -> bool:
+func has_card(ref: int) -> bool:
 	var c = _cards
 	if _filter != null:
 		c = _filtered
 		
 	for card in c:
-		if card.ref() == search.ref():
+		if card.ref() == ref:
 			return true
 	
 	return false
