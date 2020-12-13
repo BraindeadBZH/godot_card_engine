@@ -149,13 +149,13 @@ __meta__ = {
 
 [node name="ManaBar" type="HBoxContainer" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 margin_left = -400.0
-margin_top = 140.0
+margin_top = -220.0
 margin_right = 400.0
-margin_bottom = 195.0
+margin_bottom = -180.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
