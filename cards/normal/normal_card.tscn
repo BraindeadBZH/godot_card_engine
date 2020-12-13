@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://addons/cardengine/card/abstract_card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://cards/normal/normal_card.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://cards/normal/card_desc_background.png" type="Texture" id=8]
 [ext_resource path="res://cards/normal/card_cost_background.png" type="Texture" id=9]
 [ext_resource path="res://cards/normal/card_picture_placeholder.png" type="Texture" id=10]
+[ext_resource path="res://cards/normal/card_placeholder.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -41,6 +42,9 @@ size = Vector2( 420, 600 )
 [node name="Shadow" type="Sprite" parent="AnimContainer" index="0"]
 position = Vector2( -1.34912, 0.400543 )
 texture = ExtResource( 7 )
+
+[node name="Background" type="Sprite" parent="AnimContainer/Placeholder" index="0"]
+texture = ExtResource( 11 )
 
 [node name="Background" type="Sprite" parent="AnimContainer/Front" index="0"]
 texture = ExtResource( 4 )
@@ -226,7 +230,7 @@ __meta__ = {
 [node name="Background" type="Sprite" parent="AnimContainer/Back" index="0"]
 texture = ExtResource( 3 )
 
-[node name="MouseArea" parent="AnimContainer" index="3"]
+[node name="MouseArea" parent="AnimContainer" index="4"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

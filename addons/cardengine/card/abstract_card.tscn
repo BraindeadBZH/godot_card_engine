@@ -8,7 +8,10 @@ script = ExtResource( 1 )
 
 [node name="AnimContainer" type="Node2D" parent="."]
 
+[node name="Placeholder" type="Node2D" parent="AnimContainer"]
+
 [node name="Front" type="Node2D" parent="AnimContainer"]
+visible = false
 
 [node name="Back" type="Node2D" parent="AnimContainer"]
 visible = false

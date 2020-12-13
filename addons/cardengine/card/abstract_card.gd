@@ -36,6 +36,7 @@ var _follow_mouse: bool = false
 var _waiting_card_return: bool = false
 
 onready var _cont = $AnimContainer
+onready var _placeholder = $AnimContainer/Placeholder
 onready var _front = $AnimContainer/Front
 onready var _back  = $AnimContainer/Back
 onready var _transi = $Transitions
@@ -56,6 +57,7 @@ func _input(event: InputEvent) -> void:
 
 func set_instance(inst: CardInstance) -> void:
 	_inst = inst
+	_update_visibility()
 	emit_signal("instance_changed")
 
 
@@ -105,14 +107,8 @@ func set_side(side_up: int) -> void:
 	if _side == side_up:
 		return
 	
-	if side_up == CardSide.FRONT:
-		_side = CardSide.FRONT
-		_back.visible = false
-		_front.visible = true
-	elif side_up == CardSide.BACK:
-		_side = CardSide.BACK
-		_front.visible = false
-		_back.visible = true
+	_side = side_up
+	_update_visibility()
 
 
 func change_side() -> void:
@@ -165,6 +161,23 @@ func flag_for_removal() -> void:
 		_transition(_current_trans(), null)
 	else:
 		emit_signal("need_removal")
+
+
+func _update_visibility() -> void:
+	if _inst == null:
+		_placeholder.visible = true
+		_back.visible = false
+		_front.visible = false
+		return
+	else:
+		_placeholder.visible = false
+	
+	if _side == CardSide.FRONT:
+		_back.visible = false
+		_front.visible = true
+	elif _side == CardSide.BACK:
+		_front.visible = false
+		_back.visible = true
 
 
 func _current_trans() -> CardTransform:
