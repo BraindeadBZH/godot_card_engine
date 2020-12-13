@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_database_dialog/edit_database_dialog.gd" type="Script" id=1]
+[ext_resource path="res://addons/cardengine/ui/dialogs/duplicate_card_dialog/duplicate_card_dialog.tscn" type="PackedScene" id=2]
 
 [node name="EditDatabaseDialog" type="WindowDialog"]
 anchor_right = 1.0
@@ -102,14 +103,14 @@ size_flags_vertical = 3
 columns = 2
 
 [node name="ListLbl" type="Label" parent="MainLayout/CardsLayout"]
-margin_right = 253.0
+margin_right = 194.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Card List"
 align = 1
 
 [node name="DetailsLbl" type="Label" parent="MainLayout/CardsLayout"]
-margin_left = 257.0
+margin_left = 198.0
 margin_right = 510.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
@@ -118,24 +119,24 @@ align = 1
 
 [node name="CardList" type="ItemList" parent="MainLayout/CardsLayout"]
 margin_top = 18.0
-margin_right = 253.0
+margin_right = 194.0
 margin_bottom = 198.0
 size_flags_vertical = 3
 
 [node name="DetailsLayout" type="VBoxContainer" parent="MainLayout/CardsLayout"]
-margin_left = 257.0
+margin_left = 198.0
 margin_top = 18.0
 margin_right = 510.0
 margin_bottom = 198.0
 
 [node name="DetailsList" type="ItemList" parent="MainLayout/CardsLayout/DetailsLayout"]
-margin_right = 253.0
+margin_right = 312.0
 margin_bottom = 146.0
 size_flags_vertical = 3
 
 [node name="ToolsLayout" type="HBoxContainer" parent="MainLayout/CardsLayout/DetailsLayout"]
 margin_top = 150.0
-margin_right = 253.0
+margin_right = 312.0
 margin_bottom = 180.0
 alignment = 1
 
@@ -148,13 +149,21 @@ text = "Delete"
 
 [node name="Spacer" type="Control" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
 margin_left = 104.0
-margin_right = 149.0
+margin_right = 104.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
+[node name="DuplicateBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
+margin_left = 108.0
+margin_right = 208.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+disabled = true
+text = "Duplicate"
+
 [node name="EditBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
-margin_left = 153.0
-margin_right = 253.0
+margin_left = 212.0
+margin_right = 312.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
 disabled = true
@@ -178,6 +187,8 @@ margin_right = 305.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
 text = "Done"
+
+[node name="DuplicateCardDialog" parent="." instance=ExtResource( 2 )]
 [connection signal="about_to_show" from="." to="." method="_on_EditDatabaseDialog_about_to_show"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/ValFilter" to="." method="_on_ValFilter_item_selected"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/TxtFilter" to="." method="_on_TxtFilter_item_selected"]
@@ -186,5 +197,7 @@ text = "Done"
 [connection signal="text_changed" from="MainLayout/FiltersLayout/ContainsFilter" to="." method="_on_ContainsFilter_text_changed"]
 [connection signal="item_selected" from="MainLayout/CardsLayout/CardList" to="." method="_on_CardList_item_selected"]
 [connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn" to="." method="_on_DeleteBtn_pressed"]
+[connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DuplicateBtn" to="." method="_on_DuplicateBtn_pressed"]
 [connection signal="pressed" from="MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn" to="." method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="MainLayout/ButtonLayout/DoneBtn" to="." method="_on_DoneBtn_pressed"]
+[connection signal="form_validated" from="DuplicateCardDialog" to="." method="_on_DuplicateCardDialog_form_validated"]

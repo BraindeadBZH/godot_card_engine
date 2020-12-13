@@ -69,3 +69,15 @@ func _on_DeleteBtn_pressed() -> void:
 	_main_ui.show_confirmation_dialog(
 			"Delete database", funcref(self, "delete_database"))
 
+
+func _on_EditDatabaseDialog_copy_card(card_id, new_card_id, db_id) -> void:
+	var db = _manager.get_database(db_id)
+	if db == null:
+		return
+	
+	var card = db.get_card(card_id)
+	var new_card = card.duplicate()
+	new_card.id = new_card_id
+	
+	db.add_card(new_card)
+	_manager.update_database(db)

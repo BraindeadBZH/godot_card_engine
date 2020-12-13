@@ -3,6 +3,7 @@ extends WindowDialog
 
 signal edit_card(card, db)
 signal delete_card(card, db)
+signal copy_card(card, new_card, db)
 
 var _db: CardDatabase = null
 var _store: CardDeck = CardDeck.new()
@@ -18,6 +19,7 @@ onready var _card_list = $MainLayout/CardsLayout/CardList
 onready var _detail_list = $MainLayout/CardsLayout/DetailsLayout/DetailsList
 onready var _delete_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn
 onready var _edit_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn
+onready var _dup_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DuplicateBtn
 onready var _categ_filter_list = $MainLayout/CategFilterScroll/CategFilterList
 onready var _val_filter = $MainLayout/FiltersLayout/ValFilter
 onready var _txt_filter = $MainLayout/FiltersLayout/TxtFilter
@@ -25,6 +27,7 @@ onready var _comp_op = $MainLayout/FiltersLayout/CompLayout/CompOp
 onready var _comp_val = $MainLayout/FiltersLayout/CompLayout/CompVal
 onready var _contains = $MainLayout/FiltersLayout/ContainsFilter
 onready var _list_lbl = $MainLayout/CardsLayout/ListLbl
+onready var _dup_dlg = $DuplicateCardDialog
 
 
 func _ready():
@@ -52,6 +55,7 @@ func remove_selected_card():
 	_detail_list.clear()
 	_delete_btn.disabled = true
 	_edit_btn.disabled = true
+	_dup_btn.disabled = true
 
 
 func _clear_lists():
@@ -185,6 +189,7 @@ func _on_DoneBtn_pressed():
 func _on_EditDatabaseDialog_about_to_show():
 	_delete_btn.disabled = true
 	_edit_btn.disabled = true
+	_dup_btn.disabled = true
 	_clear_lists()
 
 
@@ -212,6 +217,7 @@ func _on_CardList_item_selected(index):
 	
 	_delete_btn.disabled = false
 	_edit_btn.disabled = false
+	_dup_btn.disabled = false
 
 
 func _on_EditBtn_pressed():
@@ -221,6 +227,10 @@ func _on_EditBtn_pressed():
 
 func _on_DeleteBtn_pressed():
 	emit_signal("delete_card", _selected_card, _db.id)
+
+
+func _on_DuplicateBtn_pressed() -> void:
+	_dup_dlg.popup_centered_edit({"id": _selected_card, "db": _db.id})
 
 
 func _on_db_changed():
@@ -265,3 +275,7 @@ func _on_CategFilter_item_selected(index: int, select: OptionButton, meta_categ:
 		_selected_categ[meta_categ] = select.get_item_metadata(index)
 	
 	_apply_filters()
+
+
+func _on_DuplicateCardDialog_form_validated(form) -> void:
+	emit_signal("copy_card", _selected_card, form["id"], _db.id)

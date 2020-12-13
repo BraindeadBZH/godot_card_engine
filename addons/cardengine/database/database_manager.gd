@@ -44,6 +44,15 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 		if !Utils.is_id_valid(form["id"]):
 			errors.append("Invalid text ID")
 	
+	elif form_name == "duplicate_card":
+		var id = form["id"]
+		if id.empty():
+			errors.append("Card ID cannot be empty")
+		elif get_database(form["db"]).card_exists(id):
+			errors.append("Card already exists")
+		elif !Utils.is_id_valid(id):
+			errors.append("Invalid card ID, must only contains alphanumeric characters or _, no space and starts with a letter")
+	
 	return errors
 
 

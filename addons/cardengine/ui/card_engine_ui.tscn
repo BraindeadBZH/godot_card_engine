@@ -650,6 +650,7 @@ margin_bottom = -4.0
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/DeactivatedBtn" to="Tabs/Animations" method="_on_DeactivatedBtn_pressed"]
 [connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/UnfocusedBtn" to="Tabs/Animations" method="_on_UnfocusedBtn_pressed"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="Tabs/Databases" method="_on_NewDatabaseDialog_form_validated"]
+[connection signal="copy_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Databases" method="_on_EditDatabaseDialog_copy_card"]
 [connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_delete_card"]
 [connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_edit_card"]
 [connection signal="form_validated" from="Dialogs/CategoryDialog" to="Tabs/Cards" method="_on_CategoryDialog_form_validated"]
