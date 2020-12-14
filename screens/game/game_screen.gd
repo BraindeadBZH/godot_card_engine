@@ -18,6 +18,7 @@ onready var _draw_btn = $DeckZone/DrawBtn
 onready var _discard_count = $DiscardZone/DiscardCount
 onready var _reshuffle_btn = $DiscardZone/ReshuffleBtn
 onready var _hand_delay = $StartingHandDelay
+onready var _card_drop = $PlayZone/CardDrop
 
 
 func _ready() -> void:
