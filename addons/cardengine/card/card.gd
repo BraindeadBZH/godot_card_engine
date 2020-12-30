@@ -37,6 +37,11 @@ func add_category(meta_categ: String, categ: String) -> void:
 	mark_changed()
 
 
+func set_category(meta_categ: String, categ: String) -> void:
+	_categs[meta_categ] = categ
+	mark_changed()
+
+
 func has_meta_category(meta_categ: String) -> bool:
 	return _categs.has(meta_categ)
 
@@ -74,6 +79,11 @@ func add_value(id: String, value: int) -> void:
 	mark_changed()
 
 
+func set_value(id: String, value: int) -> void:
+	_values[id] = value
+	mark_changed()
+
+
 func has_value(id: String) -> bool:
 	return _values.has(id)
 
@@ -97,6 +107,11 @@ func set_texts(texts: Dictionary) -> void:
 
 
 func add_text(id: String, text: String) -> void:
+	_texts[id] = text
+	mark_changed()
+
+
+func set_text(id: String, text: String) -> void:
 	_texts[id] = text
 	mark_changed()
 

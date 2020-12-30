@@ -15,6 +15,7 @@ onready var _new_anim_dlg = $Dialogs/NewAnimationDialog
 onready var _step_val_dlg = $Dialogs/StepValueDialog
 onready var _step_transi_dlg = $Dialogs/StepTransiDialog
 onready var _preview_dlg = $Dialogs/AnimPreviewDialog
+onready var _fx_dlg = $Dialogs/NewEffectDialog
 
 
 func _ready():
@@ -22,6 +23,7 @@ func _ready():
 	$Tabs/Cards.set_main_ui(self)
 	$Tabs/Containers.set_main_ui(self)
 	$Tabs/Animations.set_main_ui(self)
+	$Tabs/Effects.set_main_ui(self)
 
 
 func change_tab(index: int) -> void:
@@ -100,3 +102,10 @@ func show_step_transi_dialog(data: Dictionary = {}) -> void:
 
 func show_preview_dialog(anim: AnimationData) -> void:
 	_preview_dlg.show_anim(anim)
+
+
+func show_new_effect_dialog(data: Dictionary = {}) -> void:
+	if data.empty():
+		_fx_dlg.popup_centered()
+	else:
+		_fx_dlg.popup_centered_edit(data)

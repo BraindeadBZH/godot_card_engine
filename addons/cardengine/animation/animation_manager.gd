@@ -44,7 +44,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 	return errors
 
 
-func load_animations(node_folder: String, anim_folder: String) -> void:
+func load_animations(anim_folder: String) -> void:
 	_folder = anim_folder
 	
 	var dir = Directory.new()
