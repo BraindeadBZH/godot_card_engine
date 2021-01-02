@@ -1,3 +1,6 @@
 [effects]
 
-count=0
+count=3
+mana_double="Double the Mana"
+mana_incr="Mana +1"
+mana_decr="Mana -1"

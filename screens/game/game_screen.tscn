@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://screens/game/game_screen.gd" type="Script" id=1]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=2]
@@ -13,6 +13,10 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 34
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 21
 font_data = ExtResource( 5 )
 
 [node name="GameScreen" type="Control"]
@@ -329,6 +333,74 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="EffectsLayout" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 205.0
+margin_bottom = 163.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="EffectsLayout"]
+margin_right = 205.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.427451 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Effects"
+align = 1
+
+[node name="FilterTitle" type="Label" parent="EffectsLayout"]
+margin_top = 29.0
+margin_right = 205.0
+margin_bottom = 43.0
+text = "Apply to:"
+
+[node name="FilterLayout" type="HBoxContainer" parent="EffectsLayout"]
+margin_top = 47.0
+margin_right = 205.0
+margin_bottom = 71.0
+
+[node name="DrawFilter" type="CheckBox" parent="EffectsLayout/FilterLayout"]
+margin_right = 60.0
+margin_bottom = 24.0
+pressed = true
+text = "Draw"
+
+[node name="HandFilter" type="CheckBox" parent="EffectsLayout/FilterLayout"]
+margin_left = 64.0
+margin_right = 125.0
+margin_bottom = 24.0
+pressed = true
+text = "Hand"
+
+[node name="DiscardFilter" type="CheckBox" parent="EffectsLayout/FilterLayout"]
+margin_left = 129.0
+margin_right = 205.0
+margin_bottom = 24.0
+pressed = true
+text = "Discard"
+
+[node name="ManaMultiplier" type="CheckButton" parent="EffectsLayout"]
+margin_top = 75.0
+margin_right = 205.0
+margin_bottom = 115.0
+text = "Common mana x2"
+
+[node name="ManaIncrease" type="Button" parent="EffectsLayout"]
+margin_top = 119.0
+margin_right = 205.0
+margin_bottom = 139.0
+text = "Mana +1"
+
+[node name="ManaDecrease" type="Button" parent="EffectsLayout"]
+margin_top = 143.0
+margin_right = 205.0
+margin_bottom = 163.0
+text = "Mana -1"
+
 [node name="MenuBtn" parent="." instance=ExtResource( 2 )]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -345,5 +417,8 @@ autostart = true
 [connection signal="pressed" from="DiscardZone/ReshuffleBtn" to="." method="_on_ReshuffleBtn_pressed"]
 [connection signal="dropped" from="PlayZone/CardDrop" to="." method="_on_CardDrop_dropped"]
 [connection signal="pressed" from="ManaBar/EndTurnBtn" to="." method="_on_EndTurnBtn_pressed"]
+[connection signal="toggled" from="EffectsLayout/ManaMultiplier" to="." method="_on_ManaMultiplier_toggled"]
+[connection signal="pressed" from="EffectsLayout/ManaIncrease" to="." method="_on_ManaIncrease_pressed"]
+[connection signal="pressed" from="EffectsLayout/ManaDecrease" to="." method="_on_ManaDecrease_pressed"]
 [connection signal="pressed" from="MenuBtn" to="." method="_on_MenuBtn_pressed"]
 [connection signal="timeout" from="StartingHandDelay" to="." method="_on_StartingHandDelay_timeout"]

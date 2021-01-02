@@ -260,6 +260,11 @@ _global_script_classes=[ {
 "path": "res://addons/cardengine/core/utils.gd"
 }, {
 "base": "AbstractModifier",
+"class": "ValueChange",
+"language": "GDScript",
+"path": "res://addons/cardengine/effect/value_change.gd"
+}, {
+"base": "AbstractModifier",
 "class": "ValueMultiplier",
 "language": "GDScript",
 "path": "res://addons/cardengine/effect/value_multiplier.gd"
@@ -320,6 +325,7 @@ _global_script_class_icons={
 "StepTransition": "",
 "StepValue": "",
 "UtilsInstance": "",
+"ValueChange": "",
 "ValueMultiplier": "",
 "ValueSetter": ""
 }

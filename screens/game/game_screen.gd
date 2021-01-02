@@ -11,6 +11,7 @@ var _hand: CardHand = CardHand.new()
 var _draw_pile: CardPile = CardPile.new()
 var _discard_pile: CardPile = CardPile.new()
 var _mana: int = MAX_MANA
+var _fx_mana_mult: EffectInstance = null
 
 onready var _hand_cont = $HandZone/HandContainer
 onready var _draw_count = $DeckZone/DrawCount
@@ -18,6 +19,9 @@ onready var _draw_btn = $DeckZone/DrawBtn
 onready var _discard_count = $DiscardZone/DiscardCount
 onready var _reshuffle_btn = $DiscardZone/ReshuffleBtn
 onready var _hand_delay = $StartingHandDelay
+onready var _draw_filter = $EffectsLayout/FilterLayout/DrawFilter
+onready var _hand_filter = $EffectsLayout/FilterLayout/HandFilter
+onready var _discard_filter = $EffectsLayout/FilterLayout/DiscardFilter
 
 
 func _ready() -> void:
@@ -45,6 +49,17 @@ func _update_mana() -> void:
 			ctrl.texture = _mana_point
 		else:
 			ctrl.texture = _mana_empty
+
+
+func _apply_fx(fx: EffectInstance) -> void:
+	if _draw_filter.pressed:
+		fx.apply(_draw_pile)
+	
+	if _hand_filter.pressed:
+		fx.apply(_hand)
+	
+	if _discard_filter.pressed:
+		fx.apply(_discard_pile)
 
 
 func _on_MenuBtn_pressed() -> void:
@@ -123,3 +138,23 @@ func _on_EndTurnBtn_pressed() -> void:
 	
 	if _hand.count() < STARTING_HAND_SIZE:
 		_hand_delay.start(0.1)
+
+
+func _on_ManaMultiplier_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		_fx_mana_mult = CardEngine.fx().instantiate("mana_double")
+		_apply_fx(_fx_mana_mult)
+	else:
+		if _fx_mana_mult != null:
+			_fx_mana_mult.cancel()
+			_fx_mana_mult = null
+
+
+func _on_ManaIncrease_pressed() -> void:
+	var fx = CardEngine.fx().instantiate("mana_incr")
+	_apply_fx(fx)
+
+
+func _on_ManaDecrease_pressed() -> void:
+	var fx = CardEngine.fx().instantiate("mana_decr")
+	_apply_fx(fx)
