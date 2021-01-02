@@ -9,7 +9,7 @@ var _tool_btn: Button = null
 func _enter_tree():
 	_main_control = _main_scene.instance()
 	_tool_btn = add_control_to_bottom_panel(_main_control, "CardEngine")
-	CardEngine.setup()
+	CardEngine.setup(self)
 
 
 func _exit_tree():

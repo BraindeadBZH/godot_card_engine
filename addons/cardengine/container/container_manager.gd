@@ -80,6 +80,7 @@ func create_container(cont: ContainerData) -> void:
 			return
 		_write_public_scene(cont, private_scene)
 		_write_metadata(cont)
+		CardEngine.scan_for_new_files()
 	else:
 		printerr("Could not access CardEngine container folder")
 		return
@@ -105,6 +106,7 @@ func delete_container(cont: ContainerData) -> void:
 	if Utils.directory_remove_recursive(FMT_PRIVATE_FOLDER % [_private_folder, cont.id]):
 		_containers.erase(cont.id)
 		emit_signal("changed")
+		CardEngine.scan_for_new_files()
 	else:
 		printerr("Container not accessible")
 

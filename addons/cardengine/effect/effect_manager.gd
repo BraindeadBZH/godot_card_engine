@@ -58,6 +58,7 @@ func create_effect(id: String, name: String) -> void:
 		printerr("Failed to create effect")
 		return
 	
+	CardEngine.scan_for_new_files()
 	_load_effect(id, name)
 	_write_metadata()
 	
@@ -89,6 +90,7 @@ func delete_effect(id: String) -> void:
 	var dir = Directory.new()
 	dir.remove(FORMAT_FX_SCRIPT % [_folder, id])
 	
+	CardEngine.scan_for_new_files()
 	_write_metadata()
 	
 	emit_signal("changed")
