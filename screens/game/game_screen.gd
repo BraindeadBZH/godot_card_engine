@@ -122,7 +122,7 @@ func _on_CardDrop_dropped(card: CardInstance) -> void:
 		_hand.play_card(card.ref(), _discard_pile)
 		if _on_played_fx.pressed:
 			var fx = CardEngine.fx().instantiate("mana_incr")
-			fx.apply_to_card(card)
+			fx.affect(card)
 		if card_mana < 0:
 			_mana = 0
 		else:
