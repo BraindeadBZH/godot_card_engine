@@ -19,13 +19,13 @@ func effect() -> AbstractEffect:
 
 func apply(store: AbstractStore) -> void:
 	var filter := _fx.get_filter()
-	
-	for mod in _fx.get_modifiers():
-		mod.set_effect_ref(ref())
 		
-		for card in store.cards():
-			if filter == null or filter.match_card(card.data()):
-				_affected.append(card)
+	for card in store.cards():
+		if filter == null or filter.match_card(card.data()):
+			_affected.append(card)
+	
+			for mod in _fx.get_modifiers():
+				mod.set_effect_ref(ref())
 				card.add_modifier(mod)
 
 
