@@ -22,6 +22,7 @@ onready var _hand_delay = $StartingHandDelay
 onready var _draw_filter = $EffectsLayout/FilterLayout/DrawFilter
 onready var _hand_filter = $EffectsLayout/FilterLayout/HandFilter
 onready var _discard_filter = $EffectsLayout/FilterLayout/DiscardFilter
+onready var _on_played_fx = $EffectsLayout/OnPlayedEffect
 
 
 func _ready() -> void:
@@ -119,6 +120,9 @@ func _on_CardDrop_dropped(card: CardInstance) -> void:
 	
 	if _mana >= card_mana:
 		_hand.play_card(card.ref(), _discard_pile)
+		if _on_played_fx.pressed:
+			var fx = CardEngine.fx().instantiate("mana_incr")
+			fx.apply_to_card(card)
 		if card_mana < 0:
 			_mana = 0
 		else:

@@ -389,16 +389,22 @@ margin_right = 205.0
 margin_bottom = 115.0
 text = "Common mana x2"
 
-[node name="ManaIncrease" type="Button" parent="EffectsLayout"]
+[node name="OnPlayedEffect" type="CheckButton" parent="EffectsLayout"]
 margin_top = 119.0
 margin_right = 205.0
-margin_bottom = 139.0
+margin_bottom = 159.0
+text = "Mana +1 on played"
+
+[node name="ManaIncrease" type="Button" parent="EffectsLayout"]
+margin_top = 163.0
+margin_right = 205.0
+margin_bottom = 183.0
 text = "Mana +1"
 
 [node name="ManaDecrease" type="Button" parent="EffectsLayout"]
-margin_top = 143.0
+margin_top = 187.0
 margin_right = 205.0
-margin_bottom = 163.0
+margin_bottom = 207.0
 text = "Mana -1"
 
 [node name="MenuBtn" parent="." instance=ExtResource( 2 )]
