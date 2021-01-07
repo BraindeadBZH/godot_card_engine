@@ -63,7 +63,7 @@ func _on_SubmitButton_pressed() -> void:
 	_clear_errors()
 	var form = _extract_form()
 	var errors = _manager.validate_form(_form_name, form)
-	
+
 	if errors.size() == 0:
 		emit_signal("form_validated", form)
 		hide()

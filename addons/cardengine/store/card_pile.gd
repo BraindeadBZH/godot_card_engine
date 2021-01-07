@@ -16,10 +16,10 @@ func shuffle() -> void:
 func draw() -> CardInstance:
 	if is_empty():
 		return null
-	
+
 	var card = get_last()
 	remove_last()
 	emit_signal("card_drawn")
 	emit_signal("changed")
-	
+
 	return card

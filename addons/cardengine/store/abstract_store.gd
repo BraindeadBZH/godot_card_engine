@@ -5,21 +5,21 @@ extends Reference
 
 class StoreSorter:
 	var _info: Dictionary = {}
-	
+
 	func _init(sort_info: Dictionary) -> void:
 		_info = sort_info
-	
+
 	func sort(left: CardInstance, right: CardInstance) -> bool:
 		return _recurive_sort(left.data(), right.data())
-	
-	
+
+
 	func _recurive_sort(ldata: CardData, rdata: CardData, depth: int = 0) -> bool:
 		if depth >= _info.size():
 			return false
-		
+
 		var key = _info.keys()[depth]
 		var split: Array = key.split(":", false)
-		
+
 		if split[0] == "category":
 			var order: Array = _info[key]
 			var lval = ldata.get_category(split[1])
@@ -27,7 +27,7 @@ class StoreSorter:
 			var lidx: int = -1
 			var ridx: int = -1
 			var idx: int = 0
-			
+
 			for categ in order:
 				if categ == lval:
 					lidx = idx
@@ -41,7 +41,7 @@ class StoreSorter:
 				return true
 		else:
 			var asc: bool = _info[key]
-			
+
 			if split[0] == "meta" && split[1] == "id":
 				if ldata.id.casecmp_to(rdata.id) == 0:
 					return _recurive_sort(ldata, rdata, depth+1)
@@ -65,7 +65,7 @@ class StoreSorter:
 					return true
 				elif not asc and ldata.get_text(split[1]).casecmp_to(rdata.get_text(split[1])) == 1:
 					return true
-		
+
 		return false
 
 
@@ -107,7 +107,7 @@ func clear() -> void:
 
 func populate(db: CardDatabase, ids: Array) -> void:
 	clear()
-	
+
 	for id in ids:
 		add_card(CardInstance.new(db.get_card(id)))
 
@@ -151,11 +151,11 @@ func has_card(ref: int) -> bool:
 	var c = _cards
 	if _filter != null:
 		c = _filtered
-		
+
 	for card in c:
 		if card.ref() == ref:
 			return true
-	
+
 	return false
 
 
@@ -164,7 +164,7 @@ func get_card(index: int) -> CardInstance:
 		return null
 	if _filter != null and (index < 0 or index >= _filtered.size()):
 		return null
-	
+
 	if _filter == null:
 		return _cards[index]
 	else:
@@ -192,7 +192,7 @@ func categories() -> Dictionary:
 func get_meta_category(meta: String) -> Dictionary:
 	if not _categs.has(meta):
 		return {}
-	
+
 	return _categs[meta]
 
 
@@ -223,7 +223,7 @@ func add_card(card: CardInstance) -> void:
 
 func remove_card(ref: int) -> void:
 	var index: int = _ref2idx(ref)
-	
+
 	if index >= 0:
 		_cards.remove(index)
 		_update_stats()
@@ -255,7 +255,7 @@ func move_cards(to: AbstractStore) -> void:
 
 func move_card(ref: int, to: AbstractStore) -> CardInstance:
 	var index: int = _ref2idx(ref)
-	
+
 	if index >= 0:
 		var card = _cards[index]
 		to.add_card(card)
@@ -265,7 +265,7 @@ func move_card(ref: int, to: AbstractStore) -> CardInstance:
 		emit_signal("card_removed", index)
 		emit_signal("changed")
 		return card
-	
+
 	return null
 
 
@@ -280,12 +280,12 @@ func copy_cards(to: AbstractStore) -> void:
 
 func copy_card(ref: int, to: AbstractStore) -> CardInstance:
 	var index: int = _ref2idx(ref)
-	
+
 	if index >= 0:
 		var card = _cards[index].duplicate()
 		to.add_card(card)
 		return card
-	
+
 	return null
 
 
@@ -309,19 +309,19 @@ func keep(count: int) -> void:
 
 func _ref2idx(ref: int) -> int:
 	var search: int = 0
-	
+
 	for card in _cards:
 		if card.ref() == ref:
 			return search
-		
+
 		search += 1
-	
+
 	return -1
 
 
 func _update_filtered():
 	_filtered.clear()
-		
+
 	if _filter == null:
 		_filtered = _cards.duplicate()
 	else:
@@ -338,7 +338,7 @@ func _update_stats():
 
 func _update_categories():
 	_categs.clear()
-	
+
 	for card in _cards:
 		for meta in card.data().categories():
 			var val = card.data().get_category(meta)
@@ -357,7 +357,7 @@ func _update_categories():
 
 func _update_values():
 	_values.clear()
-	
+
 	for card in _cards:
 		for value in card.data().values():
 			if not _values.has(value):
@@ -366,7 +366,7 @@ func _update_values():
 
 func _update_texts():
 	_texts.clear()
-	
+
 	for card in _cards:
 		for text in card.data().texts():
 			if not _texts.has(text):

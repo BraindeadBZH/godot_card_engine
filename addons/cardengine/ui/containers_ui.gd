@@ -32,7 +32,7 @@ func _on_Containers_changed() -> void:
 	_cont_list.clear()
 	_edit_btn.disabled = true
 	_delete_btn.disabled = true
-	
+
 	var containers = CardEngine.cont().containers()
 	for id in containers:
 		var cont = containers[id]

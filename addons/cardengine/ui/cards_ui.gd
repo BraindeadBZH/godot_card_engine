@@ -44,15 +44,15 @@ func select_database(db: String) -> void:
 func load_card(id: String, db_id: String) -> void:
 	_success_lbl.text = ""
 	_error_lbl.text = ""
-	
+
 	_categ_list.clear()
 	_value_list.clear()
 	_text_list.clear()
-	
+
 	_del_categ_btn.disabled = true
 	_del_value_btn.disabled = true
 	_del_text_btn.disabled = true
-	
+
 	var db = _manager.get_database(db_id)
 	var card = db.get_card(id)
 	if card == null:
@@ -61,10 +61,10 @@ func load_card(id: String, db_id: String) -> void:
 		_card_id.text = card.id
 		for categ in card.categories():
 			append_category(categ, card.get_category(categ))
-		
+
 		for value in card.values():
 			append_value(value, card.get_value(value))
-		
+
 		for text in card.texts():
 			append_text(text, card.get_text(text))
 
@@ -160,14 +160,14 @@ func delete_text(idx: int) -> void:
 func _on_Databases_changed() -> void:
 	if _db_select == null:
 		return
-	
+
 	_db_select.clear()
 	var databases = _manager.databases()
 	for id in databases:
 		var db = databases[id]
 		_db_select.add_item("%s: %s" % [db.id, db.name])
 		_db_select.set_item_metadata(_db_select.get_item_count()-1, db.id)
-	
+
 	if _selected_db != "":
 		select_database(_selected_db)
 
@@ -187,10 +187,10 @@ func _on_CardId_text_changed(new_text) -> void:
 func _on_SaveBtn_pressed() -> void:
 	_success_lbl.text = ""
 	_error_lbl.text = ""
-	
+
 	var id = _card_id.text
 	var db = _manager.get_database(_db_select.get_selected_metadata())
-	
+
 	if db.card_exists(id):
 		_main_ui.show_confirmation_dialog(
 				"Overwrite Card", funcref(self, "overwrite_card"), [id, db])

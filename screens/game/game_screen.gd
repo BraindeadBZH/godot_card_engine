@@ -32,14 +32,14 @@ func _ready() -> void:
 	_discard_pile.connect("changed", self, "_on_DiscardPile_changed")
 	# warning-ignore:return_value_discarded
 	_hand.connect("changed", self, "_on_Hand_changed")
-	
+
 	var db = CardEngine.db().get_database("main")
-	
+
 	_draw_pile.populate_all(db)
 	_draw_pile.shuffle()
-	
+
 	_hand_cont.set_store(_hand)
-	
+
 	_update_mana()
 
 
@@ -55,10 +55,10 @@ func _update_mana() -> void:
 func _apply_fx(fx: EffectInstance) -> void:
 	if _draw_filter.pressed:
 		fx.apply(_draw_pile)
-	
+
 	if _hand_filter.pressed:
 		fx.apply(_hand)
-	
+
 	if _discard_filter.pressed:
 		fx.apply(_discard_pile)
 
@@ -69,7 +69,7 @@ func _on_MenuBtn_pressed() -> void:
 
 func _on_DrawPile_changed() -> void:
 	_draw_count.text = "%d" % _draw_pile.count()
-	
+
 	if _draw_pile.count() <= 0 or _hand.count() >= MAX_HAND_SIZE:
 		_draw_btn.disabled = true
 	else:
@@ -78,7 +78,7 @@ func _on_DrawPile_changed() -> void:
 
 func _on_DiscardPile_changed() -> void:
 	_discard_count.text = "%d" % _discard_pile.count()
-	
+
 	if _discard_pile.count() > 0:
 		_reshuffle_btn.disabled = false
 	else:
@@ -94,12 +94,12 @@ func _on_Hand_changed() -> void:
 
 func _on_StartingHandDelay_timeout() -> void:
 	var card = _draw_pile.draw()
-	
+
 	if card == null:
 		return
-		
+
 	_hand.add_card(card)
-	
+
 	if _hand.count() >= STARTING_HAND_SIZE:
 		_hand_delay.stop()
 	else:
@@ -108,16 +108,16 @@ func _on_StartingHandDelay_timeout() -> void:
 
 func _on_DrawBtn_pressed() -> void:
 	var card = _draw_pile.draw()
-	
+
 	if card == null:
 		return
-	
+
 	_hand.add_card(card)
 
 
 func _on_CardDrop_dropped(card: CardInstance) -> void:
 	var card_mana = card.data().get_value("mana")
-	
+
 	if _mana >= card_mana:
 		_hand.play_card(card.ref(), _discard_pile)
 		if _on_played_fx.pressed:
@@ -127,7 +127,7 @@ func _on_CardDrop_dropped(card: CardInstance) -> void:
 			_mana = 0
 		else:
 			_mana -= card_mana
-		
+
 		_update_mana()
 
 
@@ -139,7 +139,7 @@ func _on_ReshuffleBtn_pressed() -> void:
 func _on_EndTurnBtn_pressed() -> void:
 	_mana = MAX_MANA
 	_update_mana()
-	
+
 	if _hand.count() < STARTING_HAND_SIZE:
 		_hand_delay.start(0.1)
 

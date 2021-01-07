@@ -20,7 +20,7 @@ func set_string_seed(str_seed: String) -> void:
 
 func set_seed(random_seed: int) -> void:
 	mt[0] = random_seed
-	
+
 	for i in range(1, 624):
 		mt[i] = _int32(1812433253 * (mt[i - 1] ^ mt[i - 1] >> 30) + i)
 
@@ -28,9 +28,9 @@ func set_seed(random_seed: int) -> void:
 func generate() -> int:
 	if index >= 624:
 		_twist()
-	
+
 	var y = mt[index]
-	
+
 	# Right shift by 11 bits
 	y = y ^ y >> 11
 	# Shift y left by 7 and take the bitwise and of 2636928640
@@ -39,9 +39,9 @@ func generate() -> int:
 	y = y ^ y << 15 & 4022730752
 	# Right shift by 18 bits
 	y = y ^ y >> 18
-	
+
 	index = index + 1
-	
+
 	return _int32(y)
 
 
@@ -71,7 +71,7 @@ func _twist() -> void:
 		# bits of the next number
 		var y = _int32((mt[i] & 0x80000000) + (mt[(i + 1) % 624] & 0x7fffffff))
 		mt[i] = mt[(i + 397) % 624] ^ y >> 1
-		
+
 		if y % 2 != 0:
 			mt[i] = mt[i] ^ 0x9908b0df
 	index = 0

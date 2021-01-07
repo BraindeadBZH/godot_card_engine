@@ -43,13 +43,13 @@ func delete_animation() -> void:
 
 func _select_anim(index: int) -> void:
 	_anim_list.select(index)
-	
+
 	_idle_btn.pressed = false
 	_focused_btn.pressed = false
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = false
 	_unfocused_btn.pressed = false
-	
+
 	if index > 0:
 		_selected_anim = index
 		_opened_anim = _manager.get_animation(
@@ -92,10 +92,10 @@ func _select_anim_by_id(id: String) -> void:
 
 func _load_animation() -> void:
 	_clear_animation()
-	
+
 	if _anim_block == null:
 		return
-	
+
 	_load_sequence(_anim_block.position_sequence(), _pos_seq, _pos_seq_tools)
 	_load_sequence(_anim_block.scale_sequence(), _scale_seq, _scale_seq_tools)
 	_load_sequence(_anim_block.rotation_sequence(), _rot_seq, _rot_seq_tools)
@@ -113,22 +113,22 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 		add_btn.hint_tooltip = "Insert a step before the last step"
 		tools.add_child(add_btn)
 		add_btn.connect("pressed", self, "_on_AddStepBtn_pressed", [seq])
-		
+
 		var clear_btn = Button.new()
 		clear_btn.text = "Clear sequence"
 		clear_btn.hint_tooltip = "Remove all the steps"
 		tools.add_child(clear_btn)
 		clear_btn.connect("pressed", self, "_on_ClearSeqBtn_pressed", [seq])
-		
+
 		var index := 0
 		for step in seq.sequence():
 			var step_layout = HBoxContainer.new()
 			var step_lbl = Label.new()
 			step_lbl.text = "%d >" % index
 			step_layout.add_child(step_lbl)
-			
+
 			var is_last = index == seq.length()-1
-			
+
 			if step.transi != null:
 				var btn = Button.new()
 				btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -147,13 +147,13 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				btn.hint_tooltip = "Edit step transition"
 				step_layout.add_child(btn)
 				btn.connect("pressed", self, "_on_TransiBtn_pressed", [seq, index])
-			
+
 			var initial_txt = "initial(%s)"
 			if index == 0:
 				initial_txt = initial_txt % _initial_mode_display(seq.from_mode())
 			else:
 				initial_txt = initial_txt % _initial_mode_display(seq.to_mode())
-			
+
 			if step.val != null:
 				var btn = Button.new()
 				btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -199,52 +199,52 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				btn.hint_tooltip = "Edit step value"
 				step_layout.add_child(btn)
 				btn.connect("pressed", self, "_on_ValueBtn_pressed", [seq, index])
-			
+
 			var prev_step := seq.step(index-1)
 			var next_step := seq.step(index+1)
-			
+
 			var up_btn = Button.new()
 			up_btn.text = "▲"
 			up_btn.hint_tooltip = "Move up"
 			step_layout.add_child(up_btn)
 			up_btn.connect("pressed", self, "_on_UpBtn_pressed", [seq, index])
-			
+
 			if not(step.editable_transi and step.editable_val) or index < 1:
 					up_btn.disabled = true
-			
+
 			if prev_step != null and not(prev_step.editable_transi and prev_step.editable_val):
 					up_btn.disabled = true
-			
+
 			var down_btn = Button.new()
 			down_btn.text = "▼"
 			down_btn.hint_tooltip = "Move down"
 			step_layout.add_child(down_btn)
 			down_btn.connect("pressed", self, "_on_DownBtn_pressed", [seq, index])
-			
+
 			if not(step.editable_transi and step.editable_val) or index >= seq.length()-1:
 					down_btn.disabled = true
-					
+
 			if next_step != null and not(next_step.editable_transi and next_step.editable_val):
 				down_btn.disabled = true
-			
+
 			var dup_btn = Button.new()
 			dup_btn.text = "D"
 			dup_btn.hint_tooltip = "Duplicate step"
 			step_layout.add_child(dup_btn)
 			dup_btn.connect("pressed", self, "_on_DupBtn_pressed", [seq, step])
-			
+
 			if not(step.editable_transi and step.editable_val):
 					dup_btn.disabled = true
-			
+
 			var del_btn = Button.new()
 			del_btn.text = "X"
 			del_btn.hint_tooltip = "Delete step"
 			step_layout.add_child(del_btn)
 			del_btn.connect("pressed", self, "_on_DelStepBtn_pressed", [seq, index])
-			
+
 			if not(step.editable_transi and step.editable_val):
 				del_btn.disabled = true
-			
+
 			layout.add_child(step_layout)
 			index += 1
 
@@ -331,18 +331,18 @@ func _on_Animations_changed() -> void:
 		return
 
 	_anim_list.clear()
-	
+
 	_anim_list.add_item("Choose...")
 	_anim_list.set_item_disabled(0, true)
 	_select_anim(0)
-	
+
 	var animations = _manager.animations()
 	var index: int = 1
 	for id in animations:
 		var anim = animations[id]
 		_anim_list.add_item("%s (%s)" % [anim.name, anim.id])
 		_anim_list.set_item_metadata(index, anim.id)
-		
+
 		index += 1
 
 
@@ -352,7 +352,7 @@ func _on_NewAnimationDialog_form_validated(form) -> void:
 		_manager.update_animation(_opened_anim)
 	else:
 		_manager.create_animation(AnimationData.new(form["id"], form["name"]))
-	
+
 	_select_anim_by_id(form["id"])
 
 
@@ -382,7 +382,7 @@ func _on_SaveBtn_pressed() -> void:
 
 func _on_ResetBtn_pressed() -> void:
 	_opened_anim = _manager.reset_animation(_opened_anim)
-	
+
 	if _idle_btn.pressed:
 		_anim_block = _opened_anim.idle_loop()
 	elif _focused_btn.pressed:
@@ -393,7 +393,7 @@ func _on_ResetBtn_pressed() -> void:
 		_anim_block = _opened_anim.deactivated_animation()
 	elif _unfocused_btn.pressed:
 		_anim_block = _opened_anim.unfocused_animation()
-		
+
 	_load_animation()
 
 
@@ -404,13 +404,13 @@ func _on_PreviewBtn_pressed() -> void:
 func _on_IdleBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
-	
+
 	_idle_btn.pressed = true
 	_focused_btn.pressed = false
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = false
 	_unfocused_btn.pressed = false
-	
+
 	_anim_block = _opened_anim.idle_loop()
 	_load_animation()
 
@@ -418,13 +418,13 @@ func _on_IdleBtn_pressed() -> void:
 func _on_FocusedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
-	
+
 	_idle_btn.pressed = false
 	_focused_btn.pressed = true
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = false
 	_unfocused_btn.pressed = false
-	
+
 	_anim_block = _opened_anim.focused_animation()
 	_load_animation()
 
@@ -432,13 +432,13 @@ func _on_FocusedBtn_pressed() -> void:
 func _on_ActivatedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
-	
+
 	_idle_btn.pressed = false
 	_focused_btn.pressed = false
 	_activated_btn.pressed = true
 	_deactivated_btn.pressed = false
 	_unfocused_btn.pressed = false
-	
+
 	_anim_block = _opened_anim.activated_animation()
 	_load_animation()
 
@@ -446,13 +446,13 @@ func _on_ActivatedBtn_pressed() -> void:
 func _on_DeactivatedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
-	
+
 	_idle_btn.pressed = false
 	_focused_btn.pressed = false
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = true
 	_unfocused_btn.pressed = false
-	
+
 	_anim_block = _opened_anim.deactivated_animation()
 	_load_animation()
 
@@ -460,13 +460,13 @@ func _on_DeactivatedBtn_pressed() -> void:
 func _on_UnfocusedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
-	
+
 	_idle_btn.pressed = false
 	_focused_btn.pressed = false
 	_activated_btn.pressed = false
 	_deactivated_btn.pressed = false
 	_unfocused_btn.pressed = true
-	
+
 	_anim_block = _opened_anim.unfocused_animation()
 	_load_animation()
 
@@ -508,7 +508,7 @@ func _on_DupBtn_pressed(seq: AnimationSequence, step: AnimationStep) -> void:
 
 func _on_TransiBtn_pressed(seq: AnimationSequence, idx: int) -> void:
 	var data := {}
-	
+
 	data["seq"] = seq
 	data["index"] = idx
 	data["random_duration"] = seq.step(idx).transi.random_duration
@@ -519,17 +519,17 @@ func _on_TransiBtn_pressed(seq: AnimationSequence, idx: int) -> void:
 	data["easing"] = seq.step(idx).transi.easing
 	data["flip_card"] = seq.step(idx).transi.flip_card
 	data["interactive"] = seq.step(idx).transi.interactive
-	
+
 	_main_ui.show_step_transi_dialog(data)
 
 
 func _on_StepTransiDialog_form_validated(form) -> void:
 	var seq: AnimationSequence = form["seq"]
 	var idx: int = form["index"]
-	
+
 	if seq == null:
 		return
-	
+
 	seq.step(idx).transi.random_duration = form["random_duration"]
 	seq.step(idx).transi.duration = form["duration"]
 	seq.step(idx).transi.duration_range_min = form["duration_range_min"]
@@ -538,16 +538,16 @@ func _on_StepTransiDialog_form_validated(form) -> void:
 	seq.step(idx).transi.easing = form["easing"]
 	seq.step(idx).transi.flip_card = form["flip_card"]
 	seq.step(idx).transi.interactive = form["interactive"]
-	
+
 	_load_animation()
 
 
 func _on_ValueBtn_pressed(seq: AnimationSequence, idx: int) -> void:
 	var data := {}
-	
+
 	data["seq"] = seq
 	data["index"] = idx
-	
+
 	if seq is RotationSequence:
 		data["mode"] = seq.step(idx).val.mode
 		data["value"] = seq.step(idx).val.num_val
@@ -556,17 +556,17 @@ func _on_ValueBtn_pressed(seq: AnimationSequence, idx: int) -> void:
 		data["mode"] = seq.step(idx).val.mode
 		data["value"] = seq.step(idx).val.vec_val
 		data["range"] = seq.step(idx).val.vec_range
-			
+
 	_main_ui.show_step_value_dialog(data)
 
 
 func _on_StepValueDialog_form_validated(form) -> void:
 	var seq: AnimationSequence = form["seq"]
 	var idx: int = form["index"]
-	
+
 	if seq == null:
 		return
-	
+
 	if seq is RotationSequence:
 		seq.step(idx).val.mode = form["mode"]
 		seq.step(idx).val.num_val = form["value"]
@@ -575,5 +575,5 @@ func _on_StepValueDialog_form_validated(form) -> void:
 		seq.step(idx).val.mode = form["mode"]
 		seq.step(idx).val.vec_val = form["value"]
 		seq.step(idx).val.vec_range = form["range"]
-	
+
 	_load_animation()

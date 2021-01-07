@@ -15,19 +15,19 @@ var _effects: EffectManager = EffectManager.new()
 
 func setup(plugin: EditorPlugin = null) -> void:
 	_plugin = plugin
-	
+
 	if _conf.load(CONF_FILE_PATH) != OK:
 		printerr("Could not load CardEngine config file")
 	else:
 		_databases.load_databases(_conf.get_value("folders", "databases"))
-		
+
 		_containers.load_containers(
 			_conf.get_value("folders", "containers"),
 				_conf.get_value("folders", "containers_private"),
 				_conf.get_value("folders", "container_tpl"))
-		
+
 		_animations.load_animations(_conf.get_value("folders", "animations"))
-		
+
 		_effects.load_effects(
 			_conf.get_value("folders", "effects"),
 			_conf.get_value("folders", "effects_private"),

@@ -15,7 +15,7 @@ func clean() -> void:
 
 func validate_form(form_name: String, form: Dictionary) -> Array:
 	var errors = []
-	
+
 	if form_name == "new_animation":
 		var id = form["id"]
 		if id.empty():
@@ -24,11 +24,11 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 			errors.append("Animation ID already exists")
 		elif !Utils.is_id_valid(id):
 			errors.append("Invalid animation ID, must only contains alphanumeric characters or _, no space and starts with a letter")
-	
+
 	elif form_name == "delete_animation":
 		if !form["confirm"]:
 			errors.append("Please confirm first")
-	
+
 	elif form_name == "step_transi":
 		if form["duration"] <= 0:
 			errors.append("Duration has to striclty greater than 0")
@@ -40,13 +40,13 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 			errors.append("Invalid transition type")
 		if form["easing"] < 0 and form["easing"] > 3:
 			errors.append("Invalid transition easing")
-	
+
 	return errors
 
 
 func load_animations(anim_folder: String) -> void:
 	_folder = anim_folder
-	
+
 	var dir = Directory.new()
 	if dir.open(_folder) == OK:
 		dir.list_dir_begin(true, true)
@@ -87,50 +87,50 @@ func update_animation(modified_anim: AnimationData) -> void:
 
 func delete_animation(id: String):
 	if !_animations.has(id): return
-	
+
 	var anim = _animations[id]
 	_animations.erase(id)
-	
+
 	var dir = Directory.new()
 	dir.remove(FORMAT_ANIM_PATH % [_folder, anim.id])
-	
+
 	emit_signal("changed")
 
 
 func reset_animation(anim: AnimationData) -> AnimationData:
 	var new_anim = _read_animation(FORMAT_ANIM_PATH % [_folder, anim.id])
-	
+
 	_animations[anim.id] = new_anim
-	
+
 	return new_anim
 
 
 func _write_animation(anim: AnimationData):
 	var file = ConfigFile.new()
-	
+
 	file.set_value("meta", "id", anim.id)
 	file.set_value("meta", "name", anim.name)
-	
+
 	file.set_value("idle", "pos", _from_sequence(anim.idle_loop().position_sequence()))
 	file.set_value("idle", "scale", _from_sequence(anim.idle_loop().scale_sequence()))
 	file.set_value("idle", "rot", _from_sequence(anim.idle_loop().rotation_sequence()))
-	
+
 	file.set_value("focused", "pos", _from_sequence(anim.focused_animation().position_sequence()))
 	file.set_value("focused", "scale", _from_sequence(anim.focused_animation().scale_sequence()))
 	file.set_value("focused", "rot", _from_sequence(anim.focused_animation().rotation_sequence()))
-	
+
 	file.set_value("activated", "pos", _from_sequence(anim.activated_animation().position_sequence()))
 	file.set_value("activated", "scale", _from_sequence(anim.activated_animation().scale_sequence()))
 	file.set_value("activated", "rot", _from_sequence(anim.activated_animation().rotation_sequence()))
-	
+
 	file.set_value("deactivated", "pos", _from_sequence(anim.deactivated_animation().position_sequence()))
 	file.set_value("deactivated", "scale", _from_sequence(anim.deactivated_animation().scale_sequence()))
 	file.set_value("deactivated", "rot", _from_sequence(anim.deactivated_animation().rotation_sequence()))
-	
+
 	file.set_value("unfocused", "pos", _from_sequence(anim.unfocused_animation().position_sequence()))
 	file.set_value("unfocused", "scale", _from_sequence(anim.unfocused_animation().scale_sequence()))
 	file.set_value("unfocused", "rot", _from_sequence(anim.unfocused_animation().rotation_sequence()))
-	
+
 	var err = file.save(FORMAT_ANIM_PATH % [_folder, anim.id])
 	if err != OK:
 		printerr("Error while writing animation")
@@ -139,36 +139,36 @@ func _write_animation(anim: AnimationData):
 
 func _read_animation(filename: String) -> AnimationData:
 	var file = ConfigFile.new()
-	
+
 	var err = file.load(filename)
 	if err != OK:
 		printerr("Error while loading animation")
 		return null
-	
+
 	var anim = AnimationData.new(
 		file.get_value("meta", "id", ""),
 		file.get_value("meta", "name", ""))
-	
+
 	_to_sequence(file.get_value("idle", "pos", []), anim.idle_loop().position_sequence())
 	_to_sequence(file.get_value("idle", "scale", []), anim.idle_loop().scale_sequence())
 	_to_sequence(file.get_value("idle", "rot", []), anim.idle_loop().rotation_sequence())
-	
+
 	_to_sequence(file.get_value("focused", "pos", []), anim.focused_animation().position_sequence())
 	_to_sequence(file.get_value("focused", "scale", []), anim.focused_animation().scale_sequence())
 	_to_sequence(file.get_value("focused", "rot", []), anim.focused_animation().rotation_sequence())
-	
+
 	_to_sequence(file.get_value("activated", "pos", []), anim.activated_animation().position_sequence())
 	_to_sequence(file.get_value("activated", "scale", []), anim.activated_animation().scale_sequence())
 	_to_sequence(file.get_value("activated", "rot", []), anim.activated_animation().rotation_sequence())
-	
+
 	_to_sequence(file.get_value("deactivated", "pos", []), anim.deactivated_animation().position_sequence())
 	_to_sequence(file.get_value("deactivated", "scale", []), anim.deactivated_animation().scale_sequence())
 	_to_sequence(file.get_value("deactivated", "rot", []), anim.deactivated_animation().rotation_sequence())
-	
+
 	_to_sequence(file.get_value("unfocused", "pos", []), anim.unfocused_animation().position_sequence())
 	_to_sequence(file.get_value("unfocused", "scale", []), anim.unfocused_animation().scale_sequence())
 	_to_sequence(file.get_value("unfocused", "rot", []), anim.unfocused_animation().rotation_sequence())
-	
+
 	return anim
 
 
@@ -230,7 +230,7 @@ func _to_sequence(data: Array, seq: AnimationSequence) -> void:
 			transi, val,
 			step_data["editable_transi"],
 			step_data["editable_val"])
-		
+
 		seq.add_step(step)
 
 

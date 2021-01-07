@@ -31,7 +31,7 @@ func _on_Databases_changed() -> void:
 	_fx_list.clear()
 	_edit_btn.disabled = true
 	_delete_btn.disabled = true
-	
+
 	var fxs = _manager.effects()
 	for id in fxs:
 		pass # TODO
@@ -44,7 +44,7 @@ func _on_Effects_changed() -> void:
 	_fx_list.clear()
 	_edit_btn.disabled = true
 	_delete_btn.disabled = true
-	
+
 	var effects = _manager.effects()
 	for id in effects:
 		var fx = effects[id]

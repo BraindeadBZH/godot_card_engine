@@ -17,10 +17,10 @@ func set_drag_widget(scene: PackedScene) -> void:
 func get_drag_data(_position: Vector2):
 	if not _drag_enabled:
 		return null
-	
+
 	if _drag_widget != null:
 		set_drag_preview(_drag_widget.instance())
-	
+
 	emit_signal("drag_started")
-	
+
 	return "card_engine:drag"

@@ -35,7 +35,7 @@ func unmodified() -> CardData:
 func add_modifier(mod: AbstractModifier) -> void:
 	if not _mods.has(mod.effect_ref()):
 		_mods[mod.effect_ref()] = []
-	
+
 	_mods[mod.effect_ref()].append(mod)
 	_update_modified()
 	emit_signal("modified")
@@ -46,7 +46,7 @@ func has_modifier(id: String) -> bool:
 		for mod in _mods[fx]:
 			if mod.id == id:
 				return true
-	
+
 	return false
 
 
@@ -59,14 +59,14 @@ func remove_modifiers(fx: int) -> void:
 
 func _update_modified() -> void:
 	_modified = null
-	
+
 	if _mods.size() > 0:
 		_modified = _data.duplicate()
 	else:
 		return
-	
+
 	var mod_applied := []
-	
+
 	for fx in _mods:
 		for mod in _mods[fx]:
 			if not mod.stackable and mod_applied.find(mod.id) != -1:

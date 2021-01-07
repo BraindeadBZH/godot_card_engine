@@ -53,7 +53,7 @@ func _extract_form() -> Dictionary:
 func _fill_form(data: Dictionary) -> void:
 	_seq = data["seq"]
 	_index = data["index"]
-	
+
 	if _seq is RotationSequence:
 		_mode.select(data["mode"])
 		_num_val.value = data["value"]
@@ -64,7 +64,7 @@ func _fill_form(data: Dictionary) -> void:
 		_vec_val_y.value = data["value"].y
 		_vec_range_x.value = data["range"].x
 		_vec_range_y.value = data["range"].y
-	
+
 	_config_ui()
 
 
@@ -76,7 +76,7 @@ func _config_ui() -> void:
 		_vec_range_lbl.visible = false
 		_vec_range_x.visible = false
 		_vec_range_y.visible = false
-		
+
 		_num_val_lbl.visible = _mode.selected > 0
 		_num_val.visible = _mode.selected > 0
 		_num_range_lbl.visible = _mode.selected == 2

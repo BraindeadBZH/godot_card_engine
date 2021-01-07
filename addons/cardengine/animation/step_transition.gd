@@ -23,5 +23,5 @@ func duplicate() -> StepTransition:
 	dup.duration_range_min = duration_range_min
 	dup.duration_range_max = duration_range_max
 	dup.flip_card = flip_card
-	
+
 	return dup

@@ -49,9 +49,9 @@ func init_sequence() -> void:
 			StepValue.new(StepValue.Mode.INITIAL),
 			false, false
 		))
-		
+
 	add_step()
-	
+
 	if _to_mode != INIT_DISABLED:
 		add_step(AnimationStep.new(
 			_default_transition(),
@@ -74,23 +74,23 @@ func step(index: int) -> AnimationStep:
 func first_step() -> AnimationStep:
 	if _data.empty():
 		return null
-	
+
 	return _data.front()
 
 
 func last_step() -> AnimationStep:
 	if _data.empty():
 		return null
-	
+
 	return _data.back()
 
 
 func add_step(step: AnimationStep = null, check_last: bool = false) -> void:
 	if step == null:
 		step = AnimationStep.new(_default_transition(), _default_value())
-	
+
 	var last := last_step()
-	
+
 	if check_last and length() > 1 and last != null and not (last.editable_transi and last.editable_val):
 		_data.insert(_data.size()-1, step)
 	else:

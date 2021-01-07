@@ -24,10 +24,10 @@ func apply(store: AbstractStore) -> void:
 
 func affect(card: CardInstance) -> void:
 	var filter := _fx.get_filter()
-	
+
 	if filter == null or filter.match_card(card.data()):
 		_affected.append(card)
-		
+
 		for mod in _fx.get_modifiers():
 			mod.set_effect_ref(ref())
 			card.add_modifier(mod)
@@ -36,5 +36,5 @@ func affect(card: CardInstance) -> void:
 func cancel() -> void:
 	for card in _affected:
 		card.remove_modifiers(ref())
-	
+
 	_affected.clear()

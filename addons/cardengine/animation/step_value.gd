@@ -23,5 +23,5 @@ func duplicate() -> StepValue:
 	dup.num_val = num_val
 	dup.vec_range = vec_range
 	dup.num_range = num_range
-	
+
 	return dup

@@ -15,7 +15,7 @@ func clean() -> void:
 
 func validate_form(form_name: String, form: Dictionary) -> Array:
 	var errors = []
-	
+
 	if form_name == "new_database":
 		var id = form["id"]
 		if id.empty():
@@ -24,26 +24,26 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 			errors.append("Database ID already exists")
 		elif !Utils.is_id_valid(id):
 			errors.append("Invalid database ID, must only contains alphanumeric characters or _, no space and starts with a letter")
-	
+
 	elif form_name == "delete_database":
 		if !form["confirm"]:
 			errors.append("Please confirm first")
-	
+
 	elif form_name == "category":
 		if !Utils.is_id_valid(form["meta_categ"]):
 			errors.append("Invalid meta-category")
-			
+
 		if !Utils.is_id_valid(form["categ"]):
 			errors.append("Invalid category")
-	
+
 	elif form_name == "value":
 		if !Utils.is_id_valid(form["id"]):
 			errors.append("Invalid value ID")
-	
+
 	elif form_name == "text":
 		if !Utils.is_id_valid(form["id"]):
 			errors.append("Invalid text ID")
-	
+
 	elif form_name == "duplicate_card":
 		var id = form["id"]
 		if id.empty():
@@ -52,7 +52,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 			errors.append("Card already exists")
 		elif !Utils.is_id_valid(id):
 			errors.append("Invalid card ID, must only contains alphanumeric characters or _, no space and starts with a letter")
-	
+
 	return errors
 
 
@@ -98,22 +98,22 @@ func update_database(modified_db: CardDatabase) -> void:
 
 func delete_database(id: String):
 	if !_databases.has(id): return
-	
+
 	var db = _databases[id]
 	_databases.erase(id)
-	
+
 	var dir = Directory.new()
 	dir.remove(FORMAT_DB_PATH % [_folder, db.id])
-	
+
 	emit_signal("changed")
 
 
 func _write_database(db: CardDatabase):
 	var file = ConfigFile.new()
-	
+
 	file.set_value("meta", "id", db.id)
 	file.set_value("meta", "name", db.name)
-	
+
 	for id in db.cards():
 		var card = db.get_card(id)
 		file.set_value("cards", card.id, {
@@ -121,7 +121,7 @@ func _write_database(db: CardDatabase):
 			"values": card.values(),
 			"texts": card.texts()
 			})
-	
+
 	var err = file.save(FORMAT_DB_PATH % [_folder, db.id])
 	if err != OK:
 		printerr("Error while writing database")
@@ -131,12 +131,12 @@ func _write_database(db: CardDatabase):
 func _read_database(filename: String) -> CardDatabase:
 	var path = _folder + filename
 	var file = ConfigFile.new()
-	
+
 	var err = file.load(path)
 	if err != OK:
 		printerr("Error while loading database")
 		return null
-	
+
 	var db = CardDatabase.new(file.get_value("meta", "id", ""),
 			file.get_value("meta", "name", ""))
 
@@ -148,6 +148,6 @@ func _read_database(filename: String) -> CardDatabase:
 			card.set_values(data["values"])
 			card.set_texts(data["texts"])
 			db.add_card(card)
-	
+
 	return db
 

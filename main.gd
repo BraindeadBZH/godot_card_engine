@@ -24,11 +24,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func change_screen(screen_name: String) -> void:
 	if !_screens.has(screen_name): return
-	
+
 	for child in _screen_layer.get_children():
 		_screen_layer.remove_child(child)
 		child.queue_free()
-	
+
 	var screen = _screens[screen_name].instance()
 	screen.connect("next_screen", self, "change_screen")
 	_screen_layer.add_child(screen)

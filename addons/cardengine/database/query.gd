@@ -27,15 +27,15 @@ func from(statements: Array) -> Query:
 		var expressions = statement.split(",", false)
 		for expression in expressions:
 			compiled.append(_expr_to_from(expression))
-		
+
 		_from_stmt.append(compiled)
 	return self
 
 
 # Restriction on values
 # Example: ["damage > 10,damage <= 20", "shield < 5"]
-#          Cards must have damage value strictly superior to 11 and 
-#          inferior or equal to 20, or shield value strictly inferior to 5 
+#          Cards must have damage value strictly superior to 11 and
+#          inferior or equal to 20, or shield value strictly inferior to 5
 func where(statements: Array) -> Query:
 	for statement in statements:
 		var compiled = []
@@ -44,7 +44,7 @@ func where(statements: Array) -> Query:
 			var comparison = _expr_to_comp(expression)
 			if comparison.empty(): continue
 			compiled.append(comparison)
-		
+
 		_where_stmt.append(compiled)
 	return self
 
@@ -58,7 +58,7 @@ func contains(statements: Array) -> Query:
 		var expressions = statement.split(",", false)
 		for expression in expressions:
 			compiled.append(_expr_to_contains(expression))
-		
+
 		_contains_stmt.append(compiled)
 	return self
 
@@ -67,11 +67,11 @@ func contains(statements: Array) -> Query:
 # Returns an Array of ids matching the query
 func execute(db: CardDatabase) -> Array:
 	var result := Array()
-	
+
 	for id in db.cards():
 		if match_card(db.get_card(id)):
 			result.append(id)
-	
+
 	return result
 
 
@@ -79,43 +79,43 @@ func match_card(card: CardData) -> bool:
 	var from_result = true
 	var where_result = true
 	var contains_result = true
-	
+
 	if !_from_stmt.empty():
 		from_result = _match_categs(card)
-		
+
 	if !_where_stmt.empty():
 		where_result = _match_values(card)
-		
+
 	if !_contains_stmt.empty():
 		contains_result = _match_texts(card)
-	
+
 	return from_result and where_result and contains_result
 
 
 func _match_categs(card: CardData) -> bool:
 	var or_result = false
-	
+
 	for or_stmt in _from_stmt:
 		var and_result = true
 		for and_stmt in or_stmt:
 			and_result = and_result and card.match_category(and_stmt[0], and_stmt[1])
 
 		or_result = or_result or and_result
-	
+
 	return or_result
 
 
 func _match_values(card: CardData) -> bool:
 	var or_result = false
-	
+
 	for or_stmt in _where_stmt:
 		var and_result = true
 		for and_stmt in or_stmt:
 			if !card.has_value(and_stmt[0]):
 				return false
-			
+
 			var card_val = card.get_value(and_stmt[0])
-			
+
 			match and_stmt[1]:
 				OP_EQUAL:
 					and_result = and_result and card_val == and_stmt[2]
@@ -127,52 +127,52 @@ func _match_values(card: CardData) -> bool:
 					and_result = and_result and card_val >= and_stmt[2]
 				OP_GREATER:
 					and_result = and_result and card_val  > and_stmt[2]
-		
+
 		or_result = or_result or and_result
-	
+
 	return or_result
 
 
 func _match_texts(card: CardData) -> bool:
 	var or_result = false
-	
+
 	for or_stmt in _contains_stmt:
 		var and_result = true
 		for and_stmt in or_stmt:
 			if !card.has_text(and_stmt[0]):
 				return false
-			
+
 			and_result = and_result and card.get_text(and_stmt[0]).to_lower().find(and_stmt[1]) != -1
-		
+
 		or_result = or_result or and_result
-	
+
 	return or_result
 
 
 func _expr_to_from(input: String) -> Array:
 	var result: Array = []
-	
+
 	var operands = input.split(":", false)
 	if operands.size() != 2:
 		printerr("'%s' is not a valid from expression" % input)
 		return []
-	
+
 	result.append(operands[0].strip_edges())
 	result.append(operands[1].strip_edges())
-	
+
 	return result
 
 
 func _expr_to_comp(input: String) -> Array:
 	var result: Array = []
-	
+
 	var operands = input.split(" ", false)
 	if operands.size() != 3:
 		printerr("'%s' is not a valid comparison expression" % input)
 		return []
-	
+
 	result.append(operands[0].strip_edges())
-	
+
 	match operands[1].strip_edges():
 		"=":
 			result.append(OP_EQUAL)
@@ -184,21 +184,21 @@ func _expr_to_comp(input: String) -> Array:
 			result.append(OP_GREATER_EQUAL)
 		">":
 			result.append(OP_GREATER)
-	
+
 	result.append(int(operands[2].strip_edges()))
-	
+
 	return result
 
 
 func _expr_to_contains(input: String) -> Array:
 	var result: Array = []
-	
+
 	var operands = input.split(":", false)
 	if operands.size() != 2:
 		printerr("'%s' is not a valid contains expression" % input)
 		return []
-	
+
 	result.append(operands[0].strip_edges())
 	result.append(operands[1].strip_edges().to_lower())
-	
+
 	return result

@@ -8,4 +8,4 @@ func clean() -> void:
 
 
 func validate_form(form_name: String, form: Dictionary) -> Array:
-	return [] 
+	return []

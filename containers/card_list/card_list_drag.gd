@@ -10,5 +10,5 @@ func _ready() -> void:
 
 func _on_drag_started():
 	var card = CardEngine.general().get_dragged_card()
-	
+
 	_name.text = card.data().get_text("name")

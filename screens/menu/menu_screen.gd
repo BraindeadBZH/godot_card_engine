@@ -7,13 +7,13 @@ func _ready():
 	var db = CardEngine.db().get_database("main")
 	var q = Query.new()
 	var store = CardPile.new()
-	
+
 	var cards = q.from(["rarity:common"]).execute(db)
-	
+
 	store.populate(db, cards)
 	store.shuffle()
 	store.keep(3)
-	
+
 	_display.set_store(store)
 
 

@@ -14,8 +14,8 @@ func get_filter() -> Query:
 # Override this to returns an array of modifiers applied by this effect
 func get_modifiers() -> Array:
 	var modifiers := []
-	
+
 	modifiers.append(ValueChange.new("incr", true, "mana", 1))
-	
+
 	return modifiers
 

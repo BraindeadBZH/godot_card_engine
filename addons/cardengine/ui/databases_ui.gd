@@ -31,7 +31,7 @@ func _on_Databases_changed() -> void:
 	_db_list.clear()
 	_edit_btn.disabled = true
 	_delete_btn.disabled = true
-	
+
 	var databases = _manager.databases()
 	for id in databases:
 		var db = databases[id]
@@ -74,10 +74,10 @@ func _on_EditDatabaseDialog_copy_card(card_id, new_card_id, db_id) -> void:
 	var db = _manager.get_database(db_id)
 	if db == null:
 		return
-	
+
 	var card = db.get_card(card_id)
 	var new_card = card.duplicate()
 	new_card.id = new_card_id
-	
+
 	db.add_card(new_card)
 	_manager.update_database(db)

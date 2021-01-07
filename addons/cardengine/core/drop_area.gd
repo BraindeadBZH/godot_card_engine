@@ -17,7 +17,7 @@ func can_drop_data(_position: Vector2, data) -> bool:
 			return _filter.match_card(card.data())
 		else:
 			return true
-	
+
 	return false
 
 

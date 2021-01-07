@@ -45,7 +45,7 @@ func set_database(id: String):
 	_selected_txt = "none"
 	_comp_op.select(0)
 	_comp_val.value = 0
-	
+
 	_clear_lists()
 	_fill_card_list()
 
@@ -68,15 +68,15 @@ func _clear_lists():
 func _fill_card_list():
 	if _db == null:
 		return
-	
+
 	_store.clear()
 	var result = _query.execute(_db)
 	_store.populate(_db, result)
-	
+
 	if _store.count() > 0:
 		_update_filters()
 		_store.sort({"meta:id": true})
-	
+
 	var cards = _store.cards()
 	var index = 0
 	_list_lbl.text = "Card List (%d cards)" % cards.size()
@@ -86,7 +86,7 @@ func _fill_card_list():
 				"%s (%s)" % [card.data().id, card.data().get_text("name")])
 		else:
 			_card_list.add_item(card.data().id)
-		
+
 		_card_list.set_item_metadata(index, card.data().id)
 		index += 1
 
@@ -95,7 +95,7 @@ func _apply_filters():
 	var from: Array = [""]
 	var where: Array = []
 	var contains: Array = []
-	
+
 	for layout in _categ_filter_list.get_children():
 		for child in layout.get_children():
 			if child is OptionButton:
@@ -103,21 +103,21 @@ func _apply_filters():
 					if not from[0].empty():
 						from[0] += ","
 					from[0] += "%s:%s" % [child.name, child.get_selected_metadata()]
-	
+
 	if _val_filter.selected > 0:
 		where.append(
 			"%s %s %d" % [
 				_val_filter.get_item_text(_val_filter.selected),
 				_comp_op.get_item_text(_comp_op.selected),
 				_comp_val.value])
-	
+
 	if _txt_filter.selected > 0 and not _contains.text.empty():
 		contains.append("%s:%s" % [
 			_txt_filter.get_item_text(_txt_filter.selected),
 			_contains.text])
-	
+
 	_query.clear().from(from).where(where).contains(contains)
-	
+
 	_clear_lists()
 	_fill_card_list()
 
@@ -130,7 +130,7 @@ func _update_filters():
 
 func _update_categs():
 	Utils.delete_all_children(_categ_filter_list)
-	
+
 	for meta in _store.categories():
 		var meta_categ = _store.get_meta_category(meta)
 		var layout := VBoxContainer.new()
@@ -138,29 +138,29 @@ func _update_categs():
 		var select := OptionButton.new()
 		var index = 1
 		var selected = 0
-		
+
 		layout.name = "%s_layout" % meta
 		label.name = "%s_lbl" % meta
 		select.name = "%s" % meta
-		
+
 		label.text = "Filter by %s (%d)" % [meta, meta_categ["count"]]
 		select.add_item("All")
-		
+
 		for categ in meta_categ["values"]:
 			select.add_item("%s (%d)" % [categ,  meta_categ["values"][categ]])
 			select.set_item_metadata(index, categ)
-			
+
 			if _selected_categ.has(meta) and _selected_categ[meta] == categ:
 				selected = index
-			
+
 			index += 1
-		
+
 		layout.add_child(label)
 		layout.add_child(select)
 		_categ_filter_list.add_child(layout)
-		
+
 		select.select(selected)
-		
+
 		select.connect("item_selected", self, "_on_CategFilter_item_selected", [select, meta])
 
 
@@ -195,26 +195,26 @@ func _on_EditDatabaseDialog_about_to_show():
 
 func _on_CardList_item_selected(index):
 	_detail_list.clear()
-	
+
 	_selected_card_idx = index
 	_selected_card = _card_list.get_item_metadata(index)
-	
+
 	var card = _db.get_card(_selected_card)
 	_detail_list.add_item("Categories:")
 	for categ in card.categories():
 		_detail_list.add_item("  * %s: %s" % [categ, card.get_category(categ)])
-		
+
 	_detail_list.add_item("Values:")
 	for value in card.values():
 		_detail_list.add_item("  * %s = %d" % [value, card.get_value(value)])
-		
+
 	_detail_list.add_item("Texts:")
 	for text in card.texts():
 		_detail_list.add_item("  * %s:" % text)
 		var lines = card.get_text(text).split("\n")
 		for line in lines:
 			_detail_list.add_item("       %s" % line)
-	
+
 	_delete_btn.disabled = false
 	_edit_btn.disabled = false
 	_dup_btn.disabled = false
@@ -243,7 +243,7 @@ func _on_ValFilter_item_selected(id):
 		_selected_val = "none"
 	else:
 		_selected_val = _val_filter.get_item_text(id)
-		
+
 	_apply_filters()
 
 
@@ -252,7 +252,7 @@ func _on_TxtFilter_item_selected(id):
 		_selected_txt = "none"
 	else:
 		_selected_txt = _txt_filter.get_item_text(id)
-	
+
 	_apply_filters()
 
 
@@ -273,7 +273,7 @@ func _on_CategFilter_item_selected(index: int, select: OptionButton, meta_categ:
 		_selected_categ.erase(meta_categ)
 	else:
 		_selected_categ[meta_categ] = select.get_item_metadata(index)
-	
+
 	_apply_filters()
 
 
