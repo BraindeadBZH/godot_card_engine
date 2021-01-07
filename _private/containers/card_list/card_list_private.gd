@@ -16,6 +16,9 @@ func _ready():
 	_grid_columns = 4
 	_grid_expand = true
 
+	# Drag and drop parameters
+	_drag_enabled = true
+
 	# Path parameters
 	_path_card_width = 200
 	_path_fixed_width = true

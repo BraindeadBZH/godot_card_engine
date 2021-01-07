@@ -72,7 +72,7 @@ func root_trans() -> CardTransform:
 func set_root_trans(transform: CardTransform) -> void:
 	_transi_merge.stop()
 	_transi_merge.start()
-	
+
 	_merge_trans = transform
 
 
@@ -81,7 +81,7 @@ func set_root_trans_immediate(transform: CardTransform) -> void:
 	position = transform.pos
 	scale = transform.scale
 	rotation = transform.rot
-	
+
 	_change_anim("idle")
 
 
@@ -106,7 +106,7 @@ func side() -> int:
 func set_side(side_up: int) -> void:
 	if _side == side_up:
 		return
-	
+
 	_side = side_up
 	_update_visibility()
 
@@ -120,17 +120,20 @@ func change_side() -> void:
 
 func set_interactive(state: bool) -> void:
 	_interactive = state
-	_mouse.set_drag_enabled(state)
 
 
 func set_interaction_paused(state: bool) -> void:
 	_interaction_paused = state
 
 
+func set_drag_enabled(state: bool) -> void:
+	_mouse.set_drag_enabled(state)
+
+
 func set_animation(anim: AnimationData) -> void:
 	if anim == null:
 		_anim_player.remove_all()
-	
+
 	_cont.position = Vector2(0.0, 0.0)
 	_cont.scale = Vector2(1.0, 1.0)
 	_cont.rotation = 0.0
@@ -156,7 +159,7 @@ func is_flagged_for_removal() -> bool:
 
 func flag_for_removal() -> void:
 	_remove_flag = true
-	
+
 	if _transitions.out_anchor.enabled:
 		_transition(_current_trans(), null)
 	else:
@@ -171,7 +174,7 @@ func _update_visibility() -> void:
 		return
 	else:
 		_placeholder.visible = false
-	
+
 	if _side == CardSide.FRONT:
 		_back.visible = false
 		_front.visible = true
@@ -182,11 +185,11 @@ func _update_visibility() -> void:
 
 func _current_trans() -> CardTransform:
 	var trans = CardTransform.new()
-	
+
 	trans.pos = position
 	trans.scale = scale
 	trans.rot = rotation
-	
+
 	return trans
 
 
@@ -194,31 +197,31 @@ func _transition(from: CardTransform, to: CardTransform) -> void:
 	var duration: float = _transitions.order.duration
 	var type: int = _transitions.order.type
 	var easing: int = _transitions.order.easing
-	
+
 	if from == null:
 		from = CardTransform.new()
 		from.pos = _transitions.in_anchor.position
 		from.scale = _transitions.in_anchor.scale
 		from.rot = _transitions.in_anchor.rotation
-		
+
 		duration = _transitions.in_anchor.duration
 		type = _transitions.in_anchor.type
 		easing = _transitions.in_anchor.easing
-	
+
 	if to == null:
 		to = CardTransform.new()
 		to.pos = _transitions.out_anchor.position
 		to.scale = _transitions.out_anchor.scale
 		to.rot = _transitions.out_anchor.rotation
-		
+
 		duration = _transitions.out_anchor.duration
 		type = _transitions.out_anchor.type
 		easing = _transitions.out_anchor.easing
-	
+
 	position = from.pos
 	scale = from.scale
 	rotation = from.rot
-	
+
 	_transi.remove_all()
 
 	_transi.interpolate_property(
@@ -229,14 +232,14 @@ func _transition(from: CardTransform, to: CardTransform) -> void:
 
 	_transi.interpolate_property(
 		self, "rotation", from.rot, to.rot, duration, type, easing)
-	
+
 	_transi.start()
 
 
 func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
 	var prev_val: Vector2 = Vector2(0.0, 0.0)
 	var delay: float = 0.0
-	
+
 	match seq.from_mode():
 		AnimationSequence.INIT_ORIGIN:
 			prev_val = Vector2(0.0, 0.0)
@@ -268,10 +271,10 @@ func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
 				StepValue.Mode.RANDOM:
 					final_pos = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
-			
+
 			if not step.transi.interactive:
 				player.interpolate_callback(self, delay, "set_interaction_paused", true)
-			
+
 			player.interpolate_property(
 				_cont, "position",
 				prev_val, final_pos,
@@ -282,17 +285,17 @@ func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
 
 			if step.transi.flip_card:
 				player.interpolate_callback(self, delay, "change_side")
-			
+
 			if not step.transi.interactive:
 				player.interpolate_callback(self, delay, "set_interaction_paused", false)
-	
+
 	return prev_val
 
 
 func _setup_scale_sequence(seq: ScaleSequence, player: Tween) -> Vector2:
 	var prev_val: Vector2 = Vector2(1.0, 1.0)
 	var delay: float = 0.0
-	
+
 	match seq.from_mode():
 		AnimationSequence.INIT_ORIGIN:
 			prev_val = Vector2(1.0, 1.0)
@@ -324,10 +327,10 @@ func _setup_scale_sequence(seq: ScaleSequence, player: Tween) -> Vector2:
 				StepValue.Mode.RANDOM:
 					final_scale = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
-			
+
 			if not step.transi.interactive:
 				player.interpolate_callback(self, delay, "set_interaction_paused", true)
-			
+
 			player.interpolate_property(
 				_cont, "scale",
 				prev_val, final_scale,
@@ -338,17 +341,17 @@ func _setup_scale_sequence(seq: ScaleSequence, player: Tween) -> Vector2:
 
 			if step.transi.flip_card:
 				player.interpolate_callback(self, delay, "change_side")
-			
+
 			if not step.transi.interactive:
 				player.interpolate_callback(self, delay, "set_interaction_paused", false)
-	
+
 	return prev_val
 
 
 func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 	var prev_val: float = 0.0
 	var delay: float = 0.0
-	
+
 	match seq.from_mode():
 		AnimationSequence.INIT_ORIGIN:
 			prev_val = 0.0
@@ -380,7 +383,7 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 				StepValue.Mode.RANDOM:
 					final_rot = deg2rad(_rng.randomf_range(
 						step.val.num_val, step.val.num_range))
-			
+
 			if not step.transi.interactive:
 				player.interpolate_callback(self, delay, "set_interaction_paused", true)
 
@@ -394,37 +397,37 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 
 			if step.transi.flip_card:
 				player.interpolate_callback(self, delay, "change_side")
-			
+
 			if not step.transi.interactive:
 				player.interpolate_callback(self, delay, "set_interaction_paused", false)
-	
+
 	return prev_val
 
 
 func _precompute_trans() -> void:
 	if _anim == null:
 		return
-	
+
 	_trans_focused.pos = _setup_pos_sequence(
 		_anim.focused_animation().position_sequence(),
 		_anim_player)
-		
+
 	_trans_focused.scale = _setup_scale_sequence(
 		_anim.focused_animation().scale_sequence(),
 		_anim_player)
-		
+
 	_trans_focused.rot = _setup_rotation_sequence(
 		_anim.focused_animation().rotation_sequence(),
 		_anim_player)
-	
+
 	_trans_activated.pos = _setup_pos_sequence(
 		_anim.activated_animation().position_sequence(),
 		_anim_player)
-		
+
 	_trans_activated.scale = _setup_scale_sequence(
 		_anim.activated_animation().scale_sequence(),
 		_anim_player)
-		
+
 	_trans_activated.rot = _setup_rotation_sequence(
 		_anim.activated_animation().rotation_sequence(),
 		_anim_player)
@@ -433,7 +436,7 @@ func _precompute_trans() -> void:
 func _change_state(new_state: int) -> void:
 	if new_state == _state:
 		return
-	
+
 	_state = new_state
 	emit_signal("state_changed", new_state)
 
@@ -441,111 +444,111 @@ func _change_state(new_state: int) -> void:
 func _change_anim(anim: String) -> void:
 	if _anim == null or _remove_flag:
 		return
-	
+
 	_anim_player.remove_all()
 	_anim_player.repeat = false
 	_current_anim = anim
-	
+
 	match anim:
 		"idle":
 			_anim_player.repeat = true
-			
+
 			_cont.position = Vector2(0.0, 0.0)
 			_cont.scale = Vector2(1.0, 1.0)
 			_cont.rotation = 0.0
-			
+
 			_setup_pos_sequence(
 				_anim.idle_loop().position_sequence(),
 				_anim_player)
-				
+
 			_setup_scale_sequence(
 				_anim.idle_loop().scale_sequence(),
 				_anim_player)
-				
+
 			_setup_rotation_sequence(
 				_anim.idle_loop().rotation_sequence(),
 				_anim_player)
-			
+
 		"focused":
 			if _adjust_on_focused and _adjusted_trans != null:
 				_transition(_root_trans, _adjusted_trans)
-			
+
 			_cont.position = Vector2(0.0, 0.0)
 			_cont.scale = Vector2(1.0, 1.0)
 			_cont.rotation = 0.0
-			
+
 			_setup_pos_sequence(
 				_anim.focused_animation().position_sequence(),
 				_anim_player)
-				
+
 			_setup_scale_sequence(
 				_anim.focused_animation().scale_sequence(),
 				_anim_player)
-				
+
 			_setup_rotation_sequence(
 				_anim.focused_animation().rotation_sequence(),
 				_anim_player)
-				
+
 		"activated":
 			if _adjust_on_activated and _adjusted_trans != null:
 				_transition(_root_trans, _adjusted_trans)
-			
+
 			_cont.position = _trans_focused.pos
 			_cont.scale = _trans_focused.scale
 			_cont.rotation = _trans_focused.rot
-				
+
 			_setup_pos_sequence(
 				_anim.activated_animation().position_sequence(),
 				_anim_player)
-				
+
 			_setup_scale_sequence(
 				_anim.activated_animation().scale_sequence(),
 				_anim_player)
-				
+
 			_setup_rotation_sequence(
 				_anim.activated_animation().rotation_sequence(),
 				_anim_player)
-				
+
 		"deactivated":
 			if _adjust_on_activated and _adjusted_trans != null:
 				_transition(_adjusted_trans, _root_trans)
-			
+
 			_cont.position = _trans_activated.pos
 			_cont.scale = _trans_activated.scale
 			_cont.rotation = _trans_activated.rot
-				
+
 			_setup_pos_sequence(
 				_anim.deactivated_animation().position_sequence(),
 				_anim_player)
-				
+
 			_setup_scale_sequence(
 				_anim.deactivated_animation().scale_sequence(),
 				_anim_player)
-				
+
 			_setup_rotation_sequence(
 				_anim.deactivated_animation().rotation_sequence(),
 				_anim_player)
-				
+
 		"unfocused":
 			if _adjust_on_focused and _adjusted_trans != null:
 				_transition(_adjusted_trans, _root_trans)
-			
+
 			_cont.position = _trans_focused.pos
 			_cont.scale = _trans_focused.scale
 			_cont.rotation = _trans_focused.rot
-				
+
 			_setup_pos_sequence(
 				_anim.unfocused_animation().position_sequence(),
 				_anim_player)
-				
+
 			_setup_scale_sequence(
 				_anim.unfocused_animation().scale_sequence(),
 				_anim_player)
-				
+
 			_setup_rotation_sequence(
 				_anim.unfocused_animation().rotation_sequence(),
 				_anim_player)
-			
+
 	_anim_player.start()
 
 
@@ -556,11 +559,11 @@ func _post_event(event: String) -> void:
 func _merge_events() -> void:
 	var merged := []
 	var prev = ""
-	
+
 	for event in _event_queue:
 		if prev != event:
 			var need_merge = false
-			
+
 			if event == "focused" && prev == "unfocused":
 				need_merge = true
 			elif event == "unfocused" && prev == "focused":
@@ -569,7 +572,7 @@ func _merge_events() -> void:
 				need_merge = true
 			elif event == "deactivated" && prev == "activated":
 				need_merge = true
-			
+
 			if need_merge:
 				merged.pop_back()
 				if not merged.empty():
@@ -579,21 +582,21 @@ func _merge_events() -> void:
 			else:
 				merged.push_back(event)
 				prev = event
-	
+
 	_event_queue = merged
 
 
 func _on_EventMerge_timeout() -> void:
 	_merge_events()
-	
+
 	if _event_queue.empty() or _interaction_paused:
 		return
-	
+
 	var next = _event_queue.front()
 
 	if _current_anim != "idle" and next == "idle" and _anim_player.is_active():
 		return
-	
+
 	match next:
 		"idle":
 			_change_state(CardState.IDLE)
@@ -605,7 +608,7 @@ func _on_EventMerge_timeout() -> void:
 			_change_state(CardState.FOCUSED)
 		"unfocused":
 			_change_state(CardState.IDLE)
-	
+
 	_event_queue.pop_front()
 	_change_anim(next)
 
@@ -613,18 +616,18 @@ func _on_EventMerge_timeout() -> void:
 func _on_MouseArea_mouse_entered() -> void:
 	if not _interactive or CardEngine.general().is_dragging():
 		return
-	
+
 	z_index = 1
-	
+
 	_post_event("focused")
 
 
 func _on_MouseArea_mouse_exited() -> void:
 	if not _interactive or CardEngine.general().is_dragging():
 		return
-	
+
 	z_index = 0
-	
+
 	_post_event("unfocused")
 	_post_event("idle")
 
@@ -632,21 +635,21 @@ func _on_MouseArea_mouse_exited() -> void:
 func _on_MouseArea_pressed() -> void:
 	if not _interactive or CardEngine.general().is_dragging():
 		return
-	
+
 	emit_signal("clicked")
 
 
 func _on_MouseArea_button_down() -> void:
 	if not _interactive or CardEngine.general().is_dragging():
 		return
-	
+
 	_post_event("activated")
 
 
 func _on_MouseArea_button_up() -> void:
 	if not _interactive or CardEngine.general().is_dragging():
 		return
-		
+
 	_post_event("deactivated")
 
 
@@ -661,9 +664,9 @@ func _on_TransiMerge_timeout() -> void:
 	else:
 		if _root_trans.eq(_merge_trans):
 			return
-		
+
 		_transition(_root_trans, _merge_trans)
-	
+
 	_root_trans = _merge_trans
 	_change_anim("idle")
 
@@ -671,11 +674,11 @@ func _on_TransiMerge_timeout() -> void:
 func _on_Transitions_tween_all_completed() -> void:
 	if _remove_flag:
 		emit_signal("need_removal")
-	
+
 	if _waiting_card_return:
 		_waiting_card_return = false
 		_mouse.mouse_filter = Control.MOUSE_FILTER_STOP
-		
+
 		_post_event("unfocused")
 		_post_event("idle")
 
@@ -683,7 +686,7 @@ func _on_Transitions_tween_all_completed() -> void:
 func _on_MouseArea_drag_started() -> void:
 	CardEngine.general().start_drag(_inst)
 	_is_dragged = true
-	
+
 	if _follow_mouse:
 		_mouse.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -692,20 +695,20 @@ func _on_drag_stopped() -> void:
 	if _is_dragged:
 		z_index = 0
 		_is_dragged = false
-		
+
 		if _remove_flag:
 			return
-		
+
 		if _follow_mouse:
 			_waiting_card_return = true
-			
+
 			if _adjusted_trans != null:
 				_transition(_current_trans(), _adjusted_trans)
 			else:
 				_transition(_current_trans(), _root_trans)
 		else:
 			_post_event("deactivated")
-			
+
 			if not _mouse.is_hovered():
 				_post_event("unfocused")
 				_post_event("idle")

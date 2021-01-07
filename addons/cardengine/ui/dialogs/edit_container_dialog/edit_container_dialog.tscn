@@ -304,6 +304,35 @@ step = 0.1
 value = 1.0
 allow_greater = true
 
+[node name="DragAndDrop" type="Control" parent="MainLayout/MainTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="DragLayout" type="GridContainer" parent="MainLayout/MainTabs/DragAndDrop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnabledTitle" type="Label" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+margin_top = 13.0
+margin_right = 50.0
+margin_bottom = 27.0
+text = "Enabled"
+
+[node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+margin_left = 54.0
+margin_right = 502.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
 [node name="FineTuning" type="Control" parent="MainLayout/MainTabs"]
 visible = false
 anchor_right = 1.0
@@ -875,6 +904,7 @@ items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In Out", nul
 selected = 0
 
 [node name="Animations" type="Control" parent="MainLayout/MainTabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

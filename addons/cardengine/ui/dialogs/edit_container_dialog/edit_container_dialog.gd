@@ -21,6 +21,8 @@ onready var _path_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/Pa
 onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathFixedWidth
 onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
 
+onready var _drag_enabled = $MainLayout/MainTabs/DragAndDrop/DragLayout/Enabled
+
 onready var _pos_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Enabled
 onready var _pos_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Mode
 onready var _pos_range_min_h = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout/RangeH
@@ -81,7 +83,7 @@ func set_container(id: String) -> void:
 func _update() -> void:
 	if _data == null:
 		return
-	
+
 	_face_switch.pressed = _data.face_up
 	_grid_width.value = _data.grid_card_width
 	_grid_fixed.pressed = _data.grid_fixed_width
@@ -92,24 +94,26 @@ func _update() -> void:
 	_path_width.value = _data.path_card_width
 	_path_fixed.pressed = _data.path_fixed_width
 	_path_spacing.value = _data.path_spacing
-	
+
 	_mode_switch.pressed = _layout_mode_to_switch(_data.mode)
-	
+
 	_grid_align_h.select(_halign_to_select(_data.grid_halign))
 	_grid_align_v.select(_valign_to_select(_data.grid_valign))
-	
+
+	_drag_enabled.pressed = _data.drag_enabled
+
 	_pos_enabled.pressed = _data.fine_pos
 	_pos_range_min_h.value = _data.fine_pos_min.x
 	_pos_range_min_v.value = _data.fine_pos_min.y
 	_pos_range_max_h.value = _data.fine_pos_max.x
 	_pos_range_max_v.value = _data.fine_pos_max.y
 	_pos_mode.select(_finetune_mode_to_select(_data.fine_pos_mode))
-	
+
 	_angle_enabled.pressed = _data.fine_angle
 	_angle_range_min.value = _data.fine_angle_min
 	_angle_range_max.value = _data.fine_angle_max
 	_angle_mode.select(_finetune_mode_to_select(_data.fine_angle_mode))
-	
+
 	_scale_enabled.pressed = _data.fine_scale
 	_scale_range_min_h.value = _data.fine_scale_min.x
 	_scale_range_min_v.value = _data.fine_scale_min.y
@@ -117,22 +121,22 @@ func _update() -> void:
 	_scale_range_max_v.value = _data.fine_scale_max.y
 	_scale_mode.select(_finetune_mode_to_select(_data.fine_scale_mode))
 	_scale_ratio.select(_scale_ratio_to_select(_data.fine_scale_ratio))
-	
+
 	_trans_order_duration.value = _data.order_duration * 1000
 	_trans_order_type.select(_trans_type_to_select(_data.order_type))
 	_trans_order_easing.select(_trans_easing_to_select(_data.order_easing))
-	
+
 	_trans_in_duration.value = _data.in_duration * 1000
 	_trans_in_type.select(_trans_type_to_select(_data.in_type))
 	_trans_in_easing.select(_trans_easing_to_select(_data.in_easing))
-	
+
 	_trans_out_duration.value = _data.out_duration * 1000
 	_trans_out_type.select(_trans_type_to_select(_data.out_type))
 	_trans_out_easing.select(_trans_easing_to_select(_data.out_easing))
-	
+
 	_interactive.pressed = _data.interactive
 	_load_animation_list(_anim, _data.anim)
-	
+
 	_adjust_mode.select(_adjust_mode_to_select(_data.adjust_mode))
 	_adjust_pos_mode_x.select(_adjust_value_mode_to_select(_data.adjust_pos_x_mode))
 	_adjust_pos_mode_y.select(_adjust_value_mode_to_select(_data.adjust_pos_y_mode))
@@ -148,29 +152,29 @@ func _update() -> void:
 
 func _load_animation_list(select: OptionButton, selected_id: String) -> void:
 	select.clear()
-	
+
 	select.add_item("None")
 	select.set_item_metadata(0, "none")
-	
+
 	var index = 1
 	var selected_idx = 0
 	for id in _anims.animations():
 		var anim = _anims.get_animation(id)
 		select.add_item(anim.name)
 		select.set_item_metadata(index, anim.id)
-		
+
 		if selected_id == anim.id:
 			selected_idx = index
-		
+
 		index += 1
-	
+
 	select.select(selected_idx)
 
 
 func _save() -> void:
 	if _data == null:
 		return
-	
+
 	_data.face_up = _face_switch.pressed
 	_data.grid_card_width = _grid_width.value
 	_data.grid_fixed_width = _grid_fixed.pressed
@@ -181,24 +185,26 @@ func _save() -> void:
 	_data.path_card_width = _path_width.value
 	_data.path_fixed_width = _path_fixed.pressed
 	_data.path_spacing = _path_spacing.value
-	
+
 	_data.mode = _switch_to_layout_mode(_mode_switch.pressed)
-	
+
 	_data.grid_halign = _select_to_halign(_grid_align_h.selected)
 	_data.grid_valign = _select_to_valign(_grid_align_v.selected)
-	
+
+	_data.drag_enabled = _drag_enabled.pressed
+
 	_data.fine_pos = _pos_enabled.pressed
 	_data.fine_pos_min.x = _pos_range_min_h.value
 	_data.fine_pos_min.y = _pos_range_min_v.value
 	_data.fine_pos_max.x = _pos_range_max_h.value
 	_data.fine_pos_max.y = _pos_range_max_v.value
 	_data.fine_pos_mode = _select_to_finetune_mode(_pos_mode.selected)
-	
+
 	_data.fine_angle = _angle_enabled.pressed
 	_data.fine_angle_min = _angle_range_min.value
 	_data.fine_angle_max = _angle_range_max.value
 	_data.fine_angle_mode = _select_to_finetune_mode(_angle_mode.selected)
-	
+
 	_data.fine_scale = _scale_enabled.pressed
 	_data.fine_scale_min.x = _scale_range_min_h.value
 	_data.fine_scale_min.y = _scale_range_min_v.value
@@ -206,22 +212,22 @@ func _save() -> void:
 	_data.fine_scale_max.y = _scale_range_max_v.value
 	_data.fine_scale_mode = _select_to_finetune_mode(_scale_mode.selected)
 	_data.fine_scale_ratio = _select_to_scale_ratio(_scale_ratio.selected)
-	
+
 	_data.order_duration = _trans_order_duration.value / 1000.0
 	_data.order_type = _select_to_trans_type(_trans_order_type.selected)
 	_data.order_easing = _select_to_trans_easing(_trans_order_easing.selected)
-	
+
 	_data.in_duration = _trans_in_duration.value / 1000.0
 	_data.in_type = _select_to_trans_type(_trans_in_type.selected)
 	_data.in_easing = _select_to_trans_easing(_trans_in_easing.selected)
-	
+
 	_data.out_duration = _trans_out_duration.value / 1000.0
 	_data.out_type = _select_to_trans_type(_trans_out_type.selected)
 	_data.out_easing = _select_to_trans_easing(_trans_out_easing.selected)
-	
+
 	_data.interactive = _interactive.pressed
 	_data.anim = _anim.get_selected_metadata()
-	
+
 	_data.adjust_mode = _select_to_adjust_mode(_adjust_mode.selected)
 	_data.adjust_pos_x_mode = _select_to_adjust_value_mode(_adjust_pos_mode_x.selected)
 	_data.adjust_pos_y_mode = _select_to_adjust_value_mode(_adjust_pos_mode_y.selected)
@@ -233,7 +239,7 @@ func _save() -> void:
 	_data.adjust_scale.y = _adjust_scale_y.value
 	_data.adjust_rot_mode = _select_to_adjust_value_mode(_adjust_rot_mode.selected)
 	_data.adjust_rot = _adjust_rot.value
-	
+
 	_manager.update_container(_data)
 
 

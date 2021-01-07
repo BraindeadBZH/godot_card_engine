@@ -15,6 +15,10 @@ valign="top"
 columns=4
 expand=true
 
+[drag]
+
+enabled=true
+
 [path]
 
 card_width=200.0

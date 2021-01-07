@@ -16,6 +16,9 @@ var grid_valign: String = "middle"
 var grid_columns: int = 3
 var grid_expand: bool = true
 
+# Drag and drop parameters
+var drag_enabled: bool = false
+
 # Path parameters
 var path_card_width: float = 200
 var path_fixed_width: bool = true
