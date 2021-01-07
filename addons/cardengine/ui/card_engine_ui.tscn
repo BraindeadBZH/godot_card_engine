@@ -702,6 +702,7 @@ margin_bottom = -4.0
 [connection signal="pressed" from="Tabs/Effects/EffectLayout/Toolbar/CreateBtn" to="Tabs/Effects" method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Tabs/Effects/EffectLayout/Toolbar/EditBtn" to="Tabs/Effects" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="Tabs/Effects/EffectLayout/Toolbar/DeleteBtn" to="Tabs/Effects" method="_on_DeleteBtn_pressed"]
+[connection signal="item_activated" from="Tabs/Effects/EffectLayout/EffectList" to="Tabs/Effects" method="_on_EffectList_item_activated"]
 [connection signal="item_selected" from="Tabs/Effects/EffectLayout/EffectList" to="Tabs/Effects" method="_on_EffectList_item_selected"]
 [connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="Tabs/Databases" method="_on_NewDatabaseDialog_form_validated"]
 [connection signal="copy_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Databases" method="_on_EditDatabaseDialog_copy_card"]

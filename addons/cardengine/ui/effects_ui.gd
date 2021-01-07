@@ -70,10 +70,14 @@ func _on_EffectList_item_selected(index: int) -> void:
 
 
 func _on_EditBtn_pressed() -> void:
-	var fx = _manager.get_effect(_fx_list.get_item_metadata(_selected_fx))
-	_main_ui.show_new_effect_dialog({"id": fx.id, "name": fx.name})
+	_manager.edit(_fx_list.get_item_metadata(_selected_fx))
 
 
 func _on_DeleteBtn_pressed() -> void:
 	_main_ui.show_confirmation_dialog(
 			"Delete effect", funcref(self, "delete_effect"))
+
+
+func _on_EffectList_item_activated(index: int) -> void:
+	var fx = _manager.get_effect(_fx_list.get_item_metadata(_selected_fx))
+	_main_ui.show_new_effect_dialog({"id": fx.id, "name": fx.name})

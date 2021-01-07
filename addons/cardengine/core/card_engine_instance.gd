@@ -62,6 +62,10 @@ func fx() -> EffectManager:
 	return _effects
 
 
-func scan_for_new_files():
+func scan_for_new_files() -> void:
 	if _plugin != null:
 		_plugin.get_editor_interface().get_resource_filesystem().scan()
+
+
+func open_for_edit(res: Resource) -> void:
+	_plugin.get_editor_interface().edit_resource(res)

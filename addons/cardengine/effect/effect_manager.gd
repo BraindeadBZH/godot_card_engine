@@ -103,6 +103,11 @@ func instantiate(id: String) -> EffectInstance:
 		return null
 
 
+func edit(id: String) -> void:
+	var script := load(FORMAT_FX_SCRIPT % [_folder, id])
+	CardEngine.open_for_edit(script)
+
+
 func _read_metadata() -> void:
 	var file := ConfigFile.new()
 	
