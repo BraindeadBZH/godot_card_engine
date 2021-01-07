@@ -69,3 +69,7 @@ func scan_for_new_files() -> void:
 
 func open_for_edit(res: Resource) -> void:
 	_plugin.get_editor_interface().edit_resource(res)
+
+
+func open_scene(path: String) -> void:
+	_plugin.get_editor_interface().open_scene_from_path(path)

@@ -102,6 +102,10 @@ func update_container(modified_cont: ContainerData) -> void:
 	emit_signal("changed")
 
 
+func open(id: String) -> void:
+	CardEngine.open_scene(FMT_IMPL_SCENE % [_folder, id, id])
+
+
 func delete_container(cont: ContainerData) -> void:
 	if Utils.directory_remove_recursive(FMT_PRIVATE_FOLDER % [_private_folder, cont.id]):
 		_containers.erase(cont.id)

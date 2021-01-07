@@ -8,6 +8,7 @@ var _selected_cont: int = -1
 onready var _manager = CardEngine.cont()
 onready var _cont_list = $ContainersLayout/ContainerList
 onready var _edit_btn = $ContainersLayout/Toolbar/EditBtn
+onready var _open_btn = $ContainersLayout/Toolbar/OpenBtn
 onready var _delete_btn = $ContainersLayout/Toolbar/DeleteBtn
 
 
@@ -31,6 +32,7 @@ func _on_Containers_changed() -> void:
 
 	_cont_list.clear()
 	_edit_btn.disabled = true
+	_open_btn.disabled = true
 	_delete_btn.disabled = true
 
 	var containers = CardEngine.cont().containers()
@@ -48,6 +50,10 @@ func _on_EditBtn_pressed() -> void:
 	_main_ui.show_edit_container_dialog(_cont_list.get_item_metadata(_selected_cont))
 
 
+func _on_OpenBtn_pressed() -> void:
+	_manager.open(_cont_list.get_item_metadata(_selected_cont))
+
+
 func _on_DeleteBtn_pressed() -> void:
 	_main_ui.show_confirmation_dialog(
 			"Delete container", funcref(self, "delete_container"))
@@ -56,6 +62,7 @@ func _on_DeleteBtn_pressed() -> void:
 func _on_ContainerList_item_selected(index) -> void:
 	_selected_cont = index
 	_edit_btn.disabled = false
+	_open_btn.disabled = false
 	_delete_btn.disabled = false
 
 

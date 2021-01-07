@@ -38,6 +38,7 @@ __meta__ = {
 }
 
 [node name="Databases" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -272,7 +273,6 @@ disabled = true
 text = "Delete"
 
 [node name="Containers" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -304,9 +304,16 @@ margin_bottom = 20.0
 disabled = true
 text = "Edit container"
 
-[node name="DeleteBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
+[node name="OpenBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
 margin_left = 225.0
-margin_right = 344.0
+margin_right = 336.0
+margin_bottom = 20.0
+disabled = true
+text = "Open container"
+
+[node name="DeleteBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
+margin_left = 340.0
+margin_right = 459.0
 margin_bottom = 20.0
 disabled = true
 text = "Delete container"
@@ -626,6 +633,7 @@ margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
 size_flags_vertical = 3
+items = [ "mana_double: Double the Mana", null, false, "mana_incr: Mana +1", null, false, "mana_decr: Mana -1", null, false ]
 
 [node name="Dialogs" type="Control" parent="."]
 visible = false
@@ -684,6 +692,7 @@ margin_bottom = -4.0
 [connection signal="pressed" from="Tabs/Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn" to="Tabs/Cards" method="_on_DelTxtBtn_pressed"]
 [connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/CreateBtn" to="Tabs/Containers" method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/EditBtn" to="Tabs/Containers" method="_on_EditBtn_pressed"]
+[connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/OpenBtn" to="Tabs/Containers" method="_on_OpenBtn_pressed"]
 [connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/DeleteBtn" to="Tabs/Containers" method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="Tabs/Containers/ContainersLayout/ContainerList" to="Tabs/Containers" method="_on_ContainerList_item_activated"]
 [connection signal="item_selected" from="Tabs/Containers/ContainersLayout/ContainerList" to="Tabs/Containers" method="_on_ContainerList_item_selected"]
