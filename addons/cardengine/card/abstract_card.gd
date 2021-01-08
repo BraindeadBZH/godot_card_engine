@@ -693,7 +693,7 @@ func _on_Transitions_tween_all_completed() -> void:
 
 
 func _on_MouseArea_drag_started() -> void:
-	CardEngine.general().start_drag(_inst)
+	CardEngine.general().start_drag(_inst, _container)
 	_is_dragged = true
 
 	if _follow_mouse:

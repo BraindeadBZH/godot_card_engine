@@ -150,6 +150,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+source_filter = [ "hand" ]
 
 [node name="ManaBar" type="HBoxContainer" parent="."]
 anchor_left = 0.5
