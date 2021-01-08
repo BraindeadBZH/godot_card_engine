@@ -4,6 +4,9 @@ extends AbstractContainer
 # Generated automatically - DO NOT MODIFY
 
 func _ready():
+	data_id = "home_display"
+	data_name = "HomeDisplay"
+
 	_layout_mode = LayoutMode.PATH
 	_face_up = true
 

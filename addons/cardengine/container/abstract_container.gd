@@ -12,6 +12,9 @@ export(PackedScene) var drag_widget: PackedScene = null
 export(NodePath) var in_anchor: NodePath = ""
 export(NodePath) var out_anchor: NodePath = ""
 
+var data_id: String = ""
+var data_name: String = ""
+
 var _store: AbstractStore = null
 var _rng: PseudoRng = PseudoRng.new()
 

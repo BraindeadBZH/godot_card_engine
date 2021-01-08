@@ -4,6 +4,9 @@ extends AbstractContainer
 # Generated automatically - DO NOT MODIFY
 
 func _ready():
+	data_id = "{container_id}"
+	data_name = "{container_name}"
+
 	_layout_mode = {mode}
 	_face_up = {face_up}
 

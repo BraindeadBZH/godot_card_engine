@@ -4,6 +4,9 @@ extends AbstractContainer
 # Generated automatically - DO NOT MODIFY
 
 func _ready():
+	data_id = "hand"
+	data_name = "HandContainer"
+
 	_layout_mode = LayoutMode.GRID
 	_face_up = true
 
