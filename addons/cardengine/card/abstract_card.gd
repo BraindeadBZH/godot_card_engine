@@ -12,6 +12,7 @@ enum CardState {NONE, IDLE, FOCUSED, ACTIVE}
 
 export(Vector2) var size: Vector2 = Vector2(0.0, 0.0)
 
+var _container: String = ""
 var _inst: CardInstance = null
 var _side = CardSide.FRONT
 var _root_trans: CardTransform = null
@@ -63,6 +64,14 @@ func set_instance(inst: CardInstance) -> void:
 
 func instance() -> CardInstance:
 	return _inst
+
+
+func set_container(id: String) -> void:
+	_container = id
+
+
+func container() -> String:
+	return _container
 
 
 func root_trans() -> CardTransform:

@@ -140,6 +140,7 @@ func _update_container() -> void:
 		visual_inst.name = CARD_NODE_FMT % card.ref()
 		_cards.add_child(visual_inst)
 		visual_inst.set_instance(card)
+		visual_inst.set_container(data_id)
 		visual_inst.set_transitions(_transitions)
 		visual_inst.set_interactive(_interactive)
 		visual_inst.set_drag_enabled(_drag_enabled)
