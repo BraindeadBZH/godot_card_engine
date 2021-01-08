@@ -17,6 +17,7 @@ text = "ID"
 margin_left = 39.0
 margin_right = 402.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in an indentifier. It is used to retrieve the value in scripts."
 size_flags_horizontal = 3
 
 [node name="ValueValLbl" type="Label" parent="MainLayout/Form" index="2"]
@@ -30,6 +31,7 @@ margin_left = 39.0
 margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
+hint_tooltip = "Fill in a number. Values can be used during computation in scripts."
 min_value = -1000.0
 max_value = 1000.0
 rounded = true

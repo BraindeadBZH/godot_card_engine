@@ -17,6 +17,7 @@ text = "ID"
 margin_left = 31.0
 margin_right = 402.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in an indentifier. It is used to retrieve the text in scripts."
 size_flags_horizontal = 3
 
 [node name="TextLbl" type="Label" parent="MainLayout/Form" index="2"]
@@ -31,3 +32,4 @@ margin_top = 28.0
 margin_right = 31.0
 margin_bottom = 148.0
 rect_min_size = Vector2( 0, 150 )
+text = "Fill in characters. Texts can be displayed on cards visual."

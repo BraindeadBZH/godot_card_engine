@@ -38,7 +38,6 @@ __meta__ = {
 }
 
 [node name="Databases" type="Control" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -61,12 +60,14 @@ margin_bottom = 20.0
 [node name="CreateBtn" type="Button" parent="Tabs/Databases/DatabaseLayout/Toolbar"]
 margin_right = 144.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the database creation dialog"
 text = "Create new database"
 
 [node name="EditBtn" type="Button" parent="Tabs/Databases/DatabaseLayout/Toolbar"]
 margin_left = 148.0
 margin_right = 245.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the database edit dialog. Displays all the cards in a list. Allows edit, duplicate and delete of cards. "
 disabled = true
 text = "Edit database"
 
@@ -74,6 +75,7 @@ text = "Edit database"
 margin_left = 249.0
 margin_right = 365.0
 margin_bottom = 20.0
+hint_tooltip = "Removes the database file with all the cards in it. Not reversible."
 disabled = true
 text = "Delete database"
 
@@ -81,6 +83,8 @@ text = "Delete database"
 margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
+hint_tooltip = "Single-click to select an element.
+Double-click to edit the database name."
 size_flags_vertical = 3
 items = [ "main: Main Database (20 cards)", null, false ]
 
@@ -116,6 +120,7 @@ margin_left = 51.0
 margin_right = 251.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
+hint_tooltip = "Fill in a card identifier to either save, or create if not existing, or load."
 caret_blink = true
 
 [node name="SaveBtn" type="Button" parent="Tabs/Cards/CardLayout/ToolLayout"]
@@ -123,6 +128,7 @@ margin_left = 255.0
 margin_right = 355.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
+hint_tooltip = "Saves or creates a card with the given ID and data in the selected dabase."
 disabled = true
 text = "Save to"
 
@@ -131,6 +137,7 @@ margin_left = 359.0
 margin_right = 459.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
+hint_tooltip = "Loads the card with the given ID from the selected database."
 disabled = true
 text = "Load from"
 
@@ -139,6 +146,7 @@ margin_left = 463.0
 margin_right = 663.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 200, 0 )
+hint_tooltip = "The database used to save and load cards."
 text = "main: Main Database"
 items = [ "main: Main Database", null, false, 0, "main" ]
 selected = 0
@@ -191,6 +199,8 @@ align = 1
 margin_top = 18.0
 margin_right = 421.0
 margin_bottom = 616.0
+hint_tooltip = "Single-click to select.
+Double-click to edit."
 size_flags_vertical = 3
 
 [node name="ValuesList" type="ItemList" parent="Tabs/Cards/CardLayout/DataLayout"]
@@ -198,6 +208,8 @@ margin_left = 425.0
 margin_top = 18.0
 margin_right = 846.0
 margin_bottom = 616.0
+hint_tooltip = "Single-click to select.
+Double-click to edit."
 size_flags_vertical = 3
 
 [node name="TextsList" type="ItemList" parent="Tabs/Cards/CardLayout/DataLayout"]
@@ -205,6 +217,8 @@ margin_left = 850.0
 margin_top = 18.0
 margin_right = 1271.0
 margin_bottom = 616.0
+hint_tooltip = "Single-click to select.
+Double-click to edit."
 size_flags_vertical = 3
 
 [node name="CategToolLayout" type="HBoxContainer" parent="Tabs/Cards/CardLayout/DataLayout"]
@@ -216,6 +230,7 @@ margin_bottom = 650.0
 margin_right = 208.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
+hint_tooltip = "Opens the creation dialog."
 size_flags_horizontal = 3
 text = "Add"
 
@@ -224,6 +239,7 @@ margin_left = 212.0
 margin_right = 421.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
+hint_tooltip = "Deletes the selected element."
 size_flags_horizontal = 3
 disabled = true
 text = "Delete"
@@ -238,6 +254,7 @@ margin_bottom = 650.0
 margin_right = 208.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
+hint_tooltip = "Opens the creation dialog."
 size_flags_horizontal = 3
 text = "Add"
 
@@ -246,6 +263,7 @@ margin_left = 212.0
 margin_right = 421.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
+hint_tooltip = "Deletes the selected element."
 size_flags_horizontal = 3
 disabled = true
 text = "Delete"
@@ -260,6 +278,7 @@ margin_bottom = 650.0
 margin_right = 208.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
+hint_tooltip = "Opens the creation dialog."
 size_flags_horizontal = 3
 text = "Add"
 
@@ -268,11 +287,13 @@ margin_left = 212.0
 margin_right = 421.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
+hint_tooltip = "Deletes the selected element."
 size_flags_horizontal = 3
 disabled = true
 text = "Delete"
 
 [node name="Containers" type="Control" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -295,12 +316,14 @@ margin_bottom = 20.0
 [node name="CreateBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
 margin_right = 117.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the container creation dialog."
 text = "Create container"
 
 [node name="EditBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
 margin_left = 121.0
 margin_right = 221.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the container edition dialog."
 disabled = true
 text = "Edit container"
 
@@ -308,6 +331,7 @@ text = "Edit container"
 margin_left = 225.0
 margin_right = 336.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the container scene in the Godot editor."
 disabled = true
 text = "Open container"
 
@@ -315,6 +339,7 @@ text = "Open container"
 margin_left = 340.0
 margin_right = 459.0
 margin_bottom = 20.0
+hint_tooltip = "Removes a container and the associated files. Not reversible."
 disabled = true
 text = "Delete container"
 
@@ -322,6 +347,8 @@ text = "Delete container"
 margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
+hint_tooltip = "Single-click to select.
+Double-click to change the name."
 size_flags_vertical = 3
 items = [ "card_list: CardList", null, false, "hand: HandContainer", null, false, "home_display: HomeDisplay", null, false ]
 
@@ -349,6 +376,7 @@ margin_bottom = 20.0
 [node name="CreateBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
 margin_right = 121.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the animation creation dialog."
 text = "Create animation"
 
 [node name="OrLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
@@ -362,6 +390,7 @@ text = "or"
 margin_left = 142.0
 margin_right = 230.0
 margin_bottom = 20.0
+hint_tooltip = "The animation being edited."
 text = "Choose..."
 items = [ "Choose...", null, true, 0, null, "Hand Animation (hand)", null, false, 1, "hand", "Home Display Animation (home)", null, false, 2, "home", "Card List Animation (list)", null, false, 3, "list" ]
 selected = 0
@@ -370,7 +399,7 @@ selected = 0
 margin_left = 234.0
 margin_right = 338.0
 margin_bottom = 20.0
-hint_tooltip = "Change animation name"
+hint_tooltip = "Changes animation name."
 disabled = true
 text = "Edit animation"
 
@@ -378,7 +407,7 @@ text = "Edit animation"
 margin_left = 342.0
 margin_right = 472.0
 margin_bottom = 20.0
-hint_tooltip = "See what the animation looks like"
+hint_tooltip = "Opens the preview dialog to see what the animation looks like."
 disabled = true
 text = "Preview animation"
 
@@ -386,7 +415,7 @@ text = "Preview animation"
 margin_left = 476.0
 margin_right = 585.0
 margin_bottom = 20.0
-hint_tooltip = "Write the animation to disk"
+hint_tooltip = "Writes the animation to disk."
 disabled = true
 text = "Save animation"
 
@@ -394,7 +423,7 @@ text = "Save animation"
 margin_left = 589.0
 margin_right = 705.0
 margin_bottom = 20.0
-hint_tooltip = "Reload the animation from disk"
+hint_tooltip = "Reloads the animation from disk."
 disabled = true
 text = "Reset animation"
 
@@ -402,7 +431,7 @@ text = "Reset animation"
 margin_left = 709.0
 margin_right = 832.0
 margin_bottom = 20.0
-hint_tooltip = "Remove the animation from disk"
+hint_tooltip = "Removes the animation from disk. Not reversible."
 disabled = true
 text = "Delete animation"
 
@@ -421,6 +450,7 @@ text = "Animation chain"
 margin_left = 108.0
 margin_right = 180.0
 margin_bottom = 20.0
+hint_tooltip = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Idle Loop"
@@ -436,6 +466,7 @@ text = ">"
 margin_left = 196.0
 margin_right = 331.0
 margin_bottom = 20.0
+hint_tooltip = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Focused Animation"
@@ -451,6 +482,7 @@ text = ">"
 margin_left = 347.0
 margin_right = 489.0
 margin_bottom = 20.0
+hint_tooltip = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Activated Animation"
@@ -466,6 +498,7 @@ text = ">"
 margin_left = 505.0
 margin_right = 663.0
 margin_bottom = 20.0
+hint_tooltip = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Deactivated Animation"
@@ -481,6 +514,7 @@ text = ">"
 margin_left = 679.0
 margin_right = 829.0
 margin_bottom = 20.0
+hint_tooltip = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Unfocused Animation"
@@ -612,12 +646,14 @@ margin_bottom = 20.0
 [node name="CreateBtn" type="Button" parent="Tabs/Effects/EffectLayout/Toolbar"]
 margin_right = 144.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the effect creation dialog."
 text = "Create new effect"
 
 [node name="EditBtn" type="Button" parent="Tabs/Effects/EffectLayout/Toolbar"]
 margin_left = 148.0
 margin_right = 245.0
 margin_bottom = 20.0
+hint_tooltip = "Opens the effect script in the Godot editor."
 disabled = true
 text = "Edit effect"
 
@@ -625,6 +661,7 @@ text = "Edit effect"
 margin_left = 249.0
 margin_right = 365.0
 margin_bottom = 20.0
+hint_tooltip = "Removes the effect and associated files. Not reversible."
 disabled = true
 text = "Delete effect"
 
@@ -632,6 +669,8 @@ text = "Delete effect"
 margin_top = 24.0
 margin_right = 1272.0
 margin_bottom = 684.0
+hint_tooltip = "Single-click to select.
+Double-click to change the name."
 size_flags_vertical = 3
 items = [ "mana_double: Double the Mana", null, false, "mana_incr: Mana +1", null, false, "mana_decr: Mana -1", null, false ]
 

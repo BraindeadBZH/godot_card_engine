@@ -17,6 +17,7 @@ text = "Database ID"
 margin_left = 105.0
 margin_right = 402.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in the database identifier. It is a unique value that is used to manipulate the database in scripts."
 size_flags_horizontal = 3
 
 [node name="DatabaseNameLbl" type="Label" parent="MainLayout/Form" index="2"]
@@ -30,4 +31,5 @@ margin_left = 105.0
 margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
+hint_tooltip = "Fill in a database name. It is to help you identify your database visually."
 size_flags_horizontal = 3

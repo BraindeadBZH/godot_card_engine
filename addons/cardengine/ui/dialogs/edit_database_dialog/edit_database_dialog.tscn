@@ -48,12 +48,14 @@ text = "Filter by text:"
 margin_top = 18.0
 margin_right = 253.0
 margin_bottom = 38.0
+hint_tooltip = "The value used as filter."
 
 [node name="TxtFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
 margin_left = 257.0
 margin_top = 18.0
 margin_right = 510.0
 margin_bottom = 38.0
+hint_tooltip = "The text used as filter."
 
 [node name="CompLayout" type="HBoxContainer" parent="MainLayout/FiltersLayout"]
 margin_top = 42.0
@@ -63,6 +65,7 @@ margin_bottom = 66.0
 [node name="CompOp" type="OptionButton" parent="MainLayout/FiltersLayout/CompLayout"]
 margin_right = 124.0
 margin_bottom = 24.0
+hint_tooltip = "The operator used for value filtering."
 size_flags_horizontal = 3
 text = "="
 items = [ "=", null, false, 0, null, ">", null, false, 1, null, ">=", null, false, 2, null, "<", null, false, 3, null, "<=", null, false, 4, null ]
@@ -72,6 +75,7 @@ selected = 0
 margin_left = 128.0
 margin_right = 253.0
 margin_bottom = 24.0
+hint_tooltip = "The number used for value filtering."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -83,6 +87,7 @@ margin_left = 257.0
 margin_top = 42.0
 margin_right = 510.0
 margin_bottom = 66.0
+hint_tooltip = "The string used for text filtering."
 
 [node name="CategFilterScroll" type="ScrollContainer" parent="MainLayout"]
 margin_top = 70.0
@@ -121,6 +126,7 @@ align = 1
 margin_top = 18.0
 margin_right = 194.0
 margin_bottom = 198.0
+hint_tooltip = "Single-click to select."
 size_flags_vertical = 3
 
 [node name="DetailsLayout" type="VBoxContainer" parent="MainLayout/CardsLayout"]
@@ -132,6 +138,7 @@ margin_bottom = 198.0
 [node name="DetailsList" type="ItemList" parent="MainLayout/CardsLayout/DetailsLayout"]
 margin_right = 312.0
 margin_bottom = 146.0
+hint_tooltip = "Just display the data  of the selected card."
 size_flags_vertical = 3
 
 [node name="ToolsLayout" type="HBoxContainer" parent="MainLayout/CardsLayout/DetailsLayout"]
@@ -144,6 +151,7 @@ alignment = 1
 margin_right = 100.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
+hint_tooltip = "Removes a card from the database. Not reversible."
 disabled = true
 text = "Delete"
 
@@ -158,6 +166,7 @@ margin_left = 108.0
 margin_right = 208.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
+hint_tooltip = "Opens the card duplication dialog."
 disabled = true
 text = "Duplicate"
 
@@ -166,6 +175,7 @@ margin_left = 212.0
 margin_right = 312.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
+hint_tooltip = "Shows the card in the Cards tab for edit."
 disabled = true
 text = "Edit"
 
@@ -186,6 +196,7 @@ margin_left = 205.0
 margin_right = 305.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
+hint_tooltip = "Closes this dialog."
 text = "Done"
 
 [node name="DuplicateCardDialog" parent="." instance=ExtResource( 2 )]

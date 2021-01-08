@@ -22,6 +22,7 @@ text = "Random duration"
 margin_left = 138.0
 margin_right = 402.0
 margin_bottom = 40.0
+hint_tooltip = "If ON the duration is taken from  the interval below randomly."
 
 [node name="DurationLbl" type="Label" parent="MainLayout/Form" index="2"]
 margin_top = 49.0
@@ -34,6 +35,7 @@ margin_left = 138.0
 margin_top = 44.0
 margin_right = 402.0
 margin_bottom = 68.0
+hint_tooltip = "Fill in a number in millisecond."
 min_value = -1000.0
 max_value = 1000.0
 rounded = true
@@ -57,6 +59,7 @@ margin_bottom = 96.0
 [node name="DurationRangeMin" type="SpinBox" parent="MainLayout/Form/DurationRangeLayout" index="0"]
 margin_right = 159.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in a number in millisecond."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -69,6 +72,7 @@ suffix = "ms"
 margin_left = 163.0
 margin_right = 322.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in a number in millisecond."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -88,6 +92,7 @@ margin_left = 138.0
 margin_top = 72.0
 margin_right = 402.0
 margin_bottom = 92.0
+hint_tooltip = "Choose which curve the transition uses to smooth the movement."
 size_flags_horizontal = 3
 text = "Linear"
 items = [ "Linear", null, false, 0, null, "Sine", null, false, 1, null, "Quint", null, false, 2, null, "Quart", null, false, 3, null, "Quad", null, false, 4, null, "Expo", null, false, 5, null, "Elastic", null, false, 6, null, "Cubic", null, false, 7, null, "Circ", null, false, 8, null, "Bounce", null, false, 9, null, "Back", null, false, 10, null ]
@@ -104,6 +109,7 @@ margin_left = 138.0
 margin_top = 96.0
 margin_right = 402.0
 margin_bottom = 116.0
+hint_tooltip = "Choose how the curve is applied to the transition."
 size_flags_horizontal = 3
 text = "In"
 items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In/Out", null, false, 2, null, "Out/In", null, false, 3, null ]
@@ -120,6 +126,7 @@ margin_left = 138.0
 margin_top = 120.0
 margin_right = 402.0
 margin_bottom = 160.0
+hint_tooltip = "If ON the card is flipped when the transition is finished."
 
 [node name="InteractiveLbl" type="Label" parent="MainLayout/Form" index="12"]
 margin_top = 177.0
@@ -132,7 +139,7 @@ margin_left = 138.0
 margin_top = 164.0
 margin_right = 402.0
 margin_bottom = 204.0
-hint_tooltip = "Enable/Disable interaction during transition"
+hint_tooltip = "If OFF the card will not react to user inputs during the transition."
 
 [node name="ButtonLayout" parent="MainLayout" index="2"]
 margin_top = 211.0

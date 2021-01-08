@@ -17,6 +17,7 @@ text = "Container ID"
 margin_left = 107.0
 margin_right = 402.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in an identifier. It is used in filename for the container related files."
 size_flags_horizontal = 3
 
 [node name="ContainerNameLbl" type="Label" parent="MainLayout/Form" index="2"]
@@ -30,4 +31,5 @@ margin_left = 107.0
 margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
+hint_tooltip = "Fill in a name. It is used as the class name of the container."
 size_flags_horizontal = 3

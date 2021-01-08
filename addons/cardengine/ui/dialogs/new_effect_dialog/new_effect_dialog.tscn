@@ -17,6 +17,7 @@ text = "ID"
 margin_left = 42.0
 margin_right = 402.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in an identifier. It is used to interact with the effect in scripts."
 size_flags_horizontal = 3
 
 [node name="FxNameLbl" type="Label" parent="MainLayout/Form" index="2"]
@@ -30,4 +31,5 @@ margin_left = 42.0
 margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
+hint_tooltip = "Fill in a name. It is a visual help."
 size_flags_horizontal = 3

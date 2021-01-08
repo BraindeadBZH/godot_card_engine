@@ -17,6 +17,7 @@ text = "Meta-category"
 margin_left = 42.0
 margin_right = 402.0
 margin_bottom = 24.0
+hint_tooltip = "Fill in and identifier. A meta-category allows to group categories together."
 size_flags_horizontal = 3
 
 [node name="CategLbl" type="Label" parent="MainLayout/Form" index="2"]
@@ -30,3 +31,4 @@ margin_left = 42.0
 margin_top = 28.0
 margin_right = 402.0
 margin_bottom = 52.0
+hint_tooltip = "Fill in an identifier. A category helps  with creating common behaviors between cards in scripts."
