@@ -156,7 +156,6 @@ func _update_deck_list() -> void:
 		var lbl = Label.new()
 
 		layout.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		layout.rect_min_size = Vector2(100.0, 30.0)
 
 		var mana = card.data().get_value("mana")
 		if mana >= 0:
@@ -164,12 +163,14 @@ func _update_deck_list() -> void:
 		else:
 			btn.text = "%s (X)" % card.data().get_text("name")
 
+		btn.clip_text = true
+		btn.rect_min_size = Vector2(100, 30)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-		lbl.text = "x %d" % count
+		lbl.text = "%d x" % count
 
-		layout.add_child(btn)
 		layout.add_child(lbl)
+		layout.add_child(btn)
 		_deck_list.add_child(layout)
 
 

@@ -221,7 +221,7 @@ __meta__ = {
 }
 
 [node name="LibraryBg" type="ColorRect" parent="BuilderLayout"]
-margin_right = 1036.0
+margin_right = 996.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 0, 60 )
 size_flags_horizontal = 3
@@ -242,7 +242,7 @@ __meta__ = {
 }
 
 [node name="LibraryContainer" parent="BuilderLayout/LibraryBg/LibraryScroll" instance=ExtResource( 4 )]
-margin_right = 996.0
+margin_right = 956.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -270,10 +270,10 @@ __meta__ = {
 }
 
 [node name="DeckBg" type="ColorRect" parent="BuilderLayout"]
-margin_left = 1040.0
+margin_left = 1000.0
 margin_right = 1240.0
 margin_bottom = 600.0
-rect_min_size = Vector2( 200, 0 )
+rect_min_size = Vector2( 240, 0 )
 color = Color( 0, 0, 0, 0.784314 )
 
 [node name="CardDrop" type="Control" parent="BuilderLayout/DeckBg"]
@@ -297,13 +297,13 @@ __meta__ = {
 }
 
 [node name="DeckScroll" type="ScrollContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
-margin_right = 180.0
+margin_right = 220.0
 margin_bottom = 580.0
 mouse_filter = 1
 size_flags_vertical = 3
 
 [node name="DeckList" type="VBoxContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll"]
-margin_right = 180.0
+margin_right = 220.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
