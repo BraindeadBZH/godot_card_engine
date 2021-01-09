@@ -143,8 +143,20 @@ func _update_texts() -> void:
 func _update_deck_list() -> void:
 	Utils.delete_all_children(_deck_list)
 
+	var added_cards := []
 	for card in _deck.cards():
+		if added_cards.has(card.data().id):
+			continue
+		else:
+			added_cards.append(card.data().id)
+
+		var count = _deck.count_for(card.data().id)
+		var layout = HBoxContainer.new()
 		var btn = Button.new()
+		var lbl = Label.new()
+
+		layout.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		layout.rect_min_size = Vector2(100.0, 30.0)
 
 		var mana = card.data().get_value("mana")
 		if mana >= 0:
@@ -153,9 +165,12 @@ func _update_deck_list() -> void:
 			btn.text = "%s (X)" % card.data().get_text("name")
 
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		btn.rect_min_size = Vector2(100.0, 30.0)
 
-		_deck_list.add_child(btn)
+		lbl.text = "x %d" % count
+
+		layout.add_child(btn)
+		layout.add_child(lbl)
+		_deck_list.add_child(layout)
 
 
 func _on_BackBtn_pressed() -> void:

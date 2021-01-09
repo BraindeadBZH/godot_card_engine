@@ -80,6 +80,7 @@ signal cleared()
 
 var _cards: Array = []
 var _filtered: Array = []
+var _cards_count: Dictionary = {}
 var _categs: Dictionary = {}
 var _values: Array = []
 var _texts: Array = []
@@ -97,6 +98,7 @@ func cards() -> Array:
 func clear() -> void:
 	_cards.clear()
 	_filtered.clear()
+	_cards_count.clear()
 	_categs.clear()
 	_values.clear()
 	_texts.clear()
@@ -138,6 +140,17 @@ func count() -> int:
 		return _cards.size()
 	else:
 		return _filtered.size()
+
+
+func cards_count() -> Dictionary:
+	return _cards_count
+
+
+func count_for(id: String) -> int:
+	if _cards_count.has(id):
+		return _cards_count[id]
+	else:
+		return 0
 
 
 func is_empty() -> bool:
@@ -319,7 +332,7 @@ func _ref2idx(ref: int) -> int:
 	return -1
 
 
-func _update_filtered():
+func _update_filtered() -> void:
 	_filtered.clear()
 
 	if _filter == null:
@@ -330,13 +343,25 @@ func _update_filtered():
 				_filtered.append(card)
 
 
-func _update_stats():
+func _update_stats() -> void:
+	_update_count()
 	_update_categories()
 	_update_values()
 	_update_texts()
 
 
-func _update_categories():
+func _update_count() -> void:
+	_cards_count.clear()
+
+	for card in _cards:
+		var id = card.data().id
+		if _cards_count.has(id):
+			_cards_count[id] += 1
+		else:
+			_cards_count[id] = 1
+
+
+func _update_categories() -> void:
 	_categs.clear()
 
 	for card in _cards:
@@ -355,7 +380,7 @@ func _update_categories():
 				}
 
 
-func _update_values():
+func _update_values() -> void:
 	_values.clear()
 
 	for card in _cards:
@@ -364,7 +389,7 @@ func _update_values():
 				_values.append(value)
 
 
-func _update_texts():
+func _update_texts() -> void:
 	_texts.clear()
 
 	for card in _cards:
