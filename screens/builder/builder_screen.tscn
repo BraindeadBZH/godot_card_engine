@@ -300,10 +300,17 @@ __meta__ = {
 margin_right = 220.0
 margin_bottom = 20.0
 
-[node name="DeckSaveLayout" type="HBoxContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
+[node name="UseBtn" type="Button" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
 margin_top = 24.0
 margin_right = 220.0
-margin_bottom = 48.0
+margin_bottom = 44.0
+disabled = true
+text = "Play this deck (10)"
+
+[node name="DeckSaveLayout" type="HBoxContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
+margin_top = 48.0
+margin_right = 220.0
+margin_bottom = 72.0
 
 [node name="DeckName" type="LineEdit" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout"]
 margin_right = 175.0
@@ -319,7 +326,7 @@ disabled = true
 text = "Save"
 
 [node name="DeckScroll" type="ScrollContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
-margin_top = 52.0
+margin_top = 76.0
 margin_right = 220.0
 margin_bottom = 580.0
 mouse_filter = 1
@@ -327,7 +334,7 @@ size_flags_vertical = 3
 
 [node name="DeckList" type="VBoxContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll"]
 margin_right = 220.0
-margin_bottom = 528.0
+margin_bottom = 504.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 [connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class" to="." method="_on_Class_item_selected"]
@@ -344,5 +351,6 @@ size_flags_vertical = 3
 [connection signal="resized" from="BuilderLayout/LibraryBg/LibraryScroll" to="." method="_on_LibraryScroll_resized"]
 [connection signal="dropped" from="BuilderLayout/DeckBg/CardDrop" to="." method="_on_CardDrop_dropped"]
 [connection signal="item_selected" from="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSelect" to="." method="_on_DeckSelect_item_selected"]
+[connection signal="pressed" from="BuilderLayout/DeckBg/CardDrop/DeckLayout/UseBtn" to="." method="_on_UseBtn_pressed"]
 [connection signal="text_changed" from="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/DeckName" to="." method="_on_DeckName_text_changed"]
 [connection signal="pressed" from="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]

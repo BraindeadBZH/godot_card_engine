@@ -23,6 +23,7 @@ onready var _deck_list = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll/De
 onready var _deck_select = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSelect
 onready var _save_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/SaveBtn
 onready var _deck_name = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/DeckName
+onready var _use_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/UseBtn
 
 
 func _ready() -> void:
@@ -32,6 +33,9 @@ func _ready() -> void:
 	_container.set_store(_store)
 	_apply_filters()
 	_update_deck_select()
+
+	# warning-ignore:return_value_discarded
+	_deck.connect("changed", self, "_update_use_btn")
 
 
 func _apply_filters() -> void:
@@ -204,6 +208,15 @@ func _update_save_btn() -> void:
 		_save_btn.disabled = false
 
 
+func _update_use_btn() -> void:
+	if _deck.count() < Gameplay.MIN_DECK_SIZE:
+		_use_btn.disabled = true
+		_use_btn.text = "Play this deck (%d)" % (Gameplay.MIN_DECK_SIZE - _deck.count())
+	else:
+		_use_btn.disabled = false
+		_use_btn.text = "Play this deck (0)"
+
+
 func _on_BackBtn_pressed() -> void:
 	emit_signal("next_screen", "menu")
 
@@ -310,3 +323,11 @@ func _on_SaveBtn_pressed() -> void:
 
 	_deck.save(id, _deck_name.text)
 	_update_deck_select()
+
+
+func _on_UseBtn_pressed() -> void:
+	Gameplay.current_deck = CardDeck.new()
+	_deck.copy_cards(Gameplay.current_deck)
+
+	_use_btn.text = "Done!"
+	_use_btn.disabled = true

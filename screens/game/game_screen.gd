@@ -33,13 +33,15 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	_hand.connect("changed", self, "_on_Hand_changed")
 
-	var db = CardEngine.db().get_database("main")
+	if Gameplay.current_deck == null:
+		var db = CardEngine.db().get_database("main")
 
-	_draw_pile.populate_all(db)
+		_draw_pile.populate_all(db)
+	else:
+		Gameplay.current_deck.copy_cards(_draw_pile)
+
 	_draw_pile.shuffle()
-
 	_hand_cont.set_store(_hand)
-
 	_update_mana()
 
 
