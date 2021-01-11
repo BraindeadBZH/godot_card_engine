@@ -380,15 +380,15 @@ func move_random_card(to: AbstractStore) -> CardInstance:
 
 func copy_cards(to: AbstractStore) -> void:
 	for card in _cards:
-		to.add_card(card.duplicate())
+		to.add_card(CardInstance.new(card.data().duplicate()))
 
 
 func copy_card(ref: int, to: AbstractStore) -> CardInstance:
 	var index: int = _ref2idx(ref)
 
 	if index >= 0:
-		var card = _cards[index].duplicate()
-		to.add_card(card)
+		var card = _cards[index]
+		to.add_card(CardInstance.new(card.data().duplicate()))
 		return card
 
 	return null
