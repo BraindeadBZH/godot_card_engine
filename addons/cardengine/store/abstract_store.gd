@@ -246,6 +246,16 @@ func get_last() -> CardInstance:
 		return _filtered.back()
 
 
+func find(id: String) -> Array:
+	var result := []
+
+	for card in _cards:
+		if card.data().id == id:
+			result.append(card)
+
+	return result
+
+
 func find_first(id: String) -> CardInstance:
 	for card in _cards:
 		if card.data().id == id:
