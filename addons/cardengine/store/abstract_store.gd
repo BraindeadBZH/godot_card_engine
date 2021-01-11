@@ -69,7 +69,7 @@ class StoreSorter:
 		return false
 
 
-const DECK_SAVE_FILE: String = "user://decks.data"
+const STORE_SAVE_FILE: String = "user://stores.data"
 
 signal changed()
 signal card_added()
@@ -93,31 +93,31 @@ var _rng: PseudoRng = PseudoRng.new()
 var _filter: Query = null
 
 
-static func saved_decks() -> Dictionary:
+static func saved_stores() -> Dictionary:
 	var file = ConfigFile.new()
-	var err = file.load(DECK_SAVE_FILE)
+	var err = file.load(STORE_SAVE_FILE)
 	if err != OK:
-		print("Could not open decks file")
+		print("Could not open stores file")
 		return {}
 
 	var result = {}
-	var decks = file.get_sections()
+	var stores = file.get_sections()
 
-	for id in decks:
+	for id in stores:
 		result[id] = file.get_value(id, "name", "")
 
 	return result
 
 
-static func load_deck(id: String, dest: AbstractStore):
+static func load_store(id: String, dest: AbstractStore):
 	var file = ConfigFile.new()
-	var err = file.load(DECK_SAVE_FILE)
+	var err = file.load(STORE_SAVE_FILE)
 	if err != OK:
-		print("Could not open decks file")
+		print("Could not open stores file")
 		return
 
 	if not file.has_section(id):
-		print("Deck does not exist")
+		print("Store does not exist")
 		return
 
 	var name = file.get_value(id, "name", "")
@@ -414,7 +414,7 @@ func keep(count: int) -> void:
 
 func save(id: String, name: String) -> void:
 	var file = ConfigFile.new()
-	file.load(DECK_SAVE_FILE)
+	file.load(STORE_SAVE_FILE)
 
 	var cards := []
 	for card in _cards:
@@ -426,7 +426,7 @@ func save(id: String, name: String) -> void:
 
 	file.set_value(id, "name", name)
 	file.set_value(id, "cards", cards)
-	var err = file.save(DECK_SAVE_FILE)
+	var err = file.save(STORE_SAVE_FILE)
 	if err != OK:
 		print("Could not save decks file")
 		return
