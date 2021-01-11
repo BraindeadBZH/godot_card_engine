@@ -70,7 +70,7 @@ func load_card(id: String, db_id: String) -> void:
 
 
 func save_card(id: String, db: CardDatabase) -> void:
-	var card = CardData.new(id)
+	var card = CardData.new(id, db.id)
 	for i in range(_categ_list.get_item_count()):
 		var data = _categ_list.get_item_metadata(i)
 		card.add_category(data["meta_categ"], data["categ"])

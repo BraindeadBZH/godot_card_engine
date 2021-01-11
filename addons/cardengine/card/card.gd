@@ -5,18 +5,20 @@ extends Reference
 signal changed()
 
 var id: String = ""
+var source_db: String = ""
 
 var _categs : Dictionary = {}
 var _values: Dictionary = {}
 var _texts : Dictionary = {}
 
 
-func _init(id: String):
+func _init(id: String, db: String):
 	self.id = id
+	self.source_db = db
 
 
 func duplicate() -> CardData:
-	var copy = get_script().new(id)
+	var copy = get_script().new(id, source_db)
 	copy._categs  = _categs.duplicate()
 	copy._values = _values.duplicate()
 	copy._texts  = _texts.duplicate()

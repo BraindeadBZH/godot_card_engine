@@ -142,7 +142,7 @@ func _read_database(filename: String) -> CardDatabase:
 
 	if file.has_section("cards"):
 		for entry in file.get_section_keys("cards"):
-			var card = CardData.new(entry)
+			var card = CardData.new(entry, db.id)
 			var data = file.get_value("cards", entry)
 			card.set_categories(data["categories"])
 			card.set_values(data["values"])
