@@ -166,12 +166,21 @@ func _update_deck_list() -> void:
 		btn.clip_text = true
 		btn.rect_min_size = Vector2(100, 30)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.connect("pressed", self, "_on_DeckCard_pressed", [card.data().id])
+		btn.connect(
+			"mouse_entered", self, "_change_btn_text",
+			[btn, "Remove 1 %s" % card.data().get_text("name")])
+		btn.connect("mouse_exited", self, "_change_btn_text", [btn, btn.text])
 
 		lbl.text = "%d x" % count
 
 		layout.add_child(lbl)
 		layout.add_child(btn)
 		_deck_list.add_child(layout)
+
+
+func _change_btn_text(btn: Button, txt: String) -> void:
+	btn.text = txt
 
 
 func _on_BackBtn_pressed() -> void:
@@ -245,4 +254,9 @@ func _on_LibraryScroll_resized() -> void:
 
 func _on_CardDrop_dropped(card: CardInstance) -> void:
 	_deck.add_card(CardInstance.new(card.data()))
+	_update_deck_list()
+
+
+func _on_DeckCard_pressed(id: String) -> void:
+	_deck.remove_last(id)
 	_update_deck_list()

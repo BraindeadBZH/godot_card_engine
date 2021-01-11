@@ -198,6 +198,24 @@ func get_last() -> CardInstance:
 		return _filtered.back()
 
 
+func find_first(id: String) -> CardInstance:
+	for card in _cards:
+		if card.data().id == id:
+			return card
+
+	return null
+
+
+func find_last(id: String) -> CardInstance:
+	var result: CardInstance = null
+
+	for card in _cards:
+		if card.data().id == id:
+			result = card
+
+	return result
+
+
 func categories() -> Dictionary:
 	return _categs
 
@@ -245,16 +263,32 @@ func remove_card(ref: int) -> void:
 		emit_signal("changed")
 
 
-func remove_first() -> void:
-	_cards.pop_front()
+func remove_first(id: String = "") -> void:
+	if id == "":
+		_cards.pop_front()
+	else:
+		var card = find_first(id)
+		if card == null:
+			return
+
+		remove_card(card.ref())
+
 	_update_stats()
 	_update_filtered()
 	emit_signal("card_removed", 0)
 	emit_signal("changed")
 
 
-func remove_last() -> void:
-	_cards.pop_back()
+func remove_last(id: String = "") -> void:
+	if id == "":
+		_cards.pop_back()
+	else:
+		var card = find_last(id)
+		if card == null:
+			return
+
+		remove_card(card.ref())
+
 	_update_stats()
 	_update_filtered()
 	emit_signal("card_removed", count()-1)
