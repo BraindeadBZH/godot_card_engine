@@ -20,6 +20,9 @@ onready var _rarity_sort = $TitleBg/TitleLayout/SortLayout/RaritySort
 onready var _mana_sort = $TitleBg/TitleLayout/SortLayout/ManaSort
 onready var _name_sort = $TitleBg/TitleLayout/SortLayout/NameSort
 onready var _deck_list = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll/DeckList
+onready var _deck_select = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSelect
+onready var _save_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/SaveBtn
+onready var _deck_name = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/DeckName
 
 
 func _ready() -> void:
@@ -28,6 +31,7 @@ func _ready() -> void:
 	_store.populate_all(db)
 	_container.set_store(_store)
 	_apply_filters()
+	_update_deck_select()
 
 
 func _apply_filters() -> void:
@@ -183,6 +187,23 @@ func _change_btn_text(btn: Button, txt: String) -> void:
 	btn.text = txt
 
 
+func _update_deck_select() -> void:
+	_deck_select.clear()
+	var decks = AbstractStore.saved_decks()
+	_deck_select.add_item("Load a deck")
+	_deck_select.set_item_disabled(0, true)
+	for id in decks:
+		_deck_select.add_item(decks[id])
+		_deck_select.set_item_metadata(_deck_select.get_item_count()-1, id)
+
+
+func _update_save_btn() -> void:
+	if _deck_name.text.empty() or _deck.is_empty():
+		_save_btn.disabled = true
+	else:
+		_save_btn.disabled = false
+
+
 func _on_BackBtn_pressed() -> void:
 	emit_signal("next_screen", "menu")
 
@@ -255,8 +276,37 @@ func _on_LibraryScroll_resized() -> void:
 func _on_CardDrop_dropped(card: CardInstance) -> void:
 	_deck.add_card(CardInstance.new(card.data()))
 	_update_deck_list()
+	_update_save_btn()
 
 
 func _on_DeckCard_pressed(id: String) -> void:
 	_deck.remove_last(id)
 	_update_deck_list()
+	_update_save_btn()
+
+
+func _on_DeckSelect_item_selected(index: int) -> void:
+	if index == 0:
+		return
+
+	_deck.clear()
+	AbstractStore.load_deck(_deck_select.get_selected_metadata(), _deck)
+	_deck_name.text = _deck.save_name
+	_update_deck_list()
+	_update_save_btn()
+
+
+func _on_DeckName_text_changed(_new_text: String) -> void:
+	_update_save_btn()
+
+
+func _on_SaveBtn_pressed() -> void:
+	var id = _deck.save_id
+	if _deck_name.text != _deck.save_name:
+		var datetime = OS.get_datetime()
+		id = "deck_%02d-%02d-%d-%02d-%02d" % [
+			datetime["day"], datetime["month"], datetime["year"],
+			datetime["hour"], datetime["minute"]]
+
+	_deck.save(id, _deck_name.text)
+	_update_deck_select()
