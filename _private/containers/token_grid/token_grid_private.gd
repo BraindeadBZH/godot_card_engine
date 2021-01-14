@@ -48,7 +48,7 @@ func _init() -> void:
 	_fine_scale_max = Vector2(0, 0)
 
 	# Transitions
-	_transitions.order.duration = 0.2
+	_transitions.order.duration = 0.4
 	_transitions.order.type = Tween.TRANS_BOUNCE
 	_transitions.order.easing = Tween.EASE_OUT
 
