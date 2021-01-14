@@ -22,6 +22,7 @@ onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/Pa
 onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
 
 onready var _drag_enabled = $MainLayout/MainTabs/DragAndDrop/DragLayout/Enabled
+onready var _drop_enabled = $MainLayout/MainTabs/DragAndDrop/DragLayout/Drop
 
 onready var _pos_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Enabled
 onready var _pos_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Mode
@@ -101,6 +102,7 @@ func _update() -> void:
 	_grid_align_v.select(_valign_to_select(_data.grid_valign))
 
 	_drag_enabled.pressed = _data.drag_enabled
+	_drop_enabled.pressed = _data.drop_enabled
 
 	_pos_enabled.pressed = _data.fine_pos
 	_pos_range_min_h.value = _data.fine_pos_min.x
@@ -192,6 +194,7 @@ func _save() -> void:
 	_data.grid_valign = _select_to_valign(_grid_align_v.selected)
 
 	_data.drag_enabled = _drag_enabled.pressed
+	_data.drop_enabled = _drop_enabled.pressed
 
 	_data.fine_pos = _pos_enabled.pressed
 	_data.fine_pos_min.x = _pos_range_min_h.value

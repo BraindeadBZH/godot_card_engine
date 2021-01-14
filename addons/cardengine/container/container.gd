@@ -18,6 +18,7 @@ var grid_expand: bool = true
 
 # Drag and drop parameters
 var drag_enabled: bool = false
+var drop_enabled: bool = false
 
 # Path parameters
 var path_card_width: float = 200

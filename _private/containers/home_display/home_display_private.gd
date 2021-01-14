@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for HomeDisplay
 # Generated automatically - DO NOT MODIFY
 
-func _ready():
+func _init() -> void:
 	data_id = "home_display"
 	data_name = "HomeDisplay"
 
@@ -21,6 +21,7 @@ func _ready():
 
 	# Drag and drop parameters
 	_drag_enabled = false
+	_drop_enabled = false
 
 	# Path parameters
 	_path_card_width = 50

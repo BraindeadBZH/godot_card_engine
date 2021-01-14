@@ -18,6 +18,7 @@ expand=false
 [drag]
 
 enabled=false
+drop_enabled=true
 
 [path]
 
@@ -49,21 +50,21 @@ max=Vector2( 0, 0 )
 
 [order]
 
-duration=0.3
-type="linear"
-easing="in"
+duration=0.2
+type="bounce"
+easing="out"
 
 [in]
 
-duration=0.3
-type="linear"
-easing="in"
+duration=0.2
+type="quad"
+easing="in_out"
 
 [out]
 
-duration=0.3
-type="linear"
-easing="in"
+duration=0.2
+type="quad"
+easing="in_out"
 
 [anim]
 

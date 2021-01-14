@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for CardList
 # Generated automatically - DO NOT MODIFY
 
-func _ready():
+func _init() -> void:
 	data_id = "card_list"
 	data_name = "CardList"
 
@@ -21,6 +21,7 @@ func _ready():
 
 	# Drag and drop parameters
 	_drag_enabled = true
+	_drop_enabled = false
 
 	# Path parameters
 	_path_card_width = 200

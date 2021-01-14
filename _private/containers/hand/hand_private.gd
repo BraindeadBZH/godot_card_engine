@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for HandContainer
 # Generated automatically - DO NOT MODIFY
 
-func _ready():
+func _init() -> void:
 	data_id = "hand"
 	data_name = "HandContainer"
 
@@ -21,6 +21,7 @@ func _ready():
 
 	# Drag and drop parameters
 	_drag_enabled = true
+	_drop_enabled = false
 
 	# Path parameters
 	_path_card_width = 200

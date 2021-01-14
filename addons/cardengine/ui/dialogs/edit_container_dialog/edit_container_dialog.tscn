@@ -324,14 +324,28 @@ __meta__ = {
 
 [node name="EnabledTitle" type="Label" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
 margin_top = 13.0
-margin_right = 50.0
+margin_right = 86.0
 margin_bottom = 27.0
-text = "Enabled"
+text = "Drag enabled"
 
 [node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
-margin_left = 54.0
+margin_left = 90.0
 margin_right = 502.0
 margin_bottom = 40.0
+hint_tooltip = "If ON, the container can be used as a source for drag and drop action."
+size_flags_horizontal = 3
+
+[node name="DropTitle" type="Label" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+margin_top = 57.0
+margin_right = 86.0
+margin_bottom = 71.0
+text = "Drop enabled"
+
+[node name="Drop" type="CheckButton" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+margin_left = 90.0
+margin_top = 44.0
+margin_right = 502.0
+margin_bottom = 84.0
 hint_tooltip = "If ON, the container can be used as a source for drag and drop action."
 size_flags_horizontal = 3
 

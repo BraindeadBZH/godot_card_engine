@@ -18,6 +18,7 @@ expand=true
 [drag]
 
 enabled=true
+drop_enabled=false
 
 [path]
 

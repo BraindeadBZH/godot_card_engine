@@ -131,8 +131,9 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("grid", "columns", cont.grid_columns)
 	file.set_value("grid", "expand", cont.grid_expand)
 
-	# Drag data
+	# Drag and drop data
 	file.set_value("drag", "enabled", cont.drag_enabled)
+	file.set_value("drag", "drop_enabled", cont.drop_enabled)
 
 	# Path data
 	file.set_value("path", "card_width", cont.path_card_width)
@@ -209,6 +210,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"grid_columns": cont.grid_columns,
 		"grid_expand": _translate_bool(cont.grid_expand),
 		"drag_enabled": _translate_bool(cont.drag_enabled),
+		"drop_enabled": _translate_bool(cont.drop_enabled),
 		"path_width": cont.path_card_width,
 		"path_fixed": _translate_bool(cont.path_fixed_width),
 		"path_spacing": cont.path_spacing,
@@ -313,8 +315,9 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.grid_columns = file.get_value("grid", "columns", 3)
 	cont.grid_expand = file.get_value("grid", "expand", true)
 
-	# Drag enabled
+	# Drag and drop data
 	cont.drag_enabled = file.get_value("drag", "enabled", false)
+	cont.drop_enabled = file.get_value("drag", "drop_enabled", false)
 
 	# Path data
 	cont.path_card_width = file.get_value("path", "card_width", 200)

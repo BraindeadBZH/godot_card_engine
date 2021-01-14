@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for {container_name}
 # Generated automatically - DO NOT MODIFY
 
-func _ready():
+func _init() -> void:
 	data_id = "{container_id}"
 	data_name = "{container_name}"
 
@@ -21,6 +21,7 @@ func _ready():
 
 	# Drag and drop parameters
 	_drag_enabled = {drag_enabled}
+	_drop_enabled = {drop_enabled}
 
 	# Path parameters
 	_path_card_width = {path_width}

@@ -141,7 +141,7 @@ margin_top = -300.0
 margin_right = 200.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 300, 300 )
-color = Color( 0.866667, 0.564706, 0.564706, 1 )
+color = Color( 0.14902, 0.172549, 0.239216, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -153,6 +153,18 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = -10.0
 margin_bottom = -10.0
+in_anchor = NodePath("../TokenInOut")
+out_anchor = NodePath("../TokenInOut")
+
+[node name="TokenInOut" type="Control" parent="PlayZone"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_scale = Vector2( 1e-05, 1e-05 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ManaBar" type="HBoxContainer" parent="."]
 anchor_left = 0.5
@@ -424,6 +436,8 @@ one_shot = true
 autostart = true
 [connection signal="pressed" from="DeckZone/DrawBtn" to="." method="_on_DrawBtn_pressed"]
 [connection signal="pressed" from="DiscardZone/ReshuffleBtn" to="." method="_on_ReshuffleBtn_pressed"]
+[connection signal="card_clicked" from="PlayZone/TokenGrid" to="." method="_on_TokenGrid_card_clicked"]
+[connection signal="card_dropped" from="PlayZone/TokenGrid" to="." method="_on_TokenGrid_card_dropped"]
 [connection signal="pressed" from="ManaBar/EndTurnBtn" to="." method="_on_EndTurnBtn_pressed"]
 [connection signal="toggled" from="EffectsLayout/ManaMultiplier" to="." method="_on_ManaMultiplier_toggled"]
 [connection signal="pressed" from="EffectsLayout/ManaIncrease" to="." method="_on_ManaIncrease_pressed"]

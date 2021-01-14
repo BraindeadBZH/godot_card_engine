@@ -1,6 +1,9 @@
 class_name AbstractContainer
 extends Control
 
+signal card_clicked(card)
+signal card_dropped(card)
+
 const CARD_NODE_FMT = "card_%s"
 
 enum LayoutMode {GRID, PATH}
@@ -32,6 +35,7 @@ var _grid_expand: bool = true
 
 # Drag and drop parameters
 var _drag_enabled: bool = false
+var _drop_enabled: bool = false
 
 # Path parameters
 var _path_card_width: float = 200
@@ -74,8 +78,13 @@ var _adjust_scale: Vector2 = Vector2(0.0, 0.0)
 var _adjust_rot_mode: String = "disabled"
 var _adjust_rot: float = 0.0
 
-onready var _cards = $Cards
+onready var _cards = $DropArea/Cards
 onready var _path = $CardPath
+onready var _drop_area = $DropArea
+
+
+func _ready() -> void:
+	_drop_area.set_enabled(_drop_enabled)
 
 
 func store() -> AbstractStore:
@@ -86,6 +95,10 @@ func set_store(store: AbstractStore) -> void:
 	_store = store
 	_store.connect("changed", self, "_update_container")
 	_update_container()
+
+
+func get_drop_area() -> DropArea:
+	return _drop_area
 
 
 func _card_clicked(card: AbstractCard) -> void:
@@ -410,3 +423,8 @@ func _on_need_removal(card: AbstractCard) -> void:
 func _on_card_clicked(card: AbstractCard) -> void:
 	if _interactive:
 		_card_clicked(card)
+		emit_signal("card_clicked", card)
+
+
+func _on_DropArea_dropped(card: CardInstance) -> void:
+	emit_signal("card_dropped", card)

@@ -3,6 +3,7 @@ extends AbstractScreen
 const STARTING_HAND_SIZE: int = 4
 const MAX_HAND_SIZE: int = 8
 const MAX_MANA: int = 10
+const MAX_TOKENS: int = 4
 
 var _mana_point := preload("res://screens/game/mana_point.png")
 var _mana_empty := preload("res://screens/game/mana_empty.png")
@@ -10,6 +11,7 @@ var _mana_empty := preload("res://screens/game/mana_empty.png")
 var _hand: CardHand = CardHand.new()
 var _draw_pile: CardPile = CardPile.new()
 var _discard_pile: CardPile = CardPile.new()
+var _tokens: CardPile = CardPile.new()
 var _mana: int = MAX_MANA
 var _fx_mana_mult: EffectInstance = null
 
@@ -33,6 +35,9 @@ func _ready() -> void:
 	_discard_pile.connect("changed", self, "_on_DiscardPile_changed")
 	# warning-ignore:return_value_discarded
 	_hand.connect("changed", self, "_on_Hand_changed")
+
+	_token_grid.set_store(_tokens)
+	_token_grid.get_drop_area().set_source_filter(["hand"])
 
 	if Gameplay.current_deck == null:
 		var db = CardEngine.db().get_database("main")
@@ -118,22 +123,6 @@ func _on_DrawBtn_pressed() -> void:
 	_hand.add_card(card)
 
 
-func _on_CardDrop_dropped(card: CardInstance) -> void:
-	var card_mana = card.data().get_value("mana")
-
-	if _mana >= card_mana:
-		_hand.play_card(card.ref(), _discard_pile)
-		if _on_played_fx.pressed:
-			var fx = CardEngine.fx().instantiate("mana_incr")
-			fx.affect(card)
-		if card_mana < 0:
-			_mana = 0
-		else:
-			_mana -= card_mana
-
-		_update_mana()
-
-
 func _on_ReshuffleBtn_pressed() -> void:
 	_discard_pile.move_cards(_draw_pile)
 	_draw_pile.shuffle()
@@ -165,3 +154,29 @@ func _on_ManaIncrease_pressed() -> void:
 func _on_ManaDecrease_pressed() -> void:
 	var fx = CardEngine.fx().instantiate("mana_decr")
 	_apply_fx(fx)
+
+
+func _on_TokenGrid_card_clicked(card: AbstractCard) -> void:
+	if card != null:
+		_tokens.remove_card(card.instance().ref())
+
+
+func _on_TokenGrid_card_dropped(card: CardInstance) -> void:
+	if _tokens.count() >= MAX_TOKENS:
+		return
+
+	var card_mana = card.data().get_value("mana")
+
+	if _mana >= card_mana:
+		_hand.play_card(card.ref(), _discard_pile)
+		_tokens.add_card(CardInstance.new(card.data()))
+
+		if _on_played_fx.pressed:
+			var fx = CardEngine.fx().instantiate("mana_incr")
+			fx.affect(card)
+		if card_mana < 0:
+			_mana = 0
+		else:
+			_mana -= card_mana
+
+		_update_mana()

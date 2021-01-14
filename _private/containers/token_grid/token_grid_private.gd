@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for TokenGrid
 # Generated automatically - DO NOT MODIFY
 
-func _ready():
+func _init() -> void:
 	data_id = "token_grid"
 	data_name = "TokenGrid"
 
@@ -21,6 +21,7 @@ func _ready():
 
 	# Drag and drop parameters
 	_drag_enabled = false
+	_drop_enabled = true
 
 	# Path parameters
 	_path_card_width = 200
@@ -47,17 +48,17 @@ func _ready():
 	_fine_scale_max = Vector2(0, 0)
 
 	# Transitions
-	_transitions.order.duration = 0.3
-	_transitions.order.type = Tween.TRANS_LINEAR
-	_transitions.order.easing = Tween.EASE_IN
+	_transitions.order.duration = 0.2
+	_transitions.order.type = Tween.TRANS_BOUNCE
+	_transitions.order.easing = Tween.EASE_OUT
 
-	_transitions.in_anchor.duration = 0.3
-	_transitions.in_anchor.type = Tween.TRANS_LINEAR
-	_transitions.in_anchor.easing = Tween.EASE_IN
+	_transitions.in_anchor.duration = 0.2
+	_transitions.in_anchor.type = Tween.TRANS_QUAD
+	_transitions.in_anchor.easing = Tween.EASE_IN_OUT
 
-	_transitions.out_anchor.duration = 0.3
-	_transitions.out_anchor.type = Tween.TRANS_LINEAR
-	_transitions.out_anchor.easing = Tween.EASE_IN
+	_transitions.out_anchor.duration = 0.2
+	_transitions.out_anchor.type = Tween.TRANS_QUAD
+	_transitions.out_anchor.easing = Tween.EASE_IN_OUT
 
 	_interactive = true
 	_anim = "token_anim"
