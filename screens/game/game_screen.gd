@@ -23,6 +23,7 @@ onready var _draw_filter = $EffectsLayout/FilterLayout/DrawFilter
 onready var _hand_filter = $EffectsLayout/FilterLayout/HandFilter
 onready var _discard_filter = $EffectsLayout/FilterLayout/DiscardFilter
 onready var _on_played_fx = $EffectsLayout/OnPlayedEffect
+onready var _token_grid = $PlayZone/TokenGrid
 
 
 func _ready() -> void:

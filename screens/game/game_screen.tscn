@@ -3,7 +3,7 @@
 [ext_resource path="res://screens/game/game_screen.gd" type="Script" id=1]
 [ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://containers/hand/hand.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/cardengine/core/drop_area.gd" type="Script" id=4]
+[ext_resource path="res://containers/token_grid/token_grid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://screens/game/mana_point.png" type="Texture" id=6]
 
@@ -136,21 +136,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -240.5
-margin_right = 150.0
-margin_bottom = 59.5
+margin_left = -200.0
+margin_top = -300.0
+margin_right = 200.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 300, 300 )
 color = Color( 0.866667, 0.564706, 0.564706, 1 )
-
-[node name="CardDrop" type="Control" parent="PlayZone"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-source_filter = [ "hand" ]
+
+[node name="TokenGrid" parent="PlayZone" instance=ExtResource( 4 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
 
 [node name="ManaBar" type="HBoxContainer" parent="."]
 anchor_left = 0.5
@@ -422,7 +424,6 @@ one_shot = true
 autostart = true
 [connection signal="pressed" from="DeckZone/DrawBtn" to="." method="_on_DrawBtn_pressed"]
 [connection signal="pressed" from="DiscardZone/ReshuffleBtn" to="." method="_on_ReshuffleBtn_pressed"]
-[connection signal="dropped" from="PlayZone/CardDrop" to="." method="_on_CardDrop_dropped"]
 [connection signal="pressed" from="ManaBar/EndTurnBtn" to="." method="_on_EndTurnBtn_pressed"]
 [connection signal="toggled" from="EffectsLayout/ManaMultiplier" to="." method="_on_ManaMultiplier_toggled"]
 [connection signal="pressed" from="EffectsLayout/ManaIncrease" to="." method="_on_ManaIncrease_pressed"]

@@ -1,0 +1,83 @@
+[meta]
+
+id="token_grid"
+name="TokenGrid"
+mode="grid"
+face_up=true
+
+[grid]
+
+card_width=170.0
+fixed_width=true
+card_spacing=Vector2( 1.1, 1.1 )
+halign="left"
+valign="top"
+columns=2
+expand=false
+
+[drag]
+
+enabled=false
+
+[path]
+
+card_width=200.0
+fixed_width=true
+spacing=1.0
+
+[position]
+
+enabled=false
+mode="linear"
+min=Vector2( 0, 0 )
+max=Vector2( 0, 0 )
+
+[angle]
+
+enabled=false
+mode="linear"
+min=0.0
+max=0.0
+
+[scale]
+
+enabled=false
+mode="linear"
+ratio="keep"
+min=Vector2( 0, 0 )
+max=Vector2( 0, 0 )
+
+[order]
+
+duration=0.3
+type="linear"
+easing="in"
+
+[in]
+
+duration=0.3
+type="linear"
+easing="in"
+
+[out]
+
+duration=0.3
+type="linear"
+easing="in"
+
+[anim]
+
+interactive=true
+id="token_anim"
+
+[adjust]
+
+mode="focused"
+pos_mode_x="disabled"
+pos_mode_y="disabled"
+pos=Vector2( 0, 0 )
+scale_mode_x="disabled"
+scale_mode_y="disabled"
+scale=Vector2( 0, 0 )
+rot_mode="disabled"
+rot=0.0

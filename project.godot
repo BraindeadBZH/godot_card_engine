@@ -254,6 +254,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/step_value.gd"
 }, {
+"base": "TokenGridPrivate",
+"class": "TokenGrid",
+"language": "GDScript",
+"path": "res://containers/token_grid/token_grid.gd"
+}, {
+"base": "AbstractContainer",
+"class": "TokenGridPrivate",
+"language": "GDScript",
+"path": "res://_private/containers/token_grid/token_grid_private.gd"
+}, {
 "base": "Node",
 "class": "UtilsInstance",
 "language": "GDScript",
@@ -324,6 +334,8 @@ _global_script_class_icons={
 "ScaleSequence": "",
 "StepTransition": "",
 "StepValue": "",
+"TokenGrid": "",
+"TokenGridPrivate": "",
 "UtilsInstance": "",
 "ValueChange": "",
 "ValueMultiplier": "",

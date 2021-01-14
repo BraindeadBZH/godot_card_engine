@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/cardengine/container/abstract_container.tscn" type="PackedScene" id=1]
+[ext_resource path="res://_private/containers//token_grid/token_grid_private.gd" type="Script" id=2]
+
+[node name="TokenGridPrivate" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+

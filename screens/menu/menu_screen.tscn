@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://screens/menu/menu_screen.gd" type="Script" id=1]
 [ext_resource path="res://screens/menu/background.png" type="Texture" id=2]
 [ext_resource path="res://widgets/menu_button/menu_button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://containers/home_display/home_display.tscn" type="PackedScene" id=4]
-[ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=5]
 
 [node name="MenuScreen" type="Control"]
 anchor_right = 1.0
@@ -60,7 +59,6 @@ button_text = "Quit"
 [node name="HomeDisplay" parent="." instance=ExtResource( 4 )]
 margin_left = 20.0
 margin_top = 20.0
-card_visual = ExtResource( 5 )
 [connection signal="pressed" from="NewGameBtn" to="." method="_on_NewGameBtn_pressed"]
 [connection signal="pressed" from="BuilderBtn" to="." method="_on_BuilderBtn_pressed"]
 [connection signal="pressed" from="QuitBtn" to="." method="_on_QuitBtn_pressed"]
