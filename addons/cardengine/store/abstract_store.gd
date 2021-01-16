@@ -69,8 +69,6 @@ class StoreSorter:
 		return false
 
 
-const STORE_SAVE_FILE: String = "user://stores.data"
-
 signal changed()
 signal card_added()
 signal cards_added()
@@ -91,49 +89,6 @@ var _values: Array = []
 var _texts: Array = []
 var _rng: PseudoRng = PseudoRng.new()
 var _filter: Query = null
-
-
-static func saved_stores() -> Dictionary:
-	var file = ConfigFile.new()
-	var err = file.load(STORE_SAVE_FILE)
-	if err != OK:
-		print("Could not open stores file")
-		return {}
-
-	var result = {}
-	var stores = file.get_sections()
-
-	for id in stores:
-		result[id] = file.get_value(id, "name", "")
-
-	return result
-
-
-static func load_store(id: String, dest: AbstractStore):
-	var file = ConfigFile.new()
-	var err = file.load(STORE_SAVE_FILE)
-	if err != OK:
-		print("Could not open stores file")
-		return
-
-	if not file.has_section(id):
-		print("Store does not exist")
-		return
-
-	var name = file.get_value(id, "name", "")
-	var cards = file.get_value(id, "cards", [])
-
-	dest.save_id = id
-	dest.save_name = name
-
-	for card in cards:
-		var db = CardEngine.db().get_database(card["source"])
-		if db == null:
-			continue
-		var data = db.get_card(card["id"])
-		if data == null:
-			continue
-		dest.add_card(CardInstance.new(data.duplicate()))
 
 
 func cards() -> Array:
@@ -410,29 +365,6 @@ func keep(count: int) -> void:
 	_update_filtered()
 	emit_signal("cards_removed")
 	emit_signal("changed")
-
-
-func save(id: String, name: String) -> void:
-	var file = ConfigFile.new()
-	file.load(STORE_SAVE_FILE)
-
-	var cards := []
-	for card in _cards:
-		var data := {
-			"id": card.data().id,
-			"source": card.data().source_db,
-		}
-		cards.append(data)
-
-	file.set_value(id, "name", name)
-	file.set_value(id, "cards", cards)
-	var err = file.save(STORE_SAVE_FILE)
-	if err != OK:
-		print("Could not save decks file")
-		return
-
-	save_id = id
-	save_name = name
 
 
 func _ref2idx(ref: int) -> int:

@@ -193,7 +193,7 @@ func _change_btn_text(btn: Button, txt: String) -> void:
 
 func _update_deck_select() -> void:
 	_deck_select.clear()
-	var decks = AbstractStore.saved_stores()
+	var decks = UserStores.saved_stores()
 	_deck_select.add_item("Load a deck")
 	_deck_select.set_item_disabled(0, true)
 	for id in decks:
@@ -303,7 +303,7 @@ func _on_DeckSelect_item_selected(index: int) -> void:
 		return
 
 	_deck.clear()
-	AbstractStore.load_store(_deck_select.get_selected_metadata(), _deck)
+	UserStores.load_store(_deck_select.get_selected_metadata(), _deck)
 	_deck_name.text = _deck.save_name
 	_update_deck_list()
 	_update_save_btn()
@@ -321,7 +321,7 @@ func _on_SaveBtn_pressed() -> void:
 			datetime["day"], datetime["month"], datetime["year"],
 			datetime["hour"], datetime["minute"]]
 
-	_deck.save(id, _deck_name.text)
+	UserStores.save_store(id, _deck_name.text, _deck)
 	_update_deck_select()
 
 

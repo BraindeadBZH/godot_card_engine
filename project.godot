@@ -265,6 +265,11 @@ _global_script_classes=[ {
 "path": "res://_private/containers/token_grid/token_grid_private.gd"
 }, {
 "base": "Node",
+"class": "UDStores",
+"language": "GDScript",
+"path": "res://user_data/ud_stores.gd"
+}, {
+"base": "Node",
 "class": "UtilsInstance",
 "language": "GDScript",
 "path": "res://addons/cardengine/core/utils.gd"
@@ -336,6 +341,7 @@ _global_script_class_icons={
 "StepValue": "",
 "TokenGrid": "",
 "TokenGridPrivate": "",
+"UDStores": "",
 "UtilsInstance": "",
 "ValueChange": "",
 "ValueMultiplier": "",
@@ -353,6 +359,7 @@ config/icon="res://icon.png"
 Utils="*res://addons/cardengine/core/utils.gd"
 CardEngine="*res://addons/cardengine/core/card_engine_instance.gd"
 Gameplay="*res://gameplay.gd"
+UserStores="*res://user_data/ud_stores.gd"
 
 [debug]
 
