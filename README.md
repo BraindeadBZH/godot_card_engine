@@ -29,13 +29,14 @@ Currently under development, do not expect it to work.
 * Drag and drop support
 * Card effects
 * Filters on DropArea
+* Saving store interface
+* Container to container drag and drop
 
 
 ## What is not implemented
 
-* Saving store to disks
 * Manual sorting
-* Container to container drag and drop
+* Drop placeholder
 * Add animation loop when card is focused or active
 * More modifiers to come
 * Other features to be defined...
