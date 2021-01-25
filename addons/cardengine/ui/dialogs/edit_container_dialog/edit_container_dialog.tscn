@@ -169,7 +169,7 @@ margin_bottom = 24.0
 hint_tooltip = "Define the horizontal spacing between cards relative to their width. A value of 1 means the spacing is the same as the width."
 size_flags_horizontal = 3
 max_value = 10.0
-step = 0.1
+step = 0.01
 value = 1.0
 allow_greater = true
 
@@ -180,7 +180,7 @@ margin_bottom = 24.0
 hint_tooltip = "Define the vertical spacing between cards relative to their height. A value of 1 means the spacing is the same as the height."
 size_flags_horizontal = 3
 max_value = 10.0
-step = 0.1
+step = 0.01
 value = 1.0
 allow_greater = true
 
