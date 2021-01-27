@@ -15,6 +15,6 @@ class AnchorTransition extends BasicTransition:
 	var rotation: float = 0.0
 
 
-var order: BasicTransition = BasicTransition.new()
+var layout: BasicTransition = BasicTransition.new()
 var in_anchor: AnchorTransition = AnchorTransition.new()
 var out_anchor: AnchorTransition = AnchorTransition.new()

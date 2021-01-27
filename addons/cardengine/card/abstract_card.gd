@@ -203,9 +203,9 @@ func _current_trans() -> CardTransform:
 
 
 func _transition(from: CardTransform, to: CardTransform) -> void:
-	var duration: float = _transitions.order.duration
-	var type: int = _transitions.order.type
-	var easing: int = _transitions.order.easing
+	var duration: float = _transitions.layout.duration
+	var type: int = _transitions.layout.type
+	var easing: int = _transitions.layout.easing
 
 	if from == null:
 		from = CardTransform.new()

@@ -48,9 +48,9 @@ func _init() -> void:
 	_fine_scale_max = Vector2({scale_range_max_h}, {scale_range_max_v})
 
 	# Transitions
-	_transitions.order.duration = {order_duration}
-	_transitions.order.type = {order_type}
-	_transitions.order.easing = {order_easing}
+	_transitions.layout.duration = {order_duration}
+	_transitions.layout.type = {order_type}
+	_transitions.layout.easing = {order_easing}
 
 	_transitions.in_anchor.duration = {in_duration}
 	_transitions.in_anchor.type = {in_type}
