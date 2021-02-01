@@ -50,7 +50,7 @@ max=Vector2( 0, 0 )
 
 [order]
 
-duration=0.5
+duration=0.2
 type="quad"
 easing="in_out"
 
