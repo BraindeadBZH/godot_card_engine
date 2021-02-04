@@ -21,8 +21,9 @@ onready var _path_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/Pa
 onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathFixedWidth
 onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
 
-onready var _drag_enabled = $MainLayout/MainTabs/DragAndDrop/DragLayout/Enabled
-onready var _drop_enabled = $MainLayout/MainTabs/DragAndDrop/DragLayout/Drop
+onready var _interactive = $MainLayout/MainTabs/Interaction/InterLayout/Inter
+onready var _drag_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Enabled
+onready var _drop_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Drop
 
 onready var _pos_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Enabled
 onready var _pos_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Mode
@@ -56,7 +57,6 @@ onready var _trans_out_duration = $MainLayout/MainTabs/Transitions/TransLayout/O
 onready var _trans_out_type = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Type
 onready var _trans_out_easing = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Easing
 
-onready var _interactive = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Inter
 onready var _anim = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Anim
 onready var _adjust_mode = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/Mode
 onready var _adjust_pos_mode_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout/PosXMode

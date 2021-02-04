@@ -131,9 +131,10 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("grid", "columns", cont.grid_columns)
 	file.set_value("grid", "expand", cont.grid_expand)
 
-	# Drag and drop data
-	file.set_value("drag", "enabled", cont.drag_enabled)
-	file.set_value("drag", "drop_enabled", cont.drop_enabled)
+	# Interaction data
+	file.set_value("inter", "interactive", cont.interactive)
+	file.set_value("inter", "enabled", cont.drag_enabled)
+	file.set_value("inter", "drop_enabled", cont.drop_enabled)
 
 	# Path data
 	file.set_value("path", "card_width", cont.path_card_width)
@@ -172,10 +173,8 @@ func _write_metadata(cont: ContainerData) -> void:
 	file.set_value("out", "type", cont.out_type)
 	file.set_value("out", "easing", cont.out_easing)
 
-	# Animations data
-	file.set_value("anim", "interactive", cont.interactive)
+	# Animation data
 	file.set_value("anim", "id", cont.anim)
-
 	file.set_value("adjust", "mode", cont.adjust_mode)
 	file.set_value("adjust", "pos_mode_x", cont.adjust_pos_x_mode)
 	file.set_value("adjust", "pos_mode_y", cont.adjust_pos_y_mode)
@@ -209,6 +208,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"grid_align_v": _translate_align(cont.grid_valign),
 		"grid_columns": cont.grid_columns,
 		"grid_expand": _translate_bool(cont.grid_expand),
+		"interactive": _translate_bool(cont.interactive),
 		"drag_enabled": _translate_bool(cont.drag_enabled),
 		"drop_enabled": _translate_bool(cont.drop_enabled),
 		"path_width": cont.path_card_width,
@@ -240,7 +240,6 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"out_duration": cont.out_duration,
 		"out_type": _translate_trans_type(cont.out_type),
 		"out_easing": _translate_trans_easing(cont.out_easing),
-		"interactive": _translate_bool(cont.interactive),
 		"anim": cont.anim,
 		"adjust_mode": cont.adjust_mode,
 		"adjust_pos_x_mode": cont.adjust_pos_x_mode,
@@ -315,9 +314,10 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.grid_columns = file.get_value("grid", "columns", 3)
 	cont.grid_expand = file.get_value("grid", "expand", true)
 
-	# Drag and drop data
-	cont.drag_enabled = file.get_value("drag", "enabled", false)
-	cont.drop_enabled = file.get_value("drag", "drop_enabled", false)
+	# Interaction data
+	cont.interactive = file.get_value("inter", "interactive", true)
+	cont.drag_enabled = file.get_value("inter", "enabled", false)
+	cont.drop_enabled = file.get_value("inter", "drop_enabled", false)
 
 	# Path data
 	cont.path_card_width = file.get_value("path", "card_width", 200)
@@ -356,9 +356,8 @@ func _read_metadata(id: String) -> ContainerData:
 	cont.out_type = file.get_value("out", "type", "linear")
 	cont.out_easing = file.get_value("out", "easing", "in")
 
-	cont.interactive = file.get_value("anim", "interactive", true)
+	# Animation
 	cont.anim = file.get_value("anim", "id", "none")
-
 	cont.adjust_mode = file.get_value("adjust", "mode", "focused")
 	cont.adjust_pos_x_mode = file.get_value("adjust", "pos_mode_x", "disabled")
 	cont.adjust_pos_y_mode = file.get_value("adjust", "pos_mode_y", "disabled")

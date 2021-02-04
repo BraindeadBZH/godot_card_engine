@@ -19,7 +19,8 @@ func _init() -> void:
 	_grid_columns = {grid_columns}
 	_grid_expand = {grid_expand}
 
-	# Drag and drop parameters
+	# Interaction parameters
+	_interactive = {interactive}
 	_drag_enabled = {drag_enabled}
 	_drop_enabled = {drop_enabled}
 
@@ -60,9 +61,8 @@ func _init() -> void:
 	_transitions.out_anchor.type = {out_type}
 	_transitions.out_anchor.easing = {out_easing}
 
-	_interactive = {interactive}
+	# Animation
 	_anim = "{anim}"
-
 	_adjust_mode = "{adjust_mode}"
 	_adjust_pos_x_mode = "{adjust_pos_x_mode}"
 	_adjust_pos_y_mode = "{adjust_pos_y_mode}"

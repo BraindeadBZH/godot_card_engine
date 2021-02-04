@@ -16,7 +16,8 @@ var grid_valign: String = "middle"
 var grid_columns: int = 3
 var grid_expand: bool = true
 
-# Drag and drop parameters
+# Interaction parameters
+var interactive: bool = true
 var drag_enabled: bool = false
 var drop_enabled: bool = false
 
@@ -65,10 +66,8 @@ var flip_end_duration: float = 0.3
 var flip_end_type: String = "linear"
 var flip_end_easing: String = "in"
 
-# Animations
-var interactive: bool = true
+# Animation
 var anim: String = "none"
-
 var adjust_mode: String = "focused"
 var adjust_pos_x_mode: String = "disabled"
 var adjust_pos_y_mode: String = "disabled"

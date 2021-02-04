@@ -35,6 +35,7 @@ __meta__ = {
 }
 
 [node name="Layout" type="Control" parent="MainLayout/MainTabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -305,7 +306,7 @@ step = 0.1
 value = 1.0
 allow_greater = true
 
-[node name="DragAndDrop" type="Control" parent="MainLayout/MainTabs"]
+[node name="Interaction" type="Control" parent="MainLayout/MainTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -314,7 +315,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="DragLayout" type="GridContainer" parent="MainLayout/MainTabs/DragAndDrop"]
+[node name="InterLayout" type="GridContainer" parent="MainLayout/MainTabs/Interaction"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 columns = 2
@@ -322,30 +323,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EnabledTitle" type="Label" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+[node name="InterLbl" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
 margin_top = 13.0
 margin_right = 86.0
 margin_bottom = 27.0
-text = "Drag enabled"
+text = "Interactive"
 
-[node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+[node name="Inter" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
 margin_left = 90.0
 margin_right = 502.0
 margin_bottom = 40.0
-hint_tooltip = "If ON, the container can be used as a source for drag and drop action."
+hint_tooltip = "If ON, the cards in the container will react to user input."
 size_flags_horizontal = 3
 
-[node name="DropTitle" type="Label" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+[node name="EnabledTitle" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
 margin_top = 57.0
 margin_right = 86.0
 margin_bottom = 71.0
-text = "Drop enabled"
+text = "Drag enabled"
 
-[node name="Drop" type="CheckButton" parent="MainLayout/MainTabs/DragAndDrop/DragLayout"]
+[node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
 margin_left = 90.0
 margin_top = 44.0
 margin_right = 502.0
 margin_bottom = 84.0
+hint_tooltip = "If ON, the container can be used as a source for drag and drop action."
+size_flags_horizontal = 3
+
+[node name="DropTitle" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
+margin_top = 101.0
+margin_right = 86.0
+margin_bottom = 115.0
+text = "Drop enabled"
+
+[node name="Drop" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
+margin_left = 90.0
+margin_top = 88.0
+margin_right = 502.0
+margin_bottom = 128.0
 hint_tooltip = "If ON, the container can be used as a source for drag and drop action."
 size_flags_horizontal = 3
 
@@ -963,19 +978,6 @@ columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="InterLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
-margin_top = 13.0
-margin_right = 69.0
-margin_bottom = 27.0
-text = "Interactive"
-
-[node name="Inter" type="CheckButton" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
-margin_left = 73.0
-margin_right = 502.0
-margin_bottom = 40.0
-hint_tooltip = "If ON, the cards in the container will react to user input."
-size_flags_horizontal = 3
 
 [node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
 margin_top = 47.0

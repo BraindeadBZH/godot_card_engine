@@ -19,7 +19,8 @@ func _init() -> void:
 	_grid_columns = 2
 	_grid_expand = false
 
-	# Drag and drop parameters
+	# Interaction parameters
+	_interactive = true
 	_drag_enabled = false
 	_drop_enabled = true
 
@@ -60,9 +61,8 @@ func _init() -> void:
 	_transitions.out_anchor.type = Tween.TRANS_QUAD
 	_transitions.out_anchor.easing = Tween.EASE_IN_OUT
 
-	_interactive = true
+	# Animation
 	_anim = "token_anim"
-
 	_adjust_mode = "focused"
 	_adjust_pos_x_mode = "disabled"
 	_adjust_pos_y_mode = "disabled"

@@ -15,8 +15,9 @@ valign="top"
 columns=4
 expand=true
 
-[drag]
+[inter]
 
+interactive=true
 enabled=true
 drop_enabled=false
 
@@ -68,7 +69,6 @@ easing="in"
 
 [anim]
 
-interactive=true
 id="list"
 
 [adjust]

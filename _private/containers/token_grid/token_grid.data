@@ -15,8 +15,9 @@ valign="top"
 columns=2
 expand=false
 
-[drag]
+[inter]
 
+interactive=true
 enabled=false
 drop_enabled=true
 
@@ -68,7 +69,6 @@ easing="in_out"
 
 [anim]
 
-interactive=true
 id="token_anim"
 
 [adjust]

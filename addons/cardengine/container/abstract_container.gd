@@ -34,7 +34,8 @@ var _grid_valign: int = VALIGN_CENTER
 var _grid_columns: int = -1
 var _grid_expand: bool = true
 
-# Drag and drop parameters
+# Interaction parameters
+var _interactive: bool = true
 var _drag_enabled: bool = false
 var _drop_enabled: bool = false
 
@@ -65,10 +66,8 @@ var _fine_scale_max: Vector2 = Vector2(1.15, 1.15)
 # Transitions
 var _transitions: CardTransitions = CardTransitions.new()
 
-# Animations
-var _interactive: bool = true
+# Animation
 var _anim: String = "none"
-
 var _adjust_mode: String = "focused"
 var _adjust_pos_x_mode: String = "disabled"
 var _adjust_pos_y_mode: String = "disabled"

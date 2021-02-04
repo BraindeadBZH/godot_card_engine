@@ -15,8 +15,9 @@ valign="middle"
 columns=3
 expand=true
 
-[drag]
+[inter]
 
+interactive=false
 enabled=false
 drop_enabled=false
 
@@ -68,7 +69,6 @@ easing="in"
 
 [anim]
 
-interactive=false
 id="home"
 
 [adjust]

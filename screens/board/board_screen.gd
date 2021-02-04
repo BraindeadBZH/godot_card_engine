@@ -25,7 +25,6 @@ func _ready() -> void:
 	_pile3.data_id = "pile_3"
 
 	_pile2.set_drag_enabled(false)
-	_pile3.set_drag_enabled(false)
 
 	_pile1.get_drop_area().set_source_filter(["hand"])
 	_pile2.get_drop_area().set_source_filter(["hand", "pile_1"])

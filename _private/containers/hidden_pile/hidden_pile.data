@@ -15,9 +15,10 @@ valign="middle"
 columns=-1
 expand=true
 
-[drag]
+[inter]
 
-enabled=true
+interactive=false
+enabled=false
 drop_enabled=true
 
 [path]
@@ -68,7 +69,6 @@ easing="in"
 
 [anim]
 
-interactive=true
 id="none"
 
 [adjust]
