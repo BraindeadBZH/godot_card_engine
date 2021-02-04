@@ -286,7 +286,7 @@ func _on_LibraryScroll_resized() -> void:
 		_container.rect_min_size = _scroll.rect_size
 
 
-func _on_CardDrop_dropped(card: CardInstance) -> void:
+func _on_CardDrop_dropped(card: CardInstance, _source: String, _on_card: CardInstance) -> void:
 	_deck.add_card(CardInstance.new(card.data()))
 	_update_deck_list()
 	_update_save_btn()

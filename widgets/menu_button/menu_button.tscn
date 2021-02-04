@@ -16,6 +16,7 @@ font_data = ExtResource( 8 )
 [node name="MenuButton" type="TextureButton"]
 margin_right = 348.0
 margin_bottom = 108.0
+rect_min_size = Vector2( 348, 108 )
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )

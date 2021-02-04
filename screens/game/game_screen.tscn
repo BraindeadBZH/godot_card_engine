@@ -427,6 +427,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -175.0
 margin_right = 0.0
+rect_min_size = Vector2( 0, 0 )
 button_text = "MENU"
 
 [node name="StartingHandDelay" type="Timer" parent="."]

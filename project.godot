@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "AbstractBoard",
+"language": "GDScript",
+"path": "res://addons/cardengine/card/abstract_board.gd"
+}, {
 "base": "Node2D",
 "class": "AbstractCard",
 "language": "GDScript",
@@ -83,6 +88,11 @@ _global_script_classes=[ {
 "class": "AnimationsUi",
 "language": "GDScript",
 "path": "res://addons/cardengine/ui/animations_ui.gd"
+}, {
+"base": "AbstractBoard",
+"class": "Board",
+"language": "GDScript",
+"path": "res://addons/cardengine/container/board.gd"
 }, {
 "base": "Reference",
 "class": "CardData",
@@ -209,6 +219,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://_private/containers/hand/hand_private.gd"
 }, {
+"base": "HiddenPilePrivate",
+"class": "HiddenPile",
+"language": "GDScript",
+"path": "res://containers/hidden_pile/hidden_pile.gd"
+}, {
+"base": "AbstractContainer",
+"class": "HiddenPilePrivate",
+"language": "GDScript",
+"path": "res://_private/containers/hidden_pile/hidden_pile_private.gd"
+}, {
 "base": "HomeDisplayPrivate",
 "class": "HomeDisplay",
 "language": "GDScript",
@@ -288,8 +308,19 @@ _global_script_classes=[ {
 "class": "ValueSetter",
 "language": "GDScript",
 "path": "res://addons/cardengine/effect/value_setter.gd"
+}, {
+"base": "VisiblePilePrivate",
+"class": "VisiblePile",
+"language": "GDScript",
+"path": "res://containers/visible_pile/visible_pile.gd"
+}, {
+"base": "AbstractContainer",
+"class": "VisiblePilePrivate",
+"language": "GDScript",
+"path": "res://_private/containers/visible_pile/visible_pile_private.gd"
 } ]
 _global_script_class_icons={
+"AbstractBoard": "",
 "AbstractCard": "",
 "AbstractContainer": "",
 "AbstractEffect": "",
@@ -305,6 +336,7 @@ _global_script_class_icons={
 "AnimationSequence": "",
 "AnimationStep": "",
 "AnimationsUi": "",
+"Board": "",
 "CardData": "",
 "CardDatabase": "",
 "CardDeck": "",
@@ -330,6 +362,8 @@ _global_script_class_icons={
 "GeneralManager": "",
 "HandContainer": "",
 "HandContainerPrivate": "",
+"HiddenPile": "",
+"HiddenPilePrivate": "",
 "HomeDisplay": "",
 "HomeDisplayPrivate": "",
 "PositionSequence": "",
@@ -345,7 +379,9 @@ _global_script_class_icons={
 "UtilsInstance": "",
 "ValueChange": "",
 "ValueMultiplier": "",
-"ValueSetter": ""
+"ValueSetter": "",
+"VisiblePile": "",
+"VisiblePilePrivate": ""
 }
 
 [application]

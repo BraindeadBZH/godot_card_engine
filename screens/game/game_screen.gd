@@ -161,7 +161,7 @@ func _on_TokenGrid_card_clicked(card: AbstractCard) -> void:
 		_tokens.remove_card(card.instance().ref())
 
 
-func _on_TokenGrid_card_dropped(card: CardInstance) -> void:
+func _on_TokenGrid_card_dropped(card: CardInstance, _source: String, _on_card: CardInstance) -> void:
 	if _tokens.count() >= MAX_TOKENS:
 		return
 

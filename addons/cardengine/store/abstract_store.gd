@@ -188,6 +188,11 @@ func get_card(index: int) -> CardInstance:
 
 
 func get_first() -> CardInstance:
+	if _filter == null and _cards.empty():
+		return null
+	if _filter != null and _filtered.empty():
+		return null
+
 	if _filter == null:
 		return _cards.front()
 	else:
@@ -195,6 +200,11 @@ func get_first() -> CardInstance:
 
 
 func get_last() -> CardInstance:
+	if _filter == null and _cards.empty():
+		return null
+	if _filter != null and _filtered.empty():
+		return null
+
 	if _filter == null:
 		return _cards.back()
 	else:

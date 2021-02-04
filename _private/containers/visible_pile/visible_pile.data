@@ -1,7 +1,7 @@
 [meta]
 
-id="hand"
-name="HandContainer"
+id="visible_pile"
+name="VisiblePile"
 mode="grid"
 face_up=true
 
@@ -9,36 +9,36 @@ face_up=true
 
 card_width=150.0
 fixed_width=true
-card_spacing=Vector2( 0.5, 1 )
+card_spacing=Vector2( 0.05, 1 )
 halign="center"
 valign="middle"
 columns=-1
-expand=false
+expand=true
 
 [drag]
 
 enabled=true
-drop_enabled=false
+drop_enabled=true
 
 [path]
 
 card_width=200.0
 fixed_width=true
-spacing=0.5
+spacing=1.0
 
 [position]
 
-enabled=true
-mode="symmetric"
-min=Vector2( 0, -20 )
-max=Vector2( 0, 20 )
+enabled=false
+mode="linear"
+min=Vector2( 0, 0 )
+max=Vector2( 0, 0 )
 
 [angle]
 
-enabled=true
+enabled=false
 mode="linear"
-min=-10.0
-max=10.0
+min=0.0
+max=0.0
 
 [scale]
 
@@ -50,35 +50,35 @@ max=Vector2( 0, 0 )
 
 [order]
 
-duration=0.2
+duration=0.1
 type="quad"
-easing="in_out"
+easing="out"
 
 [in]
 
-duration=0.5
+duration=0.3
 type="back"
 easing="out"
 
 [out]
 
 duration=0.3
-type="quad"
-easing="in_out"
+type="linear"
+easing="in"
 
 [anim]
 
-interactive=true
-id="hand"
+interactive=false
+id="none"
 
 [adjust]
 
 mode="focused"
 pos_mode_x="disabled"
-pos_mode_y="absolute"
+pos_mode_y="disabled"
 pos=Vector2( 0, 0 )
 scale_mode_x="disabled"
 scale_mode_y="disabled"
 scale=Vector2( 0, 0 )
-rot_mode="absolute"
+rot_mode="disabled"
 rot=0.0

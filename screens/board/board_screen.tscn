@@ -1,0 +1,155 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://screens/board/board_screen.gd" type="Script" id=1]
+[ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/cardengine/container/board.gd" type="Script" id=3]
+[ext_resource path="res://containers/hand/hand.tscn" type="PackedScene" id=4]
+[ext_resource path="res://containers/visible_pile/visible_pile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://cards/normal/normal_card.tscn" type="PackedScene" id=6]
+[ext_resource path="res://containers/hidden_pile/hidden_pile.tscn" type="PackedScene" id=7]
+
+[node name="BoardScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.45098, 0.509804, 0.701961, 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Board" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pile1" parent="Board" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -340.0
+margin_top = -295.0
+margin_right = -140.0
+margin_bottom = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="Board/Pile1"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.14902, 0.172549, 0.239216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pile2" parent="Board" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -295.0
+margin_right = 100.0
+margin_bottom = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="Board/Pile2"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.14902, 0.172549, 0.239216, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pile3" parent="Board" instance=ExtResource( 7 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 140.0
+margin_top = -295.0
+margin_right = 340.0
+margin_bottom = 5.0
+card_visual = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="Board/Pile3"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.14902, 0.172549, 0.239216, 1 )
+
+[node name="ShuffleBtn" type="Button" parent="Board/Pile3"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 10.0
+margin_top = -40.0
+margin_right = 110.0
+margin_bottom = -10.0
+text = "Shuffle"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrawBtn" type="Button" parent="Board/Pile3"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 110.0
+margin_bottom = 40.0
+text = "Draw"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hand" parent="Board" instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -370.0
+margin_top = -140.0
+margin_right = 370.0
+margin_bottom = 80.0
+
+[node name="DiscardBtn" type="Button" parent="Board/Hand"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 10.0001
+margin_top = -60.0
+margin_right = 110.0
+margin_bottom = -30.0
+text = "Discard last"
+
+[node name="MenuButton" parent="." instance=ExtResource( 2 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -175.0
+margin_right = 0.0
+rect_min_size = Vector2( 0, 0 )
+button_text = "MENU"
+[connection signal="card_dropped" from="Board/Pile1" to="." method="_on_Pile1_card_dropped"]
+[connection signal="card_dropped" from="Board/Pile2" to="." method="_on_Pile2_card_dropped"]
+[connection signal="card_dropped" from="Board/Pile3" to="." method="_on_Pile3_card_dropped"]
+[connection signal="pressed" from="Board/Pile3/ShuffleBtn" to="." method="_on_ShuffleBtn_pressed"]
+[connection signal="pressed" from="Board/Pile3/DrawBtn" to="." method="_on_DrawBtn_pressed"]
+[connection signal="pressed" from="Board/Hand/DiscardBtn" to="." method="_on_DiscardBtn_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_MenuButton_pressed"]

@@ -6,6 +6,9 @@ signal instance_changed()
 signal need_removal()
 signal clicked()
 signal state_changed(new_state)
+signal transform_changed()
+signal focused()
+signal unfocused()
 
 enum CardSide {FRONT, BACK}
 enum CardState {NONE, IDLE, FOCUSED, ACTIVE}
@@ -21,6 +24,7 @@ var _adjusted_trans: CardTransform = null
 var _adjust_on_focused: bool = false
 var _adjust_on_activated: bool = false
 var _transitions: CardTransitions = CardTransitions.new()
+var _transi_position: Vector2 = Vector2(0, 0) setget _set_transi_position
 var _remove_flag: bool = false
 var _state = CardState.NONE
 var _rng: PseudoRng = PseudoRng.new()
@@ -53,7 +57,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and _is_dragged and _follow_mouse:
-		position += event.relative
+		_set_transi_position(position + event.relative)
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -87,11 +91,27 @@ func set_root_trans(transform: CardTransform) -> void:
 
 func set_root_trans_immediate(transform: CardTransform) -> void:
 	_root_trans = transform
-	position = transform.pos
+
+	_set_transi_position(transform.pos)
 	scale = transform.scale
 	rotation = transform.rot
 
 	_change_anim("idle")
+
+
+func current_trans(include_anim_trans: bool = false) -> CardTransform:
+	var trans = CardTransform.new()
+
+	trans.pos = position
+	trans.scale = scale
+	trans.rot = rotation
+
+	if include_anim_trans:
+		trans.pos += get_transform().basis_xform(_cont.position)
+		trans.scale *= _cont.scale
+		trans.rot += _cont.rotation
+
+	return trans
 
 
 func transitions() -> CardTransitions:
@@ -162,6 +182,10 @@ func set_drag_widget(scene: PackedScene) -> void:
 		_follow_mouse = false
 
 
+func set_drop_area(area: DropArea) -> void:
+	_mouse.set_drop_area(area)
+
+
 func is_flagged_for_removal() -> bool:
 	return _remove_flag
 
@@ -170,7 +194,7 @@ func flag_for_removal() -> void:
 	_remove_flag = true
 
 	if _transitions.out_anchor.enabled:
-		_transition(_current_trans(), null)
+		_transition(current_trans(), null)
 	else:
 		emit_signal("need_removal")
 
@@ -192,14 +216,9 @@ func _update_visibility() -> void:
 		_back.visible = true
 
 
-func _current_trans() -> CardTransform:
-	var trans = CardTransform.new()
-
-	trans.pos = position
-	trans.scale = scale
-	trans.rot = rotation
-
-	return trans
+func _set_transi_position(pos: Vector2) -> void:
+	position = pos
+	emit_signal("transform_changed")
 
 
 func _transition(from: CardTransform, to: CardTransform) -> void:
@@ -227,14 +246,14 @@ func _transition(from: CardTransform, to: CardTransform) -> void:
 		type = _transitions.out_anchor.type
 		easing = _transitions.out_anchor.easing
 
-	position = from.pos
+	_set_transi_position(from.pos)
 	scale = from.scale
 	rotation = from.rot
 
 	_transi.remove_all()
 
 	_transi.interpolate_property(
-		self, "position", from.pos, to.pos, duration, type, easing)
+		self, "_transi_position", from.pos, to.pos, duration, type, easing)
 
 	_transi.interpolate_property(
 		self, "scale", from.scale, to.scale, duration, type, easing)
@@ -629,6 +648,7 @@ func _on_MouseArea_mouse_entered() -> void:
 	z_index = 1
 
 	_post_event("focused")
+	emit_signal("focused")
 
 
 func _on_MouseArea_mouse_exited() -> void:
@@ -639,6 +659,7 @@ func _on_MouseArea_mouse_exited() -> void:
 
 	_post_event("unfocused")
 	_post_event("idle")
+	emit_signal("unfocused")
 
 
 func _on_MouseArea_pressed() -> void:
@@ -667,7 +688,7 @@ func _on_TransiMerge_timeout() -> void:
 		if _transitions.in_anchor.enabled:
 			_transition(null, _merge_trans)
 		else:
-			position = _merge_trans.pos
+			_set_transi_position(_merge_trans.pos)
 			scale = _merge_trans.scale
 			rotation = _merge_trans.rot
 	else:
@@ -678,6 +699,14 @@ func _on_TransiMerge_timeout() -> void:
 
 	_root_trans = _merge_trans
 	_change_anim("idle")
+
+
+func _on_Transitions_tween_started(object: Object, key: NodePath) -> void:
+	pass
+
+
+func _on_Transitions_tween_step(object: Object, key: NodePath, elapsed: float, value: Object) -> void:
+	pass
 
 
 func _on_Transitions_tween_all_completed() -> void:
@@ -695,6 +724,7 @@ func _on_Transitions_tween_all_completed() -> void:
 func _on_MouseArea_drag_started() -> void:
 	CardEngine.general().start_drag(_inst, _container)
 	_is_dragged = true
+	z_index = 1
 
 	if _follow_mouse:
 		_mouse.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -712,12 +742,16 @@ func _on_drag_stopped() -> void:
 			_waiting_card_return = true
 
 			if _adjusted_trans != null:
-				_transition(_current_trans(), _adjusted_trans)
+				_transition(current_trans(), _adjusted_trans)
 			else:
-				_transition(_current_trans(), _root_trans)
+				_transition(current_trans(), _root_trans)
 		else:
 			_post_event("deactivated")
 
 			if not _mouse.is_hovered():
 				_post_event("unfocused")
 				_post_event("idle")
+
+
+func _on_MouseArea_prepare_for_drop() -> void:
+	CardEngine.general().set_drop_on(_inst)

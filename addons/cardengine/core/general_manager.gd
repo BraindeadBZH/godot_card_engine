@@ -8,6 +8,7 @@ signal drag_stopped()
 var _drag_started: bool = false
 var _dragged_card: CardInstance = null
 var _drag_source: String = ""
+var _drop_on: CardInstance = null
 
 
 func validate_form(form_name: String, form: Dictionary) -> Array:
@@ -39,8 +40,17 @@ func get_drag_source() -> String:
 	return _drag_source
 
 
+func set_drop_on(card: CardInstance) -> void:
+	_drop_on = card
+
+
+func get_drop_on() -> CardInstance:
+	return _drop_on
+
+
 func stop_drag() -> void:
 	_drag_started = false
 	_dragged_card = null
 	_drag_source = ""
+	_drop_on = null
 	emit_signal("drag_stopped")

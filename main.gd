@@ -3,7 +3,8 @@ extends Node
 var _screens = {
 	"menu": preload("res://screens/menu/menu_screen.tscn"),
 	"builder": preload("res://screens/builder/builder_screen.tscn"),
-	"game": preload("res://screens/game/game_screen.tscn")
+	"game": preload("res://screens/game/game_screen.tscn"),
+	"board": preload("res://screens/board/board_screen.tscn")
 }
 
 onready var _screen_layer = $ScreenLayer

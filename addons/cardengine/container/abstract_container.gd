@@ -2,7 +2,7 @@ class_name AbstractContainer
 extends Control
 
 signal card_clicked(card)
-signal card_dropped(card)
+signal card_dropped(card, source, on_card)
 
 const CARD_NODE_FMT = "card_%s"
 
@@ -23,6 +23,7 @@ var _rng: PseudoRng = PseudoRng.new()
 
 var _layout_mode: int = LayoutMode.GRID
 var _face_up: float = true
+var _board: AbstractBoard = null
 
 # Grid parameters
 var _grid_card_width: float = 200
@@ -101,6 +102,22 @@ func get_drop_area() -> DropArea:
 	return _drop_area
 
 
+func set_interactive(state: bool) -> void:
+	_interactive = state
+
+
+func set_drag_enabled(state: bool) -> void:
+	_drag_enabled = state
+
+
+func set_drop_enabled(state: bool) -> void:
+	_drop_enabled = state
+
+
+func set_board(board: AbstractBoard) -> void:
+	_board = board
+
+
 func _card_clicked(card: AbstractCard) -> void:
 	pass
 
@@ -158,9 +175,30 @@ func _update_container() -> void:
 		visual_inst.set_interactive(_interactive)
 		visual_inst.set_drag_enabled(_drag_enabled)
 		visual_inst.set_drag_widget(drag_widget)
+		visual_inst.set_drop_area(_drop_area)
 		visual_inst.set_animation(CardEngine.anim().get_animation(_anim))
 		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
 		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
+
+		if _board != null:
+			_board.register_card(self, visual_inst)
+
+			var last_trans := _board.get_last_known_transform(card.ref())
+			if last_trans != null:
+				last_trans = _map_to(last_trans)
+
+				var transi := CardTransitions.new()
+				transi.layout = _transitions.layout
+				transi.out_anchor = _transitions.out_anchor
+
+				transi.in_anchor.enabled = true
+				transi.in_anchor.position = last_trans.pos
+				transi.in_anchor.scale = last_trans.scale
+				transi.in_anchor.rotation = last_trans.rot
+				transi.in_anchor.duration = _transitions.in_anchor.duration
+				transi.in_anchor.type = _transitions.in_anchor.type
+				transi.in_anchor.easing = _transitions.in_anchor.easing
+				visual_inst.set_transitions(transi)
 
 		if _face_up:
 			visual_inst.set_side(AbstractCard.CardSide.FRONT)
@@ -408,7 +446,30 @@ func _clear() -> void:
 
 	for child in _cards.get_children():
 		if not _store.has_card(child.instance().ref()):
+			if _board != null:
+				_board.register_last_known_transform(
+					child.instance().ref(), _map_from(child.current_trans(true)))
 			child.flag_for_removal()
+
+
+func _map_from(trans: CardTransform) -> CardTransform:
+	var result := CardTransform.new()
+
+	result.pos = trans.pos + rect_position
+	result.scale = trans.scale * rect_scale
+	result.rot = trans.rot + rect_rotation
+
+	return result
+
+
+func _map_to(trans: CardTransform) -> CardTransform:
+	var result := CardTransform.new()
+
+	result.pos = trans.pos - rect_position
+	result.scale = trans.scale / rect_scale
+	result.rot = trans.rot - rect_rotation
+
+	return result
 
 
 func _on_AbstractContainer_resized() -> void:
@@ -426,5 +487,5 @@ func _on_card_clicked(card: AbstractCard) -> void:
 		emit_signal("card_clicked", card)
 
 
-func _on_DropArea_dropped(card: CardInstance) -> void:
-	emit_signal("card_dropped", card)
+func _on_DropArea_dropped(card: CardInstance, source: String, on_card: CardInstance) -> void:
+	emit_signal("card_dropped", card, source, on_card)
