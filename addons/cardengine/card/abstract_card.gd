@@ -645,7 +645,7 @@ func _on_EventMerge_timeout() -> void:
 
 
 func _on_MouseArea_mouse_entered() -> void:
-	if not _interactive or CardEngine.general().is_dragging():
+	if not _interactive or CardEngine.general().is_dragging() or _remove_flag:
 		return
 
 	z_index = 1
@@ -656,7 +656,7 @@ func _on_MouseArea_mouse_entered() -> void:
 
 
 func _on_MouseArea_mouse_exited() -> void:
-	if not _interactive or CardEngine.general().is_dragging():
+	if not _interactive or CardEngine.general().is_dragging() or _remove_flag:
 		return
 
 	z_index = 0
@@ -668,21 +668,21 @@ func _on_MouseArea_mouse_exited() -> void:
 
 
 func _on_MouseArea_pressed() -> void:
-	if not _interactive or CardEngine.general().is_dragging():
+	if not _interactive or CardEngine.general().is_dragging() or _remove_flag:
 		return
 
 	emit_signal("clicked")
 
 
 func _on_MouseArea_button_down() -> void:
-	if not _interactive or CardEngine.general().is_dragging():
+	if not _interactive or CardEngine.general().is_dragging() or _remove_flag:
 		return
 
 	_post_event("activated")
 
 
 func _on_MouseArea_button_up() -> void:
-	if not _interactive or CardEngine.general().is_dragging():
+	if not _interactive or CardEngine.general().is_dragging() or _remove_flag:
 		return
 
 	_post_event("deactivated")
