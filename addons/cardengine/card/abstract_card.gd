@@ -26,6 +26,7 @@ var _adjust_on_activated: bool = false
 var _transitions: CardTransitions = CardTransitions.new()
 var _remove_flag: bool = false
 var _state = CardState.NONE
+var _is_focused: bool = false
 var _rng: PseudoRng = PseudoRng.new()
 var _interactive: bool = true
 var _interaction_paused: bool = false
@@ -152,6 +153,14 @@ func set_interactive(state: bool) -> void:
 
 func set_interaction_paused(state: bool) -> void:
 	_interaction_paused = state
+
+
+func is_focused() -> bool:
+	return _is_focused
+
+
+func set_mouse_filter(filter: int) -> void:
+	_mouse.mouse_filter = filter
 
 
 func set_drag_enabled(state: bool) -> void:
@@ -640,6 +649,7 @@ func _on_MouseArea_mouse_entered() -> void:
 		return
 
 	z_index = 1
+	_is_focused = true
 
 	_post_event("focused")
 	emit_signal("focused")
@@ -650,6 +660,7 @@ func _on_MouseArea_mouse_exited() -> void:
 		return
 
 	z_index = 0
+	_is_focused = false
 
 	_post_event("unfocused")
 	_post_event("idle")

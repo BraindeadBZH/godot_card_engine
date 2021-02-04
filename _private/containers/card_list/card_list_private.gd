@@ -21,6 +21,8 @@ func _init() -> void:
 
 	# Interaction parameters
 	_interactive = true
+	_exclusive = false
+	_last_only = false
 	_drag_enabled = true
 	_drop_enabled = false
 

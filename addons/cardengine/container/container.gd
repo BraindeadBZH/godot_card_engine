@@ -18,6 +18,8 @@ var grid_expand: bool = true
 
 # Interaction parameters
 var interactive: bool = true
+var exclusive: bool = false
+var last_only: bool = false
 var drag_enabled: bool = false
 var drop_enabled: bool = false
 

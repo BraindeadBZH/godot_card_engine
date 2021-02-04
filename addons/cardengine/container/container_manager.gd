@@ -133,6 +133,8 @@ func _write_metadata(cont: ContainerData) -> void:
 
 	# Interaction data
 	file.set_value("inter", "interactive", cont.interactive)
+	file.set_value("inter", "exclusive", cont.exclusive)
+	file.set_value("inter", "last_only", cont.last_only)
 	file.set_value("inter", "enabled", cont.drag_enabled)
 	file.set_value("inter", "drop_enabled", cont.drop_enabled)
 
@@ -209,6 +211,8 @@ func _write_private_scene(cont: ContainerData) -> String:
 		"grid_columns": cont.grid_columns,
 		"grid_expand": _translate_bool(cont.grid_expand),
 		"interactive": _translate_bool(cont.interactive),
+		"exclusive": _translate_bool(cont.exclusive),
+		"last_only": _translate_bool(cont.last_only),
 		"drag_enabled": _translate_bool(cont.drag_enabled),
 		"drop_enabled": _translate_bool(cont.drop_enabled),
 		"path_width": cont.path_card_width,
@@ -316,6 +320,8 @@ func _read_metadata(id: String) -> ContainerData:
 
 	# Interaction data
 	cont.interactive = file.get_value("inter", "interactive", true)
+	cont.exclusive = file.get_value("inter", "exclusive", false)
+	cont.last_only = file.get_value("inter", "last_only", false)
 	cont.drag_enabled = file.get_value("inter", "enabled", false)
 	cont.drop_enabled = file.get_value("inter", "drop_enabled", false)
 

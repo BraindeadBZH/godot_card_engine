@@ -22,6 +22,8 @@ onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/Pa
 onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
 
 onready var _interactive = $MainLayout/MainTabs/Interaction/InterLayout/Inter
+onready var _exclusive = $MainLayout/MainTabs/Interaction/InterLayout/InterEx
+onready var _last_only = $MainLayout/MainTabs/Interaction/InterLayout/InterLast
 onready var _drag_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Enabled
 onready var _drop_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Drop
 
@@ -101,6 +103,9 @@ func _update() -> void:
 	_grid_align_h.select(_halign_to_select(_data.grid_halign))
 	_grid_align_v.select(_valign_to_select(_data.grid_valign))
 
+	_interactive.pressed = _data.interactive
+	_exclusive.pressed = _data.exclusive
+	_last_only.pressed = _data.last_only
 	_drag_enabled.pressed = _data.drag_enabled
 	_drop_enabled.pressed = _data.drop_enabled
 
@@ -136,7 +141,6 @@ func _update() -> void:
 	_trans_out_type.select(_trans_type_to_select(_data.out_type))
 	_trans_out_easing.select(_trans_easing_to_select(_data.out_easing))
 
-	_interactive.pressed = _data.interactive
 	_load_animation_list(_anim, _data.anim)
 
 	_adjust_mode.select(_adjust_mode_to_select(_data.adjust_mode))
@@ -193,6 +197,9 @@ func _save() -> void:
 	_data.grid_halign = _select_to_halign(_grid_align_h.selected)
 	_data.grid_valign = _select_to_valign(_grid_align_v.selected)
 
+	_data.interactive = _interactive.pressed
+	_data.exclusive = _exclusive.pressed
+	_data.last_only = _last_only.pressed
 	_data.drag_enabled = _drag_enabled.pressed
 	_data.drop_enabled = _drop_enabled.pressed
 
@@ -228,7 +235,6 @@ func _save() -> void:
 	_data.out_type = _select_to_trans_type(_trans_out_type.selected)
 	_data.out_easing = _select_to_trans_easing(_trans_out_easing.selected)
 
-	_data.interactive = _interactive.pressed
 	_data.anim = _anim.get_selected_metadata()
 
 	_data.adjust_mode = _select_to_adjust_mode(_adjust_mode.selected)

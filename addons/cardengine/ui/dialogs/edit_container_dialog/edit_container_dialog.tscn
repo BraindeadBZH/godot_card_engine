@@ -336,6 +336,32 @@ margin_bottom = 40.0
 hint_tooltip = "If ON, the cards in the container will react to user input."
 size_flags_horizontal = 3
 
+[node name="InterExLbl" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
+margin_top = 13.0
+margin_right = 86.0
+margin_bottom = 27.0
+text = "Exclusive"
+
+[node name="InterEx" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
+margin_left = 90.0
+margin_right = 502.0
+margin_bottom = 40.0
+hint_tooltip = "If ON, when a card is in focus other cards in the container stop reacting to user input."
+size_flags_horizontal = 3
+
+[node name="InterLastLbl" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
+margin_top = 13.0
+margin_right = 86.0
+margin_bottom = 27.0
+text = "Last card only"
+
+[node name="InterLast" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
+margin_left = 90.0
+margin_right = 502.0
+margin_bottom = 40.0
+hint_tooltip = "If ON, only the last card can react to user input."
+size_flags_horizontal = 3
+
 [node name="EnabledTitle" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
 margin_top = 57.0
 margin_right = 86.0

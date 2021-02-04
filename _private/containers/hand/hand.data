@@ -18,6 +18,8 @@ expand=false
 [inter]
 
 interactive=true
+exclusive=true
+last_only=false
 enabled=true
 drop_enabled=false
 

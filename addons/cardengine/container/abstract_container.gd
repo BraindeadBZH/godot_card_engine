@@ -36,6 +36,8 @@ var _grid_expand: bool = true
 
 # Interaction parameters
 var _interactive: bool = true
+var _exclusive: bool = false
+var _last_only: bool = false
 var _drag_enabled: bool = false
 var _drop_enabled: bool = false
 
@@ -178,6 +180,8 @@ func _update_container() -> void:
 		visual_inst.set_animation(CardEngine.anim().get_animation(_anim))
 		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
 		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
+		visual_inst.connect("focused", self, "_on_card_focused", [visual_inst])
+		visual_inst.connect("unfocused", self, "_on_card_unfocused")
 
 		if _board != null:
 			var last_trans := _board.get_last_known_transform(card.ref())
@@ -209,7 +213,22 @@ func _update_container() -> void:
 		_cards.move_child(visual, index)
 		index += 1
 
+	_setup_last_only()
 	_layout_cards()
+
+
+func _setup_last_only() -> void:
+	if _interactive and _last_only:
+		for child in _cards.get_children():
+			child.set_interactive(false)
+			child.set_drag_enabled(false)
+
+		for i in range(_cards.get_child_count() - 1, -1, -1):
+			var card: AbstractCard = _cards.get_child(i)
+			if not card.is_flagged_for_removal():
+				card.set_interactive(_interactive)
+				card.set_drag_enabled(_drag_enabled)
+				return
 
 
 func _layout_cards():
@@ -446,7 +465,11 @@ func _clear() -> void:
 			if _board != null:
 				_board.register_last_known_transform(
 					child.instance().ref(), _map_from(child.current_trans(true)))
+
 			child.flag_for_removal()
+
+			if child.is_focused():
+				_on_card_unfocused()
 
 
 func _map_from(trans: CardTransform) -> CardTransform:
@@ -482,6 +505,21 @@ func _on_card_clicked(card: AbstractCard) -> void:
 	if _interactive:
 		_card_clicked(card)
 		emit_signal("card_clicked", card)
+
+
+func _on_card_focused(card: AbstractCard) -> void:
+	if _exclusive:
+		for child in _cards.get_children():
+			if child != card:
+				child.set_mouse_filter(MOUSE_FILTER_IGNORE)
+			else:
+				child.set_mouse_filter(MOUSE_FILTER_STOP)
+
+
+func _on_card_unfocused() -> void:
+	if _exclusive:
+		for child in _cards.get_children():
+			child.set_mouse_filter(MOUSE_FILTER_STOP)
 
 
 func _on_DropArea_dropped(card: CardInstance, source: String, on_card: CardInstance) -> void:

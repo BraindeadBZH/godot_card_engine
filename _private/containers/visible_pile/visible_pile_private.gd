@@ -20,7 +20,9 @@ func _init() -> void:
 	_grid_expand = true
 
 	# Interaction parameters
-	_interactive = false
+	_interactive = true
+	_exclusive = false
+	_last_only = true
 	_drag_enabled = true
 	_drop_enabled = true
 
@@ -62,7 +64,7 @@ func _init() -> void:
 	_transitions.out_anchor.easing = Tween.EASE_IN
 
 	# Animation
-	_anim = "none"
+	_anim = "visible_pile"
 	_adjust_mode = "focused"
 	_adjust_pos_x_mode = "disabled"
 	_adjust_pos_y_mode = "disabled"

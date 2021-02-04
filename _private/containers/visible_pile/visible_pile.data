@@ -17,7 +17,9 @@ expand=true
 
 [inter]
 
-interactive=false
+interactive=true
+exclusive=false
+last_only=true
 enabled=true
 drop_enabled=true
 
@@ -69,7 +71,7 @@ easing="in"
 
 [anim]
 
-id="none"
+id="visible_pile"
 
 [adjust]
 
