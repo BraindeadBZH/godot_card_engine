@@ -24,7 +24,6 @@ var _adjusted_trans: CardTransform = null
 var _adjust_on_focused: bool = false
 var _adjust_on_activated: bool = false
 var _transitions: CardTransitions = CardTransitions.new()
-var _transi_position: Vector2 = Vector2(0, 0) setget _set_transi_position
 var _remove_flag: bool = false
 var _state = CardState.NONE
 var _rng: PseudoRng = PseudoRng.new()
@@ -57,7 +56,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and _is_dragged and _follow_mouse:
-		_set_transi_position(position + event.relative)
+		position += event.relative
 
 
 func set_instance(inst: CardInstance) -> void:
@@ -92,7 +91,7 @@ func set_root_trans(transform: CardTransform) -> void:
 func set_root_trans_immediate(transform: CardTransform) -> void:
 	_root_trans = transform
 
-	_set_transi_position(transform.pos)
+	position = transform.pos
 	scale = transform.scale
 	rotation = transform.rot
 
@@ -216,11 +215,6 @@ func _update_visibility() -> void:
 		_back.visible = true
 
 
-func _set_transi_position(pos: Vector2) -> void:
-	position = pos
-	emit_signal("transform_changed")
-
-
 func _transition(from: CardTransform, to: CardTransform) -> void:
 	var duration: float = _transitions.layout.duration
 	var type: int = _transitions.layout.type
@@ -246,14 +240,14 @@ func _transition(from: CardTransform, to: CardTransform) -> void:
 		type = _transitions.out_anchor.type
 		easing = _transitions.out_anchor.easing
 
-	_set_transi_position(from.pos)
+	position = from.pos
 	scale = from.scale
 	rotation = from.rot
 
 	_transi.remove_all()
 
 	_transi.interpolate_property(
-		self, "_transi_position", from.pos, to.pos, duration, type, easing)
+		self, "position", from.pos, to.pos, duration, type, easing)
 
 	_transi.interpolate_property(
 		self, "scale", from.scale, to.scale, duration, type, easing)
@@ -688,7 +682,7 @@ func _on_TransiMerge_timeout() -> void:
 		if _transitions.in_anchor.enabled:
 			_transition(null, _merge_trans)
 		else:
-			_set_transi_position(_merge_trans.pos)
+			position = _merge_trans.pos
 			scale = _merge_trans.scale
 			rotation = _merge_trans.rot
 	else:

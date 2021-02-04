@@ -181,8 +181,6 @@ func _update_container() -> void:
 		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
 
 		if _board != null:
-			_board.register_card(self, visual_inst)
-
 			var last_trans := _board.get_last_known_transform(card.ref())
 			if last_trans != null:
 				last_trans = _map_to(last_trans)
