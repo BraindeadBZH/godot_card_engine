@@ -701,14 +701,6 @@ func _on_TransiMerge_timeout() -> void:
 	_change_anim("idle")
 
 
-func _on_Transitions_tween_started(object: Object, key: NodePath) -> void:
-	pass
-
-
-func _on_Transitions_tween_step(object: Object, key: NodePath, elapsed: float, value: Object) -> void:
-	pass
-
-
 func _on_Transitions_tween_all_completed() -> void:
 	if _remove_flag:
 		emit_signal("need_removal")

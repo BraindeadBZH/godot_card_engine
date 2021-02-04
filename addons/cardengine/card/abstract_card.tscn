@@ -45,5 +45,3 @@ autostart = true
 [connection signal="timeout" from="TransiMerge" to="." method="_on_TransiMerge_timeout"]
 [connection signal="timeout" from="EventMerge" to="." method="_on_EventMerge_timeout"]
 [connection signal="tween_all_completed" from="Transitions" to="." method="_on_Transitions_tween_all_completed"]
-[connection signal="tween_started" from="Transitions" to="." method="_on_Transitions_tween_started"]
-[connection signal="tween_step" from="Transitions" to="." method="_on_Transitions_tween_step"]
