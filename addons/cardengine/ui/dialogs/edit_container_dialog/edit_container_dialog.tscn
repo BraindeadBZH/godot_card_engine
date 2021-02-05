@@ -35,7 +35,6 @@ __meta__ = {
 }
 
 [node name="Layout" type="Control" parent="MainLayout/MainTabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -373,7 +372,7 @@ margin_left = 90.0
 margin_top = 44.0
 margin_right = 502.0
 margin_bottom = 84.0
-hint_tooltip = "If ON, the container can be used as a source for drag and drop action."
+hint_tooltip = "If ON, the container can be used as a source for drag and drop actions."
 size_flags_horizontal = 3
 
 [node name="DropTitle" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
@@ -387,7 +386,7 @@ margin_left = 90.0
 margin_top = 88.0
 margin_right = 502.0
 margin_bottom = 128.0
-hint_tooltip = "If ON, the container can be used as a source for drag and drop action."
+hint_tooltip = "If ON, the container can be used as a receiver for drag and drop actions."
 size_flags_horizontal = 3
 
 [node name="FineTuning" type="Control" parent="MainLayout/MainTabs"]
