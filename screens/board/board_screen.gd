@@ -49,7 +49,6 @@ func _on_Pile1_card_dropped(card: CardInstance, source: String, _on_card: CardIn
 func _on_Pile2_card_dropped(card: CardInstance, source: String, _on_card: CardInstance) -> void:
 	if source == "hand":
 		_hand_store.play_card(card.ref(), _pile2_store)
-		_hand_store.remove_card(card.ref())
 	elif source == "pile_1":
 		# warning-ignore:return_value_discarded
 		_pile1_store.move_card(card.ref(), _pile2_store)
