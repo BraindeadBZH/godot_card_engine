@@ -1,6 +1,6 @@
 extends AbstractScreen
 
-var _hand_store: CardPile = CardPile.new()
+var _hand_store: CardHand = CardHand.new()
 var _pile1_store: CardPile = CardPile.new()
 var _pile2_store: CardPile = CardPile.new()
 var _pile3_store: CardPile = CardPile.new()
@@ -15,7 +15,6 @@ func _ready() -> void:
 	var db = CardEngine.db().get_database("main")
 
 	_hand_store.populate_all(db)
-	_hand_store.shuffle()
 	_hand_store.keep(8)
 
 	_hand.set_store(_hand_store)
@@ -42,37 +41,37 @@ func _on_MenuButton_pressed() -> void:
 
 func _on_Pile1_card_dropped(card: CardInstance, source: String, _on_card: CardInstance) -> void:
 	if source == "hand":
-		_hand_store.remove_card(card.ref())
+		_hand_store.play_card(card.ref(), _pile1_store)
 	else:
 		return
-	_pile1_store.add_card(card)
 
 
 func _on_Pile2_card_dropped(card: CardInstance, source: String, _on_card: CardInstance) -> void:
 	if source == "hand":
+		_hand_store.play_card(card.ref(), _pile2_store)
 		_hand_store.remove_card(card.ref())
 	elif source == "pile_1":
-		_pile1_store.remove_card(card.ref())
+		# warning-ignore:return_value_discarded
+		_pile1_store.move_card(card.ref(), _pile2_store)
 	else:
 		return
-	_pile2_store.add_card(card)
 
 
 func _on_Pile3_card_dropped(card: CardInstance, source: String, _on_card: CardInstance) -> void:
 	if source == "hand":
-		_hand_store.remove_card(card.ref())
+		_hand_store.play_card(card.ref(), _pile3_store)
 	elif source == "pile_1":
-		_pile1_store.remove_card(card.ref())
+		# warning-ignore:return_value_discarded
+		_pile1_store.move_card(card.ref(), _pile3_store)
 	else:
 		return
-	_pile3_store.add_card(card)
 
 
 func _on_DiscardBtn_pressed() -> void:
 	var card := _hand_store.get_last()
 	if card != null:
-		_hand_store.remove_card(card.ref())
-		_pile3_store.add_card(card)
+		# warning-ignore:return_value_discarded
+		_hand_store.move_card(card.ref(), _pile3_store)
 
 
 func _on_ShuffleBtn_pressed() -> void:
@@ -82,5 +81,5 @@ func _on_ShuffleBtn_pressed() -> void:
 func _on_DrawBtn_pressed() -> void:
 	var card := _pile3_store.get_last()
 	if card != null:
-		_pile3_store.remove_card(card.ref())
-		_hand_store.add_card(card)
+		# warning-ignore:return_value_discarded
+		_pile3_store.move_card(card.ref(), _hand_store)
