@@ -328,12 +328,14 @@ func move_card(ref: int, to: AbstractStore) -> CardInstance:
 
 	if index >= 0:
 		var card = _cards[index]
-		to.add_card(card)
 		_cards.remove(index)
 		_update_stats()
 		_update_filtered()
 		emit_signal("card_removed", index)
 		emit_signal("changed")
+
+		to.add_card(card)
+
 		return card
 
 	return null
