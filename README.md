@@ -23,14 +23,16 @@ Currently under development, do not expect it to work.
 * Creating, modifying and deleting containers
 * Containers layouting as a grid or along a path
 * Fine tuning containers layout with linear/symmetric interpolation or random position, scale and rotation
-* Container transition animation (card re-order, card added, card removed)
-* Container event animation (idle, focused)
+* Container transition animation (layouting, card added, card removed)
+* Container event animation (idle, un/focused, de/activated)
 * Animation editor
 * Drag and drop support
 * Card effects
 * Filters on DropArea
 * Saving store interface
 * Container to container drag and drop
+* Container to card drag and drop
+* Board widget
 
 
 ## What is not implemented
