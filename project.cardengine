@@ -1,11 +1,11 @@
 config_version=1
 
 [folders]
-databases="res://_private/databases/"
-containers="res://containers/"
-containers_private="res://_private/containers/"
-container_tpl="res://addons/cardengine/container/templates/"
-animations="res://_private/animations/"
-effects="res://effects/"
-effects_private="res://_private/effects/"
-effects_tpl="res://addons/cardengine/effect/templates/"
+databases="res://_private/databases"
+containers="res://containers"
+containers_private="res://_private/containers"
+container_tpl="res://addons/cardengine/container/templates"
+animations="res://_private/animations"
+effects="res://effects"
+effects_private="res://_private/effects"
+effects_tpl="res://addons/cardengine/effect/templates"

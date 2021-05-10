@@ -4,6 +4,7 @@ extends AbstractManager
 
 signal changed()
 
+const FORMAT_FILE_PATH = "%s/%s"
 const FORMAT_DB_PATH = "%s/%s.data"
 
 var _folder: String = ""
@@ -129,7 +130,7 @@ func _write_database(db: CardDatabase):
 
 
 func _read_database(filename: String) -> CardDatabase:
-	var path = _folder + filename
+	var path = FORMAT_FILE_PATH % [_folder, filename]
 	var file = ConfigFile.new()
 
 	var err = file.load(path)

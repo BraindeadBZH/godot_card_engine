@@ -146,6 +146,7 @@ margin_left = -175.0
 margin_right = 0.0
 rect_min_size = Vector2( 0, 0 )
 button_text = "MENU"
+
 [connection signal="card_dropped" from="Board/Pile1" to="." method="_on_Pile1_card_dropped"]
 [connection signal="card_dropped" from="Board/Pile2" to="." method="_on_Pile2_card_dropped"]
 [connection signal="card_dropped" from="Board/Pile3" to="." method="_on_Pile3_card_dropped"]

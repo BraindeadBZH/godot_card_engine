@@ -337,6 +337,7 @@ margin_right = 220.0
 margin_bottom = 504.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
 [connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class" to="." method="_on_Class_item_selected"]
 [connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity" to="." method="_on_Rarity_item_selected"]
 [connection signal="item_selected" from="TitleBg/TitleLayout/ValuesLayout/Values" to="." method="_on_Values_item_selected"]

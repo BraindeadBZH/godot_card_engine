@@ -4,6 +4,7 @@ extends AbstractManager
 
 signal changed()
 
+const FORMAT_FILE_PATH = "%s/%s"
 const FORMAT_ANIM_PATH = "%s/%s.data"
 
 var _folder: String = ""
@@ -53,7 +54,7 @@ func load_animations(anim_folder: String) -> void:
 		var filename = dir.get_next()
 		while filename != "":
 			if Utils.is_anim_file(filename):
-				var anim = _read_animation(_folder + filename)
+				var anim = _read_animation(FORMAT_FILE_PATH % [_folder, filename])
 				_animations[anim.id] = anim
 			filename = dir.get_next()
 		dir.list_dir_end()

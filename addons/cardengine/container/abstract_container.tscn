@@ -22,5 +22,6 @@ mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="resized" from="." to="." method="_on_AbstractContainer_resized"]
 [connection signal="dropped" from="DropArea" to="." method="_on_DropArea_dropped"]
