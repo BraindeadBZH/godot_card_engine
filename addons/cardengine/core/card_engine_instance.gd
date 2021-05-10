@@ -4,7 +4,6 @@ extends Node
 
 const CONF_FILE_PATH = "res://project.cardengine"
 
-var _plugin: EditorPlugin = null
 var _conf: ConfigFile = ConfigFile.new()
 var _general: GeneralManager = GeneralManager.new()
 var _databases: DatabaseManager = DatabaseManager.new()
@@ -13,9 +12,7 @@ var _animations: AnimationManager = AnimationManager.new()
 var _effects: EffectManager = EffectManager.new()
 
 
-func setup(plugin: EditorPlugin = null) -> void:
-	_plugin = plugin
-
+func setup() -> void:
 	if _conf.load(CONF_FILE_PATH) != OK:
 		printerr("Could not load CardEngine config file")
 	else:
@@ -60,16 +57,3 @@ func anim() -> AnimationManager:
 
 func fx() -> EffectManager:
 	return _effects
-
-
-func scan_for_new_files() -> void:
-	if _plugin != null:
-		_plugin.get_editor_interface().get_resource_filesystem().scan()
-
-
-func open_for_edit(res: Resource) -> void:
-	_plugin.get_editor_interface().edit_resource(res)
-
-
-func open_scene(path: String) -> void:
-	_plugin.get_editor_interface().open_scene_from_path(path)
