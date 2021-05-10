@@ -412,7 +412,7 @@ window/size/height=720
 
 [editor_plugins]
 
-enabled=PoolStringArray( "cardengine", "godot-plugin-refresher" )
+enabled=PoolStringArray( "res://addons/cardengine/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
 
 [gui]
 
