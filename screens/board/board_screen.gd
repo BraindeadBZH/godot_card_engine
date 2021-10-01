@@ -5,10 +5,10 @@ var _pile1_store: CardPile = CardPile.new()
 var _pile2_store: CardPile = CardPile.new()
 var _pile3_store: CardPile = CardPile.new()
 
-onready var _hand = $Board/Hand
-onready var _pile1 = $Board/Pile1
-onready var _pile2 = $Board/Pile2
-onready var _pile3 = $Board/Pile3
+@onready var _hand = $Board/Hand
+@onready var _pile1 = $Board/Pile1
+@onready var _pile2 = $Board/Pile2
+@onready var _pile3 = $Board/Pile3
 
 
 func _ready() -> void:

@@ -1,19 +1,19 @@
-tool
+@tool
 class_name ContainersUi
 extends Control
 
 var _main_ui: CardEngineUI = null
 var _selected_cont: int = -1
 
-onready var _manager = CardEngine.cont()
-onready var _cont_list = $ContainersLayout/ContainerList
-onready var _edit_btn = $ContainersLayout/Toolbar/EditBtn
-onready var _open_btn = $ContainersLayout/Toolbar/OpenBtn
-onready var _delete_btn = $ContainersLayout/Toolbar/DeleteBtn
+@onready var _manager = CardEngine.cont()
+@onready var _cont_list = $ContainersLayout/ContainerList
+@onready var _edit_btn = $ContainersLayout/Toolbar/EditBtn
+@onready var _open_btn = $ContainersLayout/Toolbar/OpenBtn
+@onready var _delete_btn = $ContainersLayout/Toolbar/DeleteBtn
 
 
 func _ready():
-	_manager.connect("changed", self, "_on_Containers_changed")
+	_manager.connect("changed", Callable(self, "_on_Containers_changed"))
 
 
 func set_main_ui(ui: CardEngineUI) -> void:
@@ -21,10 +21,12 @@ func set_main_ui(ui: CardEngineUI) -> void:
 
 
 func delete_container() -> void:
-	if yield():
-		_manager.delete_container(
-				_manager.get_container(
-						_cont_list.get_item_metadata(_selected_cont)))
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	_manager.delete_container(
+	#			_manager.get_container(
+	#					_cont_list.get_item_metadata(_selected_cont)))
 
 
 func _on_Containers_changed() -> void:
@@ -56,7 +58,7 @@ func _on_OpenBtn_pressed() -> void:
 
 func _on_DeleteBtn_pressed() -> void:
 	_main_ui.show_confirmation_dialog(
-			"Delete container", funcref(self, "delete_container"))
+			"Delete container", Callable(self, "delete_container"))
 
 
 func _on_ContainerList_item_selected(index) -> void:

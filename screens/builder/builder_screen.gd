@@ -7,23 +7,23 @@ var _selected_rarity: String = "none"
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
-onready var _scroll = $BuilderLayout/LibraryBg/LibraryScroll
-onready var _container = $BuilderLayout/LibraryBg/LibraryScroll/LibraryContainer
-onready var _class = $TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class
-onready var _rarity = $TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity
-onready var _values = $TitleBg/TitleLayout/ValuesLayout/Values
-onready var _comp_op = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonOperator
-onready var _comp_val = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonValue
-onready var _texts = $TitleBg/TitleLayout/TextsLayout/Texts
-onready var _contains = $TitleBg/TitleLayout/TextsLayout/Contains
-onready var _rarity_sort = $TitleBg/TitleLayout/SortLayout/RaritySort
-onready var _mana_sort = $TitleBg/TitleLayout/SortLayout/ManaSort
-onready var _name_sort = $TitleBg/TitleLayout/SortLayout/NameSort
-onready var _deck_list = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll/DeckList
-onready var _deck_select = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSelect
-onready var _save_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/SaveBtn
-onready var _deck_name = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/DeckName
-onready var _use_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/UseBtn
+@onready var _scroll = $BuilderLayout/LibraryBg/LibraryScroll
+@onready var _container = $BuilderLayout/LibraryBg/LibraryScroll/LibraryContainer
+@onready var _class = $TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class
+@onready var _rarity = $TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity
+@onready var _values = $TitleBg/TitleLayout/ValuesLayout/Values
+@onready var _comp_op = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonOperator
+@onready var _comp_val = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonValue
+@onready var _texts = $TitleBg/TitleLayout/TextsLayout/Texts
+@onready var _contains = $TitleBg/TitleLayout/TextsLayout/Contains
+@onready var _rarity_sort = $TitleBg/TitleLayout/SortLayout/RaritySort
+@onready var _mana_sort = $TitleBg/TitleLayout/SortLayout/ManaSort
+@onready var _name_sort = $TitleBg/TitleLayout/SortLayout/NameSort
+@onready var _deck_list = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll/DeckList
+@onready var _deck_select = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSelect
+@onready var _save_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/SaveBtn
+@onready var _deck_name = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/DeckName
+@onready var _use_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/UseBtn
 
 
 func _ready() -> void:
@@ -35,7 +35,7 @@ func _ready() -> void:
 	_update_deck_select()
 
 	# warning-ignore:return_value_discarded
-	_deck.connect("changed", self, "_update_use_btn")
+	_deck.connect("changed", Callable(self, "_update_use_btn"))
 
 
 func _apply_filters() -> void:
@@ -78,7 +78,7 @@ func _apply_filters() -> void:
 	if _name_sort.pressed:
 		sorting["text:name"] = true
 
-	if not sorting.empty():
+	if not sorting.is_empty():
 		_store.sort(sorting)
 
 	if _store.count() > 0:
@@ -174,11 +174,11 @@ func _update_deck_list() -> void:
 		btn.clip_text = true
 		btn.rect_min_size = Vector2(100, 30)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		btn.connect("pressed", self, "_on_DeckCard_pressed", [card.data().id])
+		btn.connect("pressed", Callable(self, "_on_DeckCard_pressed"), [card.data().id])
 		btn.connect(
-			"mouse_entered", self, "_change_btn_text",
+			"mouse_entered", Callable(self, "_change_btn_text"),
 			[btn, "Remove 1 %s" % card.data().get_text("name")])
-		btn.connect("mouse_exited", self, "_change_btn_text", [btn, btn.text])
+		btn.connect("mouse_exited", Callable(self, "_change_btn_text"), [btn, btn.text])
 
 		lbl.text = "%d x" % count
 

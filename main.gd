@@ -1,13 +1,13 @@
 extends Node
 
-var _screens = {
+var _screens : Dictionary = {
 	"menu": preload("res://screens/menu/menu_screen.tscn"),
 	"builder": preload("res://screens/builder/builder_screen.tscn"),
 	"game": preload("res://screens/game/game_screen.tscn"),
 	"board": preload("res://screens/board/board_screen.tscn")
 }
 
-onready var _screen_layer = $ScreenLayer
+@onready var _screen_layer = $ScreenLayer
 
 
 func _ready():
@@ -30,6 +30,7 @@ func change_screen(screen_name: String) -> void:
 		_screen_layer.remove_child(child)
 		child.queue_free()
 
-	var screen = _screens[screen_name].instance()
-	screen.connect("next_screen", self, "change_screen")
+# warning-ignore:unsafe_cast
+	var screen := (_screens[screen_name] as PackedScene).instantiate()
+	screen.connect("next_screen", Callable(self, "change_screen"))
 	_screen_layer.add_child(screen)

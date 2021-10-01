@@ -1,6 +1,6 @@
 extends AbstractCard
 
-onready var _name = $AnimContainer/Front/NameBackground/Name
+@onready var _name = $AnimContainer/Front/NameBackground/Name
 
 
 func _update_data(data: CardData) -> void:

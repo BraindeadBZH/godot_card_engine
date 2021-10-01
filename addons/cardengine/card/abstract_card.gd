@@ -1,4 +1,4 @@
-tool
+@tool
 class_name AbstractCard
 extends Node2D
 
@@ -13,7 +13,7 @@ signal unfocused()
 enum CardSide {FRONT, BACK}
 enum CardState {NONE, IDLE, FOCUSED, ACTIVE}
 
-export(Vector2) var size: Vector2 = Vector2(0.0, 0.0)
+@export var size: Vector2 = Vector2(0.0, 0.0)
 
 var _container: String = ""
 var _inst: CardInstance = null
@@ -40,19 +40,19 @@ var _is_dragged: bool = false
 var _follow_mouse: bool = false
 var _waiting_card_return: bool = false
 
-onready var _cont = $AnimContainer
-onready var _placeholder = $AnimContainer/Placeholder
-onready var _front = $AnimContainer/Front
-onready var _back  = $AnimContainer/Back
-onready var _transi = $Transitions
-onready var _transi_merge = $TransiMerge
-onready var _anim_player = $AnimationPlayer
-onready var _event_merge = $EventMerge
-onready var _mouse = $AnimContainer/MouseArea
+@onready var _cont = $AnimContainer
+@onready var _placeholder = $AnimContainer/Placeholder
+@onready var _front = $AnimContainer/Front
+@onready var _back  = $AnimContainer/Back
+@onready var _transi = $Transitions
+@onready var _transi_merge = $TransiMerge
+@onready var _anim_player = $AnimationPlayer
+@onready var _event_merge = $EventMerge
+@onready var _mouse = $AnimContainer/MouseArea
 
 
 func _ready() -> void:
-	CardEngine.general().connect("drag_stopped", self, "_on_drag_stopped")
+	CardEngine.general().connect("drag_stopped", Callable(self, "_on_drag_stopped"))
 
 
 func _input(event: InputEvent) -> void:
@@ -132,7 +132,7 @@ func side() -> int:
 	return _side
 
 
-func set_side(side_up: int) -> void:
+func set_side(side_up: CardSide) -> void:
 	if _side == side_up:
 		return
 
@@ -224,10 +224,12 @@ func _update_visibility() -> void:
 		_back.visible = true
 
 
-func _transition(from: CardTransform, to: CardTransform) -> void:
+func _transition(from_in: CardTransform, to_in: CardTransform) -> void:
 	var duration: float = _transitions.layout.duration
 	var type: int = _transitions.layout.type
 	var easing: int = _transitions.layout.easing
+	var from := from_in
+	var to := to_in
 
 	if from == null:
 		from = CardTransform.new()
@@ -438,30 +440,31 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 func _precompute_trans() -> void:
 	if _anim == null:
 		return
-
-	_trans_focused.pos = _setup_pos_sequence(
-		_anim.focused_animation().position_sequence(),
-		_anim_player)
-
-	_trans_focused.scale = _setup_scale_sequence(
-		_anim.focused_animation().scale_sequence(),
-		_anim_player)
-
-	_trans_focused.rot = _setup_rotation_sequence(
-		_anim.focused_animation().rotation_sequence(),
-		_anim_player)
-
-	_trans_activated.pos = _setup_pos_sequence(
-		_anim.activated_animation().position_sequence(),
-		_anim_player)
-
-	_trans_activated.scale = _setup_scale_sequence(
-		_anim.activated_animation().scale_sequence(),
-		_anim_player)
-
-	_trans_activated.rot = _setup_rotation_sequence(
-		_anim.activated_animation().rotation_sequence(),
-		_anim_player)
+	
+	# TODO: Move to the new Tween class
+#	_trans_focused.pos = _setup_pos_sequence(
+#		_anim.focused_animation().position_sequence(),
+#		_anim_player)
+#
+#	_trans_focused.scale = _setup_scale_sequence(
+#		_anim.focused_animation().scale_sequence(),
+#		_anim_player)
+#
+#	_trans_focused.rot = _setup_rotation_sequence(
+#		_anim.focused_animation().rotation_sequence(),
+#		_anim_player)
+#
+#	_trans_activated.pos = _setup_pos_sequence(
+#		_anim.activated_animation().position_sequence(),
+#		_anim_player)
+#
+#	_trans_activated.scale = _setup_scale_sequence(
+#		_anim.activated_animation().scale_sequence(),
+#		_anim_player)
+#
+#	_trans_activated.rot = _setup_rotation_sequence(
+#		_anim.activated_animation().rotation_sequence(),
+#		_anim_player)
 
 
 func _change_state(new_state: int) -> void:
@@ -488,17 +491,18 @@ func _change_anim(anim: String) -> void:
 			_cont.scale = Vector2(1.0, 1.0)
 			_cont.rotation = 0.0
 
-			_setup_pos_sequence(
-				_anim.idle_loop().position_sequence(),
-				_anim_player)
-
-			_setup_scale_sequence(
-				_anim.idle_loop().scale_sequence(),
-				_anim_player)
-
-			_setup_rotation_sequence(
-				_anim.idle_loop().rotation_sequence(),
-				_anim_player)
+			# TODO: Move to the new Tween class
+#			_setup_pos_sequence(
+#				_anim.idle_loop().position_sequence(),
+#				_anim_player)
+#
+#			_setup_scale_sequence(
+#				_anim.idle_loop().scale_sequence(),
+#				_anim_player)
+#
+#			_setup_rotation_sequence(
+#				_anim.idle_loop().rotation_sequence(),
+#				_anim_player)
 
 		"focused":
 			if _adjust_on_focused and _adjusted_trans != null:
@@ -508,17 +512,18 @@ func _change_anim(anim: String) -> void:
 			_cont.scale = Vector2(1.0, 1.0)
 			_cont.rotation = 0.0
 
-			_setup_pos_sequence(
-				_anim.focused_animation().position_sequence(),
-				_anim_player)
-
-			_setup_scale_sequence(
-				_anim.focused_animation().scale_sequence(),
-				_anim_player)
-
-			_setup_rotation_sequence(
-				_anim.focused_animation().rotation_sequence(),
-				_anim_player)
+			# TODO: Move to the new Tween class
+#			_setup_pos_sequence(
+#				_anim.focused_animation().position_sequence(),
+#				_anim_player)
+#
+#			_setup_scale_sequence(
+#				_anim.focused_animation().scale_sequence(),
+#				_anim_player)
+#
+#			_setup_rotation_sequence(
+#				_anim.focused_animation().rotation_sequence(),
+#				_anim_player)
 
 		"activated":
 			if _adjust_on_activated and _adjusted_trans != null:
@@ -528,17 +533,18 @@ func _change_anim(anim: String) -> void:
 			_cont.scale = _trans_focused.scale
 			_cont.rotation = _trans_focused.rot
 
-			_setup_pos_sequence(
-				_anim.activated_animation().position_sequence(),
-				_anim_player)
-
-			_setup_scale_sequence(
-				_anim.activated_animation().scale_sequence(),
-				_anim_player)
-
-			_setup_rotation_sequence(
-				_anim.activated_animation().rotation_sequence(),
-				_anim_player)
+			# TODO: Move to the new Tween class
+#			_setup_pos_sequence(
+#				_anim.activated_animation().position_sequence(),
+#				_anim_player)
+#
+#			_setup_scale_sequence(
+#				_anim.activated_animation().scale_sequence(),
+#				_anim_player)
+#
+#			_setup_rotation_sequence(
+#				_anim.activated_animation().rotation_sequence(),
+#				_anim_player)
 
 		"deactivated":
 			if _adjust_on_activated and _adjusted_trans != null:
@@ -548,17 +554,18 @@ func _change_anim(anim: String) -> void:
 			_cont.scale = _trans_activated.scale
 			_cont.rotation = _trans_activated.rot
 
-			_setup_pos_sequence(
-				_anim.deactivated_animation().position_sequence(),
-				_anim_player)
-
-			_setup_scale_sequence(
-				_anim.deactivated_animation().scale_sequence(),
-				_anim_player)
-
-			_setup_rotation_sequence(
-				_anim.deactivated_animation().rotation_sequence(),
-				_anim_player)
+			# TODO: Move to the new Tween class
+#			_setup_pos_sequence(
+#				_anim.deactivated_animation().position_sequence(),
+#				_anim_player)
+#
+#			_setup_scale_sequence(
+#				_anim.deactivated_animation().scale_sequence(),
+#				_anim_player)
+#
+#			_setup_rotation_sequence(
+#				_anim.deactivated_animation().rotation_sequence(),
+#				_anim_player)
 
 		"unfocused":
 			if _adjust_on_focused and _adjusted_trans != null:
@@ -568,17 +575,18 @@ func _change_anim(anim: String) -> void:
 			_cont.scale = _trans_focused.scale
 			_cont.rotation = _trans_focused.rot
 
-			_setup_pos_sequence(
-				_anim.unfocused_animation().position_sequence(),
-				_anim_player)
-
-			_setup_scale_sequence(
-				_anim.unfocused_animation().scale_sequence(),
-				_anim_player)
-
-			_setup_rotation_sequence(
-				_anim.unfocused_animation().rotation_sequence(),
-				_anim_player)
+			# TODO: Move to the new Tween class
+#			_setup_pos_sequence(
+#				_anim.unfocused_animation().position_sequence(),
+#				_anim_player)
+#
+#			_setup_scale_sequence(
+#				_anim.unfocused_animation().scale_sequence(),
+#				_anim_player)
+#
+#			_setup_rotation_sequence(
+#				_anim.unfocused_animation().rotation_sequence(),
+#				_anim_player)
 
 	_anim_player.start()
 
@@ -606,7 +614,7 @@ func _merge_events() -> void:
 
 			if need_merge:
 				merged.pop_back()
-				if not merged.empty():
+				if not merged.is_empty():
 					prev = merged.back()
 				else:
 					prev = ""
@@ -620,7 +628,7 @@ func _merge_events() -> void:
 func _on_EventMerge_timeout() -> void:
 	_merge_events()
 
-	if _event_queue.empty() or _interaction_paused:
+	if _event_queue.is_empty() or _interaction_paused:
 		return
 
 	var next = _event_queue.front()

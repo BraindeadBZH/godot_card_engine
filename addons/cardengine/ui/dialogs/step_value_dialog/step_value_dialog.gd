@@ -1,20 +1,20 @@
-tool
+@tool
 extends AbstractFormDialog
 
 var _seq: AnimationSequence = null
 var _index: int = -1
 
-onready var _mode = $MainLayout/Form/Mode
-onready var _num_val_lbl = $MainLayout/Form/NumValueLbl
-onready var _num_val = $MainLayout/Form/NumValue
-onready var _vec_val_lbl = $MainLayout/Form/VecValueLbl
-onready var _vec_val_x = $MainLayout/Form/VecValueLayout/VecValueX
-onready var _vec_val_y = $MainLayout/Form/VecValueLayout/VecValueY
-onready var _num_range_lbl = $MainLayout/Form/NumRangeLbl
-onready var _num_range = $MainLayout/Form/NumRange
-onready var _vec_range_lbl = $MainLayout/Form/VecRangeLbl
-onready var _vec_range_x = $MainLayout/Form/VecRangeLayout/VecRangeX
-onready var _vec_range_y = $MainLayout/Form/VecRangeLayout/VecRangeY
+@onready var _mode = $MainLayout/Form/Mode
+@onready var _num_val_lbl = $MainLayout/Form/NumValueLbl
+@onready var _num_val = $MainLayout/Form/NumValue
+@onready var _vec_val_lbl = $MainLayout/Form/VecValueLbl
+@onready var _vec_val_x = $MainLayout/Form/VecValueLayout/VecValueX
+@onready var _vec_val_y = $MainLayout/Form/VecValueLayout/VecValueY
+@onready var _num_range_lbl = $MainLayout/Form/NumRangeLbl
+@onready var _num_range = $MainLayout/Form/NumRange
+@onready var _vec_range_lbl = $MainLayout/Form/VecRangeLbl
+@onready var _vec_range_x = $MainLayout/Form/VecRangeLayout/VecRangeX
+@onready var _vec_range_y = $MainLayout/Form/VecRangeLayout/VecRangeY
 
 
 func _ready():

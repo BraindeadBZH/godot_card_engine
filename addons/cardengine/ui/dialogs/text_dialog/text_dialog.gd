@@ -1,8 +1,8 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _text_id = $MainLayout/Form/TextId
-onready var _text = $MainLayout/Form/Text
+@onready var _text_id = $MainLayout/Form/TextId
+@onready var _text = $MainLayout/Form/Text
 
 
 func _ready():

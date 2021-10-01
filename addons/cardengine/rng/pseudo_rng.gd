@@ -1,5 +1,5 @@
 class_name PseudoRng
-extends Reference
+extends RefCounted
 # Implements the Mersenne Twister algorithm (adapted from Python)
 # It allows to have multiple self-contained pseudo-random generator
 # running at the same time independently

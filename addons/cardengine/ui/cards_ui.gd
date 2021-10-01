@@ -1,4 +1,4 @@
-tool
+@tool
 class_name CardsUi
 extends Control
 
@@ -10,23 +10,23 @@ var _selected_val: int = -1
 var _selected_text: int = -1
 var _selected_db: String = ""
 
-onready var _manager = CardEngine.db()
-onready var _db_select = $CardLayout/ToolLayout/DatabaseSelect
-onready var _save_btn = $CardLayout/ToolLayout/SaveBtn
-onready var _load_btn = $CardLayout/ToolLayout/LoadBtn
-onready var _success_lbl = $CardLayout/ToolLayout/SuccesLbl
-onready var _error_lbl = $CardLayout/ToolLayout/ErrorLbl
-onready var _card_id = $CardLayout/ToolLayout/CardId
-onready var _categ_list = $CardLayout/DataLayout/CategList
-onready var _value_list = $CardLayout/DataLayout/ValuesList
-onready var _text_list = $CardLayout/DataLayout/TextsList
-onready var _del_categ_btn = $CardLayout/DataLayout/CategToolLayout/DelCategBtn
-onready var _del_value_btn = $CardLayout/DataLayout/ValuesToolLayout/DelValBtn
-onready var _del_text_btn = $CardLayout/DataLayout/TextsToolLayout/DelTxtBtn
+@onready var _manager = CardEngine.db()
+@onready var _db_select = $CardLayout/ToolLayout/DatabaseSelect
+@onready var _save_btn = $CardLayout/ToolLayout/SaveBtn
+@onready var _load_btn = $CardLayout/ToolLayout/LoadBtn
+@onready var _success_lbl = $CardLayout/ToolLayout/SuccesLbl
+@onready var _error_lbl = $CardLayout/ToolLayout/ErrorLbl
+@onready var _card_id = $CardLayout/ToolLayout/CardId
+@onready var _categ_list = $CardLayout/DataLayout/CategList
+@onready var _value_list = $CardLayout/DataLayout/ValuesList
+@onready var _text_list = $CardLayout/DataLayout/TextsList
+@onready var _del_categ_btn = $CardLayout/DataLayout/CategToolLayout/DelCategBtn
+@onready var _del_value_btn = $CardLayout/DataLayout/ValuesToolLayout/DelValBtn
+@onready var _del_text_btn = $CardLayout/DataLayout/TextsToolLayout/DelTxtBtn
 
 
 func _ready():
-	_manager.connect("changed", self, "_on_Databases_changed")
+	_manager.connect("changed", Callable(self, "_on_Databases_changed"))
 
 
 func set_main_ui(ui: CardEngineUI) -> void:
@@ -86,15 +86,19 @@ func save_card(id: String, db: CardDatabase) -> void:
 
 
 func overwrite_card(id: String, db: CardDatabase) -> void:
-	if yield():
-		save_card(id, db)
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	save_card(id, db)
 
 
 func delete_card(id: String, db_id: String) -> void:
-	if yield():
-		var db = _manager.get_database(db_id)
-		db.remove_card(id)
-		_manager.update_database(db)
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	var db = _manager.get_database(db_id)
+	#	db.remove_card(id)
+	#	_manager.update_database(db)
 
 
 func append_category(meta_categ: String, categ: String) -> void:
@@ -110,9 +114,11 @@ func replace_category(idx: int, meta_categ: String, categ: String) -> void:
 
 
 func delete_category(idx: int) -> void:
-	if yield():
-		_categ_list.remove_item(idx)
-		_del_categ_btn.disabled = true
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	_categ_list.remove_item(idx)
+	#	_del_categ_btn.disabled = true
 
 
 func append_value(id: String, value: int) -> void:
@@ -126,9 +132,11 @@ func replace_value(idx: int, id: String, value: int) -> void:
 
 
 func delete_value(idx: int) -> void:
-	if yield():
-		_value_list.remove_item(idx)
-		_del_value_btn.disabled = true
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	_value_list.remove_item(idx)
+	#	_del_value_btn.disabled = true
 
 
 func append_text(id: String, text: String) -> void:
@@ -152,9 +160,11 @@ func replace_text(idx: int, id: String, text: String) -> void:
 
 
 func delete_text(idx: int) -> void:
-	if yield():
-		_text_list.remove_item(idx)
-		_del_text_btn.disabled = true
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	_text_list.remove_item(idx)
+	#	_del_text_btn.disabled = true
 
 
 func _on_Databases_changed() -> void:
@@ -191,11 +201,12 @@ func _on_SaveBtn_pressed() -> void:
 	var id = _card_id.text
 	var db = _manager.get_database(_db_select.get_selected_metadata())
 
-	if db.card_exists(id):
-		_main_ui.show_confirmation_dialog(
-				"Overwrite Card", funcref(self, "overwrite_card"), [id, db])
-	else:
-		save_card(id, db)
+	# TODO: replace yield by await
+#	if db.card_exists(id):
+#		_main_ui.show_confirmation_dialog(
+#				"Overwrite Card", Callable(self, "overwrite_card"), [id, db])
+#	else:
+#		save_card(id, db)
 
 
 func _on_LoadBtn_pressed() -> void:
@@ -209,8 +220,10 @@ func _on_AddCategBtn_pressed() -> void:
 
 
 func _on_DelCategBtn_pressed() -> void:
-	_main_ui.show_confirmation_dialog(
-			"Delete Category", funcref(self, "delete_category"), [_selected_categ])
+	# TODO: replace yield by await
+	pass
+#	_main_ui.show_confirmation_dialog(
+#			"Delete Category", Callable(self, "delete_category"), [_selected_categ])
 
 
 func _on_CategList_item_selected(index) -> void:
@@ -236,8 +249,10 @@ func _on_AddValBtn_pressed() -> void:
 
 
 func _on_DelValBtn_pressed() -> void:
-	_main_ui.show_confirmation_dialog(
-			"Delete Value", funcref(self, "delete_value"), [_selected_val])
+	# TODO: replace yield by await
+	pass
+#	_main_ui.show_confirmation_dialog(
+#			"Delete Value", Callable(self, "delete_value"), [_selected_val])
 
 
 func _on_ValuesList_item_selected(index) -> void:
@@ -263,8 +278,10 @@ func _on_AddTxtBtn_pressed() -> void:
 
 
 func _on_DelTxtBtn_pressed() -> void:
-	_main_ui.show_confirmation_dialog(
-			"Delete Text", funcref(self, "delete_text"), [_selected_text])
+	# TODO: replace yield by await
+	pass
+#	_main_ui.show_confirmation_dialog(
+#			"Delete Text", Callable(self, "delete_text"), [_selected_text])
 
 
 func _on_TextsList_item_selected(index) -> void:
@@ -293,8 +310,10 @@ func _on_EditDatabaseDialog_edit_card(card, db) -> void:
 
 
 func _on_EditDatabaseDialog_delete_card(card, db) -> void:
-	_main_ui.show_confirmation_dialog(
-			"Delete Card", funcref(self, "delete_card"), [card, db])
+	# TODO: replace yield by await
+	pass
+	#_main_ui.show_confirmation_dialog(
+	#		"Delete Card", Callable(self, "delete_card"), [card, db])
 
 
 func _on_DatabaseSelect_item_selected(index) -> void:

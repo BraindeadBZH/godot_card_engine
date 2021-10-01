@@ -1,8 +1,8 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _meta_categ = $MainLayout/Form/MetaCateg
-onready var _categ = $MainLayout/Form/Categ
+@onready var _meta_categ = $MainLayout/Form/MetaCateg
+@onready var _categ = $MainLayout/Form/Categ
 
 
 func _ready():

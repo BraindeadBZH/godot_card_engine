@@ -1,8 +1,8 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _value_id = $MainLayout/Form/ValueId
-onready var _value = $MainLayout/Form/ValueVal
+@onready var _value_id = $MainLayout/Form/ValueId
+@onready var _value = $MainLayout/Form/ValueVal
 
 
 func _ready():

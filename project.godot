@@ -8,7 +8,7 @@
 
 config_version=4
 
-_global_script_classes=[ {
+_global_script_classes=[{
 "base": "Control",
 "class": "AbstractBoard",
 "language": "GDScript",
@@ -24,12 +24,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/container/abstract_container.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "AbstractEffect",
 "language": "GDScript",
 "path": "res://addons/cardengine/effect/effect.gd"
 }, {
-"base": "WindowDialog",
+"base": "AcceptDialog",
 "class": "AbstractFormDialog",
 "language": "GDScript",
 "path": "res://addons/cardengine/ui/dialogs/abstract_form_dialog/abstract_form_dialog.gd"
@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/core/abstract_manager.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "AbstractModifier",
 "language": "GDScript",
 "path": "res://addons/cardengine/effect/modifier.gd"
@@ -49,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://screens/abstract_screen.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "AbstractStore",
 "language": "GDScript",
 "path": "res://addons/cardengine/store/abstract_store.gd"
@@ -59,12 +59,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "AnimationBlock",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation_block.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "AnimationData",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation.gd"
@@ -74,12 +74,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation_manager.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "AnimationSequence",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation_sequence.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "AnimationStep",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/animation_step.gd"
@@ -94,12 +94,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/container/board.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "CardData",
 "language": "GDScript",
 "path": "res://addons/cardengine/card/card.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "CardDatabase",
 "language": "GDScript",
 "path": "res://addons/cardengine/database/database.gd"
@@ -124,7 +124,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/store/card_hand.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "CardInstance",
 "language": "GDScript",
 "path": "res://addons/cardengine/store/card_instance.gd"
@@ -144,12 +144,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/store/card_pile.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "CardTransform",
 "language": "GDScript",
 "path": "res://addons/cardengine/card/card_transform.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "CardTransitions",
 "language": "GDScript",
 "path": "res://addons/cardengine/card/card_transitions.gd"
@@ -159,7 +159,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/ui/cards_ui.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "ContainerData",
 "language": "GDScript",
 "path": "res://addons/cardengine/container/container.gd"
@@ -189,7 +189,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/core/drop_area.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "EffectInstance",
 "language": "GDScript",
 "path": "res://addons/cardengine/effect/effect_instance.gd"
@@ -244,12 +244,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/position_sequence.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "PseudoRng",
 "language": "GDScript",
 "path": "res://addons/cardengine/rng/pseudo_rng.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "Query",
 "language": "GDScript",
 "path": "res://addons/cardengine/database/query.gd"
@@ -264,12 +264,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/scale_sequence.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "StepTransition",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/step_transition.gd"
 }, {
-"base": "Reference",
+"base": "RefCounted",
 "class": "StepValue",
 "language": "GDScript",
 "path": "res://addons/cardengine/animation/step_value.gd"
@@ -318,7 +318,7 @@ _global_script_classes=[ {
 "class": "VisiblePilePrivate",
 "language": "GDScript",
 "path": "res://_private/containers/visible_pile/visible_pile_private.gd"
-} ]
+}]
 _global_script_class_icons={
 "AbstractBoard": "",
 "AbstractCard": "",
@@ -399,11 +399,11 @@ UserStores="*res://user_data/ud_stores.gd"
 
 [debug]
 
-gdscript/warnings/unused_class_variable=true
 gdscript/warnings/unsafe_property_access=true
 gdscript/warnings/unsafe_method_access=true
 gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
+gdscript/warnings/unused_class_variable=true
 
 [display]
 
@@ -412,7 +412,7 @@ window/size/height=720
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/cardengine/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
+enabled=PackedStringArray()
 
 [gui]
 
@@ -421,6 +421,6 @@ timers/tooltip_delay_sec=0.1
 [rendering]
 
 quality/filters/anisotropic_filter_level=16
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color(0, 0, 0, 1)
 quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"

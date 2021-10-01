@@ -1,11 +1,11 @@
 class_name EffectInstance
-extends Reference
+extends RefCounted
 
 var _fx: AbstractEffect = null
 var _affected: Array = []
 
 
-func _init(effect: AbstractEffect) -> void:
+func _init(effect: AbstractEffect):
 	_fx = effect
 
 

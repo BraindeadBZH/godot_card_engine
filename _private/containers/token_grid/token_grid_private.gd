@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for TokenGrid
 # Generated automatically - DO NOT MODIFY
 
-func _init() -> void:
+func _init():
 	data_id = "token_grid"
 	data_name = "TokenGrid"
 

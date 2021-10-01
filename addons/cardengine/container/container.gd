@@ -1,6 +1,6 @@
-tool
+@tool
 class_name ContainerData
-extends Reference
+extends RefCounted
 
 var id: String = ""
 var name: String = ""
@@ -81,6 +81,6 @@ var adjust_rot_mode: String = "disabled"
 var adjust_rot: float = 0.0
 
 
-func _init(id: String, name: String) -> void:
+func _init(id: String, name: String):
 	self.id = id
 	self.name = name

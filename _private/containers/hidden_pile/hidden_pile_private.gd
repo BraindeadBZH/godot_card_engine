@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for HiddenPile
 # Generated automatically - DO NOT MODIFY
 
-func _init() -> void:
+func _init():
 	data_id = "hidden_pile"
 	data_name = "HiddenPile"
 

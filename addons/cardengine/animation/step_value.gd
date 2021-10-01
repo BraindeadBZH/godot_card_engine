@@ -1,6 +1,6 @@
-tool
+@tool
 class_name StepValue
-extends Reference
+extends RefCounted
 
 enum Mode {INITIAL, FIXED, RANDOM}
 
@@ -13,7 +13,7 @@ var vec_range: Vector2 = Vector2(0.0, 0.0)
 var num_range: float = 0.0
 
 
-func _init(m: int) -> void:
+func _init(m: int):
 	mode = m
 
 

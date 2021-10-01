@@ -1,7 +1,7 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _card_id = $MainLayout/Form/CardId
+@onready var _card_id = $MainLayout/Form/CardId
 
 var _db: String = ""
 

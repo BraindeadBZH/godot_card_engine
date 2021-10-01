@@ -10,10 +10,10 @@ enum LayoutMode {GRID, PATH}
 enum FineTuningMode {LINEAR, SYMMETRIC, RANDOM}
 enum AspectMode {KEEP, IGNORE}
 
-export(PackedScene) var card_visual: PackedScene = null
-export(PackedScene) var drag_widget: PackedScene = null
-export(NodePath) var in_anchor: NodePath = ""
-export(NodePath) var out_anchor: NodePath = ""
+@export var card_visual: PackedScene = null
+@export var drag_widget: PackedScene = null
+@export var in_anchor: NodePath = ""
+@export var out_anchor: NodePath = ""
 
 var data_id: String = ""
 var data_name: String = ""
@@ -80,9 +80,9 @@ var _adjust_scale: Vector2 = Vector2(0.0, 0.0)
 var _adjust_rot_mode: String = "disabled"
 var _adjust_rot: float = 0.0
 
-onready var _cards = $DropArea/Cards
-onready var _path = $CardPath
-onready var _drop_area = $DropArea
+@onready var _cards = $DropArea/Cards
+@onready var _path = $CardPath
+@onready var _drop_area = $DropArea
 
 
 func _ready() -> void:
@@ -95,7 +95,7 @@ func store() -> AbstractStore:
 
 func set_store(store: AbstractStore) -> void:
 	_store = store
-	_store.connect("changed", self, "_update_container")
+	_store.connect("changed", Callable(self, "_update_container"))
 	_update_container()
 
 
@@ -163,7 +163,7 @@ func _update_container() -> void:
 		if _cards.find_node(CARD_NODE_FMT % card.ref(), false, false) != null:
 			continue
 
-		var visual_inst := card_visual.instance()
+		var visual_inst = card_visual.instance()
 		if not visual_inst is AbstractCard:
 			printerr("Container visual instance must inherit AbstractCard")
 			continue
@@ -178,10 +178,10 @@ func _update_container() -> void:
 		visual_inst.set_drag_widget(drag_widget)
 		visual_inst.set_drop_area(_drop_area)
 		visual_inst.set_animation(CardEngine.anim().get_animation(_anim))
-		visual_inst.connect("need_removal", self, "_on_need_removal", [visual_inst])
-		visual_inst.connect("clicked", self, "_on_card_clicked", [visual_inst])
-		visual_inst.connect("focused", self, "_on_card_focused", [visual_inst])
-		visual_inst.connect("unfocused", self, "_on_card_unfocused")
+		visual_inst.connect("need_removal", Callable(self, "_on_need_removal"), [visual_inst])
+		visual_inst.connect("clicked", Callable(self, "_on_card_clicked"), [visual_inst])
+		visual_inst.connect("focused", Callable(self, "_on_card_focused"), [visual_inst])
+		visual_inst.connect("unfocused", Callable(self, "_on_card_unfocused"))
 
 		if _board != null:
 			var last_trans := _board.get_last_known_transform(card.ref())
@@ -354,14 +354,12 @@ func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
 		match _fine_pos_mode:
 			FineTuningMode.LINEAR:
 				if card_count > 0:
-					trans.pos += lerp(
+					trans.pos += _fine_pos_min.lerp(
 						_fine_pos_min,
-						_fine_pos_max,
 						card_index / card_count)
 			FineTuningMode.SYMMETRIC:
 				if card_count > 0:
-					trans.pos += lerp(
-						_fine_pos_min,
+					trans.pos += _fine_pos_min.lerp(
 						_fine_pos_max,
 						abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:
@@ -388,14 +386,12 @@ func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
 		match _fine_scale_mode:
 			FineTuningMode.LINEAR:
 				if card_count > 0:
-					trans.scale *= lerp(
-						_fine_scale_min,
+					trans.scale *= _fine_scale_min.lerp(
 						_fine_scale_max,
 						card_index / card_count)
 			FineTuningMode.SYMMETRIC:
 				if card_count > 0:
-					trans.scale *= lerp(
-						_fine_scale_min,
+					trans.scale *= _fine_scale_min.lerp(
 						_fine_scale_max,
 						abs(((card_index * 2.0) / card_count) - 1.0))
 			FineTuningMode.RANDOM:

@@ -1,10 +1,10 @@
-tool
+@tool
 class_name AnimPreviewDialog
-extends WindowDialog
+extends AcceptDialog
 
 var _anim: AnimationData = null
 
-onready var _preview_card = $Center/PreviewCard
+@onready var _preview_card = $Center/PreviewCard
 
 
 func show_anim(anim: AnimationData) -> void:

@@ -1,11 +1,11 @@
 extends Control
 
-onready var _name = $Background/Name
+@onready var _name = $Background/Name
 
 
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
-	CardEngine.general().connect("drag_started", self, "_on_drag_started")
+	CardEngine.general().connect("drag_started", Callable(self, "_on_drag_started"))
 
 
 func _on_drag_started():

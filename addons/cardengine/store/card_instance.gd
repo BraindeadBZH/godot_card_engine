@@ -1,5 +1,5 @@
 class_name CardInstance
-extends Reference
+extends RefCounted
 # Class for managing an instance of a card
 
 signal modified()
@@ -9,7 +9,7 @@ var _modified: CardData = null
 var _mods: Dictionary = {}
 
 
-func _init(data: CardData) -> void:
+func _init(data: CardData):
 	_data = data.duplicate()
 
 

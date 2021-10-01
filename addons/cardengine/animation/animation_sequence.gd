@@ -1,6 +1,6 @@
-tool
+@tool
 class_name AnimationSequence
-extends Reference
+extends RefCounted
 
 enum {INIT_DISABLED, INIT_ORIGIN, INIT_FOCUSED, INIT_ACTIVATED}
 
@@ -9,7 +9,7 @@ var _from_mode: int
 var _data: Array = []
 
 
-func _init(from_mode: int, to_mode: int) -> void:
+func _init(from_mode: int, to_mode: int):
 	_from_mode = from_mode
 	_to_mode = to_mode
 
@@ -39,7 +39,7 @@ func length() -> int:
 
 
 func empty() -> bool:
-	return _data.empty()
+	return _data.is_empty()
 
 
 func init_sequence() -> void:
@@ -72,20 +72,21 @@ func step(index: int) -> AnimationStep:
 
 
 func first_step() -> AnimationStep:
-	if _data.empty():
+	if _data.is_empty():
 		return null
 
 	return _data.front()
 
 
 func last_step() -> AnimationStep:
-	if _data.empty():
+	if _data.is_empty():
 		return null
 
 	return _data.back()
 
 
-func add_step(step: AnimationStep = null, check_last: bool = false) -> void:
+func add_step(step_in: AnimationStep = null, check_last: bool = false) -> void:
+	var step := step_in
 	if step == null:
 		step = AnimationStep.new(_default_transition(), _default_value())
 

@@ -1,12 +1,12 @@
 class_name AbstractStore
-extends Reference
+extends RefCounted
 # Base class for in-memory card handling
 
 
 class StoreSorter:
 	var _info: Dictionary = {}
 
-	func _init(sort_info: Dictionary) -> void:
+	func _init(sort_info: Dictionary):
 		_info = sort_info
 
 	func sort(left: CardInstance, right: CardInstance) -> bool:
@@ -131,9 +131,9 @@ func apply_filter(filter: Query) -> void:
 func sort(sort_info: Dictionary) -> void:
 	var sorter = StoreSorter.new(sort_info)
 	if _filter == null:
-		_cards.sort_custom(sorter, "sort")
+		_cards.sort_custom(Callable(sorter, "sort"))
 	else:
-		_filtered.sort_custom(sorter, "sort")
+		_filtered.sort_custom(Callable(sorter, "sort"))
 	emit_signal("sorted")
 	emit_signal("changed")
 
@@ -158,9 +158,9 @@ func count_for(id: String) -> int:
 
 func is_empty() -> bool:
 	if _filter == null:
-		return _cards.empty()
+		return _cards.is_empty()
 	else:
-		return _filtered.empty()
+		return _filtered.is_empty()
 
 
 func has_card(ref: int) -> bool:
@@ -188,9 +188,9 @@ func get_card(index: int) -> CardInstance:
 
 
 func get_first() -> CardInstance:
-	if _filter == null and _cards.empty():
+	if _filter == null and _cards.is_empty():
 		return null
-	if _filter != null and _filtered.empty():
+	if _filter != null and _filtered.is_empty():
 		return null
 
 	if _filter == null:
@@ -200,9 +200,9 @@ func get_first() -> CardInstance:
 
 
 func get_last() -> CardInstance:
-	if _filter == null and _cards.empty():
+	if _filter == null and _cards.is_empty():
 		return null
-	if _filter != null and _filtered.empty():
+	if _filter != null and _filtered.is_empty():
 		return null
 
 	if _filter == null:

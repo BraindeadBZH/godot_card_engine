@@ -1,8 +1,8 @@
 extends AbstractEffect
 
 
-func _init(id: String, name: String).(id, name) -> void:
-	pass
+func _init(effect_id: String, effect_name: String):
+	super(effect_id, effect_name)
 
 
 # Override this to limit the affected cards or leave null to affect all the cards

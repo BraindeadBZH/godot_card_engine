@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for HomeDisplay
 # Generated automatically - DO NOT MODIFY
 
-func _init() -> void:
+func _init():
 	data_id = "home_display"
 	data_name = "HomeDisplay"
 

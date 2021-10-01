@@ -1,18 +1,18 @@
-tool
+@tool
 class_name EffectsUi
 extends Control
 
 var _main_ui: CardEngineUI = null
 var _selected_fx: int = -1
 
-onready var _manager = CardEngine.fx()
-onready var _fx_list = $EffectLayout/EffectList
-onready var _edit_btn = $EffectLayout/Toolbar/EditBtn
-onready var _delete_btn = $EffectLayout/Toolbar/DeleteBtn
+@onready var _manager = CardEngine.fx()
+@onready var _fx_list = $EffectLayout/EffectList
+@onready var _edit_btn = $EffectLayout/Toolbar/EditBtn
+@onready var _delete_btn = $EffectLayout/Toolbar/DeleteBtn
 
 
 func _ready():
-	_manager.connect("changed", self, "_on_Effects_changed")
+	_manager.connect("changed", Callable(self, "_on_Effects_changed"))
 
 
 func set_main_ui(ui: CardEngineUI) -> void:
@@ -20,8 +20,10 @@ func set_main_ui(ui: CardEngineUI) -> void:
 
 
 func delete_effect() -> void:
-	if yield():
-		_manager.delete_effect(_fx_list.get_item_metadata(_selected_fx))
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	_manager.delete_effect(_fx_list.get_item_metadata(_selected_fx))
 
 
 func _on_Databases_changed() -> void:
@@ -75,7 +77,7 @@ func _on_EditBtn_pressed() -> void:
 
 func _on_DeleteBtn_pressed() -> void:
 	_main_ui.show_confirmation_dialog(
-			"Delete effect", funcref(self, "delete_effect"))
+			"Delete effect", Callable(self, "delete_effect"))
 
 
 func _on_EffectList_item_activated(index: int) -> void:

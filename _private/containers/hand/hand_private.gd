@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for HandContainer
 # Generated automatically - DO NOT MODIFY
 
-func _init() -> void:
+func _init():
 	data_id = "hand"
 	data_name = "HandContainer"
 

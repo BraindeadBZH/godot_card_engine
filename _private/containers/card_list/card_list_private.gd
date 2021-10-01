@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for CardList
 # Generated automatically - DO NOT MODIFY
 
-func _init() -> void:
+func _init():
 	data_id = "card_list"
 	data_name = "CardList"
 

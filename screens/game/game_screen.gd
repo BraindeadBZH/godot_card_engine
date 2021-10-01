@@ -15,26 +15,26 @@ var _tokens: CardPile = CardPile.new()
 var _mana: int = MAX_MANA
 var _fx_mana_mult: EffectInstance = null
 
-onready var _hand_cont = $HandZone/HandContainer
-onready var _draw_count = $DeckZone/DrawCount
-onready var _draw_btn = $DeckZone/DrawBtn
-onready var _discard_count = $DiscardZone/DiscardCount
-onready var _reshuffle_btn = $DiscardZone/ReshuffleBtn
-onready var _hand_delay = $StartingHandDelay
-onready var _draw_filter = $EffectsLayout/FilterLayout/DrawFilter
-onready var _hand_filter = $EffectsLayout/FilterLayout/HandFilter
-onready var _discard_filter = $EffectsLayout/FilterLayout/DiscardFilter
-onready var _on_played_fx = $EffectsLayout/OnPlayedEffect
-onready var _token_grid = $PlayZone/TokenGrid
+@onready var _hand_cont = $HandZone/HandContainer
+@onready var _draw_count = $DeckZone/DrawCount
+@onready var _draw_btn = $DeckZone/DrawBtn
+@onready var _discard_count = $DiscardZone/DiscardCount
+@onready var _reshuffle_btn = $DiscardZone/ReshuffleBtn
+@onready var _hand_delay = $StartingHandDelay
+@onready var _draw_filter = $EffectsLayout/FilterLayout/DrawFilter
+@onready var _hand_filter = $EffectsLayout/FilterLayout/HandFilter
+@onready var _discard_filter = $EffectsLayout/FilterLayout/DiscardFilter
+@onready var _on_played_fx = $EffectsLayout/OnPlayedEffect
+@onready var _token_grid = $PlayZone/TokenGrid
 
 
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
-	_draw_pile.connect("changed", self, "_on_DrawPile_changed")
+	_draw_pile.connect("changed", Callable(self, "_on_DrawPile_changed"))
 	# warning-ignore:return_value_discarded
-	_discard_pile.connect("changed", self, "_on_DiscardPile_changed")
+	_discard_pile.connect("changed", Callable(self, "_on_DiscardPile_changed"))
 	# warning-ignore:return_value_discarded
-	_hand.connect("changed", self, "_on_Hand_changed")
+	_hand.connect("changed", Callable(self, "_on_Hand_changed"))
 
 	_token_grid.set_store(_tokens)
 	_token_grid.get_drop_area().set_source_filter(["hand"])

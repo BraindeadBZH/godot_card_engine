@@ -1,6 +1,6 @@
-tool
+@tool
 class_name AnimationBlock
-extends Reference
+extends RefCounted
 
 var _from_mode: int
 var _to_mode: int
@@ -10,7 +10,7 @@ var _scale_seq: ScaleSequence
 var _rot_seq: RotationSequence
 
 
-func _init(from_mode: int, to_mode: int) -> void:
+func _init(from_mode: int, to_mode: int):
 	_from_mode = from_mode
 	_to_mode = to_mode
 	_pos_seq = PositionSequence.new(from_mode, to_mode)

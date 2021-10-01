@@ -1,76 +1,76 @@
-tool
-extends WindowDialog
+@tool
+extends AcceptDialog
 
 var _data: ContainerData = null
 
-onready var _manager: ContainerManager = CardEngine.cont()
-onready var _anims: AnimationManager = CardEngine.anim()
-onready var _mode_switch = $MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout/ModeSwitch
-onready var _face_switch = $MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout/FaceSwitch
-onready var _grid_mode = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode
-onready var _path_mode = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode
-onready var _grid_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardWidth
-onready var _grid_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/FixedWidth
-onready var _grid_spacing_h = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout/GridCardSpacingH
-onready var _grid_spacing_v = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout/GridCardSpacingV
-onready var _grid_align_h = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridAlignH
-onready var _grid_align_v = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridAlignV
-onready var _grid_columns = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridColumns
-onready var _grid_expand = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridExpand
-onready var _path_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathCardWidth
-onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathFixedWidth
-onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
+@onready var _manager: ContainerManager = CardEngine.cont()
+@onready var _anims: AnimationManager = CardEngine.anim()
+@onready var _mode_switch = $MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout/ModeSwitch
+@onready var _face_switch = $MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout/FaceSwitch
+@onready var _grid_mode = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode
+@onready var _path_mode = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode
+@onready var _grid_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardWidth
+@onready var _grid_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/FixedWidth
+@onready var _grid_spacing_h = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout/GridCardSpacingH
+@onready var _grid_spacing_v = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout/GridCardSpacingV
+@onready var _grid_align_h = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridAlignH
+@onready var _grid_align_v = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridAlignV
+@onready var _grid_columns = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridColumns
+@onready var _grid_expand = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridExpand
+@onready var _path_width = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathCardWidth
+@onready var _path_fixed = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathFixedWidth
+@onready var _path_spacing = $MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout/PathSpacing
 
-onready var _interactive = $MainLayout/MainTabs/Interaction/InterLayout/Inter
-onready var _exclusive = $MainLayout/MainTabs/Interaction/InterLayout/InterEx
-onready var _last_only = $MainLayout/MainTabs/Interaction/InterLayout/InterLast
-onready var _drag_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Enabled
-onready var _drop_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Drop
+@onready var _interactive = $MainLayout/MainTabs/Interaction/InterLayout/Inter
+@onready var _exclusive = $MainLayout/MainTabs/Interaction/InterLayout/InterEx
+@onready var _last_only = $MainLayout/MainTabs/Interaction/InterLayout/InterLast
+@onready var _drag_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Enabled
+@onready var _drop_enabled = $MainLayout/MainTabs/Interaction/InterLayout/Drop
 
-onready var _pos_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Enabled
-onready var _pos_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Mode
-onready var _pos_range_min_h = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout/RangeH
-onready var _pos_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout/RangeV
-onready var _pos_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout/RangeH
-onready var _pos_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout/RangeV
+@onready var _pos_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Enabled
+@onready var _pos_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/Mode
+@onready var _pos_range_min_h = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout/RangeH
+@onready var _pos_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout/RangeV
+@onready var _pos_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout/RangeH
+@onready var _pos_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout/RangeV
 
-onready var _angle_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/Enabled
-onready var _angle_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/Mode
-onready var _angle_range_min = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout/RangeMin
-onready var _angle_range_max = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout/RangeMax
+@onready var _angle_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/Enabled
+@onready var _angle_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/Mode
+@onready var _angle_range_min = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout/RangeMin
+@onready var _angle_range_max = $MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout/RangeMax
 
-onready var _scale_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Enabled
-onready var _scale_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Mode
-onready var _scale_ratio = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Ratio
-onready var _scale_range_min_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout/RangeH
-onready var _scale_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout/RangeV
-onready var _scale_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeH
-onready var _scale_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeV
+@onready var _scale_enabled = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Enabled
+@onready var _scale_mode = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Mode
+@onready var _scale_ratio = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/Ratio
+@onready var _scale_range_min_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout/RangeH
+@onready var _scale_range_min_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout/RangeV
+@onready var _scale_range_max_h = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeH
+@onready var _scale_range_max_v = $MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout/RangeV
 
-onready var _trans_order_duration = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Duration
-onready var _trans_order_type = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Type
-onready var _trans_order_easing = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Easing
+@onready var _trans_order_duration = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Duration
+@onready var _trans_order_type = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Type
+@onready var _trans_order_easing = $MainLayout/MainTabs/Transitions/TransLayout/OrderLayout/Easing
 
-onready var _trans_in_duration = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Duration
-onready var _trans_in_type = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Type
-onready var _trans_in_easing = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Easing
+@onready var _trans_in_duration = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Duration
+@onready var _trans_in_type = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Type
+@onready var _trans_in_easing = $MainLayout/MainTabs/Transitions/TransLayout/InLayout/Easing
 
-onready var _trans_out_duration = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Duration
-onready var _trans_out_type = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Type
-onready var _trans_out_easing = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Easing
+@onready var _trans_out_duration = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Duration
+@onready var _trans_out_type = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Type
+@onready var _trans_out_easing = $MainLayout/MainTabs/Transitions/TransLayout/OutLayout/Easing
 
-onready var _anim = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Anim
-onready var _adjust_mode = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/Mode
-onready var _adjust_pos_mode_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout/PosXMode
-onready var _adjust_pos_mode_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout/PosYMode
-onready var _adjust_pos_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout/PosX
-onready var _adjust_pos_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout/PosY
-onready var _adjust_scale_mode_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout/ScaleXMode
-onready var _adjust_scale_mode_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout/ScaleYMode
-onready var _adjust_scale_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout/ScaleX
-onready var _adjust_scale_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout/ScaleY
-onready var _adjust_rot_mode = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/RotMode
-onready var _adjust_rot = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/Rot
+@onready var _anim = $MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout/Anim
+@onready var _adjust_mode = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/Mode
+@onready var _adjust_pos_mode_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout/PosXMode
+@onready var _adjust_pos_mode_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout/PosYMode
+@onready var _adjust_pos_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout/PosX
+@onready var _adjust_pos_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout/PosY
+@onready var _adjust_scale_mode_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout/ScaleXMode
+@onready var _adjust_scale_mode_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout/ScaleYMode
+@onready var _adjust_scale_x = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout/ScaleX
+@onready var _adjust_scale_y = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout/ScaleY
+@onready var _adjust_rot_mode = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/RotMode
+@onready var _adjust_rot = $MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/Rot
 
 
 func _ready():

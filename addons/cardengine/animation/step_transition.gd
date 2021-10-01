@@ -1,6 +1,6 @@
-tool
+@tool
 class_name StepTransition
-extends Reference
+extends RefCounted
 
 var random_duration: bool = false
 var duration: float = 0.3
@@ -11,7 +11,7 @@ var easing: int = Tween.EASE_IN
 var flip_card: bool = false
 var interactive: bool = true
 
-func _init(d: float, t: int, e: int) -> void:
+func _init(d: float, t: int, e: int):
 	duration = d
 	type = t
 	easing = e

@@ -1,4 +1,4 @@
-tool
+@tool
 class_name AnimationsUi
 extends Control
 
@@ -7,28 +7,28 @@ var _selected_anim: int = -1
 var _opened_anim: AnimationData = null
 var _anim_block: AnimationBlock = null
 
-onready var _manager = CardEngine.anim()
-onready var _anim_list = $AnimationsLayout/Toolbar/AnimSelect
-onready var _edit_btn = $AnimationsLayout/Toolbar/EditBtn
-onready var _delete_btn = $AnimationsLayout/Toolbar/DeleteBtn
-onready var _save_btn = $AnimationsLayout/Toolbar/SaveBtn
-onready var _reset_btn = $AnimationsLayout/Toolbar/ResetBtn
-onready var _preview_btn = $AnimationsLayout/Toolbar/PreviewBtn
-onready var _idle_btn = $AnimationsLayout/AnimChainLayout/IdleBtn
-onready var _focused_btn = $AnimationsLayout/AnimChainLayout/FocusedBtn
-onready var _activated_btn = $AnimationsLayout/AnimChainLayout/ActivatedBtn
-onready var _deactivated_btn = $AnimationsLayout/AnimChainLayout/DeactivatedBtn
-onready var _unfocused_btn = $AnimationsLayout/AnimChainLayout/UnfocusedBtn
-onready var _pos_seq = $AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqScroll/PosSeqLayout
-onready var _pos_seq_tools = $AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqToolsLayout
-onready var _scale_seq = $AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqScroll/ScaleSeqLayout
-onready var _scale_seq_tools = $AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqToolsLayout
-onready var _rot_seq = $AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqScroll/RotSeqLayout
-onready var _rot_seq_tools = $AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqToolsLayout
+@onready var _manager = CardEngine.anim()
+@onready var _anim_list = $AnimationsLayout/Toolbar/AnimSelect
+@onready var _edit_btn = $AnimationsLayout/Toolbar/EditBtn
+@onready var _delete_btn = $AnimationsLayout/Toolbar/DeleteBtn
+@onready var _save_btn = $AnimationsLayout/Toolbar/SaveBtn
+@onready var _reset_btn = $AnimationsLayout/Toolbar/ResetBtn
+@onready var _preview_btn = $AnimationsLayout/Toolbar/PreviewBtn
+@onready var _idle_btn = $AnimationsLayout/AnimChainLayout/IdleBtn
+@onready var _focused_btn = $AnimationsLayout/AnimChainLayout/FocusedBtn
+@onready var _activated_btn = $AnimationsLayout/AnimChainLayout/ActivatedBtn
+@onready var _deactivated_btn = $AnimationsLayout/AnimChainLayout/DeactivatedBtn
+@onready var _unfocused_btn = $AnimationsLayout/AnimChainLayout/UnfocusedBtn
+@onready var _pos_seq = $AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqScroll/PosSeqLayout
+@onready var _pos_seq_tools = $AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqToolsLayout
+@onready var _scale_seq = $AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqScroll/ScaleSeqLayout
+@onready var _scale_seq_tools = $AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqToolsLayout
+@onready var _rot_seq = $AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqScroll/RotSeqLayout
+@onready var _rot_seq_tools = $AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqToolsLayout
 
 
 func _ready():
-	_manager.connect("changed", self, "_on_Animations_changed")
+	_manager.connect("changed", Callable(self, "_on_Animations_changed"))
 
 
 func set_main_ui(ui: CardEngineUI) -> void:
@@ -36,9 +36,11 @@ func set_main_ui(ui: CardEngineUI) -> void:
 
 
 func delete_animation() -> void:
-	if yield():
-		_manager.delete_animation(_anim_list.get_item_metadata(_selected_anim))
-		_select_anim(0)
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	_manager.delete_animation(_anim_list.get_item_metadata(_selected_anim))
+	#	_select_anim(0)
 
 
 func _select_anim(index: int) -> void:
@@ -106,19 +108,19 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 		var btn = Button.new()
 		btn.text = "Initialize"
 		tools.add_child(btn)
-		btn.connect("pressed", self, "_on_InitBtn_pressed", [seq])
+		btn.connect("pressed", Callable(self, "_on_InitBtn_pressed"), [seq])
 	else:
 		var add_btn = Button.new()
 		add_btn.text = "Add step"
 		add_btn.hint_tooltip = "Insert a step before the last step"
 		tools.add_child(add_btn)
-		add_btn.connect("pressed", self, "_on_AddStepBtn_pressed", [seq])
+		add_btn.connect("pressed", Callable(self, "_on_AddStepBtn_pressed"), [seq])
 
 		var clear_btn = Button.new()
 		clear_btn.text = "Clear sequence"
 		clear_btn.hint_tooltip = "Remove all the steps"
 		tools.add_child(clear_btn)
-		clear_btn.connect("pressed", self, "_on_ClearSeqBtn_pressed", [seq])
+		clear_btn.connect("pressed", Callable(self, "_on_ClearSeqBtn_pressed"), [seq])
 
 		var index := 0
 		for step in seq.sequence():
@@ -146,7 +148,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				btn.disabled = not step.editable_transi
 				btn.hint_tooltip = "Edit step transition"
 				step_layout.add_child(btn)
-				btn.connect("pressed", self, "_on_TransiBtn_pressed", [seq, index])
+				btn.connect("pressed", Callable(self, "_on_TransiBtn_pressed"), [seq, index])
 
 			var initial_txt = "initial(%s)"
 			if index == 0:
@@ -198,7 +200,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				btn.disabled = not step.editable_val
 				btn.hint_tooltip = "Edit step value"
 				step_layout.add_child(btn)
-				btn.connect("pressed", self, "_on_ValueBtn_pressed", [seq, index])
+				btn.connect("pressed", Callable(self, "_on_ValueBtn_pressed"), [seq, index])
 
 			var prev_step := seq.step(index-1)
 			var next_step := seq.step(index+1)
@@ -207,7 +209,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			up_btn.text = "▲"
 			up_btn.hint_tooltip = "Move up"
 			step_layout.add_child(up_btn)
-			up_btn.connect("pressed", self, "_on_UpBtn_pressed", [seq, index])
+			up_btn.connect("pressed", Callable(self, "_on_UpBtn_pressed"), [seq, index])
 
 			if not(step.editable_transi and step.editable_val) or index < 1:
 					up_btn.disabled = true
@@ -219,7 +221,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			down_btn.text = "▼"
 			down_btn.hint_tooltip = "Move down"
 			step_layout.add_child(down_btn)
-			down_btn.connect("pressed", self, "_on_DownBtn_pressed", [seq, index])
+			down_btn.connect("pressed", Callable(self, "_on_DownBtn_pressed"), [seq, index])
 
 			if not(step.editable_transi and step.editable_val) or index >= seq.length()-1:
 					down_btn.disabled = true
@@ -231,7 +233,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			dup_btn.text = "D"
 			dup_btn.hint_tooltip = "Duplicate step"
 			step_layout.add_child(dup_btn)
-			dup_btn.connect("pressed", self, "_on_DupBtn_pressed", [seq, step])
+			dup_btn.connect("pressed", Callable(self, "_on_DupBtn_pressed"), [seq, step])
 
 			if not(step.editable_transi and step.editable_val):
 					dup_btn.disabled = true
@@ -240,7 +242,7 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			del_btn.text = "X"
 			del_btn.hint_tooltip = "Delete step"
 			step_layout.add_child(del_btn)
-			del_btn.connect("pressed", self, "_on_DelStepBtn_pressed", [seq, index])
+			del_btn.connect("pressed", Callable(self, "_on_DelStepBtn_pressed"), [seq, index])
 
 			if not(step.editable_transi and step.editable_val):
 				del_btn.disabled = true
@@ -371,7 +373,7 @@ func _on_EditBtn_pressed() -> void:
 
 func _on_DeleteBtn_pressed() -> void:
 	_main_ui.show_confirmation_dialog(
-			"Delete animation", funcref(self, "delete_animation"))
+			"Delete animation", Callable(self, "delete_animation"))
 
 
 func _on_SaveBtn_pressed() -> void:

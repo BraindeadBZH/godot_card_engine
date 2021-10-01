@@ -4,7 +4,8 @@ extends AbstractModifier
 var value_id: String = ""
 var multiplier: float = 0.0
 
-func _init(id: String, stackable: bool, value_id: String, multiplier: float).(id, stackable) -> void:
+func _init(id: String, stackable: bool, value_id: String, multiplier: float):
+	super(id, stackable)
 	self.value_id = value_id
 	self.multiplier = multiplier
 

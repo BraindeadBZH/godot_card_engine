@@ -1,6 +1,6 @@
 extends AbstractScreen
 
-onready var _display = $HomeDisplay
+@onready var _display = $HomeDisplay
 
 
 func _ready():

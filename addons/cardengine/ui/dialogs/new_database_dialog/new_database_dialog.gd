@@ -1,8 +1,8 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _db_id = $MainLayout/Form/DatabaseId
-onready var _db_name = $MainLayout/Form/DatabaseName
+@onready var _db_id = $MainLayout/Form/DatabaseId
+@onready var _db_name = $MainLayout/Form/DatabaseName
 
 
 func _ready():

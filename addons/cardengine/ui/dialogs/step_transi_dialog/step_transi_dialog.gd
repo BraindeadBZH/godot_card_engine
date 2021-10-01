@@ -1,20 +1,20 @@
-tool
+@tool
 extends AbstractFormDialog
 
 var _seq: AnimationSequence = null
 var _index: int = -1
 
-onready var _random = $MainLayout/Form/Random
-onready var _duration = $MainLayout/Form/Duration
-onready var _duration_lbl = $MainLayout/Form/DurationLbl
-onready var _duration_range_min = $MainLayout/Form/DurationRangeLayout/DurationRangeMin
-onready var _duration_range_max = $MainLayout/Form/DurationRangeLayout/DurationRangeMax
-onready var _duration_range_lbl = $MainLayout/Form/DurationRangeLbl
-onready var _duration_range_layout = $MainLayout/Form/DurationRangeLayout
-onready var _type = $MainLayout/Form/Type
-onready var _easing = $MainLayout/Form/Easing
-onready var _flip_card = $MainLayout/Form/FlipCard
-onready var _inter = $MainLayout/Form/Interactive
+@onready var _random = $MainLayout/Form/Random
+@onready var _duration = $MainLayout/Form/Duration
+@onready var _duration_lbl = $MainLayout/Form/DurationLbl
+@onready var _duration_range_min = $MainLayout/Form/DurationRangeLayout/DurationRangeMin
+@onready var _duration_range_max = $MainLayout/Form/DurationRangeLayout/DurationRangeMax
+@onready var _duration_range_lbl = $MainLayout/Form/DurationRangeLbl
+@onready var _duration_range_layout = $MainLayout/Form/DurationRangeLayout
+@onready var _type = $MainLayout/Form/Type
+@onready var _easing = $MainLayout/Form/Easing
+@onready var _flip_card = $MainLayout/Form/FlipCard
+@onready var _inter = $MainLayout/Form/Interactive
 
 
 func _ready():

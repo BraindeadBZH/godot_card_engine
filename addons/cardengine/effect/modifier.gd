@@ -1,5 +1,5 @@
 class_name AbstractModifier
-extends Reference
+extends RefCounted
 
 var _fx_ref: int = 0
 
@@ -7,7 +7,7 @@ var id: String = ""
 var stackable: bool = false
 
 
-func _init(id: String, stackable: bool) -> void:
+func _init(id: String, stackable: bool):
 	self.id = id
 	self.stackable = stackable
 

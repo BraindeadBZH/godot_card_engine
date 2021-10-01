@@ -1,11 +1,11 @@
-tool
+@tool
 class_name AbstractEffect
-extends Reference
+extends RefCounted
 
 var id: String = ""
 var name: String = ""
 
-func _init(id: String, name: String) -> void:
+func _init(id: String, name: String):
 	self.id = id
 	self.name = name
 

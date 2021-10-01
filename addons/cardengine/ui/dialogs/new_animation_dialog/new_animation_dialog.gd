@@ -1,8 +1,8 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _anim_id = $MainLayout/Form/AnimationId
-onready var _anim_name = $MainLayout/Form/AnimationName
+@onready var _anim_id = $MainLayout/Form/AnimationId
+@onready var _anim_name = $MainLayout/Form/AnimationName
 
 
 func _ready():

@@ -1,25 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://c1g6qgbieq2g2"]
 
-[ext_resource path="res://addons/cardengine/card/abstract_card.gd" type="Script" id=1]
-[ext_resource path="res://addons/cardengine/card/mouse_area.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://addons/cardengine/card/abstract_card.gd" id="1"]
+[ext_resource type="Script" path="res://addons/cardengine/card/mouse_area.gd" id="2"]
 
 [node name="AbstractCard" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 
 [node name="AnimContainer" type="Node2D" parent="."]
+script = null
 
 [node name="Placeholder" type="Node2D" parent="AnimContainer"]
+script = null
 
 [node name="Front" type="Node2D" parent="AnimContainer"]
 visible = false
+script = null
 
 [node name="Back" type="Node2D" parent="AnimContainer"]
 visible = false
+script = null
 
 [node name="MouseArea" type="TextureButton" parent="AnimContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 2 )
+script = ExtResource( "2" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -27,14 +29,19 @@ __meta__ = {
 [node name="TransiMerge" type="Timer" parent="."]
 wait_time = 0.01
 one_shot = true
+script = null
 
 [node name="EventMerge" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+script = null
 
-[node name="Transitions" type="Tween" parent="."]
+[node name="Transitions" type="Node" parent="."]
+script = null
 
-[node name="AnimationPlayer" type="Tween" parent="."]
+[node name="AnimationPlayer" type="Node" parent="."]
+script = null
+
 [connection signal="button_down" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_down"]
 [connection signal="button_up" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_up"]
 [connection signal="drag_started" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_drag_started"]
@@ -44,4 +51,3 @@ autostart = true
 [connection signal="pressed" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_pressed"]
 [connection signal="timeout" from="TransiMerge" to="." method="_on_TransiMerge_timeout"]
 [connection signal="timeout" from="EventMerge" to="." method="_on_EventMerge_timeout"]
-[connection signal="tween_all_completed" from="Transitions" to="." method="_on_Transitions_tween_all_completed"]

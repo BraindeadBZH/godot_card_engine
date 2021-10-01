@@ -1,8 +1,8 @@
 class_name CardTransitions
-extends Reference
+extends RefCounted
 
 
-class BasicTransition extends Reference:
+class BasicTransition extends RefCounted:
 	var enabled: bool = false
 	var duration: float = 0.3
 	var type: int = Tween.TRANS_LINEAR

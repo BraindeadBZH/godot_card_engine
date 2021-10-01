@@ -1,5 +1,5 @@
 class_name CardTransform
-extends Reference
+extends RefCounted
 
 
 var pos: Vector2 = Vector2(0.0, 0.0)

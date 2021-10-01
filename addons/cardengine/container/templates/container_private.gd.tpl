@@ -3,7 +3,7 @@ extends AbstractContainer
 # Private class for {container_name}
 # Generated automatically - DO NOT MODIFY
 
-func _init() -> void:
+func _init():
 	data_id = "{container_id}"
 	data_name = "{container_name}"
 

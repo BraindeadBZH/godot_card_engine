@@ -1,6 +1,6 @@
-tool
+@tool
 class_name CardData
-extends Reference
+extends RefCounted
 
 signal changed()
 

@@ -1,8 +1,8 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _cont_id = $MainLayout/Form/ContainerId
-onready var _cont_name = $MainLayout/Form/ContainerName
+@onready var _cont_id = $MainLayout/Form/ContainerId
+@onready var _cont_name = $MainLayout/Form/ContainerName
 
 
 func _ready():

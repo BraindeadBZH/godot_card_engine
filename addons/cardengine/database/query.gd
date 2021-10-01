@@ -1,6 +1,6 @@
-tool
+@tool
 class_name Query
-extends Reference
+extends RefCounted
 # Statements works this way:
 #   - Each items of the Array is interpreted as a OR
 #   - Within each item comma separated values are interpreted as AND
@@ -80,13 +80,13 @@ func match_card(card: CardData) -> bool:
 	var where_result = true
 	var contains_result = true
 
-	if !_from_stmt.empty():
+	if !_from_stmt.is_empty():
 		from_result = _match_categs(card)
 
-	if !_where_stmt.empty():
+	if !_where_stmt.is_empty():
 		where_result = _match_values(card)
 
-	if !_contains_stmt.empty():
+	if !_contains_stmt.is_empty():
 		contains_result = _match_texts(card)
 
 	return from_result and where_result and contains_result
@@ -185,7 +185,7 @@ func _expr_to_comp(input: String) -> Array:
 		">":
 			result.append(OP_GREATER)
 
-	result.append(int(operands[2].strip_edges()))
+	result.append(operands[2].strip_edges() as int)
 
 	return result
 

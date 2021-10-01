@@ -1,18 +1,18 @@
-tool
+@tool
 class_name DatabasesUi
 extends Control
 
 var _main_ui: CardEngineUI = null
 var _selected_db: int = -1
 
-onready var _manager = CardEngine.db()
-onready var _db_list = $DatabaseLayout/DatabaseList
-onready var _edit_btn = $DatabaseLayout/Toolbar/EditBtn
-onready var _delete_btn = $DatabaseLayout/Toolbar/DeleteBtn
+@onready var _manager = CardEngine.db()
+@onready var _db_list = $DatabaseLayout/DatabaseList
+@onready var _edit_btn = $DatabaseLayout/Toolbar/EditBtn
+@onready var _delete_btn = $DatabaseLayout/Toolbar/DeleteBtn
 
 
 func _ready():
-	_manager.connect("changed", self, "_on_Databases_changed")
+	_manager.connect("changed", Callable(self, "_on_Databases_changed"))
 
 
 func set_main_ui(ui: CardEngineUI) -> void:
@@ -20,8 +20,10 @@ func set_main_ui(ui: CardEngineUI) -> void:
 
 
 func delete_database() -> void:
-	if yield():
-		_manager.delete_database(_db_list.get_item_metadata(_selected_db))
+	# TODO: find a way to replace yield by await
+	pass
+	#if yield():
+	#	_manager.delete_database(_db_list.get_item_metadata(_selected_db))
 
 
 func _on_Databases_changed() -> void:
@@ -67,7 +69,7 @@ func _on_NewDatabaseDialog_form_validated(form) -> void:
 
 func _on_DeleteBtn_pressed() -> void:
 	_main_ui.show_confirmation_dialog(
-			"Delete database", funcref(self, "delete_database"))
+			"Delete database", Callable(self, "delete_database"))
 
 
 func _on_EditDatabaseDialog_copy_card(card_id, new_card_id, db_id) -> void:

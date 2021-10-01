@@ -1,8 +1,8 @@
-tool
+@tool
 extends AbstractFormDialog
 
-onready var _fx_id = $MainLayout/Form/FxId
-onready var _fx_name = $MainLayout/Form/FxName
+@onready var _fx_id = $MainLayout/Form/FxId
+@onready var _fx_name = $MainLayout/Form/FxName
 
 
 func _ready():

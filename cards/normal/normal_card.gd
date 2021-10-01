@@ -1,15 +1,15 @@
 extends AbstractCard
 
-onready var _name = $AnimContainer/Front/NameBackground/Name
-onready var _desc = $AnimContainer/Front/DescBackground/Desc
-onready var _cost = $AnimContainer/Front/CostBackground/Cost
-onready var _picture_group = $AnimContainer/Front/PictureGroup
-onready var _common = $AnimContainer/Front/PictureGroup/Common
-onready var _uncommon = $AnimContainer/Front/PictureGroup/Uncommon
-onready var _rare = $AnimContainer/Front/PictureGroup/Rare
-onready var _mythic_rare = $AnimContainer/Front/PictureGroup/MythicRare
-onready var _basic_land = $AnimContainer/Front/PictureGroup/BasicLand
-onready var _card_id = $AnimContainer/Front/CardId
+@onready var _name = $AnimContainer/Front/NameBackground/Name
+@onready var _desc = $AnimContainer/Front/DescBackground/Desc
+@onready var _cost = $AnimContainer/Front/CostBackground/Cost
+@onready var _picture_group = $AnimContainer/Front/PictureGroup
+@onready var _common = $AnimContainer/Front/PictureGroup/Common
+@onready var _uncommon = $AnimContainer/Front/PictureGroup/Uncommon
+@onready var _rare = $AnimContainer/Front/PictureGroup/Rare
+@onready var _mythic_rare = $AnimContainer/Front/PictureGroup/MythicRare
+@onready var _basic_land = $AnimContainer/Front/PictureGroup/BasicLand
+@onready var _card_id = $AnimContainer/Front/CardId
 
 
 func _update_data(data: CardData, default: CardData = null) -> void:
@@ -63,7 +63,7 @@ func _update_picture(data: CardData) -> void:
 
 func _on_NormalCard_instance_changed() -> void:
 	# warning-ignore:return_value_discarded
-	instance().connect("modified", self, "_on_instance_modified")
+	instance().connect("modified", Callable(self, "_on_instance_modified"))
 	_update_data(instance().data(), instance().unmodified())
 
 

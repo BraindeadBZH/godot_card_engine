@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 var _main_scene: PackedScene = preload("ui/card_engine_ui.tscn")
@@ -10,23 +10,23 @@ func _enter_tree():
 	add_control_to_bottom_panel(_main_control, "CardEngine")
 	CardEngine.setup()
 
-	CardEngine.general().connect("filesystem_changed", self, "scan_for_new_files")
-	CardEngine.db().connect("filesystem_changed", self, "scan_for_new_files")
-	CardEngine.cont().connect("filesystem_changed", self, "scan_for_new_files")
-	CardEngine.anim().connect("filesystem_changed", self, "scan_for_new_files")
-	CardEngine.fx().connect("filesystem_changed", self, "scan_for_new_files")
+	CardEngine.general().connect("filesystem_changed", Callable(self, "scan_for_new_files"))
+	CardEngine.db().connect("filesystem_changed", Callable(self, "scan_for_new_files"))
+	CardEngine.cont().connect("filesystem_changed", Callable(self, "scan_for_new_files"))
+	CardEngine.anim().connect("filesystem_changed", Callable(self, "scan_for_new_files"))
+	CardEngine.fx().connect("filesystem_changed", Callable(self, "scan_for_new_files"))
 
-	CardEngine.general().connect("request_edit", self, "open_for_edit")
-	CardEngine.db().connect("request_edit", self, "open_for_edit")
-	CardEngine.cont().connect("request_edit", self, "open_for_edit")
-	CardEngine.anim().connect("request_edit", self, "open_for_edit")
-	CardEngine.fx().connect("request_edit", self, "open_for_edit")
+	CardEngine.general().connect("request_edit", Callable(self, "open_for_edit"))
+	CardEngine.db().connect("request_edit", Callable(self, "open_for_edit"))
+	CardEngine.cont().connect("request_edit", Callable(self, "open_for_edit"))
+	CardEngine.anim().connect("request_edit", Callable(self, "open_for_edit"))
+	CardEngine.fx().connect("request_edit", Callable(self, "open_for_edit"))
 
-	CardEngine.general().connect("request_scene", self, "open_scene")
-	CardEngine.db().connect("request_scene", self, "open_scene")
-	CardEngine.cont().connect("request_scene", self, "open_scene")
-	CardEngine.anim().connect("request_scene", self, "open_scene")
-	CardEngine.fx().connect("request_scene", self, "open_scene")
+	CardEngine.general().connect("request_scene", Callable(self, "open_scene"))
+	CardEngine.db().connect("request_scene", Callable(self, "open_scene"))
+	CardEngine.cont().connect("request_scene", Callable(self, "open_scene"))
+	CardEngine.anim().connect("request_scene", Callable(self, "open_scene"))
+	CardEngine.fx().connect("request_scene", Callable(self, "open_scene"))
 
 
 func _exit_tree():

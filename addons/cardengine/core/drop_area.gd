@@ -3,12 +3,12 @@ extends Control
 
 signal dropped(card, source, on_card)
 
-export(Array) var source_filter: Array = []
+@export var source_filter: Array = []
 
 var _enabled: bool = true
 var _filter: Query = null
 
-onready var _manager: GeneralManager = CardEngine.general()
+@onready var _manager: GeneralManager = CardEngine.general()
 
 
 func set_enabled(state: bool) -> void:
@@ -29,7 +29,7 @@ func can_drop_data(_position: Vector2, data) -> bool:
 
 	if data == "card_engine:drag":
 		var source := _manager.get_drag_source()
-		if not source_filter.empty() and not source_filter.has(source):
+		if not source_filter.is_empty() and not source_filter.has(source):
 			return false
 
 		if _filter != null:

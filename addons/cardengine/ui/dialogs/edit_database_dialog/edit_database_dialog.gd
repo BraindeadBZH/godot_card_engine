@@ -1,5 +1,5 @@
-tool
-extends WindowDialog
+@tool
+extends AcceptDialog
 
 signal edit_card(card, db)
 signal delete_card(card, db)
@@ -14,24 +14,24 @@ var _selected_categ: Dictionary = {}
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
-onready var _manager = CardEngine.db()
-onready var _card_list = $MainLayout/CardsLayout/CardList
-onready var _detail_list = $MainLayout/CardsLayout/DetailsLayout/DetailsList
-onready var _delete_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn
-onready var _edit_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn
-onready var _dup_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DuplicateBtn
-onready var _categ_filter_list = $MainLayout/CategFilterScroll/CategFilterList
-onready var _val_filter = $MainLayout/FiltersLayout/ValFilter
-onready var _txt_filter = $MainLayout/FiltersLayout/TxtFilter
-onready var _comp_op = $MainLayout/FiltersLayout/CompLayout/CompOp
-onready var _comp_val = $MainLayout/FiltersLayout/CompLayout/CompVal
-onready var _contains = $MainLayout/FiltersLayout/ContainsFilter
-onready var _list_lbl = $MainLayout/CardsLayout/ListLbl
-onready var _dup_dlg = $DuplicateCardDialog
+@onready var _manager = CardEngine.db()
+@onready var _card_list = $MainLayout/CardsLayout/CardList
+@onready var _detail_list = $MainLayout/CardsLayout/DetailsLayout/DetailsList
+@onready var _delete_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DeleteBtn
+@onready var _edit_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/EditBtn
+@onready var _dup_btn = $MainLayout/CardsLayout/DetailsLayout/ToolsLayout/DuplicateBtn
+@onready var _categ_filter_list = $MainLayout/CategFilterScroll/CategFilterList
+@onready var _val_filter = $MainLayout/FiltersLayout/ValFilter
+@onready var _txt_filter = $MainLayout/FiltersLayout/TxtFilter
+@onready var _comp_op = $MainLayout/FiltersLayout/CompLayout/CompOp
+@onready var _comp_val = $MainLayout/FiltersLayout/CompLayout/CompVal
+@onready var _contains = $MainLayout/FiltersLayout/ContainsFilter
+@onready var _list_lbl = $MainLayout/CardsLayout/ListLbl
+@onready var _dup_dlg = $DuplicateCardDialog
 
 
 func _ready():
-	_manager.connect("changed", self, "_on_db_changed")
+	_manager.connect("changed", Callable(self, "_on_db_changed"))
 
 
 func set_database(id: String):
@@ -161,7 +161,7 @@ func _update_categs():
 
 		select.select(selected)
 
-		select.connect("item_selected", self, "_on_CategFilter_item_selected", [select, meta])
+		select.connect("item_selected", Callable(self, "_on_CategFilter_item_selected"), [select, meta])
 
 
 func _update_values():
