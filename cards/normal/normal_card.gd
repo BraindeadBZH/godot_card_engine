@@ -33,11 +33,11 @@ func _update_data(data: CardData, default: CardData = null) -> void:
 		var orig = default.get_value("mana")
 
 		if val > orig:
-			_cost.add_color_override("font_color", Color("ff0000"))
+			_cost.add_theme_color_override("font_color", Color("ff0000"))
 		elif val < orig:
-			_cost.add_color_override("font_color", Color("00ff00"))
+			_cost.add_theme_color_override("font_color", Color("00ff00"))
 		else:
-			_cost.add_color_override("font_color", Color("ffffff"))
+			_cost.add_theme_color_override("font_color", Color("ffffff"))
 
 
 	_update_picture(data)
