@@ -50,7 +50,7 @@ func load_animations(anim_folder: String) -> void:
 
 	var dir = Directory.new()
 	if dir.open(_folder) == OK:
-		dir.list_dir_begin(true, true)
+		dir.list_dir_begin()
 		var filename = dir.get_next()
 		while filename != "":
 			if Utils.is_anim_file(filename):

@@ -54,11 +54,16 @@ func load_containers(folder: String, private_folder: String, tpl_folder: String)
 	_tpl_folder = tpl_folder
 	var dir = Directory.new()
 	if dir.open(_private_folder) == OK:
-		dir.list_dir_begin(true, true)
+		dir.list_dir_begin()
 		var filename = dir.get_next()
 		while filename != "":
 			if dir.current_is_dir():
 				var cont = _read_metadata(filename)
+				if cont == null:
+					printerr("Warning: container skipped ", filename)
+					filename = dir.get_next()
+					continue
+				
 				_containers[cont.id] = cont
 			filename = dir.get_next()
 		dir.list_dir_end()
@@ -298,8 +303,10 @@ func _read_metadata(id: String) -> ContainerData:
 	var file = ConfigFile.new()
 
 	var err = file.load(FMT_PRIVATE_DATA % [_private_folder, id, id])
-	if err != OK:
-		printerr("Error while loading container")
+	if err != OK: 
+		printerr("Error while loading container ",
+			error_string(err),
+			" - ", FMT_PRIVATE_DATA % [_private_folder, id, id])
 		return null
 
 	var cont = ContainerData.new(

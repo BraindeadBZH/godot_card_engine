@@ -61,7 +61,7 @@ func load_databases(folder: String) -> void:
 	_folder = folder
 	var dir = Directory.new()
 	if dir.open(_folder) == OK:
-		dir.list_dir_begin(true, true)
+		dir.list_dir_begin()
 		var filename = dir.get_next()
 		while filename != "":
 			if Utils.is_db_file(filename):

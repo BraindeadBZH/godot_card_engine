@@ -31,7 +31,7 @@ func is_valid_for_regex(value: String, regex: String) -> bool:
 func directory_remove_recursive(path: String) -> bool:
 	var dir = Directory.new()
 	if dir.open(path) == OK:
-		dir.list_dir_begin(true, false)
+		dir.list_dir_begin(false, true)
 		var filename = dir.get_next()
 		while filename != "":
 			if dir.current_is_dir():
