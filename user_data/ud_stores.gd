@@ -74,12 +74,12 @@ func _get_store(id: String) -> Dictionary:
 #   {"id": "<card id>", "source": "<database id>},
 #   ...
 # ]
-func _post_store(id: String, name: String, cards: Array) -> void:
+func _post_store(store_id: String, store_name: String, cards: Array) -> void:
 	var file = ConfigFile.new()
 	file.load(STORE_SAVE_FILE)
 
-	file.set_value(id, "name", name)
-	file.set_value(id, "cards", cards)
+	file.set_value(store_id, "name", store_name)
+	file.set_value(store_id, "cards", cards)
 	var err = file.save(STORE_SAVE_FILE)
 	if err != OK:
 		print("Could not save decks file")
