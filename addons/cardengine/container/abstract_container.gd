@@ -163,7 +163,7 @@ func _update_container() -> void:
 		if _cards.find_node(CARD_NODE_FMT % card.ref(), false, false) != null:
 			continue
 
-		var visual_inst = card_visual.instance()
+		var visual_inst = card_visual.instantiate()
 		if not visual_inst is AbstractCard:
 			printerr("Container visual instance must inherit AbstractCard")
 			continue
