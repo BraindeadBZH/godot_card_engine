@@ -12,7 +12,7 @@ variation_coordinates = {
 }
 data/0 = ExtResource( "5" )
 
-[sub_resource type="Font" id="2"]
+[sub_resource type="Font" id="Font_r3yim"]
 variation_coordinates = {
 }
 data/0 = ExtResource( "5" )
@@ -41,6 +41,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -510.0
+offset_top = -130.0
+offset_right = -410.0
+offset_bottom = -50.0
 rect_min_size = Vector2(80, 80)
 color = Color(0.917647, 0.890196, 0.521569, 1)
 script = null
@@ -49,13 +53,12 @@ __meta__ = {
 }
 
 [node name="DrawCount" type="Label" parent="DeckZone"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_fonts/font = SubResource( "1" )
+theme_override_font_sizes/font_size = 32
 text = "0"
 align = 1
 valign = 1
@@ -70,6 +73,8 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 6.0
+offset_bottom = 35.0
 text = "Draw"
 script = null
 __meta__ = {
@@ -81,6 +86,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = 410.0
+offset_top = -130.0
+offset_right = 510.0
+offset_bottom = -50.0
 rect_min_size = Vector2(80, 80)
 color = Color(0.917647, 0.890196, 0.521569, 1)
 script = null
@@ -89,13 +98,12 @@ __meta__ = {
 }
 
 [node name="DiscardCount" type="Label" parent="DiscardZone"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_fonts/font = SubResource( "1" )
+theme_override_font_sizes/font_size = 32
 text = "0"
 align = 1
 valign = 1
@@ -110,6 +118,8 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 6.0
+offset_bottom = 35.0
 disabled = true
 text = "Reshuffle"
 script = null
@@ -122,6 +132,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
 rect_min_size = Vector2(300, 300)
 color = Color(0.14902, 0.172549, 0.239216, 1)
 script = null
@@ -151,6 +165,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -330.0
+offset_top = -210.0
+offset_right = 330.0
+offset_bottom = -155.0
 alignment = 1
 script = null
 __meta__ = {
@@ -158,12 +176,13 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="ManaBar"]
-offset_right = 41.0
+offset_right = 60.0
 offset_bottom = 55.0
 size_flags_vertical = 3
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = SubResource( "2" )
+theme_override_fonts/font = SubResource( "Font_r3yim" )
+theme_override_font_sizes/font_size = 24
 text = "Mana  "
 valign = 1
 structured_text_bidi_override_options = []
@@ -174,8 +193,8 @@ __meta__ = {
 }
 
 [node name="Mana1" type="TextureRect" parent="ManaBar"]
-offset_left = 45.0
-offset_right = 85.0
+offset_left = 64.0
+offset_right = 104.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -184,8 +203,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana2" type="TextureRect" parent="ManaBar"]
-offset_left = 89.0
-offset_right = 129.0
+offset_left = 108.0
+offset_right = 148.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -194,8 +213,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana3" type="TextureRect" parent="ManaBar"]
-offset_left = 133.0
-offset_right = 173.0
+offset_left = 152.0
+offset_right = 192.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -204,8 +223,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana4" type="TextureRect" parent="ManaBar"]
-offset_left = 177.0
-offset_right = 217.0
+offset_left = 196.0
+offset_right = 236.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -214,8 +233,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana5" type="TextureRect" parent="ManaBar"]
-offset_left = 221.0
-offset_right = 261.0
+offset_left = 240.0
+offset_right = 280.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -224,8 +243,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana6" type="TextureRect" parent="ManaBar"]
-offset_left = 265.0
-offset_right = 305.0
+offset_left = 284.0
+offset_right = 324.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -234,8 +253,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana7" type="TextureRect" parent="ManaBar"]
-offset_left = 309.0
-offset_right = 349.0
+offset_left = 328.0
+offset_right = 368.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -244,8 +263,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana8" type="TextureRect" parent="ManaBar"]
-offset_left = 353.0
-offset_right = 393.0
+offset_left = 372.0
+offset_right = 412.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -254,8 +273,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana9" type="TextureRect" parent="ManaBar"]
-offset_left = 397.0
-offset_right = 437.0
+offset_left = 416.0
+offset_right = 456.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -264,8 +283,8 @@ stretch_mode = 6
 script = null
 
 [node name="Mana10" type="TextureRect" parent="ManaBar"]
-offset_left = 441.0
-offset_right = 481.0
+offset_left = 460.0
+offset_right = 500.0
 offset_bottom = 55.0
 rect_min_size = Vector2(40, 40)
 texture = ExtResource( "6" )
@@ -274,16 +293,20 @@ stretch_mode = 6
 script = null
 
 [node name="EndTurnBtn" parent="ManaBar" instance=ExtResource( "2" )]
-offset_left = 485.0
-offset_right = 660.0
+offset_left = 504.0
+offset_right = 679.0
 offset_bottom = 55.0
 rect_min_size = Vector2(175, 55)
+text = "End turn"
 
 [node name="HandZone" type="ColorRect" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -160.0
+offset_right = 400.0
 rect_min_size = Vector2(800, 160)
 color = Color(0.239216, 0.286275, 0.439216, 1)
 script = null
@@ -292,9 +315,7 @@ __meta__ = {
 }
 
 [node name="HandContainer" parent="HandZone" instance=ExtResource( "3" )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
 in_anchor = NodePath("../HandInAnchor")
 out_anchor = NodePath("../HandOutAnchor")
@@ -324,6 +345,8 @@ __meta__ = {
 }
 
 [node name="EffectsLayout" type="VBoxContainer" parent="."]
+offset_left = 10.0
+offset_top = 10.0
 script = null
 __meta__ = {
 "_edit_use_anchors_": false

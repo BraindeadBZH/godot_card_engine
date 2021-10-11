@@ -1,20 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://cvndkyjjg8hxm"]
 
-[ext_resource path="res://screens/builder/builder_screen.gd" type="Script" id=1]
-[ext_resource path="res://screens/builder/background.png" type="Texture" id=2]
-[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://containers/card_list/card_list.tscn" type="PackedScene" id=4]
-[ext_resource path="res://widgets/small_button/small_button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/cardengine/core/drop_area.gd" type="Script" id=7]
+[ext_resource type="Script" path="res://screens/builder/builder_screen.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://kvyitmtmi5a7" path="res://screens/builder/background.png" id="2"]
+[ext_resource type="FontData" uid="uid://bte6bvg3h4lwj" path="res://fonts/ArchivoNarrow-Bold.ttf" id="3"]
+[ext_resource type="PackedScene" path="res://containers/card_list/card_list.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dhold8ocsbk5t" path="res://widgets/small_button/small_button.tscn" id="5"]
+[ext_resource type="Script" path="res://addons/cardengine/core/drop_area.gd" id="7"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 20
-font_data = ExtResource( 3 )
+[sub_resource type="Font" id="1"]
+variation_coordinates = {
+}
+data/0 = ExtResource( "3" )
 
 [node name="BuilderScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -22,20 +23,20 @@ __meta__ = {
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
+texture = ExtResource( "2" )
 expand = true
 stretch_mode = 1
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TitleBg" type="ColorRect" parent="."]
 anchor_right = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-rect_min_size = Vector2( 0, 60 )
-color = Color( 0, 0, 0, 0.784314 )
+offset_bottom = 85.0
+rect_min_size = Vector2(0, 60)
+color = Color(0, 0, 0, 0.784314)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -43,189 +44,229 @@ __meta__ = {
 [node name="TitleLayout" type="HBoxContainer" parent="TitleBg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 5.0
-margin_right = -5.0
-margin_bottom = -5.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="TitleBg/TitleLayout"]
-margin_right = 57.0
-margin_bottom = 51.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+offset_top = 3.0
+offset_right = 73.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource( "1" )
+theme_override_font_sizes/font_size = 26
 text = "Deck
 Builder"
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Separator" type="Control" parent="TitleBg/TitleLayout"]
-margin_left = 61.0
-margin_right = 81.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 20, 0 )
+offset_left = 77.0
+offset_right = 97.0
+offset_bottom = 75.0
+rect_min_size = Vector2(20, 0)
+script = null
 
 [node name="CategoriesLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
-margin_left = 85.0
-margin_right = 328.0
-margin_bottom = 52.0
+offset_left = 101.0
+offset_right = 375.0
+offset_bottom = 75.0
+alignment = 1
+script = null
 
 [node name="ClassLayout" type="HBoxContainer" parent="TitleBg/TitleLayout/CategoriesLayout"]
-margin_right = 243.0
-margin_bottom = 20.0
+offset_top = 6.0
+offset_right = 274.0
+offset_bottom = 35.0
+script = null
 
 [node name="ClassLbl" type="Label" parent="TitleBg/TitleLayout/CategoriesLayout/ClassLayout"]
-margin_top = 3.0
-margin_right = 88.0
-margin_bottom = 17.0
+offset_top = 1.0
+offset_right = 120.0
+offset_bottom = 27.0
+rect_min_size = Vector2(120, 0)
 text = "Filter by class"
+structured_text_bidi_override_options = []
+script = null
 
 [node name="Class" type="OptionButton" parent="TitleBg/TitleLayout/CategoriesLayout/ClassLayout"]
-margin_left = 92.0
-margin_right = 242.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 150, 0 )
+offset_left = 124.0
+offset_right = 274.0
+offset_bottom = 29.0
+rect_min_size = Vector2(150, 0)
+items = []
+script = null
 
 [node name="RarityLayout" type="HBoxContainer" parent="TitleBg/TitleLayout/CategoriesLayout"]
-margin_top = 24.0
-margin_right = 243.0
-margin_bottom = 48.0
+offset_top = 39.0
+offset_right = 274.0
+offset_bottom = 68.0
+script = null
 
 [node name="RarityLbl" type="Label" parent="TitleBg/TitleLayout/CategoriesLayout/RarityLayout"]
-margin_right = 89.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+offset_top = 1.0
+offset_right = 120.0
+offset_bottom = 27.0
+rect_min_size = Vector2(120, 24)
 text = "Filter by rarity"
 valign = 1
+structured_text_bidi_override_options = []
+script = null
 
 [node name="Rarity" type="OptionButton" parent="TitleBg/TitleLayout/CategoriesLayout/RarityLayout"]
-margin_left = 93.0
-margin_right = 243.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 150, 0 )
+offset_left = 124.0
+offset_right = 274.0
+offset_bottom = 29.0
+rect_min_size = Vector2(150, 0)
+items = []
+script = null
 
 [node name="ValuesLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
-margin_left = 332.0
-margin_right = 482.0
-margin_bottom = 52.0
+offset_left = 379.0
+offset_right = 529.0
+offset_bottom = 75.0
+alignment = 1
+script = null
 
 [node name="Values" type="OptionButton" parent="TitleBg/TitleLayout/ValuesLayout"]
-margin_right = 150.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 150, 0 )
+offset_top = 4.0
+offset_right = 150.0
+offset_bottom = 33.0
+rect_min_size = Vector2(150, 0)
 clip_text = true
+items = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ComparisionLayout" type="HBoxContainer" parent="TitleBg/TitleLayout/ValuesLayout"]
-margin_top = 24.0
-margin_right = 150.0
-margin_bottom = 48.0
+offset_top = 37.0
+offset_right = 150.0
+offset_bottom = 70.0
+script = null
 
 [node name="ComparisonOperator" type="OptionButton" parent="TitleBg/TitleLayout/ValuesLayout/ComparisionLayout"]
-margin_right = 72.0
-margin_bottom = 24.0
+offset_right = 60.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
 text = "="
 clip_text = true
-items = [ "=", null, false, 0, null, ">", null, false, 1, null, ">=", null, false, 2, null, "<", null, false, 3, null, "<=", null, false, 4, null ]
+items = ["=", null, false, 0, null, ">", null, false, 1, null, ">=", null, false, 2, null, "<", null, false, 3, null, "<=", null, false, 4, null]
 selected = 0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ComparisonValue" type="SpinBox" parent="TitleBg/TitleLayout/ValuesLayout/ComparisionLayout"]
-margin_left = 76.0
-margin_right = 150.0
-margin_bottom = 24.0
+offset_left = 64.0
+offset_right = 150.0
+offset_bottom = 33.0
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextsLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
-margin_left = 486.0
-margin_right = 636.0
-margin_bottom = 52.0
+offset_left = 533.0
+offset_right = 683.0
+offset_bottom = 75.0
+alignment = 1
+script = null
 
 [node name="Texts" type="OptionButton" parent="TitleBg/TitleLayout/TextsLayout"]
-margin_right = 150.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 150, 0 )
+offset_top = 4.0
+offset_right = 150.0
+offset_bottom = 33.0
+rect_min_size = Vector2(150, 0)
 clip_text = true
+items = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Contains" type="LineEdit" parent="TitleBg/TitleLayout/TextsLayout"]
-margin_top = 24.0
-margin_right = 150.0
-margin_bottom = 48.0
+offset_top = 37.0
+offset_right = 150.0
+offset_bottom = 70.0
+structured_text_bidi_override_options = []
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SortLayout" type="GridContainer" parent="TitleBg/TitleLayout"]
-margin_left = 640.0
-margin_right = 867.0
-margin_bottom = 52.0
+offset_left = 687.0
+offset_right = 951.0
+offset_bottom = 75.0
 columns = 2
+script = null
 
 [node name="RaritySort" type="CheckBox" parent="TitleBg/TitleLayout/SortLayout"]
-margin_right = 112.0
-margin_bottom = 24.0
+offset_right = 130.0
+offset_bottom = 31.0
 text = "Sort by rarity"
+script = null
 
 [node name="ManaSort" type="CheckBox" parent="TitleBg/TitleLayout/SortLayout"]
-margin_left = 116.0
-margin_right = 227.0
-margin_bottom = 24.0
+offset_left = 134.0
+offset_right = 264.0
+offset_bottom = 31.0
 text = "Sort by mana"
+script = null
 
 [node name="NameSort" type="CheckBox" parent="TitleBg/TitleLayout/SortLayout"]
-margin_top = 28.0
-margin_right = 112.0
-margin_bottom = 52.0
+offset_top = 35.0
+offset_right = 130.0
+offset_bottom = 66.0
 text = "Sort by name"
+script = null
 
 [node name="Spacer" type="Control" parent="TitleBg/TitleLayout"]
-margin_left = 871.0
-margin_right = 1026.0
-margin_bottom = 52.0
+offset_left = 955.0
+offset_right = 1066.0
+offset_bottom = 75.0
 size_flags_horizontal = 3
+script = null
 
-[node name="BackBtn" parent="TitleBg/TitleLayout" instance=ExtResource( 5 )]
-margin_left = 1030.0
-margin_right = 1230.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 200, 0 )
-button_text = "Back"
+[node name="BackBtn" parent="TitleBg/TitleLayout" instance=ExtResource( "5" )]
+offset_left = 1070.0
+offset_right = 1270.0
+offset_bottom = 75.0
+rect_min_size = Vector2(200, 0)
+text = "Back to menu"
 
 [node name="BuilderLayout" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 100.0
-margin_right = -20.0
-margin_bottom = -20.0
+offset_top = 90.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LibraryBg" type="ColorRect" parent="BuilderLayout"]
-margin_right = 996.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 0, 60 )
+offset_right = 1036.0
+offset_bottom = 630.0
+rect_min_size = Vector2(0, 60)
 size_flags_horizontal = 3
-color = Color( 0, 0, 0, 0.784314 )
+color = Color(0, 0, 0, 0.784314)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -233,17 +274,14 @@ __meta__ = {
 [node name="LibraryScroll" type="ScrollContainer" parent="BuilderLayout/LibraryBg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = -20.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LibraryContainer" parent="BuilderLayout/LibraryBg/LibraryScroll" instance=ExtResource( 4 )]
-margin_right = 956.0
-margin_bottom = 560.0
+[node name="LibraryContainer" parent="BuilderLayout/LibraryBg/LibraryScroll" instance=ExtResource( "4" )]
+offset_right = 1036.0
+offset_bottom = 630.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 in_anchor = NodePath("../../InAnchor")
@@ -253,7 +291,8 @@ out_anchor = NodePath("../../OutAnchor")
 anchor_top = 0.5
 anchor_bottom = 0.5
 rect_rotation = 90.0
-rect_scale = Vector2( 1e-05, 1e-05 )
+rect_scale = Vector2(1e-05, 1e-05)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -264,23 +303,25 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 rect_rotation = 90.0
-rect_scale = Vector2( 1e-05, 1e-05 )
+rect_scale = Vector2(1e-05, 1e-05)
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DeckBg" type="ColorRect" parent="BuilderLayout"]
-margin_left = 1000.0
-margin_right = 1240.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 240, 0 )
-color = Color( 0, 0, 0, 0.784314 )
+offset_left = 1040.0
+offset_right = 1280.0
+offset_bottom = 630.0
+rect_min_size = Vector2(240, 0)
+color = Color(0, 0, 0, 0.784314)
+script = null
 
 [node name="CardDrop" type="Control" parent="BuilderLayout/DeckBg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-script = ExtResource( 7 )
+script = ExtResource( "7" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -288,55 +329,64 @@ __meta__ = {
 [node name="DeckLayout" type="VBoxContainer" parent="BuilderLayout/DeckBg/CardDrop"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DeckSelect" type="OptionButton" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
-margin_right = 220.0
-margin_bottom = 20.0
+offset_right = 230.0
+offset_bottom = 29.0
+items = []
+script = null
 
 [node name="UseBtn" type="Button" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
-margin_top = 24.0
-margin_right = 220.0
-margin_bottom = 44.0
+offset_top = 33.0
+offset_right = 230.0
+offset_bottom = 62.0
 disabled = true
 text = "Play this deck (10)"
+script = null
 
 [node name="DeckSaveLayout" type="HBoxContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
-margin_top = 48.0
-margin_right = 220.0
-margin_bottom = 72.0
+offset_top = 66.0
+offset_right = 230.0
+offset_bottom = 99.0
+script = null
 
 [node name="DeckName" type="LineEdit" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout"]
-margin_right = 175.0
-margin_bottom = 24.0
+offset_right = 178.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
+structured_text_bidi_override_options = []
 placeholder_text = "Deck name"
+script = null
 
 [node name="SaveBtn" type="Button" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout"]
-margin_left = 179.0
-margin_right = 220.0
-margin_bottom = 24.0
+offset_left = 182.0
+offset_right = 230.0
+offset_bottom = 33.0
 disabled = true
 text = "Save"
+script = null
 
 [node name="DeckScroll" type="ScrollContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout"]
-margin_top = 76.0
-margin_right = 220.0
-margin_bottom = 580.0
-mouse_filter = 1
+offset_top = 103.0
+offset_right = 230.0
+offset_bottom = 620.0
 size_flags_vertical = 3
+script = null
 
 [node name="DeckList" type="VBoxContainer" parent="BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll"]
-margin_right = 220.0
-margin_bottom = 504.0
+offset_right = 230.0
+offset_bottom = 517.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = null
 
 [connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class" to="." method="_on_Class_item_selected"]
 [connection signal="item_selected" from="TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity" to="." method="_on_Rarity_item_selected"]
