@@ -1,15 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dhold8ocsbk5t"]
 
-[ext_resource path="res://widgets/menu_button/menu_button.tscn" type="PackedScene" id=1]
-[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource type="PackedScene" uid="uid://br8o66b8nawid" path="res://widgets/menu_button/menu_button.tscn" id="1"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 25
-font_data = ExtResource( 2 )
-
-[node name="SmallButton" instance=ExtResource( 1 )]
-margin_right = 175.0
-margin_bottom = 55.0
-
-[node name="Text" parent="." index="0"]
-custom_fonts/font = SubResource( 1 )
+[node name="SmallButton" instance=ExtResource( "1" )]
+offset_right = 200.0
+offset_bottom = 50.0
+rect_min_size = Vector2(200, 50)
+theme_override_font_sizes/font_size = 18
