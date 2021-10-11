@@ -12,6 +12,11 @@ extends AbstractCard
 @onready var _card_id = $AnimContainer/Front/CardId
 
 
+func _ready() -> void:
+	# Workaround for https://github.com/godotengine/godot/issues/52223
+	super._ready()
+
+
 func _update_data(data: CardData, default: CardData = null) -> void:
 	_card_id.text = data.id
 
