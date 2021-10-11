@@ -478,20 +478,20 @@ func _change_state(new_state: int) -> void:
 func _change_anim(anim: String) -> void:
 	if _anim == null or _remove_flag:
 		return
-
-	_anim_player.remove_all()
-	_anim_player.repeat = false
-	_current_anim = anim
-
-	match anim:
-		"idle":
-			_anim_player.repeat = true
-
-			_cont.position = Vector2(0.0, 0.0)
-			_cont.scale = Vector2(1.0, 1.0)
-			_cont.rotation = 0.0
-
-			# TODO: Move to the new Tween class
+	
+# TODO: Move to the new Tween class
+#	_anim_player.remove_all()
+#	_anim_player.repeat = false
+#	_current_anim = anim
+#
+#	match anim:
+#		"idle":
+#			_anim_player.repeat = true
+#
+#			_cont.position = Vector2(0.0, 0.0)
+#			_cont.scale = Vector2(1.0, 1.0)
+#			_cont.rotation = 0.0
+#
 #			_setup_pos_sequence(
 #				_anim.idle_loop().position_sequence(),
 #				_anim_player)
@@ -503,16 +503,15 @@ func _change_anim(anim: String) -> void:
 #			_setup_rotation_sequence(
 #				_anim.idle_loop().rotation_sequence(),
 #				_anim_player)
-
-		"focused":
-			if _adjust_on_focused and _adjusted_trans != null:
-				_transition(_root_trans, _adjusted_trans)
-
-			_cont.position = Vector2(0.0, 0.0)
-			_cont.scale = Vector2(1.0, 1.0)
-			_cont.rotation = 0.0
-
-			# TODO: Move to the new Tween class
+#
+#		"focused":
+#			if _adjust_on_focused and _adjusted_trans != null:
+#				_transition(_root_trans, _adjusted_trans)
+#
+#			_cont.position = Vector2(0.0, 0.0)
+#			_cont.scale = Vector2(1.0, 1.0)
+#			_cont.rotation = 0.0
+#
 #			_setup_pos_sequence(
 #				_anim.focused_animation().position_sequence(),
 #				_anim_player)
@@ -524,16 +523,15 @@ func _change_anim(anim: String) -> void:
 #			_setup_rotation_sequence(
 #				_anim.focused_animation().rotation_sequence(),
 #				_anim_player)
-
-		"activated":
-			if _adjust_on_activated and _adjusted_trans != null:
-				_transition(_root_trans, _adjusted_trans)
-
-			_cont.position = _trans_focused.pos
-			_cont.scale = _trans_focused.scale
-			_cont.rotation = _trans_focused.rot
-
-			# TODO: Move to the new Tween class
+#
+#		"activated":
+#			if _adjust_on_activated and _adjusted_trans != null:
+#				_transition(_root_trans, _adjusted_trans)
+#
+#			_cont.position = _trans_focused.pos
+#			_cont.scale = _trans_focused.scale
+#			_cont.rotation = _trans_focused.rot
+#
 #			_setup_pos_sequence(
 #				_anim.activated_animation().position_sequence(),
 #				_anim_player)
@@ -545,16 +543,15 @@ func _change_anim(anim: String) -> void:
 #			_setup_rotation_sequence(
 #				_anim.activated_animation().rotation_sequence(),
 #				_anim_player)
-
-		"deactivated":
-			if _adjust_on_activated and _adjusted_trans != null:
-				_transition(_adjusted_trans, _root_trans)
-
-			_cont.position = _trans_activated.pos
-			_cont.scale = _trans_activated.scale
-			_cont.rotation = _trans_activated.rot
-
-			# TODO: Move to the new Tween class
+#
+#		"deactivated":
+#			if _adjust_on_activated and _adjusted_trans != null:
+#				_transition(_adjusted_trans, _root_trans)
+#
+#			_cont.position = _trans_activated.pos
+#			_cont.scale = _trans_activated.scale
+#			_cont.rotation = _trans_activated.rot
+#
 #			_setup_pos_sequence(
 #				_anim.deactivated_animation().position_sequence(),
 #				_anim_player)
@@ -566,16 +563,15 @@ func _change_anim(anim: String) -> void:
 #			_setup_rotation_sequence(
 #				_anim.deactivated_animation().rotation_sequence(),
 #				_anim_player)
-
-		"unfocused":
-			if _adjust_on_focused and _adjusted_trans != null:
-				_transition(_adjusted_trans, _root_trans)
-
-			_cont.position = _trans_focused.pos
-			_cont.scale = _trans_focused.scale
-			_cont.rotation = _trans_focused.rot
-
-			# TODO: Move to the new Tween class
+#
+#		"unfocused":
+#			if _adjust_on_focused and _adjusted_trans != null:
+#				_transition(_adjusted_trans, _root_trans)
+#
+#			_cont.position = _trans_focused.pos
+#			_cont.scale = _trans_focused.scale
+#			_cont.rotation = _trans_focused.rot
+#
 #			_setup_pos_sequence(
 #				_anim.unfocused_animation().position_sequence(),
 #				_anim_player)
@@ -587,8 +583,8 @@ func _change_anim(anim: String) -> void:
 #			_setup_rotation_sequence(
 #				_anim.unfocused_animation().rotation_sequence(),
 #				_anim_player)
-
-	_anim_player.start()
+#
+#	_anim_player.start()
 
 
 func _post_event(event: String) -> void:
