@@ -108,7 +108,7 @@ func load_store(id: String, dest: AbstractStore) -> void:
 		dest.add_card(CardInstance.new(card_data.duplicate()))
 
 
-func save_store(id: String, name: String, store: AbstractStore) -> void:
+func save_store(id: String, store_name: String, store: AbstractStore) -> void:
 	var cards := []
 	for card in store.cards():
 		var data := {
@@ -117,7 +117,7 @@ func save_store(id: String, name: String, store: AbstractStore) -> void:
 		}
 		cards.append(data)
 
-	_post_store(id, name, cards)
+	_post_store(id, store_name, cards)
 
 	store.save_id = id
-	store.save_name = name
+	store.save_name = store_name
