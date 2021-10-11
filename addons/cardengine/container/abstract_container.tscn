@@ -1,24 +1,25 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bjii1wqlcyoda"]
 
-[ext_resource path="res://addons/cardengine/container/abstract_container.gd" type="Script" id=1]
-[ext_resource path="res://addons/cardengine/core/drop_area.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://addons/cardengine/container/abstract_container.gd" id="1"]
+[ext_resource type="PackedScene" path="res://addons/cardengine/core/drop_area.tscn" id="2"]
 
 [node name="AbstractContainer" type="Control"]
-script = ExtResource( 1 )
+script = ExtResource( "1" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CardPath" type="Path2D" parent="."]
-curve = null
+script = null
 
-[node name="DropArea" parent="." instance=ExtResource( 2 )]
+[node name="DropArea" parent="." instance=ExtResource( "2" )]
 mouse_filter = 1
 
 [node name="Cards" type="Control" parent="DropArea"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
