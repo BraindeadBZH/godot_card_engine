@@ -36,12 +36,6 @@ wait_time = 0.1
 autostart = true
 script = null
 
-[node name="Transitions" type="Node" parent="."]
-script = null
-
-[node name="AnimationPlayer" type="Node" parent="."]
-script = null
-
 [connection signal="button_down" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_down"]
 [connection signal="button_up" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_up"]
 [connection signal="drag_started" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_drag_started"]

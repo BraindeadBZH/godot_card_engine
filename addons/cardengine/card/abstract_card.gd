@@ -44,11 +44,14 @@ var _waiting_card_return: bool = false
 @onready var _placeholder = $AnimContainer/Placeholder
 @onready var _front = $AnimContainer/Front
 @onready var _back  = $AnimContainer/Back
-@onready var _transi = $Transitions
 @onready var _transi_merge = $TransiMerge
-@onready var _anim_player = $AnimationPlayer
 @onready var _event_merge = $EventMerge
 @onready var _mouse = $AnimContainer/MouseArea
+
+@onready var _transi := create_tween()
+@onready var _pos_seq_player := create_tween()
+@onready var _scale_seq_player := create_tween()
+@onready var _rot_seq_player := create_tween()
 
 
 func _ready() -> void:
@@ -169,7 +172,9 @@ func set_drag_enabled(state: bool) -> void:
 
 func set_animation(anim: AnimationData) -> void:
 	if anim == null:
-		_anim_player.remove_all()
+		_pos_seq_player.kill()
+		_scale_seq_player.kill()
+		_rot_seq_player.kill()
 
 	_cont.position = Vector2(0.0, 0.0)
 	_cont.scale = Vector2(1.0, 1.0)
@@ -255,23 +260,22 @@ func _transition(from_in: CardTransform, to_in: CardTransform) -> void:
 	scale = from.scale
 	rotation = from.rot
 
-	_transi.remove_all()
+	_transi.kill()
+	_transi = create_tween()
+	_transi.set_loops(1)
+	_transi.set_parallel()
 
-	_transi.interpolate_property(
-		self, "position", from.pos, to.pos, duration, type, easing)
+	_transi.tween_property(self, "position", to.pos, duration).from(from.pos).set_trans(type).set_ease(easing)
 
-	_transi.interpolate_property(
-		self, "scale", from.scale, to.scale, duration, type, easing)
+	_transi.tween_property(self, "scale", to.scale, duration).from(from.scale).set_trans(type).set_ease(easing)
 
-	_transi.interpolate_property(
-		self, "rotation", from.rot, to.rot, duration, type, easing)
+	_transi.tween_property(self, "rotation", to.rot, duration).from(from.rot).set_trans(type).set_ease(easing)
 
-	_transi.start()
+	_transi.play()
 
 
-func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
+func _setup_pos_sequence(seq: PositionSequence, player: Tween = null) -> Vector2:
 	var prev_val: Vector2 = Vector2(0.0, 0.0)
-	var delay: float = 0.0
 
 	match seq.from_mode():
 		AnimationSequence.INIT_ORIGIN:
@@ -305,29 +309,25 @@ func _setup_pos_sequence(seq: PositionSequence, player: Tween) -> Vector2:
 					final_pos = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
 
-			if not step.transi.interactive:
-				player.interpolate_callback(self, delay, "set_interaction_paused", true)
+			if player != null:
+				if not step.transi.interactive:
+					player.tween_callback(self.set_interection_paused(true))
 
-			player.interpolate_property(
-				_cont, "position",
-				prev_val, final_pos,
-				final_duration, step.transi.type, step.transi.easing, delay)
+				player.tween_property(_cont, "position", final_pos, final_duration).from(prev_val).set_trans(step.transi.type).set_ease(step.transi.easing)
 
+				if step.transi.flip_card:
+					player.tween_callback(self.change_side)
+
+				if not step.transi.interactive:
+					player.tween_callback(self.set_interection_paused(false))
+			
 			prev_val = final_pos
-			delay += final_duration
-
-			if step.transi.flip_card:
-				player.interpolate_callback(self, delay, "change_side")
-
-			if not step.transi.interactive:
-				player.interpolate_callback(self, delay, "set_interaction_paused", false)
 
 	return prev_val
 
 
-func _setup_scale_sequence(seq: ScaleSequence, player: Tween) -> Vector2:
+func _setup_scale_sequence(seq: ScaleSequence, player: Tween = null) -> Vector2:
 	var prev_val: Vector2 = Vector2(1.0, 1.0)
-	var delay: float = 0.0
 
 	match seq.from_mode():
 		AnimationSequence.INIT_ORIGIN:
@@ -361,29 +361,25 @@ func _setup_scale_sequence(seq: ScaleSequence, player: Tween) -> Vector2:
 					final_scale = _rng.random_vec2_range(
 						step.val.vec_val, step.val.vec_range)
 
-			if not step.transi.interactive:
-				player.interpolate_callback(self, delay, "set_interaction_paused", true)
+			if player != null:
+				if not step.transi.interactive:
+					player.tween_callback(self.set_interection_paused(true))
 
-			player.interpolate_property(
-				_cont, "scale",
-				prev_val, final_scale,
-				final_duration, step.transi.type, step.transi.easing, delay)
+				player.tween_property(_cont, "scale", final_scale, final_duration).from(prev_val).set_trans(step.transi.type).set_ease(step.transi.easing)
 
+				if step.transi.flip_card:
+					player.tween_callback(self.change_side)
+
+				if not step.transi.interactive:
+					player.tween_callback(self.set_interection_paused(false))
+				
 			prev_val = final_scale
-			delay += final_duration
-
-			if step.transi.flip_card:
-				player.interpolate_callback(self, delay, "change_side")
-
-			if not step.transi.interactive:
-				player.interpolate_callback(self, delay, "set_interaction_paused", false)
 
 	return prev_val
 
 
-func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
+func _setup_rotation_sequence(seq: RotationSequence, player: Tween = null) -> float:
 	var prev_val: float = 0.0
-	var delay: float = 0.0
 
 	match seq.from_mode():
 		AnimationSequence.INIT_ORIGIN:
@@ -417,22 +413,20 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween) -> float:
 					final_rot = deg2rad(_rng.randomf_range(
 						step.val.num_val, step.val.num_range))
 
-			if not step.transi.interactive:
-				player.interpolate_callback(self, delay, "set_interaction_paused", true)
+			if player != null:
+				if not step.transi.interactive:
+					player.tween_callback(self.set_interection_paused(true))
 
-			player.interpolate_property(
-				_cont, "rotation",
-				prev_val, final_rot,
-				final_duration, step.transi.type, step.transi.easing, delay)
+				player.tween_property(_cont, "rotation", final_rot, final_duration).from(prev_val).set_trans(step.transi.type).set_ease(step.transi.easing)
 
+
+				if step.transi.flip_card:
+					player.tween_callback(self.change_side)
+
+				if not step.transi.interactive:
+					player.tween_callback(self.set_interection_paused(false))
+				
 			prev_val = final_rot
-			delay += final_duration
-
-			if step.transi.flip_card:
-				player.interpolate_callback(self, delay, "change_side")
-
-			if not step.transi.interactive:
-				player.interpolate_callback(self, delay, "set_interaction_paused", false)
 
 	return prev_val
 
@@ -441,30 +435,23 @@ func _precompute_trans() -> void:
 	if _anim == null:
 		return
 	
-	# TODO: Move to the new Tween class
-#	_trans_focused.pos = _setup_pos_sequence(
-#		_anim.focused_animation().position_sequence(),
-#		_anim_player)
-#
-#	_trans_focused.scale = _setup_scale_sequence(
-#		_anim.focused_animation().scale_sequence(),
-#		_anim_player)
-#
-#	_trans_focused.rot = _setup_rotation_sequence(
-#		_anim.focused_animation().rotation_sequence(),
-#		_anim_player)
-#
-#	_trans_activated.pos = _setup_pos_sequence(
-#		_anim.activated_animation().position_sequence(),
-#		_anim_player)
-#
-#	_trans_activated.scale = _setup_scale_sequence(
-#		_anim.activated_animation().scale_sequence(),
-#		_anim_player)
-#
-#	_trans_activated.rot = _setup_rotation_sequence(
-#		_anim.activated_animation().rotation_sequence(),
-#		_anim_player)
+	_trans_focused.pos = _setup_pos_sequence(
+		_anim.focused_animation().position_sequence())
+
+	_trans_focused.scale = _setup_scale_sequence(
+		_anim.focused_animation().scale_sequence())
+
+	_trans_focused.rot = _setup_rotation_sequence(
+		_anim.focused_animation().rotation_sequence())
+
+	_trans_activated.pos = _setup_pos_sequence(
+		_anim.activated_animation().position_sequence())
+
+	_trans_activated.scale = _setup_scale_sequence(
+		_anim.activated_animation().scale_sequence(),)
+
+	_trans_activated.rot = _setup_rotation_sequence(
+		_anim.activated_animation().rotation_sequence())
 
 
 func _change_state(new_state: int) -> void:
@@ -479,112 +466,125 @@ func _change_anim(anim: String) -> void:
 	if _anim == null or _remove_flag:
 		return
 	
-# TODO: Move to the new Tween class
-#	_anim_player.remove_all()
-#	_anim_player.repeat = false
-#	_current_anim = anim
-#
-#	match anim:
-#		"idle":
-#			_anim_player.repeat = true
-#
-#			_cont.position = Vector2(0.0, 0.0)
-#			_cont.scale = Vector2(1.0, 1.0)
-#			_cont.rotation = 0.0
-#
-#			_setup_pos_sequence(
-#				_anim.idle_loop().position_sequence(),
-#				_anim_player)
-#
-#			_setup_scale_sequence(
-#				_anim.idle_loop().scale_sequence(),
-#				_anim_player)
-#
-#			_setup_rotation_sequence(
-#				_anim.idle_loop().rotation_sequence(),
-#				_anim_player)
-#
-#		"focused":
-#			if _adjust_on_focused and _adjusted_trans != null:
-#				_transition(_root_trans, _adjusted_trans)
-#
-#			_cont.position = Vector2(0.0, 0.0)
-#			_cont.scale = Vector2(1.0, 1.0)
-#			_cont.rotation = 0.0
-#
-#			_setup_pos_sequence(
-#				_anim.focused_animation().position_sequence(),
-#				_anim_player)
-#
-#			_setup_scale_sequence(
-#				_anim.focused_animation().scale_sequence(),
-#				_anim_player)
-#
-#			_setup_rotation_sequence(
-#				_anim.focused_animation().rotation_sequence(),
-#				_anim_player)
-#
-#		"activated":
-#			if _adjust_on_activated and _adjusted_trans != null:
-#				_transition(_root_trans, _adjusted_trans)
-#
-#			_cont.position = _trans_focused.pos
-#			_cont.scale = _trans_focused.scale
-#			_cont.rotation = _trans_focused.rot
-#
-#			_setup_pos_sequence(
-#				_anim.activated_animation().position_sequence(),
-#				_anim_player)
-#
-#			_setup_scale_sequence(
-#				_anim.activated_animation().scale_sequence(),
-#				_anim_player)
-#
-#			_setup_rotation_sequence(
-#				_anim.activated_animation().rotation_sequence(),
-#				_anim_player)
-#
-#		"deactivated":
-#			if _adjust_on_activated and _adjusted_trans != null:
-#				_transition(_adjusted_trans, _root_trans)
-#
-#			_cont.position = _trans_activated.pos
-#			_cont.scale = _trans_activated.scale
-#			_cont.rotation = _trans_activated.rot
-#
-#			_setup_pos_sequence(
-#				_anim.deactivated_animation().position_sequence(),
-#				_anim_player)
-#
-#			_setup_scale_sequence(
-#				_anim.deactivated_animation().scale_sequence(),
-#				_anim_player)
-#
-#			_setup_rotation_sequence(
-#				_anim.deactivated_animation().rotation_sequence(),
-#				_anim_player)
-#
-#		"unfocused":
-#			if _adjust_on_focused and _adjusted_trans != null:
-#				_transition(_adjusted_trans, _root_trans)
-#
-#			_cont.position = _trans_focused.pos
-#			_cont.scale = _trans_focused.scale
-#			_cont.rotation = _trans_focused.rot
-#
-#			_setup_pos_sequence(
-#				_anim.unfocused_animation().position_sequence(),
-#				_anim_player)
-#
-#			_setup_scale_sequence(
-#				_anim.unfocused_animation().scale_sequence(),
-#				_anim_player)
-#
-#			_setup_rotation_sequence(
-#				_anim.unfocused_animation().rotation_sequence(),
-#				_anim_player)
-#
-#	_anim_player.start()
+	_pos_seq_player.kill()
+	_pos_seq_player = create_tween()
+	_pos_seq_player.set_loops(1)
+	
+	_scale_seq_player.kill()
+	_scale_seq_player = create_tween()
+	_scale_seq_player.set_loops(1)
+	
+	_rot_seq_player.kill()
+	_rot_seq_player = create_tween()
+	_rot_seq_player.set_loops(1)
+	
+	_current_anim = anim
+
+	match anim:
+		"idle":
+			_pos_seq_player.set_loops()
+			_scale_seq_player.set_loops()
+			_rot_seq_player.set_loops()
+
+			_cont.position = Vector2(0.0, 0.0)
+			_cont.scale = Vector2(1.0, 1.0)
+			_cont.rotation = 0.0
+			
+			_setup_pos_sequence(
+				_anim.idle_loop().position_sequence(),
+				_pos_seq_player)
+
+			_setup_scale_sequence(
+				_anim.idle_loop().scale_sequence(),
+				_scale_seq_player)
+
+			_setup_rotation_sequence(
+				_anim.idle_loop().rotation_sequence(),
+				_rot_seq_player)
+
+		"focused":
+			if _adjust_on_focused and _adjusted_trans != null:
+				_transition(_root_trans, _adjusted_trans)
+
+			_cont.position = Vector2(0.0, 0.0)
+			_cont.scale = Vector2(1.0, 1.0)
+			_cont.rotation = 0.0
+
+			_setup_pos_sequence(
+				_anim.focused_animation().position_sequence(),
+				_pos_seq_player)
+
+			_setup_scale_sequence(
+				_anim.focused_animation().scale_sequence(),
+				_scale_seq_player)
+
+			_setup_rotation_sequence(
+				_anim.focused_animation().rotation_sequence(),
+				_rot_seq_player)
+
+		"activated":
+			if _adjust_on_activated and _adjusted_trans != null:
+				_transition(_root_trans, _adjusted_trans)
+
+			_cont.position = _trans_focused.pos
+			_cont.scale = _trans_focused.scale
+			_cont.rotation = _trans_focused.rot
+
+			_setup_pos_sequence(
+				_anim.activated_animation().position_sequence(),
+				_pos_seq_player)
+
+			_setup_scale_sequence(
+				_anim.activated_animation().scale_sequence(),
+				_scale_seq_player)
+
+			_setup_rotation_sequence(
+				_anim.activated_animation().rotation_sequence(),
+				_rot_seq_player)
+
+		"deactivated":
+			if _adjust_on_activated and _adjusted_trans != null:
+				_transition(_adjusted_trans, _root_trans)
+
+			_cont.position = _trans_activated.pos
+			_cont.scale = _trans_activated.scale
+			_cont.rotation = _trans_activated.rot
+
+			_setup_pos_sequence(
+				_anim.deactivated_animation().position_sequence(),
+				_pos_seq_player)
+
+			_setup_scale_sequence(
+				_anim.deactivated_animation().scale_sequence(),
+				_scale_seq_player)
+
+			_setup_rotation_sequence(
+				_anim.deactivated_animation().rotation_sequence(),
+				_rot_seq_player)
+
+		"unfocused":
+			if _adjust_on_focused and _adjusted_trans != null:
+				_transition(_adjusted_trans, _root_trans)
+
+			_cont.position = _trans_focused.pos
+			_cont.scale = _trans_focused.scale
+			_cont.rotation = _trans_focused.rot
+
+			_setup_pos_sequence(
+				_anim.unfocused_animation().position_sequence(),
+				_pos_seq_player)
+
+			_setup_scale_sequence(
+				_anim.unfocused_animation().scale_sequence(),
+				_scale_seq_player)
+
+			_setup_rotation_sequence(
+				_anim.unfocused_animation().rotation_sequence(),
+				_rot_seq_player)
+
+	_pos_seq_player.play()
+	_scale_seq_player.play()
+	_rot_seq_player.play()
 
 
 func _post_event(event: String) -> void:
@@ -629,7 +629,7 @@ func _on_EventMerge_timeout() -> void:
 
 	var next = _event_queue.front()
 
-	if _current_anim != "idle" and next == "idle" and _anim_player.is_active():
+	if _current_anim != "idle" and next == "idle" and _pos_seq_player.is_running():
 		return
 
 	match next:
