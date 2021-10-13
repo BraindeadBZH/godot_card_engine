@@ -48,10 +48,10 @@ var _waiting_card_return: bool = false
 @onready var _event_merge = $EventMerge
 @onready var _mouse = $AnimContainer/MouseArea
 
-@onready var _transi := create_tween()
-@onready var _pos_seq_player := create_tween()
-@onready var _scale_seq_player := create_tween()
-@onready var _rot_seq_player := create_tween()
+@onready var _transi: Tween = null
+@onready var _pos_seq_player: Tween = null
+@onready var _scale_seq_player: Tween = null
+@onready var _rot_seq_player: Tween = null
 
 
 func _ready() -> void:
@@ -260,8 +260,10 @@ func _transition(from_in: CardTransform, to_in: CardTransform) -> void:
 	scale = from.scale
 	rotation = from.rot
 
-	_transi.kill()
-	_transi = create_tween()
+	if _transi != null:
+		_transi.kill()
+		_transi = create_tween()
+	
 	_transi.set_loops(1)
 	_transi.set_parallel()
 
@@ -466,61 +468,44 @@ func _change_anim(anim: String) -> void:
 	if _anim == null or _remove_flag:
 		return
 	
-	_pos_seq_player.kill()
-	_pos_seq_player = create_tween()
-	_pos_seq_player.set_loops(1)
+	var pos_seq: PositionSequence = null
+	var scale_seq: ScaleSequence = null
+	var rot_seq: RotationSequence = null
+	var loop_count: int = 1
 	
-	_scale_seq_player.kill()
-	_scale_seq_player = create_tween()
-	_scale_seq_player.set_loops(1)
+	if _pos_seq_player != null:
+		_pos_seq_player.kill()
+		_pos_seq_player = null
 	
-	_rot_seq_player.kill()
-	_rot_seq_player = create_tween()
-	_rot_seq_player.set_loops(1)
+	if _scale_seq_player != null:
+		_scale_seq_player.kill()
+		_scale_seq_player = null
+	
+	if _rot_seq_player != null:
+		_rot_seq_player.kill()
+		_rot_seq_player = null
 	
 	_current_anim = anim
 
+	_cont.position = Vector2(0.0, 0.0)
+	_cont.scale = Vector2(1.0, 1.0)
+	_cont.rotation = 0.0
+
 	match anim:
 		"idle":
-			_pos_seq_player.set_loops()
-			_scale_seq_player.set_loops()
-			_rot_seq_player.set_loops()
-
-			_cont.position = Vector2(0.0, 0.0)
-			_cont.scale = Vector2(1.0, 1.0)
-			_cont.rotation = 0.0
+			loop_count = 0
 			
-			_setup_pos_sequence(
-				_anim.idle_loop().position_sequence(),
-				_pos_seq_player)
-
-			_setup_scale_sequence(
-				_anim.idle_loop().scale_sequence(),
-				_scale_seq_player)
-
-			_setup_rotation_sequence(
-				_anim.idle_loop().rotation_sequence(),
-				_rot_seq_player)
+			pos_seq = _anim.idle_loop().position_sequence()
+			scale_seq = _anim.idle_loop().scale_sequence()
+			rot_seq = _anim.idle_loop().rotation_sequence()
 
 		"focused":
 			if _adjust_on_focused and _adjusted_trans != null:
 				_transition(_root_trans, _adjusted_trans)
-
-			_cont.position = Vector2(0.0, 0.0)
-			_cont.scale = Vector2(1.0, 1.0)
-			_cont.rotation = 0.0
-
-			_setup_pos_sequence(
-				_anim.focused_animation().position_sequence(),
-				_pos_seq_player)
-
-			_setup_scale_sequence(
-				_anim.focused_animation().scale_sequence(),
-				_scale_seq_player)
-
-			_setup_rotation_sequence(
-				_anim.focused_animation().rotation_sequence(),
-				_rot_seq_player)
+			
+			pos_seq = _anim.focused_animation().position_sequence()
+			scale_seq = _anim.focused_animation().scale_sequence()
+			rot_seq = _anim.focused_animation().rotation_sequence()
 
 		"activated":
 			if _adjust_on_activated and _adjusted_trans != null:
@@ -529,18 +514,10 @@ func _change_anim(anim: String) -> void:
 			_cont.position = _trans_focused.pos
 			_cont.scale = _trans_focused.scale
 			_cont.rotation = _trans_focused.rot
-
-			_setup_pos_sequence(
-				_anim.activated_animation().position_sequence(),
-				_pos_seq_player)
-
-			_setup_scale_sequence(
-				_anim.activated_animation().scale_sequence(),
-				_scale_seq_player)
-
-			_setup_rotation_sequence(
-				_anim.activated_animation().rotation_sequence(),
-				_rot_seq_player)
+			
+			pos_seq = _anim.activated_animation().position_sequence()
+			scale_seq = _anim.activated_animation().scale_sequence()
+			rot_seq = _anim.activated_animation().rotation_sequence()
 
 		"deactivated":
 			if _adjust_on_activated and _adjusted_trans != null:
@@ -549,18 +526,10 @@ func _change_anim(anim: String) -> void:
 			_cont.position = _trans_activated.pos
 			_cont.scale = _trans_activated.scale
 			_cont.rotation = _trans_activated.rot
-
-			_setup_pos_sequence(
-				_anim.deactivated_animation().position_sequence(),
-				_pos_seq_player)
-
-			_setup_scale_sequence(
-				_anim.deactivated_animation().scale_sequence(),
-				_scale_seq_player)
-
-			_setup_rotation_sequence(
-				_anim.deactivated_animation().rotation_sequence(),
-				_rot_seq_player)
+			
+			pos_seq = _anim.deactivated_animation().position_sequence()
+			scale_seq = _anim.deactivated_animation().scale_sequence()
+			rot_seq = _anim.deactivated_animation().rotation_sequence()
 
 		"unfocused":
 			if _adjust_on_focused and _adjusted_trans != null:
@@ -569,22 +538,23 @@ func _change_anim(anim: String) -> void:
 			_cont.position = _trans_focused.pos
 			_cont.scale = _trans_focused.scale
 			_cont.rotation = _trans_focused.rot
+			
+			pos_seq = _anim.unfocused_animation().position_sequence()
+			scale_seq = _anim.unfocused_animation().scale_sequence()
+			rot_seq = _anim.unfocused_animation().rotation_sequence()
 
-			_setup_pos_sequence(
-				_anim.unfocused_animation().position_sequence(),
-				_pos_seq_player)
-
-			_setup_scale_sequence(
-				_anim.unfocused_animation().scale_sequence(),
-				_scale_seq_player)
-
-			_setup_rotation_sequence(
-				_anim.unfocused_animation().rotation_sequence(),
-				_rot_seq_player)
-
-	_pos_seq_player.play()
-	_scale_seq_player.play()
-	_rot_seq_player.play()
+	if pos_seq != null && pos_seq.length() > 0:
+		_pos_seq_player = create_tween()
+		_pos_seq_player.set_loops(loop_count)
+		_setup_pos_sequence(pos_seq, _pos_seq_player)
+	if scale_seq != null && scale_seq.length() > 0:
+		_scale_seq_player = create_tween()
+		_scale_seq_player.set_loops(loop_count)
+		_setup_scale_sequence(scale_seq, _scale_seq_player)
+	if rot_seq != null && rot_seq.length() > 0:
+		_rot_seq_player = create_tween()
+		_rot_seq_player.set_loops(loop_count)
+		_setup_rotation_sequence(rot_seq, _rot_seq_player)
 
 
 func _post_event(event: String) -> void:
