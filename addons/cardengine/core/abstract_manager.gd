@@ -11,5 +11,5 @@ func clean() -> void:
 	pass
 
 
-func validate_form(form_name: String, form: Dictionary) -> Array:
+func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 	return []

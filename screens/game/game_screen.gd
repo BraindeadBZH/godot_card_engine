@@ -15,17 +15,17 @@ var _tokens: CardPile = CardPile.new()
 var _mana: int = MAX_MANA
 var _fx_mana_mult: EffectInstance = null
 
-@onready var _hand_cont = $HandZone/HandContainer
-@onready var _draw_count = $DeckZone/DrawCount
-@onready var _draw_btn = $DeckZone/DrawBtn
-@onready var _discard_count = $DiscardZone/DiscardCount
-@onready var _reshuffle_btn = $DiscardZone/ReshuffleBtn
-@onready var _hand_delay = $StartingHandDelay
-@onready var _draw_filter = $EffectsLayout/FilterLayout/DrawFilter
-@onready var _hand_filter = $EffectsLayout/FilterLayout/HandFilter
-@onready var _discard_filter = $EffectsLayout/FilterLayout/DiscardFilter
-@onready var _on_played_fx = $EffectsLayout/OnPlayedEffect
-@onready var _token_grid = $PlayZone/TokenGrid
+@onready var _hand_cont: HandContainer = $HandZone/HandContainer
+@onready var _draw_count: Label = $DeckZone/DrawCount
+@onready var _draw_btn: Button = $DeckZone/DrawBtn
+@onready var _discard_count: Label = $DiscardZone/DiscardCount
+@onready var _reshuffle_btn: Button = $DiscardZone/ReshuffleBtn
+@onready var _hand_delay: Timer = $StartingHandDelay
+@onready var _draw_filter: CheckBox = $EffectsLayout/FilterLayout/DrawFilter
+@onready var _hand_filter: CheckBox = $EffectsLayout/FilterLayout/HandFilter
+@onready var _discard_filter: CheckBox = $EffectsLayout/FilterLayout/DiscardFilter
+@onready var _on_played_fx: CheckButton = $EffectsLayout/OnPlayedEffect
+@onready var _token_grid: TokenGrid = $PlayZone/TokenGrid
 
 
 func _ready() -> void:
@@ -36,8 +36,9 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	_hand.connect("changed", Callable(self, "_on_Hand_changed"))
 
+	var filter: Array[String] = ["hand"]
 	_token_grid.set_store(_tokens)
-	_token_grid.get_drop_area().set_source_filter(["hand"])
+	_token_grid.get_drop_area().set_source_filter(filter)
 
 	if Gameplay.current_deck == null:
 		var db = CardEngine.db().get_database("main")

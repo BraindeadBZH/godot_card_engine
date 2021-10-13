@@ -21,7 +21,7 @@ func clear() -> Query:
 # Example: ["class:armor,type:shield_*", "class:creature"]
 #          Cards must be of "class" "armor" and of "type" starting with "shield_"
 #          or of "class" "creature"
-func from(statements: Array) -> Query:
+func from(statements: Array[String]) -> Query:
 	for statement in statements:
 		var compiled = []
 		var expressions = statement.split(",", false)
@@ -36,13 +36,13 @@ func from(statements: Array) -> Query:
 # Example: ["damage > 10,damage <= 20", "shield < 5"]
 #          Cards must have damage value strictly superior to 11 and
 #          inferior or equal to 20, or shield value strictly inferior to 5
-func where(statements: Array) -> Query:
+func where(statements: Array[String]) -> Query:
 	for statement in statements:
-		var compiled = []
+		var compiled := []
 		var expressions = statement.split(",", false)
 		for expression in expressions:
-			var comparison = _expr_to_comp(expression)
-			if comparison.empty(): continue
+			var comparison := _expr_to_comp(expression)
+			if comparison.is_empty(): continue
 			compiled.append(comparison)
 
 		_where_stmt.append(compiled)
@@ -52,10 +52,10 @@ func where(statements: Array) -> Query:
 # Restriction on texts (case insensitive)
 # Example: ["title:sword", "body:draw"]
 #          Cards must have "sword" in the "title" or "draw" in the "body"
-func contains(statements: Array) -> Query:
+func contains(statements: Array[String]) -> Query:
 	for statement in statements:
-		var compiled = []
-		var expressions = statement.split(",", false)
+		var compiled := []
+		var expressions := statement.split(",", false)
 		for expression in expressions:
 			compiled.append(_expr_to_contains(expression))
 
@@ -65,8 +65,8 @@ func contains(statements: Array) -> Query:
 
 # Executes the query on the give database
 # Returns an Array of ids matching the query
-func execute(db: CardDatabase) -> Array:
-	var result := Array()
+func execute(db: CardDatabase) -> Array[String]:
+	var result: Array[String] = []
 
 	for id in db.cards():
 		if match_card(db.get_card(id)):
@@ -149,10 +149,10 @@ func _match_texts(card: CardData) -> bool:
 	return or_result
 
 
-func _expr_to_from(input: String) -> Array:
-	var result: Array = []
+func _expr_to_from(input: String) -> Array[String]:
+	var result: Array[String] = []
 
-	var operands = input.split(":", false)
+	var operands := input.split(":", false)
 	if operands.size() != 2:
 		printerr("'%s' is not a valid from expression" % input)
 		return []
@@ -164,7 +164,7 @@ func _expr_to_from(input: String) -> Array:
 
 
 func _expr_to_comp(input: String) -> Array:
-	var result: Array = []
+	var result := []
 
 	var operands = input.split(" ", false)
 	if operands.size() != 3:
@@ -185,13 +185,13 @@ func _expr_to_comp(input: String) -> Array:
 		">":
 			result.append(OP_GREATER)
 
-	result.append(operands[2].strip_edges() as int)
+	result.append(operands[2].strip_edges().to_int())
 
 	return result
 
 
-func _expr_to_contains(input: String) -> Array:
-	var result: Array = []
+func _expr_to_contains(input: String) -> Array[String]:
+	var result: Array[String] = []
 
 	var operands = input.split(":", false)
 	if operands.size() != 2:

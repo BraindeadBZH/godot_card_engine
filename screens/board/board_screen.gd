@@ -5,10 +5,10 @@ var _pile1_store: CardPile = CardPile.new()
 var _pile2_store: CardPile = CardPile.new()
 var _pile3_store: CardPile = CardPile.new()
 
-@onready var _hand = $Board/Hand
-@onready var _pile1 = $Board/Pile1
-@onready var _pile2 = $Board/Pile2
-@onready var _pile3 = $Board/Pile3
+@onready var _hand: HandContainer = $Board/Hand
+@onready var _pile1: VisiblePile = $Board/Pile1
+@onready var _pile2: VisiblePile = $Board/Pile2
+@onready var _pile3: HiddenPile = $Board/Pile3
 
 
 func _ready() -> void:
@@ -25,10 +25,12 @@ func _ready() -> void:
 
 	_pile2.set_drag_enabled(false)
 	_pile2.set_interactive(false)
-
-	_pile1.get_drop_area().set_source_filter(["hand"])
-	_pile2.get_drop_area().set_source_filter(["hand", "pile_1"])
-	_pile3.get_drop_area().set_source_filter(["hand", "pile_1"])
+	
+	var filter1: Array[String] = ["hand"]
+	var filter2: Array[String] = ["hand", "pile_1"]
+	_pile1.get_drop_area().set_source_filter(filter1)
+	_pile2.get_drop_area().set_source_filter(filter2)
+	_pile3.get_drop_area().set_source_filter(filter2)
 
 	_pile1.set_store(_pile1_store)
 	_pile2.set_store(_pile2_store)

@@ -92,15 +92,15 @@ func _fill_card_list():
 
 
 func _apply_filters():
-	var from: Array = [""]
-	var where: Array = []
-	var contains: Array = []
+	var from: Array[String] = [""]
+	var where: Array[String] = []
+	var contains: Array[String] = []
 
 	for layout in _categ_filter_list.get_children():
 		for child in layout.get_children():
 			if child is OptionButton:
 				if child.selected > 0:
-					if not from[0].empty():
+					if not from[0].is_empty():
 						from[0] += ","
 					from[0] += "%s:%s" % [child.name, child.get_selected_metadata()]
 

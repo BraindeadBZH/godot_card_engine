@@ -74,7 +74,7 @@ func _get_store(id: String) -> Dictionary:
 #   {"id": "<card id>", "source": "<database id>},
 #   ...
 # ]
-func _post_store(store_id: String, store_name: String, cards: Array) -> void:
+func _post_store(store_id: String, store_name: String, cards: Array[CardInstance]) -> void:
 	var file = ConfigFile.new()
 	file.load(STORE_SAVE_FILE)
 

@@ -17,13 +17,13 @@ class StoreSorter:
 		if depth >= _info.size():
 			return false
 
-		var key = _info.keys()[depth]
-		var split: Array = key.split(":", false)
+		var key: String = _info.keys()[depth]
+		var split := key.split(":", false)
 
 		if split[0] == "category":
-			var order: Array = _info[key]
-			var lval = ldata.get_category(split[1])
-			var rval = rdata.get_category(split[1])
+			var order: Array[String] = _info[key]
+			var lval := ldata.get_category(split[1])
+			var rval := rdata.get_category(split[1])
 			var lidx: int = -1
 			var ridx: int = -1
 			var idx: int = 0
@@ -81,17 +81,19 @@ signal cleared()
 var save_id: String = ""
 var save_name: String = ""
 
-var _cards: Array = []
-var _filtered: Array = []
+# var _cards: Array[CardInstance] = [] # https://github.com/godotengine/godot/issues/53771
+# var _filtered: Array[CardInstance] = [] # https://github.com/godotengine/godot/issues/53771
+var _cards := []
+var _filtered := []
 var _cards_count: Dictionary = {}
 var _categs: Dictionary = {}
-var _values: Array = []
-var _texts: Array = []
+var _values: Array[String] = []
+var _texts: Array[String] = []
 var _rng: PseudoRng = PseudoRng.new()
 var _filter: Query = null
 
 
-func cards() -> Array:
+func cards() -> Array[CardInstance]:
 	if _filter == null:
 		return _cards
 	else:
@@ -110,7 +112,7 @@ func clear() -> void:
 	emit_signal("changed")
 
 
-func populate(db: CardDatabase, ids: Array) -> void:
+func populate(db: CardDatabase, ids: Array[String]) -> void:
 	clear()
 
 	for id in ids:
@@ -118,7 +120,8 @@ func populate(db: CardDatabase, ids: Array) -> void:
 
 
 func populate_all(db: CardDatabase):
-	populate(db, db.cards().keys())
+	var keys: Array[String] = db.cards().keys()
+	populate(db, keys)
 
 
 func apply_filter(filter: Query) -> void:
@@ -211,7 +214,7 @@ func get_last() -> CardInstance:
 		return _filtered.back()
 
 
-func find(id: String) -> Array:
+func find(id: String) -> Array[CardInstance]:
 	var result := []
 
 	for card in _cards:
@@ -250,15 +253,15 @@ func get_meta_category(meta: String) -> Dictionary:
 	return _categs[meta]
 
 
-func values() -> Array:
+func values() -> Array[String]:
 	return _values
 
 
-func texts() -> Array:
+func texts() -> Array[String]:
 	return _texts
 
 
-func add_cards(cards: Array) -> void:
+func add_cards(cards: Array[CardInstance]) -> void:
 	for card in cards:
 		_cards.append(card)
 	_update_stats()

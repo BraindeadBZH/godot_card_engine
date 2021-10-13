@@ -2,7 +2,7 @@ class_name EffectInstance
 extends RefCounted
 
 var _fx: AbstractEffect = null
-var _affected: Array = []
+var _affected: Array[CardInstance] = []
 
 
 func _init(effect: AbstractEffect):

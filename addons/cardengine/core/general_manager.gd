@@ -11,8 +11,8 @@ var _drag_source: String = ""
 var _drop_on: CardInstance = null
 
 
-func validate_form(form_name: String, form: Dictionary) -> Array:
-	var errors = []
+func validate_form(form_name: String, form: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
 
 	if form_name == "generic_confirm":
 		if !form["confirm"]:

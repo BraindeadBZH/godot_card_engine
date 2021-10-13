@@ -14,5 +14,5 @@ func get_filter() -> Query:
 	return null
 
 
-func get_modifiers() -> Array:
+func get_modifiers() -> Array[AbstractModifier]:
 	return []

@@ -14,8 +14,8 @@ func clean() -> void:
 	_animations = {}
 
 
-func validate_form(form_name: String, form: Dictionary) -> Array:
-	var errors = []
+func validate_form(form_name: String, form: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
 
 	if form_name == "new_animation":
 		var id = form["id"]
@@ -173,7 +173,7 @@ func _read_animation(filename: String) -> AnimationData:
 	return anim
 
 
-func _from_sequence(seq: AnimationSequence) -> Array:
+func _from_sequence(seq: AnimationSequence) -> Array[AnimationStep]:
 	var data := []
 	for step in seq.sequence():
 		var step_data := {}

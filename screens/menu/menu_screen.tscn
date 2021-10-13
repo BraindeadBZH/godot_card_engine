@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://screens/menu/menu_screen.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://wjtgkhxechpy" path="res://screens/menu/background.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://br8o66b8nawid" path="res://widgets/menu_button/menu_button.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://containers/home_display/home_display.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bjscfsien8r4g" path="res://containers/home_display/home_display.tscn" id="4"]
 
 [node name="MenuScreen" type="Control"]
 anchor_right = 1.0

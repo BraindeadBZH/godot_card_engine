@@ -30,7 +30,7 @@ func change_screen(screen_name: String) -> void:
 		_screen_layer.remove_child(child)
 		child.queue_free()
 
-# warning-ignore:unsafe_cast
-	var screen := (_screens[screen_name] as PackedScene).instantiate()
+	# Warnings will resolve with typed Dictionary
+	var screen = _screens[screen_name].instantiate()
 	screen.connect("next_screen", Callable(self, "change_screen"))
 	_screen_layer.add_child(screen)

@@ -1,15 +1,15 @@
 extends AbstractCard
 
-@onready var _name = $AnimContainer/Front/NameBackground/Name
-@onready var _desc = $AnimContainer/Front/DescBackground/Desc
-@onready var _cost = $AnimContainer/Front/CostBackground/Cost
-@onready var _picture_group = $AnimContainer/Front/PictureGroup
-@onready var _common = $AnimContainer/Front/PictureGroup/Common
-@onready var _uncommon = $AnimContainer/Front/PictureGroup/Uncommon
-@onready var _rare = $AnimContainer/Front/PictureGroup/Rare
-@onready var _mythic_rare = $AnimContainer/Front/PictureGroup/MythicRare
-@onready var _basic_land = $AnimContainer/Front/PictureGroup/BasicLand
-@onready var _card_id = $AnimContainer/Front/CardId
+@onready var _name: Label = $AnimContainer/Front/NameBackground/Name
+@onready var _desc: Label = $AnimContainer/Front/DescBackground/Desc
+@onready var _cost: Label = $AnimContainer/Front/CostBackground/Cost
+@onready var _picture_group: Node2D = $AnimContainer/Front/PictureGroup
+@onready var _common: Sprite2D = $AnimContainer/Front/PictureGroup/Common
+@onready var _uncommon: Sprite2D = $AnimContainer/Front/PictureGroup/Uncommon
+@onready var _rare: Sprite2D = $AnimContainer/Front/PictureGroup/Rare
+@onready var _mythic_rare: Sprite2D = $AnimContainer/Front/PictureGroup/MythicRare
+@onready var _basic_land: Sprite2D = $AnimContainer/Front/PictureGroup/BasicLand
+@onready var _card_id: Label = $AnimContainer/Front/CardId
 
 
 func _ready() -> void:
@@ -50,7 +50,7 @@ func _update_data(data: CardData, default: CardData = null) -> void:
 
 func _update_picture(data: CardData) -> void:
 	for child in _picture_group.get_children():
-		child.visible = false
+		(child as Sprite2D).visible = false
 
 	if data.has_meta_category("rarity"):
 		if data.get_category("rarity") == "common":

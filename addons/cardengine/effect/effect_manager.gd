@@ -18,8 +18,8 @@ func clean() -> void:
 	_effects.clear()
 
 
-func validate_form(form_name: String, form: Dictionary) -> Array:
-	var errors = []
+func validate_form(form_name: String, form: Dictionary) -> Array[String]:
+	var errors: Array[String] = []
 
 	if form_name == "new_effect":
 		var id = form["id"]

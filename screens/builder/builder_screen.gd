@@ -7,23 +7,23 @@ var _selected_rarity: String = "none"
 var _selected_val: String = "none"
 var _selected_txt: String = "none"
 
-@onready var _scroll = $BuilderLayout/LibraryBg/LibraryScroll
-@onready var _container = $BuilderLayout/LibraryBg/LibraryScroll/LibraryContainer
-@onready var _class = $TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class
-@onready var _rarity = $TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity
-@onready var _values = $TitleBg/TitleLayout/ValuesLayout/Values
-@onready var _comp_op = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonOperator
-@onready var _comp_val = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonValue
-@onready var _texts = $TitleBg/TitleLayout/TextsLayout/Texts
-@onready var _contains = $TitleBg/TitleLayout/TextsLayout/Contains
-@onready var _rarity_sort = $TitleBg/TitleLayout/SortLayout/RaritySort
-@onready var _mana_sort = $TitleBg/TitleLayout/SortLayout/ManaSort
-@onready var _name_sort = $TitleBg/TitleLayout/SortLayout/NameSort
-@onready var _deck_list = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll/DeckList
-@onready var _deck_select = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSelect
-@onready var _save_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/SaveBtn
-@onready var _deck_name = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/DeckName
-@onready var _use_btn = $BuilderLayout/DeckBg/CardDrop/DeckLayout/UseBtn
+@onready var _scroll: ScrollContainer = $BuilderLayout/LibraryBg/LibraryScroll
+@onready var _container: AbstractContainer = $BuilderLayout/LibraryBg/LibraryScroll/LibraryContainer
+@onready var _class: OptionButton = $TitleBg/TitleLayout/CategoriesLayout/ClassLayout/Class
+@onready var _rarity: OptionButton = $TitleBg/TitleLayout/CategoriesLayout/RarityLayout/Rarity
+@onready var _values: OptionButton = $TitleBg/TitleLayout/ValuesLayout/Values
+@onready var _comp_op: OptionButton = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonOperator
+@onready var _comp_val: SpinBox = $TitleBg/TitleLayout/ValuesLayout/ComparisionLayout/ComparisonValue
+@onready var _texts: OptionButton = $TitleBg/TitleLayout/TextsLayout/Texts
+@onready var _contains: LineEdit = $TitleBg/TitleLayout/TextsLayout/Contains
+@onready var _rarity_sort: CheckBox = $TitleBg/TitleLayout/SortLayout/RaritySort
+@onready var _mana_sort: CheckBox = $TitleBg/TitleLayout/SortLayout/ManaSort
+@onready var _name_sort: CheckBox = $TitleBg/TitleLayout/SortLayout/NameSort
+@onready var _deck_list: VBoxContainer = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckScroll/DeckList
+@onready var _deck_select: OptionButton = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSelect
+@onready var _save_btn: Button = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/SaveBtn
+@onready var _deck_name: LineEdit = $BuilderLayout/DeckBg/CardDrop/DeckLayout/DeckSaveLayout/DeckName
+@onready var _use_btn: Button = $BuilderLayout/DeckBg/CardDrop/DeckLayout/UseBtn
 
 
 func _ready() -> void:
@@ -39,15 +39,15 @@ func _ready() -> void:
 
 
 func _apply_filters() -> void:
-	var from: Array = [""]
-	var where: Array = []
-	var contains: Array = []
+	var from: Array[String] = [""]
+	var where: Array[String] = []
+	var contains: Array[String] = []
 
 	if _selected_class != "none":
 		from[0] += "class:%s" % _selected_class
 
 	if _selected_rarity != "none":
-		if not from[0].empty():
+		if not from[0].is_empty():
 			from[0] += ","
 		from[0] += "rarity:%s" % _selected_rarity
 
@@ -58,7 +58,7 @@ func _apply_filters() -> void:
 				_comp_op.get_item_text(_comp_op.selected),
 				_comp_val.value])
 
-	if _texts.selected > 0 and not _contains.text.empty():
+	if _texts.selected > 0 and not _contains.text.is_empty():
 		contains.append("%s:%s" % [_selected_txt, _contains.text])
 
 
@@ -202,7 +202,7 @@ func _update_deck_select() -> void:
 
 
 func _update_save_btn() -> void:
-	if _deck_name.text.empty() or _deck.is_empty():
+	if _deck_name.text.is_empty() or _deck.is_empty():
 		_save_btn.disabled = true
 	else:
 		_save_btn.disabled = false
@@ -316,7 +316,7 @@ func _on_DeckName_text_changed(_new_text: String) -> void:
 func _on_SaveBtn_pressed() -> void:
 	var id = _deck.save_id
 	if _deck_name.text != _deck.save_name:
-		var datetime = OS.get_datetime()
+		var datetime = Time.get_date_dict_from_system()
 		id = "deck_%02d-%02d-%d-%02d-%02d" % [
 			datetime["day"], datetime["month"], datetime["year"],
 			datetime["hour"], datetime["minute"]]

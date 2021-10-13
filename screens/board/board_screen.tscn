@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dhold8ocsbk5t" path="res://widgets/small_button/small_button.tscn" id="2"]
 [ext_resource type="Script" path="res://addons/cardengine/container/board.gd" id="3"]
 [ext_resource type="PackedScene" path="res://containers/hand/hand.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://containers/visible_pile/visible_pile.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://1mf14g8jnrhg" path="res://containers/visible_pile/visible_pile.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://cecea2neiqosx" path="res://cards/normal/normal_card.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://containers/hidden_pile/hidden_pile.tscn" id="7"]
 

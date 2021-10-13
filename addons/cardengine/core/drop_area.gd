@@ -3,7 +3,7 @@ extends Control
 
 signal dropped(card, source, on_card)
 
-@export var source_filter: Array = []
+@export var source_filter: Array[String] = []
 
 var _enabled: bool = true
 var _filter: Query = null
@@ -15,7 +15,7 @@ func set_enabled(state: bool) -> void:
 	_enabled = state
 
 
-func set_source_filter(filter: Array) -> void:
+func set_source_filter(filter: Array[String]) -> void:
 	source_filter = filter
 
 
