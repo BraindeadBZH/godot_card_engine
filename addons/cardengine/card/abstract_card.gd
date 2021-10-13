@@ -262,7 +262,9 @@ func _transition(from_in: CardTransform, to_in: CardTransform) -> void:
 
 	if _transi != null:
 		_transi.kill()
-		_transi = create_tween()
+		_transi = null
+	
+	_transi = create_tween()
 	
 	_transi.set_loops(1)
 	_transi.set_parallel()
