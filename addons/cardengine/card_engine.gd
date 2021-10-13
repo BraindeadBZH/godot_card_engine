@@ -6,7 +6,7 @@ var _main_control: CardEngineUI = null
 
 
 func _enter_tree():
-	_main_control = _main_scene.instance()
+	_main_control = _main_scene.instantiate()
 	add_control_to_bottom_panel(_main_control, "CardEngine")
 	CardEngine.setup()
 
