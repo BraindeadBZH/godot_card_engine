@@ -172,9 +172,15 @@ func set_drag_enabled(state: bool) -> void:
 
 func set_animation(anim: AnimationData) -> void:
 	if anim == null:
-		_pos_seq_player.kill()
-		_scale_seq_player.kill()
-		_rot_seq_player.kill()
+		if _pos_seq_player != null:
+			_pos_seq_player.kill()
+			_pos_seq_player = null
+		if _scale_seq_player != null:
+			_scale_seq_player.kill()
+			_scale_seq_player = null
+		if _scale_seq_player != null:
+			_rot_seq_player.kill()
+			_rot_seq_player = null
 
 	_cont.position = Vector2(0.0, 0.0)
 	_cont.scale = Vector2(1.0, 1.0)
