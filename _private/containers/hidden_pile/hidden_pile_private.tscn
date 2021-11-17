@@ -5,3 +5,4 @@
 
 [node name="HiddenPilePrivate" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+

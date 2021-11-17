@@ -277,7 +277,7 @@ func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 		row_width = _grid_columns * _grid_card_width * _grid_card_spacing.x
 		col_height = ceil(_store.count() / float(_grid_columns)) * height_adjusted * _grid_card_spacing.y
 	else:
-		row_width = _store.count() * _grid_card_width * _grid_card_spacing.x
+		row_width = _grid_card_width + _store.count() * _grid_card_width * _grid_card_spacing.x
 		col_height = height_adjusted * _grid_card_spacing.y
 
 	if _grid_expand:
@@ -287,8 +287,15 @@ func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 		if col_height > rect_size.y || _grid_columns > 0:
 			rect_min_size.y = col_height
 
-	spacing_offset.x = (_grid_card_width * _grid_card_spacing.x - _grid_card_width) / 2.0
-	spacing_offset.y = (height_adjusted * _grid_card_spacing.y - height_adjusted) / 2.0
+	if _grid_card_spacing.x < 1.0:
+		spacing_offset.x = (_grid_card_width * _grid_card_spacing.x) / 2.0
+	else:
+		spacing_offset.x = (_grid_card_width * _grid_card_spacing.x - _grid_card_width) / 2.0
+
+	if _grid_card_spacing.y < 1.0:
+		spacing_offset.y = (height_adjusted * _grid_card_spacing.y) / 2.0
+	else:
+		spacing_offset.y = (height_adjusted * _grid_card_spacing.y - height_adjusted) / 2.0
 
 	match _grid_halign:
 		HALIGN_LEFT:
@@ -296,7 +303,7 @@ func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 		HALIGN_CENTER:
 			grid_offset.x = spacing_offset.x + (rect_size.x - row_width) / 2.0
 		HALIGN_RIGHT:
-			grid_offset.x = spacing_offset.x + (rect_size.x - row_width)
+			grid_offset.x = rect_size.x - (row_width + spacing_offset.x)
 
 	match _grid_valign:
 		VALIGN_TOP:
@@ -304,7 +311,7 @@ func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 		VALIGN_CENTER:
 			grid_offset.y = spacing_offset.y + (rect_size.y - col_height) / 2.0
 		VALIGN_BOTTOM:
-			grid_offset.y = spacing_offset.y + (rect_size.y - col_height)
+			grid_offset.y = rect_size.y - (col_height + spacing_offset.y)
 
 	var pos: Vector2 = Vector2(0.0 , 0.0)
 	# Initial pos
