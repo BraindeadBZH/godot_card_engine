@@ -35,6 +35,7 @@ autostart = true
 [node name="Transitions" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="Tween" parent="."]
+
 [connection signal="button_down" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_down"]
 [connection signal="button_up" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_button_up"]
 [connection signal="drag_started" from="AnimContainer/MouseArea" to="." method="_on_MouseArea_drag_started"]
