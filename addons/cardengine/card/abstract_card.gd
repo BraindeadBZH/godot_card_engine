@@ -118,8 +118,13 @@ func transitions() -> CardTransitions:
 	return _transitions
 
 
-func set_transitions(transitions: CardTransitions):
+func set_transitions(transitions: CardTransitions, init_root_trans: bool = false):
 	_transitions = transitions
+
+	if init_root_trans && transitions.in_anchor.enabled:
+		position = transitions.in_anchor.position
+		scale = transitions.in_anchor.scale
+		rotation = transitions.in_anchor.rotation
 
 
 func set_adjusted_trans(transform: CardTransform, on_focused: bool, on_activated: bool) -> void:
