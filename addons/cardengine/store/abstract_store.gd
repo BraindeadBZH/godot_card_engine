@@ -342,7 +342,11 @@ func move_card(ref: int, to: AbstractStore) -> CardInstance:
 
 
 func move_random_card(to: AbstractStore) -> CardInstance:
-	return move_card(_rng.random_range(0, count()-1), to)
+	if is_empty():
+		return null
+
+	var card: CardInstance = _cards[_rng.random_range(0, count()-1)]
+	return move_card(card.ref(), to)
 
 
 func copy_cards(to: AbstractStore) -> void:
@@ -362,7 +366,11 @@ func copy_card(ref: int, to: AbstractStore) -> CardInstance:
 
 
 func copy_random_card(to: AbstractStore) -> CardInstance:
-	return copy_card(_rng.random_range(0, _cards.size()-1), to)
+	if is_empty():
+		return null
+
+	var card: CardInstance = _cards[_rng.random_range(0, count()-1)]
+	return copy_card(card.ref(), to)
 
 
 func rng() -> PseudoRng:
