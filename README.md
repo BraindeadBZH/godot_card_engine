@@ -55,11 +55,4 @@ Currently under development, do not expect it to work.
 
 ## Documentation
 
-### Getting started
-
-[Open page](https://www.braindead.bzh/page/getting-started)
-
-
-### Detailed usage
-
-[Open page](https://www.braindead.bzh/page/documentation)
+[Open page](https://www.braindead.bzh/)
