@@ -22,12 +22,12 @@ func _ready():
 
 
 func _reset_form() -> void:
-	_confirmation.pressed = false
+	_confirmation.button_pressed = false
 
 
 func _extract_form() -> Dictionary:
 	return {
-		"confirm": _confirmation.pressed
+		"confirm": _confirmation.button_pressed
 	}
 
 

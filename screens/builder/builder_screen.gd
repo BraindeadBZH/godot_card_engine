@@ -69,13 +69,13 @@ func _apply_filters() -> void:
 
 	var sorting: Dictionary = {}
 
-	if _rarity_sort.pressed:
+	if _rarity_sort.button_pressed:
 		sorting["category:rarity"] = ["common", "uncommon", "rare", "mythic_rare"]
 
-	if _mana_sort.pressed:
+	if _mana_sort.button_pressed:
 		sorting["value:mana"] = true
 
-	if _name_sort.pressed:
+	if _name_sort.button_pressed:
 		sorting["text:name"] = true
 
 	if not sorting.is_empty():

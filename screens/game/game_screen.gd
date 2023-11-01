@@ -62,13 +62,13 @@ func _update_mana() -> void:
 
 
 func _apply_fx(fx: EffectInstance) -> void:
-	if _draw_filter.pressed:
+	if _draw_filter.button_pressed:
 		fx.apply(_draw_pile)
 
-	if _hand_filter.pressed:
+	if _hand_filter.button_pressed:
 		fx.apply(_hand)
 
-	if _discard_filter.pressed:
+	if _discard_filter.button_pressed:
 		fx.apply(_discard_pile)
 
 
@@ -172,7 +172,7 @@ func _on_TokenGrid_card_dropped(card: CardInstance, _source: String, _on_card: C
 		_hand.play_card(card.ref(), _discard_pile)
 		_tokens.add_card(CardInstance.new(card.data()))
 
-		if _on_played_fx.pressed:
+		if _on_played_fx.button_pressed:
 			var fx = CardEngine.fx().instantiate("mana_incr")
 			fx.affect(card)
 		if card_mana < 0:

@@ -22,14 +22,14 @@ func _ready():
 
 
 func _reset_form() -> void:
-	_random.pressed = false
+	_random.button_pressed = false
 	_duration.value = 0
 	_duration_range_min.value = 0
 	_duration_range_max.value = 0
 	_type.select(0)
 	_easing.select(0)
-	_flip_card.pressed = false
-	_inter.pressed = false
+	_flip_card.button_pressed = false
+	_inter.button_pressed = false
 	_update_layout()
 
 
@@ -37,36 +37,36 @@ func _extract_form() -> Dictionary:
 	return {
 		"seq": _seq,
 		"index": _index,
-		"random_duration": _random.pressed,
+		"random_duration": _random.button_pressed,
 		"duration": _duration.value / 1000.0,
 		"duration_range_min": _duration_range_min.value / 1000.0,
 		"duration_range_max": _duration_range_max.value / 1000.0,
 		"type": _type.selected,
 		"easing": _easing.selected,
-		"flip_card": _flip_card.pressed,
-		"interactive": _inter.pressed
+		"flip_card": _flip_card.button_pressed,
+		"interactive": _inter.button_pressed
 	}
 
 
 func _fill_form(data: Dictionary) -> void:
 	_seq = data["seq"]
 	_index = data["index"]
-	_random.pressed = data["random_duration"]
+	_random.button_pressed = data["random_duration"]
 	_duration.value = data["duration"] * 1000.0
 	_duration_range_min.value = data["duration_range_min"] * 1000.0
 	_duration_range_max.value = data["duration_range_max"] * 1000.0
 	_type.select(data["type"])
 	_easing.select(data["easing"])
-	_flip_card.pressed = data["flip_card"]
-	_inter.pressed = data["interactive"]
+	_flip_card.button_pressed = data["flip_card"]
+	_inter.button_pressed = data["interactive"]
 	_update_layout()
 
 
 func _update_layout() -> void:
-	_duration.visible = not _random.pressed
-	_duration_lbl.visible = not _random.pressed
-	_duration_range_lbl.visible = _random.pressed
-	_duration_range_layout.visible = _random.pressed
+	_duration.visible = not _random.button_pressed
+	_duration_lbl.visible = not _random.button_pressed
+	_duration_range_lbl.visible = _random.button_pressed
+	_duration_range_layout.visible = _random.button_pressed
 
 
 func _on_Random_pressed() -> void:

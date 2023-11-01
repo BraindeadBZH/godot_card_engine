@@ -87,41 +87,41 @@ func _update() -> void:
 	if _data == null:
 		return
 
-	_face_switch.pressed = _data.face_up
+	_face_switch.button_pressed = _data.face_up
 	_grid_width.value = _data.grid_card_width
-	_grid_fixed.pressed = _data.grid_fixed_width
+	_grid_fixed.button_pressed = _data.grid_fixed_width
 	_grid_spacing_h.value = _data.grid_card_spacing.x
 	_grid_spacing_v.value = _data.grid_card_spacing.y
 	_grid_columns.value = _data.grid_columns
-	_grid_expand.pressed = _data.grid_expand
+	_grid_expand.button_pressed = _data.grid_expand
 	_path_width.value = _data.path_card_width
-	_path_fixed.pressed = _data.path_fixed_width
+	_path_fixed.button_pressed = _data.path_fixed_width
 	_path_spacing.value = _data.path_spacing
 
-	_mode_switch.pressed = _layout_mode_to_switch(_data.mode)
+	_mode_switch.button_pressed = _layout_mode_to_switch(_data.mode)
 
 	_grid_align_h.select(_halign_to_select(_data.grid_halign))
 	_grid_align_v.select(_valign_to_select(_data.grid_valign))
 
-	_interactive.pressed = _data.interactive
-	_exclusive.pressed = _data.exclusive
-	_last_only.pressed = _data.last_only
-	_drag_enabled.pressed = _data.drag_enabled
-	_drop_enabled.pressed = _data.drop_enabled
+	_interactive.button_pressed = _data.interactive
+	_exclusive.button_pressed = _data.exclusive
+	_last_only.button_pressed = _data.last_only
+	_drag_enabled.button_pressed = _data.drag_enabled
+	_drop_enabled.button_pressed = _data.drop_enabled
 
-	_pos_enabled.pressed = _data.fine_pos
+	_pos_enabled.button_pressed = _data.fine_pos
 	_pos_range_min_h.value = _data.fine_pos_min.x
 	_pos_range_min_v.value = _data.fine_pos_min.y
 	_pos_range_max_h.value = _data.fine_pos_max.x
 	_pos_range_max_v.value = _data.fine_pos_max.y
 	_pos_mode.select(_finetune_mode_to_select(_data.fine_pos_mode))
 
-	_angle_enabled.pressed = _data.fine_angle
+	_angle_enabled.button_pressed = _data.fine_angle
 	_angle_range_min.value = _data.fine_angle_min
 	_angle_range_max.value = _data.fine_angle_max
 	_angle_mode.select(_finetune_mode_to_select(_data.fine_angle_mode))
 
-	_scale_enabled.pressed = _data.fine_scale
+	_scale_enabled.button_pressed = _data.fine_scale
 	_scale_range_min_h.value = _data.fine_scale_min.x
 	_scale_range_min_v.value = _data.fine_scale_min.y
 	_scale_range_max_h.value = _data.fine_scale_max.x
@@ -181,41 +181,41 @@ func _save() -> void:
 	if _data == null:
 		return
 
-	_data.face_up = _face_switch.pressed
+	_data.face_up = _face_switch.button_pressed
 	_data.grid_card_width = _grid_width.value
-	_data.grid_fixed_width = _grid_fixed.pressed
+	_data.grid_fixed_width = _grid_fixed.button_pressed
 	_data.grid_card_spacing.x = _grid_spacing_h.value
 	_data.grid_card_spacing.y = _grid_spacing_v.value
 	_data.grid_columns = _grid_columns.value
-	_data.grid_expand = _grid_expand.pressed
+	_data.grid_expand = _grid_expand.button_pressed
 	_data.path_card_width = _path_width.value
-	_data.path_fixed_width = _path_fixed.pressed
+	_data.path_fixed_width = _path_fixed.button_pressed
 	_data.path_spacing = _path_spacing.value
 
-	_data.mode = _switch_to_layout_mode(_mode_switch.pressed)
+	_data.mode = _switch_to_layout_mode(_mode_switch.button_pressed)
 
 	_data.grid_halign = _select_to_halign(_grid_align_h.selected)
 	_data.grid_valign = _select_to_valign(_grid_align_v.selected)
 
-	_data.interactive = _interactive.pressed
-	_data.exclusive = _exclusive.pressed
-	_data.last_only = _last_only.pressed
-	_data.drag_enabled = _drag_enabled.pressed
-	_data.drop_enabled = _drop_enabled.pressed
+	_data.interactive = _interactive.button_pressed
+	_data.exclusive = _exclusive.button_pressed
+	_data.last_only = _last_only.button_pressed
+	_data.drag_enabled = _drag_enabled.button_pressed
+	_data.drop_enabled = _drop_enabled.button_pressed
 
-	_data.fine_pos = _pos_enabled.pressed
+	_data.fine_pos = _pos_enabled.button_pressed
 	_data.fine_pos_min.x = _pos_range_min_h.value
 	_data.fine_pos_min.y = _pos_range_min_v.value
 	_data.fine_pos_max.x = _pos_range_max_h.value
 	_data.fine_pos_max.y = _pos_range_max_v.value
 	_data.fine_pos_mode = _select_to_finetune_mode(_pos_mode.selected)
 
-	_data.fine_angle = _angle_enabled.pressed
+	_data.fine_angle = _angle_enabled.button_pressed
 	_data.fine_angle_min = _angle_range_min.value
 	_data.fine_angle_max = _angle_range_max.value
 	_data.fine_angle_mode = _select_to_finetune_mode(_angle_mode.selected)
 
-	_data.fine_scale = _scale_enabled.pressed
+	_data.fine_scale = _scale_enabled.button_pressed
 	_data.fine_scale_min.x = _scale_range_min_h.value
 	_data.fine_scale_min.y = _scale_range_min_v.value
 	_data.fine_scale_max.x = _scale_range_max_h.value

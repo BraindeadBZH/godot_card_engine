@@ -46,11 +46,11 @@ func delete_animation() -> void:
 func _select_anim(index: int) -> void:
 	_anim_list.select(index)
 
-	_idle_btn.pressed = false
-	_focused_btn.pressed = false
-	_activated_btn.pressed = false
-	_deactivated_btn.pressed = false
-	_unfocused_btn.pressed = false
+	_idle_btn.button_pressed = false
+	_focused_btn.button_pressed = false
+	_activated_btn.button_pressed = false
+	_deactivated_btn.button_pressed = false
+	_unfocused_btn.button_pressed = false
 
 	if index > 0:
 		_selected_anim = index
@@ -394,15 +394,15 @@ func _on_SaveBtn_pressed() -> void:
 func _on_ResetBtn_pressed() -> void:
 	_opened_anim = _manager.reset_animation(_opened_anim)
 
-	if _idle_btn.pressed:
+	if _idle_btn.button_pressed:
 		_anim_block = _opened_anim.idle_loop()
-	elif _focused_btn.pressed:
+	elif _focused_btn.button_pressed:
 		_anim_block = _opened_anim.focused_animation()
-	elif _activated_btn.pressed:
+	elif _activated_btn.button_pressed:
 		_anim_block = _opened_anim.activated_animation()
-	elif _deactivated_btn.pressed:
+	elif _deactivated_btn.button_pressed:
 		_anim_block = _opened_anim.deactivated_animation()
-	elif _unfocused_btn.pressed:
+	elif _unfocused_btn.button_pressed:
 		_anim_block = _opened_anim.unfocused_animation()
 
 	_load_animation()
@@ -416,11 +416,11 @@ func _on_IdleBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
 
-	_idle_btn.pressed = true
-	_focused_btn.pressed = false
-	_activated_btn.pressed = false
-	_deactivated_btn.pressed = false
-	_unfocused_btn.pressed = false
+	_idle_btn.button_pressed = true
+	_focused_btn.button_pressed = false
+	_activated_btn.button_pressed = false
+	_deactivated_btn.button_pressed = false
+	_unfocused_btn.button_pressed = false
 
 	_anim_block = _opened_anim.idle_loop()
 	_load_animation()
@@ -430,11 +430,11 @@ func _on_FocusedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
 
-	_idle_btn.pressed = false
-	_focused_btn.pressed = true
-	_activated_btn.pressed = false
-	_deactivated_btn.pressed = false
-	_unfocused_btn.pressed = false
+	_idle_btn.button_pressed = false
+	_focused_btn.button_pressed = true
+	_activated_btn.button_pressed = false
+	_deactivated_btn.button_pressed = false
+	_unfocused_btn.button_pressed = false
 
 	_anim_block = _opened_anim.focused_animation()
 	_load_animation()
@@ -444,11 +444,11 @@ func _on_ActivatedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
 
-	_idle_btn.pressed = false
-	_focused_btn.pressed = false
-	_activated_btn.pressed = true
-	_deactivated_btn.pressed = false
-	_unfocused_btn.pressed = false
+	_idle_btn.button_pressed = false
+	_focused_btn.button_pressed = false
+	_activated_btn.button_pressed = true
+	_deactivated_btn.button_pressed = false
+	_unfocused_btn.button_pressed = false
 
 	_anim_block = _opened_anim.activated_animation()
 	_load_animation()
@@ -458,11 +458,11 @@ func _on_DeactivatedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
 
-	_idle_btn.pressed = false
-	_focused_btn.pressed = false
-	_activated_btn.pressed = false
-	_deactivated_btn.pressed = true
-	_unfocused_btn.pressed = false
+	_idle_btn.button_pressed = false
+	_focused_btn.button_pressed = false
+	_activated_btn.button_pressed = false
+	_deactivated_btn.button_pressed = true
+	_unfocused_btn.button_pressed = false
 
 	_anim_block = _opened_anim.deactivated_animation()
 	_load_animation()
@@ -472,11 +472,11 @@ func _on_UnfocusedBtn_pressed() -> void:
 	if _opened_anim == null:
 		return
 
-	_idle_btn.pressed = false
-	_focused_btn.pressed = false
-	_activated_btn.pressed = false
-	_deactivated_btn.pressed = false
-	_unfocused_btn.pressed = true
+	_idle_btn.button_pressed = false
+	_focused_btn.button_pressed = false
+	_activated_btn.button_pressed = false
+	_deactivated_btn.button_pressed = false
+	_unfocused_btn.button_pressed = true
 
 	_anim_block = _opened_anim.unfocused_animation()
 	_load_animation()
