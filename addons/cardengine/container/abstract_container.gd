@@ -55,8 +55,8 @@ var _fine_pos_max: Vector2 = Vector2(0.0, 60.0)
 # Angle fine tuning
 var _fine_angle: bool = false
 var _fine_angle_mode = FineTuningMode.RANDOM
-var _fine_angle_min: float = deg2rad(-10.0)
-var _fine_angle_max: float = deg2rad(10.0)
+var _fine_angle_min: float = deg_to_rad(-10.0)
+var _fine_angle_max: float = deg_to_rad(10.0)
 
 # Scale fine tuning
 var _fine_scale: bool = false
@@ -143,7 +143,7 @@ func _update_container() -> void:
 			_transitions.in_anchor.enabled = true
 			_transitions.in_anchor.position = anchor.rect_position
 			_transitions.in_anchor.scale = anchor.rect_scale
-			_transitions.in_anchor.rotation = deg2rad(anchor.rect_rotation)
+			_transitions.in_anchor.rotation = deg_to_rad(anchor.rotation)
 
 	if not out_anchor.is_empty():
 		var anchor = get_node(out_anchor)
@@ -156,7 +156,7 @@ func _update_container() -> void:
 			_transitions.out_anchor.enabled = true
 			_transitions.out_anchor.position = anchor.rect_position
 			_transitions.out_anchor.scale = anchor.rect_scale
-			_transitions.out_anchor.rotation = deg2rad(anchor.rect_rotation)
+			_transitions.out_anchor.rotation = deg_to_rad(anchor.rotation)
 
 	# Adding missing cards
 	for card in _store.cards():
@@ -440,10 +440,10 @@ func _adjusted_trans(origin: CardTransform) -> CardTransform:
 		has_adjust = true
 
 	if _adjust_rot_mode == "relative":
-		adjusted.rot += deg2rad(_adjust_rot)
+		adjusted.rot += deg_to_rad(_adjust_rot)
 		has_adjust = true
 	elif _adjust_rot_mode == "absolute":
-		adjusted.rot = deg2rad(_adjust_rot)
+		adjusted.rot = deg_to_rad(_adjust_rot)
 		has_adjust = true
 
 	if has_adjust:
