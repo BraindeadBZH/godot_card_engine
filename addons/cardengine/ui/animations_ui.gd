@@ -108,19 +108,22 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 		var btn = Button.new()
 		btn.text = "Initialize"
 		tools.add_child(btn)
-		btn.connect("pressed", Callable(self, "_on_InitBtn_pressed"), [seq])
+		btn.connect("pressed", func ():
+			_on_InitBtn_pressed(seq))
 	else:
 		var add_btn = Button.new()
 		add_btn.text = "Add step"
 		add_btn.hint_tooltip = "Insert a step before the last step"
 		tools.add_child(add_btn)
-		add_btn.connect("pressed", Callable(self, "_on_AddStepBtn_pressed"), [seq])
+		add_btn.connect("pressed", func ():
+			_on_AddStepBtn_pressed(seq))
 
 		var clear_btn = Button.new()
 		clear_btn.text = "Clear sequence"
 		clear_btn.hint_tooltip = "Remove all the steps"
 		tools.add_child(clear_btn)
-		clear_btn.connect("pressed", Callable(self, "_on_ClearSeqBtn_pressed"), [seq])
+		clear_btn.connect("pressed", func ():
+			_on_ClearSeqBtn_pressed(seq))
 
 		var index := 0
 		for step in seq.sequence():
@@ -148,7 +151,8 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				btn.disabled = not step.editable_transi
 				btn.hint_tooltip = "Edit step transition"
 				step_layout.add_child(btn)
-				btn.connect("pressed", Callable(self, "_on_TransiBtn_pressed"), [seq, index])
+				btn.connect("pressed", func ():
+					_on_TransiBtn_pressed(seq, index))
 
 			var initial_txt = "initial(%s)"
 			if index == 0:
@@ -200,7 +204,8 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 				btn.disabled = not step.editable_val
 				btn.hint_tooltip = "Edit step value"
 				step_layout.add_child(btn)
-				btn.connect("pressed", Callable(self, "_on_ValueBtn_pressed"), [seq, index])
+				btn.connect("pressed", func ():
+					_on_ValueBtn_pressed(seq, index))
 
 			var prev_step := seq.step(index-1)
 			var next_step := seq.step(index+1)
@@ -209,7 +214,8 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			up_btn.text = "▲"
 			up_btn.hint_tooltip = "Move up"
 			step_layout.add_child(up_btn)
-			up_btn.connect("pressed", Callable(self, "_on_UpBtn_pressed"), [seq, index])
+			up_btn.connect("pressed", func ():
+				_on_UpBtn_pressed(seq, index))
 
 			if not(step.editable_transi and step.editable_val) or index < 1:
 					up_btn.disabled = true
@@ -221,7 +227,8 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			down_btn.text = "▼"
 			down_btn.hint_tooltip = "Move down"
 			step_layout.add_child(down_btn)
-			down_btn.connect("pressed", Callable(self, "_on_DownBtn_pressed"), [seq, index])
+			down_btn.connect("pressed", func ():
+				_on_DownBtn_pressed(seq, index))
 
 			if not(step.editable_transi and step.editable_val) or index >= seq.length()-1:
 					down_btn.disabled = true
@@ -233,7 +240,8 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			dup_btn.text = "D"
 			dup_btn.hint_tooltip = "Duplicate step"
 			step_layout.add_child(dup_btn)
-			dup_btn.connect("pressed", Callable(self, "_on_DupBtn_pressed"), [seq, step])
+			dup_btn.connect("pressed", func ():
+				_on_DupBtn_pressed(seq, step))
 
 			if not(step.editable_transi and step.editable_val):
 					dup_btn.disabled = true
@@ -242,7 +250,8 @@ func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> 
 			del_btn.text = "X"
 			del_btn.hint_tooltip = "Delete step"
 			step_layout.add_child(del_btn)
-			del_btn.connect("pressed", Callable(self, "_on_DelStepBtn_pressed"), [seq, index])
+			del_btn.connect("pressed", func ():
+				_on_DelStepBtn_pressed(seq, index))
 
 			if not(step.editable_transi and step.editable_val):
 				del_btn.disabled = true

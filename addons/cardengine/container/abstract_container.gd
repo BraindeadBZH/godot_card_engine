@@ -178,10 +178,14 @@ func _update_container() -> void:
 		visual_inst.set_drag_widget(drag_widget)
 		visual_inst.set_drop_area(_drop_area)
 		visual_inst.set_animation(CardEngine.anim().get_animation(_anim))
-		visual_inst.connect("need_removal", Callable(self, "_on_need_removal"), [visual_inst])
-		visual_inst.connect("clicked", Callable(self, "_on_card_clicked"), [visual_inst])
-		visual_inst.connect("focused", Callable(self, "_on_card_focused"), [visual_inst])
-		visual_inst.connect("unfocused", Callable(self, "_on_card_unfocused"))
+		visual_inst.connect("need_removal", func ():
+			_on_need_removal(visual_inst))
+		visual_inst.connect("clicked", func ():
+			_on_card_clicked(visual_inst))
+		visual_inst.connect("focused", func ():
+			_on_card_focused(visual_inst))
+		visual_inst.connect("unfocused", func ():
+			_on_card_unfocused())
 
 		if _board != null:
 			var last_trans := _board.get_last_known_transform(card.ref())
