@@ -1,9 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://1mf14g8jnrhg"]
 
-[ext_resource type="PackedScene" path="res://_private/containers/visible_pile/visible_pile_private.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://gaflogd8687o" path="res://_private/containers/visible_pile/visible_pile_private.tscn" id="1"]
 [ext_resource type="Script" path="res://containers/visible_pile/visible_pile.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cecea2neiqosx" path="res://cards/normal/normal_card.tscn" id="3"]
 
-[node name="VisiblePile" instance=ExtResource( "1" )]
-script = ExtResource( "2" )
-card_visual = ExtResource( "3" )
+[node name="VisiblePile" instance=ExtResource("1")]
+script = ExtResource("2")
+card_visual = ExtResource("3")
+
+[node name="DropArea" parent="." index="1"]
+anchor_right = 0.0
+anchor_bottom = 0.0

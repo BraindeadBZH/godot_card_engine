@@ -1,42 +1,30 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://3kbjh4eqduec"]
 
-[ext_resource path="res://addons/cardengine/ui/dialogs/abstract_form_dialog/abstract_form_dialog.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/cardengine/ui/dialogs/step_value_dialog/step_value_dialog.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://wj00hlafyg4a" path="res://addons/cardengine/ui/dialogs/abstract_form_dialog/abstract_form_dialog.tscn" id="1"]
+[ext_resource type="Script" path="res://addons/cardengine/ui/dialogs/step_value_dialog/step_value_dialog.gd" id="2"]
 
-[node name="StepValueDialog" instance=ExtResource( 1 )]
+[node name="StepValueDialog" instance=ExtResource("1")]
+script = ExtResource("2")
 window_title = "Value"
-script = ExtResource( 2 )
 
 [node name="ModeLbl" type="Label" parent="MainLayout/Form" index="0"]
-offset_top = 3.0
-offset_right = 38.0
-offset_bottom = 17.0
+layout_mode = 2
 text = "Mode"
 
 [node name="Mode" type="OptionButton" parent="MainLayout/Form" index="1"]
-offset_left = 42.0
-offset_right = 402.0
-offset_bottom = 20.0
+layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Choose a mode.
 Initial: the value is the origin as defined by the chain.
 Fixed: the value is defined below.
 Random: the is taken from the interval below randomly."
-size_flags_horizontal = 3
-text = "Initial"
-items = [ "Initial", null, false, 0, null, "Fixed", null, false, 1, null, "Random", null, false, 2, null ]
-selected = 0
 
 [node name="NumValueLbl" type="Label" parent="MainLayout/Form" index="2"]
-offset_top = 29.0
-offset_right = 38.0
-offset_bottom = 43.0
+layout_mode = 2
 text = "Value"
 
 [node name="NumValue" type="SpinBox" parent="MainLayout/Form" index="3"]
-offset_left = 42.0
-offset_top = 24.0
-offset_right = 402.0
-offset_bottom = 48.0
+layout_mode = 2
 tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
@@ -46,25 +34,16 @@ allow_lesser = true
 suffix = "°"
 
 [node name="VecValueLbl" type="Label" parent="MainLayout/Form" index="4"]
-offset_top = 57.0
-offset_right = 38.0
-offset_bottom = 71.0
+layout_mode = 2
 text = "Value"
 
 [node name="VecValueLayout" type="HBoxContainer" parent="MainLayout/Form" index="5"]
-offset_left = 42.0
-offset_top = 52.0
-offset_right = 402.0
-offset_bottom = 76.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="VecValueX" type="SpinBox" parent="MainLayout/Form/VecValueLayout" index="0"]
-offset_right = 178.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a number."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -73,11 +52,9 @@ allow_lesser = true
 suffix = "x"
 
 [node name="VecValueY" type="SpinBox" parent="MainLayout/Form/VecValueLayout" index="1"]
-offset_left = 182.0
-offset_right = 360.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a number."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -86,25 +63,16 @@ allow_lesser = true
 suffix = "y"
 
 [node name="VecRangeLbl" type="Label" parent="MainLayout/Form" index="6"]
-offset_top = 85.0
-offset_right = 38.0
-offset_bottom = 99.0
+layout_mode = 2
 text = "Range"
 
 [node name="VecRangeLayout" type="HBoxContainer" parent="MainLayout/Form" index="7"]
-offset_left = 42.0
-offset_top = 80.0
-offset_right = 402.0
-offset_bottom = 104.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="VecRangeX" type="SpinBox" parent="MainLayout/Form/VecRangeLayout" index="0"]
-offset_right = 178.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a number."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -113,11 +81,9 @@ allow_lesser = true
 suffix = "x"
 
 [node name="VecRangeY" type="SpinBox" parent="MainLayout/Form/VecRangeLayout" index="1"]
-offset_left = 182.0
-offset_right = 360.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a number."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -126,16 +92,11 @@ allow_lesser = true
 suffix = "y"
 
 [node name="NumRangeLbl" type="Label" parent="MainLayout/Form" index="8"]
-offset_top = 113.0
-offset_right = 38.0
-offset_bottom = 127.0
+layout_mode = 2
 text = "Range"
 
 [node name="NumRange" type="SpinBox" parent="MainLayout/Form" index="9"]
-offset_left = 42.0
-offset_top = 108.0
-offset_right = 402.0
-offset_bottom = 132.0
+layout_mode = 2
 tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
@@ -143,4 +104,5 @@ step = 0.01
 allow_greater = true
 allow_lesser = true
 suffix = "°"
+
 [connection signal="item_selected" from="MainLayout/Form/Mode" to="." method="_on_Mode_item_selected"]

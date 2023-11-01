@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://e587qt7tgk0o"]
 
-[ext_resource path="res://_private/containers/token_grid/token_grid_private.tscn" type="PackedScene" id=1]
-[ext_resource path="res://containers/token_grid/token_grid.gd" type="Script" id=2]
-[ext_resource path="res://cards/token/token.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://d3q26l6hgmrpu" path="res://_private/containers/token_grid/token_grid_private.tscn" id="1"]
+[ext_resource type="Script" path="res://containers/token_grid/token_grid.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bo5d4lo0typl2" path="res://cards/token/token.tscn" id="3"]
 
+[node name="TokenGrid" instance=ExtResource("1")]
+script = ExtResource("2")
+card_visual = ExtResource("3")
 
-
-[node name="TokenGrid" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
-card_visual = ExtResource( 3 )
+[node name="DropArea" parent="." index="1"]
+anchor_right = 0.0
+anchor_bottom = 0.0

@@ -1,46 +1,42 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://blo65q0fbhb2o"]
 
-[ext_resource path="res://containers/card_list/card_drag_background.png" type="Texture2D" id=1]
-[ext_resource path="res://fonts/ArchivoNarrow-Bold.ttf" type="FontFile" id=2]
-[ext_resource path="res://containers/card_list/card_list_drag.gd" type="Script" id=3]
+[ext_resource type="Texture2D" uid="uid://em47ws80acot" path="res://containers/card_list/card_drag_background.png" id="1"]
+[ext_resource type="FontFile" uid="uid://bfeskrh8t1gbp" path="res://fonts/ArchivoNarrow-Bold.ttf" id="2"]
+[ext_resource type="Script" path="res://containers/card_list/card_list_drag.gd" id="3"]
 
-[sub_resource type="FontFile" id=1]
-size = 28
-outline_size = 3
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 2 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("2")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="CardListDrag" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -1080.0
 offset_bottom = -690.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("3")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2( -14, -14 )
-scale = Vector2( 0.66, 0.66 )
 z_index = 99
-texture = ExtResource( 1 )
+position = Vector2(-14, -14)
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("1")
 centered = false
 
 [node name="Name" type="Label" parent="Background"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.492
 offset_top = 21.2808
 offset_right = -20.508
 offset_bottom = -20.7192
-theme_override_fonts/font = SubResource( 1 )
+theme_override_fonts/font = SubResource("1")
 text = "Card Name"
-align = 1
-valign = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}

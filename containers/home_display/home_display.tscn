@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjscfsien8r4g"]
 
-[ext_resource type="PackedScene" path="res://_private/containers/home_display/home_display_private.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cdg00uhaue2ol" path="res://_private/containers/home_display/home_display_private.tscn" id="1"]
 [ext_resource type="Script" path="res://containers/home_display/home_display.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cecea2neiqosx" path="res://cards/normal/normal_card.tscn" id="3"]
 
@@ -8,11 +8,16 @@
 _data = {
 "points": PackedVector2Array(1, -29, -1, 29, 33, 79.1812, -102, -3, 102, 3, 242, 175.181, -11, 69, 11, -69, 441, 63.1812)
 }
+point_count = 3
 
-[node name="HomeDisplay" instance=ExtResource( "1" )]
+[node name="HomeDisplay" instance=ExtResource("1")]
 custom_minimum_size = Vector2(500, 300)
-script = ExtResource( "2" )
-card_visual = ExtResource( "3" )
+script = ExtResource("2")
+card_visual = ExtResource("3")
 
 [node name="CardPath" parent="." index="0"]
-curve = SubResource( "1" )
+curve = SubResource("1")
+
+[node name="DropArea" parent="." index="1"]
+anchor_right = 0.0
+anchor_bottom = 0.0

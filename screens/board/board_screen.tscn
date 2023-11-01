@@ -3,37 +3,36 @@
 [ext_resource type="Script" path="res://screens/board/board_screen.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dhold8ocsbk5t" path="res://widgets/small_button/small_button.tscn" id="2"]
 [ext_resource type="Script" path="res://addons/cardengine/container/board.gd" id="3"]
-[ext_resource type="PackedScene" path="res://containers/hand/hand.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://b4a5o40pgirfs" path="res://containers/hand/hand.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://1mf14g8jnrhg" path="res://containers/visible_pile/visible_pile.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://cecea2neiqosx" path="res://cards/normal/normal_card.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://containers/hidden_pile/hidden_pile.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://ccgm7xia4srap" path="res://containers/hidden_pile/hidden_pile.tscn" id="7"]
 
 [node name="BoardScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( "1" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.45098, 0.509804, 0.701961, 1)
-script = null
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Board" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( "3" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("3")
 
-[node name="Pile1" parent="Board" instance=ExtResource( "5" )]
+[node name="Pile1" parent="Board" instance=ExtResource("5")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -42,22 +41,21 @@ offset_left = -401.0
 offset_top = -310.0
 offset_right = -101.0
 offset_bottom = -10.0
-custom_minimum_size = Vector2(300, 300)
 
 [node name="ColorRect" type="ColorRect" parent="Board/Pile1"]
 show_behind_parent = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -65.0
 offset_right = -65.0
 mouse_filter = 2
 color = Color(0.14902, 0.172549, 0.239216, 1)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Pile2" parent="Board" instance=ExtResource( "5" )]
+[node name="Pile2" parent="Board" instance=ExtResource("5")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -66,20 +64,19 @@ offset_left = -149.0
 offset_top = -310.0
 offset_right = 151.0
 offset_bottom = -10.0
-custom_minimum_size = Vector2(300, 300)
 
 [node name="ColorRect" type="ColorRect" parent="Board/Pile2"]
 show_behind_parent = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0.14902, 0.172549, 0.239216, 1)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Pile3" parent="Board" instance=ExtResource( "7" )]
+[node name="Pile3" parent="Board" instance=ExtResource("7")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -88,18 +85,19 @@ offset_left = 168.0
 offset_top = -309.0
 offset_right = 468.0
 offset_bottom = -9.0
-custom_minimum_size = Vector2(300, 300)
-card_visual = ExtResource( "6" )
+card_visual = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="Board/Pile3"]
 show_behind_parent = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0.14902, 0.172549, 0.239216, 1)
-script = null
 
 [node name="ShuffleBtn" type="Button" parent="Board/Pile3"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -108,14 +106,11 @@ offset_left = 10.0
 offset_top = -45.0
 offset_right = 110.0
 offset_bottom = -15.0
-custom_minimum_size = Vector2(100, 30)
 text = "Shuffle"
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DrawBtn" type="Button" parent="Board/Pile3"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -123,14 +118,12 @@ anchor_bottom = 0.5
 offset_left = 10.0
 offset_right = 110.0
 offset_bottom = 30.0
-custom_minimum_size = Vector2(100, 30)
 text = "Draw"
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Hand" parent="Board" instance=ExtResource( "4" )]
+[node name="Hand" parent="Board" instance=ExtResource("4")]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -138,9 +131,9 @@ anchor_bottom = 1.0
 offset_left = -300.0
 offset_top = -100.0
 offset_right = 300.0
-custom_minimum_size = Vector2(600, 100)
 
 [node name="DiscardBtn" type="Button" parent="Board/Hand"]
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -150,14 +143,15 @@ offset_top = -14.5
 offset_right = 151.0
 offset_bottom = 14.5
 text = "Discard last"
-script = null
 
-[node name="MenuButton" parent="." instance=ExtResource( "2" )]
+[node name="MenuButton" parent="." instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -200.0
 offset_right = 0.0
-custom_minimum_size = Vector2(0, 0)
+offset_bottom = 108.0
 text = "Back to menu"
 
 [connection signal="card_dropped" from="Board/Pile1" to="." method="_on_Pile1_card_dropped"]

@@ -1,681 +1,496 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=20 format=3 uid="uid://v1yfeb8q8jlw"]
 
-[ext_resource path="res://addons/cardengine/ui/card_engine_ui.gd" type="Script" id=1]
-[ext_resource path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/cardengine/ui/dialogs/generic_confirm_dialog/generic_confirm_dialog.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/cardengine/ui/dialogs/edit_database_dialog/edit_database_dialog.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/cardengine/ui/dialogs/category_dialog/category_dialog.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/cardengine/ui/dialogs/value_dialog/value_dialog.tscn" type="PackedScene" id=6]
-[ext_resource path="res://addons/cardengine/ui/dialogs/text_dialog/text_dialog.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/cardengine/ui/databases_ui.gd" type="Script" id=8]
-[ext_resource path="res://addons/cardengine/ui/cards_ui.gd" type="Script" id=9]
-[ext_resource path="res://addons/cardengine/ui/containers_ui.gd" type="Script" id=10]
-[ext_resource path="res://addons/cardengine/ui/dialogs/new_container_dialog/new_container_dialog.tscn" type="PackedScene" id=11]
-[ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.tscn" type="PackedScene" id=12]
-[ext_resource path="res://addons/cardengine/ui/animations_ui.gd" type="Script" id=13]
-[ext_resource path="res://addons/cardengine/ui/dialogs/step_value_dialog/step_value_dialog.tscn" type="PackedScene" id=14]
-[ext_resource path="res://addons/cardengine/ui/dialogs/step_transi_dialog/step_transi_dialog.tscn" type="PackedScene" id=15]
-[ext_resource path="res://addons/cardengine/ui/dialogs/new_animation_dialog/new_animation_dialog.tscn" type="PackedScene" id=16]
-[ext_resource path="res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.tscn" type="PackedScene" id=17]
-[ext_resource path="res://addons/cardengine/ui/effects_ui.gd" type="Script" id=18]
-[ext_resource path="res://addons/cardengine/ui/dialogs/new_effect_dialog/new_effect_dialog.tscn" type="PackedScene" id=19]
+[ext_resource type="Script" path="res://addons/cardengine/ui/card_engine_ui.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://djjrd4jj58kn3" path="res://addons/cardengine/ui/dialogs/new_database_dialog/new_database_dialog.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://qx8jq4hy8vdw" path="res://addons/cardengine/ui/dialogs/generic_confirm_dialog/generic_confirm_dialog.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://br6duejkejpqf" path="res://addons/cardengine/ui/dialogs/edit_database_dialog/edit_database_dialog.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cvrxhoex7kvke" path="res://addons/cardengine/ui/dialogs/category_dialog/category_dialog.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://du31hutx81out" path="res://addons/cardengine/ui/dialogs/value_dialog/value_dialog.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://x6eg0atv7rim" path="res://addons/cardengine/ui/dialogs/text_dialog/text_dialog.tscn" id="7"]
+[ext_resource type="Script" path="res://addons/cardengine/ui/databases_ui.gd" id="8"]
+[ext_resource type="Script" path="res://addons/cardengine/ui/cards_ui.gd" id="9"]
+[ext_resource type="Script" path="res://addons/cardengine/ui/containers_ui.gd" id="10"]
+[ext_resource type="PackedScene" uid="uid://dt6phs2x5duwh" path="res://addons/cardengine/ui/dialogs/new_container_dialog/new_container_dialog.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://t3r1fyyn3vrg" path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.tscn" id="12"]
+[ext_resource type="Script" path="res://addons/cardengine/ui/animations_ui.gd" id="13"]
+[ext_resource type="PackedScene" uid="uid://3kbjh4eqduec" path="res://addons/cardengine/ui/dialogs/step_value_dialog/step_value_dialog.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://colhmxsjlebm" path="res://addons/cardengine/ui/dialogs/step_transi_dialog/step_transi_dialog.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://d3xox8kcllobh" path="res://addons/cardengine/ui/dialogs/new_animation_dialog/new_animation_dialog.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://buf4jmcvkpxt3" path="res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.tscn" id="17"]
+[ext_resource type="Script" path="res://addons/cardengine/ui/effects_ui.gd" id="18"]
+[ext_resource type="PackedScene" uid="uid://ustxmub5eq3u" path="res://addons/cardengine/ui/dialogs/new_effect_dialog/new_effect_dialog.tscn" id="19"]
 
 [node name="CardEngineUI" type="Control"]
+custom_minimum_size = Vector2(0, 550)
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_minimum_size = Vector2( 0, 550 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
 
 [node name="TabBar" type="TabContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-tab_alignment = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Databases" type="Control" parent="TabBar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = ExtResource( 8 )
+layout_mode = 2
+script = ExtResource("8")
 
 [node name="DatabaseLayout" type="VBoxContainer" parent="TabBar/Databases"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Toolbar" type="HBoxContainer" parent="TabBar/Databases/DatabaseLayout"]
-offset_right = 1272.0
-offset_bottom = 20.0
+layout_mode = 2
 
 [node name="CreateBtn" type="Button" parent="TabBar/Databases/DatabaseLayout/Toolbar"]
-offset_right = 144.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the database creation dialog"
 text = "Create new database"
 
 [node name="EditBtn" type="Button" parent="TabBar/Databases/DatabaseLayout/Toolbar"]
-offset_left = 148.0
-offset_right = 245.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the database edit dialog. Displays all the cards in a list. Allows edit, duplicate and delete of cards. "
 disabled = true
 text = "Edit database"
 
 [node name="DeleteBtn" type="Button" parent="TabBar/Databases/DatabaseLayout/Toolbar"]
-offset_left = 249.0
-offset_right = 365.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Removes the database file with all the cards in it. Not reversible."
 disabled = true
 text = "Delete database"
 
 [node name="DatabaseList" type="ItemList" parent="TabBar/Databases/DatabaseLayout"]
-offset_top = 24.0
-offset_right = 1272.0
-offset_bottom = 684.0
+layout_mode = 2
+size_flags_vertical = 3
 tooltip_text = "Single-click to select an element.
 Double-click to edit the database name."
-size_flags_vertical = 3
-items = [ "main: Main Database (20 cards)", null, false ]
+item_count = 1
+item_0/text = "main: Main Database (20 cards)"
 
 [node name="Cards" type="Control" parent="TabBar"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = ExtResource( 9 )
+layout_mode = 2
+script = ExtResource("9")
 
 [node name="CardLayout" type="VBoxContainer" parent="TabBar/Cards"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout"]
-offset_right = 1272.0
-offset_bottom = 30.0
+layout_mode = 2
 
 [node name="CardIdLbl" type="Label" parent="TabBar/Cards/CardLayout/ToolLayout"]
-offset_top = 8.0
-offset_right = 47.0
-offset_bottom = 22.0
+layout_mode = 2
 text = "Card ID"
 
 [node name="CardId" type="LineEdit" parent="TabBar/Cards/CardLayout/ToolLayout"]
-offset_left = 51.0
-offset_right = 251.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 200, 0 )
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 tooltip_text = "Fill in a card identifier to either save, or create if not existing, or load."
 caret_blink = true
 
 [node name="SaveBtn" type="Button" parent="TabBar/Cards/CardLayout/ToolLayout"]
-offset_left = 255.0
-offset_right = 355.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 100, 30 )
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
 tooltip_text = "Saves or creates a card with the given ID and data in the selected dabase."
 disabled = true
 text = "Save to"
 
 [node name="LoadBtn" type="Button" parent="TabBar/Cards/CardLayout/ToolLayout"]
-offset_left = 359.0
-offset_right = 459.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 100, 30 )
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
 tooltip_text = "Loads the card with the given ID from the selected database."
 disabled = true
 text = "Load from"
 
 [node name="DatabaseSelect" type="OptionButton" parent="TabBar/Cards/CardLayout/ToolLayout"]
-offset_left = 463.0
-offset_right = 663.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 200, 0 )
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 tooltip_text = "The database used to save and load cards."
-text = "main: Main Database"
-items = [ "main: Main Database", null, false, 0, "main" ]
-selected = 0
 
 [node name="SuccesLbl" type="Label" parent="TabBar/Cards/CardLayout/ToolLayout"]
-offset_left = 667.0
-offset_top = 8.0
-offset_right = 667.0
-offset_bottom = 22.0
-theme_override_colors/font_color = Color( 0.611765, 0.917647, 0.27451, 1 )
+layout_mode = 2
+theme_override_colors/font_color = Color(0.611765, 0.917647, 0.27451, 1)
 
 [node name="ErrorLbl" type="Label" parent="TabBar/Cards/CardLayout/ToolLayout"]
-offset_left = 671.0
-offset_top = 8.0
-offset_right = 671.0
-offset_bottom = 22.0
-theme_override_colors/font_color = Color( 0.917647, 0.27451, 0.27451, 1 )
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0.27451, 0.27451, 1)
 
 [node name="DataLayout" type="GridContainer" parent="TabBar/Cards/CardLayout"]
-offset_top = 34.0
-offset_right = 1272.0
-offset_bottom = 684.0
+layout_mode = 2
 size_flags_vertical = 3
 columns = 3
 
 [node name="CategLbl" type="Label" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_right = 421.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Categories"
-align = 1
 
 [node name="ValuesLbl" type="Label" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_left = 425.0
-offset_right = 846.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Values"
-align = 1
 
 [node name="TextsLbl" type="Label" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_left = 850.0
-offset_right = 1271.0
-offset_bottom = 14.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Texts"
-align = 1
 
 [node name="CategList" type="ItemList" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_top = 18.0
-offset_right = 421.0
-offset_bottom = 616.0
+layout_mode = 2
+size_flags_vertical = 3
 tooltip_text = "Single-click to select.
 Double-click to edit."
-size_flags_vertical = 3
 
 [node name="ValuesList" type="ItemList" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_left = 425.0
-offset_top = 18.0
-offset_right = 846.0
-offset_bottom = 616.0
+layout_mode = 2
+size_flags_vertical = 3
 tooltip_text = "Single-click to select.
 Double-click to edit."
-size_flags_vertical = 3
 
 [node name="TextsList" type="ItemList" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_left = 850.0
-offset_top = 18.0
-offset_right = 1271.0
-offset_bottom = 616.0
+layout_mode = 2
+size_flags_vertical = 3
 tooltip_text = "Single-click to select.
 Double-click to edit."
-size_flags_vertical = 3
 
 [node name="CategToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_top = 620.0
-offset_right = 421.0
-offset_bottom = 650.0
+layout_mode = 2
 
 [node name="AddCategBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/CategToolLayout"]
-offset_right = 208.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 0, 30 )
-tooltip_text = "Opens the creation dialog."
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Opens the creation dialog."
 text = "Add"
 
 [node name="DelCategBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/CategToolLayout"]
-offset_left = 212.0
-offset_right = 421.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 0, 30 )
-tooltip_text = "Deletes the selected element."
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Deletes the selected element."
 disabled = true
 text = "Delete"
 
 [node name="ValuesToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_left = 425.0
-offset_top = 620.0
-offset_right = 846.0
-offset_bottom = 650.0
+layout_mode = 2
 
 [node name="AddValBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/ValuesToolLayout"]
-offset_right = 208.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 0, 30 )
-tooltip_text = "Opens the creation dialog."
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Opens the creation dialog."
 text = "Add"
 
 [node name="DelValBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/ValuesToolLayout"]
-offset_left = 212.0
-offset_right = 421.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 0, 30 )
-tooltip_text = "Deletes the selected element."
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Deletes the selected element."
 disabled = true
 text = "Delete"
 
 [node name="TextsToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout/DataLayout"]
-offset_left = 850.0
-offset_top = 620.0
-offset_right = 1271.0
-offset_bottom = 650.0
+layout_mode = 2
 
 [node name="AddTxtBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/TextsToolLayout"]
-offset_right = 208.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 0, 30 )
-tooltip_text = "Opens the creation dialog."
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Opens the creation dialog."
 text = "Add"
 
 [node name="DelTxtBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/TextsToolLayout"]
-offset_left = 212.0
-offset_right = 421.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 0, 30 )
-tooltip_text = "Deletes the selected element."
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Deletes the selected element."
 disabled = true
 text = "Delete"
 
 [node name="Containers" type="Control" parent="TabBar"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = ExtResource( 10 )
+layout_mode = 2
+script = ExtResource("10")
 
 [node name="ContainersLayout" type="VBoxContainer" parent="TabBar/Containers"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Toolbar" type="HBoxContainer" parent="TabBar/Containers/ContainersLayout"]
-offset_right = 1272.0
-offset_bottom = 20.0
+layout_mode = 2
 
 [node name="CreateBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
-offset_right = 117.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the container creation dialog."
 text = "Create container"
 
 [node name="EditBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
-offset_left = 121.0
-offset_right = 221.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the container edition dialog."
 disabled = true
 text = "Edit container"
 
 [node name="OpenBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
-offset_left = 225.0
-offset_right = 336.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the container scene in the Godot editor."
 disabled = true
 text = "Open container"
 
 [node name="DeleteBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
-offset_left = 340.0
-offset_right = 459.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Removes a container and the associated files. Not reversible."
 disabled = true
 text = "Delete container"
 
 [node name="ContainerList" type="ItemList" parent="TabBar/Containers/ContainersLayout"]
-offset_top = 24.0
-offset_right = 1272.0
-offset_bottom = 684.0
+layout_mode = 2
+size_flags_vertical = 3
 tooltip_text = "Single-click to select.
 Double-click to change the name."
-size_flags_vertical = 3
-items = [ "card_list: CardList", null, false, "hand: HandContainer", null, false, "home_display: HomeDisplay", null, false ]
+item_count = 3
+item_0/text = "card_list: CardList"
+item_1/text = "hand: HandContainer"
+item_2/text = "home_display: HomeDisplay"
 
 [node name="Animations" type="Control" parent="TabBar"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = ExtResource( 13 )
+layout_mode = 2
+script = ExtResource("13")
 
 [node name="AnimationsLayout" type="VBoxContainer" parent="TabBar/Animations"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Toolbar" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout"]
-offset_right = 1272.0
-offset_bottom = 20.0
+layout_mode = 2
 
 [node name="CreateBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_right = 121.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the animation creation dialog."
 text = "Create animation"
 
 [node name="OrLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_left = 125.0
-offset_top = 3.0
-offset_right = 138.0
-offset_bottom = 17.0
+layout_mode = 2
 text = "or"
 
 [node name="AnimSelect" type="OptionButton" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_left = 142.0
-offset_right = 230.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "The animation being edited."
-text = "Choose..."
-items = [ "Choose...", null, true, 0, null, "Hand Animation (hand)", null, false, 1, "hand", "Home Display Animation (home)", null, false, 2, "home", "Card List Animation (list)", null, false, 3, "list" ]
-selected = 0
 
 [node name="EditBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_left = 234.0
-offset_right = 338.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Changes animation name."
 disabled = true
 text = "Edit animation"
 
 [node name="PreviewBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_left = 342.0
-offset_right = 472.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the preview dialog to see what the animation looks like."
 disabled = true
 text = "Preview animation"
 
 [node name="SaveBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_left = 476.0
-offset_right = 585.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Writes the animation to disk."
 disabled = true
 text = "Save animation"
 
 [node name="ResetBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_left = 589.0
-offset_right = 705.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Reloads the animation from disk."
 disabled = true
 text = "Reset animation"
 
 [node name="DeleteBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
-offset_left = 709.0
-offset_right = 832.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Removes the animation from disk. Not reversible."
 disabled = true
 text = "Delete animation"
 
 [node name="AnimChainLayout" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout"]
-offset_top = 24.0
-offset_right = 1272.0
-offset_bottom = 44.0
+layout_mode = 2
 
 [node name="AnimChainLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_top = 3.0
-offset_right = 104.0
-offset_bottom = 17.0
+layout_mode = 2
 text = "Animation chain"
 
 [node name="IdleBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 108.0
-offset_right = 180.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Idle Loop"
 
 [node name="ChainSep1" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 184.0
-offset_top = 3.0
-offset_right = 192.0
-offset_bottom = 17.0
+layout_mode = 2
 text = ">"
 
 [node name="FocusedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 196.0
-offset_right = 331.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Focused Animation"
 
 [node name="ChainSep2" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 335.0
-offset_top = 3.0
-offset_right = 343.0
-offset_bottom = 17.0
+layout_mode = 2
 text = ">"
 
 [node name="ActivatedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 347.0
-offset_right = 489.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Activated Animation"
 
 [node name="ChainSep3" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 493.0
-offset_top = 3.0
-offset_right = 501.0
-offset_bottom = 17.0
+layout_mode = 2
 text = ">"
 
 [node name="DeactivatedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 505.0
-offset_right = 663.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Deactivated Animation"
 
 [node name="ChainSep4" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 667.0
-offset_top = 3.0
-offset_right = 675.0
-offset_bottom = 17.0
+layout_mode = 2
 text = ">"
 
 [node name="UnfocusedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
-offset_left = 679.0
-offset_right = 829.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Unfocused Animation"
 
 [node name="AnimEditLayout" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout"]
-offset_top = 48.0
-offset_right = 1272.0
-offset_bottom = 684.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SeqLayout" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout"]
-offset_right = 1272.0
-offset_bottom = 636.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PosSeqContainer" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
-offset_right = 421.0
-offset_bottom = 636.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PosSeqLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
-offset_right = 421.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Position Sequence"
 
 [node name="PosSeqToolsLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
-offset_top = 18.0
-offset_right = 421.0
-offset_bottom = 18.0
+layout_mode = 2
 
 [node name="PosSeqScroll" type="ScrollContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
-offset_top = 22.0
-offset_right = 421.0
-offset_bottom = 636.0
-custom_minimum_size = Vector2( 0, 30 )
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-scroll_horizontal_enabled = false
 
 [node name="PosSeqLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqScroll"]
-offset_right = 421.0
-offset_bottom = 614.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScaleSeqContainer" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
-offset_left = 425.0
-offset_right = 846.0
-offset_bottom = 636.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ScaleSeqLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
-offset_right = 421.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Scale Sequence"
 
 [node name="ScaleSeqToolsLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
-offset_top = 18.0
-offset_right = 421.0
-offset_bottom = 18.0
+layout_mode = 2
 
 [node name="ScaleSeqScroll" type="ScrollContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
-offset_top = 22.0
-offset_right = 421.0
-offset_bottom = 636.0
-custom_minimum_size = Vector2( 0, 30 )
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-scroll_horizontal_enabled = false
 
 [node name="ScaleSeqLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqScroll"]
-offset_right = 421.0
-offset_bottom = 614.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="RotSeqContainer" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
-offset_left = 850.0
-offset_right = 1272.0
-offset_bottom = 636.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="RotSeqLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
-offset_right = 422.0
-offset_bottom = 14.0
+layout_mode = 2
 text = "Rotation Sequence"
 
 [node name="RotSeqToolsLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
-offset_top = 18.0
-offset_right = 422.0
-offset_bottom = 18.0
+layout_mode = 2
 
 [node name="RotSeqScroll" type="ScrollContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
-offset_top = 22.0
-offset_right = 422.0
-offset_bottom = 636.0
-custom_minimum_size = Vector2( 0, 30 )
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-scroll_horizontal_enabled = false
 
 [node name="RotSeqLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqScroll"]
-offset_right = 422.0
-offset_bottom = 614.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Effects" type="Control" parent="TabBar"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
-script = ExtResource( 18 )
+layout_mode = 2
+script = ExtResource("18")
 
 [node name="EffectLayout" type="VBoxContainer" parent="TabBar/Effects"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Toolbar" type="HBoxContainer" parent="TabBar/Effects/EffectLayout"]
-offset_right = 1272.0
-offset_bottom = 20.0
+layout_mode = 2
 
 [node name="CreateBtn" type="Button" parent="TabBar/Effects/EffectLayout/Toolbar"]
-offset_right = 144.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the effect creation dialog."
 text = "Create new effect"
 
 [node name="EditBtn" type="Button" parent="TabBar/Effects/EffectLayout/Toolbar"]
-offset_left = 148.0
-offset_right = 245.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Opens the effect script in the Godot editor."
 disabled = true
 text = "Edit effect"
 
 [node name="DeleteBtn" type="Button" parent="TabBar/Effects/EffectLayout/Toolbar"]
-offset_left = 249.0
-offset_right = 365.0
-offset_bottom = 20.0
+layout_mode = 2
 tooltip_text = "Removes the effect and associated files. Not reversible."
 disabled = true
 text = "Delete effect"
 
 [node name="EffectList" type="ItemList" parent="TabBar/Effects/EffectLayout"]
-offset_top = 24.0
-offset_right = 1272.0
-offset_bottom = 684.0
+layout_mode = 2
+size_flags_vertical = 3
 tooltip_text = "Single-click to select.
 Double-click to change the name."
-size_flags_vertical = 3
-items = [ "mana_double: Double the Mana", null, false, "mana_incr: Mana +1", null, false, "mana_decr: Mana -1", null, false ]
+item_count = 3
+item_0/text = "mana_double: Double the Mana"
+item_1/text = "mana_incr: Mana +1"
+item_2/text = "mana_decr: Mana -1"
 
 [node name="Dialogs" type="Control" parent="."]
 visible = false
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
@@ -683,31 +498,32 @@ offset_top = 32.0
 offset_right = -4.0
 offset_bottom = -4.0
 
-[node name="NewDatabaseDialog" parent="Dialogs" instance=ExtResource( 2 )]
+[node name="NewDatabaseDialog" parent="Dialogs" instance=ExtResource("2")]
 
-[node name="GenericConfirmDialog" parent="Dialogs" instance=ExtResource( 3 )]
+[node name="GenericConfirmDialog" parent="Dialogs" instance=ExtResource("3")]
 
-[node name="EditDatabaseDialog" parent="Dialogs" instance=ExtResource( 4 )]
+[node name="EditDatabaseDialog" parent="Dialogs" instance=ExtResource("4")]
 
-[node name="CategoryDialog" parent="Dialogs" instance=ExtResource( 5 )]
+[node name="CategoryDialog" parent="Dialogs" instance=ExtResource("5")]
 
-[node name="ValueDialog" parent="Dialogs" instance=ExtResource( 6 )]
+[node name="ValueDialog" parent="Dialogs" instance=ExtResource("6")]
 
-[node name="TextDialog" parent="Dialogs" instance=ExtResource( 7 )]
+[node name="TextDialog" parent="Dialogs" instance=ExtResource("7")]
 
-[node name="NewContainerDialog" parent="Dialogs" instance=ExtResource( 11 )]
+[node name="NewContainerDialog" parent="Dialogs" instance=ExtResource("11")]
 
-[node name="EditContainerDialog" parent="Dialogs" instance=ExtResource( 12 )]
+[node name="EditContainerDialog" parent="Dialogs" instance=ExtResource("12")]
 
-[node name="NewAnimationDialog" parent="Dialogs" instance=ExtResource( 16 )]
+[node name="NewAnimationDialog" parent="Dialogs" instance=ExtResource("16")]
 
-[node name="StepValueDialog" parent="Dialogs" instance=ExtResource( 14 )]
+[node name="StepValueDialog" parent="Dialogs" instance=ExtResource("14")]
 
-[node name="StepTransiDialog" parent="Dialogs" instance=ExtResource( 15 )]
+[node name="StepTransiDialog" parent="Dialogs" instance=ExtResource("15")]
 
-[node name="AnimPreviewDialog" parent="Dialogs" instance=ExtResource( 17 )]
+[node name="AnimPreviewDialog" parent="Dialogs" instance=ExtResource("17")]
 
-[node name="NewEffectDialog" parent="Dialogs" instance=ExtResource( 19 )]
+[node name="NewEffectDialog" parent="Dialogs" instance=ExtResource("19")]
+
 [connection signal="pressed" from="TabBar/Databases/DatabaseLayout/Toolbar/CreateBtn" to="TabBar/Databases" method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="TabBar/Databases/DatabaseLayout/Toolbar/EditBtn" to="TabBar/Databases" method="_on_EditBtn_pressed"]
 [connection signal="pressed" from="TabBar/Databases/DatabaseLayout/Toolbar/DeleteBtn" to="TabBar/Databases" method="_on_DeleteBtn_pressed"]
@@ -752,15 +568,6 @@ offset_bottom = -4.0
 [connection signal="pressed" from="TabBar/Effects/EffectLayout/Toolbar/DeleteBtn" to="TabBar/Effects" method="_on_DeleteBtn_pressed"]
 [connection signal="item_activated" from="TabBar/Effects/EffectLayout/EffectList" to="TabBar/Effects" method="_on_EffectList_item_activated"]
 [connection signal="item_selected" from="TabBar/Effects/EffectLayout/EffectList" to="TabBar/Effects" method="_on_EffectList_item_selected"]
-[connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="TabBar/Databases" method="_on_NewDatabaseDialog_form_validated"]
 [connection signal="copy_card" from="Dialogs/EditDatabaseDialog" to="TabBar/Databases" method="_on_EditDatabaseDialog_copy_card"]
 [connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="TabBar/Cards" method="_on_EditDatabaseDialog_delete_card"]
 [connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="TabBar/Cards" method="_on_EditDatabaseDialog_edit_card"]
-[connection signal="form_validated" from="Dialogs/CategoryDialog" to="TabBar/Cards" method="_on_CategoryDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/ValueDialog" to="TabBar/Cards" method="_on_ValueDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/TextDialog" to="TabBar/Cards" method="_on_TextDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/NewContainerDialog" to="TabBar/Containers" method="_on_NewContainerDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/NewAnimationDialog" to="TabBar/Animations" method="_on_NewAnimationDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/StepValueDialog" to="TabBar/Animations" method="_on_StepValueDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/StepTransiDialog" to="TabBar/Animations" method="_on_StepTransiDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/NewEffectDialog" to="TabBar/Effects" method="_on_NewEffectDialog_form_validated"]

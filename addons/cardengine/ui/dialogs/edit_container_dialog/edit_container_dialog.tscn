@@ -1,305 +1,197 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://t3r1fyyn3vrg"]
 
-[ext_resource path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/cardengine/ui/dialogs/edit_container_dialog/edit_container_dialog.gd" id="1"]
 
 [node name="EditContainerDialog" type="Window"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -750.0
-offset_bottom = -128.0
-window_title = "Edit Container"
-resizable = true
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("1")
 
 [node name="MainLayout" type="VBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = -10.0
 offset_bottom = -10.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MainTabs" type="TabContainer" parent="MainLayout"]
-offset_right = 510.0
-offset_bottom = 538.0
+layout_mode = 2
 size_flags_vertical = 3
-tab_alignment = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Layout" type="Control" parent="MainLayout/MainTabs"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
+layout_mode = 2
 
 [node name="LayoutLayout" type="VBoxContainer" parent="MainLayout/MainTabs/Layout"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ModeSwitchLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
-offset_right = 502.0
-offset_bottom = 40.0
+layout_mode = 2
 
 [node name="GridModeLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
-offset_top = 13.0
-offset_right = 209.0
-offset_bottom = 27.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Grid mode"
-align = 2
 
 [node name="ModeSwitch" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
-offset_left = 213.0
-offset_right = 289.0
-offset_bottom = 40.0
+layout_mode = 2
 tooltip_text = "Choose between a grid layout or a path layout."
 
 [node name="PathModeLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout"]
-offset_left = 293.0
-offset_top = 13.0
-offset_right = 502.0
-offset_bottom = 27.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Path3D mode"
 
 [node name="FaceSwitchLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
-offset_top = 44.0
-offset_right = 502.0
-offset_bottom = 84.0
+layout_mode = 2
 
 [node name="FaceDownLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout"]
-offset_top = 13.0
-offset_right = 209.0
-offset_bottom = 27.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Face down"
-align = 2
 
 [node name="FaceSwitch" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout"]
-offset_left = 213.0
-offset_right = 289.0
-offset_bottom = 40.0
+layout_mode = 2
 tooltip_text = "Choose if cards will be displayed face up or face down by default."
 
 [node name="FaceUpLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/FaceSwitchLayout"]
-offset_left = 293.0
-offset_top = 13.0
-offset_right = 502.0
-offset_bottom = 27.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Face up"
 
 [node name="ModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout"]
-offset_top = 88.0
-offset_right = 502.0
-offset_bottom = 502.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="GridMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
-offset_right = 502.0
-offset_bottom = 414.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GridModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridCardWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_top = 5.0
-offset_right = 136.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Card width"
 
 [node name="GridCardWidth" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_left = 140.0
-offset_right = 502.0
-offset_bottom = 24.0
-tooltip_text = "If fixed width is ON, it defines the width of the cards in pixels."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If fixed width is ON, it defines the width of the cards in pixels."
 max_value = 1000.0
 value = 200.0
 allow_greater = true
 
 [node name="FixedWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_top = 41.0
-offset_right = 136.0
-offset_bottom = 55.0
+layout_mode = 2
 text = "Fixed width"
 
 [node name="FixedWidth" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_left = 140.0
-offset_top = 28.0
-offset_right = 502.0
-offset_bottom = 68.0
+layout_mode = 2
 tooltip_text = "If OFF the width of the cards will be defined based on the width of the container and the spacing to fill the container."
-pressed = true
 
 [node name="GridCardSpacingLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_top = 77.0
-offset_right = 136.0
-offset_bottom = 91.0
+layout_mode = 2
 text = "Spacing"
 
 [node name="GridCardSpacingLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_left = 140.0
-offset_top = 72.0
-offset_right = 502.0
-offset_bottom = 96.0
+layout_mode = 2
 
 [node name="GridCardSpacingH" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout"]
-offset_right = 179.0
-offset_bottom = 24.0
-tooltip_text = "Define the horizontal spacing between cards relative to their width. A value of 1 means the spacing is the same as the width."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Define the horizontal spacing between cards relative to their width. A value of 1 means the spacing is the same as the width."
 max_value = 10.0
 step = 0.01
 value = 1.0
 allow_greater = true
 
 [node name="GridCardSpacingV" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout/GridCardSpacingLayout"]
-offset_left = 183.0
-offset_right = 362.0
-offset_bottom = 24.0
-tooltip_text = "Define the vertical spacing between cards relative to their height. A value of 1 means the spacing is the same as the height."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Define the vertical spacing between cards relative to their height. A value of 1 means the spacing is the same as the height."
 max_value = 10.0
 step = 0.01
 value = 1.0
 allow_greater = true
 
 [node name="GridAlignHLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_top = 103.0
-offset_right = 136.0
-offset_bottom = 117.0
+layout_mode = 2
 text = "Horizontal Alignment"
 
 [node name="GridAlignH" type="OptionButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_left = 140.0
-offset_top = 100.0
-offset_right = 502.0
-offset_bottom = 120.0
+layout_mode = 2
 tooltip_text = "In case fixed sized cards does not fill up the container width, it determines the placement of the cards horizontally."
-text = "Left"
-items = [ "Left", null, false, 0, null, "Center", null, false, 1, null, "Right", null, false, 2, null ]
-selected = 0
 
 [node name="GridAlignVLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_top = 127.0
-offset_right = 136.0
-offset_bottom = 141.0
+layout_mode = 2
 text = "Vertical Alignment"
 
 [node name="GridAlignV" type="OptionButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_left = 140.0
-offset_top = 124.0
-offset_right = 502.0
-offset_bottom = 144.0
+layout_mode = 2
 tooltip_text = "In case fixed sized cards does not fill up the container height, it determines the placement of the cards vertically."
-text = "Top"
-items = [ "Top", null, false, 0, null, "Middle", null, false, 1, null, "Bottom", null, false, 2, null ]
-selected = 0
 
 [node name="GridColumnsLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_top = 153.0
-offset_right = 136.0
-offset_bottom = 167.0
+layout_mode = 2
 text = "Columns"
 
 [node name="GridColumns" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_left = 140.0
-offset_top = 148.0
-offset_right = 502.0
-offset_bottom = 172.0
+layout_mode = 2
 tooltip_text = "If set to a strictly positive number, it limits the number of colums for the grid."
 min_value = -1.0
 value = -1.0
 allow_greater = true
 
 [node name="GridExpandLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_top = 189.0
-offset_right = 136.0
-offset_bottom = 203.0
+layout_mode = 2
 text = "Expand container"
 
 [node name="GridExpand" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/GridMode/GridModeLayout"]
-offset_left = 140.0
-offset_top = 176.0
-offset_right = 502.0
-offset_bottom = 216.0
+layout_mode = 2
 tooltip_text = "If ON in case fixed width cards exceed the size of the container, it expands the container minimum size. Particularly useful when placed in a ScrollContainer."
 
 [node name="PathMode" type="Control" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout"]
 visible = false
-offset_right = 502.0
-offset_bottom = 206.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PathModeLayout" type="GridContainer" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PathCardWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-offset_top = 5.0
-offset_right = 73.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Card width"
 
 [node name="PathCardWidth" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-offset_left = 77.0
-offset_right = 502.0
-offset_bottom = 24.0
-tooltip_text = " It defines the width of the cards in pixels."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = " It defines the width of the cards in pixels."
 max_value = 1000.0
 value = 200.0
 allow_greater = true
 
 [node name="PathFixedWidthLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-offset_top = 41.0
-offset_right = 73.0
-offset_bottom = 55.0
+layout_mode = 2
 text = "Fixed width"
 
 [node name="PathFixedWidth" type="CheckButton" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-offset_left = 77.0
-offset_top = 28.0
-offset_right = 502.0
-offset_bottom = 68.0
+layout_mode = 2
 
 [node name="PathSpacingLbl" type="Label" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-offset_top = 77.0
-offset_right = 73.0
-offset_bottom = 91.0
+layout_mode = 2
 text = "Spacing"
 
 [node name="PathSpacing" type="SpinBox" parent="MainLayout/MainTabs/Layout/LayoutLayout/ModeLayout/PathMode/PathModeLayout"]
-offset_left = 77.0
-offset_top = 72.0
-offset_right = 502.0
-offset_bottom = 96.0
-tooltip_text = "Define the horizontal spacing between cards relative to their width. A value of 1 means the spacing is the same as the width."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Define the horizontal spacing between cards relative to their width. A value of 1 means the spacing is the same as the width."
 max_value = 10.0
 step = 0.1
 value = 1.0
@@ -307,386 +199,250 @@ allow_greater = true
 
 [node name="Interaction" type="Control" parent="MainLayout/MainTabs"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
+layout_mode = 2
 
 [node name="InterLayout" type="GridContainer" parent="MainLayout/MainTabs/Interaction"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="InterLbl" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_top = 13.0
-offset_right = 86.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Interactive"
 
 [node name="Inter" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_left = 90.0
-offset_right = 502.0
-offset_bottom = 40.0
-tooltip_text = "If ON, the cards in the container will react to user input."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If ON, the cards in the container will react to user input."
 
 [node name="InterExLbl" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_top = 13.0
-offset_right = 86.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Exclusive"
 
 [node name="InterEx" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_left = 90.0
-offset_right = 502.0
-offset_bottom = 40.0
-tooltip_text = "If ON, when a card is in focus other cards in the container stop reacting to user input."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If ON, when a card is in focus other cards in the container stop reacting to user input."
 
 [node name="InterLastLbl" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_top = 13.0
-offset_right = 86.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Last card only"
 
 [node name="InterLast" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_left = 90.0
-offset_right = 502.0
-offset_bottom = 40.0
-tooltip_text = "If ON, only the last card can react to user input."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If ON, only the last card can react to user input."
 
 [node name="EnabledTitle" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_top = 57.0
-offset_right = 86.0
-offset_bottom = 71.0
+layout_mode = 2
 text = "Drag enabled"
 
 [node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_left = 90.0
-offset_top = 44.0
-offset_right = 502.0
-offset_bottom = 84.0
-tooltip_text = "If ON, the container can be used as a source for drag and drop actions."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If ON, the container can be used as a source for drag and drop actions."
 
 [node name="DropTitle" type="Label" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_top = 101.0
-offset_right = 86.0
-offset_bottom = 115.0
+layout_mode = 2
 text = "Drop enabled"
 
 [node name="Drop" type="CheckButton" parent="MainLayout/MainTabs/Interaction/InterLayout"]
-offset_left = 90.0
-offset_top = 88.0
-offset_right = 502.0
-offset_bottom = 128.0
-tooltip_text = "If ON, the container can be used as a receiver for drag and drop actions."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If ON, the container can be used as a receiver for drag and drop actions."
 
 [node name="FineTuning" type="Control" parent="MainLayout/MainTabs"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
+layout_mode = 2
 
 [node name="TuningLayout" type="VBoxContainer" parent="MainLayout/MainTabs/FineTuning"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PositionTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-offset_right = 502.0
-offset_bottom = 20.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Position"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PostionLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-offset_top = 24.0
-offset_right = 502.0
-offset_bottom = 144.0
+layout_mode = 2
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_top = 13.0
-offset_right = 98.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Enabled"
 
 [node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_left = 102.0
-offset_right = 502.0
-offset_bottom = 40.0
-tooltip_text = "If enabled allow to move the card relative to the position defined by the layout."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If enabled allow to move the card relative to the position defined by the layout."
 
 [node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_top = 47.0
-offset_right = 98.0
-offset_bottom = 61.0
+layout_mode = 2
 text = "Mode"
 
 [node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_left = 102.0
-offset_top = 44.0
-offset_right = 502.0
-offset_bottom = 64.0
+layout_mode = 2
 tooltip_text = "Linear: the position will be interpolated linearly from min to max.
 Symmetric: like linear but flip direction in the middle of the cards.
 Random: randomly pick a position in the min/max range. "
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Symmetric", null, false, 1, null, "Random", null, false, 2, null ]
-selected = 0
 
 [node name="RangeMinLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_top = 73.0
-offset_right = 98.0
-offset_bottom = 87.0
+layout_mode = 2
 text = "Minimum (x, y)"
 
 [node name="RangeMinLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_left = 102.0
-offset_top = 68.0
-offset_right = 502.0
-offset_bottom = 92.0
+layout_mode = 2
 
 [node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout"]
-offset_right = 198.0
-offset_bottom = 24.0
-tooltip_text = "Minimal horizontal relative position."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Minimal horizontal relative position."
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMinLayout"]
-offset_left = 202.0
-offset_right = 400.0
-offset_bottom = 24.0
-tooltip_text = "Minimal vertical relative position."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Minimal vertical relative position."
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
 
 [node name="RangeMaxLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_top = 101.0
-offset_right = 98.0
-offset_bottom = 115.0
+layout_mode = 2
 text = "Maximum (x, y)"
 
 [node name="RangeMaxLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout"]
-offset_left = 102.0
-offset_top = 96.0
-offset_right = 502.0
-offset_bottom = 120.0
+layout_mode = 2
 
 [node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout"]
-offset_right = 198.0
-offset_bottom = 24.0
-tooltip_text = "Maximal horizontal relative position."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Maximal horizontal relative position."
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/PostionLayout/RangeMaxLayout"]
-offset_left = 202.0
-offset_right = 400.0
-offset_bottom = 24.0
-tooltip_text = "Maximal vertical relative position."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Maximal vertical relative position."
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
 
 [node name="AngleTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-offset_top = 148.0
-offset_right = 502.0
-offset_bottom = 168.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Angle"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AngleLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-offset_top = 172.0
-offset_right = 502.0
-offset_bottom = 264.0
+layout_mode = 2
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
-offset_top = 13.0
-offset_right = 110.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Enabled"
 
 [node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
-offset_left = 114.0
-offset_right = 502.0
-offset_bottom = 40.0
-tooltip_text = "If enabled allow to rotate the card relative to the angle defined by the layout."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If enabled allow to rotate the card relative to the angle defined by the layout."
 
 [node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
-offset_top = 47.0
-offset_right = 110.0
-offset_bottom = 61.0
+layout_mode = 2
 text = "Mode"
 
 [node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
-offset_left = 114.0
-offset_top = 44.0
-offset_right = 502.0
-offset_bottom = 64.0
+layout_mode = 2
 tooltip_text = "Linear: the angle will be interpolated linearly from min to max.
 Symmetric: like linear but flip direction in the middle of the cards.
 Random: randomly pick an angle in the min/max range. "
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Symmetric", null, false, 1, null, "Random", null, false, 2, null ]
-selected = 0
 
 [node name="RangeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
-offset_top = 73.0
-offset_right = 110.0
-offset_bottom = 87.0
+layout_mode = 2
 text = "Range (min, max)"
 
 [node name="RangeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout"]
-offset_left = 114.0
-offset_top = 68.0
-offset_right = 502.0
-offset_bottom = 92.0
+layout_mode = 2
 
 [node name="RangeMin" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout"]
-offset_right = 192.0
-offset_bottom = 24.0
-tooltip_text = "Minimal relative angle."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Minimal relative angle."
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
 
 [node name="RangeMax" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/AngleLayout/RangeLayout"]
-offset_left = 196.0
-offset_right = 388.0
-offset_bottom = 24.0
-tooltip_text = "Maximal relative angle."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Maximal relative angle."
 min_value = -1000.0
 max_value = 1000.0
 allow_greater = true
 allow_lesser = true
 
 [node name="ScaleTitle" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-offset_top = 268.0
-offset_right = 502.0
-offset_bottom = 288.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Scale"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScaleLayout" type="GridContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout"]
-offset_top = 292.0
-offset_right = 502.0
-offset_bottom = 436.0
+layout_mode = 2
 columns = 2
 
 [node name="EnabledLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_top = 13.0
-offset_right = 98.0
-offset_bottom = 27.0
+layout_mode = 2
 text = "Enabled"
 
 [node name="Enabled" type="CheckButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_left = 102.0
-offset_right = 502.0
-offset_bottom = 40.0
-tooltip_text = "If enabled allow to scale the card relative to the scale defined by the layout."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "If enabled allow to scale the card relative to the scale defined by the layout."
 
 [node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_top = 47.0
-offset_right = 98.0
-offset_bottom = 61.0
+layout_mode = 2
 text = "Mode"
 
 [node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_left = 102.0
-offset_top = 44.0
-offset_right = 502.0
-offset_bottom = 64.0
+layout_mode = 2
 tooltip_text = "Linear: the scale will be interpolated linearly from min to max.
 Symmetric: like linear but flip direction in the middle of the cards.
 Random: randomly pick a scale in the min/max range. "
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Symmetric", null, false, 1, null, "Random", null, false, 2, null ]
-selected = 0
 
 [node name="RatioLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_top = 71.0
-offset_right = 98.0
-offset_bottom = 85.0
+layout_mode = 2
 text = "Aspect ratio"
 
 [node name="Ratio" type="OptionButton" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_left = 102.0
-offset_top = 68.0
-offset_right = 502.0
-offset_bottom = 88.0
+layout_mode = 2
 tooltip_text = "Keep: keep the aspect ratio of the cards. (ignore the y scaling)
 Ignore: allows independent x and y scaling."
-text = "Keep"
-items = [ "Keep", null, false, 0, null, "Ignore", null, false, 1, null ]
-selected = 0
 
 [node name="RangeMinLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_top = 97.0
-offset_right = 98.0
-offset_bottom = 111.0
+layout_mode = 2
 text = "Minimum (x, y)"
 
 [node name="RangeMinLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_left = 102.0
-offset_top = 92.0
-offset_right = 502.0
-offset_bottom = 116.0
+layout_mode = 2
 
 [node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout"]
-offset_right = 198.0
-offset_bottom = 24.0
-tooltip_text = "Minimal horizontal relative scaling."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Minimal horizontal relative scaling."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -694,11 +450,9 @@ allow_greater = true
 allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMinLayout"]
-offset_left = 202.0
-offset_right = 400.0
-offset_bottom = 24.0
-tooltip_text = "Minimal vertical relative scaling."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Minimal vertical relative scaling."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -706,22 +460,16 @@ allow_greater = true
 allow_lesser = true
 
 [node name="RangeMaxLbl" type="Label" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_top = 125.0
-offset_right = 98.0
-offset_bottom = 139.0
+layout_mode = 2
 text = "Maximum (x, y)"
 
 [node name="RangeMaxLayout" type="HBoxContainer" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout"]
-offset_left = 102.0
-offset_top = 120.0
-offset_right = 502.0
-offset_bottom = 144.0
+layout_mode = 2
 
 [node name="RangeH" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout"]
-offset_right = 198.0
-offset_bottom = 24.0
-tooltip_text = "Maximal horizontal relative scaling."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Maximal horizontal relative scaling."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -729,11 +477,9 @@ allow_greater = true
 allow_lesser = true
 
 [node name="RangeV" type="SpinBox" parent="MainLayout/MainTabs/FineTuning/TuningLayout/ScaleLayout/RangeMaxLayout"]
-offset_left = 202.0
-offset_right = 400.0
-offset_bottom = 24.0
-tooltip_text = "Maximal vertical relative scaling."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Maximal vertical relative scaling."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -742,53 +488,31 @@ allow_lesser = true
 
 [node name="Transitions" type="Control" parent="MainLayout/MainTabs"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
+layout_mode = 2
 
 [node name="TransLayout" type="VBoxContainer" parent="MainLayout/MainTabs/Transitions"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OrderTitle" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout"]
-offset_right = 502.0
-offset_bottom = 20.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "On layout change"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OrderLayout" type="GridContainer" parent="MainLayout/MainTabs/Transitions/TransLayout"]
-offset_top = 24.0
-offset_right = 502.0
-offset_bottom = 96.0
+layout_mode = 2
 columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-offset_top = 5.0
-offset_right = 55.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-offset_left = 59.0
-offset_right = 502.0
-offset_bottom = 24.0
-tooltip_text = "Duration of the transition in miliseconds"
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Duration of the transition in miliseconds"
 max_value = 10000.0
 value = 300.0
 rounded = true
@@ -796,68 +520,39 @@ allow_greater = true
 suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-offset_top = 31.0
-offset_right = 55.0
-offset_bottom = 45.0
+layout_mode = 2
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-offset_left = 59.0
-offset_top = 28.0
-offset_right = 502.0
-offset_bottom = 48.0
+layout_mode = 2
 tooltip_text = "Choose which curve the transition follows."
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Sine", null, false, 1, null, "Quint", null, false, 2, null, "Quart", null, false, 3, null, "Quad", null, false, 4, null, "Expo", null, false, 5, null, "Elastic", null, false, 6, null, "Cubic", null, false, 7, null, "Circ", null, false, 8, null, "Bounce", null, false, 9, null, "Back", null, false, 10, null ]
-selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-offset_top = 55.0
-offset_right = 55.0
-offset_bottom = 69.0
+layout_mode = 2
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OrderLayout"]
-offset_left = 59.0
-offset_top = 52.0
-offset_right = 502.0
-offset_bottom = 72.0
+layout_mode = 2
 tooltip_text = "Choose if the curve is applied at the start of the transition or the end or both."
-text = "In"
-items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In Out", null, false, 2, null, "Out In", null, false, 3, null ]
-selected = 0
 
 [node name="InTitle" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout"]
-offset_top = 100.0
-offset_right = 502.0
-offset_bottom = 120.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "On card added"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="InLayout" type="GridContainer" parent="MainLayout/MainTabs/Transitions/TransLayout"]
-offset_top = 124.0
-offset_right = 502.0
-offset_bottom = 196.0
+layout_mode = 2
 columns = 2
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-offset_top = 5.0
-offset_right = 55.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-offset_left = 59.0
-offset_right = 502.0
-offset_bottom = 24.0
-tooltip_text = "Duration of the transition in miliseconds"
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Duration of the transition in miliseconds"
 max_value = 10000.0
 value = 300.0
 rounded = true
@@ -865,68 +560,39 @@ allow_greater = true
 suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-offset_top = 31.0
-offset_right = 55.0
-offset_bottom = 45.0
+layout_mode = 2
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-offset_left = 59.0
-offset_top = 28.0
-offset_right = 502.0
-offset_bottom = 48.0
+layout_mode = 2
 tooltip_text = "Choose which curve the transition follows."
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Sine", null, false, 1, null, "Quint", null, false, 2, null, "Quart", null, false, 3, null, "Quad", null, false, 4, null, "Expo", null, false, 5, null, "Elastic", null, false, 6, null, "Cubic", null, false, 7, null, "Circ", null, false, 8, null, "Bounce", null, false, 9, null, "Back", null, false, 10, null ]
-selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-offset_top = 55.0
-offset_right = 55.0
-offset_bottom = 69.0
+layout_mode = 2
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/InLayout"]
-offset_left = 59.0
-offset_top = 52.0
-offset_right = 502.0
-offset_bottom = 72.0
+layout_mode = 2
 tooltip_text = "Choose if the curve is applied at the start of the transition or the end or both."
-text = "In"
-items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In Out", null, false, 2, null, "Out In", null, false, 3, null ]
-selected = 0
 
 [node name="OutTitle" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout"]
-offset_top = 200.0
-offset_right = 502.0
-offset_bottom = 220.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "On card removed"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OutLayout" type="GridContainer" parent="MainLayout/MainTabs/Transitions/TransLayout"]
-offset_top = 224.0
-offset_right = 502.0
-offset_bottom = 296.0
+layout_mode = 2
 columns = 2
 
 [node name="DurationLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-offset_top = 5.0
-offset_right = 55.0
-offset_bottom = 19.0
+layout_mode = 2
 text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-offset_left = 59.0
-offset_right = 502.0
-offset_bottom = 24.0
-tooltip_text = "Duration of the transition in miliseconds"
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Duration of the transition in miliseconds"
 max_value = 10000.0
 value = 300.0
 rounded = true
@@ -934,308 +600,188 @@ allow_greater = true
 suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-offset_top = 31.0
-offset_right = 55.0
-offset_bottom = 45.0
+layout_mode = 2
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-offset_left = 59.0
-offset_top = 28.0
-offset_right = 502.0
-offset_bottom = 48.0
+layout_mode = 2
 tooltip_text = "Choose which curve the transition follows."
-text = "Linear"
-items = [ "Linear", null, false, 0, null, "Sine", null, false, 1, null, "Quint", null, false, 2, null, "Quart", null, false, 3, null, "Quad", null, false, 4, null, "Expo", null, false, 5, null, "Elastic", null, false, 6, null, "Cubic", null, false, 7, null, "Circ", null, false, 8, null, "Bounce", null, false, 9, null, "Back", null, false, 10, null ]
-selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-offset_top = 55.0
-offset_right = 55.0
-offset_bottom = 69.0
+layout_mode = 2
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/MainTabs/Transitions/TransLayout/OutLayout"]
-offset_left = 59.0
-offset_top = 52.0
-offset_right = 502.0
-offset_bottom = 72.0
+layout_mode = 2
 tooltip_text = "Choose if the curve is applied at the start of the transition or the end or both."
-text = "In"
-items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In Out", null, false, 2, null, "Out In", null, false, 3, null ]
-selected = 0
 
 [node name="Animations" type="Control" parent="MainLayout/MainTabs"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = -4.0
-offset_bottom = -4.0
+layout_mode = 2
 
 [node name="AnimLayout" type="VBoxContainer" parent="MainLayout/MainTabs/Animations"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 0.5
 offset_bottom = 0.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GeneralTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-offset_right = 502.0
-offset_bottom = 20.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "General"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GeneralLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-offset_top = 24.0
-offset_right = 502.0
-offset_bottom = 88.0
+layout_mode = 2
 columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
-offset_top = 47.0
-offset_right = 69.0
-offset_bottom = 61.0
+layout_mode = 2
 text = "Animation"
 
 [node name="Anim" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/GeneralLayout"]
-offset_left = 73.0
-offset_top = 44.0
-offset_right = 502.0
-offset_bottom = 64.0
-tooltip_text = "Choose which animation chain the container use."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Choose which animation chain the container use."
 
 [node name="LayoutTitle" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-offset_top = 92.0
-offset_right = 502.0
-offset_bottom = 112.0
-custom_minimum_size = Vector2( 0, 20 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Change to layout"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LayoutLayout" type="GridContainer" parent="MainLayout/MainTabs/Animations/AnimLayout"]
-offset_top = 116.0
-offset_right = 502.0
-offset_bottom = 292.0
+layout_mode = 2
 columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_top = 3.0
-offset_right = 94.0
-offset_bottom = 17.0
+layout_mode = 2
 text = "Mode"
 
 [node name="Mode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_left = 98.0
-offset_right = 502.0
-offset_bottom = 20.0
-tooltip_text = "Choose when the layout change occurs."
+layout_mode = 2
 size_flags_horizontal = 3
-text = "On focused"
-items = [ "On focused", null, false, 0, null, "On activated", null, false, 1, null ]
-selected = 0
+tooltip_text = "Choose when the layout change occurs."
 
 [node name="PosModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_top = 27.0
-offset_right = 94.0
-offset_bottom = 41.0
+layout_mode = 2
 text = "Position mode"
 
 [node name="PosModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_left = 98.0
-offset_top = 24.0
-offset_right = 502.0
-offset_bottom = 44.0
+layout_mode = 2
 
 [node name="PosXMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout"]
-offset_right = 200.0
-offset_bottom = 20.0
-tooltip_text = "Choose the type of change."
+layout_mode = 2
 size_flags_horizontal = 3
-text = "No change"
-items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
-selected = 0
+tooltip_text = "Choose the type of change."
 
 [node name="PosYMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosModeLayout"]
-offset_left = 204.0
-offset_right = 404.0
-offset_bottom = 20.0
-tooltip_text = "Choose the type of change."
+layout_mode = 2
 size_flags_horizontal = 3
-text = "No change"
-items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
-selected = 0
+tooltip_text = "Choose the type of change."
 
 [node name="PosLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_top = 53.0
-offset_right = 94.0
-offset_bottom = 67.0
+layout_mode = 2
 text = "Position"
 
 [node name="PosLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_left = 98.0
-offset_top = 48.0
-offset_right = 502.0
-offset_bottom = 72.0
+layout_mode = 2
 
 [node name="PosX" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout"]
-offset_right = 200.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a value for the change."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a value for the change."
 allow_greater = true
 allow_lesser = true
 suffix = "x"
 
 [node name="PosY" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/PosLayout"]
-offset_left = 204.0
-offset_right = 404.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a value for the change."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a value for the change."
 allow_greater = true
 allow_lesser = true
 suffix = "y"
 
 [node name="ScaleModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_top = 79.0
-offset_right = 94.0
-offset_bottom = 93.0
+layout_mode = 2
 text = "Scale mode"
 
 [node name="ScaleModeLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_left = 98.0
-offset_top = 76.0
-offset_right = 502.0
-offset_bottom = 96.0
+layout_mode = 2
 
 [node name="ScaleXMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout"]
-offset_right = 200.0
-offset_bottom = 20.0
-tooltip_text = "Choose the type of change."
+layout_mode = 2
 size_flags_horizontal = 3
-text = "No change"
-items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
-selected = 0
+tooltip_text = "Choose the type of change."
 
 [node name="ScaleYMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleModeLayout"]
-offset_left = 204.0
-offset_right = 404.0
-offset_bottom = 20.0
-tooltip_text = "Choose the type of change."
+layout_mode = 2
 size_flags_horizontal = 3
-text = "No change"
-items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
-selected = 0
+tooltip_text = "Choose the type of change."
 
 [node name="ScaleLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_top = 105.0
-offset_right = 94.0
-offset_bottom = 119.0
+layout_mode = 2
 text = "Scale"
 
 [node name="ScaleLayout" type="HBoxContainer" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_left = 98.0
-offset_top = 100.0
-offset_right = 502.0
-offset_bottom = 124.0
+layout_mode = 2
 
 [node name="ScaleX" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout"]
-offset_right = 200.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a value for the change."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a value for the change."
 step = 0.01
 allow_greater = true
 allow_lesser = true
 suffix = "x"
 
 [node name="ScaleY" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout/ScaleLayout"]
-offset_left = 204.0
-offset_right = 404.0
-offset_bottom = 24.0
-tooltip_text = "Fill in a value for the change."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a value for the change."
 step = 0.01
 allow_greater = true
 allow_lesser = true
 suffix = "y"
 
 [node name="RotModeLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_top = 131.0
-offset_right = 94.0
-offset_bottom = 145.0
+layout_mode = 2
 text = "Rotation mode"
 
 [node name="RotMode" type="OptionButton" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_left = 98.0
-offset_top = 128.0
-offset_right = 502.0
-offset_bottom = 148.0
-tooltip_text = "Choose the type of change."
+layout_mode = 2
 size_flags_horizontal = 3
-text = "No change"
-items = [ "No change", null, false, 0, null, "Relative change", null, false, 1, null, "Absolute change", null, false, 2, null ]
-selected = 0
+tooltip_text = "Choose the type of change."
 
 [node name="RotLbl" type="Label" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_top = 157.0
-offset_right = 94.0
-offset_bottom = 171.0
+layout_mode = 2
 text = "Rotation"
 
 [node name="Rot" type="SpinBox" parent="MainLayout/MainTabs/Animations/AnimLayout/LayoutLayout"]
-offset_left = 98.0
-offset_top = 152.0
-offset_right = 502.0
-offset_bottom = 176.0
-tooltip_text = "Fill in a value for the change."
+layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Fill in a value for the change."
 step = 0.01
 allow_greater = true
 allow_lesser = true
 suffix = "°"
 
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
-offset_top = 542.0
-offset_right = 510.0
-offset_bottom = 572.0
+layout_mode = 2
 alignment = 1
 
 [node name="SaveBtn" type="Button" parent="MainLayout/ButtonLayout"]
-offset_left = 153.0
-offset_right = 253.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 100, 30 )
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
 text = "Save"
 
 [node name="CancelBtn" type="Button" parent="MainLayout/ButtonLayout"]
-offset_left = 257.0
-offset_right = 357.0
-offset_bottom = 30.0
-custom_minimum_size = Vector2( 100, 30 )
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
 text = "Cancel"
+
 [connection signal="toggled" from="MainLayout/MainTabs/Layout/LayoutLayout/ModeSwitchLayout/ModeSwitch" to="." method="_on_ModeSwitch_toggled"]
 [connection signal="pressed" from="MainLayout/ButtonLayout/SaveBtn" to="." method="_on_SaveBtn_pressed"]
 [connection signal="pressed" from="MainLayout/ButtonLayout/CancelBtn" to="." method="_on_CancelBtn_pressed"]

@@ -5,9 +5,6 @@
 
 [node name="MenuButton" type="Button"]
 custom_minimum_size = Vector2(348, 108)
-theme = ExtResource( "1_gtiy8" )
+theme = ExtResource("1_gtiy8")
 text = "BUTTON"
-script = ExtResource( "7" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("7")
