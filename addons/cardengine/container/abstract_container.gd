@@ -160,7 +160,7 @@ func _update_container() -> void:
 
 	# Adding missing cards
 	for card in _store.cards():
-		if _cards.find_node(CARD_NODE_FMT % card.ref(), false, false) != null:
+		if _cards.find_child(CARD_NODE_FMT % card.ref(), false, false) != null:
 			continue
 
 		var visual_inst = card_visual.instantiate()
@@ -213,7 +213,7 @@ func _update_container() -> void:
 	# Sorting according to store order
 	var index = 0
 	for card in _store.cards():
-		var visual = _cards.find_node(CARD_NODE_FMT % card.ref(), false, false)
+		var visual = _cards.find_child(CARD_NODE_FMT % card.ref(), false, false)
 		_cards.move_child(visual, index)
 		index += 1
 
