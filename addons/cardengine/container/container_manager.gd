@@ -52,8 +52,8 @@ func load_containers(folder: String, private_folder: String, tpl_folder: String)
 	_folder = folder
 	_private_folder = private_folder
 	_tpl_folder = tpl_folder
-	var dir = Directory.new()
-	if dir.open(_private_folder) == OK:
+	var dir = DirAccess.open(_private_folder)
+	if dir:
 		dir.list_dir_begin()
 		var filename = dir.get_next()
 		while filename != "":
@@ -77,8 +77,8 @@ func containers() -> Dictionary:
 
 
 func create_container(cont: ContainerData) -> void:
-	var dir = Directory.new()
-	if dir.open(_private_folder) == OK:
+	var dir = DirAccess.open(_private_folder)
+	if dir:
 		dir.make_dir(cont.id)
 		var private_scene = _write_private_scene(cont)
 		if private_scene == "":
@@ -196,9 +196,8 @@ func _write_metadata(cont: ContainerData) -> void:
 
 
 func _write_private_scene(cont: ContainerData) -> String:
-	var dir = Directory.new()
-	if !dir.dir_exists(FMT_PRIVATE_FOLDER % [_private_folder, cont.id]):
-		dir.make_dir_recursive(FMT_PRIVATE_FOLDER % [_private_folder, cont.id])
+	if !DirAccess.dir_exists_absolute(FMT_PRIVATE_FOLDER % [_private_folder, cont.id]):
+		DirAccess.make_dir_recursive_absolute(FMT_PRIVATE_FOLDER % [_private_folder, cont.id])
 
 	var tpl_path = FMT_PRIVATE_TPL % _tpl_folder
 	var script_path = FMT_PRIVATE_SCRIPT % [_private_folder, cont.id, cont.id]
@@ -277,11 +276,10 @@ func _write_private_scene(cont: ContainerData) -> String:
 
 
 func _write_public_scene(cont: ContainerData, private_scene: String) -> void:
-	var dir = Directory.new()
-	if dir.dir_exists(FMT_IMPL_FOLDER % [_folder, cont.id]):
+	if DirAccess.dir_exists_absolute(FMT_IMPL_FOLDER % [_folder, cont.id]):
 		return
 	else:
-		dir.make_dir_recursive(FMT_IMPL_FOLDER % [_folder, cont.id])
+		DirAccess.make_dir_recursive_absolute(FMT_IMPL_FOLDER % [_folder, cont.id])
 
 	var tpl_path = FMT_IMPL_TPL % _tpl_folder
 	var script_path = FMT_IMPL_SCRIPT % [_folder, cont.id, cont.id]
