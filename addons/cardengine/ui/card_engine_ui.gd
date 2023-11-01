@@ -2,7 +2,7 @@
 class_name CardEngineUI
 extends Control
 
-@onready var _tabs = $Tabs
+@onready var _tabs = $TabBar
 @onready var _confirm_dlg = $Dialogs/GenericConfirmDialog
 @onready var _new_db_dlg = $Dialogs/NewDatabaseDialog
 @onready var _edit_db_dlg = $Dialogs/EditDatabaseDialog
@@ -19,11 +19,11 @@ extends Control
 
 
 func _ready():
-	$Tabs/Databases.set_main_ui(self)
-	$Tabs/Cards.set_main_ui(self)
-	$Tabs/Containers.set_main_ui(self)
-	$Tabs/Animations.set_main_ui(self)
-	$Tabs/Effects.set_main_ui(self)
+	$TabBar/Databases.set_main_ui(self)
+	$TabBar/Cards.set_main_ui(self)
+	$TabBar/Containers.set_main_ui(self)
+	$TabBar/Animations.set_main_ui(self)
+	$TabBar/Effects.set_main_ui(self)
 
 
 func change_tab(index: int) -> void:
