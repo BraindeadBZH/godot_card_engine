@@ -20,7 +20,7 @@ func set_drop_area(area: DropArea) -> void:
 	_drop_area = area
 
 
-func get_drag_data(_position: Vector2):
+func _get_drag_data(_position: Vector2):
 	if not _drag_enabled:
 		return null
 
@@ -32,9 +32,9 @@ func get_drag_data(_position: Vector2):
 	return "card_engine:drag"
 
 
-func can_drop_data(position: Vector2, data) -> bool:
+func _can_drop_data(position: Vector2, data) -> bool:
 	if _drop_area != null:
-		var can_drop = _drop_area.can_drop_data(position, data)
+		var can_drop = _drop_area._can_drop_data(position, data)
 
 		if can_drop:
 			emit_signal("prepare_for_drop")
@@ -44,6 +44,6 @@ func can_drop_data(position: Vector2, data) -> bool:
 	return false
 
 
-func drop_data(position: Vector2, data) -> void:
+func _drop_data(position: Vector2, data) -> void:
 	if _drop_area != null:
-		_drop_area.drop_data(position, data)
+		_drop_area._drop_data(position, data)

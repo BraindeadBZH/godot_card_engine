@@ -23,7 +23,7 @@ func set_filter(filter: Query) -> void:
 	_filter = filter
 
 
-func can_drop_data(_position: Vector2, data) -> bool:
+func _can_drop_data(_position: Vector2, data) -> bool:
 	if not _enabled:
 		return false
 
@@ -41,7 +41,7 @@ func can_drop_data(_position: Vector2, data) -> bool:
 	return false
 
 
-func drop_data(_position: Vector2, data) -> void:
+func _drop_data(_position: Vector2, data) -> void:
 	if not _enabled:
 		return
 
