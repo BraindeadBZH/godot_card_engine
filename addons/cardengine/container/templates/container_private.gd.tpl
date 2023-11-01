@@ -40,8 +40,8 @@ func _init():
 	# Angle fine tuning
 	_fine_angle = {angle_enabled}
 	_fine_angle_mode = {angle_mode}
-	_fine_angle_min = deg2rad({angle_range_min})
-	_fine_angle_max = deg2rad({angle_range_max})
+	_fine_angle_min = deg_to_rad({angle_range_min})
+	_fine_angle_max = deg_to_rad({angle_range_max})
 
 	# Scale fine tuning
 	_fine_scale = {scale_enabled}

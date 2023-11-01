@@ -418,9 +418,9 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween = null) -> fl
 						AnimationSequence.INIT_ACTIVATED:
 							final_rot = _trans_activated.rot
 				StepValue.Mode.FIXED:
-					final_rot = deg2rad(step.val.num_val)
+					final_rot = deg_to_rad(step.val.num_val)
 				StepValue.Mode.RANDOM:
-					final_rot = deg2rad(_rng.randomf_range(
+					final_rot = deg_to_rad(_rng.randomf_range(
 						step.val.num_val, step.val.num_range))
 
 			if player != null:
