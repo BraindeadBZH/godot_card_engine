@@ -5,5 +5,5 @@
 [node name="SmallButton" instance=ExtResource( "1" )]
 offset_right = 200.0
 offset_bottom = 50.0
-rect_min_size = Vector2(200, 50)
+custom_minimum_size = Vector2(200, 50)
 theme_override_font_sizes/font_size = 18

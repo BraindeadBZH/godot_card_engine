@@ -8,28 +8,28 @@ window_title = "Effect"
 script = ExtResource( 2 )
 
 [node name="FxIdLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 5.0
-margin_right = 38.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 38.0
+offset_bottom = 19.0
 text = "ID"
 
 [node name="FxId" type="LineEdit" parent="MainLayout/Form" index="1"]
-margin_left = 42.0
-margin_right = 402.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in an identifier. It is used to interact with the effect in scripts."
+offset_left = 42.0
+offset_right = 402.0
+offset_bottom = 24.0
+tooltip_text = "Fill in an identifier. It is used to interact with the effect in scripts."
 size_flags_horizontal = 3
 
 [node name="FxNameLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 33.0
-margin_right = 38.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 38.0
+offset_bottom = 47.0
 text = "Name"
 
 [node name="FxName" type="LineEdit" parent="MainLayout/Form" index="3"]
-margin_left = 42.0
-margin_top = 28.0
-margin_right = 402.0
-margin_bottom = 52.0
-hint_tooltip = "Fill in a name. It is a visual help."
+offset_left = 42.0
+offset_top = 28.0
+offset_right = 402.0
+offset_bottom = 52.0
+tooltip_text = "Fill in a name. It is a visual help."
 size_flags_horizontal = 3

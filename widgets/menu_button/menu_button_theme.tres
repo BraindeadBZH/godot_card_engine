@@ -1,42 +1,36 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://4yx28d1p88hr"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://4yx28d1p88hr"]
 
-[ext_resource type="FontData" uid="uid://bte6bvg3h4lwj" path="res://fonts/ArchivoNarrow-Bold.ttf" id="1_qrrra"]
-[ext_resource type="Texture2D" uid="uid://c2uiwd3fien5e" path="res://widgets/menu_button/button-normal.png" id="2_p4dak"]
-[ext_resource type="Texture2D" uid="uid://m2ebwo8lxsi5" path="res://widgets/menu_button/button-disabled.png" id="2_sl027"]
-[ext_resource type="Texture2D" uid="uid://ejtaqd0aqm4f" path="res://widgets/menu_button/button-focused.png" id="3_01swx"]
-[ext_resource type="Texture2D" uid="uid://dtbu08qc3eime" path="res://widgets/menu_button/button-hover.png" id="4_am4k0"]
-[ext_resource type="Texture2D" uid="uid://bcpc6ah3dir8k" path="res://widgets/menu_button/button-clicked.png" id="6_crn4m"]
-
-[sub_resource type="Font" id="Font_j2f6v"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "1_qrrra" )
+[ext_resource type="Texture2D" uid="uid://denlxh06airi1" path="res://widgets/menu_button/button-normal.png" id="2_p4dak"]
+[ext_resource type="Texture2D" uid="uid://dd1r407atjf3e" path="res://widgets/menu_button/button-disabled.png" id="2_sl027"]
+[ext_resource type="Texture2D" uid="uid://b0fieo0ne3pit" path="res://widgets/menu_button/button-focused.png" id="3_01swx"]
+[ext_resource type="Texture2D" uid="uid://bmjx6unojy7oy" path="res://widgets/menu_button/button-hover.png" id="4_am4k0"]
+[ext_resource type="Texture2D" uid="uid://dpq8n0m4qkpyl" path="res://widgets/menu_button/button-clicked.png" id="6_crn4m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n24ah"]
-texture = ExtResource( "2_sl027" )
+texture = ExtResource("2_sl027")
 region_rect = Rect2(0, 0, 348, 108)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_of57r"]
-texture = ExtResource( "3_01swx" )
+texture = ExtResource("3_01swx")
 region_rect = Rect2(0, 0, 348, 108)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_65uou"]
-texture = ExtResource( "4_am4k0" )
+texture = ExtResource("4_am4k0")
 region_rect = Rect2(0, 0, 348, 108)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kte03"]
-texture = ExtResource( "2_p4dak" )
+texture = ExtResource("2_p4dak")
 region_rect = Rect2(0, 0, 348, 108)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_040iu"]
-texture = ExtResource( "6_crn4m" )
+texture = ExtResource("6_crn4m")
 region_rect = Rect2(0, 0, 348, 108)
 
 [resource]
 Button/font_sizes/font_size = 28
-Button/fonts/font = SubResource( "Font_j2f6v" )
-Button/styles/disabled = SubResource( "StyleBoxTexture_n24ah" )
-Button/styles/focus = SubResource( "StyleBoxTexture_of57r" )
-Button/styles/hover = SubResource( "StyleBoxTexture_65uou" )
-Button/styles/normal = SubResource( "StyleBoxTexture_kte03" )
-Button/styles/pressed = SubResource( "StyleBoxTexture_040iu" )
+Button/fonts/font = null
+Button/styles/disabled = SubResource("StyleBoxTexture_n24ah")
+Button/styles/focus = SubResource("StyleBoxTexture_of57r")
+Button/styles/hover = SubResource("StyleBoxTexture_65uou")
+Button/styles/normal = SubResource("StyleBoxTexture_kte03")
+Button/styles/pressed = SubResource("StyleBoxTexture_040iu")

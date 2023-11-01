@@ -3,11 +3,11 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/edit_database_dialog/edit_database_dialog.gd" type="Script" id=1]
 [ext_resource path="res://addons/cardengine/ui/dialogs/duplicate_card_dialog/duplicate_card_dialog.tscn" type="PackedScene" id=2]
 
-[node name="EditDatabaseDialog" type="WindowDialog"]
+[node name="EditDatabaseDialog" type="Window"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -750.0
-margin_bottom = -380.0
+offset_right = -750.0
+offset_bottom = -380.0
 window_title = "Edit Database"
 resizable = true
 script = ExtResource( 1 )
@@ -18,64 +18,64 @@ __meta__ = {
 [node name="MainLayout" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FiltersLayout" type="GridContainer" parent="MainLayout"]
-margin_right = 510.0
-margin_bottom = 66.0
+offset_right = 510.0
+offset_bottom = 66.0
 columns = 2
 
 [node name="ValFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
-margin_right = 253.0
-margin_bottom = 14.0
+offset_right = 253.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Filter by value:"
 
 [node name="TxtFilterLbl" type="Label" parent="MainLayout/FiltersLayout"]
-margin_left = 257.0
-margin_right = 510.0
-margin_bottom = 14.0
+offset_left = 257.0
+offset_right = 510.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Filter by text:"
 
 [node name="ValFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
-margin_top = 18.0
-margin_right = 253.0
-margin_bottom = 38.0
-hint_tooltip = "The value used as filter."
+offset_top = 18.0
+offset_right = 253.0
+offset_bottom = 38.0
+tooltip_text = "The value used as filter."
 
 [node name="TxtFilter" type="OptionButton" parent="MainLayout/FiltersLayout"]
-margin_left = 257.0
-margin_top = 18.0
-margin_right = 510.0
-margin_bottom = 38.0
-hint_tooltip = "The text used as filter."
+offset_left = 257.0
+offset_top = 18.0
+offset_right = 510.0
+offset_bottom = 38.0
+tooltip_text = "The text used as filter."
 
 [node name="CompLayout" type="HBoxContainer" parent="MainLayout/FiltersLayout"]
-margin_top = 42.0
-margin_right = 253.0
-margin_bottom = 66.0
+offset_top = 42.0
+offset_right = 253.0
+offset_bottom = 66.0
 
 [node name="CompOp" type="OptionButton" parent="MainLayout/FiltersLayout/CompLayout"]
-margin_right = 124.0
-margin_bottom = 24.0
-hint_tooltip = "The operator used for value filtering."
+offset_right = 124.0
+offset_bottom = 24.0
+tooltip_text = "The operator used for value filtering."
 size_flags_horizontal = 3
 text = "="
 items = [ "=", null, false, 0, null, ">", null, false, 1, null, ">=", null, false, 2, null, "<", null, false, 3, null, "<=", null, false, 4, null ]
 selected = 0
 
 [node name="CompVal" type="SpinBox" parent="MainLayout/FiltersLayout/CompLayout"]
-margin_left = 128.0
-margin_right = 253.0
-margin_bottom = 24.0
-hint_tooltip = "The number used for value filtering."
+offset_left = 128.0
+offset_right = 253.0
+offset_bottom = 24.0
+tooltip_text = "The number used for value filtering."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -83,124 +83,124 @@ allow_greater = true
 allow_lesser = true
 
 [node name="ContainsFilter" type="LineEdit" parent="MainLayout/FiltersLayout"]
-margin_left = 257.0
-margin_top = 42.0
-margin_right = 510.0
-margin_bottom = 66.0
-hint_tooltip = "The string used for text filtering."
+offset_left = 257.0
+offset_top = 42.0
+offset_right = 510.0
+offset_bottom = 66.0
+tooltip_text = "The string used for text filtering."
 
 [node name="CategFilterScroll" type="ScrollContainer" parent="MainLayout"]
-margin_top = 70.0
-margin_right = 510.0
-margin_bottom = 70.0
+offset_top = 70.0
+offset_right = 510.0
+offset_bottom = 70.0
 scroll_vertical_enabled = false
 
 [node name="CategFilterList" type="HBoxContainer" parent="MainLayout/CategFilterScroll"]
-margin_right = 510.0
+offset_right = 510.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CardsLayout" type="GridContainer" parent="MainLayout"]
-margin_top = 74.0
-margin_right = 510.0
-margin_bottom = 272.0
+offset_top = 74.0
+offset_right = 510.0
+offset_bottom = 272.0
 size_flags_vertical = 3
 columns = 2
 
 [node name="ListLbl" type="Label" parent="MainLayout/CardsLayout"]
-margin_right = 194.0
-margin_bottom = 14.0
+offset_right = 194.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Card List"
 align = 1
 
 [node name="DetailsLbl" type="Label" parent="MainLayout/CardsLayout"]
-margin_left = 198.0
-margin_right = 510.0
-margin_bottom = 14.0
+offset_left = 198.0
+offset_right = 510.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Card Details"
 align = 1
 
 [node name="CardList" type="ItemList" parent="MainLayout/CardsLayout"]
-margin_top = 18.0
-margin_right = 194.0
-margin_bottom = 198.0
-hint_tooltip = "Single-click to select."
+offset_top = 18.0
+offset_right = 194.0
+offset_bottom = 198.0
+tooltip_text = "Single-click to select."
 size_flags_vertical = 3
 
 [node name="DetailsLayout" type="VBoxContainer" parent="MainLayout/CardsLayout"]
-margin_left = 198.0
-margin_top = 18.0
-margin_right = 510.0
-margin_bottom = 198.0
+offset_left = 198.0
+offset_top = 18.0
+offset_right = 510.0
+offset_bottom = 198.0
 
 [node name="DetailsList" type="ItemList" parent="MainLayout/CardsLayout/DetailsLayout"]
-margin_right = 312.0
-margin_bottom = 146.0
-hint_tooltip = "Just display the data  of the selected card."
+offset_right = 312.0
+offset_bottom = 146.0
+tooltip_text = "Just display the data  of the selected card."
 size_flags_vertical = 3
 
 [node name="ToolsLayout" type="HBoxContainer" parent="MainLayout/CardsLayout/DetailsLayout"]
-margin_top = 150.0
-margin_right = 312.0
-margin_bottom = 180.0
+offset_top = 150.0
+offset_right = 312.0
+offset_bottom = 180.0
 alignment = 1
 
 [node name="DeleteBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
-margin_right = 100.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-hint_tooltip = "Removes a card from the database. Not reversible."
+offset_right = 100.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 100, 30 )
+tooltip_text = "Removes a card from the database. Not reversible."
 disabled = true
 text = "Delete"
 
 [node name="Spacer" type="Control" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
-margin_left = 104.0
-margin_right = 104.0
-margin_bottom = 30.0
+offset_left = 104.0
+offset_right = 104.0
+offset_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="DuplicateBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
-margin_left = 108.0
-margin_right = 208.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-hint_tooltip = "Opens the card duplication dialog."
+offset_left = 108.0
+offset_right = 208.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 100, 30 )
+tooltip_text = "Opens the card duplication dialog."
 disabled = true
 text = "Duplicate"
 
 [node name="EditBtn" type="Button" parent="MainLayout/CardsLayout/DetailsLayout/ToolsLayout"]
-margin_left = 212.0
-margin_right = 312.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-hint_tooltip = "Shows the card in the Cards tab for edit."
+offset_left = 212.0
+offset_right = 312.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 100, 30 )
+tooltip_text = "Shows the card in the Cards tab for edit."
 disabled = true
 text = "Edit"
 
 [node name="Spacer" type="Control" parent="MainLayout"]
-margin_top = 276.0
-margin_right = 510.0
-margin_bottom = 286.0
-rect_min_size = Vector2( 0, 10 )
+offset_top = 276.0
+offset_right = 510.0
+offset_bottom = 286.0
+custom_minimum_size = Vector2( 0, 10 )
 
 [node name="ButtonLayout" type="HBoxContainer" parent="MainLayout"]
-margin_top = 290.0
-margin_right = 510.0
-margin_bottom = 320.0
+offset_top = 290.0
+offset_right = 510.0
+offset_bottom = 320.0
 alignment = 1
 
 [node name="DoneBtn" type="Button" parent="MainLayout/ButtonLayout"]
-margin_left = 205.0
-margin_right = 305.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-hint_tooltip = "Closes this dialog."
+offset_left = 205.0
+offset_right = 305.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 100, 30 )
+tooltip_text = "Closes this dialog."
 text = "Done"
 
 [node name="DuplicateCardDialog" parent="." instance=ExtResource( 2 )]
-[connection signal="about_to_show" from="." to="." method="_on_EditDatabaseDialog_about_to_show"]
+[connection signal="about_to_popup" from="." to="." method="_on_EditDatabaseDialog_about_to_show"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/ValFilter" to="." method="_on_ValFilter_item_selected"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/TxtFilter" to="." method="_on_TxtFilter_item_selected"]
 [connection signal="item_selected" from="MainLayout/FiltersLayout/CompLayout/CompOp" to="." method="_on_CompOp_item_selected"]

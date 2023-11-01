@@ -8,28 +8,28 @@ window_title = "Animation"
 script = ExtResource( 2 )
 
 [node name="AnimationIdLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 5.0
-margin_right = 101.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 101.0
+offset_bottom = 19.0
 text = "Animation  ID"
 
 [node name="AnimationId" type="LineEdit" parent="MainLayout/Form" index="1"]
-margin_left = 105.0
-margin_right = 402.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in an identifier. It is used to link an animation to a container."
+offset_left = 105.0
+offset_right = 402.0
+offset_bottom = 24.0
+tooltip_text = "Fill in an identifier. It is used to link an animation to a container."
 size_flags_horizontal = 3
 
 [node name="AnimationNameLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 33.0
-margin_right = 101.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 101.0
+offset_bottom = 47.0
 text = "Animation Name"
 
 [node name="AnimationName" type="LineEdit" parent="MainLayout/Form" index="3"]
-margin_left = 105.0
-margin_top = 28.0
-margin_right = 402.0
-margin_bottom = 52.0
-hint_tooltip = "Fill in a name. It is a visual help."
+offset_left = 105.0
+offset_top = 28.0
+offset_right = 402.0
+offset_bottom = 52.0
+tooltip_text = "Fill in a name. It is a visual help."
 size_flags_horizontal = 3

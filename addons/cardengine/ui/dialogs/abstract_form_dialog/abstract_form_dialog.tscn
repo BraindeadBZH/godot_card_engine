@@ -40,7 +40,7 @@ script = null
 offset_left = 538.0
 offset_right = 638.0
 offset_bottom = 30.0
-rect_min_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 30)
 text = "Confirm"
 script = null
 
@@ -48,7 +48,7 @@ script = null
 offset_left = 642.0
 offset_right = 742.0
 offset_bottom = 30.0
-rect_min_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 30)
 text = "Cancel"
 script = null
 

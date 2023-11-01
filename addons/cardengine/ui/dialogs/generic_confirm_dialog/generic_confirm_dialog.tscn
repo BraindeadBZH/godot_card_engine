@@ -8,17 +8,17 @@ window_title = "Confirm Irreversible Action"
 script = ExtResource( 2 )
 
 [node name="ConfirmationLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 13.0
-margin_right = 199.0
-margin_bottom = 27.0
+offset_top = 13.0
+offset_right = 199.0
+offset_bottom = 27.0
 size_flags_horizontal = 3
 text = "Are you sure?"
 align = 2
 
 [node name="Confirmation" type="CheckButton" parent="MainLayout/Form" index="1"]
-margin_left = 203.0
-margin_right = 279.0
-margin_bottom = 40.0
+offset_left = 203.0
+offset_right = 279.0
+offset_bottom = 40.0
 size_flags_horizontal = 2
 [connection signal="form_validated" from="." to="." method="_on_GenericConfirmDialog_form_validated"]
 [connection signal="popup_hide" from="." to="." method="_on_GenericConfirmDialog_popup_hide"]

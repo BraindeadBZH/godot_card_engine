@@ -10,7 +10,7 @@ _data = {
 }
 
 [node name="HomeDisplay" instance=ExtResource( "1" )]
-rect_min_size = Vector2(500, 300)
+custom_minimum_size = Vector2(500, 300)
 script = ExtResource( "2" )
 card_visual = ExtResource( "3" )
 

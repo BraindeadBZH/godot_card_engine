@@ -4,38 +4,38 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/step_transi_dialog/step_transi_dialog.gd" type="Script" id=2]
 
 [node name="StepTransiDialog" instance=ExtResource( 1 )]
-margin_top = 1.0
-margin_bottom = -458.0
+offset_top = 1.0
+offset_bottom = -458.0
 window_title = "Transition"
 script = ExtResource( 2 )
 
 [node name="Form" parent="MainLayout" index="1"]
-margin_bottom = 207.0
+offset_bottom = 207.0
 
 [node name="RandomLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 13.0
-margin_right = 134.0
-margin_bottom = 27.0
+offset_top = 13.0
+offset_right = 134.0
+offset_bottom = 27.0
 text = "Random duration"
 
 [node name="Random" type="CheckButton" parent="MainLayout/Form" index="1"]
-margin_left = 138.0
-margin_right = 402.0
-margin_bottom = 40.0
-hint_tooltip = "If ON the duration is taken from  the interval below randomly."
+offset_left = 138.0
+offset_right = 402.0
+offset_bottom = 40.0
+tooltip_text = "If ON the duration is taken from  the interval below randomly."
 
 [node name="DurationLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 49.0
-margin_right = 134.0
-margin_bottom = 63.0
+offset_top = 49.0
+offset_right = 134.0
+offset_bottom = 63.0
 text = "Duration"
 
 [node name="Duration" type="SpinBox" parent="MainLayout/Form" index="3"]
-margin_left = 138.0
-margin_top = 44.0
-margin_right = 402.0
-margin_bottom = 68.0
-hint_tooltip = "Fill in a number in millisecond."
+offset_left = 138.0
+offset_top = 44.0
+offset_right = 402.0
+offset_bottom = 68.0
+tooltip_text = "Fill in a number in millisecond."
 min_value = -1000.0
 max_value = 1000.0
 rounded = true
@@ -45,21 +45,21 @@ suffix = "ms"
 
 [node name="DurationRangeLbl" type="Label" parent="MainLayout/Form" index="4"]
 visible = false
-margin_top = 77.0
-margin_right = 109.0
-margin_bottom = 91.0
+offset_top = 77.0
+offset_right = 109.0
+offset_bottom = 91.0
 text = "Duration range"
 
 [node name="DurationRangeLayout" type="HBoxContainer" parent="MainLayout/Form" index="5"]
 visible = false
-margin_top = 72.0
-margin_right = 322.0
-margin_bottom = 96.0
+offset_top = 72.0
+offset_right = 322.0
+offset_bottom = 96.0
 
 [node name="DurationRangeMin" type="SpinBox" parent="MainLayout/Form/DurationRangeLayout" index="0"]
-margin_right = 159.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in a number in millisecond."
+offset_right = 159.0
+offset_bottom = 24.0
+tooltip_text = "Fill in a number in millisecond."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -69,10 +69,10 @@ allow_lesser = true
 suffix = "ms"
 
 [node name="DurationRangeMax" type="SpinBox" parent="MainLayout/Form/DurationRangeLayout" index="1"]
-margin_left = 163.0
-margin_right = 322.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in a number in millisecond."
+offset_left = 163.0
+offset_right = 322.0
+offset_bottom = 24.0
+tooltip_text = "Fill in a number in millisecond."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -82,66 +82,66 @@ allow_lesser = true
 suffix = "ms"
 
 [node name="TypeLbl" type="Label" parent="MainLayout/Form" index="6"]
-margin_top = 75.0
-margin_right = 134.0
-margin_bottom = 89.0
+offset_top = 75.0
+offset_right = 134.0
+offset_bottom = 89.0
 text = "Type"
 
 [node name="Type" type="OptionButton" parent="MainLayout/Form" index="7"]
-margin_left = 138.0
-margin_top = 72.0
-margin_right = 402.0
-margin_bottom = 92.0
-hint_tooltip = "Choose which curve the transition uses to smooth the movement."
+offset_left = 138.0
+offset_top = 72.0
+offset_right = 402.0
+offset_bottom = 92.0
+tooltip_text = "Choose which curve the transition uses to smooth the movement."
 size_flags_horizontal = 3
 text = "Linear"
 items = [ "Linear", null, false, 0, null, "Sine", null, false, 1, null, "Quint", null, false, 2, null, "Quart", null, false, 3, null, "Quad", null, false, 4, null, "Expo", null, false, 5, null, "Elastic", null, false, 6, null, "Cubic", null, false, 7, null, "Circ", null, false, 8, null, "Bounce", null, false, 9, null, "Back", null, false, 10, null ]
 selected = 0
 
 [node name="EasingLbl" type="Label" parent="MainLayout/Form" index="8"]
-margin_top = 99.0
-margin_right = 134.0
-margin_bottom = 113.0
+offset_top = 99.0
+offset_right = 134.0
+offset_bottom = 113.0
 text = "Easing"
 
 [node name="Easing" type="OptionButton" parent="MainLayout/Form" index="9"]
-margin_left = 138.0
-margin_top = 96.0
-margin_right = 402.0
-margin_bottom = 116.0
-hint_tooltip = "Choose how the curve is applied to the transition."
+offset_left = 138.0
+offset_top = 96.0
+offset_right = 402.0
+offset_bottom = 116.0
+tooltip_text = "Choose how the curve is applied to the transition."
 size_flags_horizontal = 3
 text = "In"
 items = [ "In", null, false, 0, null, "Out", null, false, 1, null, "In/Out", null, false, 2, null, "Out/In", null, false, 3, null ]
 selected = 0
 
 [node name="FlipCardLbl" type="Label" parent="MainLayout/Form" index="10"]
-margin_top = 133.0
-margin_right = 134.0
-margin_bottom = 147.0
+offset_top = 133.0
+offset_right = 134.0
+offset_bottom = 147.0
 text = "Flip card when done"
 
 [node name="FlipCard" type="CheckButton" parent="MainLayout/Form" index="11"]
-margin_left = 138.0
-margin_top = 120.0
-margin_right = 402.0
-margin_bottom = 160.0
-hint_tooltip = "If ON the card is flipped when the transition is finished."
+offset_left = 138.0
+offset_top = 120.0
+offset_right = 402.0
+offset_bottom = 160.0
+tooltip_text = "If ON the card is flipped when the transition is finished."
 
 [node name="InteractiveLbl" type="Label" parent="MainLayout/Form" index="12"]
-margin_top = 177.0
-margin_right = 134.0
-margin_bottom = 191.0
+offset_top = 177.0
+offset_right = 134.0
+offset_bottom = 191.0
 text = "Interactive transition"
 
 [node name="Interactive" type="CheckButton" parent="MainLayout/Form" index="13"]
-margin_left = 138.0
-margin_top = 164.0
-margin_right = 402.0
-margin_bottom = 204.0
-hint_tooltip = "If OFF the card will not react to user inputs during the transition."
+offset_left = 138.0
+offset_top = 164.0
+offset_right = 402.0
+offset_bottom = 204.0
+tooltip_text = "If OFF the card will not react to user inputs during the transition."
 
 [node name="ButtonLayout" parent="MainLayout" index="2"]
-margin_top = 211.0
-margin_bottom = 241.0
+offset_top = 211.0
+offset_bottom = 241.0
 [connection signal="pressed" from="MainLayout/Form/Random" to="." method="_on_Random_pressed"]

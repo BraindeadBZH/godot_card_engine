@@ -8,11 +8,11 @@ window_title = "Duplicate card"
 script = ExtResource( 2 )
 
 [node name="CardIdLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_right = 47.0
-margin_bottom = 14.0
+offset_right = 47.0
+offset_bottom = 14.0
 text = "Card ID"
 
 [node name="CardId" type="LineEdit" parent="MainLayout/Form" index="1"]
-margin_right = 58.0
-margin_bottom = 24.0
+offset_right = 58.0
+offset_bottom = 24.0
 size_flags_horizontal = 3

@@ -42,7 +42,7 @@ offset_left = -401.0
 offset_top = -310.0
 offset_right = -101.0
 offset_bottom = -10.0
-rect_min_size = Vector2(300, 300)
+custom_minimum_size = Vector2(300, 300)
 
 [node name="ColorRect" type="ColorRect" parent="Board/Pile1"]
 show_behind_parent = true
@@ -66,7 +66,7 @@ offset_left = -149.0
 offset_top = -310.0
 offset_right = 151.0
 offset_bottom = -10.0
-rect_min_size = Vector2(300, 300)
+custom_minimum_size = Vector2(300, 300)
 
 [node name="ColorRect" type="ColorRect" parent="Board/Pile2"]
 show_behind_parent = true
@@ -88,7 +88,7 @@ offset_left = 168.0
 offset_top = -309.0
 offset_right = 468.0
 offset_bottom = -9.0
-rect_min_size = Vector2(300, 300)
+custom_minimum_size = Vector2(300, 300)
 card_visual = ExtResource( "6" )
 
 [node name="ColorRect" type="ColorRect" parent="Board/Pile3"]
@@ -108,7 +108,7 @@ offset_left = 10.0
 offset_top = -45.0
 offset_right = 110.0
 offset_bottom = -15.0
-rect_min_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 30)
 text = "Shuffle"
 script = null
 __meta__ = {
@@ -123,7 +123,7 @@ anchor_bottom = 0.5
 offset_left = 10.0
 offset_right = 110.0
 offset_bottom = 30.0
-rect_min_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 30)
 text = "Draw"
 script = null
 __meta__ = {
@@ -138,7 +138,7 @@ anchor_bottom = 1.0
 offset_left = -300.0
 offset_top = -100.0
 offset_right = 300.0
-rect_min_size = Vector2(600, 100)
+custom_minimum_size = Vector2(600, 100)
 
 [node name="DiscardBtn" type="Button" parent="Board/Hand"]
 anchor_left = 1.0
@@ -157,7 +157,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -200.0
 offset_right = 0.0
-rect_min_size = Vector2(0, 0)
+custom_minimum_size = Vector2(0, 0)
 text = "Back to menu"
 
 [connection signal="card_dropped" from="Board/Pile1" to="." method="_on_Pile1_card_dropped"]

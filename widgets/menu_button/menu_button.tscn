@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://widgets/menu_button/menu_button.gd" id="7"]
 
 [node name="MenuButton" type="Button"]
-rect_min_size = Vector2(348, 108)
+custom_minimum_size = Vector2(348, 108)
 theme = ExtResource( "1_gtiy8" )
 text = "BUTTON"
 script = ExtResource( "7" )

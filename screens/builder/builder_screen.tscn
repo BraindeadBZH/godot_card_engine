@@ -34,7 +34,7 @@ __meta__ = {
 [node name="TitleBg" type="ColorRect" parent="."]
 anchor_right = 1.0
 offset_bottom = 85.0
-rect_min_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 60)
 color = Color(0, 0, 0, 0.784314)
 script = null
 __meta__ = {
@@ -73,7 +73,7 @@ __meta__ = {
 offset_left = 77.0
 offset_right = 97.0
 offset_bottom = 75.0
-rect_min_size = Vector2(20, 0)
+custom_minimum_size = Vector2(20, 0)
 script = null
 
 [node name="CategoriesLayout" type="VBoxContainer" parent="TitleBg/TitleLayout"]
@@ -93,7 +93,7 @@ script = null
 offset_top = 1.0
 offset_right = 120.0
 offset_bottom = 27.0
-rect_min_size = Vector2(120, 0)
+custom_minimum_size = Vector2(120, 0)
 text = "Filter by class"
 structured_text_bidi_override_options = []
 script = null
@@ -102,7 +102,7 @@ script = null
 offset_left = 124.0
 offset_right = 274.0
 offset_bottom = 29.0
-rect_min_size = Vector2(150, 0)
+custom_minimum_size = Vector2(150, 0)
 items = []
 script = null
 
@@ -116,7 +116,7 @@ script = null
 offset_top = 1.0
 offset_right = 120.0
 offset_bottom = 27.0
-rect_min_size = Vector2(120, 24)
+custom_minimum_size = Vector2(120, 24)
 text = "Filter by rarity"
 valign = 1
 structured_text_bidi_override_options = []
@@ -126,7 +126,7 @@ script = null
 offset_left = 124.0
 offset_right = 274.0
 offset_bottom = 29.0
-rect_min_size = Vector2(150, 0)
+custom_minimum_size = Vector2(150, 0)
 items = []
 script = null
 
@@ -141,7 +141,7 @@ script = null
 offset_top = 4.0
 offset_right = 150.0
 offset_bottom = 33.0
-rect_min_size = Vector2(150, 0)
+custom_minimum_size = Vector2(150, 0)
 clip_text = true
 items = []
 script = null
@@ -192,7 +192,7 @@ script = null
 offset_top = 4.0
 offset_right = 150.0
 offset_bottom = 33.0
-rect_min_size = Vector2(150, 0)
+custom_minimum_size = Vector2(150, 0)
 clip_text = true
 items = []
 script = null
@@ -248,7 +248,7 @@ script = null
 offset_left = 1070.0
 offset_right = 1270.0
 offset_bottom = 75.0
-rect_min_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 0)
 text = "Back to menu"
 
 [node name="BuilderLayout" type="HBoxContainer" parent="."]
@@ -263,7 +263,7 @@ __meta__ = {
 [node name="LibraryBg" type="ColorRect" parent="BuilderLayout"]
 offset_right = 1036.0
 offset_bottom = 630.0
-rect_min_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 60)
 size_flags_horizontal = 3
 color = Color(0, 0, 0, 0.784314)
 script = null
@@ -290,8 +290,8 @@ out_anchor = NodePath("../../OutAnchor")
 [node name="InAnchor" type="Control" parent="BuilderLayout/LibraryBg"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-rect_rotation = 90.0
-rect_scale = Vector2(1e-05, 1e-05)
+rotation = 90.0
+scale = Vector2(1e-05, 1e-05)
 script = null
 __meta__ = {
 "_edit_use_anchors_": false
@@ -302,8 +302,8 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-rect_rotation = 90.0
-rect_scale = Vector2(1e-05, 1e-05)
+rotation = 90.0
+scale = Vector2(1e-05, 1e-05)
 script = null
 __meta__ = {
 "_edit_use_anchors_": false
@@ -313,7 +313,7 @@ __meta__ = {
 offset_left = 1040.0
 offset_right = 1280.0
 offset_bottom = 630.0
-rect_min_size = Vector2(240, 0)
+custom_minimum_size = Vector2(240, 0)
 color = Color(0, 0, 0, 0.784314)
 script = null
 

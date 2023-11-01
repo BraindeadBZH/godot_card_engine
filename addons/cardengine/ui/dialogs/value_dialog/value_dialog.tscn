@@ -8,30 +8,30 @@ window_title = "Value"
 script = ExtResource( 2 )
 
 [node name="ValueIdLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 5.0
-margin_right = 35.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 35.0
+offset_bottom = 19.0
 text = "ID"
 
 [node name="ValueId" type="LineEdit" parent="MainLayout/Form" index="1"]
-margin_left = 39.0
-margin_right = 402.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in an indentifier. It is used to retrieve the value in scripts."
+offset_left = 39.0
+offset_right = 402.0
+offset_bottom = 24.0
+tooltip_text = "Fill in an indentifier. It is used to retrieve the value in scripts."
 size_flags_horizontal = 3
 
 [node name="ValueValLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 33.0
-margin_right = 35.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 35.0
+offset_bottom = 47.0
 text = "Value"
 
 [node name="ValueVal" type="SpinBox" parent="MainLayout/Form" index="3"]
-margin_left = 39.0
-margin_top = 28.0
-margin_right = 402.0
-margin_bottom = 52.0
-hint_tooltip = "Fill in a number. Values can be used during computation in scripts."
+offset_left = 39.0
+offset_top = 28.0
+offset_right = 402.0
+offset_bottom = 52.0
+tooltip_text = "Fill in a number. Values can be used during computation in scripts."
 min_value = -1000.0
 max_value = 1000.0
 rounded = true

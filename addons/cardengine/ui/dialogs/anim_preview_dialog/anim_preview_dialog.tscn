@@ -3,10 +3,10 @@
 [ext_resource path="res://addons/cardengine/ui/dialogs/anim_preview_dialog/anim_preview_dialog.gd" type="Script" id=1]
 [ext_resource path="res://addons/cardengine/card/preview_card.tscn" type="PackedScene" id=2]
 
-[node name="AnimPreviewDialog" type="WindowDialog"]
-margin_right = 800.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 700, 700 )
+[node name="AnimPreviewDialog" type="Window"]
+offset_right = 800.0
+offset_bottom = 800.0
+custom_minimum_size = Vector2( 700, 700 )
 window_title = "Animation Preview"
 resizable = true
 script = ExtResource( 1 )
@@ -19,13 +19,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_right = 40.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PreviewCard" parent="Center" instance=ExtResource( 2 )]
-[connection signal="about_to_show" from="." to="." method="_on_AnimPreviewDialog_about_to_show"]
+[connection signal="about_to_popup" from="." to="." method="_on_AnimPreviewDialog_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_AnimPreviewDialog_popup_hide"]

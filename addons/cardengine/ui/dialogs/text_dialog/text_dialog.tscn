@@ -8,28 +8,28 @@ window_title = "Text"
 script = ExtResource( 2 )
 
 [node name="TextIdLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 5.0
-margin_right = 27.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 27.0
+offset_bottom = 19.0
 text = "ID"
 
 [node name="TextId" type="LineEdit" parent="MainLayout/Form" index="1"]
-margin_left = 31.0
-margin_right = 402.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in an indentifier. It is used to retrieve the text in scripts."
+offset_left = 31.0
+offset_right = 402.0
+offset_bottom = 24.0
+tooltip_text = "Fill in an indentifier. It is used to retrieve the text in scripts."
 size_flags_horizontal = 3
 
 [node name="TextLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 51.0
-margin_right = 27.0
-margin_bottom = 65.0
+offset_top = 51.0
+offset_right = 27.0
+offset_bottom = 65.0
 text = "Text"
 
 [node name="Text" type="TextEdit" parent="MainLayout/Form" index="3"]
-margin_left = 31.0
-margin_top = 28.0
-margin_right = 31.0
-margin_bottom = 148.0
-rect_min_size = Vector2( 0, 150 )
+offset_left = 31.0
+offset_top = 28.0
+offset_right = 31.0
+offset_bottom = 148.0
+custom_minimum_size = Vector2( 0, 150 )
 text = "Fill in characters. Texts can be displayed on cards visual."

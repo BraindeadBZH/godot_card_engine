@@ -8,16 +8,16 @@ window_title = "Value"
 script = ExtResource( 2 )
 
 [node name="ModeLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 3.0
-margin_right = 38.0
-margin_bottom = 17.0
+offset_top = 3.0
+offset_right = 38.0
+offset_bottom = 17.0
 text = "Mode"
 
 [node name="Mode" type="OptionButton" parent="MainLayout/Form" index="1"]
-margin_left = 42.0
-margin_right = 402.0
-margin_bottom = 20.0
-hint_tooltip = "Choose a mode.
+offset_left = 42.0
+offset_right = 402.0
+offset_bottom = 20.0
+tooltip_text = "Choose a mode.
 Initial: the value is the origin as defined by the chain.
 Fixed: the value is defined below.
 Random: the is taken from the interval below randomly."
@@ -27,17 +27,17 @@ items = [ "Initial", null, false, 0, null, "Fixed", null, false, 1, null, "Rando
 selected = 0
 
 [node name="NumValueLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 29.0
-margin_right = 38.0
-margin_bottom = 43.0
+offset_top = 29.0
+offset_right = 38.0
+offset_bottom = 43.0
 text = "Value"
 
 [node name="NumValue" type="SpinBox" parent="MainLayout/Form" index="3"]
-margin_left = 42.0
-margin_top = 24.0
-margin_right = 402.0
-margin_bottom = 48.0
-hint_tooltip = "Fill in a number."
+offset_left = 42.0
+offset_top = 24.0
+offset_right = 402.0
+offset_bottom = 48.0
+tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01
@@ -46,24 +46,24 @@ allow_lesser = true
 suffix = "°"
 
 [node name="VecValueLbl" type="Label" parent="MainLayout/Form" index="4"]
-margin_top = 57.0
-margin_right = 38.0
-margin_bottom = 71.0
+offset_top = 57.0
+offset_right = 38.0
+offset_bottom = 71.0
 text = "Value"
 
 [node name="VecValueLayout" type="HBoxContainer" parent="MainLayout/Form" index="5"]
-margin_left = 42.0
-margin_top = 52.0
-margin_right = 402.0
-margin_bottom = 76.0
+offset_left = 42.0
+offset_top = 52.0
+offset_right = 402.0
+offset_bottom = 76.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VecValueX" type="SpinBox" parent="MainLayout/Form/VecValueLayout" index="0"]
-margin_right = 178.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in a number."
+offset_right = 178.0
+offset_bottom = 24.0
+tooltip_text = "Fill in a number."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -73,10 +73,10 @@ allow_lesser = true
 suffix = "x"
 
 [node name="VecValueY" type="SpinBox" parent="MainLayout/Form/VecValueLayout" index="1"]
-margin_left = 182.0
-margin_right = 360.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in a number."
+offset_left = 182.0
+offset_right = 360.0
+offset_bottom = 24.0
+tooltip_text = "Fill in a number."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -86,24 +86,24 @@ allow_lesser = true
 suffix = "y"
 
 [node name="VecRangeLbl" type="Label" parent="MainLayout/Form" index="6"]
-margin_top = 85.0
-margin_right = 38.0
-margin_bottom = 99.0
+offset_top = 85.0
+offset_right = 38.0
+offset_bottom = 99.0
 text = "Range"
 
 [node name="VecRangeLayout" type="HBoxContainer" parent="MainLayout/Form" index="7"]
-margin_left = 42.0
-margin_top = 80.0
-margin_right = 402.0
-margin_bottom = 104.0
+offset_left = 42.0
+offset_top = 80.0
+offset_right = 402.0
+offset_bottom = 104.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VecRangeX" type="SpinBox" parent="MainLayout/Form/VecRangeLayout" index="0"]
-margin_right = 178.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in a number."
+offset_right = 178.0
+offset_bottom = 24.0
+tooltip_text = "Fill in a number."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -113,10 +113,10 @@ allow_lesser = true
 suffix = "x"
 
 [node name="VecRangeY" type="SpinBox" parent="MainLayout/Form/VecRangeLayout" index="1"]
-margin_left = 182.0
-margin_right = 360.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in a number."
+offset_left = 182.0
+offset_right = 360.0
+offset_bottom = 24.0
+tooltip_text = "Fill in a number."
 size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
@@ -126,17 +126,17 @@ allow_lesser = true
 suffix = "y"
 
 [node name="NumRangeLbl" type="Label" parent="MainLayout/Form" index="8"]
-margin_top = 113.0
-margin_right = 38.0
-margin_bottom = 127.0
+offset_top = 113.0
+offset_right = 38.0
+offset_bottom = 127.0
 text = "Range"
 
 [node name="NumRange" type="SpinBox" parent="MainLayout/Form" index="9"]
-margin_left = 42.0
-margin_top = 108.0
-margin_right = 402.0
-margin_bottom = 132.0
-hint_tooltip = "Fill in a number."
+offset_left = 42.0
+offset_top = 108.0
+offset_right = 402.0
+offset_bottom = 132.0
+tooltip_text = "Fill in a number."
 min_value = -1000.0
 max_value = 1000.0
 step = 0.01

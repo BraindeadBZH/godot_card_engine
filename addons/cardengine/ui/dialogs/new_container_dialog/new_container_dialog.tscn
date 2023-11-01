@@ -8,28 +8,28 @@ window_title = "Container"
 script = ExtResource( 2 )
 
 [node name="ContainerIdLbl" type="Label" parent="MainLayout/Form" index="0"]
-margin_top = 5.0
-margin_right = 103.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 103.0
+offset_bottom = 19.0
 text = "Container ID"
 
 [node name="ContainerId" type="LineEdit" parent="MainLayout/Form" index="1"]
-margin_left = 107.0
-margin_right = 402.0
-margin_bottom = 24.0
-hint_tooltip = "Fill in an identifier. It is used in filename for the container related files."
+offset_left = 107.0
+offset_right = 402.0
+offset_bottom = 24.0
+tooltip_text = "Fill in an identifier. It is used in filename for the container related files."
 size_flags_horizontal = 3
 
 [node name="ContainerNameLbl" type="Label" parent="MainLayout/Form" index="2"]
-margin_top = 33.0
-margin_right = 103.0
-margin_bottom = 47.0
+offset_top = 33.0
+offset_right = 103.0
+offset_bottom = 47.0
 text = "Container Name"
 
 [node name="ContainerName" type="LineEdit" parent="MainLayout/Form" index="3"]
-margin_left = 107.0
-margin_top = 28.0
-margin_right = 402.0
-margin_bottom = 52.0
-hint_tooltip = "Fill in a name. It is used as the class name of the container."
+offset_left = 107.0
+offset_top = 28.0
+offset_right = 402.0
+offset_bottom = 52.0
+tooltip_text = "Fill in a name. It is used as the class name of the container."
 size_flags_horizontal = 3

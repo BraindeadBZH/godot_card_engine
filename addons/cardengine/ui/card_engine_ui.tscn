@@ -23,653 +23,653 @@
 [node name="CardEngineUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 550 )
+custom_minimum_size = Vector2( 0, 550 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tabs" type="TabContainer" parent="."]
+[node name="TabBar" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-tab_align = 0
+tab_alignment = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Databases" type="Control" parent="Tabs"]
+[node name="Databases" type="Control" parent="TabBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 script = ExtResource( 8 )
 
-[node name="DatabaseLayout" type="VBoxContainer" parent="Tabs/Databases"]
+[node name="DatabaseLayout" type="VBoxContainer" parent="TabBar/Databases"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Toolbar" type="HBoxContainer" parent="Tabs/Databases/DatabaseLayout"]
-margin_right = 1272.0
-margin_bottom = 20.0
+[node name="Toolbar" type="HBoxContainer" parent="TabBar/Databases/DatabaseLayout"]
+offset_right = 1272.0
+offset_bottom = 20.0
 
-[node name="CreateBtn" type="Button" parent="Tabs/Databases/DatabaseLayout/Toolbar"]
-margin_right = 144.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the database creation dialog"
+[node name="CreateBtn" type="Button" parent="TabBar/Databases/DatabaseLayout/Toolbar"]
+offset_right = 144.0
+offset_bottom = 20.0
+tooltip_text = "Opens the database creation dialog"
 text = "Create new database"
 
-[node name="EditBtn" type="Button" parent="Tabs/Databases/DatabaseLayout/Toolbar"]
-margin_left = 148.0
-margin_right = 245.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the database edit dialog. Displays all the cards in a list. Allows edit, duplicate and delete of cards. "
+[node name="EditBtn" type="Button" parent="TabBar/Databases/DatabaseLayout/Toolbar"]
+offset_left = 148.0
+offset_right = 245.0
+offset_bottom = 20.0
+tooltip_text = "Opens the database edit dialog. Displays all the cards in a list. Allows edit, duplicate and delete of cards. "
 disabled = true
 text = "Edit database"
 
-[node name="DeleteBtn" type="Button" parent="Tabs/Databases/DatabaseLayout/Toolbar"]
-margin_left = 249.0
-margin_right = 365.0
-margin_bottom = 20.0
-hint_tooltip = "Removes the database file with all the cards in it. Not reversible."
+[node name="DeleteBtn" type="Button" parent="TabBar/Databases/DatabaseLayout/Toolbar"]
+offset_left = 249.0
+offset_right = 365.0
+offset_bottom = 20.0
+tooltip_text = "Removes the database file with all the cards in it. Not reversible."
 disabled = true
 text = "Delete database"
 
-[node name="DatabaseList" type="ItemList" parent="Tabs/Databases/DatabaseLayout"]
-margin_top = 24.0
-margin_right = 1272.0
-margin_bottom = 684.0
-hint_tooltip = "Single-click to select an element.
+[node name="DatabaseList" type="ItemList" parent="TabBar/Databases/DatabaseLayout"]
+offset_top = 24.0
+offset_right = 1272.0
+offset_bottom = 684.0
+tooltip_text = "Single-click to select an element.
 Double-click to edit the database name."
 size_flags_vertical = 3
 items = [ "main: Main Database (20 cards)", null, false ]
 
-[node name="Cards" type="Control" parent="Tabs"]
+[node name="Cards" type="Control" parent="TabBar"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 script = ExtResource( 9 )
 
-[node name="CardLayout" type="VBoxContainer" parent="Tabs/Cards"]
+[node name="CardLayout" type="VBoxContainer" parent="TabBar/Cards"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ToolLayout" type="HBoxContainer" parent="Tabs/Cards/CardLayout"]
-margin_right = 1272.0
-margin_bottom = 30.0
+[node name="ToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout"]
+offset_right = 1272.0
+offset_bottom = 30.0
 
-[node name="CardIdLbl" type="Label" parent="Tabs/Cards/CardLayout/ToolLayout"]
-margin_top = 8.0
-margin_right = 47.0
-margin_bottom = 22.0
+[node name="CardIdLbl" type="Label" parent="TabBar/Cards/CardLayout/ToolLayout"]
+offset_top = 8.0
+offset_right = 47.0
+offset_bottom = 22.0
 text = "Card ID"
 
-[node name="CardId" type="LineEdit" parent="Tabs/Cards/CardLayout/ToolLayout"]
-margin_left = 51.0
-margin_right = 251.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 200, 0 )
-hint_tooltip = "Fill in a card identifier to either save, or create if not existing, or load."
+[node name="CardId" type="LineEdit" parent="TabBar/Cards/CardLayout/ToolLayout"]
+offset_left = 51.0
+offset_right = 251.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 200, 0 )
+tooltip_text = "Fill in a card identifier to either save, or create if not existing, or load."
 caret_blink = true
 
-[node name="SaveBtn" type="Button" parent="Tabs/Cards/CardLayout/ToolLayout"]
-margin_left = 255.0
-margin_right = 355.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-hint_tooltip = "Saves or creates a card with the given ID and data in the selected dabase."
+[node name="SaveBtn" type="Button" parent="TabBar/Cards/CardLayout/ToolLayout"]
+offset_left = 255.0
+offset_right = 355.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 100, 30 )
+tooltip_text = "Saves or creates a card with the given ID and data in the selected dabase."
 disabled = true
 text = "Save to"
 
-[node name="LoadBtn" type="Button" parent="Tabs/Cards/CardLayout/ToolLayout"]
-margin_left = 359.0
-margin_right = 459.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-hint_tooltip = "Loads the card with the given ID from the selected database."
+[node name="LoadBtn" type="Button" parent="TabBar/Cards/CardLayout/ToolLayout"]
+offset_left = 359.0
+offset_right = 459.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 100, 30 )
+tooltip_text = "Loads the card with the given ID from the selected database."
 disabled = true
 text = "Load from"
 
-[node name="DatabaseSelect" type="OptionButton" parent="Tabs/Cards/CardLayout/ToolLayout"]
-margin_left = 463.0
-margin_right = 663.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 200, 0 )
-hint_tooltip = "The database used to save and load cards."
+[node name="DatabaseSelect" type="OptionButton" parent="TabBar/Cards/CardLayout/ToolLayout"]
+offset_left = 463.0
+offset_right = 663.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 200, 0 )
+tooltip_text = "The database used to save and load cards."
 text = "main: Main Database"
 items = [ "main: Main Database", null, false, 0, "main" ]
 selected = 0
 
-[node name="SuccesLbl" type="Label" parent="Tabs/Cards/CardLayout/ToolLayout"]
-margin_left = 667.0
-margin_top = 8.0
-margin_right = 667.0
-margin_bottom = 22.0
-custom_colors/font_color = Color( 0.611765, 0.917647, 0.27451, 1 )
+[node name="SuccesLbl" type="Label" parent="TabBar/Cards/CardLayout/ToolLayout"]
+offset_left = 667.0
+offset_top = 8.0
+offset_right = 667.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color( 0.611765, 0.917647, 0.27451, 1 )
 
-[node name="ErrorLbl" type="Label" parent="Tabs/Cards/CardLayout/ToolLayout"]
-margin_left = 671.0
-margin_top = 8.0
-margin_right = 671.0
-margin_bottom = 22.0
-custom_colors/font_color = Color( 0.917647, 0.27451, 0.27451, 1 )
+[node name="ErrorLbl" type="Label" parent="TabBar/Cards/CardLayout/ToolLayout"]
+offset_left = 671.0
+offset_top = 8.0
+offset_right = 671.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color( 0.917647, 0.27451, 0.27451, 1 )
 
-[node name="DataLayout" type="GridContainer" parent="Tabs/Cards/CardLayout"]
-margin_top = 34.0
-margin_right = 1272.0
-margin_bottom = 684.0
+[node name="DataLayout" type="GridContainer" parent="TabBar/Cards/CardLayout"]
+offset_top = 34.0
+offset_right = 1272.0
+offset_bottom = 684.0
 size_flags_vertical = 3
 columns = 3
 
-[node name="CategLbl" type="Label" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_right = 421.0
-margin_bottom = 14.0
+[node name="CategLbl" type="Label" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_right = 421.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Categories"
 align = 1
 
-[node name="ValuesLbl" type="Label" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_left = 425.0
-margin_right = 846.0
-margin_bottom = 14.0
+[node name="ValuesLbl" type="Label" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_left = 425.0
+offset_right = 846.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Values"
 align = 1
 
-[node name="TextsLbl" type="Label" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_left = 850.0
-margin_right = 1271.0
-margin_bottom = 14.0
+[node name="TextsLbl" type="Label" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_left = 850.0
+offset_right = 1271.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 text = "Texts"
 align = 1
 
-[node name="CategList" type="ItemList" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_top = 18.0
-margin_right = 421.0
-margin_bottom = 616.0
-hint_tooltip = "Single-click to select.
+[node name="CategList" type="ItemList" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_top = 18.0
+offset_right = 421.0
+offset_bottom = 616.0
+tooltip_text = "Single-click to select.
 Double-click to edit."
 size_flags_vertical = 3
 
-[node name="ValuesList" type="ItemList" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_left = 425.0
-margin_top = 18.0
-margin_right = 846.0
-margin_bottom = 616.0
-hint_tooltip = "Single-click to select.
+[node name="ValuesList" type="ItemList" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_left = 425.0
+offset_top = 18.0
+offset_right = 846.0
+offset_bottom = 616.0
+tooltip_text = "Single-click to select.
 Double-click to edit."
 size_flags_vertical = 3
 
-[node name="TextsList" type="ItemList" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_left = 850.0
-margin_top = 18.0
-margin_right = 1271.0
-margin_bottom = 616.0
-hint_tooltip = "Single-click to select.
+[node name="TextsList" type="ItemList" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_left = 850.0
+offset_top = 18.0
+offset_right = 1271.0
+offset_bottom = 616.0
+tooltip_text = "Single-click to select.
 Double-click to edit."
 size_flags_vertical = 3
 
-[node name="CategToolLayout" type="HBoxContainer" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_top = 620.0
-margin_right = 421.0
-margin_bottom = 650.0
+[node name="CategToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_top = 620.0
+offset_right = 421.0
+offset_bottom = 650.0
 
-[node name="AddCategBtn" type="Button" parent="Tabs/Cards/CardLayout/DataLayout/CategToolLayout"]
-margin_right = 208.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-hint_tooltip = "Opens the creation dialog."
+[node name="AddCategBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/CategToolLayout"]
+offset_right = 208.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 0, 30 )
+tooltip_text = "Opens the creation dialog."
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="DelCategBtn" type="Button" parent="Tabs/Cards/CardLayout/DataLayout/CategToolLayout"]
-margin_left = 212.0
-margin_right = 421.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-hint_tooltip = "Deletes the selected element."
+[node name="DelCategBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/CategToolLayout"]
+offset_left = 212.0
+offset_right = 421.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 0, 30 )
+tooltip_text = "Deletes the selected element."
 size_flags_horizontal = 3
 disabled = true
 text = "Delete"
 
-[node name="ValuesToolLayout" type="HBoxContainer" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_left = 425.0
-margin_top = 620.0
-margin_right = 846.0
-margin_bottom = 650.0
+[node name="ValuesToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_left = 425.0
+offset_top = 620.0
+offset_right = 846.0
+offset_bottom = 650.0
 
-[node name="AddValBtn" type="Button" parent="Tabs/Cards/CardLayout/DataLayout/ValuesToolLayout"]
-margin_right = 208.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-hint_tooltip = "Opens the creation dialog."
+[node name="AddValBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/ValuesToolLayout"]
+offset_right = 208.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 0, 30 )
+tooltip_text = "Opens the creation dialog."
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="DelValBtn" type="Button" parent="Tabs/Cards/CardLayout/DataLayout/ValuesToolLayout"]
-margin_left = 212.0
-margin_right = 421.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-hint_tooltip = "Deletes the selected element."
+[node name="DelValBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/ValuesToolLayout"]
+offset_left = 212.0
+offset_right = 421.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 0, 30 )
+tooltip_text = "Deletes the selected element."
 size_flags_horizontal = 3
 disabled = true
 text = "Delete"
 
-[node name="TextsToolLayout" type="HBoxContainer" parent="Tabs/Cards/CardLayout/DataLayout"]
-margin_left = 850.0
-margin_top = 620.0
-margin_right = 1271.0
-margin_bottom = 650.0
+[node name="TextsToolLayout" type="HBoxContainer" parent="TabBar/Cards/CardLayout/DataLayout"]
+offset_left = 850.0
+offset_top = 620.0
+offset_right = 1271.0
+offset_bottom = 650.0
 
-[node name="AddTxtBtn" type="Button" parent="Tabs/Cards/CardLayout/DataLayout/TextsToolLayout"]
-margin_right = 208.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-hint_tooltip = "Opens the creation dialog."
+[node name="AddTxtBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/TextsToolLayout"]
+offset_right = 208.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 0, 30 )
+tooltip_text = "Opens the creation dialog."
 size_flags_horizontal = 3
 text = "Add"
 
-[node name="DelTxtBtn" type="Button" parent="Tabs/Cards/CardLayout/DataLayout/TextsToolLayout"]
-margin_left = 212.0
-margin_right = 421.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-hint_tooltip = "Deletes the selected element."
+[node name="DelTxtBtn" type="Button" parent="TabBar/Cards/CardLayout/DataLayout/TextsToolLayout"]
+offset_left = 212.0
+offset_right = 421.0
+offset_bottom = 30.0
+custom_minimum_size = Vector2( 0, 30 )
+tooltip_text = "Deletes the selected element."
 size_flags_horizontal = 3
 disabled = true
 text = "Delete"
 
-[node name="Containers" type="Control" parent="Tabs"]
+[node name="Containers" type="Control" parent="TabBar"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 script = ExtResource( 10 )
 
-[node name="ContainersLayout" type="VBoxContainer" parent="Tabs/Containers"]
+[node name="ContainersLayout" type="VBoxContainer" parent="TabBar/Containers"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Toolbar" type="HBoxContainer" parent="Tabs/Containers/ContainersLayout"]
-margin_right = 1272.0
-margin_bottom = 20.0
+[node name="Toolbar" type="HBoxContainer" parent="TabBar/Containers/ContainersLayout"]
+offset_right = 1272.0
+offset_bottom = 20.0
 
-[node name="CreateBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
-margin_right = 117.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the container creation dialog."
+[node name="CreateBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
+offset_right = 117.0
+offset_bottom = 20.0
+tooltip_text = "Opens the container creation dialog."
 text = "Create container"
 
-[node name="EditBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
-margin_left = 121.0
-margin_right = 221.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the container edition dialog."
+[node name="EditBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
+offset_left = 121.0
+offset_right = 221.0
+offset_bottom = 20.0
+tooltip_text = "Opens the container edition dialog."
 disabled = true
 text = "Edit container"
 
-[node name="OpenBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
-margin_left = 225.0
-margin_right = 336.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the container scene in the Godot editor."
+[node name="OpenBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
+offset_left = 225.0
+offset_right = 336.0
+offset_bottom = 20.0
+tooltip_text = "Opens the container scene in the Godot editor."
 disabled = true
 text = "Open container"
 
-[node name="DeleteBtn" type="Button" parent="Tabs/Containers/ContainersLayout/Toolbar"]
-margin_left = 340.0
-margin_right = 459.0
-margin_bottom = 20.0
-hint_tooltip = "Removes a container and the associated files. Not reversible."
+[node name="DeleteBtn" type="Button" parent="TabBar/Containers/ContainersLayout/Toolbar"]
+offset_left = 340.0
+offset_right = 459.0
+offset_bottom = 20.0
+tooltip_text = "Removes a container and the associated files. Not reversible."
 disabled = true
 text = "Delete container"
 
-[node name="ContainerList" type="ItemList" parent="Tabs/Containers/ContainersLayout"]
-margin_top = 24.0
-margin_right = 1272.0
-margin_bottom = 684.0
-hint_tooltip = "Single-click to select.
+[node name="ContainerList" type="ItemList" parent="TabBar/Containers/ContainersLayout"]
+offset_top = 24.0
+offset_right = 1272.0
+offset_bottom = 684.0
+tooltip_text = "Single-click to select.
 Double-click to change the name."
 size_flags_vertical = 3
 items = [ "card_list: CardList", null, false, "hand: HandContainer", null, false, "home_display: HomeDisplay", null, false ]
 
-[node name="Animations" type="Control" parent="Tabs"]
+[node name="Animations" type="Control" parent="TabBar"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 script = ExtResource( 13 )
 
-[node name="AnimationsLayout" type="VBoxContainer" parent="Tabs/Animations"]
+[node name="AnimationsLayout" type="VBoxContainer" parent="TabBar/Animations"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Toolbar" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout"]
-margin_right = 1272.0
-margin_bottom = 20.0
+[node name="Toolbar" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout"]
+offset_right = 1272.0
+offset_bottom = 20.0
 
-[node name="CreateBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_right = 121.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the animation creation dialog."
+[node name="CreateBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_right = 121.0
+offset_bottom = 20.0
+tooltip_text = "Opens the animation creation dialog."
 text = "Create animation"
 
-[node name="OrLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 125.0
-margin_top = 3.0
-margin_right = 138.0
-margin_bottom = 17.0
+[node name="OrLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_left = 125.0
+offset_top = 3.0
+offset_right = 138.0
+offset_bottom = 17.0
 text = "or"
 
-[node name="AnimSelect" type="OptionButton" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 142.0
-margin_right = 230.0
-margin_bottom = 20.0
-hint_tooltip = "The animation being edited."
+[node name="AnimSelect" type="OptionButton" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_left = 142.0
+offset_right = 230.0
+offset_bottom = 20.0
+tooltip_text = "The animation being edited."
 text = "Choose..."
 items = [ "Choose...", null, true, 0, null, "Hand Animation (hand)", null, false, 1, "hand", "Home Display Animation (home)", null, false, 2, "home", "Card List Animation (list)", null, false, 3, "list" ]
 selected = 0
 
-[node name="EditBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 234.0
-margin_right = 338.0
-margin_bottom = 20.0
-hint_tooltip = "Changes animation name."
+[node name="EditBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_left = 234.0
+offset_right = 338.0
+offset_bottom = 20.0
+tooltip_text = "Changes animation name."
 disabled = true
 text = "Edit animation"
 
-[node name="PreviewBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 342.0
-margin_right = 472.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the preview dialog to see what the animation looks like."
+[node name="PreviewBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_left = 342.0
+offset_right = 472.0
+offset_bottom = 20.0
+tooltip_text = "Opens the preview dialog to see what the animation looks like."
 disabled = true
 text = "Preview animation"
 
-[node name="SaveBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 476.0
-margin_right = 585.0
-margin_bottom = 20.0
-hint_tooltip = "Writes the animation to disk."
+[node name="SaveBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_left = 476.0
+offset_right = 585.0
+offset_bottom = 20.0
+tooltip_text = "Writes the animation to disk."
 disabled = true
 text = "Save animation"
 
-[node name="ResetBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 589.0
-margin_right = 705.0
-margin_bottom = 20.0
-hint_tooltip = "Reloads the animation from disk."
+[node name="ResetBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_left = 589.0
+offset_right = 705.0
+offset_bottom = 20.0
+tooltip_text = "Reloads the animation from disk."
 disabled = true
 text = "Reset animation"
 
-[node name="DeleteBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/Toolbar"]
-margin_left = 709.0
-margin_right = 832.0
-margin_bottom = 20.0
-hint_tooltip = "Removes the animation from disk. Not reversible."
+[node name="DeleteBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/Toolbar"]
+offset_left = 709.0
+offset_right = 832.0
+offset_bottom = 20.0
+tooltip_text = "Removes the animation from disk. Not reversible."
 disabled = true
 text = "Delete animation"
 
-[node name="AnimChainLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout"]
-margin_top = 24.0
-margin_right = 1272.0
-margin_bottom = 44.0
+[node name="AnimChainLayout" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout"]
+offset_top = 24.0
+offset_right = 1272.0
+offset_bottom = 44.0
 
-[node name="AnimChainLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_top = 3.0
-margin_right = 104.0
-margin_bottom = 17.0
+[node name="AnimChainLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_top = 3.0
+offset_right = 104.0
+offset_bottom = 17.0
 text = "Animation chain"
 
-[node name="IdleBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 108.0
-margin_right = 180.0
-margin_bottom = 20.0
-hint_tooltip = "Loads the animation block sequences."
+[node name="IdleBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 108.0
+offset_right = 180.0
+offset_bottom = 20.0
+tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Idle Loop"
 
-[node name="ChainSep1" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 184.0
-margin_top = 3.0
-margin_right = 192.0
-margin_bottom = 17.0
+[node name="ChainSep1" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 184.0
+offset_top = 3.0
+offset_right = 192.0
+offset_bottom = 17.0
 text = ">"
 
-[node name="FocusedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 196.0
-margin_right = 331.0
-margin_bottom = 20.0
-hint_tooltip = "Loads the animation block sequences."
+[node name="FocusedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 196.0
+offset_right = 331.0
+offset_bottom = 20.0
+tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Focused Animation"
 
-[node name="ChainSep2" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 335.0
-margin_top = 3.0
-margin_right = 343.0
-margin_bottom = 17.0
+[node name="ChainSep2" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 335.0
+offset_top = 3.0
+offset_right = 343.0
+offset_bottom = 17.0
 text = ">"
 
-[node name="ActivatedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 347.0
-margin_right = 489.0
-margin_bottom = 20.0
-hint_tooltip = "Loads the animation block sequences."
+[node name="ActivatedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 347.0
+offset_right = 489.0
+offset_bottom = 20.0
+tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Activated Animation"
 
-[node name="ChainSep3" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 493.0
-margin_top = 3.0
-margin_right = 501.0
-margin_bottom = 17.0
+[node name="ChainSep3" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 493.0
+offset_top = 3.0
+offset_right = 501.0
+offset_bottom = 17.0
 text = ">"
 
-[node name="DeactivatedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 505.0
-margin_right = 663.0
-margin_bottom = 20.0
-hint_tooltip = "Loads the animation block sequences."
+[node name="DeactivatedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 505.0
+offset_right = 663.0
+offset_bottom = 20.0
+tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Deactivated Animation"
 
-[node name="ChainSep4" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 667.0
-margin_top = 3.0
-margin_right = 675.0
-margin_bottom = 17.0
+[node name="ChainSep4" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 667.0
+offset_top = 3.0
+offset_right = 675.0
+offset_bottom = 17.0
 text = ">"
 
-[node name="UnfocusedBtn" type="Button" parent="Tabs/Animations/AnimationsLayout/AnimChainLayout"]
-margin_left = 679.0
-margin_right = 829.0
-margin_bottom = 20.0
-hint_tooltip = "Loads the animation block sequences."
+[node name="UnfocusedBtn" type="Button" parent="TabBar/Animations/AnimationsLayout/AnimChainLayout"]
+offset_left = 679.0
+offset_right = 829.0
+offset_bottom = 20.0
+tooltip_text = "Loads the animation block sequences."
 disabled = true
 toggle_mode = true
 text = "Unfocused Animation"
 
-[node name="AnimEditLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout"]
-margin_top = 48.0
-margin_right = 1272.0
-margin_bottom = 684.0
+[node name="AnimEditLayout" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout"]
+offset_top = 48.0
+offset_right = 1272.0
+offset_bottom = 684.0
 size_flags_vertical = 3
 
-[node name="SeqLayout" type="HBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout"]
-margin_right = 1272.0
-margin_bottom = 636.0
+[node name="SeqLayout" type="HBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout"]
+offset_right = 1272.0
+offset_bottom = 636.0
 size_flags_horizontal = 3
 
-[node name="PosSeqContainer" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
-margin_right = 421.0
-margin_bottom = 636.0
+[node name="PosSeqContainer" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
+offset_right = 421.0
+offset_bottom = 636.0
 size_flags_horizontal = 3
 
-[node name="PosSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
-margin_right = 421.0
-margin_bottom = 14.0
+[node name="PosSeqLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
+offset_right = 421.0
+offset_bottom = 14.0
 text = "Position Sequence"
 
-[node name="PosSeqToolsLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
-margin_top = 18.0
-margin_right = 421.0
-margin_bottom = 18.0
+[node name="PosSeqToolsLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
+offset_top = 18.0
+offset_right = 421.0
+offset_bottom = 18.0
 
-[node name="PosSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
-margin_top = 22.0
-margin_right = 421.0
-margin_bottom = 636.0
-rect_min_size = Vector2( 0, 30 )
+[node name="PosSeqScroll" type="ScrollContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer"]
+offset_top = 22.0
+offset_right = 421.0
+offset_bottom = 636.0
+custom_minimum_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="PosSeqLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqScroll"]
-margin_right = 421.0
-margin_bottom = 614.0
+[node name="PosSeqLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/PosSeqContainer/PosSeqScroll"]
+offset_right = 421.0
+offset_bottom = 614.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScaleSeqContainer" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
-margin_left = 425.0
-margin_right = 846.0
-margin_bottom = 636.0
+[node name="ScaleSeqContainer" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
+offset_left = 425.0
+offset_right = 846.0
+offset_bottom = 636.0
 size_flags_horizontal = 3
 
-[node name="ScaleSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
-margin_right = 421.0
-margin_bottom = 14.0
+[node name="ScaleSeqLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
+offset_right = 421.0
+offset_bottom = 14.0
 text = "Scale Sequence"
 
-[node name="ScaleSeqToolsLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
-margin_top = 18.0
-margin_right = 421.0
-margin_bottom = 18.0
+[node name="ScaleSeqToolsLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
+offset_top = 18.0
+offset_right = 421.0
+offset_bottom = 18.0
 
-[node name="ScaleSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
-margin_top = 22.0
-margin_right = 421.0
-margin_bottom = 636.0
-rect_min_size = Vector2( 0, 30 )
+[node name="ScaleSeqScroll" type="ScrollContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer"]
+offset_top = 22.0
+offset_right = 421.0
+offset_bottom = 636.0
+custom_minimum_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="ScaleSeqLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqScroll"]
-margin_right = 421.0
-margin_bottom = 614.0
+[node name="ScaleSeqLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/ScaleSeqContainer/ScaleSeqScroll"]
+offset_right = 421.0
+offset_bottom = 614.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RotSeqContainer" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
-margin_left = 850.0
-margin_right = 1272.0
-margin_bottom = 636.0
+[node name="RotSeqContainer" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout"]
+offset_left = 850.0
+offset_right = 1272.0
+offset_bottom = 636.0
 size_flags_horizontal = 3
 
-[node name="RotSeqLbl" type="Label" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
-margin_right = 422.0
-margin_bottom = 14.0
+[node name="RotSeqLbl" type="Label" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
+offset_right = 422.0
+offset_bottom = 14.0
 text = "Rotation Sequence"
 
-[node name="RotSeqToolsLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
-margin_top = 18.0
-margin_right = 422.0
-margin_bottom = 18.0
+[node name="RotSeqToolsLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
+offset_top = 18.0
+offset_right = 422.0
+offset_bottom = 18.0
 
-[node name="RotSeqScroll" type="ScrollContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
-margin_top = 22.0
-margin_right = 422.0
-margin_bottom = 636.0
-rect_min_size = Vector2( 0, 30 )
+[node name="RotSeqScroll" type="ScrollContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer"]
+offset_top = 22.0
+offset_right = 422.0
+offset_bottom = 636.0
+custom_minimum_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="RotSeqLayout" type="VBoxContainer" parent="Tabs/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqScroll"]
-margin_right = 422.0
-margin_bottom = 614.0
+[node name="RotSeqLayout" type="VBoxContainer" parent="TabBar/Animations/AnimationsLayout/AnimEditLayout/SeqLayout/RotSeqContainer/RotSeqScroll"]
+offset_right = 422.0
+offset_bottom = 614.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Effects" type="Control" parent="Tabs"]
+[node name="Effects" type="Control" parent="TabBar"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 script = ExtResource( 18 )
 
-[node name="EffectLayout" type="VBoxContainer" parent="Tabs/Effects"]
+[node name="EffectLayout" type="VBoxContainer" parent="TabBar/Effects"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Toolbar" type="HBoxContainer" parent="Tabs/Effects/EffectLayout"]
-margin_right = 1272.0
-margin_bottom = 20.0
+[node name="Toolbar" type="HBoxContainer" parent="TabBar/Effects/EffectLayout"]
+offset_right = 1272.0
+offset_bottom = 20.0
 
-[node name="CreateBtn" type="Button" parent="Tabs/Effects/EffectLayout/Toolbar"]
-margin_right = 144.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the effect creation dialog."
+[node name="CreateBtn" type="Button" parent="TabBar/Effects/EffectLayout/Toolbar"]
+offset_right = 144.0
+offset_bottom = 20.0
+tooltip_text = "Opens the effect creation dialog."
 text = "Create new effect"
 
-[node name="EditBtn" type="Button" parent="Tabs/Effects/EffectLayout/Toolbar"]
-margin_left = 148.0
-margin_right = 245.0
-margin_bottom = 20.0
-hint_tooltip = "Opens the effect script in the Godot editor."
+[node name="EditBtn" type="Button" parent="TabBar/Effects/EffectLayout/Toolbar"]
+offset_left = 148.0
+offset_right = 245.0
+offset_bottom = 20.0
+tooltip_text = "Opens the effect script in the Godot editor."
 disabled = true
 text = "Edit effect"
 
-[node name="DeleteBtn" type="Button" parent="Tabs/Effects/EffectLayout/Toolbar"]
-margin_left = 249.0
-margin_right = 365.0
-margin_bottom = 20.0
-hint_tooltip = "Removes the effect and associated files. Not reversible."
+[node name="DeleteBtn" type="Button" parent="TabBar/Effects/EffectLayout/Toolbar"]
+offset_left = 249.0
+offset_right = 365.0
+offset_bottom = 20.0
+tooltip_text = "Removes the effect and associated files. Not reversible."
 disabled = true
 text = "Delete effect"
 
-[node name="EffectList" type="ItemList" parent="Tabs/Effects/EffectLayout"]
-margin_top = 24.0
-margin_right = 1272.0
-margin_bottom = 684.0
-hint_tooltip = "Single-click to select.
+[node name="EffectList" type="ItemList" parent="TabBar/Effects/EffectLayout"]
+offset_top = 24.0
+offset_right = 1272.0
+offset_bottom = 684.0
+tooltip_text = "Single-click to select.
 Double-click to change the name."
 size_flags_vertical = 3
 items = [ "mana_double: Double the Mana", null, false, "mana_incr: Mana +1", null, false, "mana_decr: Mana -1", null, false ]
@@ -678,10 +678,10 @@ items = [ "mana_double: Double the Mana", null, false, "mana_incr: Mana +1", nul
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 
 [node name="NewDatabaseDialog" parent="Dialogs" instance=ExtResource( 2 )]
 
@@ -708,59 +708,59 @@ margin_bottom = -4.0
 [node name="AnimPreviewDialog" parent="Dialogs" instance=ExtResource( 17 )]
 
 [node name="NewEffectDialog" parent="Dialogs" instance=ExtResource( 19 )]
-[connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/CreateBtn" to="Tabs/Databases" method="_on_CreateBtn_pressed"]
-[connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/EditBtn" to="Tabs/Databases" method="_on_EditBtn_pressed"]
-[connection signal="pressed" from="Tabs/Databases/DatabaseLayout/Toolbar/DeleteBtn" to="Tabs/Databases" method="_on_DeleteBtn_pressed"]
-[connection signal="item_activated" from="Tabs/Databases/DatabaseLayout/DatabaseList" to="Tabs/Databases" method="_on_DatabaseList_item_activated"]
-[connection signal="item_selected" from="Tabs/Databases/DatabaseLayout/DatabaseList" to="Tabs/Databases" method="_on_DatabaseList_item_selected"]
-[connection signal="text_changed" from="Tabs/Cards/CardLayout/ToolLayout/CardId" to="Tabs/Cards" method="_on_CardId_text_changed"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/ToolLayout/SaveBtn" to="Tabs/Cards" method="_on_SaveBtn_pressed"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/ToolLayout/LoadBtn" to="Tabs/Cards" method="_on_LoadBtn_pressed"]
-[connection signal="item_selected" from="Tabs/Cards/CardLayout/ToolLayout/DatabaseSelect" to="Tabs/Cards" method="_on_DatabaseSelect_item_selected"]
-[connection signal="item_activated" from="Tabs/Cards/CardLayout/DataLayout/CategList" to="Tabs/Cards" method="_on_CategList_item_activated"]
-[connection signal="item_selected" from="Tabs/Cards/CardLayout/DataLayout/CategList" to="Tabs/Cards" method="_on_CategList_item_selected"]
-[connection signal="item_activated" from="Tabs/Cards/CardLayout/DataLayout/ValuesList" to="Tabs/Cards" method="_on_ValuesList_item_activated"]
-[connection signal="item_selected" from="Tabs/Cards/CardLayout/DataLayout/ValuesList" to="Tabs/Cards" method="_on_ValuesList_item_selected"]
-[connection signal="item_activated" from="Tabs/Cards/CardLayout/DataLayout/TextsList" to="Tabs/Cards" method="_on_TextsList_item_activated"]
-[connection signal="item_selected" from="Tabs/Cards/CardLayout/DataLayout/TextsList" to="Tabs/Cards" method="_on_TextsList_item_selected"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="Tabs/Cards" method="_on_AddCategBtn_pressed"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/DataLayout/CategToolLayout/DelCategBtn" to="Tabs/Cards" method="_on_DelCategBtn_pressed"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="Tabs/Cards" method="_on_AddValBtn_pressed"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/DataLayout/ValuesToolLayout/DelValBtn" to="Tabs/Cards" method="_on_DelValBtn_pressed"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="Tabs/Cards" method="_on_AddTxtBtn_pressed"]
-[connection signal="pressed" from="Tabs/Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn" to="Tabs/Cards" method="_on_DelTxtBtn_pressed"]
-[connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/CreateBtn" to="Tabs/Containers" method="_on_CreateBtn_pressed"]
-[connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/EditBtn" to="Tabs/Containers" method="_on_EditBtn_pressed"]
-[connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/OpenBtn" to="Tabs/Containers" method="_on_OpenBtn_pressed"]
-[connection signal="pressed" from="Tabs/Containers/ContainersLayout/Toolbar/DeleteBtn" to="Tabs/Containers" method="_on_DeleteBtn_pressed"]
-[connection signal="item_activated" from="Tabs/Containers/ContainersLayout/ContainerList" to="Tabs/Containers" method="_on_ContainerList_item_activated"]
-[connection signal="item_selected" from="Tabs/Containers/ContainersLayout/ContainerList" to="Tabs/Containers" method="_on_ContainerList_item_selected"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/CreateBtn" to="Tabs/Animations" method="_on_CreateBtn_pressed"]
-[connection signal="item_selected" from="Tabs/Animations/AnimationsLayout/Toolbar/AnimSelect" to="Tabs/Animations" method="_on_AnimSelect_item_selected"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/EditBtn" to="Tabs/Animations" method="_on_EditBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/PreviewBtn" to="Tabs/Animations" method="_on_PreviewBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/SaveBtn" to="Tabs/Animations" method="_on_SaveBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/ResetBtn" to="Tabs/Animations" method="_on_ResetBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/Toolbar/DeleteBtn" to="Tabs/Animations" method="_on_DeleteBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/IdleBtn" to="Tabs/Animations" method="_on_IdleBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/FocusedBtn" to="Tabs/Animations" method="_on_FocusedBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/ActivatedBtn" to="Tabs/Animations" method="_on_ActivatedBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/DeactivatedBtn" to="Tabs/Animations" method="_on_DeactivatedBtn_pressed"]
-[connection signal="pressed" from="Tabs/Animations/AnimationsLayout/AnimChainLayout/UnfocusedBtn" to="Tabs/Animations" method="_on_UnfocusedBtn_pressed"]
-[connection signal="pressed" from="Tabs/Effects/EffectLayout/Toolbar/CreateBtn" to="Tabs/Effects" method="_on_CreateBtn_pressed"]
-[connection signal="pressed" from="Tabs/Effects/EffectLayout/Toolbar/EditBtn" to="Tabs/Effects" method="_on_EditBtn_pressed"]
-[connection signal="pressed" from="Tabs/Effects/EffectLayout/Toolbar/DeleteBtn" to="Tabs/Effects" method="_on_DeleteBtn_pressed"]
-[connection signal="item_activated" from="Tabs/Effects/EffectLayout/EffectList" to="Tabs/Effects" method="_on_EffectList_item_activated"]
-[connection signal="item_selected" from="Tabs/Effects/EffectLayout/EffectList" to="Tabs/Effects" method="_on_EffectList_item_selected"]
-[connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="Tabs/Databases" method="_on_NewDatabaseDialog_form_validated"]
-[connection signal="copy_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Databases" method="_on_EditDatabaseDialog_copy_card"]
-[connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_delete_card"]
-[connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="Tabs/Cards" method="_on_EditDatabaseDialog_edit_card"]
-[connection signal="form_validated" from="Dialogs/CategoryDialog" to="Tabs/Cards" method="_on_CategoryDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/ValueDialog" to="Tabs/Cards" method="_on_ValueDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/TextDialog" to="Tabs/Cards" method="_on_TextDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/NewContainerDialog" to="Tabs/Containers" method="_on_NewContainerDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/NewAnimationDialog" to="Tabs/Animations" method="_on_NewAnimationDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/StepValueDialog" to="Tabs/Animations" method="_on_StepValueDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/StepTransiDialog" to="Tabs/Animations" method="_on_StepTransiDialog_form_validated"]
-[connection signal="form_validated" from="Dialogs/NewEffectDialog" to="Tabs/Effects" method="_on_NewEffectDialog_form_validated"]
+[connection signal="pressed" from="TabBar/Databases/DatabaseLayout/Toolbar/CreateBtn" to="TabBar/Databases" method="_on_CreateBtn_pressed"]
+[connection signal="pressed" from="TabBar/Databases/DatabaseLayout/Toolbar/EditBtn" to="TabBar/Databases" method="_on_EditBtn_pressed"]
+[connection signal="pressed" from="TabBar/Databases/DatabaseLayout/Toolbar/DeleteBtn" to="TabBar/Databases" method="_on_DeleteBtn_pressed"]
+[connection signal="item_activated" from="TabBar/Databases/DatabaseLayout/DatabaseList" to="TabBar/Databases" method="_on_DatabaseList_item_activated"]
+[connection signal="item_selected" from="TabBar/Databases/DatabaseLayout/DatabaseList" to="TabBar/Databases" method="_on_DatabaseList_item_selected"]
+[connection signal="text_changed" from="TabBar/Cards/CardLayout/ToolLayout/CardId" to="TabBar/Cards" method="_on_CardId_text_changed"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/ToolLayout/SaveBtn" to="TabBar/Cards" method="_on_SaveBtn_pressed"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/ToolLayout/LoadBtn" to="TabBar/Cards" method="_on_LoadBtn_pressed"]
+[connection signal="item_selected" from="TabBar/Cards/CardLayout/ToolLayout/DatabaseSelect" to="TabBar/Cards" method="_on_DatabaseSelect_item_selected"]
+[connection signal="item_activated" from="TabBar/Cards/CardLayout/DataLayout/CategList" to="TabBar/Cards" method="_on_CategList_item_activated"]
+[connection signal="item_selected" from="TabBar/Cards/CardLayout/DataLayout/CategList" to="TabBar/Cards" method="_on_CategList_item_selected"]
+[connection signal="item_activated" from="TabBar/Cards/CardLayout/DataLayout/ValuesList" to="TabBar/Cards" method="_on_ValuesList_item_activated"]
+[connection signal="item_selected" from="TabBar/Cards/CardLayout/DataLayout/ValuesList" to="TabBar/Cards" method="_on_ValuesList_item_selected"]
+[connection signal="item_activated" from="TabBar/Cards/CardLayout/DataLayout/TextsList" to="TabBar/Cards" method="_on_TextsList_item_activated"]
+[connection signal="item_selected" from="TabBar/Cards/CardLayout/DataLayout/TextsList" to="TabBar/Cards" method="_on_TextsList_item_selected"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/DataLayout/CategToolLayout/AddCategBtn" to="TabBar/Cards" method="_on_AddCategBtn_pressed"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/DataLayout/CategToolLayout/DelCategBtn" to="TabBar/Cards" method="_on_DelCategBtn_pressed"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/DataLayout/ValuesToolLayout/AddValBtn" to="TabBar/Cards" method="_on_AddValBtn_pressed"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/DataLayout/ValuesToolLayout/DelValBtn" to="TabBar/Cards" method="_on_DelValBtn_pressed"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/DataLayout/TextsToolLayout/AddTxtBtn" to="TabBar/Cards" method="_on_AddTxtBtn_pressed"]
+[connection signal="pressed" from="TabBar/Cards/CardLayout/DataLayout/TextsToolLayout/DelTxtBtn" to="TabBar/Cards" method="_on_DelTxtBtn_pressed"]
+[connection signal="pressed" from="TabBar/Containers/ContainersLayout/Toolbar/CreateBtn" to="TabBar/Containers" method="_on_CreateBtn_pressed"]
+[connection signal="pressed" from="TabBar/Containers/ContainersLayout/Toolbar/EditBtn" to="TabBar/Containers" method="_on_EditBtn_pressed"]
+[connection signal="pressed" from="TabBar/Containers/ContainersLayout/Toolbar/OpenBtn" to="TabBar/Containers" method="_on_OpenBtn_pressed"]
+[connection signal="pressed" from="TabBar/Containers/ContainersLayout/Toolbar/DeleteBtn" to="TabBar/Containers" method="_on_DeleteBtn_pressed"]
+[connection signal="item_activated" from="TabBar/Containers/ContainersLayout/ContainerList" to="TabBar/Containers" method="_on_ContainerList_item_activated"]
+[connection signal="item_selected" from="TabBar/Containers/ContainersLayout/ContainerList" to="TabBar/Containers" method="_on_ContainerList_item_selected"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/Toolbar/CreateBtn" to="TabBar/Animations" method="_on_CreateBtn_pressed"]
+[connection signal="item_selected" from="TabBar/Animations/AnimationsLayout/Toolbar/AnimSelect" to="TabBar/Animations" method="_on_AnimSelect_item_selected"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/Toolbar/EditBtn" to="TabBar/Animations" method="_on_EditBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/Toolbar/PreviewBtn" to="TabBar/Animations" method="_on_PreviewBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/Toolbar/SaveBtn" to="TabBar/Animations" method="_on_SaveBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/Toolbar/ResetBtn" to="TabBar/Animations" method="_on_ResetBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/Toolbar/DeleteBtn" to="TabBar/Animations" method="_on_DeleteBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/AnimChainLayout/IdleBtn" to="TabBar/Animations" method="_on_IdleBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/AnimChainLayout/FocusedBtn" to="TabBar/Animations" method="_on_FocusedBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/AnimChainLayout/ActivatedBtn" to="TabBar/Animations" method="_on_ActivatedBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/AnimChainLayout/DeactivatedBtn" to="TabBar/Animations" method="_on_DeactivatedBtn_pressed"]
+[connection signal="pressed" from="TabBar/Animations/AnimationsLayout/AnimChainLayout/UnfocusedBtn" to="TabBar/Animations" method="_on_UnfocusedBtn_pressed"]
+[connection signal="pressed" from="TabBar/Effects/EffectLayout/Toolbar/CreateBtn" to="TabBar/Effects" method="_on_CreateBtn_pressed"]
+[connection signal="pressed" from="TabBar/Effects/EffectLayout/Toolbar/EditBtn" to="TabBar/Effects" method="_on_EditBtn_pressed"]
+[connection signal="pressed" from="TabBar/Effects/EffectLayout/Toolbar/DeleteBtn" to="TabBar/Effects" method="_on_DeleteBtn_pressed"]
+[connection signal="item_activated" from="TabBar/Effects/EffectLayout/EffectList" to="TabBar/Effects" method="_on_EffectList_item_activated"]
+[connection signal="item_selected" from="TabBar/Effects/EffectLayout/EffectList" to="TabBar/Effects" method="_on_EffectList_item_selected"]
+[connection signal="form_validated" from="Dialogs/NewDatabaseDialog" to="TabBar/Databases" method="_on_NewDatabaseDialog_form_validated"]
+[connection signal="copy_card" from="Dialogs/EditDatabaseDialog" to="TabBar/Databases" method="_on_EditDatabaseDialog_copy_card"]
+[connection signal="delete_card" from="Dialogs/EditDatabaseDialog" to="TabBar/Cards" method="_on_EditDatabaseDialog_delete_card"]
+[connection signal="edit_card" from="Dialogs/EditDatabaseDialog" to="TabBar/Cards" method="_on_EditDatabaseDialog_edit_card"]
+[connection signal="form_validated" from="Dialogs/CategoryDialog" to="TabBar/Cards" method="_on_CategoryDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/ValueDialog" to="TabBar/Cards" method="_on_ValueDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/TextDialog" to="TabBar/Cards" method="_on_TextDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/NewContainerDialog" to="TabBar/Containers" method="_on_NewContainerDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/NewAnimationDialog" to="TabBar/Animations" method="_on_NewAnimationDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/StepValueDialog" to="TabBar/Animations" method="_on_StepValueDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/StepTransiDialog" to="TabBar/Animations" method="_on_StepTransiDialog_form_validated"]
+[connection signal="form_validated" from="Dialogs/NewEffectDialog" to="TabBar/Effects" method="_on_NewEffectDialog_form_validated"]
