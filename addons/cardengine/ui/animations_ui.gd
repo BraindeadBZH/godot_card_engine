@@ -104,7 +104,7 @@ func _load_animation() -> void:
 
 
 func _load_sequence(seq: AnimationSequence, layout: Control, tools: Control) -> void:
-	if seq.empty():
+	if seq.is_empty():
 		var btn = Button.new()
 		btn.text = "Initialize"
 		tools.add_child(btn)

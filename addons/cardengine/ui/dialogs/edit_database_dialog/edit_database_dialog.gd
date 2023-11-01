@@ -111,7 +111,7 @@ func _apply_filters():
 				_comp_op.get_item_text(_comp_op.selected),
 				_comp_val.value])
 
-	if _txt_filter.selected > 0 and not _contains.text.empty():
+	if _txt_filter.selected > 0 and not _contains.text.is_empty():
 		contains.append("%s:%s" % [
 			_txt_filter.get_item_text(_txt_filter.selected),
 			_contains.text])

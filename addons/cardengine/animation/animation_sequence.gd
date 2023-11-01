@@ -38,7 +38,7 @@ func length() -> int:
 	return _data.size()
 
 
-func empty() -> bool:
+func is_empty() -> bool:
 	return _data.is_empty()
 
 

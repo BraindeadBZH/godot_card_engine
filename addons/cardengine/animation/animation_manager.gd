@@ -19,7 +19,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 
 	if form_name == "new_animation":
 		var id = form["id"]
-		if id.empty():
+		if id.is_empty():
 			errors.append("Animation ID cannot be empty")
 		elif !form["edit"] and _animations.has(id):
 			errors.append("Animation ID already exists")

@@ -19,7 +19,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 
 	if form_name == "new_database":
 		var id = form["id"]
-		if id.empty():
+		if id.is_empty():
 			errors.append("Database ID cannot be empty")
 		elif !form["edit"] && _databases.has(id):
 			errors.append("Database ID already exists")
@@ -47,7 +47,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 
 	elif form_name == "duplicate_card":
 		var id = form["id"]
-		if id.empty():
+		if id.is_empty():
 			errors.append("Card ID cannot be empty")
 		elif get_database(form["db"]).card_exists(id):
 			errors.append("Card already exists")

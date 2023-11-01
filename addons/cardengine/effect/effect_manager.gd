@@ -23,7 +23,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 
 	if form_name == "new_effect":
 		var id = form["id"]
-		if id.empty():
+		if id.is_empty():
 			errors.append("Effect ID cannot be empty")
 		elif !form["edit"] && _effects.has(id):
 			errors.append("Effect ID already exists")
@@ -31,7 +31,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 			errors.append("Invalid effect ID, must only contains alphanumeric characters or _, no space and starts with a letter")
 
 		var name = form["name"]
-		if name.empty():
+		if name.is_empty():
 			errors.append("Effect Name cannot be empty")
 
 	return errors

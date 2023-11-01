@@ -32,7 +32,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 
 	if form_name == "new_container":
 		var id = form["id"]
-		if id.empty():
+		if id.is_empty():
 			errors.append("Container ID cannot be empty")
 		elif !form["edit"] && _containers.has(id):
 			errors.append("Container ID already exists")
@@ -40,7 +40,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array[String]:
 			errors.append("Invalid container ID, must only contains alphanumeric characters or _, no space and starts with a letter")
 
 		var name = form["name"]
-		if name.empty():
+		if name.is_empty():
 			errors.append("Container Name cannot be empty")
 		elif !Utils.is_class_name_valid(name):
 			errors.append("Invalid container Name, must only contains letters and cannot contains space")
