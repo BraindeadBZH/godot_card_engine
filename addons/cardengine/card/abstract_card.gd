@@ -576,7 +576,7 @@ func _post_event(event: String) -> void:
 
 
 func _merge_events() -> void:
-	var merged := []
+	var merged: Array[String] = []
 	var prev = ""
 
 	for event in _event_queue:

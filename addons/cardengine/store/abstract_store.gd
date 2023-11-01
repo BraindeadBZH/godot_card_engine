@@ -21,7 +21,7 @@ class StoreSorter:
 		var split := key.split(":", false)
 
 		if split[0] == "category":
-			var order: Array[String] = _info[key]
+			var order: Array = _info[key]
 			var lval := ldata.get_category(split[1])
 			var rval := rdata.get_category(split[1])
 			var lidx: int = -1
@@ -110,7 +110,7 @@ func clear() -> void:
 	emit_signal("changed")
 
 
-func populate(db: CardDatabase, ids: Array[String]) -> void:
+func populate(db: CardDatabase, ids: Array) -> void:
 	clear()
 
 	for id in ids:
@@ -118,7 +118,7 @@ func populate(db: CardDatabase, ids: Array[String]) -> void:
 
 
 func populate_all(db: CardDatabase):
-	var keys: Array[String] = db.cards().keys()
+	var keys = db.cards().keys()
 	populate(db, keys)
 
 
