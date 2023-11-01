@@ -174,11 +174,13 @@ func _update_deck_list() -> void:
 		btn.clip_text = true
 		btn.rect_min_size = Vector2(100, 30)
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		btn.connect("pressed", Callable(self, "_on_DeckCard_pressed"), [card.data().id])
+		btn.connect("pressed", func ():
+						_on_DeckCard_pressed(card.data().id))
 		btn.connect(
-			"mouse_entered", Callable(self, "_change_btn_text"),
-			[btn, "Remove 1 %s" % card.data().get_text("name")])
-		btn.connect("mouse_exited", Callable(self, "_change_btn_text"), [btn, btn.text])
+			"mouse_entered", func ():
+						_change_btn_text(btn, "Remove 1 %s" % card.data().get_text("name")))
+		btn.connect("mouse_exited", func ():
+						_change_btn_text(btn, btn.text))
 
 		lbl.text = "%d x" % count
 
