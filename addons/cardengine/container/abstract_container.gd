@@ -29,8 +29,8 @@ var _board: AbstractBoard = null
 var _grid_card_width: float = 200
 var _grid_fixed_width: bool = true
 var _grid_card_spacing: Vector2 = Vector2(0.75, 1.2)
-var _grid_halign: int = HALIGN_CENTER
-var _grid_valign: int = VALIGN_CENTER
+var _grid_halign: int = HORIZONTAL_ALIGNMENT_CENTER
+var _grid_valign: int = VERTICAL_ALIGNMENT_CENTER
 var _grid_columns: int = -1
 var _grid_expand: bool = true
 
@@ -291,20 +291,20 @@ func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 	spacing_offset.y = (height_adjusted * _grid_card_spacing.y - height_adjusted) / 2.0
 
 	match _grid_halign:
-		HALIGN_LEFT:
+		HORIZONTAL_ALIGNMENT_LEFT:
 			grid_offset.x = spacing_offset.x
-		HALIGN_CENTER:
-			grid_offset.x = spacing_offset.x + (rect_size.x - row_width) / 2.0
-		HALIGN_RIGHT:
-			grid_offset.x = spacing_offset.x + (rect_size.x - row_width)
+		HORIZONTAL_ALIGNMENT_CENTER:
+			grid_offset.x = spacing_offset.x + (size.x - row_width) / 2.0
+		HORIZONTAL_ALIGNMENT_RIGHT:
+			grid_offset.x = spacing_offset.x + (size.x - row_width)
 
 	match _grid_valign:
-		VALIGN_TOP:
+		VERTICAL_ALIGNMENT_TOP:
 			grid_offset.y = spacing_offset.y
-		VALIGN_CENTER:
-			grid_offset.y = spacing_offset.y + (rect_size.y - col_height) / 2.0
-		VALIGN_BOTTOM:
-			grid_offset.y = spacing_offset.y + (rect_size.y - col_height)
+		VERTICAL_ALIGNMENT_CENTER:
+			grid_offset.y = spacing_offset.y + (size.y - col_height) / 2.0
+		VERTICAL_ALIGNMENT_BOTTOM:
+			grid_offset.y = spacing_offset.y + (size.y - col_height)
 
 	var pos: Vector2 = Vector2(0.0 , 0.0)
 	# Initial pos

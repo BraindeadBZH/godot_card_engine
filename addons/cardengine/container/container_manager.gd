@@ -402,17 +402,17 @@ func _translate_bool(val: bool) -> String:
 func _translate_align(align: String) -> String:
 	match align:
 		"left":
-			return "HALIGN_LEFT"
+			return "HORIZONTAL_ALIGNMENT_LEFT"
 		"center":
-			return "HALIGN_CENTER"
+			return "HORIZONTAL_ALIGNMENT_CENTER"
 		"right":
-			return "HALIGN_RIGHT"
+			return "HORIZONTAL_ALIGNMENT_RIGHT"
 		"top":
-			return "VALIGN_TOP"
+			return "VERTICAL_ALIGNMENT_TOP"
 		"middle":
-			return "VALIGN_CENTER"
+			return "VERTICAL_ALIGNMENT_CENTER"
 		"bottom":
-			return "VALIGN_BOTTOM"
+			return "VERTICAL_ALIGNMENT_BOTTOM"
 		_:
 			return "0"
 
