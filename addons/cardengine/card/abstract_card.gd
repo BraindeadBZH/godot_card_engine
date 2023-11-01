@@ -321,7 +321,8 @@ func _setup_pos_sequence(seq: PositionSequence, player: Tween = null) -> Vector2
 
 			if player != null:
 				if not step.transi.interactive:
-					player.tween_callback(self.set_interection_paused(true))
+					player.tween_callback(func ():
+						set_interaction_paused(true))
 
 				player.tween_property(_cont, "position", final_pos, final_duration).from(prev_val).set_trans(step.transi.type).set_ease(step.transi.easing)
 
@@ -329,7 +330,8 @@ func _setup_pos_sequence(seq: PositionSequence, player: Tween = null) -> Vector2
 					player.tween_callback(self.change_side)
 
 				if not step.transi.interactive:
-					player.tween_callback(self.set_interection_paused(false))
+					player.tween_callback(func ():
+						set_interaction_paused(false))
 			
 			prev_val = final_pos
 
@@ -373,7 +375,8 @@ func _setup_scale_sequence(seq: ScaleSequence, player: Tween = null) -> Vector2:
 
 			if player != null:
 				if not step.transi.interactive:
-					player.tween_callback(self.set_interection_paused(true))
+					player.tween_callback(func ():
+						set_interaction_paused(true))
 
 				player.tween_property(_cont, "scale", final_scale, final_duration).from(prev_val).set_trans(step.transi.type).set_ease(step.transi.easing)
 
@@ -381,7 +384,8 @@ func _setup_scale_sequence(seq: ScaleSequence, player: Tween = null) -> Vector2:
 					player.tween_callback(self.change_side)
 
 				if not step.transi.interactive:
-					player.tween_callback(self.set_interection_paused(false))
+					player.tween_callback(func ():
+						set_interaction_paused(false))
 				
 			prev_val = final_scale
 
@@ -425,7 +429,8 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween = null) -> fl
 
 			if player != null:
 				if not step.transi.interactive:
-					player.tween_callback(self.set_interection_paused(true))
+					player.tween_callback(func ():
+						set_interaction_paused(true))
 
 				player.tween_property(_cont, "rotation", final_rot, final_duration).from(prev_val).set_trans(step.transi.type).set_ease(step.transi.easing)
 
@@ -434,7 +439,8 @@ func _setup_rotation_sequence(seq: RotationSequence, player: Tween = null) -> fl
 					player.tween_callback(self.change_side)
 
 				if not step.transi.interactive:
-					player.tween_callback(self.set_interection_paused(false))
+					player.tween_callback(func ():
+						set_interaction_paused(false))
 				
 			prev_val = final_rot
 
