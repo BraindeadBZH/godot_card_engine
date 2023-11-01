@@ -1,59 +1,35 @@
-[gd_scene load_steps=16 format=3 uid="uid://cecea2neiqosx"]
+[gd_scene load_steps=11 format=3 uid="uid://cecea2neiqosx"]
 
 [ext_resource type="PackedScene" uid="uid://c1g6qgbieq2g2" path="res://addons/cardengine/card/abstract_card.tscn" id="1"]
 [ext_resource type="Script" path="res://cards/normal/normal_card.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://cqk7svmrck0ox" path="res://cards/normal/card_back_background.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://c0wtiput5fex4" path="res://cards/normal/card_front_background.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dedliq3bavtjg" path="res://cards/normal/card_name_background.png" id="5"]
-[ext_resource type="FontData" uid="uid://bte6bvg3h4lwj" path="res://fonts/ArchivoNarrow-Bold.ttf" id="6"]
-[ext_resource type="Texture2D" uid="uid://dluq5y2nox0bk" path="res://cards/normal/card_shadow.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://chibs8wc7ix25" path="res://cards/normal/card_desc_background.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://donkcnt0c4x5m" path="res://cards/normal/card_cost_background.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://rlq2eim0c6qf" path="res://cards/normal/card_picture_placeholder.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://osgu6fetxikq" path="res://cards/normal/card_placeholder.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://dgllucpqnwtsm" path="res://cards/normal/card_back_background.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://fqugr4ubiw54" path="res://cards/normal/card_front_background.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://u3xmfasfw663" path="res://cards/normal/card_name_background.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://38cym37lk3td" path="res://cards/normal/card_shadow.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bqui13kulk0y4" path="res://cards/normal/card_desc_background.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://8wa7adge30ou" path="res://cards/normal/card_cost_background.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://bpk7vhs2oavo1" path="res://cards/normal/card_picture_placeholder.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://b50d4r0au43ee" path="res://cards/normal/card_placeholder.png" id="11"]
 
-[sub_resource type="Font" id="1"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "6" )
-
-[sub_resource type="Font" id="2"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "6" )
-
-[sub_resource type="Font" id="3"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "6" )
-
-[sub_resource type="Font" id="4"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "6" )
-
-[node name="NormalCard" instance=ExtResource( "1" )]
-script = ExtResource( "2" )
+[node name="NormalCard" instance=ExtResource("1")]
+script = ExtResource("2")
 size = Vector2(420, 600)
 
 [node name="Shadow" type="Sprite2D" parent="AnimContainer" index="0"]
 position = Vector2(-1.34912, 0.400543)
-texture = ExtResource( "7" )
-script = null
+texture = ExtResource("7")
 
 [node name="Background" type="Sprite2D" parent="AnimContainer/Placeholder" index="0"]
-texture = ExtResource( "11" )
-script = null
+texture = ExtResource("11")
 
 [node name="Background" type="Sprite2D" parent="AnimContainer/Front" index="0"]
-texture = ExtResource( "4" )
-script = null
+texture = ExtResource("4")
 
 [node name="NameBackground" type="Sprite2D" parent="AnimContainer/Front" index="1"]
-texture = ExtResource( "5" )
-script = null
+texture = ExtResource("5")
 
 [node name="Name" type="Label" parent="AnimContainer/Front/NameBackground" index="0"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -173.0
@@ -62,24 +38,16 @@ offset_right = -173.0
 offset_bottom = -45.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 32
 text = "Card Name"
-align = 1
-valign = 1
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DescBackground" type="Sprite2D" parent="AnimContainer/Front" index="2"]
 position = Vector2(0, 150)
-texture = ExtResource( "8" )
-script = null
+texture = ExtResource("8")
 
 [node name="Desc" type="Label" parent="AnimContainer/Front/DescBackground" index="0"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -138.0
@@ -87,22 +55,16 @@ offset_top = -91.0
 offset_right = -166.0
 offset_bottom = -118.0
 theme_override_colors/font_color = Color(0.141176, 0.141176, 0.141176, 1)
-theme_override_fonts/font = SubResource( "2" )
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus, enim eu blandit sodales, risus mi egestas felis, non mattis tellus est vel turpis. Sed fermentum rutrum varius. "
 autowrap_mode = 3
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CostBackground" type="Sprite2D" parent="AnimContainer/Front" index="3"]
 position = Vector2(-184.699, -281.75)
-texture = ExtResource( "9" )
-script = null
+texture = ExtResource("9")
 
 [node name="Cost" type="Label" parent="AnimContainer/Front/CostBackground" index="0"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -111,146 +73,98 @@ offset_left = -96.0
 offset_top = -96.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_fonts/font = SubResource( "3" )
 theme_override_font_sizes/font_size = 50
 text = "0"
-align = 1
-valign = 1
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PictureGroup" type="Node2D" parent="AnimContainer/Front" index="4"]
-script = null
 
 [node name="Common" type="Sprite2D" parent="AnimContainer/Front/PictureGroup" index="0"]
 visible = false
 position = Vector2(0, -150)
-texture = ExtResource( "10" )
-script = null
+texture = ExtResource("10")
 
 [node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/Common" index="0"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -152.0
 offset_top = -104.0
 offset_right = -152.0
 offset_bottom = -104.0
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 24
 text = "Common"
-align = 1
-valign = 1
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Uncommon" type="Sprite2D" parent="AnimContainer/Front/PictureGroup" index="1"]
 visible = false
 position = Vector2(0, -150)
-texture = ExtResource( "10" )
-script = null
+texture = ExtResource("10")
 
 [node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/Uncommon" index="0"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -152.0
 offset_top = -104.0
 offset_right = -152.0
 offset_bottom = -104.0
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 24
 text = "Uncommon"
-align = 1
-valign = 1
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Rare" type="Sprite2D" parent="AnimContainer/Front/PictureGroup" index="2"]
 visible = false
 position = Vector2(0, -150)
-texture = ExtResource( "10" )
-script = null
+texture = ExtResource("10")
 
 [node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/Rare" index="0"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -152.0
 offset_top = -104.0
 offset_right = -152.0
 offset_bottom = -104.0
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 24
 text = "Rare"
-align = 1
-valign = 1
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MythicRare" type="Sprite2D" parent="AnimContainer/Front/PictureGroup" index="3"]
 visible = false
 position = Vector2(0, -150)
-texture = ExtResource( "10" )
-script = null
+texture = ExtResource("10")
 
 [node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/MythicRare" index="0"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -152.0
 offset_top = -104.0
 offset_right = -152.0
 offset_bottom = -104.0
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 24
 text = "Mythic Rare"
-align = 1
-valign = 1
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BasicLand" type="Sprite2D" parent="AnimContainer/Front/PictureGroup" index="4"]
 position = Vector2(0, -150)
-texture = ExtResource( "10" )
-script = null
+texture = ExtResource("10")
 
 [node name="Text" type="Label" parent="AnimContainer/Front/PictureGroup/BasicLand" index="0"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -152.0
 offset_top = -104.0
 offset_right = -152.0
 offset_bottom = -104.0
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 24
 text = "Basic Land"
-align = 1
-valign = 1
 clip_text = true
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CardId" type="Label" parent="AnimContainer/Front" index="5"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -260,22 +174,14 @@ offset_top = 251.0
 offset_right = 172.0
 offset_bottom = 273.0
 theme_override_colors/font_color = Color(0.67451, 0.67451, 0.67451, 1)
-theme_override_fonts/font = SubResource( "4" )
 theme_override_font_sizes/font_size = 11
 text = "card_id"
-align = 1
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="Sprite2D" parent="AnimContainer/Back" index="0"]
-texture = ExtResource( "3" )
-script = null
+texture = ExtResource("3")
 
 [node name="MouseArea" parent="AnimContainer" index="4"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

@@ -1,42 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://cphmtulivcicg"]
+[gd_scene load_steps=6 format=3 uid="uid://cphmtulivcicg"]
 
 [ext_resource type="Script" path="res://screens/game/game_screen.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dhold8ocsbk5t" path="res://widgets/small_button/small_button.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://containers/hand/hand.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://containers/token_grid/token_grid.tscn" id="4"]
-[ext_resource type="FontData" uid="uid://bte6bvg3h4lwj" path="res://fonts/ArchivoNarrow-Bold.ttf" id="5"]
-[ext_resource type="Texture2D" uid="uid://bmwxtjfs57brr" path="res://screens/game/mana_point.png" id="6"]
-
-[sub_resource type="Font" id="1"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "5" )
-
-[sub_resource type="Font" id="Font_r3yim"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "5" )
-
-[sub_resource type="Font" id="3"]
-variation_coordinates = {
-}
-data/0 = ExtResource( "5" )
+[ext_resource type="Texture2D" uid="uid://wdfjux8qypsb" path="res://screens/game/mana_point.png" id="6"]
 
 [node name="GameScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( "1" )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.45098, 0.509804, 0.701961, 1)
-script = null
 
 [node name="DeckZone" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -45,43 +32,29 @@ offset_left = -510.0
 offset_top = -130.0
 offset_right = -410.0
 offset_bottom = -50.0
-custom_minimum_size = Vector2(80, 80)
 color = Color(0.917647, 0.890196, 0.521569, 1)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DrawCount" type="Label" parent="DeckZone"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 32
 text = "0"
-align = 1
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
 
 [node name="DrawBtn" type="Button" parent="DeckZone"]
+layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 6.0
 offset_bottom = 35.0
 text = "Draw"
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DiscardZone" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -90,31 +63,19 @@ offset_left = 410.0
 offset_top = -130.0
 offset_right = 510.0
 offset_bottom = -50.0
-custom_minimum_size = Vector2(80, 80)
 color = Color(0.917647, 0.890196, 0.521569, 1)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DiscardCount" type="Label" parent="DiscardZone"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = SubResource( "1" )
 theme_override_font_sizes/font_size = 32
 text = "0"
-align = 1
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
 
 [node name="ReshuffleBtn" type="Button" parent="DiscardZone"]
+layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,12 +83,10 @@ offset_top = 6.0
 offset_bottom = 35.0
 disabled = true
 text = "Reshuffle"
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayZone" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -136,31 +95,25 @@ offset_left = -150.0
 offset_top = -150.0
 offset_right = 150.0
 offset_bottom = 150.0
-custom_minimum_size = Vector2(300, 300)
 color = Color(0.14902, 0.172549, 0.239216, 1)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TokenGrid" parent="PlayZone" instance=ExtResource( "4" )]
+[node name="TokenGrid" parent="PlayZone" instance=ExtResource("4")]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 in_anchor = NodePath("../TokenInOut")
 out_anchor = NodePath("../TokenInOut")
 
 [node name="TokenInOut" type="Control" parent="PlayZone"]
+anchors_preset = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 scale = Vector2(1e-05, 1e-05)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ManaBar" type="HBoxContainer" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -170,136 +123,93 @@ offset_top = -210.0
 offset_right = 330.0
 offset_bottom = -155.0
 alignment = 1
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="Label" parent="ManaBar"]
-offset_right = 60.0
-offset_bottom = 55.0
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = SubResource( "Font_r3yim" )
 theme_override_font_sizes/font_size = 24
 text = "Mana  "
-valign = 1
-structured_text_bidi_override_options = []
-script = null
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
 
 [node name="Mana1" type="TextureRect" parent="ManaBar"]
-offset_left = 64.0
-offset_right = 104.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana2" type="TextureRect" parent="ManaBar"]
-offset_left = 108.0
-offset_right = 148.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana3" type="TextureRect" parent="ManaBar"]
-offset_left = 152.0
-offset_right = 192.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana4" type="TextureRect" parent="ManaBar"]
-offset_left = 196.0
-offset_right = 236.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana5" type="TextureRect" parent="ManaBar"]
-offset_left = 240.0
-offset_right = 280.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana6" type="TextureRect" parent="ManaBar"]
-offset_left = 284.0
-offset_right = 324.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana7" type="TextureRect" parent="ManaBar"]
-offset_left = 328.0
-offset_right = 368.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana8" type="TextureRect" parent="ManaBar"]
-offset_left = 372.0
-offset_right = 412.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana9" type="TextureRect" parent="ManaBar"]
-offset_left = 416.0
-offset_right = 456.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
 [node name="Mana10" type="TextureRect" parent="ManaBar"]
-offset_left = 460.0
-offset_right = 500.0
-offset_bottom = 55.0
 custom_minimum_size = Vector2(40, 40)
-texture = ExtResource( "6" )
-expand = true
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
 stretch_mode = 6
-script = null
 
-[node name="EndTurnBtn" parent="ManaBar" instance=ExtResource( "2" )]
-offset_left = 504.0
-offset_right = 679.0
-offset_bottom = 55.0
+[node name="EndTurnBtn" parent="ManaBar" instance=ExtResource("2")]
 custom_minimum_size = Vector2(175, 55)
+layout_mode = 2
 text = "End turn"
 
 [node name="HandZone" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(800, 160)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -307,140 +217,93 @@ anchor_bottom = 1.0
 offset_left = -400.0
 offset_top = -160.0
 offset_right = 400.0
-custom_minimum_size = Vector2(800, 160)
 color = Color(0.239216, 0.286275, 0.439216, 1)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="HandContainer" parent="HandZone" instance=ExtResource( "3" )]
+[node name="HandContainer" parent="HandZone" instance=ExtResource("3")]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 in_anchor = NodePath("../HandInAnchor")
 out_anchor = NodePath("../HandOutAnchor")
 
 [node name="HandInAnchor" type="Control" parent="HandZone"]
+anchors_preset = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 rotation = 45.0
 scale = Vector2(1e-05, 1e-05)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HandOutAnchor" type="Control" parent="HandZone"]
+anchors_preset = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 rotation = 90.0
 scale = Vector2(1e-05, 1e-05)
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="EffectsLayout" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-script = null
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="Label" parent="EffectsLayout"]
-offset_right = 232.0
-offset_bottom = 22.0
+layout_mode = 2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = SubResource( "3" )
 text = "Effects"
-align = 1
-structured_text_bidi_override_options = []
-script = null
 
 [node name="FilterTitle" type="Label" parent="EffectsLayout"]
-offset_top = 26.0
-offset_right = 232.0
-offset_bottom = 52.0
+layout_mode = 2
 text = "Apply to:"
-structured_text_bidi_override_options = []
-script = null
 
 [node name="FilterLayout" type="HBoxContainer" parent="EffectsLayout"]
-offset_top = 56.0
-offset_right = 232.0
-offset_bottom = 87.0
-script = null
+layout_mode = 2
 
 [node name="DrawFilter" type="CheckBox" parent="EffectsLayout/FilterLayout"]
-offset_right = 69.0
-offset_bottom = 31.0
-pressed = true
+layout_mode = 2
 text = "Draw"
-script = null
 
 [node name="HandFilter" type="CheckBox" parent="EffectsLayout/FilterLayout"]
-offset_left = 73.0
-offset_right = 142.0
-offset_bottom = 31.0
-pressed = true
+layout_mode = 2
 text = "Hand"
-script = null
 
 [node name="DiscardFilter" type="CheckBox" parent="EffectsLayout/FilterLayout"]
-offset_left = 146.0
-offset_right = 232.0
-offset_bottom = 31.0
-pressed = true
+layout_mode = 2
 text = "Discard"
-script = null
 
 [node name="ManaMultiplier" type="CheckButton" parent="EffectsLayout"]
-offset_top = 91.0
-offset_right = 232.0
-offset_bottom = 131.0
+layout_mode = 2
 text = "Common mana x2"
-script = null
 
 [node name="OnPlayedEffect" type="CheckButton" parent="EffectsLayout"]
-offset_top = 135.0
-offset_right = 232.0
-offset_bottom = 175.0
+layout_mode = 2
 text = "Mana +1 on played"
-script = null
 
 [node name="ManaIncrease" type="Button" parent="EffectsLayout"]
-offset_top = 179.0
-offset_right = 232.0
-offset_bottom = 208.0
+layout_mode = 2
 text = "Mana +1"
-script = null
 
 [node name="ManaDecrease" type="Button" parent="EffectsLayout"]
-offset_top = 212.0
-offset_right = 232.0
-offset_bottom = 241.0
+layout_mode = 2
 text = "Mana -1"
-script = null
 
-[node name="MenuBtn" parent="." instance=ExtResource( "2" )]
+[node name="MenuBtn" parent="." instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -200.0
 offset_right = 0.0
-custom_minimum_size = Vector2(0, 0)
+offset_bottom = 108.0
 text = "Back to menu"
 
 [node name="StartingHandDelay" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 autostart = true
-script = null
 
 [connection signal="pressed" from="DeckZone/DrawBtn" to="." method="_on_DrawBtn_pressed"]
 [connection signal="pressed" from="DiscardZone/ReshuffleBtn" to="." method="_on_ReshuffleBtn_pressed"]
