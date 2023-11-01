@@ -285,11 +285,11 @@ func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 		col_height = height_adjusted * _grid_card_spacing.y
 
 	if _grid_expand:
-		if row_width > rect_size.x:
-			rect_min_size.x = row_width
+		if row_width > size.x:
+			custom_minimum_size.x = row_width
 
-		if col_height > rect_size.y || _grid_columns > 0:
-			rect_min_size.y = col_height
+		if col_height > size.y || _grid_columns > 0:
+			custom_minimum_size.y = col_height
 
 	spacing_offset.x = (_grid_card_width * _grid_card_spacing.x - _grid_card_width) / 2.0
 	spacing_offset.y = (height_adjusted * _grid_card_spacing.y - height_adjusted) / 2.0
