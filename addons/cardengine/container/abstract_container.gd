@@ -348,7 +348,7 @@ func _path_layout(trans: CardTransform, card_index: int, card_size: Vector2):
 	path_offset = _path_card_width / 2 + path_offset_delta * card_index
 
 	trans.scale =  Vector2(width_ratio, width_ratio)
-	trans.pos = curve.interpolate_baked(path_offset)
+	trans.pos = curve.sample_baked(path_offset)
 
 
 func _fine_tune(trans: CardTransform, card_index: int, card_size: Vector2):
