@@ -141,8 +141,8 @@ func _update_container() -> void:
 			_transitions.in_anchor.rotation = anchor.rotation
 		elif anchor is Control:
 			_transitions.in_anchor.enabled = true
-			_transitions.in_anchor.position = anchor.rect_position
-			_transitions.in_anchor.scale = anchor.rect_scale
+			_transitions.in_anchor.position = anchor.position
+			_transitions.in_anchor.scale = anchor.scale
 			_transitions.in_anchor.rotation = deg_to_rad(anchor.rotation)
 
 	if not out_anchor.is_empty():
@@ -154,8 +154,8 @@ func _update_container() -> void:
 			_transitions.out_anchor.rotation = anchor.rotation
 		elif anchor is Control:
 			_transitions.out_anchor.enabled = true
-			_transitions.out_anchor.position = anchor.rect_position
-			_transitions.out_anchor.scale = anchor.rect_scale
+			_transitions.out_anchor.position = anchor.position
+			_transitions.out_anchor.scale = anchor.scale
 			_transitions.out_anchor.rotation = deg_to_rad(anchor.rotation)
 
 	# Adding missing cards
@@ -269,9 +269,9 @@ func _grid_layout(trans: CardTransform, grid_cell: int, card_size: Vector2):
 	# Card size
 	if not _grid_fixed_width:
 		if _grid_columns > 0:
-			_grid_card_width = rect_size.x / (_grid_columns * _grid_card_spacing.x)
+			_grid_card_width = size.x / (_grid_columns * _grid_card_spacing.x)
 		else:
-			_grid_card_width = rect_size.x / (_store.count() * _grid_card_spacing.x)
+			_grid_card_width = size.x / (_store.count() * _grid_card_spacing.x)
 
 	width_ratio = _grid_card_width / card_size.x
 	height_adjusted = card_size.y * width_ratio
@@ -475,9 +475,9 @@ func _clear() -> void:
 func _map_from(trans: CardTransform) -> CardTransform:
 	var result := CardTransform.new()
 
-	result.pos = trans.pos + rect_position
-	result.scale = trans.scale * rect_scale
-	result.rot = trans.rot + rect_rotation
+	result.pos = trans.pos + position
+	result.scale = trans.scale * scale
+	result.rot = trans.rot + rotation
 
 	return result
 
@@ -485,9 +485,9 @@ func _map_from(trans: CardTransform) -> CardTransform:
 func _map_to(trans: CardTransform) -> CardTransform:
 	var result := CardTransform.new()
 
-	result.pos = trans.pos - rect_position
-	result.scale = trans.scale / rect_scale
-	result.rot = trans.rot - rect_rotation
+	result.pos = trans.pos - position
+	result.scale = trans.scale / scale
+	result.rot = trans.rot - rotation
 
 	return result
 
