@@ -80,11 +80,11 @@ func delete_all_children(node: Node) -> void:
 
 func shift_elt_left(arr: Array, idx: int) -> void:
 	var elt = arr[idx]
-	arr.remove(idx)
+	arr.remove_at(idx)
 	arr.insert(idx-1, elt)
 
 
 func shift_elt_right(arr: Array, idx: int) -> void:
 	var elt = arr[idx]
-	arr.remove(idx)
+	arr.remove_at(idx)
 	arr.insert(idx+1, elt)

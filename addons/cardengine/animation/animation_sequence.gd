@@ -6,8 +6,7 @@ enum {INIT_DISABLED, INIT_ORIGIN, INIT_FOCUSED, INIT_ACTIVATED}
 
 var _to_mode: int
 var _from_mode: int
-# var _data: Array[AnimationStep] = [] #https://github.com/godotengine/godot/issues/53771
-var _data := []
+var _data: Array[AnimationStep] = []
 
 
 func _init(from_mode: int, to_mode: int):
@@ -103,7 +102,7 @@ func remove_step(index: int) -> void:
 	if index < 0 or index >= _data.size():
 		return
 
-	_data.remove(index)
+	_data.remove_at(index)
 
 
 func shift_step_left(index: int) -> void:
